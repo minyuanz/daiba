@@ -105,7 +105,11 @@
     <div class="swiper" id="mySwiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for=" in 20">
-          <img src="../../public/img/mrtArrow.png" alt="" />
+          <img
+            src="../../public/img/mrtArrow.png"
+            alt=""
+            @load="initializeSwiper"
+          />
         </div>
       </div>
     </div>
@@ -115,7 +119,11 @@
     <div class="swiper" id="mySwiper2">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for=" in 20">
-          <img src="../../public/img/mrtArrow.png" alt="" />
+          <img
+            src="../../public/img/mrtArrow.png"
+            alt=""
+            @load="initializeSwiper"
+          />
         </div>
       </div>
     </div>
@@ -152,6 +160,9 @@ export default {
       autoHeight: true,
       slidesPerView: "auto",
       spaceBetween: 0,
+      observer: true,
+      observerParents: true,
+      disableOnInteraction: false,
       autoplay: {
         delay: 0,
         pauseOnMouseEnter: false,
@@ -211,11 +222,11 @@ export default {
 
 <style>
 .active {
-  animation: flash 300ms 1s linear infinite;
+  animation: flash 350ms linear;
 }
 
 .title-tag:hover ~ .pic.active {
-  animation: flash 300ms linear;
+  animation: flash 350ms linear;
 }
 
 @keyframes flash {

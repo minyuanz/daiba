@@ -204,7 +204,6 @@
   position: fixed;
   top: 0;
   z-index: -2;
-  // padding-inline: 5%;
 
   .swiper {
     width: 100%;
@@ -381,7 +380,8 @@
     .mrtTag {
       width: 100vw;
       max-width: 100vw;
-      padding: 0%;
+      padding: 0% 3%;
+
       .title-tag {
         margin: 2rem 0.5rem;
       }
