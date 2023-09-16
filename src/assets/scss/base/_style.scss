@@ -1,0 +1,39 @@
+$border-radius: 50px;
+
+// border(卡片用)
+.border-r {
+  border: 10px solid map-get($color, $key: danger);
+}
+
+.border-g {
+  border: 10px solid map-get($color, $key: success);
+}
+
+.border-b {
+  border: 10px solid map-get($color, $key: info);
+}
+
+// border(mrt用)
+.border-redline {
+  border: 8px solid map-get($color, $key: danger);
+}
+
+.border-greenline {
+  border: 8px solid map-get($color, $key: success);
+}
+
+.border-blueline {
+  border: 8px solid map-get($color, $key: info);
+}
+
+.border-yellowline {
+  border: 8px solid map-get($color, $key: warning);
+}
+
+.border-orangeline {
+  border: 8px solid map-get($color, $key: tangerine);
+}
+
+.border-brownline {
+  border: 8px solid map-get($color, $key: choco);
+}

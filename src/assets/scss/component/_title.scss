@@ -1,0 +1,28 @@
+// h1 {
+//   $a: 10px; //區域變數
+//   font-size: map-get($map , 'large');
+//   font-weight: 100;
+// }
+
+// .title {
+//   @include fontWeight(bold);
+//   @include fontstyle(en);
+// }
+
+
+
+// @each $k, $v in $fontsizes {
+//   #{$k} {
+//     font-size: $v;
+//   }
+// }
+
+
+// @each $k, $v in $color {
+//   .#{$k}_bg {
+//     background-color: $v;
+//   }
+//   .#{$k}_color {
+//      color: $v
+//   }
+// }

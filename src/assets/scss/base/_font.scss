@@ -1,0 +1,64 @@
+$map: (
+  key: "value",
+  large: 60px,
+  medium: 55px,
+  small: 18px,
+);
+
+$fontweight: (
+  fw_stitle: 700,
+  fw_bold: bold,
+);
+
+$fontsizes: (
+  // ".key": value,
+  h1: 40px,
+  h2: 32px,
+  h3: 24px,
+  h4: 18px,
+  span: 16px,
+  p: 16px
+);
+
+h1 {
+  font-size: map-get($fontsizes, h1);
+  font-weight: map-get($fontweight, fw_stitle);
+  line-height: 64px;
+}
+
+h2 {
+  font-size: map-get($fontsizes, h2);
+  font-weight: map-get($fontweight, fw_stitle);
+  line-height: 51px;
+}
+
+h3 {
+  font-size: map-get($fontsizes, h3);
+  font-weight: map-get($fontweight, fw_stitle);
+  line-height: 38px;
+}
+
+h4 {
+  font-size: map-get($fontsizes, h4);
+  line-height: 28px;
+}
+
+span {
+  font-size: map-get($fontsizes, span);
+  line-height: 28px;
+}
+
+p {
+  font-size: map-get($fontsizes, p);
+  line-height: 28px;
+}
+
+.s_text {
+  font-size: 14px;
+  // line-height: 22px;
+}
+
+.ss_text {
+  font-size: 12px;
+  line-height: 19px;
+}

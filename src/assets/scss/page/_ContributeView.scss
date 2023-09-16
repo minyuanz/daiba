@@ -1,0 +1,481 @@
+.CBWrapper {
+  text-align: center;
+  position: relative;
+  overflow-x: hidden;
+
+  h1 {
+    font-size: map-get($fontsizes, h1);
+    margin: 3rem 0;
+    text-align: center;
+  }
+
+  .swiperBanner {
+    width: 100%;
+
+    .swiper-wrapper {
+      transition-timing-function: linear;
+
+      .swiper-slide {
+        width: 262px;
+        height: 450px;
+        background-color: black;
+        padding: 20px 15px;
+        transform: skewX(-5deg);
+      }
+
+      .pic {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          // transform: skewX(deg);
+        }
+
+        .info {
+          position: absolute;
+          background-color: rgba(0, 0, 0, 0.5);
+          width: 100%;
+          height: 130px;
+          // height: 100px;
+          bottom: 0;
+          margin: auto;
+          text-align: center;
+          padding: 15px 10px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          box-sizing: border-box;
+
+          .tag {
+            padding-block: 5px;
+            transform: skewX(5deg);
+
+            span {
+              margin-right: 12px;
+              padding: 1px 3px;
+              font-weight: 600;
+            }
+          }
+
+          p {
+            margin-block: 3px;
+            color: #fff;
+            transform: skewX(5deg);
+            letter-spacing: 0.1em;
+          }
+
+          .en {
+            font-size: 13px;
+            line-height: 15px;
+            max-width: 80%;
+            min-height: 30px;
+            margin-top: auto;
+          }
+        }
+      }
+
+      .even {
+        background-color: #d9d9d9;
+      }
+    }
+  }
+
+  .talk {
+    position: absolute;
+    border: 12px solid black;
+    background-color: #eee;
+    padding: 25px 50px;
+    bottom: -3%;
+    left: 6.5%;
+    z-index: 8;
+    transform: skew(-15deg);
+
+    p {
+      transform: skew(15deg);
+    }
+
+    span {
+      background-color: black;
+      font-size: 20px;
+      color: #fff;
+      border-radius: 50px;
+      width: 50px;
+      height: 50px;
+      display: inline-block;
+      line-height: 50px;
+      position: absolute;
+      right: -7%;
+      top: -25%;
+      cursor: pointer;
+    }
+  }
+
+  .talk::before {
+    content: "";
+    width: 100px;
+    height: 80px;
+    display: block;
+    position: absolute;
+    top: -45%;
+    right: 0.5%;
+    z-index: 6;
+    clip-path: polygon(64% 0, 28% 54%, 56% 55%);
+    background-color: black;
+    transform: skew(15deg);
+  }
+
+  .talk::after {
+    content: "";
+    width: 100px;
+    height: 80px;
+    display: block;
+    position: absolute;
+    top: -40%;
+    right: 0.5%;
+    z-index: 6;
+    clip-path: polygon(51% 32%, 35% 53%, 51% 53%);
+    background-color: #eee;
+    transform: skew(15deg);
+  }
+
+  .toCB {
+    margin: auto;
+
+    .btn_s {
+      display: inline-block;
+      border: solid #000;
+      text-align: center;
+      height: 50px;
+      line-height: 40px;
+      margin: 2.5rem auto;
+    }
+  }
+}
+
+.CBArea {
+  width: 1200px;
+  margin: auto;
+
+  .CBTitle {
+    width: 1200px;
+    margin: 8% auto;
+    padding-block: 1%;
+    text-align: center;
+    // border-top: 5px dashed #D9D9D9;
+    // border-bottom: dashed #D9D9D9;
+    // padding-block: 30px;
+    position: relative;
+
+    h2 {
+      font-size: map-get($fontsizes, h2);
+      padding-bottom: 20px;
+    }
+
+    div {
+      margin-block: 20px;
+
+      span {
+        padding: 1px 3px;
+        font-weight: 600;
+        margin-right: 5px;
+        cursor: pointer;
+        letter-spacing: 0.1rem;
+      }
+    }
+  }
+
+  .CBTitle::after {
+    content: "";
+    background-image: url("~@/assets/images/Line.svg");
+    width: 1150px;
+    height: 2px;
+    position: absolute;
+    top: -20%;
+    left: 2%;
+    right: 2%;
+    opacity: 0.5;
+  }
+
+  .CBTitle::before {
+    content: "";
+    background-image: url("~@/assets/images/Line.svg");
+    width: 1150px;
+    height: 2px;
+    position: absolute;
+    bottom: -20%;
+    left: 2%;
+    right: 2%;
+    opacity: 0.5;
+  }
+
+  .CBList {
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    .card-w {
+      cursor: pointer;
+    }
+
+    .head {
+      width: 80px;
+    }
+  }
+
+  .CBPost {
+    width: 1200px;
+    height: 80%;
+    background-color: #d9d9d9;
+    padding: 30px;
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    z-index: 10;
+
+    .box {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+      padding: 20px;
+
+      .swiperPost {
+        width: 480px;
+        // height: 680px;
+        margin-right: 50px;
+
+        .swiper-slide {
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+
+      .inner {
+        // height: 680px;
+
+        p {
+          font-size: 18px;
+        }
+
+        .title {
+          border-top: 30px solid map-get($color, $key: success);
+          border-left: 30px solid map-get($color, $key: success);
+          padding-top: 20px;
+          padding-inline: 20px;
+          position: relative;
+
+          h3 {
+            font-size: map-get($fontsizes, h2);
+            line-height: 70px;
+          }
+
+          h4 {
+            font-size: map-get($fontsizes, h4);
+          }
+
+          .closePost {
+            background-color: black;
+            font-size: 50px;
+            font-weight: 1000;
+            color: #fff;
+            border-radius: 50px;
+            width: 60px;
+            height: 60px;
+            display: inline-block;
+            position: absolute;
+            text-align: center;
+            line-height: 50px;
+            right: -5%;
+            top: -35%;
+            cursor: pointer;
+          }
+        }
+
+        .info {
+          background-color: #fff;
+          padding-left: 50px;
+          padding-right: 20px;
+          padding-top: 30px;
+          padding-bottom: 10px;
+          width: 100%;
+          height: 200px;
+          display: inline-grid;
+          position: relative;
+
+          .PostingDate {
+            display: block;
+            margin-top: auto;
+            text-align: end;
+            color: #999;
+            padding-block: 10px;
+          }
+        }
+
+        .info::before {
+          content: "";
+          background-image: url("~@/assets/images/Line.svg");
+          width: 520px;
+          height: 2px;
+          position: absolute;
+          bottom: 0;
+          left: 9%;
+        }
+
+        .txt {
+          padding-left: 50px;
+          padding-right: 20px;
+          height: 280px;
+
+          p {
+            text-indent: 2em;
+            padding-top: 20px;
+          }
+        }
+
+        .author {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-left: 50px;
+          padding-right: 50px;
+          height: 50px;
+
+          .line {
+            width: 300px;
+            height: 12px;
+            background-color: map-get($color, $key: success);
+          }
+
+          span {
+            font-size: 24px;
+            font-weight: 900;
+          }
+        }
+
+        .head {
+          position: absolute;
+          border-radius: 50%;
+          width: 120px;
+          height: 120px;
+          bottom: -2%;
+          right: -2%;
+          border: 6px solid #333;
+        }
+      }
+    }
+  }
+}
+
+.lightBox {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 1280px) {
+  .CBArea .CBPost {
+    width: 1000px;
+    height: 550px;
+
+    .box {
+      margin: auto;
+      padding: 0;
+
+      .swiperPost {
+        width: 300px;
+        margin: auto 30px;
+      }
+
+      .inner {
+        p {
+          font-size: 16px;
+          line-height: 24px;
+        }
+
+        .title {
+          height: 50%;
+          width: 98%;
+
+          h3 {
+            font-size: map-get($fontsizes, h3);
+            line-height: 40px;
+          }
+
+          h4 {
+            font-size: map-get($fontsizes, h5);
+          }
+
+          .closePost {
+            font-size: 40px;
+            width: 50px;
+            height: 50px;
+            line-height: 45px;
+            right: -6%;
+            top: -48%;
+          }
+        }
+
+        .info {
+          height: auto;
+          padding-top: 15px;
+
+          .PostingDate {
+            padding: 0;
+          }
+        }
+
+        .info::before {
+          width: 420px;
+        }
+
+        .txt {
+          height: 180px;
+
+          p {
+            text-indent: 2em;
+            padding-top: 16px;
+          }
+        }
+
+        .author {
+          span {
+            font-size: 16px;
+            font-weight: 900;
+            line-height: 16px;
+          }
+        }
+
+        .head {
+          position: absolute;
+          border-radius: 50%;
+          width: 90px;
+          height: 90px;
+          bottom: -2%;
+          right: -2%;
+          border: 6px solid #333;
+        }
+      }
+    }
+  }
+}

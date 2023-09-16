@@ -1,0 +1,112 @@
+body {
+  position: relative;
+  // overflow: hidden;
+}
+
+.col {
+  pointer-events: none;
+  display: flex;
+  justify-content: space-between;
+  width: 315px;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  right: 18.75%;
+  #col1 {
+    background-color: rgba($color: #32c8e1, $alpha: 0.6);
+    width: 35px;
+    height: 100vh;
+    top: 0;
+    z-index: -3;
+  }
+
+  #col2 {
+    background-color: rgba($color: #ffa629, $alpha: 0.6);
+    width: 35px;
+    height: 100vh;
+    top: 0;
+    z-index: -3;
+  }
+
+  #col3 {
+    background-color: rgba($color: #9164cd, $alpha: 0.6);
+    width: 35px;
+    height: 100vh;
+    top: 0;
+    z-index: -3;
+  }
+}
+
+.row {
+  pointer-events: none;
+  position: absolute;
+  width: 100vw;
+  height: 315px;
+  left: 0;
+  bottom: 18.75%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  #row1 {
+    // border: 1px solid red;
+    background-color: rgba($color: #a67c52, $alpha: 0.6);
+    width: 100vw;
+    height: 35px;
+    // position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: -3;
+  }
+  #row2 {
+    // border: 1px solid red;
+    background-color: rgba($color: #4bc887, $alpha: 0.6);
+    width: 100vw;
+    height: 35px;
+    // position: absolute;
+    top: 60%;
+    left: 0;
+    z-index: -3;
+  }
+
+  #row3 {
+    // border: 1px solid red;
+    background-color: rgba($color: #dc4b55, $alpha: 0.6);
+    width: 100vw;
+    height: 35px;
+    top: 70%;
+    left: 0;
+    z-index: -3;
+  }
+}
+
+#circle {
+  pointer-events: none;
+  width: 1000px;
+  height: 1000px;
+  right: 0;
+  bottom: 0;
+  z-index: -5;
+  position: absolute;
+  border: 30px solid rgba(255, 240, 75, 0.6);
+  border-radius: 50%;
+}
+
+.userHam {
+  display: none;
+}
+
+.userWrap {
+  // border: 1px solid red;
+  width: 1200px;
+  margin: auto;
+  margin-top: 30px;
+  display: flex;
+
+  // .userSlider {
+  //     // border: 1px solid red;
+  // }
+  // .userInfo{
+  //     // border: 1px solid red;
+  // }
+}

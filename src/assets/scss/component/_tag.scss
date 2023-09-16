@@ -1,0 +1,44 @@
+.title-tag {
+  padding: 0rem 1rem;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  margin: 0.5rem 0.3rem 0.3rem 0.3rem;
+  line-height: 18px;
+  display: inline-block;
+}
+
+.gray {
+  color: #757575;
+  border: 2px solid #757575;
+}
+
+.blue {
+  color: map-get($color, $key: info);
+  border: 2px solid map-get($color, $key: info);
+}
+
+.red {
+  color: map-get($color, $key: danger);
+  border: 2px solid map-get($color, $key: danger);
+}
+
+.orange {
+  color: map-get($color, $key: tangerine);
+  border: 2px solid map-get($color, $key: tangerine);
+}
+
+.green {
+  color: map-get($color, $key: success);
+  border: 2px solid map-get($color, $key: success);
+}
+
+.brown {
+  color: map-get($color, $key: choco);
+  border: 2px solid map-get($color, $key: choco);
+}
+
+.yellow {
+  color: map-get($color, $key: warning);
+  border: 2px solid map-get($color, $key: warning);
+}

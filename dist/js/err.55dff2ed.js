@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkdaibason"]=self["webpackChunkdaibason"]||[]).push([[640],{771:function(n,a,u){u.r(a),u.d(a,{default:function(){return f}});var r=u(6252);const s={class:"about"},t=(0,r._)("h1",null,"404",-1),e=[t];function c(n,a){return(0,r.wg)(),(0,r.iD)("div",s,e)}var i=u(3744);const o={},d=(0,i.Z)(o,[["render",c]]);var f=d}}]);
+//# sourceMappingURL=err.55dff2ed.js.map

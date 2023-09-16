@@ -1,0 +1,131 @@
+.forgetPwdWrap {
+  // border: 1px solid red;
+  width: 60%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+
+  .forgetPwdPic {
+    // border: 1px solid #aaa;
+    position: relative;
+    left: 50px;
+    border-radius: $border-radius;
+
+    img {
+      height: 100%;
+      vertical-align: bottom;
+      border-radius: $border-radius;
+    }
+  }
+
+  .forgetPwdText {
+    border: 1px solid #aaa;
+    // width: 500px;
+    background-color: #fff;
+    border-radius: $border-radius;
+    position: relative;
+    right: 50px;
+    // text-align: center;
+
+    h1 {
+      width: 80%;
+      margin: auto;
+      margin-top: 100px;
+    }
+
+    p {
+      width: 80%;
+      margin: auto;
+      margin-top: 100px;
+    }
+
+    .forgetPwdForm {
+      // border: 1px solid red;
+      width: 100%;
+      // margin: auto;
+      margin-top: 50px;
+      padding: 0 50px;
+      text-align: center;
+
+      label {
+        display: block;
+        text-align: left;
+        margin-bottom: 10px;
+      }
+
+      input {
+        // border-radius: 20px;
+        border: transparent;
+        border-bottom: 1px solid #000;
+        width: 100%;
+        padding: 10px 0;
+      }
+
+      button {
+        margin: 30px 0;
+        // padding: 0 50px;
+      }
+
+      .loginOr {
+        // border: 1px solid red;
+        position: relative;
+        margin: 50px 0;
+        text-align: center;
+        // display: inline-block;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 0;
+          width: 40%;
+          // height: 1px;
+          border-bottom: 1px solid #aaa;
+        }
+
+        &::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          right: 0;
+          width: 40%;
+          // height: 1px;
+          border-bottom: 1px solid #aaa;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .forgetPwdWrap {
+    width: 100%;
+    flex-direction: column;
+
+    .forgetPwdPic {
+      // border: 1px solid red;
+      height: 300px;
+      overflow: hidden;
+      left: 0;
+      border-radius: 0;
+      // top: 50px;
+
+      // height: 200px;
+      img {
+        border-radius: 0;
+        // height: 200px;
+        width: 100%;
+      }
+    }
+
+    .forgetPwdText {
+      right: 0;
+      bottom: 50px;
+
+      h1 {
+        text-align: center;
+        // margin: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkdaibason"]=self["webpackChunkdaibason"]||[]).push([[536],{9653:function(n,a,s){s.r(a),s.d(a,{default:function(){return d}});var t=s(6252);const u={class:"about"},e=(0,t._)("h1",null,"This is an contribute page",-1),r=[e];function i(n,a){return(0,t.wg)(),(0,t.iD)("div",u,r)}var c=s(3744);const o={},b=(0,c.Z)(o,[["render",i]]);var d=b}}]);
+//# sourceMappingURL=contribute.8d1e9dd5.js.map

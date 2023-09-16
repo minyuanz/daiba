@@ -1,0 +1,39 @@
+{
+  "name": "daibason",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/free-regular-svg-icons": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/vue-fontawesome": "^3.0.3",
+    "core-js": "^3.8.3",
+    "gsap": "^3.12.2",
+    "iview": "^3.5.4",
+    "swiper": "^10.2.0",
+    "view-ui-plus": "^1.3.14",
+    "vue": "^3.2.13",
+    "vue-router": "^4.0.3",
+    "vuex": "^4.1.0"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^6.4.2",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-plugin-vuex": "~5.0.0",
+    "@vue/cli-service": "^5.0.8",
+    "sass": "^1.32.7",
+    "sass-loader": "^12.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}

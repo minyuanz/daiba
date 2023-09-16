@@ -1,0 +1,495 @@
+.mrtTitle {
+  h1 {
+    margin: 3rem 0;
+    text-align: center;
+    font-size: 40px;
+  }
+}
+
+.mrtLineCheck {
+  overflow: hidden;
+
+  .mrtPic {
+    position: relative;
+    display: flex;
+    min-width: 1200px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background-color: #000;
+    padding-block: 30px;
+    z-index: 1;
+
+    img {
+      object-fit: cover;
+      height: 100%;
+    }
+
+    .pic {
+      width: 10%;
+      height: 400px;
+      overflow: hidden;
+      transform: skew(-5deg);
+      position: relative;
+      bottom: 10px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .mrtMainLine {
+      transform: skew(-5deg);
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: center;
+      width: 60%;
+
+      .pic {
+        width: 16.6666%;
+        transform: skew(0deg);
+        z-index: 5;
+
+        img {
+          transform: skew(5deg) translateX(-18px);
+        }
+      }
+    }
+    .pic.mrtGrayStyle {
+      transform: skew(-5deg);
+      filter: grayscale(100%);
+      img {
+        transform: skew(5deg) translateX(-18px);
+      }
+    }
+  }
+
+  .mrtTag {
+    display: flex;
+    justify-content: space-around;
+    width: 62.5%;
+    margin: auto;
+    padding-inline: 2%;
+    font-size: 24px;
+    z-index: 3;
+
+    .red {
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-left: 5px solid map-get($color, $key: danger);
+        height: 95px;
+        top: -190%;
+        left: 50%;
+        z-index: 2;
+      }
+    }
+
+    .blue {
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-left: 5px solid map-get($color, $key: info);
+        height: 95px;
+        top: -190%;
+        left: 50%;
+        z-index: 2;
+      }
+    }
+
+    .green {
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-left: 5px solid map-get($color, $key: success);
+        height: 95px;
+        top: -190%;
+        left: 50%;
+        z-index: 2;
+      }
+    }
+
+    .orange {
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-left: 5px solid map-get($color, $key: tangerine);
+        height: 95px;
+        top: -190%;
+        left: 50%;
+        z-index: 2;
+      }
+    }
+
+    .brown {
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-left: 5px solid map-get($color, $key: choco);
+        height: 95px;
+        top: -190%;
+        left: 50%;
+        z-index: 2;
+      }
+    }
+
+    .yellow {
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-left: 5px solid map-get($color, $key: warning);
+        height: 95px;
+        top: -190%;
+        left: 50%;
+        z-index: 2;
+      }
+    }
+
+    .red:hover {
+      background-color: map-get($color, $key: danger);
+      color: #fff;
+    }
+
+    .blue:hover {
+      background-color: map-get($color, $key: info);
+      color: #fff;
+    }
+
+    .green:hover {
+      background-color: map-get($color, $key: success);
+      color: #fff;
+    }
+
+    .orange:hover {
+      background-color: map-get($color, $key: tangerine);
+      color: #fff;
+    }
+
+    .brown:hover {
+      background-color: map-get($color, $key: choco);
+      color: #fff;
+    }
+
+    .yellow:hover {
+      background-color: map-get($color, $key: warning);
+      color: #fff;
+    }
+    .title-tag {
+      font-size: 18px;
+      padding: 1rem 0;
+      width: 12%;
+      margin: 3rem auto 2rem;
+      inset: 0;
+      position: relative;
+      background: #fff;
+      display: block;
+      z-index: 3;
+      cursor: pointer;
+    }
+  }
+}
+
+.mrtBanner:nth-of-type(2) {
+  right: 0;
+  transform: rotate(180deg);
+}
+
+.mrtBanner {
+  width: 20%;
+  height: 100vh;
+  display: block;
+  position: fixed;
+  top: 0;
+  z-index: -2;
+  // padding-inline: 5%;
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+
+    .swiper-wrapper {
+      transition-timing-function: linear !important;
+
+      .swiper-slide {
+        width: 80%;
+      }
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// --------------------------------------------
+.dottedLineBox {
+  margin-top: 5%;
+  .dottedLine {
+    background: #e8e7ee;
+    /* width: 1200px; */
+    height: 6px;
+    margin: auto;
+  }
+}
+/* 站點板塊 */
+.mrtWrap {
+  .mrtSta {
+    background-image: url(/public/img/mrt_smallarr.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 2% 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 2% 2% 0 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 站點文字介紹 */
+    .mrtStaTxt {
+      width: 34.5%;
+    }
+    /* 站點圖跟捷運圖 */
+    .mrtStaBox {
+      width: 48.5%;
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      .mrtStaMaruBox {
+        width: 20%;
+        cursor: pointer;
+        .mrtStaMaru {
+          width: 100%;
+        }
+      }
+      .mrtStaPicBox {
+        width: 70%;
+        .mrtStaPic {
+          width: 100%;
+          border-radius: 50%;
+          border: 5px solid #999999;
+        }
+      }
+    }
+  }
+  .swiperMRTCard {
+    width: 900px;
+    height: 400px;
+    margin: auto;
+    // background-color: aqua;
+    overflow: hidden;
+    margin-block: 1rem;
+
+    .swiper-slide {
+      width: 300px;
+      height: 200px;
+
+      .ard-h {
+        width: 50%;
+      }
+    }
+  }
+}
+
+/* 站點板塊左右對調 */
+.mrtWrap:nth-of-type(even) {
+  .mrtSta {
+    flex-direction: row-reverse;
+    .mrtStaBox {
+      flex-direction: row-reverse;
+      justify-content: start;
+
+      .mrtStaMaruBox {
+        transform: scaleX(-1);
+      }
+    }
+  }
+}
+/* 美食住宿景點卡片動態 */
+.mrtCardWrap {
+  display: flex;
+  justify-content: center;
+}
+.cardSliFade-enter-active,
+.cardSliFade-leave-active {
+  transition: 0.8s ease;
+}
+
+.cardSliFade-enter-from,
+.cardSliFade-leave-to {
+  transform: translateY(-20%);
+  opacity: 0;
+}
+.cardSliFade-leave-from .cardSliFade-enter-to {
+  opacity: 1;
+}
+// --------------------------------------------
+
+@media screen and (max-width: 1279px) {
+  .mrtLineCheck {
+    .mrtPic {
+      justify-content: center;
+      min-width: 300px;
+
+      .mrtMainLine {
+        width: 95%;
+      }
+    }
+
+    .mrtTag {
+      width: 100%;
+
+      .title-tag {
+        font-size: 16px;
+        // width: 15%;
+      }
+    }
+
+    .mrtGrayStyle {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .mrtLineCheck {
+    .mrtPic {
+      padding-block: 15px;
+      min-width: 100%;
+      height: 300px;
+
+      .mrtMainLine {
+        inset: 0;
+        margin: 0 3%;
+        width: 95%;
+        z-index: 2;
+
+        .pic {
+          height: 100%;
+          bottom: 0px;
+        }
+
+        a {
+          height: 100%;
+          bottom: 0;
+        }
+      }
+    }
+
+    .mrtTag {
+      width: 100vw;
+      max-width: 100vw;
+      padding: 0%;
+      .title-tag {
+        margin: 2rem 0.5rem;
+      }
+
+      .red {
+        &::after {
+          height: 50px;
+          top: -100%;
+        }
+      }
+
+      .blue {
+        &::after {
+          height: 50px;
+          top: -100%;
+        }
+      }
+
+      .green {
+        &::after {
+          height: 50px;
+          top: -100%;
+        }
+      }
+
+      .orange {
+        &::after {
+          height: 50px;
+          top: -100%;
+        }
+      }
+
+      .brown {
+        &::after {
+          height: 50px;
+          top: -100%;
+        }
+      }
+
+      .yellow {
+        &::after {
+          height: 50px;
+          top: -100%;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 414px) {
+    .mrtLineCheck {
+      .mrtPic {
+        min-width: 100%;
+        height: 200px;
+      }
+      .mrtTag {
+        padding-inline: 0%;
+        justify-content: space-evenly;
+        width: 100%;
+
+        .title-tag {
+          font-size: 14px;
+          width: 12%;
+          padding: 0.5rem 0;
+          margin: 2rem 0px;
+        }
+
+        .red {
+          &::after {
+            height: 50px;
+            top: -150%;
+          }
+        }
+
+        .blue {
+          &::after {
+            height: 50px;
+            top: -150%;
+          }
+        }
+
+        .green {
+          &::after {
+            height: 50px;
+            top: -150%;
+          }
+        }
+
+        .orange {
+          &::after {
+            height: 50px;
+            top: -150%;
+          }
+        }
+
+        .brown {
+          &::after {
+            height: 50px;
+            top: -150%;
+          }
+        }
+
+        .yellow {
+          &::after {
+            height: 50px;
+            top: -150%;
+          }
+        }
+      }
+    }
+  }
+}

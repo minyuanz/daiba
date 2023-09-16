@@ -1,0 +1,102 @@
+.SliderAC {
+    width: 300px;
+    background-color: #ddd;
+    border-radius: 20px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+    padding: $padding;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    height: 900px;
+
+    .pic {
+        width: 180px;
+        height: 180px;
+        margin: auto;
+        margin-top: 10px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: 100px;
+            vertical-align: top;
+            border: 8px solid black;
+        }
+    }
+
+    button {
+        background-color: #fff;
+        color: #7D7D7D;
+        width: 80%;
+        padding-block: 8px;
+        border-radius: 10px;
+        border: 1px solid #7D7D7D;
+        font-size: 16px;
+        margin: auto;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    button:hover {
+        background-color: #7d7d7d;
+        color: #fff
+    }
+
+    ul {
+        margin-block: 20px;
+
+        li {
+
+            border-radius: 10px;
+            width: 80%;
+            padding: 12px 10px;
+            margin: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        li:Hover {
+            background-color: #7d7d7d;
+
+            a {
+                color: #fff;
+            }
+        }
+    }
+    .userback{
+        display: none;
+    }
+}
+
+@media screen and (max-width:414px) {
+    .SliderAC {
+        gap: 0;
+        padding: 0;
+        background-color: #fff;
+        height: 100%;
+
+        .userback {
+            // border: 1px solid red;
+            display: block;
+            writing-mode: vertical-lr;
+            position: absolute;
+            top: 50px;
+            right: 15px;
+            height: 100px;
+            text-align: center;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: -30px;
+                right: -15px;
+                width: 15px;
+                height: 150%;
+                background-image: linear-gradient(#A87B52 5%, #DD4D54 10%, #FFBB33 30%, #FFF04B 45%, #4BC887 70%, #32C8E1 85%, #9164CD);
+                /* border: 1px solid red; */
+            }
+        }
+    }
+}

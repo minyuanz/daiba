@@ -1,0 +1,180 @@
+// // 置中
+// @mixin center($w, $h: null) {
+//   margin: 0 auto;
+//   width: $w;
+//   height: $h;
+// }
+
+// // 方形
+// @mixin rect($w, $h: $w) {
+//   width: $w;
+//   height: $h;
+// }
+
+// // layout
+// @mixin layout($w) {
+//   @if $w == 100% {
+//     width: 100%;
+//   } @else {
+//     max-width: $w;
+//     margin: 0 auto;
+//     width: 100%;
+//   }
+// }
+
+// @mixin a() {
+//   font-size: 20px;
+//   &:hover {
+//     @content;
+//   }
+// }
+
+// a {
+//   color: #333;
+//   @include a() {
+//     color: #999;
+//   }
+// }
+
+// @mixin m() {
+//   @media all and (max-width: $m) {
+//     // 手機板
+//     @content;
+//   }
+// }
+
+// @mixin t() {
+//   @media all and (max-width: $t) {
+//     // 平板
+//     @content;
+//   }
+// }
+
+// @mixin set($val) {
+//   @media all and (max-width: $val) {
+//     // 客製化
+//     @content;
+//   }
+// }
+
+// @mixin fontWeight($w) {
+//   @if $w == bold {
+//     font-weight: bold;
+//   } @else if $w == default {
+//     font-weight: 400;
+//   } @else {
+//     font-weight: 100;
+//   }
+// }
+
+// @mixin fontstyle($style) {
+//   @if $style == "zh" {
+//     font-family: "Noto Sans TC", sans-serif;
+//   } @else if $style == "en" {
+//     font-family: "Montserrat", sans-serif;
+//   }
+// }
+
+
+// @mixin border($color , $border : true){
+//    @if $border {
+//      border: 1px solid $color;
+//      border-radius: 6px;
+//    }@else {
+//      border: initial;
+//    }
+// }
+
+// @mixin btnColor($bgc , $border: false) {
+//   @if $border {
+//     border: 1px solid $bgc;
+//     color: $bgc;
+//     &:hover {
+//       background-color: $bgc;
+//       color: #fff
+//     }
+//   } @else {
+//     background-color: $bgc;
+//     color: #fff;
+//     &:hover {
+//       background-color: darken($bgc, 10);
+//     }
+//   }
+// }
+
+
+// //================== space ====================  
+// // if true => position  false => margin
+// //  @include spacing(100 , true);
+// @mixin spacing($val , $position:true) {
+//   @for $i from 1 through $val {
+//     .top_#{$i} {
+//       @if $position {
+//            position: relative;
+//            top : $i + px
+//       }@else {
+//          margin-top: $i + px;
+//       }
+//     }
+//     .bottom_#{$i} {
+//      @if $position {
+//            position: relative;
+//            bottom : $i + px
+//       }@else {
+//          margin-bottom: $i + px;
+//       }
+//     }
+//     .left_#{$i} {
+//       @if $position {
+//            position: relative;
+//            left : $i + px
+//       }@else {
+//          margin-left: $i + px;
+//       }
+//     }
+//     .right_#{$i} {
+//       @if $position {
+//            position: relative;
+//            right : $i + px
+//       }@else {
+//          margin-right: $i + px;
+//       }
+//     }
+//   }
+// }
+
+
+// //========== grid =========
+// // @include grid(12); 桌機
+// // @include t() {
+// //   @include grid(12 , md);
+// // }  平板
+
+// // @include m(){
+// //    @include grid(12, sm);
+// // } 手機
+
+
+// @mixin grid($val, $class: default) {
+//   @for $i from 1 through $val {
+//     @if $class == default {
+//       .col-#{$i} {
+//         width: ($i/ $val) * 100%;
+//       }
+//     } @else {
+//       .col-#{$class}-#{$i} {
+//         width: ($i/ $val) * 100%;
+//       }
+//     }
+//   }
+// }
+
+// @mixin img($class) {
+//   @each $img in $class {
+//     .img_#{$img} {
+//       background-image: url("images/#{$img}.jpg");
+//       background-repeat: no-repeat;
+//       background-size: cover
+//     }
+//   }
+// }

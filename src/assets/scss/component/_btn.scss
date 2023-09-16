@@ -1,0 +1,159 @@
+//按鈕的尺寸
+.btn_s {
+  border-radius: $border-radius;
+  width: 200px;
+  height: 40px;
+  background-color: white;
+  font-weight: bold;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+//
+
+.btn_m {
+  border-radius: $border-radius;
+  width: 300px;
+  height: 40px;
+  background-color: white;
+  font-weight: bold;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.btn_l {
+  border-radius: $border-radius;
+  width: 400px;
+  height: 40px;
+  background-color: white;
+  font-weight: bold;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.btn_s:hover,
+.btn_m:hover,
+.btn_l:hover {
+  background-color: #333;
+  border: none;
+  color: white;
+}
+
+.btn_s:active,
+.btn_m:active,
+.btn_l:active {
+  background-color: #666;
+  border: none;
+  color: white;
+}
+
+@media screen and (max-width: 414px) {
+  .btn_s {
+    width: 100px;
+    height: 40px;
+  }
+
+  .btn_m {
+    width: 200px;
+    height: 40px;
+  }
+
+  .btn_l {
+    width: 100%;
+    height: 40px;
+  }
+}
+
+.btn_br0_red {
+  width: 100px;
+  height: 40px;
+  background-color: white;
+  font-weight: bold;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.btn_br0_yellow {
+  width: 100px;
+  height: 40px;
+  background-color: white;
+  font-weight: bold;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.btn_br0_orange {
+  width: 100px;
+  height: 40px;
+  background-color: white;
+  font-weight: bold;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.btn_br0_red:hover {
+  background-color: #dc4b55;
+  border: none;
+  color: white;
+}
+
+.btn_br0_yellow:hover {
+  background-color: #fff04b;
+  border: none;
+}
+
+.btn_br0_orange:hover {
+  background-color: #ffbb33;
+  border: none;
+}
+
+//會員資料的更改按鈕
+
+.ChangAC {
+  width: 230px;
+  height: 140px;
+  border: 3px solid black;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  font-size: 18px;
+  cursor: pointer;
+
+  svg {
+    font-size: 28px;
+  }
+}
+
+.ChangAC:hover {
+  background-color: #d9d9d9;
+  border: none;
+}
+
+.ChangAC:active {
+  background-color: #333;
+  border: none;
+  color: #fff;
+}
+
+//   //按鈕的顏色
+//   .btn_primary {
+//     @include btnColor(#0700d1 , true);
+//   }
+
+//   .btn_error {
+//     @include btnColor(#c02300, true);
+//   }
+
+//   .btn_fail {
+//      @include btnColor(#01d21d , true);
+//   }
+
+//   //圓角
+//   .btn_radius {
+//     border-radius: 10px;
+//   }
+//   .btn_rounded {
+//     border-radius: 30px;
+//   }

@@ -1,0 +1,49 @@
+// 變數
+/*css 註解*/
+
+//共用變數
+@import "base/reset";
+@import "base/color";
+@import "base/font";
+@import "base/var";
+@import "base/style";
+
+// function
+@import "mixin/mixin";
+
+//component
+@import "component/btn";
+@import "component/card";
+@import "component/form";
+@import "component/body";
+@import "component/title";
+@import "component/spacing";
+@import "component/grid";
+@import "component/tag";
+@import "component/slider";
+
+// layout
+@import "layout/header";
+@import "layout/footer";
+@import "layout/login";
+
+// page
+@import "page/index";
+@import "page/about";
+@import "page/product";
+@import "page/Login";
+@import "page/Register";
+@import "page/RegSuccess";
+@import "page/forgetPwd";
+@import "page/pwdSuccess";
+@import "page/newView";
+@import "page/newsinside";
+@import "page/user";
+@import "page/mrt";
+@import "page/ContributeView";
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Noto+Sans+TC:wght@100;400&family=Roboto&display=swap");
+
+// a{
+// color: inherit !important ;
+// }

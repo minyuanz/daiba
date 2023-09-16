@@ -1,0 +1,40 @@
+$color: (
+  "info": #32c8e1,
+  "grap": #9164cd,
+  "success": #4bc887,
+  "warning": #fff04b,
+  "tangerine": #ffbb33,
+  "danger": #dc4b55,
+  "choco": #a67c52,
+);
+
+// 背景顏色
+.info {
+  background-color: map-get($color, $key: info);
+}
+.grap {
+  background-color: map-get($color, $key: grap);
+}
+
+.success {
+  background-color: map-get($color, $key: success);
+}
+
+.warning {
+  color: map-get($color, $key: warning);
+}
+
+.tangerine {
+  background-color: map-get($color, $key: tangerine);
+}
+
+.danger {
+  background-color: map-get($color, $key: danger);
+}
+
+.chocolate {
+  background-color: map-get($color, $key: choco);
+}
+
+// 引用方式
+//  color: map-get($color, $key: success);

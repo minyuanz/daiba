@@ -1,0 +1,145 @@
+.mrtContibuteInPage {
+  p {
+    line-height: 3rem;
+    font-size: 21px;
+  }
+  .title {
+    width: 62.5%;
+    margin: 3rem auto;
+    text-align: center;
+    padding-bottom: 3rem;
+    border-bottom: 2px solid #ccc;
+  }
+  .image {
+    box-shadow: 0 10px 10px #5556;
+  }
+  .fixCenter {
+    width: 100%;
+    inset: 0;
+    margin: 3rem auto 2rem;
+    background-size: cover;
+    .imageArea {
+      width: 100%;
+      background-size: cover;
+      background-position: 50%;
+      .image {
+        width: 62.5%;
+        inset: 0;
+        margin: auto;
+      }
+      img {
+        width: 100%;
+        vertical-align: top;
+        object-fit: cover;
+      }
+    }
+    p {
+      width: 62.5%;
+      inset: 0;
+      font-weight: 700;
+      text-align: center;
+      margin: 3rem auto;
+    }
+  }
+  .part2 {
+    p {
+      font-weight: 500;
+      text-align: left;
+    }
+  }
+  .part3 {
+    width: 100%;
+    background-size: cover;
+    background-position: 50%;
+    .content {
+      width: 75%;
+      inset: 0;
+      margin: auto;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: center;
+      .image {
+        width: 50%;
+        z-index: 1;
+
+        img {
+          width: 100%;
+          vertical-align: top;
+          object-fit: cover;
+        }
+      }
+      article {
+        background-color: #fff;
+        transform: skew(-19deg);
+        width: 50%;
+        // height: 600px;
+        inset: 0;
+        margin: auto;
+        z-index: 0;
+        p {
+          width: 100%;
+          padding: 0 5rem;
+          transform: skew(19deg);
+          font-weight: 500;
+          text-align: left;
+        }
+      }
+    }
+  }
+  .part4 {
+    width: 100%;
+    background-size: cover;
+    background-position: 50%;
+    .content {
+      width: 75%;
+      inset: 0;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .image {
+        width: 50%;
+        z-index: 1;
+
+        img {
+          width: 100%;
+          vertical-align: top;
+          object-fit: cover;
+        }
+      }
+      article {
+        background-color: #fff;
+        transform: skew(19deg);
+        width: 50%;
+        // height: 600px;
+        inset: 0;
+        margin: auto;
+        z-index: 0;
+        p {
+          width: 100%;
+          padding: 0 5rem;
+          transform: skew(-19deg);
+          font-weight: 500;
+          text-align: left;
+        }
+      }
+    }
+  }
+  .seperate {
+    width: 62.5%;
+    inset: 0;
+    margin: 5rem auto 0;
+    svg {
+      width: 100%;
+    }
+  }
+  .detail {
+    margin-top: 5rem;
+    padding: 0 0 3rem 0;
+    p {
+      font-weight: 500;
+      text-align: left;
+    }
+  }
+}
