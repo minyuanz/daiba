@@ -1,6 +1,6 @@
 <template>
   <div class="newsWrap">
-    <h1>消息資訊</h1>
+    <h1>消息資訊qaq</h1>
     <div class="newsBanner">
 
       <div class="swiper">
