@@ -23,7 +23,7 @@
             <router-link to="/New" class="new">最新消息</router-link>
             <router-link to="/about" class="about">關於我們</router-link>
             <router-link to="/cart" class="cart">購物車</router-link>
-            <!-- <router-link to="/MemberPagesBgc" class="cart">排版用之後刪掉</router-link> -->
+            <router-link to="/mrtContributeInPage" class="cart">排版用之後刪掉</router-link>
         </nav>
     </header>
 </template>
