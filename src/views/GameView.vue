@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>This is an game page</h1>
+    <!-- <h1>This is an game page</h1> -->
   </div>
 
   <div class="animate">
@@ -8,8 +8,8 @@
       <svg
         ref="svgElement"
         xmlns="http://www.w3.org/2000/svg"
-        width="80%"
-        height="80%"
+        width="40%"
+        height="40%"
         viewBox="0 0 107 190"
         enable-background="new 0 0 107 190"
       >
@@ -75,7 +75,7 @@
       alt=""
     /> -->
   <!-- </div> -->
-  <div class="Test1"></div>
+  <!-- <div class="Test1"></div> -->
 </template>
 
 <style lang="scss">
@@ -166,11 +166,11 @@ body {
 //   }
 // }
 
-.Test1 {
-  width: 900px;
-  height: 400px;
-  background-image: url("../../public/img/register.png");
-}
+// .Test1 {
+//   width: 900px;
+//   height: 400px;
+//   background-image: url("../../public/img/register.png");
+// }
 </style>
 
 <script>
