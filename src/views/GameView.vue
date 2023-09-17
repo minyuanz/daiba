@@ -37,7 +37,7 @@
           begin="1.2s"
           fill="freeze"
         />
-<!-- 
+
         <animate
           attributeType="XML"
           xlink:href="#circle"
@@ -48,7 +48,7 @@
           dur="1s"
           begin="1.5s"
           fill="freeze"
-        />  -->
+        />  
       </svg>
     </div>
 
@@ -64,36 +64,36 @@
         <div class="c-line tangerine"></div>
         <div class="c-line grap"></div>
       </div>
-      <div class="animateLineGroup">
-      <div class="left">
-        <div class="thick"></div>
-        <div class="dark1 slim"></div>
-        <div class="dark2 slim"></div>
-        <div class="dark3 slim"></div>
-        <div class="dark4 slim"></div>
-        <div class="dark5 slim"></div>
-        <div class="dark6 slim"></div>
-        <div class="dark7 slim"></div>
-        <div class="dark8 slim"></div>
-        <div class="dark9 slim"></div>
-      </div>
-      <!-- <div class="right">
-        <div class="dark9 slim"></div>
-        <div class="dark8 slim"></div>
-        <div class="dark7 slim"></div>
-        <div class="dark6 slim"></div>
-        <div class="dark5 slim"></div>
-        <div class="dark4 slim"></div>
-        <div class="dark3 slim"></div>
-        <div class="dark2 slim"></div>
-        <div class="dark1 slim"></div>
-        <div class="thick"></div>
-      </div> -->
-  </div>
-    </div>
-    
-  </div>
 
+    </div>
+
+  </div>
+  <div class="animateLineGroup">
+        <div class="left">
+          <div class="thick"></div>
+          <div class="dark1 slim"></div>
+          <div class="dark2 slim"></div>
+          <div class="dark3 slim"></div>
+          <div class="dark4 slim"></div>
+          <div class="dark5 slim"></div>
+          <div class="dark6 slim"></div>
+          <div class="dark7 slim"></div>
+          <div class="dark8 slim"></div>
+          <div class="dark9 slim"></div>
+        </div>
+        <div class="right">
+          <div class="dark9 slim"></div>
+          <div class="dark8 slim"></div>
+          <div class="dark7 slim"></div>
+          <div class="dark6 slim"></div>
+          <div class="dark5 slim"></div>
+          <div class="dark4 slim"></div>
+          <div class="dark3 slim"></div>
+          <div class="dark2 slim"></div>
+          <div class="dark1 slim"></div>
+          <div class="thick"></div>
+        </div>
+    </div>
 
 
 
@@ -111,7 +111,7 @@
 <style lang="scss">
 body {
   // position: relative;
-  // overflow: hidden;
+  overflow: hidden;
 
   .animate {
     position: fixed;
@@ -168,20 +168,28 @@ body {
       // opacity: 0.7;
     }
   }
-  .animateLineGroup{
+}
+.animateLineGroup{
     width: 100%;
-    display: none;
+    display: flex;
     justify-content: space-between;      
     position: relative;
-    .left,.right{
+    // overflow: hidden;
+    .left{
         width: 18.75%;
-        // height: 100%;
         display: flex;
         justify-content: space-between;
         position: absolute;
-        animation: fadeInLeft 2.5s ease-out 5s ;
-
+        animation: fadeInLeft 5.5s ease-out 0s ;
       }
+    .right{
+      width: 18.75%;
+        display: flex;
+        right: 0;
+        justify-content: space-between;
+        position: absolute;
+        animation: fadeInRight 5.5s ease-out 0s ;
+    }
         .thick{
           width: 20%;
           height: 100vh;
@@ -219,12 +227,13 @@ body {
         }
 
   }
-
-}
-
 @keyframes fadeInLeft{
     0%{ left: -100%;}
   100%{ left: 0;}
+}
+@keyframes fadeInRight{
+    0%{ right: -100%;}
+  100%{ right: 0;}
 }
 @keyframes fadeOut {
   0% {
@@ -280,12 +289,12 @@ export default {
   //   },
   },
   computed: {
-    addClass(){
-      const lineGroupElement = document.querySelector(".animateLineGroup");
-      if(lineGroupElement) {
-        lineGroupElement.style.display='flex'
-        lineGroupElement.classList.add("fadeInLeft")} 
-    }
+    // addClass(){
+    //   const lineGroupElement = document.querySelector(".animateLineGroup");
+    //   if(lineGroupElement) {
+    //     lineGroupElement.style.display='flex'
+    //     lineGroupElement.classList.add("fadeInLeft")} 
+    // }
   },
   mounted() {
     setTimeout(() => {
@@ -301,6 +310,7 @@ export default {
         animateElement.classList.add("fadeOut");
       }
     }, 4000);
+
       
     gsap.fromTo(
       ".chocolate",
