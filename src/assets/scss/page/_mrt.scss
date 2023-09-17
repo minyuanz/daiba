@@ -131,6 +131,7 @@
       display: block;
       z-index: 3;
       cursor: pointer;
+      transition: all 0.3s;
 
       &::after {
         content: "";

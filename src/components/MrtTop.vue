@@ -230,11 +230,11 @@ export default {
 
 <style>
 .active {
-  animation: flash 400ms linear;
+  animation: flash 300ms linear forwards;
 }
 
 .title-tag:hover ~ .pic.active {
-  animation: flash 400ms linear;
+  animation: flash 300ms linear forwards;
 }
 
 @keyframes flash {
@@ -242,12 +242,8 @@ export default {
     filter: brightness(100%);
   }
 
-  50% {
-    filter: brightness(150%);
-  }
-
   100% {
-    filter: brightness(100%);
+    filter: brightness(150%);
   }
 }
 </style>
