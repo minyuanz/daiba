@@ -8,8 +8,8 @@
       <svg
         ref="svgElement"
         xmlns="http://www.w3.org/2000/svg"
-        width="80%"
-        height="80%"
+        width="65%"
+        height="65%"
         viewBox="0 0 107 190"
         enable-background="new 0 0 107 190"
       >
@@ -135,7 +135,7 @@ body {
       top: 0;
       left: 0;
       right: 0;
-      margin-inline: auto;
+      margin: auto;
       opacity: 0.7;
     }
   }
