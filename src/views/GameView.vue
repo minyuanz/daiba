@@ -135,7 +135,7 @@ body {
       top: 0;
       left: 0;
       right: 0;
-      margin-inline: auto;
+      margin: auto;
       opacity: 0.7;
     }
   }

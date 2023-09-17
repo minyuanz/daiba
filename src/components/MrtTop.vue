@@ -4,6 +4,14 @@
   </div>
 
   <section class="mrtLineCheck">
+    <div class="mrtTagbar">
+      <div class="outer-circle"></div>
+      <div class="color-circle"></div>
+      <div class="inner-circle">
+        <img src="../../public/img/mrtImg.png" alt="" />
+      </div>
+    </div>
+
     <div class="mrtPic">
       <div class="pic mrtGrayStyle border-brownline">
         <img src="../../public/img/brown.jpeg" alt="brownline" />
@@ -222,31 +230,24 @@ export default {
 
 <style>
 .active {
-  animation: flash 350ms linear;
+  animation: flash 400ms linear;
 }
 
 .title-tag:hover ~ .pic.active {
-  animation: flash 350ms linear;
+  animation: flash 400ms linear;
 }
 
 @keyframes flash {
   0% {
     filter: brightness(100%);
   }
-  20% {
+
+  50% {
     filter: brightness(150%);
   }
-  40% {
-    filter: brightness(100%);
-  }
-  60% {
-    filter: brightness(150%);
-  }
-  80% {
-    filter: brightness(100%);
-  }
+
   100% {
-    filter: brightness(150%);
+    filter: brightness(100%);
   }
 }
 </style>
