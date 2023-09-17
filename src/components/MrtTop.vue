@@ -203,7 +203,7 @@ export default {
         this.showAll = true;
       }
     },
-
+    //rwd判斷
     WindowWidth() {
       if (window.innerWidth <= 768) {
         this.MB = true;
@@ -216,6 +216,7 @@ export default {
   },
 
   computed: {
+    //字母轉大寫
     upperCaseColorsMB() {
       return this.selectColor.map((color) =>
         color.toUpperCase().substring(0, 2)

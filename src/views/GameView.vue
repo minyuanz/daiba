@@ -17,7 +17,6 @@
           fill="none"
           id="circle"
           stroke-dasharray="0 610 610 0"
-          stroke-dashoffset="610"
           class="stat-outline-circle"
           stroke="#fff04b"
           stroke-width="8"
@@ -35,10 +34,10 @@
           from="0"
           to="610"
           dur="1s"
-          begin="0s"
+          begin="1.2s"
           fill="freeze"
         />
-
+<!-- 
         <animate
           attributeType="XML"
           xlink:href="#circle"
@@ -47,9 +46,9 @@
           from="610"
           to="0"
           dur="1s"
-          begin="4s"
+          begin="1.5s"
           fill="freeze"
-        />
+        />  -->
       </svg>
     </div>
 
@@ -65,8 +64,39 @@
         <div class="c-line tangerine"></div>
         <div class="c-line grap"></div>
       </div>
-    </div>
+      <div class="animateLineGroup">
+      <div class="left">
+        <div class="thick"></div>
+        <div class="dark1 slim"></div>
+        <div class="dark2 slim"></div>
+        <div class="dark3 slim"></div>
+        <div class="dark4 slim"></div>
+        <div class="dark5 slim"></div>
+        <div class="dark6 slim"></div>
+        <div class="dark7 slim"></div>
+        <div class="dark8 slim"></div>
+        <div class="dark9 slim"></div>
+      </div>
+      <!-- <div class="right">
+        <div class="dark9 slim"></div>
+        <div class="dark8 slim"></div>
+        <div class="dark7 slim"></div>
+        <div class="dark6 slim"></div>
+        <div class="dark5 slim"></div>
+        <div class="dark4 slim"></div>
+        <div class="dark3 slim"></div>
+        <div class="dark2 slim"></div>
+        <div class="dark1 slim"></div>
+        <div class="thick"></div>
+      </div> -->
   </div>
+    </div>
+    
+  </div>
+
+
+
+
 
   <!-- <div class="box2"> -->
   <!-- <img
@@ -93,37 +123,35 @@ body {
     transition: opacity 1s ease;
 
     .row-line {
+      height: 300px;
       position: absolute;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      top: 0;
-      bottom: 0;
-      margin-block: auto;
+      justify-content: space-between;
+      inset: 0;
+      margin: auto;
 
       .r-line {
         height: 70px;
-        width: 150vw;
-        opacity: 0.7;
-        margin-block: 3%;
+        width: 200vw;
+        // opacity: 0.7;
         border-radius: 50px;
       }
     }
 
-    .col-line {
+    .col-line { 
+      width: 300px;
       position: absolute;
       display: flex;
       flex-direction: row;
-      justify-content: center;
-      left: 0;
-      right: 0;
-      margin-inline: auto;
+      justify-content: space-between;
+      inset: 0;
+      margin: auto;
 
       .c-line {
         width: 70px;
-        height: 150vh;
-        opacity: 0.7;
-        margin-inline: 3%;
+        height: 200vh;
+        // opacity: 0.7;
         border-radius: 50px;
       }
     }
@@ -136,11 +164,68 @@ body {
       left: 0;
       right: 0;
       margin: auto;
-      opacity: 0.7;
+      // transform: rotateZ(90deg);
+      // opacity: 0.7;
     }
   }
+  .animateLineGroup{
+    width: 100%;
+    display: none;
+    justify-content: space-between;      
+    position: relative;
+    .left,.right{
+        width: 18.75%;
+        // height: 100%;
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        animation: fadeInLeft 2.5s ease-out 5s ;
+
+      }
+        .thick{
+          width: 20%;
+          height: 100vh;
+          background-color: #000;
+        }
+        .slim{
+          width: 6%;
+        }
+        .dark1{
+          background-color: #1A1A1A;
+        }
+        .dark2{
+          background-color: #323232;
+        }
+        .dark3{
+          background-color: #4C4C4C;
+        }
+        .dark4{
+          background-color: #666666;
+        }
+        .dark5{
+          background-color: #808080;
+        }
+        .dark6{
+          background-color: #9A9A9A;
+        }
+        .dark7{
+          background-color: #B4B4B4;
+        }
+        .dark8{
+          background-color: #CCCCCC;
+        }
+        .dark9{
+          background-color: #E6E6E6;
+        }
+
+  }
+
 }
 
+@keyframes fadeInLeft{
+    0%{ left: -100%;}
+  100%{ left: 0;}
+}
 @keyframes fadeOut {
   0% {
     opacity: 1;
@@ -149,7 +234,9 @@ body {
     opacity: 0;
   }
 }
-
+// .fadeInLeft{
+//   animation: fadeInLeft 2.5s ease-out 0s ;
+// }
 .fadeOut {
   animation: fadeOut .5s ease; /* Apply the fadeOut animation */
 }
@@ -177,7 +264,10 @@ body {
 import gsap from "gsap";
 
 export default {
-  // methods: {
+  methods: {
+    // addClass(){
+    //   document.document.querySelector('left').addClass('fadeInLeft')
+    // }
   //   hideCircle() {
   //     gsap.to(this.$refs.circleElement, {
   //       opacity: 0,
@@ -188,15 +278,22 @@ export default {
   //       },
   //     });
   //   },
-  // },
-
+  },
+  computed: {
+    addClass(){
+      const lineGroupElement = document.querySelector(".animateLineGroup");
+      if(lineGroupElement) {
+        lineGroupElement.style.display='flex'
+        lineGroupElement.classList.add("fadeInLeft")} 
+    }
+  },
   mounted() {
     setTimeout(() => {
       const circleElement = document.querySelector(".animate");
       if (circleElement) {
         circleElement.style.display = "none";
       }
-    }, 5000);
+    }, 4500);
 
     setTimeout(() => {
       const animateElement = document.querySelector(".animate");
@@ -204,7 +301,7 @@ export default {
         animateElement.classList.add("fadeOut");
       }
     }, 4000);
-
+      
     gsap.fromTo(
       ".chocolate",
       {
@@ -213,7 +310,7 @@ export default {
       {
         x: "-150%",
         duration: 1,
-        delay: 1,
+        delay: 0,
       }
     );
 
@@ -225,7 +322,7 @@ export default {
       {
         x: "-150%",
         duration: 1,
-        delay: 1.1,
+        delay: .2,
       }
     );
 
@@ -237,7 +334,7 @@ export default {
       {
         x: "-150%",
         duration: 1,
-        delay: 1.2,
+        delay: .4,
       }
     );
 
@@ -249,7 +346,7 @@ export default {
       {
         y: "-160%",
         duration: 1,
-        delay: 1.5,
+        delay:.6,
       }
     );
 
@@ -261,7 +358,7 @@ export default {
       {
         y: "-160%",
         duration: 1,
-        delay: 1.6,
+        delay: .8,
       }
     );
 
@@ -273,7 +370,7 @@ export default {
       {
         y: "-160%",
         duration: 1,
-        delay: 1.7,
+        delay: 1,
       }
     );
   },
