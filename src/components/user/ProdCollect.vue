@@ -1,0 +1,128 @@
+<template>
+    <div class="prodWrap">
+        <h1>商品收藏</h1>
+        <div class="prodGrid">
+            <div class="prodCard" v-for="card in cardsDisplay">
+                <div class="pic">
+                    <img :src="card.image" alt="">
+                </div>
+                <div class="txt">
+                    <h3>{{ card.title }}</h3>
+                    <span> NT.{{ card.price }}</span>
+                </div>
+            </div>
+        </div>
+        <Page :total="cards.length" size="small" :page-size="pageSize" @on-change="updatePage" id="page" />
+    </div>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            cards: [{
+                image: '../img/prod1.png',
+                title: '台灣紀念酒杯',
+                price: 150
+            }, {
+                image: '../img/prod1.png',
+                title: '台灣紀念酒杯',
+                price: 150
+            }, {
+                image: '../img/prod1.png',
+                title: '台灣紀念酒杯',
+                price: 150
+            }, {
+                image: '../img/prod1.png',
+                title: '台灣紀念酒杯',
+                price: 150
+            }, {
+                image: '../img/prod1.png',
+                title: '台灣紀念酒杯',
+                price: 150
+            }, {
+                image: '../img/prod1.png',
+                title: '台灣紀念酒杯',
+                price: 150
+            },],
+            cardsDisplay: [],
+            pageSize: 6,
+            currentPage: 1,
+        }
+    },
+    methods: {
+        updatePage(page) {
+            // console.log(page);
+            this.currentPage = page
+            this.cardsDisplay = this.cards
+            const startIdx = (this.currentPage - 1) * this.pageSize
+            const endIdx = startIdx + this.pageSize
+            this.cardsDisplay = this.cards.slice(startIdx, endIdx);
+        },
+    },
+    mounted() {
+        this.cardsDisplay = this.cards
+    },
+}
+</script>
+
+<style lang="scss">
+.prodWrap {
+    border: 1px solid #aaa;
+    background-color: #fff;
+    border-radius: 20px;
+    width: 900px;
+
+    h1 {
+        text-align: center;
+        margin: 30px 0;
+    }
+
+    .prodGrid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 350px);
+        justify-items: center;
+        // justify-content: center;
+        align-items: center;
+        padding: 0 30px;
+        gap: 20px;
+
+        .prodCard {
+            .pic {
+                img {
+                    width: 100%;
+                }
+            }
+
+            .txt {
+                // border: 1px solid red;
+                // margin: auto;
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-between;
+            }
+        }
+    }
+
+    #page {
+        text-align: center;
+    }
+}
+
+@media screen and (max-width:414px) {
+    .prodWrap {
+        width: 100%;
+
+        .prodGrid {
+            display: block;
+            .prodCard {
+                margin: 10px 0;
+            }
+
+        }
+    }
+
+}
+</style>
+

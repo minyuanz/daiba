@@ -20,30 +20,6 @@
                 更改信箱
             </button>
         </div>
-        <!-- <div class="userChange">
-            <div class="userPic">
-                <img src="https://steam.oxxostudio.tw/webp/gimp/example/simple-keyer-mask-16.webp" />
-            </div>
-            <div class="userTxt">
-                <h2>更改基本資料</h2>
-                <div class="userName">
-                    <label for="name">名稱：</label>
-                    <input type="text" v-model="username" id="name">
-                </div>
-                <div class="userBir">
-                    <label for="Bir">生日：</label>
-                    <input type="date" v-model="userbir" id="Bir">
-                </div>
-                <div class="userSex">
-                    <label for="sex">性別：</label>
-                    <select name="" id="sex" v-model="usersex">
-                        <option value="男">男</option>
-                        <option value="女">女</option>
-                    </select>
-                </div>
-            </div>
-        </div> -->
-        <!-- <button class="userSubmit btn_s">送出</button> -->
     </div>
     <!-- 更改基本資料 -->
     <AccChange id="AccChange" v-else-if="'更改基本資料' == toggle" @toggle-change="toggleUpdate"/>
@@ -56,10 +32,10 @@
 </template>
 
 <script>
-import AccChange from '@/components/AccChange.vue'
-import PwdChange from '@/components/PwdChange.vue'
-import PhoneChange from '@/components/PhoneChange.vue'
-import MailChange from '@/components/MailChange.vue'
+import AccChange from '@/components/user/AccChange.vue'
+import PwdChange from '@/components/user/PwdChange.vue'
+import PhoneChange from '@/components/user/PhoneChange.vue'
+import MailChange from '@/components/user/MailChange.vue'
 export default {
     components: {
         AccChange,
