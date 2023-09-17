@@ -90,7 +90,7 @@ body {
     height: 100vh;
     backdrop-filter: blur(5px);
     opacity: 1;
-    transition: opacity 1s ease;
+    // transition: opacity 1s ease;
 
     .row-line {
       position: absolute;
@@ -151,7 +151,7 @@ body {
 }
 
 .fadeOut {
-  animation: fadeOut 1s ease; /* Apply the fadeOut animation */
+  animation: fadeOut .5s ease; /* Apply the fadeOut animation */
 }
 
 // .box2 {
