@@ -20,6 +20,66 @@
     justify-content: center;
     align-items: center;
 
+    .checkBox {
+      position: relative;
+      right: 120%;
+      bottom: 0%;
+      width: 100px;
+      height: 180px;
+
+      .box {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        border: 3px solid #d9d9d9;
+        background: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+
+        button {
+          display: block;
+          inset: 0;
+          width: 80%;
+          height: 25%;
+          border-radius: 10px;
+          border: none;
+          background: initial;
+          transition: all 0.3s;
+        }
+
+        button:hover {
+          background: #7d7d7d;
+          color: white;
+        }
+      }
+
+      .triangle {
+        position: absolute;
+        left: 96%;
+        width: 25px;
+        height: 25px;
+        top: 0;
+        bottom: 0;
+        margin-block: auto;
+        clip-path: polygon(0 20%, 0 80%, 100% 50%);
+        background: #d9d9d9;
+
+        &::before {
+          content: "";
+          position: absolute;
+          display: block;
+          height: 25px;
+          width: 25px;
+          left: -25%;
+          clip-path: polygon(0 25%, 0 75%, 100% 50%);
+          background: white;
+        }
+      }
+    }
+
     .outer-circle {
       width: 90%;
       height: 90%;
@@ -50,6 +110,10 @@
     .inner-circle {
       z-index: 3;
       position: absolute;
+
+      img {
+        width: 100%;
+      }
     }
 
     @keyframes spin {
@@ -375,6 +439,11 @@
 
 @media screen and (max-width: 768px) {
   .mrtLineCheck {
+    .mrtTagbar {
+      width: 100px;
+      height: 100px;
+    }
+
     .mrtPic {
       padding-block: 15px;
       min-width: 100%;
@@ -453,6 +522,11 @@
 
   @media screen and (max-width: 414px) {
     .mrtLineCheck {
+      .mrtTagbar {
+        width: 80px;
+        height: 80px;
+      }
+
       .mrtPic {
         min-width: 100%;
         height: 200px;

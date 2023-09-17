@@ -10,6 +10,14 @@
       <div class="inner-circle">
         <img src="../../public/img/mrtImg.png" alt="" />
       </div>
+      <div class="checkBox">
+        <div class="box">
+          <button class="place">景點</button>
+          <button class="food">美食</button>
+          <button class="hotel">住宿</button>
+        </div>
+        <div class="triangle"></div>
+      </div>
     </div>
 
     <div class="mrtPic">
