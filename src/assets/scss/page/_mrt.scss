@@ -78,12 +78,13 @@
       display: block;
       z-index: 3;
       cursor: pointer;
+
       &::after {
         content: "";
         position: absolute;
         inset: 0;
-        height: 200%;
-        top: -200%;
+        height: 95px;
+        top: -190%;
         left: 50%;
       }
     }

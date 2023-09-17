@@ -84,8 +84,22 @@ body {
   // overflow: hidden;
 
   .animate {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    backdrop-filter: blur(5px);
+    opacity: 1;
+    transition: opacity 1s ease;
+
     .row-line {
       position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      top: 0;
+      bottom: 0;
+      margin-block: auto;
 
       .r-line {
         height: 70px;
@@ -127,6 +141,19 @@ body {
   }
 }
 
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.fadeOut {
+  animation: fadeOut 1s ease; /* Apply the fadeOut animation */
+}
+
 // .box2 {
 //   width: 300px;
 //   height: 300px;
@@ -165,11 +192,18 @@ export default {
 
   mounted() {
     setTimeout(() => {
-      const circleElement = document.querySelector(".circle");
+      const circleElement = document.querySelector(".animate");
       if (circleElement) {
         circleElement.style.display = "none";
       }
     }, 5000);
+
+    setTimeout(() => {
+      const animateElement = document.querySelector(".animate");
+      if (animateElement) {
+        animateElement.classList.add("fadeOut");
+      }
+    }, 4000);
 
     gsap.fromTo(
       ".chocolate",
