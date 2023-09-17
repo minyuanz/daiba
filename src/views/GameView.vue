@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <!-- <h1>This is an game page</h1> -->
+
   </div>
 
   <div class="animate">
@@ -93,7 +93,7 @@
           <div class="dark1 slim"></div>
           <div class="thick"></div>
         </div>
-    </div>
+  </div>
 
 
 
@@ -111,7 +111,7 @@
 <style lang="scss">
 body {
   // position: relative;
-  overflow: hidden;
+  // overflow: hidden;
 
   .animate {
     position: fixed;
