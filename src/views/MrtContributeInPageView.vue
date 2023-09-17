@@ -41,11 +41,10 @@
         與吧檯旁亮起的銀幕畫面相互呼應， 讓人駐足在電影般的榕民活動中心。
       </p>
     </div>
+    <!-- ------------------------------------------------------------ -->
     <div
       class="fixCenter part3"
-      :style="{
-        backgroundImage: `url(${background3})`,
-      }"
+      :style="{ backgroundImage: MB ? `url(${backgroundMb3})` : `url(${background3})` }"
     >
       <div class="content">
         <div class="image">
@@ -62,11 +61,19 @@
         </article>
       </div>
     </div>
+    <article class="mbart">
+      <p>
+            榕，<br />
+            一座單名的咖啡酒吧，出自門前的老榕樹，翻新老屋創造士林傳說。在這裡，隨著派對聚會與音樂的喧鬧聲，我們聚集了氣味相投的常客老友們，
+            互相稱之為「榕民」。<br />
+            <br />2013年末，榕團隊以酒飲、餐點與音樂派對發想企劃，在台式老屋裡融入西洋文化。
+            當人們踏上階梯探訪舊式公寓，就能感受到特有的榕式氣味。
+      </p>
+    </article>
+    <!-- ------------------------------------------------------------ -->
     <div
       class="fixCenter part4"
-      :style="{
-        backgroundImage: `url(${background4})`,
-      }"
+      :style="{ backgroundImage: MB ? `url(${backgroundMb4})` : `url(${background4})` }"
     >
       <div class="content">
         <div class="image">
@@ -81,6 +88,13 @@
         </article>
       </div>
     </div>
+    <article class="mbart">
+          <p>
+            由電影背景的主理人，與熱愛音樂得好友們於2013年成立，期許在酒吧餐飲空間，使來客們找到歸屬感，延續記憶營造舊地重遊的空間感受。<br /><br />
+            榕 RON 團隊為空間注入藝術，為氣氛加入音樂，從餐點翻玩創意，
+            為情感抒發提供餐酒空間，「榕」合出人與人的交流。
+          </p>
+    </article>
     <div class="seperate">
       <svg height="10" width="4000">
         <g fill="none">
@@ -112,15 +126,34 @@
 import background1 from "@../../../public/img/ron/part1bgc.svg";
 import background2 from "@../../../public/img/ron/part2bgc.svg";
 import background3 from "@../../../public/img/ron/part3bgc.svg";
+import backgroundMb3 from "@../../../public/img/ron/part3_mb.svg";
 import background4 from "@../../../public/img/ron/part4bgc.svg";
+import backgroundMb4 from "@../../../public/img/ron/part4_mb.svg";
 export default {
   data() {
     return {
       background1,
       background2,
-      background3,
-      background4,
+      background3,backgroundMb3,
+      background4,backgroundMb4,
+      MB:false,
+      PC:false
     };
   },
+  mounted () {
+    this.WindowWidth();
+    window.addEventListener("resize", this.WindowWidth);  
+  },
+  methods: {
+    WindowWidth() {
+      if (window.innerWidth <= 768) {
+        this.MB = true;
+        this.PC = false;
+      } else {
+        this.PC = true;
+        this.MB = false;
+      }
+    },
+  }
 };
 </script>
