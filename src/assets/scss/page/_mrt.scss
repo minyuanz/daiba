@@ -44,7 +44,7 @@
         blue 80%,
         violet 100%
       );
-      animation: spin 0.7s steps(10) infinite;
+      animation: spin 1.5s steps(90) infinite;
     }
 
     .inner-circle {
@@ -131,6 +131,7 @@
       display: block;
       z-index: 3;
       cursor: pointer;
+      transition: all 0.3s;
 
       &::after {
         content: "";
