@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+// import HomeView from "../views/HomeView.vue";
 // import LoginView from "@/views/LoginView.vue";
 // import storeView from "@/views/storeView.vue";
 // import NotFound from "@/views/NotFoundView.vue";
@@ -7,8 +7,19 @@ import HomeView from "../views/HomeView.vue";
 const routes = [
   {
     path: "/",
+    name: "Main",
+    component: () =>
+    import(/* webpackChunkName: "About" */ "../views/Main.vue"),
+    // meta: {
+    //   useAppLayout: false, // 不使用 App.vue 佈局
+    // },
+  },
+  {
+    path: "/home",
     name: "home",
-    component: HomeView,
+    // component: HomeView,
+    component: () =>
+    import(/* webpackChunkName: "About" */ "../views/HomeView.vue"),
     // meta: {
     //   useAppLayout: false, // 不使用 App.vue 佈局
     // },
