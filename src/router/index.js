@@ -83,6 +83,13 @@ const routes = [
       import(/* webpackChunkName: "Contribute" */ "@/views/ContributeView.vue"),
   },
   {
+    path: "/Submit",
+    name: "Submit",
+    // component: LoginView,
+    component: () =>
+      import(/* webpackChunkName: "Contribute" */ "@/views/Submit.vue"),
+  },
+  {
     path: "/new",
     name: "new",
     // component: LoginView,

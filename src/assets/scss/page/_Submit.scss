@@ -1,0 +1,197 @@
+.SubmitTitle {
+    h1 {
+        text-align: center;
+        margin: 3rem 0;
+        font-size: map-get($fontsizes, h1);
+        font-weight: map-get($fontweight, fw_stitle);
+        line-height: 64px;
+    }
+}
+
+.next {
+    margin: 3rem auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
+    a {
+        border: solid #000;
+        height: 40px;
+        color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.SubmitNorms {
+    margin: auto;
+    width: 1200px;
+
+
+
+    .txt {
+        p {
+            font-size: 24px;
+
+        }
+
+        ul {
+            margin-block: 1rem;
+            padding: 1rem;
+
+            li {
+                margin-block: 1rem;
+                list-style: decimal;
+                font-size: 16px;
+                line-height: 24px;
+
+            }
+        }
+
+        .checkBox {
+            margin: auto;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+
+
+            span {
+                font-size: 20px;
+            }
+
+            input {
+                width: 25px;
+                height: 25px;
+            }
+
+
+        }
+
+
+    }
+
+}
+
+.SubmitArea {
+    width: 1200px;
+    margin: auto;
+    padding: 2% 10%;
+
+
+    ul {
+
+        li {
+
+            margin: 5% auto;
+
+            label {
+                font-size: 24px;
+                border-left: 10px solid map-get($color, $key: grap);
+                padding-inline: 10px;
+                display: block;
+                margin-bottom: 3%;
+            }
+
+            input {
+                display: block;
+                margin-left: 2%;
+                width: 100%;
+                height: 40px;
+                border-radius: 50px;
+                padding: 10px 25px;
+                font-size: 20px;
+            }
+
+            .select {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 5%;
+                margin-bottom: 2%;
+
+                select {
+                    width: 200px;
+                    height: 35px;
+                    font-size: 20px;
+                    border-radius: 50px;
+                    padding-inline: 2%;
+
+
+
+                }
+            }
+
+            span {
+                display: inline-block;
+                color: red;
+                font-size: 16px;
+                font-weight: 600;
+                margin-left: 3%;
+                margin-top: 5px;
+            }
+
+
+            .UploadImg {
+                display: flex;
+                gap: 10px;
+
+                .img {
+                    width: 300px;
+                    height: 250px;
+                    border: 1px solid black;
+
+                    position: relative;
+                    margin-left: 2%;
+                    border-radius: 50px;
+
+                    p {
+                        font-size: 20px;
+                        text-align: center;
+                        line-height: 250px;
+                    }
+
+                    input {
+                        position: absolute;
+                        inset: 0;
+                        width: 100%;
+                        height: 100%;
+                        opacity: 0;
+                        z-index: 9;
+                        cursor: pointer;
+                    }
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        margin: auto;
+                        border-radius: 50px;
+                    }
+                }
+            }
+
+            textarea {
+                width: 100%;
+                height: 250px;
+                border-radius: 50px;
+                font-size: 20px;
+                padding: 20px 40px;
+            }
+
+        }
+    }
+}
+
+.SubmitFinish {
+    p {
+        font-size: 24px;
+        text-align: center;
+    }
+}
