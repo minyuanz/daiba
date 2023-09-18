@@ -3,23 +3,21 @@
       <div class="DetailBox">
         <div class="DetailPicBox">
             <div class="DetailMainPic"><img :src="selectedImage" alt=""></div>
-            <div class="DetailPic" v-for="(item, index) in images" :key="index" @click="selectImage(item.src)">
-            <img :src="item.src" alt="">
+            <div class="DetailPic"  @click="selectImage(item.src)">
+              <img v-if="foundObject.prod_img1" :src="foundObject.prod_img1" alt="">
+              <img v-if="foundObject.prod_img2" :src="foundObject.prod_img1" alt="">
+              <img v-if="foundObject.prod_img3" :src="foundObject.prod_img1" alt="">
+              <img v-if="foundObject.prod_img4" :src="foundObject.prod_img1" alt="">
             </div>
-            <!-- <div class="DetailPic"><img  src="https://img.shoplineapp.com/media/image_clips/5f7ecf347257270029e5c2dc/original.jpg?1602146100" alt=""></div>
-            <div class="DetailPic"><img  src="https://cc.tvbs.com.tw/img/program/upload/2023/02/08/20230208173312-e7d780c5.jpg" alt=""  ></div>
-            <div class="DetailPic"><img src="https://i2.wp.com/gwan.tw/wp-content/uploads/2022/10/20221020004311_53.jpg" alt="" ></div>
-            <div class="DetailPic"><img class="DetailPic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlsDygW5l6-urgSirZ28w1yJgNOy7sF4VJqQ&usqp=CAU" alt="" ></div> 
-            -->
         </div>
         <div class="DetailDigBox">
-            <h2 class="Digtitle">阿罵復古袋子</h2>
-            <div class="DigPrice">NT.200</div>
-            <div class="DigDes">說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明說明</div>
+            <h2 class="Digtitle">{{ foundObject.pord_name }}</h2>
+            <div class="DigPrice">NT.{{ foundObject.pord_price }}</div>
+            <div class="DigDes">{{ foundObject.pord_bdes }}</div>
             <div class="DigCountBox">
                 數量
                 <button @click="decrementCount">-</button>
-                {{ count }}
+                1
                 <button  @click="incrementCount">+</button>  
             </div>
             <div class="DigLikeBox">
@@ -29,9 +27,7 @@
             <div class="DigInStore">加入購物車</div>
             <div class="DigSDES">
                 商品訊息:
-                <P>尺寸:</P>
-                <P>材質:</P>
-                <P>產地:</P>
+                {{ foundObject.pord_bdes2 }}
             </div>
         </div>
       </div>
@@ -55,19 +51,19 @@
 </template>
 
 <script>
+import ProTest from "@/testdata/ProTest.json"
 export default {
   data() {
     return {
+      foundObject:"",
       selectedImage: 'https://img.shoplineapp.com/media/image_clips/5f7ecf347257270029e5c2dc/original.jpg?1602146100', 
-      images: [
-        { src: 'https://img.shoplineapp.com/media/image_clips/5f7ecf347257270029e5c2dc/original.jpg?1602146100' },
-        { src: 'https://cc.tvbs.com.tw/img/program/upload/2023/02/08/20230208173312-e7d780c5.jpg' },
-        { src: 'https://i2.wp.com/gwan.tw/wp-content/uploads/2022/10/20221020004311_53.jpg' },
-        { src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlsDygW5l6-urgSirZ28w1yJgNOy7sF4VJqQ&usqp=CAU' },
-      ],
       count: 1,
       value: 0,
     };
+  },
+  mounted() {
+    const idToFind = this.$route.params.id;
+    this.foundObject = ProTest.find(item => item.pord_id === idToFind);
   },
   methods: {
     decrementCount() {

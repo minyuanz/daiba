@@ -26,18 +26,17 @@
       <button class="storeSearchBt">搜尋</button>
     </div>
     <div class="storecardbox">
-      <!-- <div v-for="(item) in testitem" :key="item.id" class="storeCard"> -->
-      <div v-for="item in 10" class="storeCard">
+      <div v-for="item  in testitem "  :key="item.pord_id"  class="storeCard">
         <img
-          @click="goToStoreDetail"
+          @click="goToStoreDetail(item.pord_id)"
           class="storeCardimg"
-          src="https://s.yimg.com/ny/api/res/1.2/47Kriq370oo5npvk5nr.6Q--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTY0MA--/https://media.zenfs.com/en/ftvn.com.tw/5ada7e3c01073aac8a607bfa5aaecd3b"
+          :src="item.prod_img1"
           alt=""
         />
         <div class="storeBottom">
           <div class="storeCardText">
-            <h3 class="CardDes">{{ testitem.pord_bdes }}敘述</h3>
-            <h4 class="CardPri">{{ testitem.sta_name }}NT.12345</h4>
+            <h3 class="CardDes">{{ item.pord_name }}</h3>
+            <h4 class="CardPri">{{ item.pord_price }}</h4>
           </div>
           <div class="storeButton">
             <i class="fa-regular fa-heart" style="cursor: pointer"></i>
@@ -51,29 +50,21 @@
 
 <script>
 import { useRouter } from "vue-router";
+import ProTest from "@/testdata/ProTest.json"
 export default {
   data() {
     return {
-      testitem: [
-        {
-          pord_id: "商品編號",
-          pord_name: "商品名稱",
-          pord_bdes: "商品簡述",
-          pord_price: "商品價格",
-          mrt_name: "捷運線名稱",
-          sta_name: "捷運站名稱",
-          prod_img1:
-            "https://s.yimg.com/ny/api/res/1.2/47Kriq370oo5npvk5nr.6Q--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTY0MA--/https://media.zenfs.com/en/ftvn.com.tw/5ada7e3c01073aac8a607bfa5aaecd3b",
-          prod_img2: "",
-          prod_img3: "",
-          prod_img4: "",
-        },
-      ],
+      testitem: ProTest,
     };
   },
   methods: {
-    goToStoreDetail() {
-      this.$router.push("/StoreDetail");
+    goToStoreDetail(Detail) {
+      this.$router.push({
+        name: 'storeDetail',
+        params: {
+          id:Detail
+          }
+      });
     },
     addToCart(product) {
       this.$store.dispatch("addToCart", product);
