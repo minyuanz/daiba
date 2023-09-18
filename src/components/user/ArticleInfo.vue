@@ -12,7 +12,7 @@
                     </div>
                     <div class="text">
                         <div class="title">
-                            <span class="tag gray">#{{ card.tag }}</span>
+                            <span class="gray title-tag">#{{ card.tag }}</span>
                             <h3>{{ card.title }}</h3>
                             <p>{{ card.title2 }}</p>
                         </div>
@@ -25,11 +25,7 @@
                     </p>
                 </div>
             </div>
-            <!-- <Page 
-            :total="cards.length" 
-            size="small" 
-            :page-size="pageSize" 
-            @on-change="updatePage"  id="page"/> -->
+            <Page :total="cards.length" size="small" :page-size="pageSize" @on-change="updatePage" id="page" />
         </div>
 
     </div>
@@ -47,8 +43,7 @@ export default {
                 title2: '開箱五星級行政豪華客房一泊二食',
                 date: '2020-06-15',
                 ctx: '在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。'
-            },
-            {
+            }, {
                 image: '../img/artCard.png',
                 head: '../img/artCard1.png',
                 tag: '住宿推薦',
@@ -94,7 +89,7 @@ export default {
                 ctx: '在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。'
             }],
             cardsDisplay: [],
-            pageSize: 4,
+            pageSize: 6,
             currentPage: 1,
 
         }
@@ -133,7 +128,7 @@ export default {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: repeat(2, 1fr);
-        gap: 30px;
+        gap: 20px;
         padding: 0 50px;
         justify-items: center;
 
@@ -144,6 +139,7 @@ export default {
                 width: 100%;
                 height: 350px;
                 overflow: auto;
+                margin: 0;
 
                 .img {
                     .head {
@@ -154,7 +150,9 @@ export default {
         }
 
         #page {
-            grid-area: 4/1/5/3;
+            grid-area: 3/1/4/4;
+            // display: block;
+            text-align: center;
         }
     }
 
@@ -165,18 +163,17 @@ export default {
         width: 100%;
 
         .artGrid {
-            grid-template-columns: repeat(1, 1fr);
+            display: block;
 
             .artCard {
+
                 .card-h {
-                    // margin:  5px auto;
-                    // overflow:auto;
-                    // margin: 5px 0;
-                    height: 520px;
-                    margin: 0;
+                    height: 550px;
+                    margin: 10px 0;
 
                 }
             }
+
         }
     }
 

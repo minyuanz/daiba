@@ -11,7 +11,7 @@
     <div id="row2"></div>
     <div id="row3"></div>
   </div>
-  <div id="circle"></div>
+  <!-- <div id="circle"></div> -->
   <!-- </template> -->
 
   <!-- <div id="circle"></div> -->
@@ -23,24 +23,35 @@
     <!-- 左邊選單 -->
     <SliderAC class="userSlider" @title-change="titleUpdate" />
     <!-- 右邊選單 -->
-    <!--會員資料 -->
+    <!-- 會員資料 -->
     <UserInfo v-if="'會員資料' == title" />
     <!-- 投稿文章 -->
     <ArticleInfo id="ArticleInfo" v-else-if="'投稿文章' == title" />
     <!-- 文章收藏 -->
+    <ArticleCollect v-else-if="'文章收藏' == title" />
+    <!-- 商品收藏 -->
+    <ProdCollect v-else-if="'商品收藏' == title" />
+    <!-- 訂單查詢 -->
+    <orders v-else-if="'訂單查詢' == title" />
   </div>
 </template>
 
 <script>
 import SliderAC from "@/components/SliderAC.vue";
-import UserInfo from "@/components/UserInfo.vue";
-import ArticleInfo from "@/components/ArticleInfo.vue";
+import UserInfo from "@/components/user/UserInfo.vue";
+import ArticleInfo from "@/components/user/ArticleInfo.vue";
+import ArticleCollect from "@/components/user/ArticleCollect.vue";
+import ProdCollect from "@/components/user/ProdCollect.vue";
+import orders from "@/components/user/orders.vue";
 
 export default {
   components: {
     SliderAC,
     UserInfo,
     ArticleInfo,
+    ArticleCollect,
+    ProdCollect,
+    orders
   },
   data() {
     return {
@@ -60,7 +71,7 @@ export default {
   },
   mounted() {
     let app = document.getElementById("app");
-    // // alert(window.innerWidth)
+    // alert(app.clientHeight)
     // // console.log(app.clientHeight)
     let col1 = document.getElementById("col1");
     let col2 = document.getElementById("col2");
@@ -82,6 +93,7 @@ export default {
 
 <style lang="scss">
 @media screen and (max-width: 414px) {
+
   #col1,
   #col2,
   #col3,
@@ -113,15 +125,13 @@ export default {
         left: -10px;
         width: 15px;
         height: 150%;
-        background-image: linear-gradient(
-          #a87b52 5%,
-          #dd4d54 10%,
-          #ffbb33 30%,
-          #fff04b 45%,
-          #4bc887 70%,
-          #32c8e1 85%,
-          #9164cd
-        );
+        background-image: linear-gradient(#a87b52 5%,
+            #dd4d54 10%,
+            #ffbb33 30%,
+            #fff04b 45%,
+            #4bc887 70%,
+            #32c8e1 85%,
+            #9164cd);
         /* border: 1px solid red; */
       }
     }

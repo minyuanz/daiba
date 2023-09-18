@@ -4,6 +4,22 @@
   </div>
 
   <section class="mrtLineCheck">
+    <div class="mrtTagbar">
+      <div class="outer-circle"></div>
+      <div class="color-circle"></div>
+      <div class="inner-circle">
+        <img src="../../public/img/mrtImg.png" alt="" />
+      </div>
+      <div class="checkBox">
+        <div class="box">
+          <button class="place">景點</button>
+          <button class="food">美食</button>
+          <button class="hotel">住宿</button>
+        </div>
+        <div class="triangle"></div>
+      </div>
+    </div>
+
     <div class="mrtPic">
       <div class="pic mrtGrayStyle border-brownline">
         <img src="../../public/img/brown.jpeg" alt="brownline" />
@@ -105,7 +121,11 @@
     <div class="swiper" id="mySwiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for=" in 20">
-          <img src="../../public/img/mrtArrow.png" alt="" />
+          <img
+            src="../../public/img/mrtArrow.png"
+            alt=""
+            @load="initializeSwiper"
+          />
         </div>
       </div>
     </div>
@@ -115,7 +135,11 @@
     <div class="swiper" id="mySwiper2">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for=" in 20">
-          <img src="../../public/img/mrtArrow.png" alt="" />
+          <img
+            src="../../public/img/mrtArrow.png"
+            alt=""
+            @load="initializeSwiper"
+          />
         </div>
       </div>
     </div>
@@ -152,6 +176,9 @@ export default {
       autoHeight: true,
       slidesPerView: "auto",
       spaceBetween: 0,
+      observer: true,
+      observerParents: true,
+      disableOnInteraction: false,
       autoplay: {
         delay: 0,
         pauseOnMouseEnter: false,
@@ -184,7 +211,7 @@ export default {
         this.showAll = true;
       }
     },
-
+    //rwd判斷
     WindowWidth() {
       if (window.innerWidth <= 768) {
         this.MB = true;
@@ -197,6 +224,7 @@ export default {
   },
 
   computed: {
+    //字母轉大寫
     upperCaseColorsMB() {
       return this.selectColor.map((color) =>
         color.toUpperCase().substring(0, 2)
@@ -211,29 +239,18 @@ export default {
 
 <style>
 .active {
-  animation: flash 300ms 1s linear infinite;
+  animation: flash 300ms linear forwards;
 }
 
 .title-tag:hover ~ .pic.active {
-  animation: flash 300ms linear;
+  animation: flash 300ms linear forwards;
 }
 
 @keyframes flash {
   0% {
     filter: brightness(100%);
   }
-  20% {
-    filter: brightness(150%);
-  }
-  40% {
-    filter: brightness(100%);
-  }
-  60% {
-    filter: brightness(150%);
-  }
-  80% {
-    filter: brightness(100%);
-  }
+
   100% {
     filter: brightness(150%);
   }
