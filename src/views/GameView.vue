@@ -180,7 +180,7 @@ body {
         display: flex;
         justify-content: space-between;
         position: absolute;
-        animation: fadeInLeft 5.5s ease-out 0s ;
+        animation: fadeInLeft 3.5s ease-out 0s ;
       }
     .right{
       width: 18.75%;
@@ -188,7 +188,7 @@ body {
         right: 0;
         justify-content: space-between;
         position: absolute;
-        animation: fadeInRight 5.5s ease-out 0s ;
+        animation: fadeInRight 3.5s ease-out 0s ;
     }
         .thick{
           width: 20%;
