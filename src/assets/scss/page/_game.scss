@@ -1,0 +1,70 @@
+.gameWrapper {
+    position: relative;
+    border: 1px solid red;
+
+    .home {
+        margin: 3rem 0;
+        height: 90vh;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .gameLogo {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 10%;
+        margin: auto;
+    }
+
+    .start {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 30%;
+        bottom: 0;
+        margin: auto;
+    }
+
+    .name {
+        width: 300px;
+        height: 400px;
+        background-color: #eee;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        z-index: 2;
+        text-align: center;
+        border-radius: 50px;
+
+
+        p {
+            display: block;
+            margin-block: 4rem;
+            font-size: 30px;
+        }
+
+        input{
+            width: 200px;
+            border-radius: 50px;
+            padding: 5px 30px;
+            margin-bottom: 5rem;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .btn_s{
+            display: block;
+            width: 200px;
+            margin: auto;
+        }
+    }
+
+
+}
