@@ -158,13 +158,18 @@ const routes = [
     name: "/user",
     component: () => import(/* webpackChunkName: "User" */ "@/views/User.vue"),
   },
-
+  {
+    path: "/Back/BackgroundUse",
+    name: "/BackgroundUse",
+    component: () => import(/* webpackChunkName: "User" */ "@/views/Back/BackgroundUse.vue"),
+  },
   {
     path: "/:pathMatch(.*)*",
     name: "NotFound",
     component: () =>
       import(/* webpackChunkName: "err" */ "@/views/NotFoundView.vue"),
   },
+  
 ];
 
 const router = createRouter({

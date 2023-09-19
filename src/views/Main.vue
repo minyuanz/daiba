@@ -1,6 +1,11 @@
 <template>
     <div>
-        <button>前台</button>
-        <button>後台</button>
+        <a href="/home">前台</a>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <a href="/Back/BackgroundUse">後台</a>
     </div>
 </template>
