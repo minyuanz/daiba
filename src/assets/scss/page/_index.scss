@@ -9,7 +9,7 @@
 .homeNav {
   max-width: 1200px;
   margin: auto;
-  margin-top: 1%;
+  // margin-top: 1%;
   padding-inline: 5%;
 
   ul {
@@ -57,6 +57,7 @@
         }
       }
 
+
       a {
         position: absolute;
         inset: 0;
@@ -76,11 +77,20 @@
       }
     }
   }
+  ul li:nth-child(1) .pic img{
+    object-position: 60% 0;
+  }
+  ul li:nth-child(2) .pic img{
+    object-position: 35% 30%;
+  }
+  ul li:nth-child(3) .pic img{
+    object-position: 30% 0;
+  }
 }
 
 .homeBanner {
   max-width: 1100px;
-  margin: 3% auto;
+  margin: 3% auto 0;
   // margin-top: 2%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
