@@ -179,6 +179,31 @@ const routes = [
     component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackFeature.vue"),
   },
   {
+    path: "/Back/BackContri",
+    name: "/BackContri",
+    component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackContri.vue"),
+  },
+  {
+    path: "/Back/BackNews",
+    name: "/BackNews",
+    component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackNews.vue"),
+  },
+  {
+    path: "/Back/BackPermission",
+    name: "/BackPermission",
+    component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackPermission.vue"),
+  },
+  {
+    path: "/Back/BackOrder",
+    name: "/BackOrder",
+    component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackOrder.vue"),
+  },
+  {
+    path: "/Back/BackPro",
+    name: "/BackPro",
+    component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackPro.vue"),
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "NotFound",
     component: () =>

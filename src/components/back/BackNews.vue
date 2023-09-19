@@ -1,5 +1,5 @@
 <template>
     <div>
-        測試
+        新聞
     </div>
 </template>
