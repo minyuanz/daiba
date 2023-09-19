@@ -11,7 +11,7 @@ const publicURL =
 export default createStore({
   state: {
     cart: [],
-    favorites: [],
+    favorites: [],  
     purchaseProcess: {},
   },
   getters: {

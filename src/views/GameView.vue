@@ -33,12 +33,12 @@
           attributeName="stroke-dashoffset"
           from="0"
           to="610"
-          dur="1s"
+          dur="1.5s"
           begin="1.2s"
           fill="freeze"
         />
 
-        <animate
+        <!-- <animate
           attributeType="XML"
           xlink:href="#circle"
           id="circleanimate2"
@@ -48,7 +48,7 @@
           dur="1s"
           begin="1.5s"
           fill="freeze"
-        />  
+        />   -->
       </svg>
     </div>
 
@@ -119,6 +119,7 @@ body {
     width: 100%;
     height: 100vh;
     backdrop-filter: blur(5px);
+    background-color: #fff;
     opacity: 1;
     transition: opacity 1s ease;
 
@@ -247,7 +248,7 @@ body {
 //   animation: fadeInLeft 2.5s ease-out 0s ;
 // }
 .fadeOut {
-  animation: fadeOut .5s ease; /* Apply the fadeOut animation */
+  animation: fadeOut 1.5s ease-in 0s; /* Apply the fadeOut animation */
 }
 
 // .box2 {
@@ -309,7 +310,7 @@ export default {
       if (animateElement) {
         animateElement.classList.add("fadeOut");
       }
-    }, 4000);
+    }, 3000);
 
       
     gsap.fromTo(
