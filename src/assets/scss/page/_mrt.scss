@@ -325,6 +325,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 2% 100%;
+    cursor: pointer;
     max-width: 1200px;
     margin: auto;
     padding: 2% 2% 0 2%;
@@ -359,20 +360,41 @@
     }
   }
   .swiperMRTCard {
-    width: 900px;
-    height: 400px;
+    width: 70%;
+    // height: 400px;
     margin: auto;
-    // background-color: aqua;
+    position: relative;
     overflow: hidden;
     margin-block: 1rem;
 
     .swiper-slide {
       width: 300px;
-      height: 200px;
+      height: 400px;
 
-      .ard-h {
-        width: 50%;
+      .mrtCardWrap {
+        height: 100%;
+
+        .card-h {
+          background: white;
+
+          .img {
+            height: 50%;
+
+            img {
+              height: 100%;
+            }
+          }
+        }
       }
+    }
+
+    .swiper-button-prev {
+      position: absolute;
+      right: 100%;
+    }
+
+    .swiper-button-next {
+      position: absolute;
     }
   }
 }
@@ -442,6 +464,7 @@
     .mrtTagbar {
       width: 100px;
       height: 100px;
+      bottom: 8%;
     }
 
     .mrtPic {
@@ -520,68 +543,135 @@
     }
   }
 
-  @media screen and (max-width: 414px) {
-    .mrtLineCheck {
-      .mrtTagbar {
-        width: 80px;
-        height: 80px;
+  .mrtWrap {
+    .swiperMRTCard {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 414px) {
+  .mrtLineCheck {
+    .mrtTagbar {
+      width: 80px;
+      height: 80px;
+    }
+
+    .mrtPic {
+      min-width: 100%;
+      height: 200px;
+    }
+    .mrtTag {
+      padding-inline: 0%;
+      justify-content: space-evenly;
+      width: 100%;
+
+      .title-tag {
+        font-size: 14px;
+        width: 12%;
+        padding: 0.5rem 0;
+        margin: 2rem 0px;
       }
 
-      .mrtPic {
-        min-width: 100%;
-        height: 200px;
+      .red {
+        &::after {
+          height: 50px;
+          top: -150%;
+        }
       }
-      .mrtTag {
-        padding-inline: 0%;
-        justify-content: space-evenly;
+
+      .blue {
+        &::after {
+          height: 50px;
+          top: -150%;
+        }
+      }
+
+      .green {
+        &::after {
+          height: 50px;
+          top: -150%;
+        }
+      }
+
+      .orange {
+        &::after {
+          height: 50px;
+          top: -150%;
+        }
+      }
+
+      .brown {
+        &::after {
+          height: 50px;
+          top: -150%;
+        }
+      }
+
+      .yellow {
+        &::after {
+          height: 50px;
+          top: -150%;
+        }
+      }
+    }
+  }
+
+  .mrtWrap:nth-of-type(even) {
+    .mrtSta {
+      flex-direction: column-reverse;
+
+      .mrtStaBox {
+        justify-content: center;
+
+        .mrtStaMaruBox {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .mrtWrap {
+    .swiperMRTCard {
+      // width: 70%;
+
+      .swiper-wrapper {
+        justify-content: center;
+
+        .swiper-slide {
+          width: 250px;
+          height: 350px;
+        }
+      }
+    }
+
+    .mrtSta {
+      flex-direction: column-reverse;
+      justify-content: start;
+      background-size: 5% 100%;
+      height: 30vh;
+      padding: 0;
+
+      .mrtStaTxt {
         width: 100%;
+        text-align: center;
 
-        .title-tag {
-          font-size: 14px;
-          width: 12%;
-          padding: 0.5rem 0;
-          margin: 2rem 0px;
+        h2 {
+          font-size: 24px;
         }
-
-        .red {
-          &::after {
-            height: 50px;
-            top: -150%;
-          }
+        p {
+          display: none;
         }
+      }
+      /* 站點圖跟捷運圖 */
+      .mrtStaBox {
+        justify-content: center;
 
-        .blue {
-          &::after {
-            height: 50px;
-            top: -150%;
-          }
-        }
+        .mrtStaMaruBox {
+          display: none;
 
-        .green {
-          &::after {
-            height: 50px;
-            top: -150%;
-          }
-        }
-
-        .orange {
-          &::after {
-            height: 50px;
-            top: -150%;
-          }
-        }
-
-        .brown {
-          &::after {
-            height: 50px;
-            top: -150%;
-          }
-        }
-
-        .yellow {
-          &::after {
-            height: 50px;
-            top: -150%;
+          .mrtStaMaru {
+            width: 100%;
           }
         }
       }
