@@ -1,8 +1,8 @@
 <template>
-    <header :class="{ '--closeHeader': shouldclose }">
+    <header :class="{ '--closeHeader': shouldclose,'--closeHeader2': mainClose }">
         <div class="header">
             <div class="line"></div>
-            <router-link to="/">
+            <router-link to="/home">
                 <img src="../../public/img/logo.png" alt="" />
             </router-link>
             <div class="line"></div>
@@ -36,8 +36,14 @@ export default {
     computed: {
         shouldclose() {
             // 根據路由的 meta.useAppLayout 屬性來決定是否使用 App.vue 佈局
-            return this.$route.path === "/";
+            return this.$route.path === "/home"
+        },
+        mainClose(){
+            // 根據路由的 meta.useAppLayout 屬性來決定是否使用 App.vue 佈局
+            return this.$route.path === "/"
         },
     },
-};
+        
+    
+}
 </script>
