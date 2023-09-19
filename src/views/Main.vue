@@ -1,7 +1,6 @@
 <template>
     <div>
         <router-link to="/home" class="store">前台首頁</router-link>
-        <button>前台</button>
-        <button>後台</button>
+        <router-link to="/Back/BackLogin" class="store">後台首頁</router-link>
     </div>
 </template>

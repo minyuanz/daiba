@@ -30,33 +30,13 @@ export default {
     },
     methods: {
         backAC() {
-            // console.log(111)
             document.querySelector('.SliderAC').style.left = '-100%'
         },
         To(e) {
-            // console.log(11)
-            // console.log(e.target.innerText)
             let title = e.target.innerText
-            // console.log(title)
             this.$emit('title-change', title)
-
-            // document.getElementById('userInfo').style.display = 'block'
-            // document.getElementById('ArticleInfo').style.display = 'none'
-            // document.getElementById('AccChange').style.display = 'none'
-            // document.getElementById('PwdChange').style.display = 'none'
-            // document.getElementById('PhoneChange').style.display = 'none'
-            // document.getElementById('MailChange').style.display = 'none'
+            // document.querySelector('.SliderAC').style.left = '-100%'
         }
-        // Toart(e) {
-        //     // console.log(e.target.innerText)
-        //     let title = e.target.innerText
-        //     // console.log(title)
-        //     this.$emit('title-change', title)
-            
-        //     // console.log(111)
-        //     // document.getElementById('userInfo').style.display = 'none'
-        //     // document.getElementById('ArticleInfo').style.display = 'block'
-        // }
     }
 }
 </script>

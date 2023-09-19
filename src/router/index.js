@@ -9,7 +9,7 @@ const routes = [
     path: "/",
     name: "Main",
     component: () =>
-    import(/* webpackChunkName: "About" */ "../views/Main.vue"),
+      import(/* webpackChunkName: "About" */ "../views/Main.vue"),
     // meta: {
     //   useAppLayout: false, // 不使用 App.vue 佈局
     // },
@@ -19,7 +19,7 @@ const routes = [
     name: "home",
     // component: HomeView,
     component: () =>
-    import(/* webpackChunkName: "About" */ "../views/HomeView.vue"),
+      import(/* webpackChunkName: "About" */ "../views/HomeView.vue"),
     // meta: {
     //   useAppLayout: false, // 不使用 App.vue 佈局
     // },
@@ -158,7 +158,26 @@ const routes = [
     name: "/user",
     component: () => import(/* webpackChunkName: "User" */ "@/views/User.vue"),
   },
-
+  {
+    path: "/Back/BackLogin",
+    name: "/BackLogin",
+    component: () => import(/* webpackChunkName: "BackLogin" */ "@/views/Back/BackLogin.vue"),
+  },
+  {
+    path: "/Back/BackMember",
+    name: "/BackMember",
+    component: () => import(/* webpackChunkName: "BackMember" */ "@/views/Back/BackMember.vue"),
+  },
+  {
+    path: "/Back/BackMrt",
+    name: "/BackMrt",
+    component: () => import(/* webpackChunkName: "BackMrt" */ "@/views/Back/BackMrt.vue"),
+  },
+  {
+    path: "/Back/BackFeature",
+    name: "/BackFeature",
+    component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackFeature.vue"),
+  },
   {
     path: "/:pathMatch(.*)*",
     name: "NotFound",

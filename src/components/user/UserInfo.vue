@@ -22,13 +22,13 @@
         </div>
     </div>
     <!-- 更改基本資料 -->
-    <AccChange id="AccChange" v-else-if="'更改基本資料' == toggle" @toggle-change="toggleUpdate"/>
+    <AccChange id="AccChange" v-else-if="'更改基本資料' == toggle" @toggle-change="toggleUpdate" />
     <!-- 更改帳號/密碼 -->
-    <PwdChange id="PwdChange" v-else-if="'更改帳號/密碼' == toggle" @toggle-change="toggleUpdate"/>
+    <PwdChange id="PwdChange" v-else-if="'更改帳號/密碼' == toggle" @toggle-change="toggleUpdate" />
     <!-- 更改手機號碼 -->
-    <PhoneChange id="PhoneChange" v-else-if="'更改手機號碼' == toggle" @toggle-change="toggleUpdate"/>
+    <PhoneChange id="PhoneChange" v-else-if="'更改手機號碼' == toggle" @toggle-change="toggleUpdate" />
     <!-- 更改信箱 -->
-    <MailChange id="MailChange" v-else-if="'更改信箱' == toggle" @toggle-change="toggleUpdate"/>
+    <MailChange id="MailChange" v-else-if="'更改信箱' == toggle" @toggle-change="toggleUpdate" />
 </template>
 
 <script>
@@ -54,35 +54,12 @@ export default {
     methods: {
         toggleUpdate() {
             this.toggle = '會員資料'
-            // 在這裡處理新的 toggle 值
-            // console.log('新的 toggle 值:', newToggleValue);
-            // console.log(111)
         },
         To(e) {
             console.log(e.target.innerText)
             this.toggle = e.target.innerText
-            // document.querySelector('.userInfo').style.display = 'none'
-            // document.getElementById('AccChange').style.display = 'block'
         },
-        // Topwd(e) {
-        //     // console.log(11)
-        //     console.log(e.target.innerText)
-        //     this.toggle = e.target.innerText
-        //     // document.querySelector('.userInfo').style.display = 'none'
-        //     // document.getElementById('PwdChange').style.display = 'block'
-        // },
-        // Tophone(e) {
-        //     console.log(e.target.innerText)
-        //     this.toggle = e.target.innerText
-        //     // document.querySelector('.userInfo').style.display = 'none'
-        //     // document.getElementById('PhoneChange').style.display = 'block'
-        // },
-        // Tomail(e) {
-        //     console.log(e.target.innerText)
-        //     this.toggle = e.target.innerText
-        //     // document.querySelector('.userInfo').style.display = 'none'
-        //     // document.getElementById('MailChange').style.display = 'block'
-        // }
+
     },
 }
 </script>
@@ -142,14 +119,6 @@ export default {
 
 
         }
-
-        // .userChange {
-        //     display: none;
-        // }
-
-        // .userSubmit {
-        //     display: none;
-        // }
     }
 
 }
