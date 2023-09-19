@@ -1,51 +1,95 @@
+
 <template>
-  <div class="about">
+  <div class="gameWrapper">
+    <div class="home">
+      <transition name="fade" mode="out-in">
+        <img :src="currentMessage.image" alt="">
+
+      </transition>
+    </div>
+    <img src="../assets/images/game/gameLogo.png" alt="gameLogo" class="gameLogo">
+    <button class="start btn_s" @click="closeName = !closeName">start</button>
+    <div class="name" v-show="closeName">
+      <p>請輸入ID</p>
+      <input type="text" maxlength="8" v-model="userName">
+      <button class="btn_s" @click="closeName = !closeName">OK</button>
+    </div>
+
+
 
   </div>
 
+
+
+
+
+
+
+
+
+
+
+
+  <div>
+    <transition name="fade" mode="out-in">
+      <div :key="currentMessage.id" class="message-container">
+        <img :src="currentMessage.image" alt="Character Image" class="character-image" />
+        <p>{{ currentMessage.text }}</p>
+      </div>
+    </transition>
+    <!-- <button @click="nextMessage">下一句</button> -->
+  </div>
 </template>
 
-<style lang="scss">
-
-
-</style>
-
 <script>
-
 export default {
-  methods: {
-
+  data() {
+    return {
+      messages: [
+        { id: 1, text: "一", image: require("@/assets/images/game/station_AM.jpg") },
+        { id: 2, text: "二", image: "./img/news4.png" },
+        // 添加更多的对话消息
+      ],
+      currentMessageIndex: 0,
+      userName: '',
+      closeName:false,
+    };
   },
   computed: {
-
+    currentMessage() {
+      return this.messages[this.currentMessageIndex];
+    },
   },
-  mounted() {
+  methods: {
+    nextMessage() {
+      if (this.currentMessageIndex < this.messages.length - 1) {
+        this.currentMessageIndex++;
+      }
+    },
 
   },
 };
 </script>
 
-<!-- <script>
-import gsap from "gsap"; // 确保正确引入GSAP库
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
 
-export default {
-  mounted() {
-    // 在组件挂载后初始化GSAP动画
-    gsap.set(".box2", { transformOrigin: "50% 50%" });
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 
-    // 创建一个无限循环的动画
-    function bounceImage() {
-      gsap.to(".box2", {
-        x: () => gsap.utils.random(0, 1000, 60), // 随机水平位移
-        y: () => gsap.utils.random(0, 200, 5), // 随机垂直位移
-        rotation: () => gsap.utils.random(-45, 45), // 随机旋转角度
-        duration: 2, // 持续时间
-        ease: "power2.inOut",
-        onComplete: bounceImage, // 完成后再次调用此函数
-      });
-    }
+.message-container {
+  display: flex;
+  align-items: center;
+}
 
-    bounceImage(); // 开始动画
-  },
-};
-</script> -->
+.character-image {
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+}
+</style>
