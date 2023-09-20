@@ -37,4 +37,8 @@ export default {
 .is-active {
   background-color:  #7d7d7d !important;
 }
+.router-link-exact-acitve{
+    background-color: #f00;
+}
+
 </style>

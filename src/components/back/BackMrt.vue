@@ -1,5 +1,5 @@
 <template>
-    <div class="backMrt">
+    <div class="backMrt" v-if="addToggle">
         <div class="mrtSearch">
             <label for="">請選擇捷運線：</label>
             <select name="" id="">
@@ -26,7 +26,51 @@
             </div>
         </div>
         <div class="addSta">
-            <button>新增捷運站</button>
+            <button @click="addToggle = !addToggle">新增捷運站</button>
+        </div>
+    </div>
+    <div class="backMrtAdd" v-else>
+        <p>你正在新增車站：</p>
+        <div class="addInfo">
+            <div class="pic">
+                <img src="https://picsum.photos/200/200/?random=10">
+                <button>上傳圖片</button>
+            </div>
+            <div class="txt">
+                <div>
+                    <label for="">位於捷運線：</label>
+                    <select name="" id="">
+                        <option value="BL">BL</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">捷運站編號：</label>
+                    <input type="text" value="BL11">
+                </div>
+                <div>
+                    <label for="">位於捷運線：</label>
+                    <select name="" id="">
+                        <option value="noline">若無轉乘線則免填</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">捷運站編號：</label>
+                    <input type="text" value="" placeholder="若無轉乘線則免填">
+                </div>
+                <div>
+                    <label for="">捷運站名稱：</label>
+                    <input type="text" value="西門">
+                </div>
+            </div>
+        </div>
+        <div class="addCtx">
+            <span>捷運站描述</span>
+            <p>qqq</p>
+            <span class="count">0/100字</span>
+        </div>
+        <div class="btn">
+            <button @click="addToggle = !addToggle">取消新增</button>
+            <button @click="addToggle = !addToggle">確認新增</button>
         </div>
     </div>
 </template>
@@ -79,7 +123,8 @@ export default {
                 id: '18',
                 number: 'BL01',
                 name: '頂埔',
-            },]
+            },],
+            addToggle:true
         }
     },
 }
@@ -148,6 +193,83 @@ export default {
 
         button {
             padding: 10px 30px;
+        }
+    }
+}
+
+.backMrtAdd {
+    border: 1px solid #aaa;
+    background-color: #fff;
+    border-radius: 20px;
+    width: 900px;
+    padding: 50px;
+
+    .addInfo {
+        // border: 1px solid red;
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 30px;
+
+        .pic {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            // border: 1px solid red;
+
+            img {
+                border-radius: 50%;
+                width: 100%;
+                vertical-align: bottom;
+            }
+
+            button {
+                margin-top: 30px;
+                padding: 10px 20px;
+            }
+        }
+
+        .txt {
+            div {
+                // border: 1px solid red;
+                margin: 20px 0;
+                display: flex;
+                align-items: center;
+
+                select {
+                    // border: 1px solid red;
+                    width: 220px
+                }
+            }
+        }
+    }
+    .addCtx{
+        // border: 1px solid #333;
+        margin-top: 30px;
+        span{
+            display: block;
+            text-align: center;
+            background-color: #ddd;
+            border: 1px solid #333;
+        }
+        p{
+            border: 1px solid #333;
+            border-top:1px solid transparent;
+            height: 200px;
+        }
+        .count{
+            border: 1px solid transparent;
+            background-color: #fff;
+            text-align: right;
+            color:#ddd;
+        }
+    }
+    .btn{
+        // border: 1px solid red;
+        margin-top: 30px;
+        text-align: right;
+        button{
+            margin-left:20px;
+            padding: 10px 20px;
         }
     }
 }
