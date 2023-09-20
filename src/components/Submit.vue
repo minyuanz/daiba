@@ -196,14 +196,16 @@ export default {
         handleFileUpload(index, event) {
             const fileInput = event.target;
             const files = fileInput.files;
-
-            // 处理选定的文件
+            console.log(fileInput)
+            console.log(files)
+            
             for (let j = 0; j < files.length; j++) {
                 const file = files[j];
 
                 this.uploadedImages[index] = URL.createObjectURL(file);
                 this.imgsData[index] = true;
             }
+
         },
     }
 }

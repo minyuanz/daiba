@@ -1,7 +1,8 @@
 #menu-check {
   display: none;
 }
-.--closeHeader2{
+
+.--closeHeader2 {
   display: none;
 }
 
@@ -16,6 +17,7 @@ header {
     display: flex;
     // justify-content: center;
     align-items: center;
+    position: relative;
 
     .line {
       width: 45%;
@@ -50,7 +52,34 @@ header {
         }
       }
     }
+
+    .weather {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      right: 20%;
+      top: 65%;
+      gap: 5px;
+
+      .celsius{
+        color: map-get($color, $key: info);
+      }
+
+      .hot {
+        color: map-get($color, $key: danger);
+
+      }
+
+      img {
+        width: 35px;
+        height: 35px;
+      }
+    }
+
   }
+
+
 
   .navbar {
     max-width: 1200px;
@@ -93,6 +122,12 @@ header {
         display: block;
         position: absolute;
         right: $padding;
+      }
+
+      .weather {
+        display: none;
+
+
       }
     }
 

@@ -1,5 +1,5 @@
 <template>
-    <header :class="{ '--closeHeader': shouldclose,'--closeHeader2': mainClose }">
+    <header :class="{ '--closeHeader': shouldclose, '--closeHeader2': mainClose }">
         <div class="header">
             <div class="line"></div>
             <router-link to="/home">
@@ -13,6 +13,15 @@
                     <span></span>
                 </label>
             </div>
+            <template v-if="weather.condition">
+                <div class="weather">
+                    <p>台北</p>
+                    <p>{{ weather.condition.text }}</p>
+                    <img :src="weather.condition.icon" alt="">
+                    <p class="celsius" :class="{ 'hot': hot }">{{ weather.temp_c }}°</p>
+                </div>
+            </template>
+
         </div>
         <nav class="navbar">
             <router-link to="/mrt" class="mrt">捷運推薦</router-link>
@@ -25,6 +34,7 @@
             <router-link to="/cart" class="cart">購物車</router-link>
             <router-link to="/mrtContributeInPage" class="cart">排版用之後刪掉</router-link>
         </nav>
+
     </header>
 </template>
 
@@ -33,17 +43,40 @@
 
 <script>
 export default {
+    data() {
+        return {
+            weather: {},
+            hot: false,
+        }
+    },
     computed: {
         shouldclose() {
             // 根據路由的 meta.useAppLayout 屬性來決定是否使用 App.vue 佈局
             return this.$route.path === "/home"
         },
-        mainClose(){
+        mainClose() {
             // 根據路由的 meta.useAppLayout 屬性來決定是否使用 App.vue 佈局
             return this.$route.path === "/"
         },
     },
-        
-    
-}
+    mounted() {
+        fetch('https://api.weatherapi.com/v1/current.json?q=Taipei&lang=zh_tw&key=831993a5339d4b7cadc74621231609')
+            .then(res => res.json())
+            .then(json => {
+                this.weather = json.current
+                if (this.weather.condition.text === '局部多雲') {
+                    this.weather.condition.icon = require("@/assets/images/test.gif")
+                } else if (this.weather.condition.text === '晴天') {
+                    this.weather.condition.icon = require("@/assets/images/sun.gif")
+                }
+                if (this.weather.temp_c >= 30) {
+                    this.hot = true
+
+                }
+            })
+
+    },
+};
+
+
 </script>
