@@ -161,46 +161,73 @@ const routes = [
   {
     path: "/Back/BackLogin",
     name: "/BackLogin",
+    meta:{
+      hideApp:true
+    },
     component: () => import(/* webpackChunkName: "BackLogin" */ "@/views/Back/BackLogin.vue"),
   },
   {
     path: "/Back/BackMember",
     name: "/BackMember",
+    meta:{
+      hideApp:true
+    },
     component: () => import(/* webpackChunkName: "BackMember" */ "@/views/Back/BackMember.vue"),
   },
   {
     path: "/Back/BackMrt",
     name: "/BackMrt",
+    meta:{
+      hideApp:true
+    },
     component: () => import(/* webpackChunkName: "BackMrt" */ "@/views/Back/BackMrt.vue"),
   },
   {
     path: "/Back/BackFeature",
     name: "/BackFeature",
+    meta:{
+      hideApp:true
+    },
     component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackFeature.vue"),
   },
   {
     path: "/Back/BackContri",
     name: "/BackContri",
+    meta:{
+      hideApp:true
+    },
     component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackContri.vue"),
   },
   {
     path: "/Back/BackNews",
     name: "/BackNews",
+    meta:{
+      hideApp:true
+    },
     component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackNews.vue"),
   },
   {
     path: "/Back/BackPermission",
     name: "/BackPermission",
+    meta:{
+      hideApp:true
+    },
     component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackPermission.vue"),
   },
   {
     path: "/Back/BackOrder",
     name: "/BackOrder",
+    meta:{
+      hideApp:true
+    },
     component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackOrder.vue"),
   },
   {
     path: "/Back/BackPro",
     name: "/BackPro",
+    meta:{
+      hideApp:true
+    },
     component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackPro.vue"),
   },
   {
