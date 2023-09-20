@@ -1,6 +1,6 @@
 <template>
-  <header-area />
-
+  <!-- <header-area /> -->
+  <header-area v-if="!$route.meta.hideApp" />
   <!-- <div :class="{'body': poke }" > </div> -->
 
   <main>
@@ -8,7 +8,7 @@
     <!-- Main -->
   </main>
 
-  <footer-area />
+  <footer-area v-if="!$route.meta.hideApp"/>
 </template>
 
 <script>
