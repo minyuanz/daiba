@@ -183,6 +183,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "BackMrt" */ "@/views/Back/BackMrt.vue"),
   },
   {
+    path: '/back-mrt-new',
+    name: 'BackMrtNew',
+    component: () => import(/* webpackChunkName: "BackMrt" */ "@/views/Back/BackMrt.vue"),
+  },
+  {
     path: "/Back/BackFeature",
     name: "/BackFeature",
     meta:{

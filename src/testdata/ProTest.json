@@ -1,7 +1,7 @@
 [
     {
         "pord_id": "商品編號1",
-        "pord_name": "商品名稱",
+        "pord_name": "喔",
         "pord_bdes": "好男好難 世界",
         "pord_bdes2": "商品簡述",
         "pord_price": "商品價格",
@@ -14,8 +14,8 @@
         "prod_img4": ""
       },
       {
-        "pord_id": "商品編號2",
-        "pord_name": "商品名稱",
+        "pord_id": "我是笨蛋",
+        "pord_name": "你",
         "pord_bdes": "商品描述",
         "pord_bdes2": "商品簡述",
         "pord_price": "商品價格",
@@ -29,7 +29,7 @@
       },
       {
         "pord_id": "商品編號3",
-        "pord_name": "商品名稱",
+        "pord_name": "王",
         "pord_bdes": "商品描述",
         "pord_bdes2": "商品簡述",
         "pord_price": 1321651,
