@@ -301,12 +301,12 @@ export default {
       });
       const swiper = new Swiper(".swiper", {
           direction: "vertical",
-          speed: 2000,
+          speed: 3000,
           loop: true,
           loopedSlides: 10,
           // autoHeight: true,
           slidesPerView: "auto",
-          spaceBetween: 0,
+          spaceBetween: 205,
           autoplay: {
               delay: 0,
               pauseOnMouseEnter: false,

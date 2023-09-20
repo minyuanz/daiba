@@ -180,9 +180,10 @@ export default {
     const swiperMRTCard = new Swiper(".swiperMRTCard", {
       direction: "horizontal",
       effect: "coverflow",
-      speed: 2000,
+      speed: 3000,
       loop: true,
       slidesPerView: 3,
+      spaceBetween: 205,
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
