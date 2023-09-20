@@ -4,13 +4,13 @@
   </div>
 
   <section class="mrtLineCheck">
-    <div class="mrtTagbar">
+    <div class="mrtTagbar" @click="checkShow">
       <div class="outer-circle"></div>
       <div class="color-circle"></div>
       <div class="inner-circle">
         <img src="../../public/img/mrtImg.png" alt="" />
       </div>
-      <div class="checkBox">
+      <div class="checkBox" v-if="showCheckBox">
         <div class="box">
           <button class="place">景點</button>
           <button class="food">美食</button>
@@ -152,6 +152,7 @@ import Swiper from "swiper/bundle";
 export default {
   data() {
     return {
+      showCheckBox: false,
       selectColor: ["red", "blue", "green", "orange", "brown", "yellow"],
       showAll: true,
       src: "../../public/img/mrtArrow.jpg",
@@ -189,6 +190,10 @@ export default {
     window.addEventListener("resize", this.WindowWidth);
   },
   methods: {
+    checkShow() {
+      this.showCheckBox = !this.showCheckBox;
+    },
+
     activate(color) {
       this.isActive[color] = true;
     },

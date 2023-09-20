@@ -4,59 +4,59 @@
     <div class="dottedLine"></div>
   </div>
   <!-- 站點板塊 -->
-  <div class="mrtWrap" v-for="item in mrt">
-    <div class="mrtSta" @click="item.isShow = !item.isShow">
-      <!-- 站點文字介紹 -->
-      <div class="mrtStaTxt">
-        <h2>{{ item.title }}</h2>
-        <p>
-          {{ item.txt }}
-        </p>
-      </div>
-      <!-- 站點圖跟捷運圖 -->
-      <div class="mrtStaBox">
-        <div class="mrtStaMaruBox">
-          <img
-            class="mrtStaMaru"
-            src="../../public/img/mrt_maru.png"
-            alt="mrt_maru"
-          />
+  <div class="mrtWrappo">
+    <div class="mrtWrap" v-for="item in mrt">
+      <div class="mrtSta">
+        <!-- 站點文字介紹 -->
+        <div class="mrtStaTxt">
+          <h2>{{ item.title }}</h2>
+          <p>
+            {{ item.txt }}
+          </p>
         </div>
-        <div class="mrtStaPicBox">
-          <img class="mrtStaPic" :src="item.url" alt="mrt_101" />
+        <!-- 站點圖跟捷運圖 -->
+        <div class="mrtStaBox" @click="item.isShow = !item.isShow">
+          <div class="mrtStaMaruBox">
+            <img
+              class="mrtStaMaru"
+              src="../../public/img/mrt_maru.png"
+              alt="mrt_maru"
+            />
+          </div>
+          <div class="mrtStaPicBox">
+            <img class="mrtStaPic" :src="item.url" alt="" />
+          </div>
         </div>
       </div>
-    </div>
-    <!------------------------美食住宿景點卡片 ------------------------------------->
-    <transition name="fade" mode="out-in">
+      <!------------------------美食住宿景點卡片 ------------------------------------->
+
       <div class="swiperMRTCard" v-show="item.isShow">
         <div class="swiper-wrapper">
-          <div
-            class="swiper-slide"
-            v-for="sight in item.sights"
-            :key="sight.title"
-          >
+          <div class="swiper-slide" v-for="itemFood in item.foodCard">
             <div class="mrtCardWrap">
+              <!-- 卡片 -->
               <div class="card-h border-r">
                 <div class="img">
-                  <img :src="sight.url" alt="sight.title" />
+                  <img :src="itemFood.url" alt="" />
                 </div>
                 <div class="text">
                   <div class="title">
-                    <h3>{{ sight.title }}</h3>
+                    <h3>{{ itemFood.title }}</h3>
+                    <div class="tag">
+                      <span class="title-tag gray">#景點推薦</span>
+                      <span class="title-tag blue">#板南線</span>
+                    </div>
                   </div>
-                  <div class="txt">
-                    {{ sight.txt }}
-                  </div>
+                  <div class="txt">{{ itemFood.txt }}</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev swiper-btn"></div>
+        <div class="swiper-button-next swiper-btn"></div>
       </div>
-    </transition>
+    </div>
   </div>
 </template>
 
@@ -71,9 +71,32 @@ export default {
       mrt: [
         {
           title: "信義安和站",
-          txt: "有世界最高建築物的美名長達五年的台北101大樓南山廣場、威秀影城、信義微風、誠品百貨、新光三越高檔餐廳、時尚酒吧與夜店等等，大量的建築群拔地而起疊構出最具未來感、新穎的「都心」風貌。",
+          txt: "有世界最高建築物的美名長達五年的台北 101 大樓南山廣場、威秀影城、信義微風、誠品百貨、新光三越高檔餐廳、時尚酒吧與夜店等等，大量的建築群拔地而起疊構出最具未來感、新穎的「都心」風貌。",
           url: require("../../public/img/mrt_101.jpg"),
           isShow: false,
+          foodCard: [
+            {
+              title: "雲鼎阿二麻辣食堂",
+              txt: "阿二麻辣食堂使用多種中藥食材，精心熬煮麻辣湯頭，有別於一般麻辣火鍋店，招牌麻辣系列分為「麻辣煲」與「麻辣鍋」，也有「藥膳」與「紅燒」系列可以選擇，所有鍋底均可以選擇辣度，主食單點區中的滷肉飯、拌麵，也是雲鼎阿二麻辣食堂中相當具有人氣的品項。",
+
+              url: require("../../src/assets/images/mrtFoodCard/atwo.jpg"),
+            },
+            {
+              title: "烤師傅",
+              txt: "有世界最高建築物的美名長達五年的台北101大樓南山廣場、威秀影城、信義微風、誠品百貨、新光三越高檔餐廳、時尚酒吧與夜店等等，大量的建築群拔地而起疊構出最具未來感、新穎的「都心」風貌。",
+              url: require("../../src/assets/images/mrtFoodCard/firemaster.jpg"),
+            },
+            {
+              title: "一蘭拉麵",
+              txt: "有世界最高建築物的美名長達五年的台北101大樓南山廣場、威秀影城、信義微風、誠品百貨、新光三越高檔餐廳、時尚酒吧與夜店等等，大量的建築群拔地而起疊構出最具未來感、新穎的「都心」風貌。",
+              url: require("../../src/assets/images/mrtFoodCard/ichiran.jpg"),
+            },
+            {
+              title: "站著吃韓式烤肉",
+              txt: "有世界最高建築物的美名長達五年的台北101大樓南山廣場、威秀影城、信義微風、誠品百貨、新光三越高檔餐廳、時尚酒吧與夜店等等，大量的建築群拔地而起疊構出最具未來感、新穎的「都心」風貌。",
+              url: require("../../src/assets/images/mrtFoodCard/standfire.jpg"),
+            },
+          ],
           sights: [
             {
               title: "台北101",
@@ -98,7 +121,7 @@ export default {
             {
               title: "臨江夜市",
               txt: "「臨江夜市」以前叫通化夜市，擁有許多米其林必比登與米其林餐盤推薦小吃，且因鄰近百貨、商辦、飯店林立的信義區，是許多上班族、外食族的廚房，也推薦外國來的朋友在逛完五光十射的購物商場後，夜晚就近來試試台灣傳統夜市小吃，一次體驗兩種不同面向的台灣，絕對讓你不虛此行。",
-              url: require("../../public/img/XinyiAnhe-3.jpg"),
+              url: require("../../public/img/XinyiAnhe-4.jpg"),
             },
           ],
         },
@@ -148,8 +171,7 @@ export default {
             },
             {
               title: "劍潭山親山步道",
-              txt: `以前是軍事管制區和保安林地，所以自然林相得以保持，密林遍佈整個步道。樹木不受人為干擾，恣意展放他們最美麗的姿態，棲息其間的物種也能悠遊自得。抬頭仰望，說不定就能看到松鼠跳躍林間，還有披著五色彩衣的五色鳥、翠綠小巧的綠繡眼也是這裡常見的鳥類。雖然軍事管制解除之後，原始山林因為人為開發起了變化，步道兩旁多見人工種植的園藝植物或經濟植物，綠意盎然的山徑步道魅力猶存。<br>劍潭山親山步道夜景的人氣指數向來高居不下，當然自有其獨特之處，於制高點欣賞繁華的市景燈火夜色，不時還有飛機低空略過星空，總讓山友為之興奮、津津樂道，結合士林夜市美食小吃同遊，來到這裡夜間探路健走的民眾甚至比白天、晨間來的更多，這也是其越夜越美麗、熱鬧的原因吧！
-`,
+              txt: `以前是軍事管制區和保安林地，所以自然林相得以保持，密林遍佈整個步道。樹木不受人為干擾，恣意展放他們最美麗的姿態，棲息其間的物種也能悠遊自得。抬頭仰望，說不定就能看到松鼠跳躍林間，還有披著五色彩衣的五色鳥、翠綠小巧的綠繡眼也是這裡常見的鳥類。雖然軍事管制解除之後，原始山林因為人為開發起了變化，步道兩旁多見人工種植的園藝植物或經濟植物，綠意盎然的山徑步道魅力猶存。<br>劍潭山親山步道夜景的人氣指數向來高居不下，當然自有其獨特之處，於制高點欣賞繁華的市景燈火夜色，不時還有飛機低空略過星空，總讓山友為之興奮、津津樂道，結合士林夜市美食小吃同遊，來到這裡夜間探路健走的民眾甚至比白天、晨間來的更多，這也是其越夜越美麗、熱鬧的原因吧！`,
               url: require("../../public/img/Jiantan-2.jpg"),
             },
             {
@@ -242,16 +264,36 @@ export default {
   mounted() {
     const swiperMRTCard = new Swiper(".swiperMRTCard", {
       direction: "horizontal",
-      effect: "slide",
-      loop: true,
-      autoHeight: false,
-      grabCursor: true,
-      speed: 1000,
-      slidesPerView: "auto",
-      // slidesPerView: 3,
+
+      // spaceBetween: -60,
+      speed: 500,
+
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        375: {
+          slidesPerView: 1,
+          slidesPerGroup: 1,
+          spaceBetween: -130,
+        },
+        415: {
+          slidesPerView: 1,
+          slidesPerGroup: 1,
+          spaceBetween: 50,
+        },
+        577: {
+          slidesPerView: 2,
+          slidesPerGroup: 2,
+        },
+        769: {
+          slidesPerView: 3,
+        },
+        1281: {
+          slidesPerView: 4,
+          slidesPerGroup: 4,
+        },
       },
     });
   },

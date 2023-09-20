@@ -1,14 +1,17 @@
 <template>
   <!-- <header-area /> -->
-  <header-area v-if="!$route.meta.hideApp" />
-  <!-- <div :class="{'body': poke }" > </div> -->
+  <header-area v-if="!$route.meta.hideApp">
 
+  </header-area>
+  <!-- <div :class="{'body': poke }" > </div> -->
+ 
   <main>
     <router-view />
     <!-- Main -->
+
   </main>
 
-  <footer-area v-if="!$route.meta.hideApp"/>
+  <footer-area v-if="!$route.meta.hideApp" />
 </template>
 
 <script>
@@ -17,8 +20,8 @@ import FooterArea from "@/components/Footer.vue";
 export default {
   data() {
     return {
-      // apikey: '831993a5339d4b7cadc74621231609',
-      // weather: {}
+      apikey: '831993a5339d4b7cadc74621231609',
+      weather: {},
     };
   },
   components: {
@@ -33,12 +36,12 @@ export default {
     // },
   },
   mounted() {
-    // fetch('https://api.weatherapi.com/v1/current.json?q=Taipei&lang=zh_tw&key=831993a5339d4b7cadc74621231609')
-    // .then(res=>res.json())
-    // .then(json=>{
-    //   console.log(json.current);
-    // this.weather = json.current
-    // })
+    fetch('https://api.weatherapi.com/v1/current.json?q=Taipei&lang=zh_tw&key=831993a5339d4b7cadc74621231609')
+      .then(res => res.json())
+      .then(json => {
+        console.log(json.current);
+        this.weather = json.current
+      })
   },
 };
 </script>
