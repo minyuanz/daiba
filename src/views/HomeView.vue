@@ -110,9 +110,11 @@
           </div>
         </div>
       </div>
-      <div class="logo">
-        <img src="../../public/img/logo.png" alt="logo" />
-      </div>
+      <router-link to="/" class="home">
+        <div class="logo">
+          <img src="../../public/img/logo.png" alt="logo" />
+        </div>
+      </router-link>
       <div class="swiper mb-none">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
