@@ -13,6 +13,9 @@ const routes = [
     // meta: {
     //   useAppLayout: false, // 不使用 App.vue 佈局
     // },
+    meta:{
+      hideApp:true
+    },
   },
   {
     path: "/home",
@@ -180,11 +183,6 @@ const routes = [
     meta:{
       hideApp:true
     },
-    component: () => import(/* webpackChunkName: "BackMrt" */ "@/views/Back/BackMrt.vue"),
-  },
-  {
-    path: '/back-mrt-new',
-    name: 'BackMrtNew',
     component: () => import(/* webpackChunkName: "BackMrt" */ "@/views/Back/BackMrt.vue"),
   },
   {

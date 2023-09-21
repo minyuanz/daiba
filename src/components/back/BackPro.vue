@@ -15,7 +15,7 @@
         <div class="ProInfro"  v-for="item  in item "  :key="item.pord_id">
             <p>{{ item.prod_id }}</p>
             <p>{{ item.prod_name }}</p>
-            <p>{{ item.price }}</p>
+            <p>{{ item.prod_price }}</p>
             <div class="edit">
                 <i class="fa-solid fa-pen-to-square"></i>
             </div>
