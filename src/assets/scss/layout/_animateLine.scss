@@ -143,3 +143,15 @@
   .fadeOut {
     animation: fadeOut 2s ease-in 0s; /* Apply the fadeOut animation */
   }
+  @media screen and (max-width: 414px) {
+    .animateLineGroup.main{
+      display: none;
+      .left {
+        animation: fadeInLeft 1s ease-out 0s;
+      }
+      .right {
+        animation: fadeInRight 1s ease-out 0s;
+      }
+    }
+
+  }

@@ -36,15 +36,48 @@
             </div>
             <div class="swiper" id="mySwiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide" v-for=" in 50">
+                    <div class="swiper-slide" v-for=" in 80">
                         <img src="../../public/img/mainArrow.png" alt="" />
                     </div>
                 </div>
             </div>
         </div>
-        <div class="logo">
-          <img src="../../public/img/logo.png" alt="logo" />
+
+        <div class="centerline">
+            <div class="animateLineGroup">
+                <div class="left">
+                    <div class="thick"></div>
+                    <div class="dark1 slim"></div>
+                    <div class="dark2 slim"></div>
+                    <div class="dark3 slim"></div>
+                    <div class="dark4 slim"></div>
+                    <div class="dark5 slim"></div>
+                    <div class="dark6 slim"></div>
+                    <div class="dark7 slim"></div>
+                    <div class="dark8 slim"></div>
+                    <div class="dark9 slim"></div>
+                </div>
+                <div class="right">
+                    <div class="dark9 slim"></div>
+                    <div class="dark8 slim"></div>
+                    <div class="dark7 slim"></div>
+                    <div class="dark6 slim"></div>
+                    <div class="dark5 slim"></div>
+                    <div class="dark4 slim"></div>
+                    <div class="dark3 slim"></div>
+                    <div class="dark2 slim"></div>
+                    <div class="dark1 slim"></div>
+                    <div class="thick"></div>
+                </div>
+            </div>
+            <div class="logo">
+                <img src="../../public/img/logo.png" alt="logo" />
+            </div>
         </div>
+        <div class="logo">
+                <img src="../../public/img/logo.png" alt="logo" />
+        </div>
+
        <div class="back router">
                  <div class="title">
                     <router-link to="/Back/BackLogin" class="store">
@@ -53,13 +86,12 @@
                 </div> 
             <div class="swiper" id="mySwiper2">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide" v-for=" in 50">
+                    <div class="swiper-slide" v-for=" in 80">
                         <img src="../../public/img/mainArrow2.png" alt="" />
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
 </template>
