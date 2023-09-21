@@ -16,7 +16,8 @@
           "scale",
           "width: fit-content",
           "height: fit-content",
-          "backdrop-filter"
+          "backdrop-filter",
+          "min-height: auto"
         ]
       }
     ]

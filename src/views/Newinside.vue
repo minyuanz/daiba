@@ -17,8 +17,12 @@
         </div>
 
         <div class="newsinBtn">
-            <a href="/" class="btn_s">前往官網</a>
-            <a href="/New" class="btn_s">上一頁</a>
+            <button class="btn_s">
+                <router-link to="/home">前往官網</router-link>
+            </button>
+            <button class="btn_s">
+                <router-link to="New">上一頁</router-link>
+            </button>
         </div>
     </div>
 </template>

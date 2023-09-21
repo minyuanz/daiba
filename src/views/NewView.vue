@@ -1,6 +1,6 @@
 <template>
   <div class="newsWrap">
-    <h1>消息資訊qaq</h1>
+    <h1>消息資訊</h1>
     <div class="newsBanner">
 
       <div class="swiper">
@@ -13,8 +13,8 @@
             <div class="newsBackpic">
               <img :src="news.image" alt="">
             </div>
-            
-            <a href="/Newinside" class="newsBox">
+
+            <div class="newsBox">
               <div class="newsCtxTxt">
                 <div class="newsTag title-tag gray">
                   <span>#{{ news.tag }}</span>
@@ -26,14 +26,17 @@
                 </div>
                 <h2>{{ news.title }}</h2>
                 <h3>{{ news.title2 }}</h3>
-                <a href="/Newinside" class="btn_s">更多</a>
+
+                <button class="btn_s">
+                  <router-link to="Newinside">更多</router-link>
+                </button>
               </div>
 
               <div class="newsCtxPic">
                 <img :src="news.image" alt="">
               </div>
+            </div>
 
-            </a>
           </div>
 
         </div>
@@ -50,38 +53,41 @@
     </div>
 
     <div class="newsList">
-      <a href="/Newinside" class="newsCard" v-for="card in newsdisplay">
+      <router-link to="Newinside">
+      <div href="/Newinside" class="newsCard" v-for="card in newsdisplay">
 
-        <div class="newsPic">
-          <img :src="card.image" alt="">
-        </div>
-        <div class="newsTxt">
-          <!-- <div class="newsTag title-tag gray">
+
+          <div class="newsPic">
+            <img :src="card.image" alt="">
+          </div>
+          <div class="newsTxt">
+            <!-- <div class="newsTag title-tag gray">
             <span>
               #{{ card.tag }}
             </span>
           </div> -->
-          <div class="newsTag title-tag gray">
-            <span>
-              #{{ card.tag1 }}
-            </span>
+            <div class="newsTag title-tag gray">
+              <span>
+                #{{ card.tag1 }}
+              </span>
+            </div>
+            <div class="newsDate">
+              <span>
+                {{ card.date }}
+              </span>
+            </div>
+            <h3 class="newsTitle">
+              {{ card.title }}
+            </h3>
+            <p class="newsCtx">
+              {{ card.contents }}
+            </p>
+            <button class="btn_s">
+              <router-link to="Newinside">更多</router-link>
+            </button>
           </div>
-          <div class="newsDate">
-            <span>
-              {{ card.date }}
-            </span>
-          </div>
-          <h3 class="newsTitle">
-            {{ card.title }}
-          </h3>
-          <p class="newsCtx">
-            {{ card.contents }}
-          </p>
-          <a href="/Newinside" class="btn_s">
-            更多
-          </a>
         </div>
-      </a>
+      </router-link>
 
 
     </div>
