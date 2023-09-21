@@ -12,53 +12,35 @@
             <p>編輯</p>
             <p>上架/下架</p>
         </div>
-        <div class="feaInfo" v-for="info in product">
-            <p>{{ info.staName }}</p>
-            <p>{{ info.Title }}</p>
-            <p>{{ info.Fea }}</p>
-            <p>{{ info.Date }}</p>
+        <div class="ProInfro"  v-for="item  in item "  :key="item.pord_id">
+            <p>{{ item.prod_id }}</p>
+            <p>{{ item.prod_name }}</p>
+            <p>{{ item.price }}</p>
             <div class="edit">
                 <i class="fa-solid fa-pen-to-square"></i>
             </div>
-            <div class="del">
-                <i class="fa-solid fa-circle-xmark"></i>
+            <div class="upcheck">
+                <label class="ios-switch">
+                <input type="checkbox" v-model="item.isChecked" />
+                <span class="slider"></span>
+                </label>
             </div>
         </div>
         <div class="addSta">
-            <button>新增推薦</button>
+            <button>新增商品</button>
         </div>
     </div>
 </template>
 
 <script>
+import BackProTest from "@/testdata/BackProTest.json"
 export default {
     data() {
         return {
-            product: [{
-                prod_id:"",
-                mrt_id:"",
-                sta_id:"",
-                prod_name:"",
-                prod_price:"",
-                prod_img1:"",
-                prod_img2:"",
-                prod_img3:"",
-                prod_img4:"",
-                prod_des1:"",
-                prod_des2:"",
-                prod_status:"",
-                prod_type:"",
-            }, {
-                staName: '板橋',
-                Title: '漢堡',
-                Fea: '美食',
-                Date: '2023-02-03'
-            }, {
-                staName: '板橋',
-                Title: '漢堡',
-                Fea: '美食',
-                Date: '2023-02-03'
-            },]
+            item:BackProTest,
+            isSwitchOn: false,
+            items: BackProTest.map((item) => ({...item,isChecked: false,})), 
+
         }
     }
 }
@@ -86,14 +68,12 @@ export default {
         padding: 5px 0;
 
         p {
-            // border: 1px solid red;
             width: 100%;
             text-align: center;
         }
     }
 
-    .feaInfo {
-        // border: 1px solid red;
+    .ProInfro {
         display: flex;
         justify-content: space-evenly;
         align-items: center;
@@ -102,16 +82,58 @@ export default {
 
         div,
         p {
-            // border: 1px solid red;
             width: 100%;
             text-align: center;
         }
+        .ios-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+  background-color: #ccc;
+  border-radius: 15px;
+}
+
+.ios-switch input {
+  display: none;
+}
+
+.ios-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #565656;
+  border-radius: 15px;
+  transition: 0.4s;
+}
+
+.ios-switch input:checked + .slider {
+  background-color: #4CAF50;
+}
+
+.ios-switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+.ios-switch input:checked + .slider:before {
+  transform: translateX(30px);
+}
     }
 
     .addSta {
         margin-top: 50px;
         text-align: center;
-        // border: 1px solid red;
 
         button {
             padding: 10px 30px;
