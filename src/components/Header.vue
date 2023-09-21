@@ -144,6 +144,7 @@ export default {
         if (this.weather.temp_c >= 30) {
           this.hot = true;
         }
+        // console.log(this.weather)
       });
   },
 };

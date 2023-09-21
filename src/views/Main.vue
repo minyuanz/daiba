@@ -1,5 +1,5 @@
 <template>
-    <div class="animateLineGroup">
+    <div class="animateLineGroup main">
             <div class="left">
                 <div class="thick"></div>
                 <div class="dark1 slim"></div>
