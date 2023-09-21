@@ -76,49 +76,100 @@
       }
     }
   }
-  ul li:nth-child(1) {
-    .pic {
-      border: 8px solid map-get($color, $key: info);
-    }
-    img {
+  // ul li:nth-child(1) {
+  //   .pic {
+  //     border: 8px solid map-get($color, $key: info);
+  //   }
+  //   img {
+  //     object-position: 60% 0;
+  //   }
+  // }
+  // ul li:nth-child(2) {
+  //   .pic {
+  //     border: 8px solid map-get($color, $key: tangerine);
+  //   }
+  //   img {
+  //     object-position: 35% 30%;
+  //   }
+  // }
+  // ul li:nth-child(3) {
+  //   .pic {
+  //     border: 8px solid map-get($color, $key: grap);
+  //   }
+  //   img {
+  //     object-position: 30% 0;
+  //   }
+  // }
+  // ul li:nth-child(4) {
+  //   .pic {
+  //     border: 8px solid map-get($color, $key: choco);
+  //   }
+  // }
+  // ul li:nth-child(5) {
+  //   .pic {
+  //     border: 8px solid map-get($color, $key: success);
+  //   }
+  // }
+  // ul li:nth-child(6) {
+  //   .pic {
+  //     border: 8px solid map-get($color, $key: danger);
+  //   }
+  // }
+  // ul li:nth-child(7) {
+  //   .pic {
+  //     border: 8px solid map-get($color, $key: warning);
+  //   }
+  ul li:nth-child(1){
+     .pic{
+      border: 8px solid #000;
+      // border: 8px solid map-get($color, $key: info);
+     }
+      img{
       object-position: 60% 0;
+     }
+  }
+  ul li:nth-child(2){ 
+    .pic{
+      border: 8px solid #d9d9d9;
+      // border: 8px solid map-get($color, $key: tangerine);
+    } 
+    img{
+    object-position: 35% 30%;
+  }
+    
+  }
+  ul li:nth-child(3){ 
+    .pic{
+      border: 8px solid #000;
+      // border: 8px solid map-get($color, $key: grap);
+    } 
+    img{
+    object-position: 30% 0;
     }
   }
-  ul li:nth-child(2) {
-    .pic {
-      border: 8px solid map-get($color, $key: tangerine);
-    }
-    img {
-      object-position: 35% 30%;
-    }
+  ul li:nth-child(4){ 
+    .pic{
+      border: 8px solid #d9d9d9;
+      // border: 8px solid map-get($color, $key: choco);
+    } 
   }
-  ul li:nth-child(3) {
-    .pic {
-      border: 8px solid map-get($color, $key: grap);
-    }
-    img {
-      object-position: 30% 0;
-    }
+  ul li:nth-child(5){ 
+    .pic{
+      border: 8px solid #000;
+      // border: 8px solid map-get($color, $key: success);
+    } 
   }
-  ul li:nth-child(4) {
-    .pic {
-      border: 8px solid map-get($color, $key: choco);
-    }
+  ul li:nth-child(6){ 
+    .pic{
+      border: 8px solid #d9d9d9;
+      // border: 8px solid map-get($color, $key: danger);
+    } 
   }
-  ul li:nth-child(5) {
-    .pic {
-      border: 8px solid map-get($color, $key: success);
-    }
-  }
-  ul li:nth-child(6) {
-    .pic {
-      border: 8px solid map-get($color, $key: danger);
-    }
-  }
-  ul li:nth-child(7) {
-    .pic {
-      border: 8px solid map-get($color, $key: warning);
-    }
+  ul li:nth-child(7){ 
+    .pic{
+      border: 8px solid #000;
+      // border: 8px solid map-get($color, $key: warning);
+    } 
   }
 }
 .homeBanner {
