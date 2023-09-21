@@ -1,7 +1,5 @@
 <template>
-  <header
-    :class="{ '--closeHeader': shouldclose, '--closeHeader2': mainClose }"
-  >
+  <header :class="{ '--closeHeader': shouldclose }">
     <div class="header">
       <div class="line"></div>
       <router-link to="/home">
@@ -103,9 +101,7 @@
       <router-link to="/New" class="new">最新消息</router-link>
       <router-link to="/about" class="about">關於我們</router-link>
       <router-link to="/cart" class="cart">購物車</router-link>
-      <router-link to="/mrtContributeInPage" class="cart"
-        >排版用之後刪掉</router-link
-      >
+      <router-link to="/mrtContributeInPage" class="cart">排版用之後刪掉</router-link>
     </nav>
   </header>
 </template>
@@ -118,13 +114,9 @@ export default {
       hot: false,
     };
   },
-
   computed: {
     shouldclose() {
-      return this.$router.path === "/home";
-    },
-    mainClose() {
-      return this.$router.path === "/";
+      return this.$route.path === "/home";
     },
   },
   mounted() {
