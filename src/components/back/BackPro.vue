@@ -1,9 +1,9 @@
 <template>
-    <div class="BackPro">
+    <div class="BackPro" v-if="addToggle">
         <div class="ProSearch">
             商品編號查詢:
             <input type="text">
-            <button class ="ProSearchBtn">查詢</button>
+            <button class="ProSearchBtn">查詢</button>
         </div>
         <div class="ProTitle">
             <p>商品編號</p>
@@ -12,7 +12,7 @@
             <p>編輯</p>
             <p>上架/下架</p>
         </div>
-        <div class="ProInfro"  v-for="item  in item "  :key="item.pord_id">
+        <div class="ProInfro" v-for="item  in item " :key="item.pord_id">
             <p>{{ item.prod_id }}</p>
             <p>{{ item.prod_name }}</p>
             <p>{{ item.prod_price }}</p>
@@ -21,13 +21,63 @@
             </div>
             <div class="upcheck">
                 <label class="ios-switch">
-                <input type="checkbox" v-model="item.isChecked" />
-                <span class="slider"></span>
+                    <input type="checkbox" v-model="item.isChecked" />
+                    <span class="slider"></span>
                 </label>
             </div>
         </div>
         <div class="addSta">
-            <button>新增商品</button>
+            <button @click="addToggle = !addToggle">新增商品</button>
+        </div>
+    </div>
+    <div class="proAdd" v-else>
+        <div class="proInfo">
+            <p>新增商品資訊</p>
+            <div class="name">
+                <label>商品名稱：</label>
+                <input type="text">
+            </div>
+            <div class="price">
+                <label for="">商品價格：</label>
+                <input type="text">
+            </div>
+        </div>
+        <div class="proTag">
+            <p>新增商品標籤</p>
+            <label for="">商品分類：</label>
+            <select name="" id="">
+                <option value="food">food</option>
+            </select>
+            <label for="">捷運站：</label>
+            <select name="" id="">
+                <option value="BL">BL</option>
+            </select>
+        </div>
+        <div class="proPic">
+            <p class="title">商品照</p>
+            <p class="title">(第一張為商品版頭)</p>
+            <div class="picArea">
+                <div class="uploadPic" v-for="i in 8">
+                    <div class="pic">
+                        <p>＋</p>
+                        <input type="file">
+                        <img src="" v-show="0">
+                    </div>
+                </div>
+                <button>+</button>
+            </div>
+        </div>
+        <div class="proCtx">
+            <label for="">商品描述</label>
+            <input type="text">
+        </div>
+        <div class="proMore">
+            <label for="">商品資訊</label>
+            <input type="text">
+        </div>
+        <div class="btn">
+            <button @click="addToggle = !addToggle">取消新增</button>
+            <button @click="addToggle = !addToggle">確認新增</button>
         </div>
     </div>
 </template>
@@ -37,9 +87,11 @@ import BackProTest from "@/testdata/BackProTest.json"
 export default {
     data() {
         return {
-            item:BackProTest,
+            item: BackProTest,
             isSwitchOn: false,
-            items: BackProTest.map((item) => ({...item,isChecked: false,})), 
+            items: BackProTest.map((item) => ({ ...item, isChecked: false, })),
+            addToggle: true,
+
 
         }
     }
@@ -53,14 +105,17 @@ export default {
     border-radius: 20px;
     width: 900px;
     padding: 50px;
-    .ProSearch{
-    padding: 10px; 
-    .ProSearchBtn{
-    width: 80px;
-    height: 28px;
-    margin-left: 10px;
+
+    .ProSearch {
+        padding: 10px;
+
+        .ProSearchBtn {
+            width: 80px;
+            height: 28px;
+            margin-left: 10px;
+        }
     }
-    }
+
     .ProTitle {
         display: flex;
         justify-content: space-evenly;
@@ -85,50 +140,51 @@ export default {
             width: 100%;
             text-align: center;
         }
+
         .ios-switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 30px;
-  background-color: #ccc;
-  border-radius: 15px;
-}
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 15px;
+        }
 
-.ios-switch input {
-  display: none;
-}
+        .ios-switch input {
+            display: none;
+        }
 
-.ios-switch .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #565656;
-  border-radius: 15px;
-  transition: 0.4s;
-}
+        .ios-switch .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #565656;
+            border-radius: 15px;
+            transition: 0.4s;
+        }
 
-.ios-switch input:checked + .slider {
-  background-color: #4CAF50;
-}
+        .ios-switch input:checked+.slider {
+            background-color: #4CAF50;
+        }
 
-.ios-switch .slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 2px;
-  bottom: 2px;
-  background-color: white;
-  border-radius: 50%;
-  transition: 0.4s;
-}
+        .ios-switch .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.4s;
+        }
 
-.ios-switch input:checked + .slider:before {
-  transform: translateX(30px);
-}
+        .ios-switch input:checked+.slider:before {
+            transform: translateX(30px);
+        }
     }
 
     .addSta {
@@ -140,4 +196,182 @@ export default {
         }
     }
 }
-</style>
+
+.proAdd {
+    border: 1px solid #aaa;
+    background-color: #fff;
+    border-radius: 20px;
+    width: 900px;
+    height: 900px;
+    overflow: auto;
+    padding: 50px;
+
+    .proInfo {
+
+        // border: 1px solid red;
+        p {
+            text-align: center;
+            background-color: #ddd;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 5px 0;
+
+        }
+
+        .name,
+        .price {
+            margin: 10px 0;
+
+            label {
+                font-size: 24px;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .proTag {
+        margin-top: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        align-items: center;
+
+        p {
+            text-align: center;
+            background-color: #ddd;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 5px 0;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        select {
+            width: 200px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    }
+
+    .proPic {
+        margin-top: 30px;
+
+        .title {
+            text-align: center;
+            background-color: #ddd;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 5px 0;
+            width: 100%;
+        }
+
+        .picArea {
+            border: 1px solid red;
+            display: flex;
+            align-items: center;
+            // justify-content: center;
+            flex-wrap: wrap;
+
+
+            .uploadPic {
+                // border: 1px solid red; text-align: center;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                // margin-top: 10px;
+                margin: 0 16px;
+
+                .pic {
+                    border: 1px dashed #aaa;
+                    // margin-top: 30px;
+                    position: relative;
+                    width: 100px;
+
+
+                    p {
+                        font-size: 24px;
+                        line-height: 100px;
+                        // width: 100px;
+                    }
+
+                    input {
+                        // border: 1px solid red;
+                        position: absolute;
+                        inset: 0;
+                        // width: 100px;
+                        width: 100%;
+                        height: 100%;
+                        opacity: 0;
+                        z-index: 9;
+                    }
+
+                    img {
+                        position: absolute;
+                        inset: 0;
+                        // width: 100px;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+
+            button {
+                width: 20px;
+                height: 20px;
+                margin-left: 55px;
+            }
+        }
+    }
+
+    .proCtx {
+        margin-top: 30px;
+
+        label {
+            display: block;
+            text-align: center;
+            background-color: #ddd;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 5px 0;
+        }
+
+        input {
+            width: 100%;
+            height: 200px;
+        }
+    }
+
+    .proMore {
+        margin-top: 30px;
+
+        label {
+            display: block;
+            text-align: center;
+            background-color: #ddd;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 5px 0;
+        }
+
+        input {
+            width: 100%;
+            height: 200px;
+        }
+    }
+
+    .btn {
+        // border: 1px solid red;
+        margin-top: 30px;
+        text-align: right;
+
+        button {
+            margin-left: 20px;
+            padding: 10px 20px;
+        }
+    }
+}</style>
