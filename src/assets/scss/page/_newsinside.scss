@@ -17,6 +17,7 @@
     img {
       width: 100%;
       vertical-align: bottom;
+      object-fit: cover;
       // height: 100%;
     }
   }
@@ -32,6 +33,22 @@
     button{
       margin-left: 50px;
     }
+  }
+  .swiper-pagination{
+    .swiper-pagination-bullet{
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      border:1px solid #fff;
+      margin: 0 8px;
+    }
+  }
+  .swiper-pagination-bullet-active{
+    background-color: #fff;
+    width: 15px;
+    height: 15px;
   }
 }
 

@@ -240,6 +240,7 @@ const routes = [
       import(/* webpackChunkName: "err" */ "@/views/NotFoundView.vue"),
   },
   
+  
 ];
 
 const router = createRouter({
