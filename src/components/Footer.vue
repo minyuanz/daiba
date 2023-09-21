@@ -1,5 +1,5 @@
 <template>
-    <footer :class="{ '--closeFooter': shouldclose,'--closeFooter2':mainClose }">
+    <footer :class="{ '--closeFooter': shouldclose }">
         <div class="footerLogo">
             <router-link to="/">
                 <img src="../../public/img/logo.png" alt="" />
@@ -20,9 +20,6 @@ export default {
             // 根據路由的 meta.useAppLayout 屬性來決定是否使用 App.vue 佈局
             return this.$route.path === "/home";
         },
-        mainClose(){
-            return this.$route.path === "/"
-        }
     },
 };
 </script>

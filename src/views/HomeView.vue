@@ -1,93 +1,93 @@
 <template>
   <div class="homeWrapper">
-  <div class="animateLineGroup">
-        <div class="left">
-          <div class="thick"></div>
-          <div class="dark1 slim"></div>
-          <div class="dark2 slim"></div>
-          <div class="dark3 slim"></div>
-          <div class="dark4 slim"></div>
-          <div class="dark5 slim"></div>
-          <div class="dark6 slim"></div>
-          <div class="dark7 slim"></div>
-          <div class="dark8 slim"></div>
-          <div class="dark9 slim"></div>
-        </div>
-        <div class="right">
-          <div class="dark9 slim"></div>
-          <div class="dark8 slim"></div>
-          <div class="dark7 slim"></div>
-          <div class="dark6 slim"></div>
-          <div class="dark5 slim"></div>
-          <div class="dark4 slim"></div>
-          <div class="dark3 slim"></div>
-          <div class="dark2 slim"></div>
-          <div class="dark1 slim"></div>
-          <div class="thick"></div>
-        </div>
-  </div>
-  <nav class="homeNav">
-    <ul>
-      <li>
-        <div class="pic">
-          <img src="../../public/img/home/index_home.jpg" alt="" />
-        </div>
-        <router-link to="/mrt" class="mrt">
-          <p>捷運推薦</p>
-        </router-link>
-      </li>
-      <li>
-        <div class="pic">
-          <img src="../../public/img/home/game.jpg" alt="" />
-        </div>
-        <router-link to="/game" class="game">
-          <p>捷運冒險</p>
-        </router-link>
-      </li>
-      <li>
-        <div class="pic">
-          <img src="../../public/img/home/contribute.jpg" alt="" />
-        </div>
-        <router-link to="/contribute" class="contribute">
-          <p>投稿專欄</p>
-        </router-link>
-      </li>
-      <li>
-        <div class="pic">
-          <img src="../../public/img/home/member.jpg" alt="" />
-        </div>
-        <router-link to="/Login" class="login">
-          <p>會員中心</p>
-        </router-link>
-      </li>
-      <li>
-        <div class="pic">
-          <img src="../../public/img/home/shop.jpg" alt="" />
-        </div>
-        <router-link to="/store" class="store">
-          <p>精選購物</p>
-        </router-link>
-      </li>
-      <li>
-        <div class="pic">
-          <img src="../../public/img/home/new1.jpg" alt="" />
-        </div>
-        <router-link to="/New" class="new">
-          <p>最新消息</p>
-        </router-link>
-      </li>
-      <li>
-        <div class="pic">
-          <img src="../../public/img/home/about.jpg" alt="" />
-        </div>
-        <router-link to="/about" class="about">
-          <p>關於我們</p>
-        </router-link>
-      </li>
-    </ul>
-  </nav>
+    <div class="animateLineGroup">
+      <div class="left">
+        <div class="thick"></div>
+        <div class="dark1 slim"></div>
+        <div class="dark2 slim"></div>
+        <div class="dark3 slim"></div>
+        <div class="dark4 slim"></div>
+        <div class="dark5 slim"></div>
+        <div class="dark6 slim"></div>
+        <div class="dark7 slim"></div>
+        <div class="dark8 slim"></div>
+        <div class="dark9 slim"></div>
+      </div>
+      <div class="right">
+        <div class="dark9 slim"></div>
+        <div class="dark8 slim"></div>
+        <div class="dark7 slim"></div>
+        <div class="dark6 slim"></div>
+        <div class="dark5 slim"></div>
+        <div class="dark4 slim"></div>
+        <div class="dark3 slim"></div>
+        <div class="dark2 slim"></div>
+        <div class="dark1 slim"></div>
+        <div class="thick"></div>
+      </div>
+    </div>
+    <nav class="homeNav">
+      <ul>
+        <li>
+          <div class="pic">
+            <img src="../../public/img/home/index_home.jpg" alt="" />
+          </div>
+          <router-link to="/mrt" class="mrt">
+            <p>捷運推薦</p>
+          </router-link>
+        </li>
+        <li>
+          <div class="pic">
+            <img src="../../public/img/home/game.jpg" alt="" />
+          </div>
+          <router-link to="/game" class="game">
+            <p>捷運冒險</p>
+          </router-link>
+        </li>
+        <li>
+          <div class="pic">
+            <img src="../../public/img/home/contribute.jpg" alt="" />
+          </div>
+          <router-link to="/contribute" class="contribute">
+            <p>投稿專欄</p>
+          </router-link>
+        </li>
+        <li>
+          <div class="pic">
+            <img src="../../public/img/home/member.jpg" alt="" />
+          </div>
+          <router-link to="/Login" class="login">
+            <p>會員中心</p>
+          </router-link>
+        </li>
+        <li>
+          <div class="pic">
+            <img src="../../public/img/home/shop.jpg" alt="" />
+          </div>
+          <router-link to="/store" class="store">
+            <p>精選購物</p>
+          </router-link>
+        </li>
+        <li>
+          <div class="pic">
+            <img src="../../public/img/home/new1.jpg" alt="" />
+          </div>
+          <router-link to="/New" class="new">
+            <p>最新消息</p>
+          </router-link>
+        </li>
+        <li>
+          <div class="pic">
+            <img src="../../public/img/home/about.jpg" alt="" />
+          </div>
+          <router-link to="/about" class="about">
+            <p>關於我們</p>
+          </router-link>
+        </li>
+      </ul>
+    </nav>
 
-  <div class="homeBanner">
+    <div class="homeBanner">
       <div class="swiper">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
@@ -141,38 +141,13 @@
   </div>
   <div class="animate">
     <div class="circle">
-      <svg
-        ref="svgElement"
-        xmlns="http://www.w3.org/2000/svg"
-        width="40%"
-        height="40%"
-        viewBox="0 0 107 190"
-        enable-background="new 0 0 107 190"
-      >
-        <circle
-          fill="none"
-          id="circle"
-          stroke-dasharray="0 610 610 0"
-          class="stat-outline-circle"
-          stroke="#fff04b"
-          stroke-width="8"
-          stroke-miterlimit="10"
-          cx="53"
-          cy="56"
-          r="48"
-        ></circle>
+      <svg ref="svgElement" xmlns="http://www.w3.org/2000/svg" width="80%" height="80%" viewBox="0 0 107 190"
+        enable-background="new 0 0 107 190">
+        <circle fill="none" id="circle" stroke-dasharray="0 610 610 0" class="stat-outline-circle" stroke="#fff04b"
+          stroke-width="8" stroke-miterlimit="10" cx="50" cy="90" r="30%"></circle>
 
-        <animate
-          attributeType="XML"
-          xlink:href="#circle"
-          id="circleanimate"
-          attributeName="stroke-dashoffset"
-          from="0"
-          to="610"
-          dur="1s"
-          begin=".5s"
-          fill="freeze"
-        />
+        <animate attributeType="XML" xlink:href="#circle" id="circleanimate" attributeName="stroke-dashoffset" from="0"
+          to="610" dur="1s" begin=".5s" fill="freeze" />
 
         <!-- <animate
           attributeType="XML"
@@ -203,8 +178,6 @@
 
     </div>
   </div>
-
-
 </template>
 
 <script>
@@ -241,7 +214,7 @@ export default {
       }
     }, 2500);
 
-      
+
     gsap.fromTo(
       ".chocolate",
       {
@@ -286,7 +259,7 @@ export default {
       {
         y: "-160%",
         duration: 1,
-        delay:.6,
+        delay: .6,
       }
     );
 
