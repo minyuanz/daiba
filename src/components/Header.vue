@@ -121,12 +121,10 @@ export default {
 
   computed: {
     shouldclose() {
-      // 根據路由的 meta.useAppLayout 屬性來決定是否使用 App.vue 佈局
-      return this.$route.path === "/home";
+      return this.$router.path === "/home";
     },
     mainClose() {
-      // 根據路由的 meta.useAppLayout 屬性來決定是否使用 App.vue 佈局
-      return this.$route.path === "/";
+      return this.$router.path === "/";
     },
   },
   mounted() {

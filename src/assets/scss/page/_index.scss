@@ -69,106 +69,64 @@
           padding-bottom: 1rem;
           padding-right: 1.5rem;
           color: #fff;
-          text-shadow: 3px 3px 0px #000,3px 3px 0px #000,3px 3px 0px #000,3px 3px 0px #000;
+          text-shadow: 3px 3px 0px #000, 3px 3px 0px #000, 3px 3px 0px #000,
+            3px 3px 0px #000;
           transition: all 0.2s;
         }
       }
     }
   }
-  // ul li:nth-child(1) {
-  //   .pic {
-  //     border: 8px solid map-get($color, $key: info);
-  //   }
-  //   img {
-  //     object-position: 60% 0;
-  //   }
-  // }
-  // ul li:nth-child(2) {
-  //   .pic {
-  //     border: 8px solid map-get($color, $key: tangerine);
-  //   }
-  //   img {
-  //     object-position: 35% 30%;
-  //   }
-  // }
-  // ul li:nth-child(3) {
-  //   .pic {
-  //     border: 8px solid map-get($color, $key: grap);
-  //   }
-  //   img {
-  //     object-position: 30% 0;
-  //   }
-  // }
-  // ul li:nth-child(4) {
-  //   .pic {
-  //     border: 8px solid map-get($color, $key: choco);
-  //   }
-  // }
-  // ul li:nth-child(5) {
-  //   .pic {
-  //     border: 8px solid map-get($color, $key: success);
-  //   }
-  // }
-  // ul li:nth-child(6) {
-  //   .pic {
-  //     border: 8px solid map-get($color, $key: danger);
-  //   }
-  // }
-  // ul li:nth-child(7) {
-  //   .pic {
-  //     border: 8px solid map-get($color, $key: warning);
-  //   }
-  ul li:nth-child(1){
-     .pic{
+
+  ul li:nth-child(1) {
+    .pic {
       border: 8px solid #000;
       // border: 8px solid map-get($color, $key: info);
-     }
-      img{
+    }
+    img {
       object-position: 60% 0;
-     }
-  }
-  ul li:nth-child(2){ 
-    .pic{
-      border: 8px solid #d9d9d9;
-      // border: 8px solid map-get($color, $key: tangerine);
-    } 
-    img{
-    object-position: 35% 30%;
-  }
-    
-  }
-  ul li:nth-child(3){ 
-    .pic{
-      border: 8px solid #000;
-      // border: 8px solid map-get($color, $key: grap);
-    } 
-    img{
-    object-position: 30% 0;
     }
   }
-  ul li:nth-child(4){ 
-    .pic{
+  ul li:nth-child(2) {
+    .pic {
+      border: 8px solid #d9d9d9;
+      // border: 8px solid map-get($color, $key: tangerine);
+    }
+    img {
+      object-position: 35% 30%;
+    }
+  }
+  ul li:nth-child(3) {
+    .pic {
+      border: 8px solid #000;
+      // border: 8px solid map-get($color, $key: grap);
+    }
+    img {
+      object-position: 30% 0;
+    }
+  }
+  ul li:nth-child(4) {
+    .pic {
       border: 8px solid #d9d9d9;
       // border: 8px solid map-get($color, $key: choco);
-    } 
+    }
   }
-  ul li:nth-child(5){ 
-    .pic{
+  ul li:nth-child(5) {
+    .pic {
       border: 8px solid #000;
       // border: 8px solid map-get($color, $key: success);
-    } 
+    }
   }
-  ul li:nth-child(6){ 
-    .pic{
+  ul li:nth-child(6) {
+    .pic {
       border: 8px solid #d9d9d9;
       // border: 8px solid map-get($color, $key: danger);
-    } 
+    }
   }
-  ul li:nth-child(7){ 
-    .pic{
+  ul li:nth-child(7) {
+    .pic {
       border: 8px solid #000;
       // border: 8px solid map-get($color, $key: warning);
-    } 
+    }
   }
 }
 .homeBanner {
@@ -272,47 +230,41 @@
     margin-bottom: 0;
   }
 
-  .container {
-    position: relative;
+  .homeNav {
+    width: 100%;
+    margin-top: 0%;
     padding-left: 0;
-    padding-block: 5%;
 
-    .homeNav {
-      width: 100%;
-      margin-top: 0%;
-      padding-left: 0;
+    ul {
+      flex-direction: column;
+      gap: 5px;
 
-      ul {
-        flex-direction: column;
-        gap: 5px;
+      :hover p {
+        font-size: 36px;
+      }
 
-        :hover p {
-          font-size: 36px;
+      li {
+        width: 100%;
+        writing-mode: inherit;
+        height: 90px;
+        left: 0;
+
+        .pic {
+          width: 100%;
+          height: 100%;
+          transform: skewX(-20deg);
+          margin-left: -5%;
         }
 
-        li {
-          width: 100%;
-          writing-mode: inherit;
-          height: 90px;
-          left: 0;
+        a {
+          height: 100%;
 
-          .pic {
-            width: 100%;
-            height: 100%;
-            transform: skewX(-20deg);
-            margin-left: -5%;
-          }
-
-          a {
-            height: 100%;
-
-            p {
-              margin-top: 13%;
-              margin-right: 2%;
-              font-size: 28px;
-              padding-bottom: 0;
-              padding-right: 0;
-            }
+          p {
+            margin-top: 13%;
+            margin-right: 2%;
+            font-size: 28px;
+            padding-bottom: 0;
+            padding-right: 0;
           }
         }
       }
@@ -342,4 +294,3 @@
   height: 100vh;
   overflow: hidden;
 }
-
