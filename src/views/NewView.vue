@@ -16,6 +16,7 @@
 
             <div class="newsBox">
               <div class="newsCtxTxt">
+
                 <div class="newsTag title-tag gray">
                   <span>#{{ news.tag }}</span>
                 </div>
@@ -40,7 +41,7 @@
           </div>
 
         </div>
-        <div class="swiper-scrollbar"></div>
+        <div class="swiper-pagination"></div>
 
       </div>
 
@@ -108,7 +109,7 @@ export default {
         date: '2023-07-04',
         title: '植感生活',
         title2: '－植物郵票與押花特展',
-        image: '../img/newsbackimg.png'
+        image: '../img/newsbackimg.jpg'
       },
       {
         tag: '活動消息2',
@@ -188,10 +189,17 @@ export default {
       loop: true,
       slidesPerView: 1,
       spaceBetween: 0,
-      scrollbar: {
-        // dragcClass:'.swiper-scrollbar'
-        el: '.swiper-scrollbar'
+      autoplay:{
+        delay: 3000
       },
+      pagination:{
+        el:".swiper-pagination",
+        clickable: true
+      },
+      // scrollbar: {
+      //   // dragcClass:'.swiper-scrollbar'
+      //   el: '.swiper-scrollbar'
+      // },
       initialSlide: 0, //第一個顯示的畫面,
       // grabCursor: true,
       breakpoints: { //width:414px顯示一個
@@ -209,4 +217,8 @@ export default {
   },
 }
 </script>
-<style></style>
+<style>
+h1{
+font-size: 45px;
+}
+</style>
