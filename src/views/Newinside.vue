@@ -9,7 +9,7 @@
                 <img :src="news.image" alt="" class="swiper-slide">
                 <img :src="news.image1" alt="" class="swiper-slide">
             </div>
-            <div class="swiper-scrollbar"></div>
+            <div class="swiper-pagination"></div>
         </div>
 
         <div class="newsintxt">
@@ -33,7 +33,7 @@ export default {
                 tag: '活動消息',
                 date: '2023-07-07',
                 title: '植感生活－植物郵票與押花特展',
-                image: '../img/newsbackimg.png',
+                image: '../img/newsbackimg.jpg',
                 image1: '../img/news4.png',
                 contents: '綠色植物的生命力，讓人感到快樂與朝氣。為鼓勵大眾親近植物，本館特規劃「植感生活－植物郵票與押花特展」，期透過展出郵票與手作押花作品，使民眾認識植物，推廣香草植物的多元應用與花藝美學，讓生活增添綠意與愜意。'
             }
@@ -44,11 +44,15 @@ export default {
             direction: "horizontal",
             speed: 1500,
             loop: true,
+            autoplay:{
+                delay:3000
+            },
             slidesPerView: 1,
             spaceBetween: 0,
-            scrollbar: {
-                el: '.swiper-scrollbar'
-            }
+            pagination:{
+                el:".swiper-pagination",
+                clickable: true
+            },
         })
 
         // const swiper = new Swiper(".swiper", {
