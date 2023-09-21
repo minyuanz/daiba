@@ -1,145 +1,181 @@
 .animate {
-    position: fixed;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  backdrop-filter: blur(5px);
+  background-color: #fff;
+  opacity: 1;
+  transition: opacity 1s ease;
+  z-index: 5;
+
+  .row-line {
+    height: 300px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    inset: 0;
+    margin: auto;
+
+    .r-line {
+      height: 70px;
+      width: 200vw;
+      border-radius: 50px;
+    }
+  }
+
+  .col-line {
+    width: 300px;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: auto;
     top: 0;
-    width: 100%;
-    height: 100vh;
-    backdrop-filter: blur(5px);
-    background-color: #fff;
-    opacity: 1;
-    transition: opacity 1s ease;
-    z-index: 5;
-    .row-line {
-      height: 300px;
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      inset: 0;
-      margin: auto;
-  
-      .r-line {
-        height: 70px;
-        width: 200vw;
-        border-radius: 50px;
-      }
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    .c-line {
+      width: 70px;
+      height: 200vh;
+      border-radius: 50px;
     }
-  
-    .col-line {
-      width: 300px;
+  }
+
+  .circle {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+
+    svg {
       position: absolute;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      inset: 0;
-      margin: auto;
-  
-      .c-line {
-        width: 70px;
-        height: 200vh;
-        border-radius: 50px;
-      }
-    }
-  
-    .circle {
-      position: absolute;
-      display: flex;
-      justify-content: center;
       top: 0;
       left: 0;
       right: 0;
+      bottom: 0;
       margin: auto;
     }
-}
-.animateLineGroup.main{
-    .left {
-      animation: fadeInLeft 1s ease-out 0s;
-    }
-    .right {
-      animation: fadeInRight 1s ease-out 0s;
-    }
   }
-  .animateLineGroup {
-    width: 100%;
+}
+
+.animateLineGroup.main {
+  .left {
+    animation: fadeInLeft 1s ease-out 0s;
+  }
+
+  .right {
+    animation: fadeInRight 1s ease-out 0s;
+  }
+}
+
+.animateLineGroup {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+
+  .left {
+    width: 18.75%;
     display: flex;
     justify-content: space-between;
-    position: relative;
-  
-    .left {
-      width: 18.75%;
-      display: flex;
-      justify-content: space-between;
-      position: absolute;
-      animation: fadeInLeft 4.5s ease-out 0s;
-    }
-    .right {
-      width: 18.75%;
-      display: flex;
-      right: 0;
-      justify-content: space-between;
-      position: absolute;
-      animation: fadeInRight 4.5s ease-out 0s;
-    }
-    .thick {
-      width: 20%;
-      height: 100vh;
-      background-color: #000;
-    }
-    .slim {
-      width: 6%;
-    }
-    .dark1 {
-      background-color: #1a1a1a;
-    }
-    .dark2 {
-      background-color: #323232;
-    }
-    .dark3 {
-      background-color: #4c4c4c;
-    }
-    .dark4 {
-      background-color: #666666;
-    }
-    .dark5 {
-      background-color: #808080;
-    }
-    .dark6 {
-      background-color: #9a9a9a;
-    }
-    .dark7 {
-      background-color: #b4b4b4;
-    }
-    .dark8 {
-      background-color: #cccccc;
-    }
-    .dark9 {
-      background-color: #e6e6e6;
-    }
+    position: absolute;
+    animation: fadeInLeft 4.5s ease-out 0s;
   }
-  @keyframes fadeInLeft {
-    0% {
-      left: -100%;
-    }
-    100% {
-      left: 0;
-    }
+
+  .right {
+    width: 18.75%;
+    display: flex;
+    right: 0;
+    justify-content: space-between;
+    position: absolute;
+    animation: fadeInRight 4.5s ease-out 0s;
   }
-  @keyframes fadeInRight {
-    0% {
-      right: -100%;
-    }
-    100% {
-      right: 0;
-    }
+
+  .thick {
+    width: 20%;
+    height: 100vh;
+    background-color: #000;
   }
-  @keyframes fadeOut {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
+
+  .slim {
+    width: 6%;
   }
-  
-  .fadeOut {
-    animation: fadeOut 2s ease-in 0s; /* Apply the fadeOut animation */
+
+  .dark1 {
+    background-color: #1a1a1a;
   }
+
+  .dark2 {
+    background-color: #323232;
+  }
+
+  .dark3 {
+    background-color: #4c4c4c;
+  }
+
+  .dark4 {
+    background-color: #666666;
+  }
+
+  .dark5 {
+    background-color: #808080;
+  }
+
+  .dark6 {
+    background-color: #9a9a9a;
+  }
+
+  .dark7 {
+    background-color: #b4b4b4;
+  }
+
+  .dark8 {
+    background-color: #cccccc;
+  }
+
+  .dark9 {
+    background-color: #e6e6e6;
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    right: -100%;
+  }
+
+  100% {
+    right: 0;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.fadeOut {
+  animation: fadeOut 2s ease-in 0s;
+  /* Apply the fadeOut animation */
+}

@@ -1,8 +1,4 @@
-// #menu-check {
-//   display: none;
-// }
-
-.--closeHeader2 {
+.--closeHeader {
   display: none;
 }
 
@@ -83,6 +79,7 @@ header {
               width: 100%;
               transform: skew(-5deg);
               box-shadow: 0 8px 8px #0006;
+
               img {
                 width: 100%;
                 height: 100%;
@@ -109,45 +106,55 @@ header {
             }
           }
         }
+
         ul li:nth-child(1) {
           .pic {
             border: 8px solid map-get($color, $key: info);
           }
+
           img {
             object-position: 60% 0;
           }
         }
+
         ul li:nth-child(2) {
           .pic {
             border: 8px solid map-get($color, $key: tangerine);
           }
+
           img {
             object-position: 35% 30%;
           }
         }
+
         ul li:nth-child(3) {
           .pic {
             border: 8px solid map-get($color, $key: grap);
           }
+
           img {
             object-position: 30% 0;
           }
         }
+
         ul li:nth-child(4) {
           .pic {
             border: 8px solid map-get($color, $key: choco);
           }
         }
+
         ul li:nth-child(5) {
           .pic {
             border: 8px solid map-get($color, $key: success);
           }
         }
+
         ul li:nth-child(6) {
           .pic {
             border: 8px solid map-get($color, $key: danger);
           }
         }
+
         ul li:nth-child(7) {
           .pic {
             border: 8px solid map-get($color, $key: warning);
@@ -353,22 +360,23 @@ header {
         display: none;
       }
 
-      #navbar:checked + .header-nav .homeNav {
+      #navbar:checked+.header-nav .homeNav {
         left: 0;
       }
 
-      #navbar:checked ~ .header-nav .checkBox span:nth-of-type(1) {
+      #navbar:checked~.header-nav .checkBox span:nth-of-type(1) {
         transform: rotate(45deg);
         position: absolute;
         inset: 0;
         margin: auto;
       }
 
-      #navbar:checked ~ .header-nav .checkBox span:nth-of-type(2) {
+      #navbar:checked~.header-nav .checkBox span:nth-of-type(2) {
         opacity: 0;
         transition: all 0.3s;
       }
-      #navbar:checked ~ .header-nav .checkBox span:nth-of-type(3) {
+
+      #navbar:checked~.header-nav .checkBox span:nth-of-type(3) {
         transform: rotate(-45deg);
         position: absolute;
         inset: 0;
@@ -387,21 +395,39 @@ header {
 }
 
 @media screen and (max-width: 414px) {
-  .header-nav {
-    .homeNav {
-      ul {
-        :hover p {
-          font-size: 36px;
-        }
+  header {
+    .header {
+      .header-nav {
+        .homeNav {
+          ul {
+            :hover p {
+              font-size: 36px;
+            }
 
-        li {
-          a {
-            p {
-              font-size: 28px;
+            li {
+              a {
+                p {
+                  font-size: 28px;
+                }
+              }
             }
           }
         }
+
+        .checkBox {
+          display: none;
+        }
       }
     }
+
+   
+
   }
+
+  .--closeHeader {
+    display: block;
+  }
+
+
+
 }
