@@ -1,5 +1,5 @@
 <template>
-    <div class="BackPro">
+    <div class="BackPro" v-if="addToggle">
         <div class="ProSearch">
             商品編號查詢:
             <input type="text">
@@ -23,8 +23,25 @@
             </div>
         </div>
         <div class="addSta">
-            <button>創建帳號</button>
+            <button @click="addToggle = !addToggle">創建帳號</button>
         </div>
+    </div>
+    <div class="BackPerAdd" v-else >
+        <form class="PerBOX">
+            <div class="PerAddTITLE">新增管理員帳號:</div>
+            <div>
+                <label for="">管理員帳號：</label>
+                <input type="text" >
+            </div>
+            <div>
+                <label for="">管理員密碼：</label>
+                <input type="text" >
+            </div>
+            <div class="btn">
+                <button @click="addToggle = !addToggle">取消新增</button>
+                <button @click="addToggle = !addToggle">確認新增</button>
+            </div>
+        </form>
     </div>
 </template>
 
@@ -33,6 +50,7 @@ import BackProTest from "@/testdata/BackProTest.json"
 export default {
     data() {
         return {
+            addToggle:true,
             item:BackProTest,
             isSwitchOn: false,
             items: BackProTest.map((item) => ({...item,isChecked: false,})), 
@@ -133,6 +151,37 @@ export default {
 
         button {
             padding: 10px 30px;
+        }
+    }
+}
+.BackPerAdd{
+    border: 1px solid #aaa;
+    background-color: #fff;
+    border-radius: 20px;
+    width: 900px;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .PerBOX{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-wrap: wrap;
+        width: 70%;
+        background-color: #ddd;
+        .PerAddTITLE{
+            width: 100%;
+            text-align: center;
+            font-size: 40px;
+        }
+        div{
+            line-height: 2;
+            padding: 30px;
+            button{
+                width: 200px;
+                margin: 20px;
+            }
         }
     }
 }

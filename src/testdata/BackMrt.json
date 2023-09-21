@@ -1,0 +1,72 @@
+[
+{
+"sta_id":"1",
+"mrt_code1":"BL",
+"mrt_code2":"Y",
+"sta_name":"板橋車站",
+"mrt_id1":"",
+"mrt_id2":"",
+"sta_pictor":"",
+"sta_describe":""
+},
+{
+"sta_id":"2",
+"mrt_code1":"BL",
+"mrt_code2":"Y",
+"sta_name":"頂埔車站",
+"mrt_id1":"",
+"mrt_id2":"",
+"sta_pictor":"",
+"sta_describe":""
+},
+{
+    "sta_id":"3",
+    "mrt_code1":"BL",
+    "mrt_code2":"G",
+    "sta_name":"西門車站",
+    "mrt_id1":"",
+    "mrt_id2":"",
+    "sta_pictor":"",
+    "sta_describe":""
+},
+{
+    "sta_id":"4",
+    "mrt_code1":"BL",
+    "mrt_code2":"R",
+    "sta_name":"台北車站",
+    "mrt_id1":"",
+    "mrt_id2":"",
+    "sta_pictor":"",
+    "sta_describe":""
+},
+{
+    "sta_id":"5",
+    "mrt_code1":"BL",
+    "mrt_code2":"O",
+    "sta_name":"忠孝新生",
+    "mrt_id1":"",
+    "mrt_id2":"",
+    "sta_pictor":"",
+    "sta_describe":""
+},
+{
+    "sta_id":"6",
+    "mrt_code1":"BL",
+    "mrt_code2":"BR",
+    "sta_name":"忠孝復興",
+    "mrt_id1":"",
+    "mrt_id2":"",
+    "sta_pictor":"",
+    "sta_describe":""
+},
+{
+    "sta_id":"7",
+    "mrt_code1":"",
+    "mrt_code2":"",
+    "sta_name":"",
+    "mrt_id1":"",
+    "mrt_id2":"",
+    "sta_pictor":"",
+    "sta_describe":""
+}
+]

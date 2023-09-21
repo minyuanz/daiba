@@ -5,10 +5,10 @@
         "sta_id":"台北站",
         "prod_name":"袋子",
         "prod_price":"100",
-        "prod_img1":"",
-        "prod_img2":"",
-        "prod_img3":"",
-        "prod_img4":"",
+        "prod_img1":"https://picsum.photos/200/200/?random=10",
+        "prod_img2":"https://picsum.photos/200/200/?random=7",
+        "prod_img3":"https://picsum.photos/200/200/?random=6",
+        "prod_img4":"https://picsum.photos/200/200/?random=5",
         "prod_des1":"",
         "prod_des2":"",
         "prod_status":"",
@@ -32,7 +32,7 @@
         "prod_date":"2023/1/10"
     },
     {
-        "prod_id":"1",
+        "prod_id":"3",
         "mrt_id":"板南線",
         "sta_id":"台北站",
         "prod_name":"袋子",
@@ -48,7 +48,7 @@
         "prod_date":"2023/4/10"
     },
     {
-        "prod_id":"1",
+        "prod_id":"4",
         "mrt_id":"板南線",
         "sta_id":"台北站",
         "prod_name":"袋子",
@@ -64,7 +64,7 @@
         "prod_date":"2023/7/10"
     },
     {
-        "prod_id":"1",
+        "prod_id":"5",
         "mrt_id":"板南線",
         "sta_id":"台北站",
         "prod_name":"袋子",
@@ -80,7 +80,7 @@
         "prod_date":"2023/8/10"
     },
     {
-        "prod_id":"1",
+        "prod_id":"6",
         "mrt_id":"板南線",
         "sta_id":"台北站",
         "prod_name":"袋子",
@@ -96,7 +96,7 @@
         "prod_date":"2023/12/25"
     },
     {
-        "prod_id":"1",
+        "prod_id":"7",
         "mrt_id":"板南線",
         "sta_id":"台北站",
         "prod_name":"袋子",
@@ -112,7 +112,7 @@
         "prod_date":"2023/6/9"
     },
     {
-        "prod_id":"1",
+        "prod_id":"8",
         "mrt_id":"板南線",
         "sta_id":"台北站",
         "prod_name":"袋子",
@@ -128,7 +128,7 @@
         "prod_date":"2023/9/21"
     },
     {
-        "prod_id":"1",
+        "prod_id":"9",
         "mrt_id":"板南線",
         "sta_id":"台北站",
         "prod_name":"袋子",
@@ -144,7 +144,7 @@
         "prod_date":"2023/9/28"
     },
     {
-        "prod_id":"1",
+        "prod_id":"10",
         "mrt_id":"板南線",
         "sta_id":"台北站",
         "prod_name":"袋子",

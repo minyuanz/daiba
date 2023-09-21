@@ -8,16 +8,18 @@
             <button class="btnsearch">查詢</button>
         </div>
         <div class="mrtTitle">
-            <p>行</p>
             <p>捷運站編號</p>
+            <p>捷運站代碼1</p>
+            <p>捷運站代碼2</p>
             <p>站名</p>
             <p>編輯</p>
             <p>刪除</p>
         </div>
-        <div class="mrtInfo" v-for="info in infos">
-            <p>{{ info.id }}</p>
-            <p>{{ info.number }}</p>
-            <p>{{ info.name }}</p>
+        <div class="mrtInfo" v-for="info in sta" >
+            <p>{{ info.sta_id }}</p>
+            <p>{{ info.mrt_code1 }}</p>
+            <p>{{ info.mrt_code2 }}</p>
+            <p>{{ info.sta_name }}</p>
             <div class="edit">
                 <i class="fa-solid fa-pen-to-square"></i>
             </div>
@@ -76,9 +78,11 @@
 </template>
 
 <script>
+import BackMrt from "@/testdata/BackMrt.json"
 export default {
     data() {
         return {
+            sta:BackMrt,
             lines: [{
                 name: 'BL線',
             },
@@ -91,39 +95,6 @@ export default {
             {
                 name: 'G線',
             }],
-            infos: [{
-                id: '1',
-                number: 'BL01',
-                name: '頂埔',
-            }, {
-                id: '12',
-                number: 'BL01',
-                name: '頂埔',
-            }, {
-                id: '13',
-                number: 'BL01',
-                name: '頂埔',
-            }, {
-                id: '14',
-                number: 'BL01',
-                name: '頂埔',
-            }, {
-                id: '15',
-                number: 'BL01',
-                name: '頂埔',
-            }, {
-                id: '16',
-                number: 'BL01',
-                name: '頂埔',
-            }, {
-                id: '17',
-                number: 'BL01',
-                name: '頂埔',
-            }, {
-                id: '18',
-                number: 'BL01',
-                name: '頂埔',
-            },],
             addToggle:true
         }
     },
@@ -234,7 +205,9 @@ export default {
                 margin: 20px 0;
                 display: flex;
                 align-items: center;
-
+                input{
+                    width: 220px
+                }
                 select {
                     // border: 1px solid red;
                     width: 220px
