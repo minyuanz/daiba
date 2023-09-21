@@ -201,8 +201,8 @@
         content: "";
         position: absolute;
         inset: 0;
-        height: 95px;
-        top: -190%;
+        height: 80px;
+        top: -193%;
         left: 50%;
       }
     }
@@ -621,42 +621,42 @@
 
       .red {
         &::after {
-          height: 50px;
+          height: 45px;
           top: -150%;
         }
       }
 
       .blue {
         &::after {
-          height: 50px;
+          height: 45px;
           top: -150%;
         }
       }
 
       .green {
         &::after {
-          height: 50px;
+          height: 45px;
           top: -150%;
         }
       }
 
       .orange {
         &::after {
-          height: 50px;
+          height: 45px;
           top: -150%;
         }
       }
 
       .brown {
         &::after {
-          height: 50px;
+          height: 45px;
           top: -150%;
         }
       }
 
       .yellow {
         &::after {
-          height: 50px;
+          height: 45px;
           top: -150%;
         }
       }

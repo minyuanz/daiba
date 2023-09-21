@@ -105,6 +105,7 @@ header {
             border: 8px solid #000;
             // border: 8px solid map-get($color, $key: info);
           }
+
           img {
             object-position: 60% 0;
           }
@@ -114,56 +115,13 @@ header {
             border: 8px solid #d9d9d9;
             // border: 8px solid map-get($color, $key: tangerine);
           }
+
           img {
             object-position: 35% 30%;
           }
         }
       }
     }
-
-    // .navbar-btn {
-    //   width: 40px;
-    //   height: 40px;
-    //   display: flex;
-    //   padding: 3px;
-    //   flex-direction: column;
-    //   justify-content: space-evenly;
-    //   align-items: center;
-    //   position: relative;
-    //   // right: 0;
-
-    //   #navbar-btn:checked ~ .wrap-group .navbar-img {
-    //     position: absolute;
-    //   }
-
-    //   #navbar-btn:checked ~ .navbar-btn span:nth-of-type(1) {
-    //     transform: rotate(45deg);
-    //     position: absolute;
-    //     inset: 0;
-    //     margin: auto;
-    //   }
-
-    //   #navbar-btn:checked ~ .navbar-btn span:nth-of-type(3) {
-    //     transform: rotate(-45deg);
-    //     position: absolute;
-    //     inset: 0;
-    //     margin: auto;
-    //   }
-
-    //   span {
-    //     width: 70%;
-    //     height: 3px;
-    //     background: #7d7d7d;
-
-    //     &:nth-of-type(1) {
-    //       transition: 0.3s;
-    //     }
-
-    //     &:nth-of-type(3) {
-    //       transition: 0.3s;
-    //     }
-    //   }
-    // }
 
     .weather {
       display: flex;
@@ -333,6 +291,7 @@ header {
         opacity: 0;
         transition: all 0.3s;
       }
+
       #navbar:checked ~ .header-nav .checkBox span:nth-of-type(3) {
         transform: rotate(-45deg);
         position: absolute;
@@ -352,21 +311,33 @@ header {
 }
 
 @media screen and (max-width: 414px) {
-  .header-nav {
-    .homeNav {
-      ul {
-        :hover p {
-          font-size: 36px;
-        }
+  header {
+    .header {
+      .header-nav {
+        .homeNav {
+          ul {
+            :hover p {
+              font-size: 36px;
+            }
 
-        li {
-          a {
-            p {
-              font-size: 28px;
+            li {
+              a {
+                p {
+                  font-size: 28px;
+                }
+              }
             }
           }
         }
+
+        .checkBox {
+          display: none;
+        }
       }
     }
+  }
+
+  .--closeHeader {
+    display: block;
   }
 }
