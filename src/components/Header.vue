@@ -1,7 +1,5 @@
 <template>
-  <header
-    :class="{ '--closeHeader': shouldclose, '--closeHeader2': mainClose }"
-  >
+  <header :class="{ '--closeHeader': shouldclose }">
     <div class="header">
       <div class="line"></div>
       <router-link to="/home">
@@ -121,10 +119,7 @@ export default {
 
   computed: {
     shouldclose() {
-      return this.$router.path === "/home";
-    },
-    mainClose() {
-      return this.$router.path === "/";
+      return this.$route.path === "/home";
     },
   },
   mounted() {

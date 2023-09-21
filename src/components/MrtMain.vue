@@ -264,8 +264,6 @@ export default {
   mounted() {
     const swiperMRTCard = new Swiper(".swiperMRTCard", {
       direction: "horizontal",
-
-      // spaceBetween: -60,
       speed: 500,
 
       navigation: {
@@ -276,23 +274,26 @@ export default {
         375: {
           slidesPerView: 1,
           slidesPerGroup: 1,
-          spaceBetween: -130,
+          spaceBetween: 30,
         },
         415: {
           slidesPerView: 1,
           slidesPerGroup: 1,
-          spaceBetween: 50,
+          spaceBetween: 30,
         },
         577: {
           slidesPerView: 2,
           slidesPerGroup: 2,
+          spaceBetween: 30,
         },
         769: {
           slidesPerView: 3,
+          spaceBetween: 30,
         },
         1281: {
           slidesPerView: 4,
           slidesPerGroup: 4,
+          spaceBetween: 50,
         },
       },
     });

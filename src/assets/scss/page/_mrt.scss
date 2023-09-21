@@ -248,6 +248,10 @@
       color: #fff;
     }
 
+    .red:hover ~ .mrtPic .pic.border-red {
+      opacity: 0;
+    }
+
     .blue:hover {
       background-color: map-get($color, $key: info);
       color: #fff;
@@ -350,8 +354,8 @@
         width: 48.5%;
         display: flex;
         justify-content: end;
-
         align-items: center;
+
         .mrtStaMaruBox {
           width: 20%;
           cursor: pointer;
@@ -373,18 +377,13 @@
     }
     // 卡片輪播
     .swiperMRTCard {
+      position: relative;
       margin: auto;
       overflow: hidden;
       width: 90%;
+
       .swiper-btn {
-        margin-top: 16%;
-        width: 50px;
         color: #838383;
-      }
-      margin-block: 1rem;
-      .swiper-wrappe {
-        .swiper-slide {
-        }
       }
       // 卡片樣式
       .card-h {
@@ -394,7 +393,7 @@
           rgba(126, 126, 126, 0.3) 0px -3px 5px inset;
         background-color: #ffffff;
         width: 350px;
-        margin: 5%;
+        margin: 5% 0;
         padding: 20px;
         img {
           border-radius: 0px;
@@ -413,10 +412,12 @@
     .swiper-button-prev {
       position: absolute;
       right: 100%;
+      margin-top: 0;
     }
 
     .swiper-button-next {
       position: absolute;
+      margin-top: 0;
     }
   }
 }
@@ -568,102 +569,30 @@
   .mrtWrappo {
     .mrtWrap {
       .mrtSta {
-        background-image: url(/public/img/mrt_smallarr.png);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 2% 100%;
-        max-width: 1200px;
-        margin: auto;
-        padding: 2% 2% 0 2%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
         /* 站點文字介紹 */
         .mrtStaTxt {
-          width: 34.5%;
-
-          background-color: #ffffff;
           padding: 10px 40px 20px 40px;
-          border: #c9c9c9 solid 3px;
-          h2 {
-            font-size: 24px;
-          }
-          p {
-            font-size: 14px;
-          }
-        }
-        /* 站點圖跟捷運圖 */
-        .mrtStaBox {
-          width: 48.5%;
-          display: flex;
-          justify-content: end;
 
-          align-items: center;
-          .mrtStaMaruBox {
-            width: 20%;
-            cursor: pointer;
-            .mrtStaMaru {
-              width: 100%;
-            }
-          }
-          .mrtStaPicBox {
-            width: 70%;
-            .mrtStaPic {
-              width: 100%;
-              border-radius: 50%;
-              border: #c9c9c9 solid 4px;
-              box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-                rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
-            }
+          p {
+            font-size: 16px;
           }
         }
       }
-      // 卡片輪播
-      .swiperMRTCard {
-        margin: auto;
-        overflow: hidden;
-        width: 90%;
-        .swiper-btn {
-          margin-top: 23%;
-          width: 50px;
-          color: #838383;
-        }
-        margin-block: 1rem;
-        .swiper-wrappe {
-          .swiper-slide {
-          }
-        }
-        // 卡片樣式
-        .card-h {
-          border: none;
-          box-shadow: rgba(126, 126, 126, 0.3) 0px 2px 4px,
-            rgba(126, 126, 126, 0.3) 0px 7px 13px -3px,
-            rgba(126, 126, 126, 0.3) 0px -3px 5px inset;
-          background-color: #ffffff;
-          width: 300px;
-          margin: 5%;
-          padding: 20px;
-          img {
-            border-radius: 0px;
-          }
-          .tag {
-            min-height: auto;
-          }
+    }
+    // 卡片樣式
+    .card-h {
+      width: 300px;
 
-          .txt {
-            margin-top: 10px;
-            -webkit-line-clamp: 3;
-          }
-        }
+      .txt {
+        -webkit-line-clamp: 3;
       }
     }
   }
+}
 
-  .mrtWrap {
-    .swiperMRTCard {
-      width: 100%;
-    }
+.mrtWrap {
+  .swiperMRTCard {
+    width: 100%;
   }
 }
 
@@ -734,193 +663,91 @@
     }
   }
 
-  .mrtWrap:nth-of-type(even) {
-    .mrtSta {
-      flex-direction: column-reverse;
+  // .mrtWrap:nth-of-type(even) {
+  //   .mrtSta {
+  //     flex-direction: column-reverse;
 
-      .mrtStaBox {
-        justify-content: center;
+  //     .mrtStaBox {
+  //       justify-content: center;
 
-        .mrtStaMaruBox {
-          display: none;
-        }
-      }
-    }
-  }
+  //       .mrtStaMaruBox {
+  //         display: none;
+  //       }
+  //     }
+  //   }
+  // }
 
-  .mrtWrap {
-    .swiperMRTCard {
-      // width: 70%;
-
-      .swiper-wrapper {
-        justify-content: center;
-
-        .swiper-slide {
-          width: 250px;
-          height: 350px;
-        }
-      }
-    }
-
-    .mrtSta {
-      flex-direction: column-reverse;
-      justify-content: start;
-      background-size: 5% 100%;
-      height: 30vh;
-      padding: 0;
-
-      .mrtStaTxt {
-        width: 100%;
-        text-align: center;
-
-        h2 {
-          font-size: 24px;
-        }
-        p {
-          display: none;
-        }
-      }
-      /* 站點圖跟捷運圖 */
-      .mrtStaBox {
-        justify-content: center;
-
-        .mrtStaMaruBox {
-          display: none;
-
-          .mrtStaMaru {
-            width: 100%;
-          }
-        }
-      }
-    }
-    /* 站點板塊 */
-    .mrtWrappo {
-      margin-top: 5%;
-      .mrtWrap {
-        .mrtSta {
-          background-image: url(/public/img/mrt_smallarr.png);
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: 5% 100%;
-          max-width: 1200px;
-          margin: auto;
-          padding: 2% 2% 0 2%;
-          display: flex;
-          flex-direction: column-reverse;
-          justify-content: center;
-          align-items: center;
-
-          /* 站點文字介紹 */
-          .mrtStaTxt {
-            margin: 5% 0 20% 0;
-            width: 40%;
-            background-color: #ffffff;
-            padding: 0px 20px 5px 20px;
-            border: #c9c9c9 solid 3px;
-            text-align: center;
-            h2 {
-              font-size: 20px;
-            }
-            p {
-              display: none;
-            }
-          }
-          /* 站點圖跟捷運圖 */
-          .mrtStaBox {
-            width: 80%;
-            display: flex;
-            justify-content: center;
-
-            align-items: center;
-            .mrtStaMaruBox {
-              display: none;
-            }
-            .mrtStaPicBox {
-              width: 70%;
-              .mrtStaPic {
-                width: 100%;
-                border-radius: 50%;
-                border: #c9c9c9 solid 4px;
-                box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-                  rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
-              }
-            }
-          }
-        }
-        // 卡片輪播
-        .swiperMRTCard {
-          margin: auto;
-          overflow: hidden;
-          width: 100%;
-          .swiper-btn {
-            margin-top: 7%;
-            width: 50px;
-            color: #838383;
-          }
-          .swiper-button-prev {
-            margin-left: 20px;
-          }
-          .swiper-button-next {
-            margin-right: 20px;
-          }
-          margin-block: 1rem;
-          .swiper-wrappe {
-            .swiper-slide {
-            }
-          }
-          // 卡片樣式
-          .card-h {
-            border: none;
-            box-shadow: rgba(126, 126, 126, 0.3) 0px 2px 4px,
-              rgba(126, 126, 126, 0.3) 0px 7px 13px -3px,
-              rgba(126, 126, 126, 0.3) 0px -3px 5px inset;
-            background-color: #ffffff;
-            width: 55%;
-
-            padding: 20px;
-
-            img {
-              border-radius: 0px;
-            }
-            .text {
-              margin-top: 0px;
-              h3 {
-                font-size: 18px;
-                line-height: 35px;
-              }
-            }
-
-            .tag {
-              display: flex;
-              width: 150px;
-              min-height: auto;
-              gap: 10px;
-              .title-tag {
-                margin: 0px;
-                padding: 2px 5px;
-                font-size: 10px;
-              }
-            }
-
-            .txt {
-              margin-top: 10px;
-              -webkit-line-clamp: 3;
-            }
-          }
-        }
-      }
-    }
-
-    /* 站點板塊左右對調 */
-    .mrtWrap:nth-of-type(even) {
+  /* 站點板塊 */
+  .mrtWrappo {
+    .mrtWrap {
       .mrtSta {
+        background-image: url(/public/img/mrt_smallarr.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 5% 100%;
+        max-width: 1200px;
+        margin: auto;
+        padding: 2% 2% 0 2%;
+        display: flex;
         flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+
+        /* 站點文字介紹 */
+        .mrtStaTxt {
+          margin: 5% 0 20% 0;
+          width: 50%;
+          padding: 0px 20px 0px 20px;
+          text-align: center;
+
+          h2 {
+            font-size: 20px;
+          }
+          p {
+            display: none;
+          }
+        }
+        /* 站點圖跟捷運圖 */
         .mrtStaBox {
-          flex-direction: column-reverse;
           justify-content: center;
+          width: 80%;
 
           .mrtStaMaruBox {
-            transform: scaleX(-1);
+            display: none;
+          }
+        }
+      }
+      // 卡片輪播
+      .swiperMRTCard {
+        .swiper-button-prev {
+          margin-left: 20px;
+        }
+        .swiper-button-next {
+          margin-right: 20px;
+        }
+
+        // 卡片樣式
+        .card-h {
+          width: 70%;
+
+          .text {
+            margin-top: 0px;
+            h3 {
+              font-size: 18px;
+              line-height: 35px;
+            }
+          }
+
+          .tag {
+            display: flex;
+            width: 150px;
+            gap: 10px;
+
+            .title-tag {
+              margin: 0px;
+              padding: 2px 5px;
+              font-size: 10px;
+            }
           }
         }
       }
