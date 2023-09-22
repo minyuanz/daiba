@@ -8,7 +8,7 @@
       <div class="line"></div>
       <input type="checkbox" name="navbar" id="navbar" />
       <div class="header-nav">
-        <label for="navbar" class="checkBox">
+        <label for="navbar" class="checkBox" :class="{ 'hbclose': hbclose }">
           <span></span>
           <span></span>
           <span></span>
@@ -118,6 +118,9 @@ export default {
     shouldclose() {
       return this.$route.path === "/home";
     },
+    hbclose() {
+      return this.$route.path === "/home";
+    }
   },
   mounted() {
     fetch(

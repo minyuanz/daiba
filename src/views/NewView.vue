@@ -103,27 +103,29 @@ import Swiper from "swiper/bundle";
 export default {
   data() {
     return {
+      // publicPath:process.env.BASE_URL,
       tagtoggle: '所有消息',
       slider: [{
         tag: '活動消息',
         date: '2023-07-04',
         title: '植感生活',
         title2: '－植物郵票與押花特展',
-        image: '../img/newsbackimg.jpg'
+        image: require('../../public/img/newsbackimg.jpg')
       },
       {
         tag: '活動消息2',
         date: '2023-07-04',
         title: '植感生活',
         title2: '－植物郵票與押花特展',
-        image: '../img/newsbackimg2.png'
+        image: require('../../public/img/newsbackimg2.png')
+        // image: '../img/newsbackimg2.png'
       },
       {
         tag: '活動消息3',
         date: '2023-07-04',
         title: '植感生活',
         title2: '－植物郵票與押花特展',
-        image: '../img/newsbackimg.png'
+        image: require('../../public/img/newsbackimg.jpg')
       }
       ],
       btns: [{
@@ -141,7 +143,8 @@ export default {
         date: '2023-09-09',
         title: '止觀-堉泉個展',
         contents: '久⽯讓在《感動，如此創造》書中開篇提到：「創作者依循個⼈的信念、價值觀，去追求⾃我滿意的作品。但⽤此態度創作出的作品，也許讓⼈無法理解，也可能會花上漫長的時間才能完成⼀部作品。因此，秉持這種態度創作時，必然不會考慮付出成本及產量多寡的問題。所謂的藝術家，指的就是朝此⽅向前進的⼈。」',
-        image: '../img/news1.png'
+        image: require('../../public/img/news1.png')
+        // image: '../img/news1.png'
       },
       {
         tag: '所有消息',
@@ -149,7 +152,8 @@ export default {
         date: '2023-09-04',
         title: '歐亞水獺雙姝剛滿月，新手媽媽「金萌」超級忙',
         contents: '2019年11月13日透過林務局野生動物救傷收容計畫，被安置到臺北市立動物園保育研究中心的金門歐亞水獺寶寶「金萌」，今2023年7月28日傍晚六點左右，在巢箱中生了第一隻小寶寶，時隔六個小時後，在半夜12點又產下了第二隻，兩隻歐亞水獺寶寶為姊妹，目前活力充沛穩定成長中。',
-        image: '../img/news2.png'
+        image: require('../../public/img/news2.png')
+        // image: '../img/news2.png'
       },
       {
         tag: '所有消息',
@@ -157,7 +161,8 @@ export default {
         date: '2023-08-17',
         title: '比喻之光：逐光追影及它義 ',
         contents: '攝影沒有光就無法成影，唯有借助光才能產生影像、、影子，光是影的源頭，影則是光的見證。然而，沒有攝影者經由暗箱或是照相機（當今攝影機具眾多，連手機皆可拍照）捕捉這些光，就無法形成影像，凝固這一道道的光，絕非僅是出自意外或偶然。',
-        image: '../img/news3.png'
+        image: require('../../public/img/news3.png')
+        // image: '../img/news3.png'
       }],
       newsdisplay: []
     }
@@ -217,7 +222,8 @@ export default {
   },
 }
 </script>
-<style>
+<style lang="scss">
+@import "@/assets/scss/page/newView";
 h1{
 font-size: 45px;
 }
