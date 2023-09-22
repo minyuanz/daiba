@@ -10,14 +10,16 @@
       <div class="inner-circle">
         <img src="../../public/img/mrtImg.png" alt="" />
       </div>
-      <div class="checkBox" v-if="showCheckBox">
-        <div class="box">
-          <button class="place">景點</button>
-          <button class="food">美食</button>
-          <button class="hotel">住宿</button>
+      <transition appear name="box" mode="out-in">
+        <div class="checkBox" v-if="showCheckBox">
+          <div class="box">
+            <button class="place">景點</button>
+            <button class="food">美食</button>
+            <button class="hotel">住宿</button>
+          </div>
+          <div class="triangle"></div>
         </div>
-        <div class="triangle"></div>
-      </div>
+      </transition>
     </div>
 
     <div class="mrtPic">
@@ -99,6 +101,9 @@
         :key="color"
         :class="({ active: selectColor === color }, color)"
         v-show="showAll || selectColor == color"
+        @click="showTag(color)"
+        @mouseenter="activate(color)"
+        @mouseleave="deactivate(color)"
       >
         {{ upperCaseColorsMB[index] }}
       </div>
@@ -111,6 +116,9 @@
         :key="color"
         :class="({ active: selectColor === color }, color)"
         v-show="showAll || selectColor == color"
+        @mouseenter="activate(color)"
+        @mouseleave="deactivate(color)"
+        @click="showTag(color)"
       >
         {{ upperCaseColorsPC[index] }}
       </div>
@@ -444,6 +452,17 @@ export default {
   },
 
   methods: {
+    someMethod() {
+      if (Array.isArray(this.selectColor)) {
+        // 在這裡安全地使用 this.selectColor.map
+        const result = this.selectColor.map((color) => color.toUpperCase());
+        // 繼續處理 result 或返回它
+      } else {
+        console.warn("selectColor is not an array:", this.selectColor);
+        // 處理無效的情況，或返回一個默認值
+      }
+    },
+
     checkShow() {
       this.showCheckBox = !this.showCheckBox;
     },
@@ -501,20 +520,39 @@ export default {
 
   computed: {
     //字母轉大寫
+    // upperCaseColorsMB() {
+    //   return this.selectColor.map((color) =>
+    //     color.toUpperCase().substring(0, 2)
+    //   );
+    // },
+    // upperCaseColorsPC() {
+    //   return this.selectColor.map((color) => color.toUpperCase());
+    // },
+
     upperCaseColorsMB() {
-      return this.selectColor.map((color) =>
-        color.toUpperCase().substring(0, 2)
-      );
+      if (Array.isArray(this.selectColor)) {
+        return this.selectColor.map((color) =>
+          color.toUpperCase().substring(0, 2)
+        );
+      } else {
+        console.warn("selectColor is not an array:", this.selectColor);
+        return [];
+      }
     },
     upperCaseColorsPC() {
-      return this.selectColor.map((color) => color.toUpperCase());
+      if (Array.isArray(this.selectColor)) {
+        return this.selectColor.map((color) => color.toUpperCase());
+      } else {
+        console.warn("selectColor is not an array:", this.selectColor);
+        return [];
+      }
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-@import "../assets/scss/page/mrt.scss";
+@import "../assets/scss/page/_mrt.scss";
 
 .active {
   animation: flash 300ms linear forwards;
