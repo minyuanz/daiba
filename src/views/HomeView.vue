@@ -141,14 +141,13 @@
   </div>
   <div class="animate">
     <div class="circle">
-      <svg ref="svgElement" xmlns="http://www.w3.org/2000/svg" width="80%" height="80%" viewBox="0 0 107 190"
+      <svg ref="svgElement" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 107 190"
         enable-background="new 0 0 107 190">
         <circle fill="none" id="circle" stroke-dasharray="0 610 610 0" class="stat-outline-circle" stroke="#fff04b"
-          stroke-width="8" stroke-miterlimit="10" cx="50" cy="90" r="30%"></circle>
+          stroke-width="8" stroke-miterlimit="10" cx="53.5" cy="95" r="30%"></circle>
 
         <animate attributeType="XML" xlink:href="#circle" id="circleanimate" attributeName="stroke-dashoffset" from="0"
-          to="610" dur="1s" begin=".5s" fill="freeze" />
-
+          to="610" dur="3s" begin=".2s" fill="freeze" />
         <!-- <animate
           attributeType="XML"
           xlink:href="#circle"
@@ -162,6 +161,12 @@
         />   -->
       </svg>
     </div>
+    <div class="displaycenter">
+      <div class="logo">
+        <img src="../../public/img/logo.png" alt="">
+      </div>
+    </div>
+
 
     <div class="animateLine">
       <div class="row-line">
@@ -205,14 +210,14 @@ export default {
       if (circleElement) {
         circleElement.style.display = "none";
       }
-    }, 4300);
+    }, 4800);
 
     setTimeout(() => {
       const animateElement = document.querySelector(".animate");
       if (animateElement) {
         animateElement.classList.add("fadeOut");
       }
-    }, 2500);
+    }, 3000);
 
 
     gsap.fromTo(
