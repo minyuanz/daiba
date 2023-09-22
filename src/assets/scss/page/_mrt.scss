@@ -95,13 +95,15 @@
       height: 100%;
       border-radius: 50%;
 
-      background: -webkit-linear-gradient(left,
-          red 0%,
-          orange 20%,
-          yellow 40%,
-          green 60%,
-          blue 80%,
-          violet 100%);
+      background: -webkit-linear-gradient(
+        left,
+        red 0%,
+        orange 20%,
+        yellow 40%,
+        green 60%,
+        blue 80%,
+        violet 100%
+      );
       animation: spin 1.5s steps(90) infinite;
     }
 
@@ -249,7 +251,7 @@
       color: #fff;
     }
 
-    .red:hover~.mrtPic .pic.border-red {
+    .red:hover ~ .mrtPic .pic.border-red {
       opacity: 0;
     }
 
@@ -455,19 +457,17 @@
   display: flex;
   justify-content: center;
 }
-
-.cardSliFade-enter-active,
-.cardSliFade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: 0.8s ease;
 }
 
-.cardSliFade-enter-from,
-.cardSliFade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   transform: translateY(-20%);
   opacity: 0;
 }
-
-.cardSliFade-leave-from .cardSliFade-enter-to {
+.fade-leave-from .fade-enter-to {
   opacity: 1;
 }
 
@@ -587,7 +587,6 @@
   .mrtWrappo {
     .mrtWrap {
       .mrtSta {
-
         /* 站點文字介紹 */
         .mrtStaTxt {
           padding: 10px 40px 20px 40px;

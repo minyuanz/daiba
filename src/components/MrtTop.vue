@@ -216,7 +216,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
+@import "../assets/scss/page/mrt.scss";
+
 .active {
   animation: flash 300ms linear forwards;
 }
