@@ -2,18 +2,37 @@
     position: fixed;
     top: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     backdrop-filter: blur(5px);
     background-color: #fff;
     opacity: 1;
     transition: opacity 1s ease;
     z-index: 5;
+    .displaycenter{
+      z-index: 6;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      scale: 0;
+      animation: zooming 2s ease-out 2.8s ;
+      .logo{
+        width: 50%;
+        inset: 0;
+        margin: auto;
+        img{
+          width: 100%;
+          object-fit: cover;
+        }
+      }  
+    }
     .row-line {
       height: 300px;
       position: absolute;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: space-between ease-out 0s;
       inset: 0;
       margin: auto;
   
@@ -39,7 +58,7 @@
         border-radius: 50px;
       }
     }
-  
+
     .circle {
       position: absolute;
       display: flex;
@@ -49,13 +68,11 @@
       right: 0;
       bottom: 0;
       margin: auto;
+
   
       svg {
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        inset: 0;
         margin: auto;
       }
     }
@@ -149,11 +166,24 @@
       opacity: 0;
     }
   }
+  @keyframes zooming {
+    0%{
+      scale: 0;
+    }
+    100%{
+      scale: .8;
+    }
+  }
   
   .fadeOut {
     animation: fadeOut 2s ease-in 0s; /* Apply the fadeOut animation */
   }
   @media screen and (max-width: 414px) {
+    .animateLineGroup{
+      .right{
+        display: none;
+      }
+    }
     .animateLineGroup.main{
       display: none;
       .left {
