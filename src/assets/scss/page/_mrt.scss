@@ -15,10 +15,10 @@
     height: 120px;
     right: 3%;
     bottom: 5%;
-    z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 5;
 
     .checkBox {
       position: relative;
@@ -162,6 +162,7 @@
       .pic {
         width: 16.6666%;
         transform: skew(0deg);
+        z-index: 2;
 
         img {
           transform: skew(5deg) translateX(-18px);
@@ -185,6 +186,7 @@
     width: 62.5%;
     margin: auto;
     padding-inline: 2%;
+    position: relative;
     font-size: 24px;
 
     .title-tag {
@@ -196,17 +198,16 @@
       position: relative;
       background: #fff;
       display: block;
-      z-index: 3;
       cursor: pointer;
       transition: all 0.3s;
 
       &::after {
         content: "";
         position: absolute;
-        inset: 0;
-        height: 80px;
-        top: -193%;
+        height: 95px;
+        bottom: 100%;
         left: 50%;
+        z-index: 0;
       }
     }
 
@@ -466,6 +467,22 @@
   }
 }
 
+.box-enter-active,
+.box-leave-active {
+  transition: 0.4s linear;
+}
+
+.box-enter-from,
+.box-leave-to {
+  transform: translateX(-20%);
+  opacity: 0;
+}
+
+.box-enter-to,
+.box-leave-from {
+  opacity: 1;
+}
+
 /* 美食住宿景點卡片動態 */
 .mrtCardWrap {
   display: flex;
@@ -537,7 +554,6 @@
         inset: 0;
         margin: 0 3%;
         width: 95%;
-        z-index: 2;
 
         .pic {
           height: 100%;
@@ -563,42 +579,42 @@
       .red {
         &::after {
           height: 50px;
-          top: -100%;
+          bottom: 100%;
         }
       }
 
       .blue {
         &::after {
           height: 50px;
-          top: -100%;
+          bottom: 100%;
         }
       }
 
       .green {
         &::after {
           height: 50px;
-          top: -100%;
+          bottom: 100%;
         }
       }
 
       .orange {
         &::after {
           height: 50px;
-          top: -100%;
+          bottom: 100%;
         }
       }
 
       .brown {
         &::after {
           height: 50px;
-          top: -100%;
+          bottom: 100%;
         }
       }
 
       .yellow {
         &::after {
           height: 50px;
-          top: -100%;
+          bottom: 100%;
         }
       }
     }
@@ -663,64 +679,8 @@
         padding: 0.5rem 0;
         margin: 2rem 0px;
       }
-
-      .red {
-        &::after {
-          height: 45px;
-          top: -150%;
-        }
-      }
-
-      .blue {
-        &::after {
-          height: 45px;
-          top: -150%;
-        }
-      }
-
-      .green {
-        &::after {
-          height: 45px;
-          top: -150%;
-        }
-      }
-
-      .orange {
-        &::after {
-          height: 45px;
-          top: -150%;
-        }
-      }
-
-      .brown {
-        &::after {
-          height: 45px;
-          top: -150%;
-        }
-      }
-
-      .yellow {
-        &::after {
-          height: 45px;
-          top: -150%;
-        }
-      }
     }
   }
-
-  // .mrtWrap:nth-of-type(even) {
-  //   .mrtSta {
-  //     flex-direction: column-reverse;
-
-  //     .mrtStaBox {
-  //       justify-content: center;
-
-  //       .mrtStaMaruBox {
-  //         display: none;
-  //       }
-  //     }
-  //   }
-  // }
 
   /* 站點板塊 */
   .mrtWrappo {
