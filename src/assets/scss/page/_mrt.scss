@@ -441,17 +441,17 @@
   display: flex;
   justify-content: center;
 }
-.cardSliFade-enter-active,
-.cardSliFade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition: 0.8s ease;
 }
 
-.cardSliFade-enter-from,
-.cardSliFade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   transform: translateY(-20%);
   opacity: 0;
 }
-.cardSliFade-leave-from .cardSliFade-enter-to {
+.fade-leave-from .fade-enter-to {
   opacity: 1;
 }
 // --------------------------------------------
