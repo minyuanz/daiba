@@ -95,15 +95,13 @@
       height: 100%;
       border-radius: 50%;
 
-      background: -webkit-linear-gradient(
-        left,
-        red 0%,
-        orange 20%,
-        yellow 40%,
-        green 60%,
-        blue 80%,
-        violet 100%
-      );
+      background: -webkit-linear-gradient(left,
+          red 0%,
+          orange 20%,
+          yellow 40%,
+          green 60%,
+          blue 80%,
+          violet 100%);
       animation: spin 1.5s steps(90) infinite;
     }
 
@@ -120,6 +118,7 @@
       from {
         -webkit-transform: rotate(0deg);
       }
+
       to {
         -webkit-transform: rotate(360deg);
       }
@@ -167,9 +166,11 @@
         }
       }
     }
+
     .pic.mrtGrayStyle {
       transform: skew(-5deg);
       filter: grayscale(100%);
+
       img {
         transform: skew(5deg) translateX(-18px);
       }
@@ -248,7 +249,7 @@
       color: #fff;
     }
 
-    .red:hover ~ .mrtPic .pic.border-red {
+    .red:hover~.mrtPic .pic.border-red {
       opacity: 0;
     }
 
@@ -323,9 +324,11 @@
     margin: auto;
   }
 }
+
 /* 站點板塊 */
 .mrtWrappo {
   margin-top: 5%;
+
   .mrtWrap {
     .mrtSta {
       background-image: url(/public/img/mrt_smallarr.png);
@@ -345,10 +348,12 @@
         background-color: #ffffff;
         padding: 10px 35px 20px 35px;
         border: #c9c9c9 solid 3px;
+
         h2 {
           font-size: 24px;
         }
       }
+
       /* 站點圖跟捷運圖 */
       .mrtStaBox {
         width: 48.5%;
@@ -359,12 +364,15 @@
         .mrtStaMaruBox {
           width: 20%;
           cursor: pointer;
+
           .mrtStaMaru {
             width: 100%;
           }
         }
+
         .mrtStaPicBox {
           width: 70%;
+
           .mrtStaPic {
             width: 100%;
             border-radius: 50%;
@@ -375,6 +383,7 @@
         }
       }
     }
+
     // 卡片輪播
     .swiperMRTCard {
       position: relative;
@@ -385,6 +394,7 @@
       .swiper-btn {
         color: #838383;
       }
+
       // 卡片樣式
       .card-h {
         border: none;
@@ -395,9 +405,11 @@
         width: 350px;
         margin: 5% 0;
         padding: 20px;
+
         img {
           border-radius: 0px;
         }
+
         .tag {
           min-height: auto;
         }
@@ -426,6 +438,7 @@
 .mrtWrap:nth-of-type(even) {
   .mrtSta {
     flex-direction: row-reverse;
+
     .mrtStaBox {
       flex-direction: row-reverse;
       justify-content: start;
@@ -436,11 +449,13 @@
     }
   }
 }
+
 /* 美食住宿景點卡片動態 */
 .mrtCardWrap {
   display: flex;
   justify-content: center;
 }
+
 .cardSliFade-enter-active,
 .cardSliFade-leave-active {
   transition: 0.8s ease;
@@ -451,9 +466,11 @@
   transform: translateY(-20%);
   opacity: 0;
 }
+
 .cardSliFade-leave-from .cardSliFade-enter-to {
   opacity: 1;
 }
+
 // --------------------------------------------
 
 @media screen and (max-width: 1279px) {
@@ -565,10 +582,12 @@
       }
     }
   }
+
   /* 站點板塊 */
   .mrtWrappo {
     .mrtWrap {
       .mrtSta {
+
         /* 站點文字介紹 */
         .mrtStaTxt {
           padding: 10px 40px 20px 40px;
@@ -579,6 +598,7 @@
         }
       }
     }
+
     // 卡片樣式
     .card-h {
       width: 300px;
@@ -587,6 +607,10 @@
         -webkit-line-clamp: 3;
       }
     }
+  }
+
+  .mrtBanner {
+    width: 10%;
   }
 }
 
@@ -607,6 +631,7 @@
       min-width: 100%;
       height: 200px;
     }
+
     .mrtTag {
       padding-inline: 0%;
       justify-content: space-evenly;
@@ -703,10 +728,12 @@
           h2 {
             font-size: 20px;
           }
+
           p {
             display: none;
           }
         }
+
         /* 站點圖跟捷運圖 */
         .mrtStaBox {
           justify-content: center;
@@ -717,11 +744,13 @@
           }
         }
       }
+
       // 卡片輪播
       .swiperMRTCard {
         .swiper-button-prev {
           margin-left: 20px;
         }
+
         .swiper-button-next {
           margin-right: 20px;
         }
@@ -732,6 +761,7 @@
 
           .text {
             margin-top: 0px;
+
             h3 {
               font-size: 18px;
               line-height: 35px;

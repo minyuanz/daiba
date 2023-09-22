@@ -29,58 +29,28 @@
       </div>
 
       <div class="mrtMainLine">
-        <div
-          class="pic border-redline"
-          @click="showTag('red')"
-          @mouseenter="activate('red')"
-          @mouseleave="deactivate('red')"
-          :class="{ active: isActive.red }"
-        >
+        <div class="pic border-redline" @click="showTag('red')" @mouseenter="activate('red')"
+          @mouseleave="deactivate('red')" :class="{ active: isActive.red }">
           <img src="../../public/img/red.jpeg" alt="redline" />
         </div>
-        <div
-          class="pic border-blueline"
-          @click="showTag('blue')"
-          @mouseenter="activate('blue')"
-          @mouseleave="deactivate('blue')"
-          :class="{ active: isActive.blue }"
-        >
+        <div class="pic border-blueline" @click="showTag('blue')" @mouseenter="activate('blue')"
+          @mouseleave="deactivate('blue')" :class="{ active: isActive.blue }">
           <img src="../../public/img/blue.jpeg" alt="blueline" />
         </div>
-        <div
-          class="pic border-greenline"
-          @click="showTag('green')"
-          @mouseenter="activate('green')"
-          @mouseleave="deactivate('green')"
-          :class="{ active: isActive.green }"
-        >
+        <div class="pic border-greenline" @click="showTag('green')" @mouseenter="activate('green')"
+          @mouseleave="deactivate('green')" :class="{ active: isActive.green }">
           <img src="../../public/img/green.jpeg" alt="greenline" />
         </div>
-        <div
-          class="pic border-orangeline"
-          @click="showTag('orange')"
-          @mouseenter="activate('orange')"
-          @mouseleave="deactivate('orange')"
-          :class="{ active: isActive.orange }"
-        >
+        <div class="pic border-orangeline" @click="showTag('orange')" @mouseenter="activate('orange')"
+          @mouseleave="deactivate('orange')" :class="{ active: isActive.orange }">
           <img src="../../public/img/orange.jpeg" alt="orangeline" />
         </div>
-        <div
-          class="pic border-brownline"
-          @click="showTag('brown')"
-          @mouseenter="activate('brown')"
-          @mouseleave="deactivate('brown')"
-          :class="{ active: isActive.brown }"
-        >
+        <div class="pic border-brownline" @click="showTag('brown')" @mouseenter="activate('brown')"
+          @mouseleave="deactivate('brown')" :class="{ active: isActive.brown }">
           <img src="../../public/img/brown.jpeg" alt="brownline" />
         </div>
-        <div
-          class="pic border-yellowline"
-          @click="showTag('yellow')"
-          @mouseenter="activate('yellow')"
-          @mouseleave="deactivate('yellow')"
-          :class="{ active: isActive.yellow }"
-        >
+        <div class="pic border-yellowline" @click="showTag('yellow')" @mouseenter="activate('yellow')"
+          @mouseleave="deactivate('yellow')" :class="{ active: isActive.yellow }">
           <img src="../../public/img/yellow.jpeg" alt="yellowline" />
         </div>
       </div>
@@ -93,25 +63,15 @@
     </div>
 
     <div v-if="MB" class="mrtTag">
-      <div
-        class="title-tag"
-        v-for="(color, index) in selectColor"
-        :key="color"
-        :class="({ active: selectColor === color }, color)"
-        v-show="showAll || selectColor == color"
-      >
+      <div class="title-tag" v-for="(color, index) in selectColor" :key="color"
+        :class="({ active: selectColor === color }, color)" v-show="showAll || selectColor == color">
         {{ upperCaseColorsMB[index] }}
       </div>
     </div>
 
     <div v-if="PC" class="mrtTag">
-      <div
-        class="title-tag"
-        v-for="(color, index) in selectColor"
-        :key="color"
-        :class="({ active: selectColor === color }, color)"
-        v-show="showAll || selectColor == color"
-      >
+      <div class="title-tag" v-for="(color, index) in selectColor" :key="color"
+        :class="({ active: selectColor === color }, color)" v-show="showAll || selectColor == color">
         {{ upperCaseColorsPC[index] }}
       </div>
     </div>
@@ -121,11 +81,7 @@
     <div class="swiper" id="mySwiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for=" in 20">
-          <img
-            src="../../public/img/mrtArrow.png"
-            alt=""
-            @load="initializeSwiper"
-          />
+          <img src="../../public/img/mrtArrow.png" alt="" @load="initializeSwiper" />
         </div>
       </div>
     </div>
@@ -135,11 +91,7 @@
     <div class="swiper" id="mySwiper2">
       <div class="swiper-wrapper">
         <div class="swiper-slide" v-for=" in 20">
-          <img
-            src="../../public/img/mrtArrow.png"
-            alt=""
-            @load="initializeSwiper"
-          />
+          <img src="../../public/img/mrtArrow.png" alt="" @load="initializeSwiper" />
         </div>
       </div>
     </div>
@@ -170,22 +122,27 @@ export default {
   },
 
   mounted() {
-    const swiper = new Swiper(".swiper", {
-      direction: "vertical",
-      speed: 3000,
-      loop: true,
-      autoHeight: true,
-      slidesPerView: "auto",
-      spaceBetween: 0,
-      observer: true,
-      observerParents: true,
-      disableOnInteraction: false,
-      autoplay: {
-        delay: 0,
-        pauseOnMouseEnter: false,
-        disableOnInteraction: false,
-      },
-    });
+
+    // 背景圖輪播
+    setTimeout(() => {
+      this.initSwiper();
+    }, 100); // 延遲100毫秒
+    // const swiper = new Swiper(".swiper", {
+    //   direction: "vertical",
+    //   speed: 3000,
+    //   loop: true,
+    //   autoHeight: true,
+    //   slidesPerView: "auto",
+    //   spaceBetween: 0,
+    //   observer: true,
+    //   observerParents: true,
+    //   disableOnInteraction: false,
+    //   autoplay: {
+    //     delay: 0,
+    //     pauseOnMouseEnter: false,
+    //     disableOnInteraction: false,
+    //   },
+    // });
     this.WindowWidth();
     window.addEventListener("resize", this.WindowWidth);
   },
@@ -226,6 +183,23 @@ export default {
         this.MB = false;
       }
     },
+    // 背景圖
+    initSwiper() {
+      const swiper = new Swiper(".swiper", {
+        direction: "vertical",
+        speed: 3500,
+        loop: true,
+        loopedSlides: 10,
+        autoHeight: true,
+        slidesPerView: "auto",
+        spaceBetween: 0,
+        autoplay: {
+          delay: 0,
+          pauseOnMouseEnter: false,
+          disableOnInteraction: false,
+        },
+      });
+    },
   },
 
   computed: {
@@ -247,7 +221,7 @@ export default {
   animation: flash 300ms linear forwards;
 }
 
-.title-tag:hover ~ .pic.active {
+.title-tag:hover~.pic.active {
   animation: flash 300ms linear forwards;
 }
 
