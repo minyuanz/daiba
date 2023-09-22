@@ -1,5 +1,5 @@
 [
-    {   "id":"1", 
+    {
         "pord_id": "商品編號1",
         "pord_name": "喔",
         "pord_bdes": "好男好難 世界",
@@ -13,7 +13,7 @@
         "prod_img3": "",
         "prod_img4": ""
       },
-      { "id":"2",
+      {
         "pord_id": "我是笨蛋",
         "pord_name": "你",
         "pord_bdes": "商品描述",
@@ -27,7 +27,7 @@
         "prod_img3": "",
         "prod_img4": ""
       },
-      { "id":"3",
+      {
         "pord_id": "商品編號3",
         "pord_name": "王",
         "pord_bdes": "商品描述",
@@ -41,7 +41,7 @@
         "prod_img3": "",
         "prod_img4": ""
       },
-      { "id":"4",
+      {
         "pord_id": "商品編號4",
         "pord_name": "商品名稱",
         "pord_bdes": "商品描述",
