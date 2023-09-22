@@ -74,9 +74,9 @@ export default {
     incrementCount() {
       this.count += 1;
     },
-    selectImage(imageSrc) {
-      this.selectedImage = imageSrc;
-    },
+    selectImage() {
+    this.selectedImage = this.foundObject.prod_img1;
+  },
     addToCart(product) {
       this.$store.dispatch('addToCart', product);
     },
