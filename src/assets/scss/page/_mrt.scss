@@ -398,27 +398,41 @@
       }
 
       // 卡片樣式
-      .card-h {
-        border: none;
-        box-shadow: rgba(126, 126, 126, 0.3) 0px 2px 4px,
-          rgba(126, 126, 126, 0.3) 0px 7px 13px -3px,
-          rgba(126, 126, 126, 0.3) 0px -3px 5px inset;
-        background-color: #ffffff;
-        width: 350px;
-        margin: 5% 0;
-        padding: 20px;
+      .swiper-slide {
+        width: 300px;
+        height: 500px;
 
-        img {
-          border-radius: 0px;
-        }
+        .mrtCardWrap {
+          height: 100%;
 
-        .tag {
-          min-height: auto;
-        }
+          .card-h {
+            border: none;
+            box-shadow: rgba(126, 126, 126, 0.3) 0px 2px 4px,
+              rgba(126, 126, 126, 0.3) 0px 7px 13px -3px,
+              rgba(126, 126, 126, 0.3) 0px -3px 5px inset;
+            background-color: #ffffff;
+            width: 350px;
+            margin: 5% 0;
+            padding: 20px;
 
-        .txt {
-          margin-top: 10px;
-          -webkit-line-clamp: 5;
+            .img {
+              height: 45%;
+
+              img {
+                height: 100%;
+                border-radius: 0px;
+              }
+            }
+
+            .tag {
+              min-height: auto;
+            }
+
+            .txt {
+              margin-top: 10px;
+              -webkit-line-clamp: 5;
+            }
+          }
         }
       }
     }
@@ -457,9 +471,11 @@
   display: flex;
   justify-content: center;
 }
-.fade-enter-active,
-.fade-leave-active {
+.fade-enter-active {
   transition: 0.8s ease;
+}
+.fade-leave-active {
+  transition: 0.4s linear;
 }
 
 .fade-enter-from,
@@ -467,7 +483,12 @@
   transform: translateY(-20%);
   opacity: 0;
 }
-.fade-leave-from .fade-enter-to {
+.fade-leave-from {
+  transform: translateY(20%);
+  opacity: 1;
+}
+
+.fade-enter-to {
   opacity: 1;
 }
 

@@ -29,7 +29,7 @@
         </div>
       </div>
       <!------------------------美食住宿景點卡片 ------------------------------------->
-      <transition name="fade" mode="out-in">
+      <transition appear name="fade" mode="out-in">
         <div class="swiperMRTCard" v-show="item.isShow">
           <div class="swiper-wrapper">
             <div class="swiper-slide" v-for="itemFood in item.foodCard">
