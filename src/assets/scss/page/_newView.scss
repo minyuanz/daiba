@@ -1,10 +1,14 @@
 .newsWrap {
+
   // border: 1px solid red;
   h1 {
+    font-size: 45px;
     text-align: center;
     margin-top: 5%;
   }
-  h2,h3{
+
+  h2,
+  h3 {
     margin-top: -.5rem;
   }
 
@@ -50,7 +54,7 @@
         // margin-top: 100px;
         display: flex;
         justify-content: center;
-        
+
 
         .newsCtxTxt {
           // border: 1px solid red;
@@ -64,39 +68,36 @@
           // margin-top: 15%;
           // inset: 0;
           color: #fff;
-          
-          .newsDate{
-            span{
-              letter-spacing: .25rem;
-            }
-          }
+
           .newsTag {
             background-color: #fff;
             margin: 0;
             margin-bottom: .8rem;
           }
 
-          // a {
-          //   display: block;
-          //   background-color: transparent;
-          //   border: solid #fff;
-          //   color: #fff;
-          //   margin-top: 5%;
-          //   text-align: center;
-          //   height: 50px;
-          //   line-height: 40px;
+          .newsDate {
+            span {
+              letter-spacing: .25rem;
+            }
+          }
 
-          //   &:hover {
-          //     background-color: #333;
-          //   }
-          // }
+          button {
+            a {
+              display: block;
+              line-height: 36px;
+              // height: 100%;
+              // border: 1px solid red;
+            }
+          }
+
         }
 
         .newsCtxPic {
           width: 60%;
           box-shadow: 10px 10px 10px #0006;
           position: relative;
-          &::after{
+
+          &::after {
             content: "";
             width: 100%;
             height: 100%;
@@ -156,8 +157,8 @@
         position: relative;
         margin-left: 3%;
 
-        .newsDate{
-          span{
+        .newsDate {
+          span {
             letter-spacing: .25rem;
           }
         }
@@ -167,27 +168,38 @@
           // margin-right: 10px;
         }
 
-        button{
+        button {
           // border: 1px solid red;
           position: absolute;
           right: 0;
           top: 0;
+
+          a {
+            display: block;
+            line-height: 36px;
+            // height: 100%;
+            // border: 1px solid red;
+            // pointer-events: none;
+          }
         }
       }
+
     }
   }
-  .swiper-pagination{
-    .swiper-pagination-bullet{
+
+  .swiper-pagination {
+    .swiper-pagination-bullet {
       width: 15px;
       height: 15px;
       border-radius: 50%;
       display: inline-block;
       box-sizing: border-box;
-      border:1px solid #fff;
+      border: 1px solid #fff;
       margin: 0 8px;
     }
   }
-  .swiper-pagination-bullet-active{
+
+  .swiper-pagination-bullet-active {
     background-color: #fff;
     width: 15px;
     height: 15px;

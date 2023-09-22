@@ -18,27 +18,14 @@
 
     <div class="newsinBtn">
       <button class="btn_s">
-        <router-link to="/home">前往官網</router-link>
+        <router-link to="/home" class="btn_a">前往官網</router-link>
       </button>
       <button class="btn_s">
-        <router-link to="New">上一頁</router-link>
+        <router-link to="New" class="btn_a">上一頁</router-link>
       </button>
     </div>
   </div>
 
-  <div class="newsintxt">
-    <p>{{ news.contents }}</p>
-  </div>
-
-  <div class="newsinBtn">
-    <button class="btn_s">
-      <router-link to="/home">前往官網</router-link>
-    </button>
-    <button class="btn_s">
-      <router-link to="New">上一頁</router-link>
-    </button>
-  </div>
-  <!-- </div> -->
 </template>
 
 <script>

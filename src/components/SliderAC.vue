@@ -40,4 +40,6 @@ export default {
     }
 }
 </script>
-<style></style>
+<style lang="scss">
+@import "@/assets/scss/component/slider";
+</style>

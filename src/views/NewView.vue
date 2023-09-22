@@ -54,13 +54,11 @@
     </div>
 
     <div class="newsList">
-      <router-link to="Newinside">
-      <div href="/Newinside" class="newsCard" v-for="card in newsdisplay">
-
-
-          <div class="newsPic">
-            <img :src="card.image" alt="">
-          </div>
+      <div class="newsCard" v-for="card in newsdisplay">
+        <div class="newsPic">
+          <img :src="card.image" alt="">
+        </div>
+        <router-link to="Newinside">
           <div class="newsTxt">
             <!-- <div class="newsTag title-tag gray">
             <span>
@@ -87,8 +85,8 @@
               <router-link to="Newinside">更多</router-link>
             </button>
           </div>
-        </div>
-      </router-link>
+        </router-link>
+      </div>
 
 
     </div>
@@ -194,11 +192,11 @@ export default {
       loop: true,
       slidesPerView: 1,
       spaceBetween: 0,
-      autoplay:{
+      autoplay: {
         delay: 3000
       },
-      pagination:{
-        el:".swiper-pagination",
+      pagination: {
+        el: ".swiper-pagination",
         clickable: true
       },
       // scrollbar: {
@@ -224,7 +222,4 @@ export default {
 </script>
 <style lang="scss">
 @import "@/assets/scss/page/newView";
-h1{
-font-size: 45px;
-}
 </style>
