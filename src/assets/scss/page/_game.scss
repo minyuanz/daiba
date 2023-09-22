@@ -92,10 +92,29 @@
         padding: 3rem;
         cursor: pointer;
         color: #fff;
+        overflow: hidden;
 
         p {
             font-size: 26px;
             line-height: 50px;
+
+        }
+
+        .inputTxt {
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 3s steps(90, end);
+
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
         }
 
         span {
