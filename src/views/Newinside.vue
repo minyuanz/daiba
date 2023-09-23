@@ -34,6 +34,7 @@ import news from "@/testdata/news.json";
 export default {
   data() {
     return {
+      publicPath: process.env.BASE_URL,
       news: {
         tag: "活動消息",
         date: "2023-07-07",
@@ -43,7 +44,6 @@ export default {
         contents:
           "綠色植物的生命力，讓人感到快樂與朝氣。為鼓勵大眾親近植物，本館特規劃「植感生活－植物郵票與押花特展」，期透過展出郵票與手作押花作品，使民眾認識植物，推廣香草植物的多元應用與花藝美學，讓生活增添綠意與愜意。",
       },
-      //newslist: news
       foundObject: "",
     };
   },

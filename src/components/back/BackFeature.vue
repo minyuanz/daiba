@@ -391,7 +391,7 @@ export default {
                 position: relative;
 
                 p {
-                    font-size: 24px;
+                    // font-size: 24px;
                     line-height: 200px;
                 }
 

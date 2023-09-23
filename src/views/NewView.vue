@@ -102,7 +102,7 @@ import news from "@/testdata/news.json";
 export default {
   data() {
     return {
-      // publicPath:process.env.BASE_URL,
+      publicPath: process.env.BASE_URL,
       tagtoggle: '所有消息',
       slider: [{
         tag: '活動消息',
@@ -138,7 +138,7 @@ export default {
       }],
       newslist: news,
       newsdisplay: [],
-      newswiper: []
+      newswiper: [],
     }
   },
   methods: {
