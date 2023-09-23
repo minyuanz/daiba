@@ -1,19 +1,19 @@
 <template>
   <div class="newsinWrap">
-    <span class="newsinTag title-tag gray">#{{ news.tag }}</span>
-    <span class="newsindate"> 發佈日期：{{ news.date }}</span>
-    <h1>{{ news.title }}</h1>
+    <span class="newsinTag title-tag gray">#{{ foundObject.news_tag1 }}</span>
+    <span class="newsindate"> 發佈日期：{{ foundObject.news_date }}</span>
+    <h1>{{ foundObject.news_title }}</h1>
 
     <div class="swiper">
       <div class="newsinpic swiper-wrapper">
-        <img :src="news.image" alt="" class="swiper-slide" />
-        <img :src="news.image1" alt="" class="swiper-slide" />
+        <img :src="foundObject.news_pic1" alt="" class="swiper-slide" />
+        <img :src="foundObject.news_pic1" alt="" class="swiper-slide" />
       </div>
       <div class="swiper-pagination"></div>
     </div>
 
     <div class="newsintxt">
-      <p>{{ news.contents }}</p>
+      <p>{{ foundObject.news_des1 }}</p>
     </div>
 
     <div class="newsinBtn">
@@ -21,15 +21,15 @@
         <router-link to="/home" class="btn_a">前往官網</router-link>
       </button>
       <button class="btn_s">
-        <router-link to="New" class="btn_a">上一頁</router-link>
+        <router-link to="/New" class="btn_a">上一頁</router-link>
       </button>
     </div>
   </div>
-
 </template>
 
 <script>
 import Swiper from "swiper/bundle";
+import news from "@/testdata/news.json";
 
 export default {
   data() {
@@ -43,6 +43,8 @@ export default {
         contents:
           "綠色植物的生命力，讓人感到快樂與朝氣。為鼓勵大眾親近植物，本館特規劃「植感生活－植物郵票與押花特展」，期透過展出郵票與手作押花作品，使民眾認識植物，推廣香草植物的多元應用與花藝美學，讓生活增添綠意與愜意。",
       },
+      //newslist: news
+      foundObject: "",
     };
   },
   mounted() {
@@ -59,29 +61,10 @@ export default {
         el: ".swiper-pagination",
         clickable: true,
       },
-    });
-
-    // const swiper = new Swiper(".swiper", {
-    //     // Optional parameters
-    //     direction: "horizontal",
-    //     speed: 1500,
-    //     loop: true,
-    //     slidesPerView: 1,
-    //     spaceBetween: 0,
-    //     scrollbar: {
-    //         // dragcClass:'.swiper-scrollbar'
-    //         el: '.swiper-scrollbar'
-    //     },
-    //     initialSlide: 0, //第一個顯示的畫面,
-    //     // grabCursor: true,
-    //     breakpoints: { //width:414px顯示一個
-    //         414: {
-    //             slidesPerView: 1
-    //         }
-    //     }
-    // }
-    // )
-  },
+    })
+    const idToFind = this.$route.params.id;
+    this.foundObject = news.find(item => item.news_id === idToFind);
+  }
 };
 </script>
 

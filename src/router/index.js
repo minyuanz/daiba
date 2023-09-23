@@ -143,7 +143,7 @@ const routes = [
       import(/* webpackChunkName: "PwdSuccess" */ "@/views/PwdSuccess.vue"),
   },
   {
-    path: "/newinside",
+    path: "/newinside/:id",
     name: "newinside",
     component: () =>
       import(/* webpackChunkName: "Newinside" */ "@/views/Newinside.vue"),
