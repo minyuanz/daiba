@@ -454,12 +454,9 @@ export default {
   methods: {
     someMethod() {
       if (Array.isArray(this.selectColor)) {
-        // 在這裡安全地使用 this.selectColor.map
         const result = this.selectColor.map((color) => color.toUpperCase());
-        // 繼續處理 result 或返回它
       } else {
         console.warn("selectColor is not an array:", this.selectColor);
-        // 處理無效的情況，或返回一個默認值
       }
     },
 
@@ -519,16 +516,6 @@ export default {
   },
 
   computed: {
-    //字母轉大寫
-    // upperCaseColorsMB() {
-    //   return this.selectColor.map((color) =>
-    //     color.toUpperCase().substring(0, 2)
-    //   );
-    // },
-    // upperCaseColorsPC() {
-    //   return this.selectColor.map((color) => color.toUpperCase());
-    // },
-
     upperCaseColorsMB() {
       if (Array.isArray(this.selectColor)) {
         return this.selectColor.map((color) =>
