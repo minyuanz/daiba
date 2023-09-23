@@ -6,14 +6,21 @@
         <img src="../../public/img/logo.png" alt="" />
       </router-link>
       <div class="line"></div>
-      <input type="checkbox" name="navbar" id="navbar" />
-      <div class="header-nav">
-        <label for="navbar" class="checkBox" :class="{ 'hbclose': hbclose }">
-          <span></span>
-          <span></span>
-          <span></span>
-        </label>
-        <label class="homeNav" for="navbar">
+
+      <div class="header-container">
+        <div
+          class="header-menu"
+          @click="toggleNav"
+          :class="{ hbclose: hbclose }"
+        >
+          <div class="hambergerIcon" :class="{ open: open }"></div>
+        </div>
+
+        <div
+          class="homeNav"
+          @click="toggleNav"
+          :class="{ showHomeNav: showHomeNav }"
+        >
           <ul>
             <li>
               <div class="pic">
@@ -72,16 +79,8 @@
               </router-link>
             </li>
           </ul>
-        </label>
-      </div>
-
-      <!-- <label class="navbar-img" for="navbar" id="navbar-btn">
-        <div class="navbar-btn">
-          <span></span>
-          <span></span>
-          <span></span>
         </div>
-      </label> -->
+      </div>
 
       <template v-if="weather.condition">
         <div class="weather">
@@ -107,11 +106,15 @@
 </template>
 
 <script>
+import gsap from "gsap";
 export default {
   data() {
     return {
+      // showNav: false,
+      open: false,
       weather: {},
       hot: false,
+      showHomeNav: false,
     };
   },
   computed: {
@@ -120,8 +123,16 @@ export default {
     },
     hbclose() {
       return this.$route.path === "/home";
-    }
+    },
   },
+
+  methods: {
+    toggleNav() {
+      this.open = !this.open;
+      this.showHomeNav = !this.showHomeNav;
+    },
+  },
+
   mounted() {
     fetch(
       "https://api.weatherapi.com/v1/current.json?q=Taipei&lang=zh_tw&key=831993a5339d4b7cadc74621231609"
@@ -139,6 +150,46 @@ export default {
         }
         // console.log(this.weather)
       });
+
+    // gsap.fromTo(
+    //   ".showHomeNav ul li:nth-child(1)",
+    //   {
+    //     x: "-120%",
+    //   },
+    //   {
+    //     x: "0",
+    //     duration: 1,
+    //     delay: 0,
+    //   }
+    // );
+
+    // gsap.fromTo(
+    //   ".success ",
+    //   {
+    //     x: "150%",
+    //   },
+    //   {
+    //     x: "-150%",
+    //     duration: 1,
+    //     delay: 0.2,
+    //   }
+    // );
+
+    // gsap.fromTo(
+    //   ".danger",
+    //   {
+    //     x: "150%",
+    //   },
+    //   {
+    //     x: "-150%",
+    //     duration: 1,
+    //     delay: 0.4,
+    //   }
+    // );
   },
 };
 </script>
+
+<style scoped lang="scss">
+@import "../assets/scss/layout/header";
+</style>

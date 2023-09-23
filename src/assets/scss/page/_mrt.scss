@@ -17,6 +17,7 @@
     bottom: 5%;
     display: flex;
     justify-content: center;
+    cursor: pointer;
     align-items: center;
     z-index: 5;
 
@@ -48,6 +49,7 @@
           border: none;
           background: initial;
           transition: all 0.3s;
+          cursor: pointer;
         }
 
         button:hover {
@@ -375,6 +377,7 @@
 
         .mrtStaPicBox {
           width: 70%;
+          cursor: pointer;
 
           .mrtStaPic {
             width: 100%;
@@ -492,7 +495,7 @@
   transition: 0.8s ease;
 }
 .fade-leave-active {
-  transition: 0.4s linear;
+  transition: 0.5s linear;
 }
 
 .fade-enter-from,
@@ -623,8 +626,24 @@
   /* 站點板塊 */
   .mrtWrappo {
     .mrtWrap {
+      .swiperMRTCard {
+        width: 80%;
+
+        .swiper-slide {
+          height: 450px;
+
+          .mrtCardWrap {
+            .card-h {
+              width: 300px;
+
+              .txt {
+                -webkit-line-clamp: 3;
+              }
+            }
+          }
+        }
+      }
       .mrtSta {
-        /* 站點文字介紹 */
         .mrtStaTxt {
           padding: 10px 40px 20px 40px;
 
@@ -634,25 +653,10 @@
         }
       }
     }
-
-    // 卡片樣式
-    .card-h {
-      width: 300px;
-
-      .txt {
-        -webkit-line-clamp: 3;
-      }
-    }
   }
 
   .mrtBanner {
     width: 10%;
-  }
-}
-
-.mrtWrap {
-  .swiperMRTCard {
-    width: 100%;
   }
 }
 
@@ -735,28 +739,34 @@
           margin-right: 20px;
         }
 
-        // 卡片樣式
-        .card-h {
-          width: 70%;
+        .swiper-slide {
+          height: 380px;
 
-          .text {
-            margin-top: 0px;
+          .mrtCardWrap {
+            // 卡片樣式
+            .card-h {
+              width: 70%;
 
-            h3 {
-              font-size: 18px;
-              line-height: 35px;
-            }
-          }
+              .text {
+                margin-top: 0px;
 
-          .tag {
-            display: flex;
-            width: 150px;
-            gap: 10px;
+                h3 {
+                  font-size: 18px;
+                  line-height: 35px;
+                }
+              }
 
-            .title-tag {
-              margin: 0px;
-              padding: 2px 5px;
-              font-size: 10px;
+              .tag {
+                display: flex;
+                width: 150px;
+                gap: 10px;
+
+                .title-tag {
+                  margin: 0px;
+                  padding: 2px 5px;
+                  font-size: 10px;
+                }
+              }
             }
           }
         }

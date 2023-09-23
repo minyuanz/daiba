@@ -37,6 +37,7 @@
       writing-mode: vertical-rl;
       height: 600px;
       position: relative;
+      top: -100vh;
 
       .pic {
         width: 100%;
@@ -70,10 +71,21 @@
     }
   }
 
+  @keyframes flyIn {
+    0% {
+      top: -100vh;
+    }
+
+    100% {
+      top: 0;
+    }
+  }
+
   ul li:nth-child(1) {
+    animation: flyIn 0.2s 4.1s forwards;
+
     .pic {
       border: 8px solid #000;
-      // border: 8px solid map-get($color, $key: info);
     }
 
     img {
@@ -82,6 +94,8 @@
   }
 
   ul li:nth-child(2) {
+    animation: flyIn 0.2s 4.2s forwards;
+
     .pic {
       border: 8px solid #d9d9d9;
       // border: 8px solid map-get($color, $key: tangerine);
@@ -93,6 +107,8 @@
   }
 
   ul li:nth-child(3) {
+    animation: flyIn 0.2s 4.3s forwards;
+
     .pic {
       border: 8px solid #000;
       // border: 8px solid map-get($color, $key: grap);
@@ -104,6 +120,8 @@
   }
 
   ul li:nth-child(4) {
+    animation: flyIn 0.2s 4.4s forwards;
+
     .pic {
       border: 8px solid #d9d9d9;
       // border: 8px solid map-get($color, $key: choco);
@@ -111,6 +129,8 @@
   }
 
   ul li:nth-child(5) {
+    animation: flyIn 0.2s 4.5s forwards;
+
     .pic {
       border: 8px solid #000;
       // border: 8px solid map-get($color, $key: success);
@@ -118,6 +138,8 @@
   }
 
   ul li:nth-child(6) {
+    animation: flyIn 0.2s 4.6s forwards;
+
     .pic {
       border: 8px solid #d9d9d9;
       // border: 8px solid map-get($color, $key: danger);
@@ -125,6 +147,8 @@
   }
 
   ul li:nth-child(7) {
+    animation: flyIn 0.2s 4.7s forwards;
+
     .pic {
       border: 8px solid #000;
       // border: 8px solid map-get($color, $key: warning);
@@ -170,7 +194,6 @@
 }
 
 @media screen and (max-width: 1280px) {
-
   .homeNav {
     margin: 7% auto;
 
