@@ -45,9 +45,6 @@ export default {
     },
     data() {
         return {
-            username: '',
-            userbir: '',
-            usersex: '男',
             toggle: '會員資料'
         }
     },
