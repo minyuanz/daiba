@@ -19,6 +19,7 @@ export default createStore({
       // 計算總價
       return state.cart.reduce((total, product) => total + product.pord_price * product.count, 0);
     },
+    //算商品總數
     cartItemCount(state) {
       return state.cart.length; 
     },

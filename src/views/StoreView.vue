@@ -41,6 +41,7 @@
           <div class="storeButton">
             <i class="fa-regular fa-heart" style="cursor: pointer"></i>
             <button class="btn_s" @click="addToCart(item)">加入購物車</button>
+            <notification ref="notification"></notification>
           </div>
         </div>
       </div>
@@ -51,7 +52,11 @@
 <script>
 import { useRouter } from "vue-router";
 import ProTest from "@/testdata/ProTest.json"
+import Notification from "@/components/Notification.vue";
 export default {
+  components: {
+    Notification,
+  },
   data() {
     return {
       testitem: ProTest,
@@ -68,6 +73,9 @@ export default {
     },
     addToCart(product) {
     this.$store.dispatch('addToCart', product);
+    this.$nextTick(() => {
+      this.$refs.notification.showNotification("已加入購物車");
+    });
   },
   },
 };
