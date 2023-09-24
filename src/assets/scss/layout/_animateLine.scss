@@ -10,13 +10,15 @@
     z-index: 5;
     .displaycenter{
       z-index: 6;
-      width: 100%;
+      width: 50%;
       height: 100%;
+      inset: 0;
+      margin: auto;
       display: flex;
       justify-content: center;
       align-items: center;
       scale: 0;
-      animation: zooming 2s ease-out 2.8s ;
+      animation: zooming 1.3s ease-out 3s ;
       .logo{
         width: 50%;
         inset: 0;
@@ -85,12 +87,13 @@
       animation: fadeInRight 1s ease-out 0s;
     }
   }
-  .animateLineGroup {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-  
+.animateLineGroup {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  pointer-events: none;
     .left {
       width: 18.75%;
       display: flex;
@@ -174,16 +177,16 @@
       scale: .8;
     }
   }
-  
   .fadeOut {
     animation: fadeOut 2s ease-in 0s; /* Apply the fadeOut animation */
   }
   @media screen and (max-width: 414px) {
-    .animateLineGroup{
-      .right{
-        display: none;
-      }
+    .animate{
+
+      .displaycenter{
+        width: 100%;
     }
+  }
     .animateLineGroup.main{
       display: none;
       .left {
