@@ -43,9 +43,6 @@ export default {
     methods: {
         menu() {
             this.$emit('toggle-change')
-            // console.log(11)
-            // document.getElementById('PwdChange').style.display = 'none'
-            // document.querySelector('.userInfo').style.display = 'block'
         }
     }
 }

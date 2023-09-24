@@ -32,8 +32,10 @@ export default {
     data() {
         return {
             cards: [{
-                image: '../img/collect.png',
-                head: '../img/collect2.png',
+                image: require('@/../public/img/collect.png'),
+                head: require('@/../public/img/collect2.png'),
+                // image: '../img/collect.png',
+                // head: '../img/collect2.png',
                 title: '五分埔商圈購物',
                 title2: '台北成衣街｜衣服、飾品、配件、包包、 帽子批發',
                 date: '2020-06-15',
@@ -41,8 +43,10 @@ export default {
                 tag2: '板南線',
                 ctx: '　　那天逛完華山KAKAO敗家後，就心血來潮到五分埔去逛逛，真的是久違了好多年，以前學生時期過年領完紅包，一定都是最期待來到五分埔買衣服！如今後來才知道原來這裡除了一般民眾外......。'
             }, {
-                image: '../img/collect.png',
-                head: '../img/collect2.png',
+                image: require('@/../public/img/collect.png'),
+                head: require('@/../public/img/collect2.png'),
+                // image: '../img/collect.png',
+                // head: '../img/collect2.png',
                 title: '五分埔商圈購物',
                 title2: '台北成衣街｜衣服、飾品、配件、包包、 帽子批發',
                 date: '2020-06-15',
@@ -98,26 +102,31 @@ export default {
         }
     }
 }
+
 @media screen and (max-width:414px) {
-    .collect{
+    .collect {
         width: 100%;
-        .collectGrid{
+
+        .collectGrid {
             grid-template-columns: repeat(1, 1fr);
             padding: 0 20px;
-            .card-w{
+
+            .card-w {
                 width: 100%;
-                .img{
+
+                .img {
                     display: none;
                 }
-                .text{
+
+                .text {
                     width: 100%;
                 }
-                .head{
+
+                .head {
                     display: none;
                 }
             }
         }
     }
-    
-}
-</style>
+
+}</style>

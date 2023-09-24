@@ -24,7 +24,7 @@
                 <i class="fa-regular fa-heart" style="cursor: pointer;"></i>
                 加入收藏
             </div>
-            <div class="DigInStore">加入購物車</div>
+            <div class="DigInStore"  @click="addToCart(foundObject)">加入購物車</div>
             <div class="DigSDES">
                 商品訊息:
                 {{ foundObject.pord_bdes2 }}
@@ -78,8 +78,8 @@ export default {
       this.selectedImage = imageSrc;
     },
     addToCart(product) {
-      this.$store.dispatch('addToCart', product);
-    },
+    this.$store.dispatch('addToCart', product);
+  },
   },
 };
 </script>

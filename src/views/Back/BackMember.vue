@@ -22,6 +22,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/assets/scss/component/slider";
     .backUI{
         // border: 1px solid red;
         width: 1200px;

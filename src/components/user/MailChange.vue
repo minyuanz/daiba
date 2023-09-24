@@ -4,7 +4,6 @@
         <div class="changebox">
             <div class="mail">
                 <label for="">信箱</label>
-                <!-- <input type="text"> -->
                 <span>0912-345-678</span>
             </div>
             <div class="changeMail">
@@ -27,9 +26,6 @@ export default {
     methods: {
         menu() {
             this.$emit('toggle-change')
-            // console.log(11)
-            // document.getElementById('MailChange').style.display = 'none'
-            // document.querySelector('.userInfo').style.display = 'block'
         }
     }
 }

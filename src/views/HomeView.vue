@@ -113,13 +113,38 @@
   </div>
   <div class="animate">
     <div class="circle">
-      <svg ref="svgElement" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 107 190"
-        enable-background="new 0 0 107 190">
-        <circle fill="none" id="circle" stroke-dasharray="0 610 610 0" class="stat-outline-circle" stroke="#fff04b"
-          stroke-width="8" stroke-miterlimit="10" cx="53.5" cy="95" r="30%"></circle>
+      <svg
+        ref="svgElement"
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        height="100%"
+        viewBox="0 0 107 190"
+        enable-background="new 0 0 107 190"
+      >
+        <circle
+          fill="none"
+          id="circle"
+          stroke-dasharray="0 610 610 0"
+          class="stat-outline-circle"
+          stroke="#fff04b"
+          stroke-width="8"
+          stroke-miterlimit="10"
+          cx="53.5"
+          cy="95"
+          r="30%"
+        ></circle>
 
-        <animate attributeType="XML" xlink:href="#circle" id="circleanimate" attributeName="stroke-dashoffset" from="0"
-          to="610" dur="3s" begin=".2s" fill="freeze" />
+        <animate
+          attributeType="XML"
+          xlink:href="#circle"
+          id="circleanimate"
+          attributeName="stroke-dashoffset"
+          from="0"
+          to="610"
+          dur="3s"
+          begin=".2s"
+          fill="freeze"
+        />
         <!-- <animate
           attributeType="XML"
           xlink:href="#circle"
@@ -135,10 +160,9 @@
     </div>
     <div class="displaycenter">
       <div class="logo">
-        <img src="../../public/img/logo.png" alt="">
+        <img src="../../public/img/logo.png" alt="" />
       </div>
     </div>
-
 
     <div class="animateLine">
       <div class="row-line">
@@ -152,7 +176,6 @@
         <div class="c-line tangerine"></div>
         <div class="c-line grap"></div>
       </div>
-
     </div>
   </div>
 </template>
@@ -206,7 +229,6 @@ export default {
       }
     }, 3000);
 
-
     gsap.fromTo(
       ".chocolate",
       {
@@ -227,7 +249,7 @@ export default {
       {
         x: "-150%",
         duration: 1,
-        delay: .2,
+        delay: 0.2,
       }
     );
 
@@ -239,7 +261,7 @@ export default {
       {
         x: "-150%",
         duration: 1,
-        delay: .4,
+        delay: 0.4,
       }
     );
 
@@ -251,7 +273,7 @@ export default {
       {
         y: "-160%",
         duration: 1,
-        delay: .6,
+        delay: 0.6,
       }
     );
 
@@ -263,7 +285,7 @@ export default {
       {
         y: "-160%",
         duration: 1,
-        delay: .8,
+        delay: 0.8,
       }
     );
 
@@ -281,6 +303,11 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+@import "../assets/scss/page/index";
+</style>
+
 <!-- <script>
 import gsap from "gsap"; // 确保正确引入GSAP库
 

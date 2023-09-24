@@ -13,7 +13,7 @@
     </div>
     </div>
     <div class="ShopProBOX">
-      <div class="ShopProTitle" @click="">合計:NT:2300</div>
+      <div class="ShopProTitle" @click="">合計:NT: {{ cartTotal }}</div>
 
       <div class="ShopProCardBox">
         <div class="ShopProCardTitle">
@@ -22,16 +22,16 @@
           <div>數量</div>
           <div>小計</div>
         </div>
-        <div v-for="card in 3" class="ShopProCardDetail">
+        <div v-for="(product, index) in cartItems" :key="index" class="ShopProCardDetail">
           <div class="CardDetailImg">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlsDygW5l6-urgSirZ28w1yJgNOy7sF4VJqQ&usqp=CAU" alt="">
+            <img :src="product.prod_img1" alt="" />
           </div>
-          <div class="CardDetailTitle">吃的蛋糕</div>
-          <div class="CardDetailPrice">NT$320</div>
+          <div class="CardDetailTitle">{{ product.pord_name }}</div>
+          <div class="CardDetailPrice">NT${{ product.pord_price }}</div>
           <div class="CardDetailCount">
-            <p>{{ 1 }}</p>
+            <p>{{ product.count }}</p>
           </div>
-          <div class="CardDetailTotal">NT$320</div>
+          <div class="CardDetailTotal">NT${{ product.pord_price * product.count }}</div>
           <div class="CardDetailDelet"></div>
         </div>
       </div>
@@ -85,24 +85,21 @@
       </div>
     </div>
     <div class="ShopSumBox">
-      <div class="SumCac">
-        <div class="SumCacTex">
-          <p>折扣後小計</p>
-          <p>運費</p>
-        </div>
-        <div class="SumCacPrice">
-          <p>NT${{250 }}</p>
-          <p>NT${{250 }}</p>
-        </div>
+      <div >
+      <p>折扣後小計</p> 
+      <p class="SumBoxNo">NT:{{ cartTotal }}</p>
       </div>
-      <div class="SumTol">
-        <div class="SumCacTex">
-          <p>商品金額統計</p>
-        </div>
-        <div class="SumCacPrice">
-          <p>NT${{  }}</p>
-          <p>(含運費)</p>
-        </div>
+      <div >
+      <p>運費</p> 
+      <p class="SumBoxNo">NT:150</p>
+      </div>
+      <div >
+      <p>商品金額總計</p> 
+      <p class="SumBoxNoex">NT:{{ cartTotal +150 }}</p>
+      </div>
+      <div >
+      <p></p> 
+      <p>(含運費)</p>
       </div>
     </div>
     <div class="ShopBtmBox">
@@ -122,6 +119,14 @@ export default {
       expirationDate: '',
       securityCode: '',
     };
+  },
+  computed: {
+    cartItems() {
+      return this.$store.state.cart; 
+    },
+    cartTotal() {
+      return this.$store.getters.cartTotal; 
+    },
   },
   methods: {
     gotoCart(){
@@ -207,16 +212,16 @@ export default {
       padding: 30px;
       font-size:map-get($map: $fontsizes, $key: h3);
       text-align: center;
-      &::after{
-        content: ">";
-        width: 30px;
-        height: 30px;
-        position: absolute;
-        transform: rotate(90deg);
-        font-weight:bold;
-        font-size:map-get($map: $fontsizes, $key: h2);
-        cursor: pointer;
-      }
+      // &::after{
+      //   content: ">";
+      //   width: 30px;
+      //   height: 30px;
+      //   position: absolute;
+      //   transform: rotate(90deg);
+      //   font-weight:bold;
+      //   font-size:map-get($map: $fontsizes, $key: h2);
+      //   cursor: pointer;
+      // }
     }
     .ShopProCardBox{
       display: flex;
@@ -319,22 +324,25 @@ export default {
     display: flex;
     flex-wrap: wrap;
     background-color: rgb(234, 233, 233);
-    align-items: flex-end; 
-    .SumCac{
-      justify-content: flex-end;
-      display: flex;
-      width: 100%;
-      .SumCacTex{
-
-      }
-      .SumCacPrice{
-        padding-left: 20%;
-      }
-    }
-    .SumTol{
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    div{
       display: flex;
       flex-wrap: wrap;
       width: 100%;
+      justify-content:flex-end;
+      p{
+        width: 200px;
+       padding-right:30px ;
+       line-height: 2;
+      }
+      .SumBoxNo{
+        font-size:map-get($map: $fontsizes, $key: h3);
+      }
+      .SumBoxNoex{
+        font-size:map-get($map: $fontsizes, $key: h3);
+        color: red;
+      }
     }
   }  
   .ShopBtmBox{

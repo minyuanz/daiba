@@ -13,11 +13,11 @@
       </div>
       </div>
       <div class="CartProBOX">
-        購物完成介面
+        <i class="fa-solid fa-circle-check icon-size"></i>
+        <p>購買完成</p>
       </div>
       <div class="CartBtmBox">
-        <div class="CartBtnBack" @click="gotoShopping">上一頁</div>
-        <div class="CartBtnBackNex" @click="">訂單確認</div>
+        <div class="CartBtnBack" @click="gotoShopping">返回商店</div>
       </div>
     </div>
   </template>
@@ -26,21 +26,14 @@
   <script>
   export default {
     data() {
-      return {
-        count: 1,
-      };
     },
     methods: {
-      decrementCount() {
-        if (this.count > 1) {
-          this.count -= 1;
-        }
-      },
+
       incrementCount() {
         this.count += 1;
       },
       gotoShopping(){
-      this.$router.push("/Shopping"); 
+      this.$router.push("/store"); 
     },
     },
   };
@@ -95,29 +88,35 @@
           text-align: center;
         }
       }
-  
-  
+    }
+
+    .CartProBOX{
+      border: 1px solid rgb(210, 210, 210);
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      .icon-size {
+        font-size:map-get($map: $fontsizes, $key: h1);
+        color:rgb(27, 216, 49);
+      }
+      p{
+        font-size:map-get($map: $fontsizes, $key: h1);
+        padding: 60px;
+      }
     }
     .CartBtmBox{
       width: 100%;
       display: flex;
-      justify-content: right;
-      align-items: end;
+      justify-content: center;
+      align-items:center;
       padding: 20px;
       .CartBtnBack{
+        color:rgb(27, 216, 49) ;
         text-align: center;
         cursor: pointer;
-        border: 1px solid red;
-        border-radius: $border-radius;
-        font-size:map-get($map: $fontsizes, $key: h3);
-        padding: 10px 40px;
-      }
-      .CartBtnBackNex{
-        margin-left: 10px;
-        text-align: center;
-        cursor: pointer;
-        background-color: rgb(236, 85, 112);
-        border: 1px solid red;
+        border: 1px solid rgb(27, 216, 49);
         border-radius: $border-radius;
         font-size:map-get($map: $fontsizes, $key: h3);
         padding: 10px 40px;

@@ -36,16 +36,18 @@ export default {
     data() {
         return {
             cards: [{
-                image: '../img/artCard.png',
-                head: '../img/artCard1.png',
+                image: require('@/../public/img/artCard.png'),
+                head: require('@/../public/img/artCard1.png'),
+                // image: '../img/artCard.png',
+                // head: '../img/artCard1.png',
                 tag: '住宿推薦',
                 title: '原來京站樓上長這樣？',
                 title2: '開箱五星級行政豪華客房一泊二食',
                 date: '2020-06-15',
                 ctx: '在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。'
             }, {
-                image: '../img/artCard.png',
-                head: '../img/artCard1.png',
+                image: require('@/../public/img/artCard.png'),
+                head: require('@/../public/img/artCard1.png'),
                 tag: '住宿推薦',
                 title: '原來京站樓上長這樣？',
                 title2: '開箱五星級行政豪華客房一泊二食',
@@ -53,8 +55,8 @@ export default {
                 ctx: '在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。'
             },
             {
-                image: '../img/artCard.png',
-                head: '../img/artCard1.png',
+                image: require('@/../public/img/artCard.png'),
+                head: require('@/../public/img/artCard1.png'),
                 tag: '住宿推薦',
                 title: '原來京站樓上長這樣？',
                 title2: '開箱五星級行政豪華客房一泊二食',
@@ -62,8 +64,8 @@ export default {
                 ctx: '在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。'
             },
             {
-                image: '../img/artCard.png',
-                head: '../img/artCard1.png',
+                image: require('@/../public/img/artCard.png'),
+                head: require('@/../public/img/artCard1.png'),
                 tag: '住宿推薦',
                 title: '原來京站樓上長這樣？',
                 title2: '開箱五星級行政豪華客房一泊二食',
@@ -71,8 +73,8 @@ export default {
                 ctx: '在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。'
             },
             {
-                image: '../img/artCard.png',
-                head: '../img/artCard1.png',
+                image: require('@/../public/img/artCard.png'),
+                head: require('@/../public/img/artCard1.png'),
                 tag: '住宿推薦',
                 title: '原來京站樓上長這樣？',
                 title2: '開箱五星級行政豪華客房一泊二食',
@@ -80,8 +82,8 @@ export default {
                 ctx: '在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。'
             },
             {
-                image: '../img/artCard.png',
-                head: '../img/artCard1.png',
+                image: require('@/../public/img/artCard.png'),
+                head: require('@/../public/img/artCard1.png'),
                 tag: '住宿推薦',
                 title: '原來京站樓上長這樣？',
                 title2: '開箱五星級行政豪華客房一泊二食',

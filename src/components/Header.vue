@@ -6,14 +6,21 @@
         <img src="../../public/img/logo.png" alt="" />
       </router-link>
       <div class="line"></div>
-      <input type="checkbox" name="navbar" id="navbar" />
-      <div class="header-nav">
-        <label for="navbar" class="checkBox" :class="{ 'hbclose': hbclose }">
-          <span></span>
-          <span></span>
-          <span></span>
-        </label>
-        <label class="homeNav" for="navbar">
+
+      <div class="header-container">
+        <div
+          class="header-menu"
+          @click="toggleNav"
+          :class="{ hbclose: hbclose }"
+        >
+          <div class="hambergerIcon" :class="{ open: open }"></div>
+        </div>
+
+        <div
+          class="homeNav"
+          @click="toggleNav"
+          :class="{ showHomeNav: showHomeNav }"
+        >
           <ul>
             <li>
               <div class="pic">
@@ -72,16 +79,8 @@
               </router-link>
             </li>
           </ul>
-        </label>
-      </div>
-
-      <!-- <label class="navbar-img" for="navbar" id="navbar-btn">
-        <div class="navbar-btn">
-          <span></span>
-          <span></span>
-          <span></span>
         </div>
-      </label> -->
+      </div>
 
       <template v-if="weather.condition">
         <div class="weather">
@@ -96,22 +95,27 @@
       <router-link to="/mrt" class="mrt">捷運推薦</router-link>
       <router-link to="/game" class="game">捷運冒險</router-link>
       <router-link to="/contribute" class="contribute">投稿專欄</router-link>
-      <router-link to="/Login" class="login">會員中心</router-link>
       <router-link to="/store" class="store">精選購物</router-link>
       <router-link to="/New" class="new">最新消息</router-link>
       <router-link to="/about" class="about">關於我們</router-link>
-      <router-link to="/cart" class="cart">購物車</router-link>
+      <router-link to="/Login" class="login">會員中心</router-link>
+      <router-link to="/cart" class="cart">購物車 ({{cartItemCount}})</router-link>
       <router-link to="/Test" class="test">排版用之後刪掉</router-link>
     </nav>
   </header>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import gsap from "gsap";
 export default {
   data() {
     return {
+      // showNav: false,
+      open: false,
       weather: {},
       hot: false,
+      showHomeNav: false,
     };
   },
   computed: {
@@ -120,8 +124,17 @@ export default {
     },
     hbclose() {
       return this.$route.path === "/home";
-    }
+    }, 
+    ...mapGetters('cart', ['cartItemCount']),
   },
+
+  methods: {
+    toggleNav() {
+      this.open = !this.open;
+      this.showHomeNav = !this.showHomeNav;
+    },
+  },
+
   mounted() {
     fetch(
       "https://api.weatherapi.com/v1/current.json?q=Taipei&lang=zh_tw&key=831993a5339d4b7cadc74621231609"
@@ -139,6 +152,46 @@ export default {
         }
         // console.log(this.weather)
       });
+
+    // gsap.fromTo(
+    //   ".showHomeNav ul li:nth-child(1)",
+    //   {
+    //     x: "-120%",
+    //   },
+    //   {
+    //     x: "0",
+    //     duration: 1,
+    //     delay: 0,
+    //   }
+    // );
+
+    // gsap.fromTo(
+    //   ".success ",
+    //   {
+    //     x: "150%",
+    //   },
+    //   {
+    //     x: "-150%",
+    //     duration: 1,
+    //     delay: 0.2,
+    //   }
+    // );
+
+    // gsap.fromTo(
+    //   ".danger",
+    //   {
+    //     x: "150%",
+    //   },
+    //   {
+    //     x: "-150%",
+    //     duration: 1,
+    //     delay: 0.4,
+    //   }
+    // );
   },
 };
 </script>
+
+<style scoped lang="scss">
+@import "../assets/scss/layout/header";
+</style>

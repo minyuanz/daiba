@@ -29,33 +29,34 @@
         </div>
       </div>
       <!------------------------美食住宿景點卡片 ------------------------------------->
-
-      <div class="swiperMRTCard" v-show="item.isShow">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide" v-for="itemFood in item.foodCard">
-            <div class="mrtCardWrap">
-              <!-- 卡片 -->
-              <div class="card-h border-r">
-                <div class="img">
-                  <img :src="itemFood.url" alt="" />
-                </div>
-                <div class="text">
-                  <div class="title">
-                    <h3>{{ itemFood.title }}</h3>
-                    <div class="tag">
-                      <span class="title-tag gray">#景點推薦</span>
-                      <span class="title-tag blue">#板南線</span>
-                    </div>
+      <transition appear name="fade" mode="out-in">
+        <div class="swiperMRTCard" v-show="item.isShow">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="itemFood in item.foodCard">
+              <div class="mrtCardWrap">
+                <!-- 卡片 -->
+                <div class="card-h border-r">
+                  <div class="img">
+                    <img :src="itemFood.url" alt="" />
                   </div>
-                  <div class="txt">{{ itemFood.txt }}</div>
+                  <div class="text">
+                    <div class="title">
+                      <h3>{{ itemFood.title }}</h3>
+                      <div class="tag">
+                        <span class="title-tag gray">#景點推薦</span>
+                        <span class="title-tag blue">#板南線</span>
+                      </div>
+                    </div>
+                    <div class="txt">{{ itemFood.txt }}</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <div class="swiper-button-prev swiper-btn"></div>
+          <div class="swiper-button-next swiper-btn"></div>
         </div>
-        <div class="swiper-button-prev swiper-btn"></div>
-        <div class="swiper-button-next swiper-btn"></div>
-      </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -74,30 +75,7 @@ export default {
           txt: "有世界最高建築物的美名長達五年的台北 101 大樓南山廣場、威秀影城、信義微風、誠品百貨、新光三越高檔餐廳、時尚酒吧與夜店等等，大量的建築群拔地而起疊構出最具未來感、新穎的「都心」風貌。",
           url: require("../../public/img/mrt_101.jpg"),
           isShow: false,
-          foodCard: [
-            {
-              title: "雲鼎阿二麻辣食堂",
-              txt: "阿二麻辣食堂使用多種中藥食材，精心熬煮麻辣湯頭，有別於一般麻辣火鍋店，招牌麻辣系列分為「麻辣煲」與「麻辣鍋」，也有「藥膳」與「紅燒」系列可以選擇，所有鍋底均可以選擇辣度，主食單點區中的滷肉飯、拌麵，也是雲鼎阿二麻辣食堂中相當具有人氣的品項。",
-
-              url: require("../../src/assets/images/mrtFoodCard/atwo.jpg"),
-            },
-            {
-              title: "烤師傅",
-              txt: "有世界最高建築物的美名長達五年的台北101大樓南山廣場、威秀影城、信義微風、誠品百貨、新光三越高檔餐廳、時尚酒吧與夜店等等，大量的建築群拔地而起疊構出最具未來感、新穎的「都心」風貌。",
-              url: require("../../src/assets/images/mrtFoodCard/firemaster.jpg"),
-            },
-            {
-              title: "一蘭拉麵",
-              txt: "有世界最高建築物的美名長達五年的台北101大樓南山廣場、威秀影城、信義微風、誠品百貨、新光三越高檔餐廳、時尚酒吧與夜店等等，大量的建築群拔地而起疊構出最具未來感、新穎的「都心」風貌。",
-              url: require("../../src/assets/images/mrtFoodCard/ichiran.jpg"),
-            },
-            {
-              title: "站著吃韓式烤肉",
-              txt: "有世界最高建築物的美名長達五年的台北101大樓南山廣場、威秀影城、信義微風、誠品百貨、新光三越高檔餐廳、時尚酒吧與夜店等等，大量的建築群拔地而起疊構出最具未來感、新穎的「都心」風貌。",
-              url: require("../../src/assets/images/mrtFoodCard/standfire.jpg"),
-            },
-          ],
-          sights: [
+          travel: [
             {
               title: "台北101",
               txt: "台北101坐落被譽為『台北曼哈頓』之稱的信義計畫區,是大台北地區最密集的商業區,也是摩天大樓與國際級購物中心的精華地段。台北101觀景台不僅僅享受登高望遠的遼闊美景,更能感受台北101建築科技。",
@@ -124,13 +102,36 @@ export default {
               url: require("../../public/img/XinyiAnhe-4.jpg"),
             },
           ],
+          foodCard: [
+            {
+              title: "雲鼎阿二麻辣食堂",
+              txt: "阿二麻辣食堂使用多種中藥食材，精心熬煮麻辣湯頭，有別於一般麻辣火鍋店，招牌麻辣系列分為「麻辣煲」與「麻辣鍋」，也有「藥膳」與「紅燒」系列可以選擇，所有鍋底均可以選擇辣度，主食單點區中的滷肉飯、拌麵，也是雲鼎阿二麻辣食堂中相當具有人氣的品項。",
+
+              url: require("../../src/assets/images/mrtFoodCard/atwo.jpg"),
+            },
+            {
+              title: "烤師傅",
+              txt: "有世界最高建築物的美名長達五年的台北101大樓南山廣場、威秀影城、信義微風、誠品百貨、新光三越高檔餐廳、時尚酒吧與夜店等等，大量的建築群拔地而起疊構出最具未來感、新穎的「都心」風貌。",
+              url: require("../../src/assets/images/mrtFoodCard/firemaster.jpg"),
+            },
+            {
+              title: "一蘭拉麵",
+              txt: "有世界最高建築物的美名長達五年的台北101大樓南山廣場、威秀影城、信義微風、誠品百貨、新光三越高檔餐廳、時尚酒吧與夜店等等，大量的建築群拔地而起疊構出最具未來感、新穎的「都心」風貌。",
+              url: require("../../src/assets/images/mrtFoodCard/ichiran.jpg"),
+            },
+            {
+              title: "站著吃韓式烤肉",
+              txt: "有世界最高建築物的美名長達五年的台北101大樓南山廣場、威秀影城、信義微風、誠品百貨、新光三越高檔餐廳、時尚酒吧與夜店等等，大量的建築群拔地而起疊構出最具未來感、新穎的「都心」風貌。",
+              url: require("../../src/assets/images/mrtFoodCard/standfire.jpg"),
+            },
+          ],
         },
         {
           title: "中山站",
           txt: "曾經是美國人聚集的美式生活圈，後來又成為日本人匯聚的熱鬧街區，裡面散布著一些風格別具的創意小店，內斂卻多元兼蓄，非常適合徒步於巷弄之中，感受難得的悠閒，探索新舊趣味。",
           url: require("../../public/img/mrt_zhongshan.jpg"),
           isShow: false,
-          sights: [
+          travel: [
             {
               title: "台北光點",
               txt: "光點台北所在地點是中美外交關係的歷史見證者，這棟建築物曾歷經美國駐台北領事館、總領事館及大使館，西元68年（西元1979年）美國駐台北大使館正式關閉後，建築物荒廢多年，民國86年（西元1997年）正式訂為第三級古蹟（現為直轄市定古蹟）。民國90年（西元2002年）11月以「台北之家」之名重新開館。本建築物外觀為白色二層樓洋式建築，室內採中央走廊梯間佈局，廊柱為簡潔的希臘柱式，是以電影文化為主的藝文空間，讓蹟與電影結合，內設展覽館、藝文廳、小型電影院，輕食餐廳及一家專以「電影」與「城市」為主題的書店。",
@@ -163,7 +164,7 @@ export default {
           txt: "有台北最大的士林夜市來逛夜市的人大都以美食與購物為主，這裡有各式各樣新奇好玩的商品與美食，吸引大批的人潮。這樣特殊的夜市文化，是臺北夜生活不可缺少的一部份。",
           url: require("../../public/img/mrt_Jiantan.jpg"),
           isShow: false,
-          sights: [
+          travel: [
             {
               title: "士林觀光夜市",
               txt: "士林夜市是臺北市範圍最大的夜市，也是國外觀光客造訪臺北必遊的觀光夜市。鄰近捷運劍潭站，佔地十分寬廣，可分為兩個主要範圍，一個是傳統陽明戲院周邊的街道，包括大南路慈諴宮一帶；另一邊則是基河路101號重新營運的士林市場。<br>士林夜市是臺北市範圍最大的夜市，也是國外觀光客造訪臺北必遊的觀光夜市。鄰近捷運劍潭站，佔地十分寬廣，可分為兩個主要範圍，一個是傳統陽明戲院周邊的街道，包括大南路慈諴宮一帶；另一邊則是基河路101號重新營運的士林市場。",
@@ -197,7 +198,7 @@ export default {
           txt: "以豐富的溫泉資源著稱，為知名的渡假休閒區。除溫泉外，亦可參觀博物館和古老的建築，品嚐當地美食，感受舒適的氛圍。是放鬆身心，體驗台灣文化的絕佳地點。",
           url: require("../../public/img/mrt_beitou.jpg"),
           isShow: false,
-          sights: [
+          travel: [
             {
               title: "新北投車站",
               txt: "新北投車站原為台鐵淡水線新北投支線的終點站，29年前因台鐵停駛而走入歷史，並拆遷至彰化台灣民俗村。其典型的日式木造結構、簷架下的雕花托座與屋頂上的老虎窗，皆為車站建築特色之一。 近年文化資產保存意識抬頭，台北市政府與民間團體攜手爭取車站回家，幾經波折，日榮資產股份有限公司有感於台北市民期待車站返鄉的熱忱，願意無償捐贈予台北市。修復重組工程於今年3月底完工，成為北市唯一留存的老火車站。 為感謝各界人士的幫助與努力，市府文化局、台北市文化基金會、台北捷運公司與北投當地居民共同策畫一系列精彩的開幕活動，歡迎大家一同來感受「百年驛站．風華再現」的魅力。",
@@ -230,7 +231,7 @@ export default {
           txt: "淡水是一個風景優美的海濱小鎮。遊客可欣賞到壯觀的淡水河口夕陽，探訪歷史悠久的淡水老街，品嚐當地美食如阿給和魚丸湯，並參觀知名的淡水漁人碼頭。此外，淡水還擁有富有特色的文創店舖和藝術家工作室，是個適合休閒散步和賞美的地方。",
           url: require("../../public/img/mrt_tanshui.jpg"),
           isShow: false,
-          sights: [
+          travel: [
             {
               title: "淡水老街",
               txt: "從淡水捷運站走出來右轉，中正路及延伸的重建街、清水街一帶，就是鼎鼎大名的淡水老街。「淡水老街」不僅早已是全台知名熱門景點，同時也吸引不少外國人慕名而來。這裡街道兩旁林立熱鬧商店，有濃濃古早味的餅舖、雜貨店，也有賣潮流服飾、玩具。來到淡水必吃的美食阿給，是從日文油豆腐的部分發音直譯而來，作法是將油豆腐中間挖空，填加炒過的冬粉然後浸泡滷汁，再用魚漿封口加以蒸煮，最後淋上甜辣醬或是店家獨門的秘密醬料。特色小吃如：魚丸、阿婆鐵蛋、魚酥等等，還有許多古蹟可參觀，怎麼玩都不會膩。淡水老街分成內外兩側，外側是靠淡水河岸的金色水岸步道，內側是的傳統老街，這裡街道兩旁林立熱鬧商店，有濃濃古早味的餅舖、雜貨店，也有賣潮流服飾與玩具。傍晚時，在金色水岸步道還可欣賞夕陽落入海面的美景。",
@@ -261,6 +262,7 @@ export default {
       ],
     };
   },
+
   mounted() {
     const swiperMRTCard = new Swiper(".swiperMRTCard", {
       direction: "horizontal",
@@ -300,3 +302,7 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+@import "../assets/scss/page/mrt.scss";
+</style>

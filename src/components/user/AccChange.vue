@@ -40,8 +40,6 @@ export default {
     methods: {
         menu() {
             this.$emit('toggle-change')
-            // document.getElementById('AccChange').style.display = 'none'
-            // document.querySelector('.userInfo').style.display = 'block'
         }
     }
 }

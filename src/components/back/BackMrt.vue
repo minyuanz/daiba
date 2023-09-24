@@ -67,7 +67,7 @@
         </div>
         <div class="addCtx">
             <span>捷運站描述</span>
-            <p>qqq</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid sequi asperiores hic aspernatur excepturi adipisci repudiandae molestias architecto ea, mollitia dolores doloribus suscipit, perspiciatis at nobis tempora numquam! Ipsam, voluptate.</p>
             <span class="count">0/100字</span>
         </div>
         <div class="btn">

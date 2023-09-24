@@ -4,7 +4,7 @@
         "pord_name": "喔",
         "pord_bdes": "好男好難 世界",
         "pord_bdes2": "商品簡述",
-        "pord_price": "商品價格",
+        "pord_price": 33,
         "mrt_name": "捷運線名稱",
         "sta_name": "捷運站名稱",
         "prod_img1":
@@ -18,7 +18,7 @@
         "pord_name": "你",
         "pord_bdes": "商品描述",
         "pord_bdes2": "商品簡述",
-        "pord_price": "商品價格",
+        "pord_price": 3333,
         "mrt_name": "捷運線名稱",
         "sta_name": "捷運站名稱",
         "prod_img1":
@@ -60,7 +60,7 @@
         "pord_name": "商品名稱",
         "pord_bdes": "商品描述",
         "pord_bdes2": "商品簡述",
-        "pord_price": "商品價格",
+        "pord_price": 888,
         "mrt_name": "捷運線名稱",
         "sta_name": "捷運站名稱",
         "prod_img1":

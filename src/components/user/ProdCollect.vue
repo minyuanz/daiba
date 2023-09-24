@@ -21,27 +21,28 @@ export default {
     data() {
         return {
             cards: [{
-                image: '../img/prod1.png',
+                image: require('@/../public/img/prod1.png'),
+                // image: '../img/prod1.png',
                 title: '台灣紀念酒杯',
                 price: 150
             }, {
-                image: '../img/prod1.png',
+                image: require('@/../public/img/prod1.png'),
                 title: '台灣紀念酒杯',
                 price: 150
             }, {
-                image: '../img/prod1.png',
+                image: require('@/../public/img/prod1.png'),
                 title: '台灣紀念酒杯',
                 price: 150
             }, {
-                image: '../img/prod1.png',
+                image: require('@/../public/img/prod1.png'),
                 title: '台灣紀念酒杯',
                 price: 150
             }, {
-                image: '../img/prod1.png',
+                image: require('@/../public/img/prod1.png'),
                 title: '台灣紀念酒杯',
                 price: 150
             }, {
-                image: '../img/prod1.png',
+                image: require('@/../public/img/prod1.png'),
                 title: '台灣紀念酒杯',
                 price: 150
             },],
@@ -116,6 +117,7 @@ export default {
 
         .prodGrid {
             display: block;
+
             .prodCard {
                 margin: 10px 0;
             }

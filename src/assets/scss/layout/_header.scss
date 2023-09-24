@@ -26,17 +26,13 @@ header {
       width: 85px;
     }
 
-    .header-nav {
-      .checkBox {
-        display: none;
-      }
+    .header-container {
+      position: absolute;
+      right: 0;
+      z-index: 10;
+      display: none;
 
       .homeNav {
-        max-width: 1280px;
-        margin: auto;
-        display: none;
-        padding-inline: 5%;
-
         ul {
           display: flex;
           justify-content: center;
@@ -51,7 +47,7 @@ header {
 
           :hover .pic img {
             transform: scaleY(1.1);
-            box-shadow: 6px 6px 20px black;
+            box-shadow: 6px 6px 20px #333;
           }
 
           :hover .pic {
@@ -103,7 +99,6 @@ header {
         ul li:nth-child(odd) {
           .pic {
             border: 8px solid #000;
-            // border: 8px solid map-get($color, $key: info);
           }
 
           img {
@@ -113,11 +108,73 @@ header {
         ul li:nth-child(even) {
           .pic {
             border: 8px solid #d9d9d9;
-            // border: 8px solid map-get($color, $key: tangerine);
           }
 
           img {
             object-position: 35% 30%;
+          }
+        }
+      }
+
+      .header-menu {
+        height: 30px;
+        width: 30px;
+        position: relative;
+        z-index: 10;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        .hambergerIcon {
+          height: 5px;
+          width: 100%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          border-radius: 50px;
+          background-color: #333;
+          transform: translate(-50%, -50%) rotate(0deg);
+          transition: all ease 0.5s;
+
+          &::before,
+          &::after {
+            content: "";
+            position: absolute;
+            height: inherit;
+            border-radius: inherit;
+            background-color: #777;
+            margin: auto;
+            width: 50%;
+            transition: all ease 0.5s;
+          }
+
+          &::before {
+            top: -10px;
+            left: 0;
+            transform-origin: left;
+          }
+
+          &::after {
+            bottom: -10px;
+            right: 0;
+            transform-origin: right;
+          }
+        }
+        .open {
+          background-color: #32c8e1;
+          transform: translate(-50%, -50%) rotate(135deg);
+
+          &::before {
+            background-color: #fff04b;
+            top: 0;
+            transform: translateX(100%) rotate(-90deg);
+          }
+
+          &::after {
+            background-color: #fff04b;
+            bottom: 0;
+            transform: translateX(-100%) rotate(-90deg);
           }
         }
       }
@@ -172,7 +229,7 @@ header {
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   header {
     border-bottom: 2px dashed #d9d9d9;
     margin-bottom: 3%;
@@ -188,56 +245,36 @@ header {
         width: 75px;
       }
 
-      .header-nav {
-        top: 100%;
-        z-index: 11;
+      .header-container {
+        display: block;
 
-        .checkBox {
-          display: flex;
-          width: 40px;
-          height: 40px;
-          padding: 3px;
-          flex-direction: column;
-          justify-content: space-evenly;
-          align-items: center;
-          position: absolute;
-          left: 85%;
-          top: 20px;
-
-          span {
-            width: 70%;
-            height: 3px;
-            background: #7d7d7d;
-
-            &:nth-of-type(2) {
-              opacity: 1;
-            }
-
-            &:nth-of-type(1) {
-              transition: 0.3s;
-            }
-
-            &:nth-of-type(3) {
-              transition: 0.3s;
-            }
+        .header-menu {
+          .open {
+            position: fixed;
+            width: 30px;
+            top: 60px;
+            left: 94%;
           }
         }
 
         .homeNav {
-          width: 100vw;
-          height: 250vh;
           background: #0008;
-          background-size: cover;
-          left: -150%;
-          display: block;
-          position: absolute;
-          padding: 8% 1.5rem 0 0;
-          top: 80px;
+          display: flex;
+          justify-content: center;
+          position: fixed;
+          padding: 0 3rem 0 0;
+          height: 100vh;
+          top: 0;
+          width: 100%;
+          margin-top: 0;
+          opacity: 0;
+          left: -100%;
           transition: all 0.3s ease-in;
+          z-index: 9;
 
           ul {
             flex-direction: column;
-            gap: 5px;
+            width: 100%;
 
             :hover p {
               font-size: 40px;
@@ -247,7 +284,8 @@ header {
               width: 100%;
               writing-mode: inherit;
               height: 90px;
-              left: 0;
+              left: -100%;
+              margin-block: 1%;
 
               .pic {
                 width: 100%;
@@ -260,7 +298,7 @@ header {
                 height: 100%;
 
                 p {
-                  margin-top: 13%;
+                  margin-top: 8%;
                   margin-right: 2%;
                   padding-bottom: 0;
                   padding-right: 0;
@@ -270,33 +308,49 @@ header {
             }
           }
         }
-      }
 
+        .showHomeNav {
+          opacity: 1;
+          left: 0;
+          transition: all 0.3s ease-in;
+
+          @keyframes flyInLeft {
+            0% {
+              left: -100%;
+            }
+
+            100% {
+              left: 0;
+            }
+          }
+
+          ul {
+            li:nth-child(1) {
+              animation: flyInLeft 0.2s 0.4s forwards;
+            }
+            li:nth-child(2) {
+              animation: flyInLeft 0.2s 0.5s forwards;
+            }
+            li:nth-child(3) {
+              animation: flyInLeft 0.2s 0.6s forwards;
+            }
+            li:nth-child(4) {
+              animation: flyInLeft 0.2s 0.7s forwards;
+            }
+            li:nth-child(5) {
+              animation: flyInLeft 0.2s 0.8s forwards;
+            }
+            li:nth-child(6) {
+              animation: flyInLeft 0.2s 0.9s forwards;
+            }
+            li:nth-child(7) {
+              animation: flyInLeft 0.2s 1s forwards;
+            }
+          }
+        }
+      }
       .weather {
         display: none;
-      }
-
-      #navbar:checked + .header-nav .homeNav {
-        left: 0;
-      }
-
-      #navbar:checked ~ .header-nav .checkBox span:nth-of-type(1) {
-        transform: rotate(45deg);
-        position: absolute;
-        inset: 0;
-        margin: auto;
-      }
-
-      #navbar:checked ~ .header-nav .checkBox span:nth-of-type(2) {
-        opacity: 0;
-        transition: all 0.3s;
-      }
-
-      #navbar:checked ~ .header-nav .checkBox span:nth-of-type(3) {
-        transform: rotate(-45deg);
-        position: absolute;
-        inset: 0;
-        margin: auto;
       }
     }
 
@@ -313,7 +367,18 @@ header {
 @media screen and (max-width: 414px) {
   header {
     .header {
-      .header-nav {
+      .header-container {
+        display: block;
+
+        .header-menu {
+          .open {
+            position: fixed;
+            width: 30px;
+            top: 60px;
+            left: 90%;
+          }
+        }
+
         .homeNav {
           ul {
             :hover p {
@@ -321,24 +386,23 @@ header {
             }
 
             li {
+              margin-block: 0%;
+
               a {
                 p {
+                  margin-top: 13%;
                   font-size: 28px;
                 }
               }
             }
           }
         }
+      }
 
-        .hbclose {
-          display: none;
-        }
-
+      .hbclose {
+        display: none;
       }
     }
-
-
-
   }
 
   .--closeHeader {
