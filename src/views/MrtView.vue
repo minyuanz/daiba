@@ -13,9 +13,9 @@
       <transition appear name="box" mode="out-in">
         <div class="checkBox" v-if="showCheckBox">
           <div class="box">
-            <button class="place">景點</button>
-            <button class="food">美食</button>
-            <button class="hotel">住宿</button>
+            <button class="place" @click="changeContent('place')">景點</button>
+            <button class="food" @click="changeContent('food')">美食</button>
+            <button class="hotel" @click="changeContent('hotel')">住宿</button>
           </div>
           <div class="triangle"></div>
         </div>
@@ -158,7 +158,7 @@
   </div>
   <!-- 站點板塊 -->
   <div class="mrtWrappo">
-    <div class="mrtWrap" v-for="item in mrt">
+    <div class="mrtWrap" v-for="item in filteredMrt">
       <div class="mrtSta">
         <!-- 站點文字介紹 -->
         <div class="mrtStaTxt">
@@ -221,13 +221,16 @@ import { pushScopeId } from "vue";
 export default {
   data() {
     return {
+      defaultColor: "red",
+      selectedColor: "red",
+      filteredMrt: [],
       swiperMRTCard: null,
-      showCheckBox: false,
+      showCheckBox: true,
       selectColor: ["red", "blue", "green", "orange", "brown", "yellow"],
       showAll: true,
       src: "../../public/img/mrtArrow.jpg",
-      PC: false,
-      MB: false,
+      PC: true,
+      MB: true,
       isActive: {
         red: false,
         blue: false,
@@ -243,9 +246,37 @@ export default {
           txt: "有世界最高建築物的美名長達五年的台北 101 大樓南山廣場、威秀影城、信義微風、誠品百貨、新光三越高檔餐廳、時尚酒吧與夜店等等，大量的建築群拔地而起疊構出最具未來感、新穎的「都心」風貌。",
           url: require("../../public/img/mrt_101.jpg"),
           isShow: false,
+          color: "red",
           travel: [
             {
               title: "台北101",
+              txt: "台北101坐落被譽為『台北曼哈頓』之稱的信義計畫區,是大台北地區最密集的商業區,也是摩天大樓與國際級購物中心的精華地段。台北101觀景台不僅僅享受登高望遠的遼闊美景,更能感受台北101建築科技。",
+              url: require("../../public/img/mrt_101.jpg"),
+            },
+            {
+              title: "四四南村",
+              txt: "早年為眷村，由於住戶均為聯勤第四十四兵工廠的廠工，因而得名「四四南村」。隨著社會變遷，眷村拆除改建成文教特區，並保留部份舊有的連棟式平房，讓人得以穿梭在小徑裡，遙想過去的眷村時光。<br>裡面部分房舍改建為信義公民會館，作為舉辦活動及展演的開放空間，以顯現眷村遺址；在「好，丘 good cho's」進駐C棟後，帶來了在地商品展售、藝文展演、輕食飲料等元素，假日廣場還有小農市集、手作與二手主題Simple Market，讓人感受到豐富自在的生活氣息，特殊的場域與氛圍，吸引許多新人來此拍婚紗。 ",
+              url: require("../../public/img/XinyiAnhe-1.jpg"),
+            },
+            {
+              title: "信義商圈",
+              txt: "信義計劃區為新興商業區，乃目前臺北市最具指標性的商圈，其中信義路四、五段間就有多家百貨公司、飯店、時尚餐廳，號稱臺北最具價值的地區，包含新光三越信義店、新光三越新天地、A4、威秀影城、君悅飯店等，加上臺北101，這裡已漸漸取代東區成為新的時髦都會地區。<br>信義商圈最大的特色是，完全針對都市人休閒購物需求設計，而且由於採取低密度、低容積的開發方式，再加上市政府刻意經營，規劃設置相當多的造景，進駐的百貨商場或企業大樓，建築風格都也都別具特色。<br>信義計劃區現在被稱為「臺北曼哈頓」，白天的它是個商業金融中心，生活節奏忙碌快速。但，到了夜晚，夜幕將高樓的輪廓掩蓋後，它搖身一變又成為一顆閃閃發亮的鑽石，竟比白天還要豔麗光彩奪目，所以看信義計劃區的夜景也是另一種趣味。<br>週末假日的信義計劃區，又搖身一變成為一個超大型的舞台，市府廣場、新光三越東側廣場等，經常舉辦各種假日活動或園遊會，而威秀影城中庭也常有歌手新片發表、演唱活動、簽名，而電影造勢活動，威秀影城中庭也常是第一選擇的場地。",
+              url: require("../../public/img/XinyiAnhe-2.jpg"),
+            },
+            {
+              title: "松山文創園區",
+              txt: "前身為「臺灣總督府專賣局松山菸草工場」，為臺灣現代化工業廠房的先驅，也是第一座專業的捲菸廠。建築風格屬「日本初現代主義」，形式簡潔典雅，面磚、琉璃及銅釘做工精細，堪稱當時工廠的楷模。民國34年（西元1945年）戰後，台灣省專賣局接收，更名為「臺灣省專賣局松山菸草工廠」，民國87年（西元1998年），因都市空間規劃、公賣改制、需求量下降等因素停產，併入臺北菸廠，正式走入歷史。民國90年（西元2001年），臺北市政府將其指定為第99處市定古蹟，園區規劃為：市定古蹟、歷史建物、特色建築。近年為活化園區的空間再利用，結合了藝文、文創、設計等展演活動，與台灣創意設計中心合作設置「臺灣設計館」，與國內知名琉璃工房結合琉璃藝術推出「小山堂」，並設有輕食餐廳（位於機械修理廠），將園區提升為設計及文創產業的基地。",
+              url: require("../../public/img/XinyiAnhe-3.jpg"),
+            },
+            {
+              title: "臨江夜市",
+              txt: "「臨江夜市」以前叫通化夜市，擁有許多米其林必比登與米其林餐盤推薦小吃，且因鄰近百貨、商辦、飯店林立的信義區，是許多上班族、外食族的廚房，也推薦外國來的朋友在逛完五光十射的購物商場後，夜晚就近來試試台灣傳統夜市小吃，一次體驗兩種不同面向的台灣，絕對讓你不虛此行。",
+              url: require("../../public/img/XinyiAnhe-4.jpg"),
+            },
+          ],
+          food: [
+            {
+              title: "台北101111",
               txt: "台北101坐落被譽為『台北曼哈頓』之稱的信義計畫區,是大台北地區最密集的商業區,也是摩天大樓與國際級購物中心的精華地段。台北101觀景台不僅僅享受登高望遠的遼闊美景,更能感受台北101建築科技。",
               url: require("../../public/img/mrt_101.jpg"),
             },
@@ -276,6 +307,7 @@ export default {
           txt: "曾經是美國人聚集的美式生活圈，後來又成為日本人匯聚的熱鬧街區，裡面散布著一些風格別具的創意小店，內斂卻多元兼蓄，非常適合徒步於巷弄之中，感受難得的悠閒，探索新舊趣味。",
           url: require("../../public/img/mrt_zhongshan.jpg"),
           isShow: false,
+          color: "red",
           travel: [
             {
               title: "台北光點",
@@ -309,6 +341,7 @@ export default {
           txt: "有台北最大的士林夜市來逛夜市的人大都以美食與購物為主，這裡有各式各樣新奇好玩的商品與美食，吸引大批的人潮。這樣特殊的夜市文化，是臺北夜生活不可缺少的一部份。",
           url: require("../../public/img/mrt_Jiantan.jpg"),
           isShow: false,
+          color: "red",
           travel: [
             {
               title: "士林觀光夜市",
@@ -343,6 +376,7 @@ export default {
           txt: "以豐富的溫泉資源著稱，為知名的渡假休閒區。除溫泉外，亦可參觀博物館和古老的建築，品嚐當地美食，感受舒適的氛圍。是放鬆身心，體驗台灣文化的絕佳地點。",
           url: require("../../public/img/mrt_beitou.jpg"),
           isShow: false,
+          color: "red",
           travel: [
             {
               title: "新北投車站",
@@ -376,6 +410,7 @@ export default {
           txt: "淡水是一個風景優美的海濱小鎮。遊客可欣賞到壯觀的淡水河口夕陽，探訪歷史悠久的淡水老街，品嚐當地美食如阿給和魚丸湯，並參觀知名的淡水漁人碼頭。此外，淡水還擁有富有特色的文創店舖和藝術家工作室，是個適合休閒散步和賞美的地方。",
           url: require("../../public/img/mrt_tanshui.jpg"),
           isShow: false,
+          color: "red",
           travel: [
             {
               title: "淡水老街",
@@ -452,6 +487,14 @@ export default {
   },
 
   methods: {
+    changeContent(type) {
+      // 根據所選的類型 (place, food, hotel)，過濾捷運站資料
+      this.filteredMrt.forEach((item) => {
+        item.isShow = false; // 關閉原先顯示的內容
+        item.travel = item[type]; // 使用所選類型的資料更新 travel 屬性
+      });
+    },
+
     someMethod() {
       if (Array.isArray(this.selectColor)) {
         const result = this.selectColor.map((color) => color.toUpperCase());
@@ -471,6 +514,9 @@ export default {
       this.isActive[color] = false;
     },
     showTag(color) {
+      this.selectedColor = color;
+      this.filteredMrt = this.mrt.filter((item) => item.color === color);
+
       if (window.innerWidth <= 768) {
         this.selectColor = color;
         this.showAll = false;
@@ -534,6 +580,12 @@ export default {
         return [];
       }
     },
+  },
+
+  created() {
+    this.filteredMrt = this.mrt.filter(
+      (item) => item.color === this.defaultColor
+    );
   },
 };
 </script>
