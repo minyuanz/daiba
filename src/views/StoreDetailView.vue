@@ -36,15 +36,15 @@
           <p>你可能會喜歡</p>
         </div>
         <div class="OtherDetailCardbox">
-          <div v-for="(item) in 4" class="OtherDetailCard">
+          <router-link v-for="product in randomProducts" :key="product.pord_id" :to="'/storeDetail/' + product.pord_id" class="OtherDetailCard" @click="generateRandomProducts">
             <div class="DetailCardImg">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlsDygW5l6-urgSirZ28w1yJgNOy7sF4VJqQ&usqp=CAU" alt="">
+              <img :src="product.prod_img1" alt="">
             </div>
             <div class="DetailCardDes">
-              <h4 class="CardDesTitle">謝謝明信片</h4>
-              <p class="CardDesPrice">NT$150</p>
+              <h4 class="CardDesTitle">{{ product.pord_name }}</h4>
+              <p class="CardDesPrice">NT${{ product.pord_price }}</p>
             </div>
-          </div>
+          </router-link>
         </div>  
       </div>
     </div>
@@ -56,16 +56,21 @@ export default {
   data() {
     return {
       foundObject:"",
+      randomProducts: [], 
       selectedImage: 'https://img.shoplineapp.com/media/image_clips/5f7ecf347257270029e5c2dc/original.jpg?1602146100', 
       count: 1,
       value: 0,
     };
   },
-  mounted() {
-    const idToFind = this.$route.params.id;
-    this.foundObject = ProTest.find(item => item.pord_id === idToFind);
-  },
+
   methods: {
+    //產生隨機卡片
+    generateRandomProducts() {
+      const currentProductId = this.foundObject.pord_id;
+      const filteredProducts = ProTest.filter(item => item.pord_id !== currentProductId);
+      const shuffled = filteredProducts.slice().sort(() => 0.5 - Math.random());
+      this.randomProducts = shuffled.slice(0, 4);
+    },
     decrementCount() {
       if (this.count > 1) {
         this.count -= 1;
@@ -79,7 +84,23 @@ export default {
     },
     addToCart(product) {
     this.$store.dispatch('addToCart', product);
+    alert("已加入購物車");
   },
+  },
+  mounted() {
+    const idToFind = this.$route.params.id;
+    this.foundObject = ProTest.find(item => item.pord_id === idToFind);
+    //隨機
+    this.generateRandomProducts();
+  },
+  watch: {
+    // 觀察路徑的變化更改數據 因為mounted只能一次  所以用 watch
+    $route(to, from) {
+      const idToFind = to.params.id;
+      this.foundObject = ProTest.find((item) => item.pord_id === idToFind);
+      //更新後 在更新一次隨機清單
+      this.generateRandomProducts();
+    },
   },
 };
 </script>

@@ -27,12 +27,9 @@
     </div>
     <div class="storecardbox">
       <div v-for="item  in testitem "  :key="item.pord_id"  class="storeCard">
-        <img
-          @click="goToStoreDetail(item.pord_id)"
-          class="storeCardimg"
-          :src="item.prod_img1"
-          alt=""
-        />
+        <router-link :to="'/storeDetail/' + item.pord_id" >
+        <img  class="storeCardimg" :src="item.prod_img1" alt=""/>
+        </router-link>
         <div class="storeBottom">
           <div class="storeCardText">
             <h3 class="CardDes">{{ item.pord_name }}</h3>
@@ -42,7 +39,6 @@
             <i class="fa-regular fa-heart" style="cursor: pointer"></i>
             <button class="btn_s" @click="addToCart(item)">加入購物車</button>
             <div>
-            <notification ref="notification"></notification>
             </div>
           </div>
         </div>
@@ -53,10 +49,8 @@
 
 <script>
 import ProTest from "@/testdata/ProTest.json"
-import Notification from "@/components/Notification.vue";
 export default {
   components: {
-    Notification,
   },
   data() {
     return {
@@ -64,18 +58,17 @@ export default {
     };
   },
   methods: {
-    goToStoreDetail(Detail) {
-      this.$router.push({
-        name: 'storeDetail',
-        params: {
-          id:Detail
-          }
-      });
-    },
+    // goToStoreDetail(Detail) {
+    //   this.$router.push({
+    //     name: 'storeDetail',
+    //     params: {
+    //       id:Detail
+    //       }
+    //   });
+    // },
     addToCart(product) {
     this.$store.dispatch('addToCart', product);
     alert("已加入購物車");
-    // this.$refs.notification.showNotification("已加入購物車");
   },
   },
 };
