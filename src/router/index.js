@@ -129,12 +129,13 @@ const routes = [
     name: "shopping",
     component: () =>
       import(/* webpackChunkName: "Cart" */ "@/views/Shopping.vue"),
+      props: true,
   },
   {
     path: "/shoppingDone",
     name: "shoppingDone",
-    component: () =>
-      import(/* webpackChunkName: "Cart" */ "@/views/ShoppingDone.vue"),
+    // component: () =>
+    //   import(/* webpackChunkName: "Cart" */ "@/views/ShoppingDone.vue"),
   },
   {
     path: "/pwdSuccess",

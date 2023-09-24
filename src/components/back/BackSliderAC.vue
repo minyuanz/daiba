@@ -4,7 +4,9 @@
             <img src="https://steam.oxxostudio.tw/webp/gimp/example/simple-keyer-mask-16.webp" />
         </div>
         <h3>NAME</h3>
+        <router-link to="/Back/BackLogin" >
         <button>登出</button>
+        </router-link>
         <nav>
             <ul>
                 <li :class="{ 'is-active': $route.path === '/Back/BackMember' }"><router-link to="/Back/BackMember">會員管理</router-link></li>

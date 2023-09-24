@@ -22,16 +22,16 @@
           <div>數量</div>
           <div>小計</div>
         </div>
-        <div v-for="card in 3" class="ShopProCardDetail">
+        <div v-for="(product, index) in cartItems" :key="index" class="ShopProCardDetail">
           <div class="CardDetailImg">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlsDygW5l6-urgSirZ28w1yJgNOy7sF4VJqQ&usqp=CAU" alt="">
+            <img :src="product.prod_img1" alt="" />
           </div>
-          <div class="CardDetailTitle">吃的蛋糕</div>
-          <div class="CardDetailPrice">NT$320</div>
+          <div class="CardDetailTitle">{{ product.pord_name }}</div>
+          <div class="CardDetailPrice">NT${{ product.pord_price }}</div>
           <div class="CardDetailCount">
-            <p>{{ 1 }}</p>
+            <p>{{ product.count }}</p>
           </div>
-          <div class="CardDetailTotal">NT$320</div>
+          <div class="CardDetailTotal">NT${{ product.pord_price * product.count }}</div>
           <div class="CardDetailDelet"></div>
         </div>
       </div>
@@ -122,6 +122,14 @@ export default {
       expirationDate: '',
       securityCode: '',
     };
+  },
+  computed: {
+    cartItems() {
+      return this.$store.state.cart; 
+    },
+    cartTotal() {
+      return this.$store.getters.cartTotal; 
+    },
   },
   methods: {
     gotoCart(){

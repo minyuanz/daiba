@@ -26,14 +26,13 @@
       <button class="storeSearchBt">搜尋</button>
     </div>
     <div class="storecardbox">
-      <div v-for="item in testitem" :key="item.pord_id" class="storeCard">
-        <router-link :to="{ name: 'storeDetail', params: { id: item.pord_id } }">
-          <img
+      <div v-for="item  in testitem "  :key="item.pord_id"  class="storeCard">
+        <img
+          @click="goToStoreDetail(item.pord_id)"
           class="storeCardimg"
           :src="item.prod_img1"
           alt=""
         />
-      </router-link>
         <div class="storeBottom">
           <div class="storeCardText">
             <h3 class="CardDes">{{ item.pord_name }}</h3>
@@ -41,7 +40,7 @@
           </div>
           <div class="storeButton">
             <i class="fa-regular fa-heart" style="cursor: pointer"></i>
-            <button class="btn_s">加入購物車</button>
+            <button class="btn_s" @click="addToCart(item)">加入購物車</button>
           </div>
         </div>
       </div>
@@ -59,17 +58,17 @@ export default {
     };
   },
   methods: {
-    // goToStoreDetail(Detail) {
-    //   this.$router.push({
-    //     name: 'storeDetail',
-    //     params: {
-    //       id:Detail
-    //       }
-    //   });
-    // },
-    addToCart(product) {
-      this.$store.dispatch("addToCart", product);
+    goToStoreDetail(Detail) {
+      this.$router.push({
+        name: 'storeDetail',
+        params: {
+          id:Detail
+          }
+      });
     },
+    addToCart(product) {
+    this.$store.dispatch('addToCart', product);
+  },
   },
 };
 </script>
