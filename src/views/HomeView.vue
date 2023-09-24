@@ -88,52 +88,24 @@
     </nav>
 
     <div class="homeBanner">
-      <div class="swiper">
+      <div class="swiper left">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=1" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=1" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=1" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=2" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=2" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=2" alt="" />
+          <div class="swiper-slide" v-for="(path, index) in buildingPaths" :key="index">
+            <img :src="path" alt="Image">
           </div>
         </div>
       </div>
-      <router-link to="/" class="home">
-        <div class="logo">
+      
+      <div class="logo">
+        <router-link to="/" class="home">
           <img src="../../public/img/logo.png" alt="logo" />
-        </div>
-      </router-link>
-      <div class="swiper mb-none">
+        </router-link>
+      </div>
+      
+      <div class="swiper mb-none right">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=1" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=1" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=1" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=2" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=2" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=2" alt="" />
+          <div class="swiper-slide" v-for="(path, index) in buildingPaths" :key="index">
+            <img :src="path" alt="Image">
           </div>
         </div>
       </div>
@@ -190,6 +162,21 @@ import gsap from "gsap";
 import Swiper from "swiper/bundle";
 export default {
 
+  data () {
+      return {
+        buildingPaths: [],  
+      }
+  },
+  created() {
+    this.importImages();
+  },
+  methods: {
+    importImages() {
+      const buildings = require.context('@/assets/images/building', false, /\.(png|jpe?g|gif|svg)$/);
+
+      this.buildingPaths = buildings.keys().map(key => buildings(key));
+    }
+  },
   mounted() {
     const swiper = new Swiper(".swiper", {
       // Optional parameters
@@ -197,7 +184,7 @@ export default {
       speed: 2000,
       loop: true,
       slidesPerView: 3,
-      spaceBetween: 30,
+      spaceBetween: 10,
       allowTouchMove: false,
       autoplay: {
         delay: 0,
