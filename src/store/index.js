@@ -19,6 +19,9 @@ export default createStore({
       // 計算總價
       return state.cart.reduce((total, product) => total + product.pord_price * product.count, 0);
     },
+    cartItemCount(state) {
+      return state.cart.length; 
+    },
   },
   mutations: {
     addToCart(state, product) {

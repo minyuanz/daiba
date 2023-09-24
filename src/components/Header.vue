@@ -99,13 +99,14 @@
       <router-link to="/New" class="new">最新消息</router-link>
       <router-link to="/about" class="about">關於我們</router-link>
       <router-link to="/Login" class="login">會員中心</router-link>
-      <router-link to="/cart" class="cart">購物車</router-link>
+      <router-link to="/cart" class="cart">購物車 ({{cartItemCount}})</router-link>
       <router-link to="/Test" class="test">排版用之後刪掉</router-link>
     </nav>
   </header>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import gsap from "gsap";
 export default {
   data() {
@@ -123,7 +124,8 @@ export default {
     },
     hbclose() {
       return this.$route.path === "/home";
-    },
+    }, 
+    ...mapGetters('cart', ['cartItemCount']),
   },
 
   methods: {
