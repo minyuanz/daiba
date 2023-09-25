@@ -21,8 +21,10 @@
                     <option value="女" >女</option>
                 </select>
             </div>
-            <button class="btn_l">確認更改</button>
-            <button class="btn_s" @click="menu">返回</button>
+            <div class="acurrance">
+                <button class="btn_l">確認更改</button>
+                <button class="btn_l btn_undo" @click="menu">返回</button>
+            </div>
         </div>
     </div>
 </template>
@@ -59,22 +61,23 @@ export default {
         margin-top: 50px;
     }
 
-    .changebox {
-        // border: 1px solid red;
-        // margin-top: 50px;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 180px repeat(6, 1fr);
-        justify-items: center;
-        align-items: center;
-        gap: 40px;
-
+    .changebox >*{
+        display: block;
+        inset: 0;
+        margin: 3rem auto;
+    }
+        .acurrance{
+            button{
+                display: block;
+                margin: 2rem auto;
+            }
+        }
         .accPic {
             // border: 1px solid red;
             width: 180px;
             height: 180px;
             margin: auto;
-            // margin-top: 10px;
+            margin-top: 2rem;
 
             img {
                 width: 100%;
@@ -83,26 +86,33 @@ export default {
                 vertical-align: top;
                 border: 8px solid black;
             }
-
-            button {
-                // text-align: center;
-                margin-top: 10px;
-            }
         }
 
         label {
+            width: 400px;
             display: block;
+            inset: 0;
+            margin: auto;
             margin-bottom: 10px;
+            font-size: map-get($map,small);
         }
 
         input {
-            width: 100%;
+            width: 400px;
+            display: block;
             border: transparent;
+            inset: 0;
+            margin: auto;
             border-bottom: 1px solid #aaa;
+            font-size: map-get($map,small);
+        }
+        select{
+            display: block;
+            margin-left: 2rem;
+            font-size: map-get($map,small);
         }
 
         .changeName {
-            // border: 1px solid red;
             width: 50%;
 
         }
@@ -112,20 +122,25 @@ export default {
         }
 
         .changeSex {
+            // display: flex;
             width: 50%;
         }
-    }
 }
 
 @media screen and (max-width:414px) {
     .accchange {
-        // width: 100%;
+        width: 100%;
         .changebox {
+            width: 100%;
+            button{
+                width: 80%;
+            }
             .accPic {
-                // width: 80%;
-
-                label {
-                    width: 20%;
+                width: 150px;
+                height: 150px;
+                img{
+                    width: 150px;
+                    height: 150px;
                 }
 
                 span {
@@ -136,14 +151,27 @@ export default {
             .changeName {
                 // border: 1px solid red;
                 width: 80%;
+                label,input{
+                    width: 100%;
+                }
             }
 
             .changeBir {
                 width: 80%;
+                label,input{
+                    width: 100%;
+                }
             }
 
             .changeSex {
                 width: 80%;
+                // margin: 0;
+                display: flex;
+                label,select{ 
+                    margin: 0;
+                    display: inline-block;
+                    width: 25%;
+                }
             }
         }
     }
