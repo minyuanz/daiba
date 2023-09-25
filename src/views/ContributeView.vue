@@ -55,7 +55,9 @@
             <span @click="closeTxt = !closeTxt">✖</span>
         </div>
         <div class="toCB">
-            <router-link to="/Submit" class="btn_s">我要投稿</router-link>
+            <router-link to="/Submit">
+                <ButtonM :HTMLInner="btninner"/>
+            </router-link>
         </div>
     </section>
 
@@ -164,9 +166,11 @@
 <script>
 import { faL } from "@fortawesome/free-solid-svg-icons";
 import Swiper from "swiper/bundle";
+import ButtonM from '@/components/ButtonM.vue';
 export default {
     data() {
         return {
+            btninner:"我要投稿",
             publicPath: process.env.BASE_URL,
             swipers: [
                 {
@@ -255,6 +259,9 @@ export default {
             closePost: false,
             lightBox: false,
         };
+    },
+    components:{
+    ButtonM
     },
     methods: {
         evenPic(taipeisIndex) {
