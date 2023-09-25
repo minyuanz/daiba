@@ -45,9 +45,9 @@
       </div>
     </div>
     <div class="pagination">
-      <button @click="prevPage" :disabled="currentPage === 1">上一页</button>
+      <button @click="prevPage" :disabled="currentPage === 1">上一頁</button>
       <button @click="goToPage(page)" v-for="page in totalPages" :key="page">{{ page }}</button>
-      <button @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
+      <button @click="nextPage" :disabled="currentPage === totalPages">下一頁</button>
     </div>
   </div>
 </template>
@@ -117,11 +117,14 @@ export default {
     border-bottom: 5px black solid;
     padding-bottom: 15px;
     font-weight: bold;
+    text-align: center;
+    padding: 50px;
   }
   .storeSearch {
     width: 100%;
     height: 10vh;
     display: flex;
+    justify-content: center;
     align-items: center;
     font-size: map-get($map: $fontsizes, $key: h4);
 
