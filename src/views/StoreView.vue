@@ -26,7 +26,7 @@
       <button class="storeSearchBt">搜尋</button>
     </div>
     <div class="storecardbox">
-      <div v-for="item  in testitem "  :key="item.pord_id"  class="storeCard">
+      <div v-for="item  in paginatedProducts "  :key="item.pord_id"  class="storeCard">
         <router-link :to="'/storeDetail/' + item.pord_id" >
         <img  class="storeCardimg" :src="item.prod_img1" alt=""/>
         </router-link>
@@ -44,6 +44,11 @@
         </div>
       </div>
     </div>
+    <div class="pagination">
+      <button @click="prevPage" :disabled="currentPage === 1">上一页</button>
+      <button @click="goToPage(page)" v-for="page in totalPages" :key="page">{{ page }}</button>
+      <button @click="nextPage" :disabled="currentPage === totalPages">下一页</button>
+    </div>
   </div>
 </template>
 
@@ -54,6 +59,9 @@ export default {
   },
   data() {
     return {
+      allProducts: ProTest, // 假設顯示所有商品數據
+      pageSize: 6,         // 每頁顯示數量
+      currentPage: 1 ,     // 當前頁數
       testitem: ProTest,
     };
   },
@@ -70,7 +78,30 @@ export default {
     this.$store.dispatch('addToCart', product);
     alert("已加入購物車");
   },
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage -= 1;
+    }
   },
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage += 1;
+    }
+  },
+  goToPage(page) {
+    this.currentPage = page;
+  }
+  },
+  computed: {
+  paginatedProducts() {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    return this.allProducts.slice(startIndex, endIndex);
+  },
+  totalPages() {
+    return Math.ceil(this.allProducts.length / this.pageSize);
+  }
+}
 };
 </script>
 
