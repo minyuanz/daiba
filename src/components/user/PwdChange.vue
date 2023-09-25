@@ -28,7 +28,7 @@
                 <button class="btn_l">確認更改</button>
                 <button class="btn_l btn_undo" @click="menu">返回</button>
             </div>
-            
+
         </div>
     </div>
 </template>
@@ -64,10 +64,11 @@ export default {
         text-align: center;
         margin-top: 50px;
     }
+
     .changebox {
         width: 400px;
         inset: 0;
-        margin: 5rem auto ;
+        margin: 5rem auto;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -76,28 +77,32 @@ export default {
 
         .acc {
             width: 100%;
-            span{
 
-                font-size: map-get($map , small );
-                margin-bottom: 10px;
+            span {
+                display: block;
+                text-align: center;
+                // border: 1px solid red;
+                font-size: map-get($map , small);
+                // margin-bottom: 10px;
             }
         }
 
         label {
             width: 400px;
             display: block;
-            font-size: map-get($map , small );
+            font-size: map-get($map , small);
             margin-bottom: 10px;
         }
 
         input {
             width: 400px;
             display: block;
-            font-size: map-get($map , small );
+            font-size: map-get($map , small);
             border: transparent;
             border-bottom: 1px solid #aaa;
         }
-        .accurance>*{
+
+        .accurance>* {
             margin: .5rem 0;
         }
 
@@ -107,18 +112,24 @@ export default {
 @media screen and (max-width:414px) {
     .pwdchange {
         width: 100%;
+
         .changebox {
             width: 100%;
+
             .acc {
                 width: 80%;
 
             }
         }
-        .changebox>*{
+
+        .changebox>* {
             width: 80%;
-            input,label{
+
+            input,
+            label {
                 width: 100%;
             }
         }
     }
-}</style>
+}
+</style>

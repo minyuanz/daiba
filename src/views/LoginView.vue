@@ -25,7 +25,7 @@
         <input type="password" id="pwd" v-model="userPwd" />
       </div>
       <router-link to="/ForgetPwd">忘記密碼 ?</router-link>
-      <button class="btn_l">
+      <button class="btn_l btnlogin">
         <router-link to="/User">登入</router-link>
       </button>
       <router-link to="/RegisterView">還沒有會員 ? 會員註冊</router-link>

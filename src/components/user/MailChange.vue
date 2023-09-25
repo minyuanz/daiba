@@ -4,7 +4,7 @@
         <div class="changebox">
             <div class="mail">
                 <label for="">信箱</label>
-                <span>0912-345-678</span>
+                <span>qaq@gmail.com</span>
             </div>
             <div class="changeMail">
                 <label for="">新信箱</label>
@@ -58,12 +58,12 @@ export default {
         .mail {
 
             label {
-                font-size: map-get($map , small );
+                font-size: map-get($map , small);
                 display: inline-block;
             }
 
             span {
-                font-size: map-get($map , small );
+                font-size: map-get($map , small);
                 display: inline-block;
                 width: 100%;
                 text-align: center;
@@ -72,8 +72,9 @@ export default {
             // text-align: center;
         }
 
-        label,input {
-            font-size: map-get($map , small );
+        label,
+        input {
+            font-size: map-get($map , small);
             display: block;
             width: 100%;
             margin-bottom: 10px;
@@ -83,7 +84,8 @@ export default {
             border: transparent;
             border-bottom: 1px solid #aaa;
         }
-        button{
+
+        button {
             margin: .5rem 0;
         }
     }
@@ -92,18 +94,31 @@ export default {
 @media screen and (max-width:414px) {
     .mailchange {
         height: 670px;
+
         .changebox {
             width: 80%;
+
             .mail {
-                label { width: 35%;}
-                span { width: 65%;}
+                label {
+                    width: 35%;
+                }
+
+                span {
+                    width: 65%;
+                }
             }
+
             .changeMail {
                 display: flex;
-                label { width: 35%;}
-                input { width: 65%;}
+
+                label {
+                    width: 35%;
+                }
+
+                input {
+                    width: 65%;
+                }
             }
         }
     }
-}
-</style>
+}</style>
