@@ -28,9 +28,9 @@
                 <h2>{{ news.news_title }}</h2>
                 <!-- <h3>{{ news.news_title }}</h3> -->
 
-                <button class="btn_s">
-                  <router-link :to="{ name: 'newinside', params: { id: news.news_id } }">更多</router-link>
-                </button>
+                <router-link :to="{ name: 'newinside', params: { id: news.news_id } }">
+                  <ButtonS :HTMLInner="btninner"/>
+                </router-link>
               </div>
 
               <div class="newsCtxPic">
@@ -81,9 +81,9 @@
             <p class="newsCtx">
               {{ card.news_des1 }}
             </p>
-            <button class="btn_s">
-              <router-link :to="{ name: 'newinside', params: { id: card.news_id } }">更多</router-link>
-            </button>
+            <router-link :to="{ name: 'newinside', params: { id: card.news_id } }">
+              <ButtonS :HTMLInner="btninner"/>
+            </router-link>
           </div>
         </router-link>
       </div>
@@ -98,10 +98,12 @@
 <script>
 import Swiper from "swiper/bundle";
 import news from "@/testdata/news.json";
+import ButtonS from '@/components/ButtonS.vue';
 
 export default {
   data() {
     return {
+      btninner:"更多",
       publicPath: process.env.BASE_URL,
       tagtoggle: '所有消息',
       slider: [{
@@ -141,6 +143,9 @@ export default {
       newswiper: [],
     }
   },
+  components:{
+    ButtonS
+    },
   methods: {
     changeHandler(tag) {
       // console.log(tag);

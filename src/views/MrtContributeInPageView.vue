@@ -119,6 +119,7 @@
         ✦ 白天為咖啡廳，晚上是酒吧<br />
         ✦ PM8:00後才提供調酒
       </p>
+      <ButtonM :HTMLInner="btninner"/>
     </div>
   </div>
 </template>
@@ -129,6 +130,7 @@ import background3 from "@../../../public/img/ron/part3bgc.svg";
 import backgroundMb3 from "@../../../public/img/ron/part3_mb.svg";
 import background4 from "@../../../public/img/ron/part4bgc.svg";
 import backgroundMb4 from "@../../../public/img/ron/part4_mb.svg";
+import ButtonL from '@/components/ButtonM.vue'
 export default {
   data() {
     return {
@@ -137,8 +139,12 @@ export default {
       background3,backgroundMb3,
       background4,backgroundMb4,
       MB:false,
-      PC:false
+      PC:false,
+      btninner:"官方網站"
     };
+  },
+  components:{
+    ButtonL
   },
   mounted () {
     this.WindowWidth();

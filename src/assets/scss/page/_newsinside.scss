@@ -29,18 +29,13 @@
 
   .newsinBtn {
     // border: 1px solid red;
+    width: 100%;
     text-align: right;
-    margin-top: 100px;
-
-    button {
-      margin-left: 50px;
-
-      .btn_a {
-        display: block;
-        line-height: 36px;
-        // height: 100%;
-        // border: 1px solid red;
-      }
+    display: flex;
+    justify-content: flex-end;
+    margin: 100px 0;
+    a .small{
+      margin-right: 1rem;
     }
   }
 
