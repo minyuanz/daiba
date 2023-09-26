@@ -7,12 +7,12 @@
         <img src="@/assets/images/game/station_AM.jpg" alt="home">
       </div>
       <img src="../assets/images/game/gameLogo.png" alt="gameLogo" class="gameLogo">
-      <ButtonS class="start" :HTMLInner="btninner[0]" @click="closeName = !closeName"/>      
+      <ButtonS class="start" :HTMLInner="btninner[0]" @click="closeName = !closeName" />
       <!-- <button class="start btn_s" @click="closeName = !closeName">start</button> -->
       <div class="name" v-show="closeName">
         <p>請輸入ID</p>
-        <input type="text" maxlength="8" v-model="userName">      
-        <ButtonS class="btn_s" :HTMLInner="btninner[1]" @click="checkName"/>      
+        <input type="text" maxlength="8" v-model="userName">
+        <ButtonS class="btn_s" :HTMLInner="btninner[1]" @click="checkName" />
         <!-- <button class="btn_s" @click="checkName">OK</button> -->
       </div>
     </div>
@@ -109,9 +109,9 @@ import { faRuler } from '@fortawesome/free-solid-svg-icons';
 export default {
   data() {
     return {
-      btninner:["START","OK"],
+      btninner: ["START", "OK"],
       messages: [],  //對話內容
-      currentMessageIndex: 0, //對話內容索引值
+      currentMessageIndex: 16, //對話內容索引值
       userName: '222', //使用者名稱
       closeName: false, //關閉填寫名稱欄位
       home: false, //遊戲首頁
@@ -128,7 +128,7 @@ export default {
       loading: false, //讀取
     };
   },
-  components:{
+  components: {
     ButtonS
   },
   computed: {
@@ -265,8 +265,20 @@ export default {
       },
       {
         id: 17,
-        text: `${this.userName}你看！是白天欸，`,
+        text: `${this.userName}你看！是白天欸，台北馬路如虎口，大家要小心哦！`,
         image: require("@/assets/images/game/tokai.png"),
+        npc: true,
+      },
+      {
+        id: 18,
+        text: "好...",
+        image: require("@/assets/images/game/tokai.png"),
+        user: true,
+      },
+      {
+        id: 19,
+        text: "咳咳...好的，第一站",
+        image: require("@/assets/images/game/chuuka.jpg"),
         npc: true,
       },
     ];
