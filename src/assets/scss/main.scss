@@ -21,15 +21,17 @@
 @import "component/grid";
 @import "component/tag";
 @import "component/slider";
+@import "component/back/slider";
+
 
 // layout
-@import "layout/header";
+// @import "layout/header";
 @import "layout/footer";
 @import "layout/login";
 @import "layout/animateLine";
 
 // page
-@import "page/index";
+// @import "page/index";
 @import "page/about";
 @import "page/product";
 @import "page/Login";
@@ -39,8 +41,8 @@
 @import "page/pwdSuccess";
 // @import "page/newView";
 // @import "page/newsinside";
-@import "page/user";
-@import "page/mrt";
+// @import "page/user";
+// @import "page/mrt";
 @import "page/ContributeView";
 @import "page/mrtContributeInPage";
 @import "page/Submit";

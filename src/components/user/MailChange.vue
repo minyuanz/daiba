@@ -4,15 +4,16 @@
         <div class="changebox">
             <div class="mail">
                 <label for="">信箱</label>
-                <!-- <input type="text"> -->
-                <span>0912-345-678</span>
+                <span>qaq@gmail.com</span>
             </div>
             <div class="changeMail">
                 <label for="">新信箱</label>
                 <input type="text" v-model="changemail">
             </div>
-            <button class="btn_l">確認更改</button>
-            <button class="btn_s" @click="menu">返回</button>
+            <div class="accurance">
+                <button class="btn_l">確認更改</button>
+                <button class="btn_l btn_undo" @click="menu">返回</button>
+            </div>
         </div>
     </div>
 </template>
@@ -27,9 +28,6 @@ export default {
     methods: {
         menu() {
             this.$emit('toggle-change')
-            // console.log(11)
-            // document.getElementById('MailChange').style.display = 'none'
-            // document.querySelector('.userInfo').style.display = 'block'
         }
     }
 }
@@ -41,8 +39,6 @@ export default {
     background-color: #fff;
     border-radius: 20px;
     width: 900px;
-    // margin-left: 10px;
-    // display: none;
 
     h1 {
         text-align: center;
@@ -50,71 +46,79 @@ export default {
     }
 
     .changebox {
+        width: 400px;
         margin-top: 50px;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(6, 1fr);
-        justify-items: center;
-        gap: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 3rem;
+        inset: 0;
+        margin: 5rem auto;
 
         .mail {
-            // border: 1px solid red;
-            width: 50%;
 
             label {
-                // border: 1px solid red;
+                font-size: map-get($map , small);
                 display: inline-block;
-                width: 20%;
             }
 
             span {
-                // border: 1px solid red;
+                font-size: map-get($map , small);
                 display: inline-block;
-                width: 80%;
+                width: 100%;
                 text-align: center;
             }
 
             // text-align: center;
         }
 
-        label {
+        label,
+        input {
+            font-size: map-get($map , small);
             display: block;
+            width: 100%;
             margin-bottom: 10px;
         }
 
         input {
-            width: 100%;
             border: transparent;
             border-bottom: 1px solid #aaa;
         }
 
-        .changeMail {
-            // border: 1px solid red;
-            width: 50%;
+        button {
+            margin: .5rem 0;
         }
-
     }
 }
 
 @media screen and (max-width:414px) {
     .mailchange {
-        .changebox {
-            .mail {
-                width: 80%;
+        height: 670px;
 
+        .changebox {
+            width: 80%;
+
+            .mail {
                 label {
-                    width: 30%;
+                    width: 35%;
                 }
 
                 span {
-                    width: 70%;
+                    width: 65%;
                 }
             }
 
             .changeMail {
-                width: 80%;
+                display: flex;
+
+                label {
+                    width: 35%;
+                }
+
+                input {
+                    width: 65%;
+                }
             }
         }
     }
-}
-</style>
+}</style>

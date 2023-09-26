@@ -88,52 +88,24 @@
     </nav>
 
     <div class="homeBanner">
-      <div class="swiper">
+      <div class="swiper left">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=1" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=1" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=1" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=2" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=2" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=2" alt="" />
+          <div class="swiper-slide" v-for="(path, index) in buildingPaths" :key="index">
+            <img :src="path" alt="Image">
           </div>
         </div>
       </div>
-      <router-link to="/" class="home">
-        <div class="logo">
+      
+      <div class="logo">
+        <router-link to="/" class="home">
           <img src="../../public/img/logo.png" alt="logo" />
-        </div>
-      </router-link>
-      <div class="swiper mb-none">
+        </router-link>
+      </div>
+      
+      <div class="swiper mb-none right">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=1" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=1" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=1" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=2" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=2" alt="" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://picsum.photos/200/300/?random=2" alt="" />
+          <div class="swiper-slide" v-for="(path, index) in buildingPaths" :key="index">
+            <img :src="path" alt="Image">
           </div>
         </div>
       </div>
@@ -141,13 +113,38 @@
   </div>
   <div class="animate">
     <div class="circle">
-      <svg ref="svgElement" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 107 190"
-        enable-background="new 0 0 107 190">
-        <circle fill="none" id="circle" stroke-dasharray="0 610 610 0" class="stat-outline-circle" stroke="#fff04b"
-          stroke-width="8" stroke-miterlimit="10" cx="53.5" cy="95" r="30%"></circle>
+      <svg
+        ref="svgElement"
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        height="100%"
+        viewBox="0 0 107 190"
+        enable-background="new 0 0 107 190"
+      >
+        <circle
+          fill="none"
+          id="circle"
+          stroke-dasharray="0 610 610 0"
+          class="stat-outline-circle"
+          stroke="#fff04b"
+          stroke-width="8"
+          stroke-miterlimit="10"
+          cx="53.5"
+          cy="95"
+          r="30%"
+        ></circle>
 
-        <animate attributeType="XML" xlink:href="#circle" id="circleanimate" attributeName="stroke-dashoffset" from="0"
-          to="610" dur="3s" begin=".2s" fill="freeze" />
+        <animate
+          attributeType="XML"
+          xlink:href="#circle"
+          id="circleanimate"
+          attributeName="stroke-dashoffset"
+          from="0"
+          to="610"
+          dur="3s"
+          begin=".2s"
+          fill="freeze"
+        />
         <!-- <animate
           attributeType="XML"
           xlink:href="#circle"
@@ -163,10 +160,9 @@
     </div>
     <div class="displaycenter">
       <div class="logo">
-        <img src="../../public/img/logo.png" alt="">
+        <img src="../../public/img/logo.png" alt="" />
       </div>
     </div>
-
 
     <div class="animateLine">
       <div class="row-line">
@@ -180,7 +176,6 @@
         <div class="c-line tangerine"></div>
         <div class="c-line grap"></div>
       </div>
-
     </div>
   </div>
 </template>
@@ -190,6 +185,21 @@ import gsap from "gsap";
 import Swiper from "swiper/bundle";
 export default {
 
+  data () {
+      return {
+        buildingPaths: [],  
+      }
+  },
+  created() {
+    this.importImages();
+  },
+  methods: {
+    importImages() {
+      const buildings = require.context('@/assets/images/building', false, /\.(png|jpe?g|gif|svg)$/);
+
+      this.buildingPaths = buildings.keys().map(key => buildings(key));
+    }
+  },
   mounted() {
     const swiper = new Swiper(".swiper", {
       // Optional parameters
@@ -197,7 +207,7 @@ export default {
       speed: 2000,
       loop: true,
       slidesPerView: 3,
-      spaceBetween: 30,
+      spaceBetween: 10,
       allowTouchMove: false,
       autoplay: {
         delay: 0,
@@ -219,7 +229,6 @@ export default {
       }
     }, 3000);
 
-
     gsap.fromTo(
       ".chocolate",
       {
@@ -240,7 +249,7 @@ export default {
       {
         x: "-150%",
         duration: 1,
-        delay: .2,
+        delay: 0.2,
       }
     );
 
@@ -252,7 +261,7 @@ export default {
       {
         x: "-150%",
         duration: 1,
-        delay: .4,
+        delay: 0.4,
       }
     );
 
@@ -264,7 +273,7 @@ export default {
       {
         y: "-160%",
         duration: 1,
-        delay: .6,
+        delay: 0.6,
       }
     );
 
@@ -276,7 +285,7 @@ export default {
       {
         y: "-160%",
         duration: 1,
-        delay: .8,
+        delay: 0.8,
       }
     );
 
@@ -294,6 +303,11 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+@import "../assets/scss/page/index";
+</style>
+
 <!-- <script>
 import gsap from "gsap"; // 确保正确引入GSAP库
 

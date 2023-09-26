@@ -57,14 +57,14 @@
             <p class="title">商品照</p>
             <p class="title">(第一張為商品版頭)</p>
             <div class="picArea">
-                <div class="uploadPic" v-for="i in 8">
+                <div class="uploadPic" v-for="(pic, index) in pics" :key="index">
                     <div class="pic">
                         <p>＋</p>
-                        <input type="file">
-                        <img src="" v-show="0">
+                        <input type="file" @change="handleFileChange($event, index)">
+                        <img :src="pic.imageURL" v-show="pic.fix">
                     </div>
                 </div>
-                <button>+</button>
+                <!-- <button>+</button> -->
             </div>
         </div>
         <div class="proCtx">
@@ -91,15 +91,52 @@ export default {
             isSwitchOn: false,
             items: BackProTest.map((item) => ({ ...item, isChecked: false, })),
             addToggle: true,
+            pics: [{
+                imageURL: null,
+                fix: false
+            }, {
+                imageURL: null,
+                fix: false
+            }, {
+                imageURL: null,
+                fix: false
+            },{
+                imageURL: null,
+                fix: false
+            },],
+
 
 
         }
-    }
+    },
+    methods: {
+        handleFileChange(e, index) {
+            const files = e.target.files; // 獲取所有所選文件
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const reader = new FileReader();
+                reader.onload = () => {
+                    // 當讀取完成時觸發
+                    this.pics[index].imageURL = reader.result; // 將 Data URL 賦值給圖片的 src
+                };
+                // this.pics[index].imageURL = true;
+                // 
+                if (file) {
+                    reader.readAsDataURL(file); // 讀取文件內容，以 Data URL 形式
+                }
+            }
+            this.pics[index].fix = true
+
+        },
+    },
+
 }
 </script>
 
 <style lang="scss">
 .BackPro {
+    margin-top: 3rem;
     border: 1px solid #aaa;
     background-color: #fff;
     border-radius: 20px;
@@ -200,7 +237,6 @@ export default {
 .proAdd {
     border: 1px solid #aaa;
     background-color: #fff;
-    border-radius: 20px;
     width: 900px;
     height: 900px;
     overflow: auto;
@@ -223,8 +259,8 @@ export default {
             margin: 10px 0;
 
             label {
-                font-size: 24px;
-                font-weight: bold;
+                // font-size: 24px;
+                // font-weight: bold;
             }
         }
     }
@@ -247,14 +283,14 @@ export default {
         }
 
         label {
-            font-size: 24px;
-            font-weight: bold;
+            // font-size: 24px;
+            // font-weight: bold;
         }
 
         select {
             width: 200px;
-            font-size: 24px;
-            font-weight: bold;
+            // font-size: 24px;
+            // font-weight: bold;
         }
     }
 
@@ -271,7 +307,7 @@ export default {
         }
 
         .picArea {
-            border: 1px solid red;
+            border: 1px solid #aaa;
             display: flex;
             align-items: center;
             // justify-content: center;
@@ -284,7 +320,7 @@ export default {
                 display: flex;
                 flex-direction: column;
                 // margin-top: 10px;
-                margin: 0 16px;
+                margin: 10px 20px;
 
                 .pic {
                     border: 1px dashed #aaa;
@@ -374,4 +410,5 @@ export default {
             padding: 10px 20px;
         }
     }
-}</style>
+}
+</style>

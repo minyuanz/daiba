@@ -45,9 +45,6 @@ export default {
     },
     data() {
         return {
-            username: '',
-            userbir: '',
-            usersex: '男',
             toggle: '會員資料'
         }
     },
@@ -59,7 +56,6 @@ export default {
             console.log(e.target.innerText)
             this.toggle = e.target.innerText
         },
-
     },
 }
 </script>

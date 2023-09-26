@@ -23,32 +23,29 @@
           <div>小計</div>
           <div></div>
         </div>
-        <div v-for="card in 3" class="CartProCardDetail">
+        <div v-for="(product, index) in cartItems" :key="index" class="CartProCardDetail">
           <div class="CardDetailImg">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlsDygW5l6-urgSirZ28w1yJgNOy7sF4VJqQ&usqp=CAU"
-              alt=""
-            />
+            <img :src="product.prod_img1" alt="" />
           </div>
-          <div class="CardDetailTitle">吃的蛋糕</div>
-          <div class="CardDetailPrice">NT$320</div>
+          <div class="CardDetailTitle">{{ product.pord_name }}</div>
+          <div class="CardDetailPrice">{{ product.pord_price }}</div>
           <div class="CardDetailCount">
-            <div @click="decrementCount">-</div>
-            <p>{{ count }}</p>
-            <div @click="incrementCount">+</div>
+            <div @click="decrementCount(product)">-</div>
+            <p>{{ product.count }}</p>
+            <div @click="incrementCount(product)">+</div>
           </div>
-          <div class="CardDetailTotal">NT$320</div>
-          <div class="CardDetailDelet">x</div>
+          <div class="CardDetailTotal">NT${{ product.pord_price * product.count }}</div>
+          <div class="CardDetailDelet"  @click="removeFromCart(product)">x</div>
         </div>
       </div>
       <div class="CartProTotalBox">
         <p class="CartProTotalTitle">商品金額小記:</p>
-        <p class="CartProTotalPrice">NT$320</p>
+        <p class="CartProTotalPrice">NT$ {{ cartTotal }}</p>
       </div>
     </div>
     <div class="CartBtmBox">
       <div class="CartBtnBack" @click="goToStore">返回購物</div>
-      <div class="CartBtnBackNex" @click="gotoShopping">前往結帳</div>
+      <div class="CartBtnBackNex" @click="gotoCheckout">前往結帳</div>
     </div>
   </div>
 </template>
@@ -60,24 +57,36 @@ export default {
       count: 1,
     };
   },
+  computed: {
+    cartItems() {
+    return this.$store.state.cart;
+  },
+  cartTotal() {
+    return this.$store.getters.cartTotal;
+  },
+},
   methods: {
-    decrementCount() {
-      if (this.count > 1) {
-        this.count -= 1;
-      }
-    },
-    incrementCount() {
-      this.count += 1;
-    },
+    //刪除商品
+    removeFromCart(product) {
+    this.$store.dispatch('removeFromCart', product);
+  },
+  // 清空商品
+  // clearCart() {
+  //   this.$store.dispatch('clearCart');
+  // },
+  // 減少數量
+  decrementCount(product) {
+    this.$store.commit('decrementCount', product);
+  },//增加數量
+  incrementCount(product) {
+    this.$store.commit('incrementCount', product);
+  },
     goToStore() {
       this.$router.push("/Store");
     },
-    gotoShopping() {
-      this.$router.push("/Shopping");
-    },
-    cartTotal() {
-      return this.$store.getters.cartTotal;
-    },
+    gotoCheckout() {
+  this.$router.push({ name: 'shopping', params: { cartItems: this.cartItems } });
+},
   },
 };
 </script>

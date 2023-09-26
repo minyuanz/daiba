@@ -7,11 +7,13 @@
         <img src="@/assets/images/game/station_AM.jpg" alt="home">
       </div>
       <img src="../assets/images/game/gameLogo.png" alt="gameLogo" class="gameLogo">
-      <button class="start btn_s" @click="closeName = !closeName">start</button>
+      <ButtonS class="start" :HTMLInner="btninner[0]" @click="closeName = !closeName"/>      
+      <!-- <button class="start btn_s" @click="closeName = !closeName">start</button> -->
       <div class="name" v-show="closeName">
         <p>請輸入ID</p>
-        <input type="text" maxlength="8" v-model="userName">
-        <button class="btn_s" @click="checkName">OK</button>
+        <input type="text" maxlength="8" v-model="userName">      
+        <ButtonS class="btn_s" :HTMLInner="btninner[1]" @click="checkName"/>      
+        <!-- <button class="btn_s" @click="checkName">OK</button> -->
       </div>
     </div>
   </transition>
@@ -31,9 +33,11 @@
 </template>
 
 <script>
+import ButtonS from '@/components/ButtonS.vue'
 export default {
   data() {
     return {
+      btninner:["START","OK"],
       messages: [],  //對話內容
       currentMessageIndex: 0, //對話內容索引值
       userName: '', //使用者名稱
@@ -43,6 +47,9 @@ export default {
       inputTxt: true, //文字打字機動畫
       txtKey: 1, //重新瑄染文字讓動畫可以重跑
     };
+  },
+  components:{
+    ButtonS
   },
   computed: {
     // 帶出當前對話內容索引值

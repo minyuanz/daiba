@@ -39,8 +39,8 @@
                 <label for="">版頭圖片</label>
                 <div class="pic">
                     <p>＋</p>
-                    <input type="file">
-                    <img src="">
+                    <input type="file" @change="FileChange">
+                    <img :src="imageURL" v-show="fix">
                 </div>
             </div>
         </div>
@@ -48,6 +48,7 @@
             <label for="">消息分類：</label>
             <select name="" id="">
                 <option value="">活動消息</option>
+                <option value="">最新消息</option>
             </select>
         </div>
         <div class="Ctx">
@@ -69,18 +70,38 @@ export default {
             item: BackProTest,
             items: BackProTest.map((item) => ({ ...item, isChecked: false, })),
             addToggle: true,
-            
-
+            imageURL: null,
+            fix: false
         }
-    }
+    },
+    methods: {
+        FileChange(e) {
+            const file = e.target.files[0]; // 獲取所有所選文件
+            const reader = new FileReader();
+
+            console.log(file);
+            console.log(reader);
+
+            reader.onload = () => {
+                // 當讀取完成時觸發
+                this.imageURL = reader.result; // 將 Data URL 賦值給圖片的 src
+            };
+
+            if (file) {
+                reader.readAsDataURL(file); // 讀取文件內容，以 Data URL 形式
+            }
+            this.fix = true
+
+        },
+    },
 }
 </script>
 
 <style lang="scss">
 .BackNews {
+    margin-top: 3rem;
     border: 1px solid #aaa;
     background-color: #fff;
-    border-radius: 20px;
     width: 900px;
     padding: 50px;
 
@@ -298,6 +319,7 @@ export default {
             border: 1px solid #aaa;
         }
     }
+
     .btn {
         // border: 1px solid red;
         margin-top: 30px;
@@ -308,4 +330,5 @@ export default {
             padding: 10px 20px;
         }
     }
-}</style>
+}
+</style>

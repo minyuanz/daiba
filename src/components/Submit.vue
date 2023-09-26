@@ -26,7 +26,8 @@
             </div>
             <!-- 下一步 -->
             <div class="next">
-                <button class="btn_s" @click="ToSubmit">下一步</button>
+                <ButtonS class="btn_s" :HTMLInner="btninner[0]" @click="ToSubmit"/>
+                <!-- <button class="btn_s" @click="ToSubmit">下一步</button> -->
             </div>
         </div>
     </section>
@@ -86,7 +87,7 @@
         </ul>
 
         <div class="next">
-            <button class="btn_s" @click="Send">下一步</button>
+            <ButtonS class="btn_s" :HTMLInner="btninner[0]" @click="Send"/>
         </div>
 
 
@@ -97,7 +98,9 @@
     <section class="SubmitFinish" v-show="Finish">
         <p>感謝您的投稿，我們將為您審核，請耐心等候。</p>
         <div class="next">
-            <router-link to="/Contribute" class="btn_s">返回投稿專欄</router-link>
+            <router-link to="/Contribute" class="btn_s">
+                <ButtonS :HTMLInner="btninner[1]"/>
+            </router-link>
         </div>
     </section>
 </template>
@@ -105,10 +108,11 @@
 
 <script>
 import { Checkbox } from 'view-ui-plus';
-
+import ButtonS from '@/components/ButtonS.vue';
 export default {
     data() {
         return {
+            btninner:["下一步","返回投稿熱門"],
             Norms: true,
             Submit: false,
             Finish: false,
@@ -128,7 +132,9 @@ export default {
 
         }
     },
-
+    components:{
+    ButtonS
+    },
 
     methods: {
         ToSubmit() {

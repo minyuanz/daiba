@@ -4,7 +4,9 @@
             <img src="https://steam.oxxostudio.tw/webp/gimp/example/simple-keyer-mask-16.webp" />
         </div>
         <h3>NAME</h3>
-        <button>登出</button>
+        <button>
+            <router-link to="/home" class="logout">登出</router-link>
+        </button>
         <nav>
             <ul>
                 <li @click="To"><router-link to="">會員資料</router-link></li>
@@ -40,4 +42,6 @@ export default {
     }
 }
 </script>
-<style></style>
+<style lang="scss">
+@import "@/assets/scss/component/slider";
+</style>

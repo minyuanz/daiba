@@ -199,9 +199,9 @@ export default {
 
 <style lang="scss">
 .backFeature {
+    margin-top: 3rem;
     border: 1px solid #aaa;
     background-color: #fff;
-    border-radius: 20px;
     width: 900px;
     padding: 50px;
 
@@ -391,7 +391,7 @@ export default {
                 position: relative;
 
                 p {
-                    font-size: 24px;
+                    // font-size: 24px;
                     line-height: 200px;
                 }
 
