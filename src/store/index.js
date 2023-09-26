@@ -11,7 +11,7 @@ const publicURL =
 const publicURLL =
   process.env.NODE_ENV === "development"
     ? ""
-    : "https://tibamef2e.com/chd103/g5/mrt";
+    : "https://tibamef2e.com/chd103/g5";
 export default createStore({
   state: {
     cart: [], // 儲存商品
