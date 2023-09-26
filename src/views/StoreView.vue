@@ -95,7 +95,7 @@ export default {
     //   });
     // },
     addToCart(product) {
-      this.$store.dispatch("addToCart", product);
+      this.$store.dispatch('addToCart', { ...product, count: this.count });
       alert("已加入購物車");
     },
     prevPage() {
@@ -251,8 +251,8 @@ export default {
         width: 100%;
         height: 300px;
       .storeCardimg {
-        width: 100%;
-        height: 100%;
+        width: 400px;
+        height: 300px;
         cursor: pointer;
       }
       }

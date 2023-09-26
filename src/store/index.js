@@ -65,7 +65,8 @@ export default createStore({
 
       if (existingProduct) {
         //如果有 則加一個
-        commit('incrementCount', existingProduct);
+        existingProduct.count += product.count;
+        commit('updateCart', state.cart);
       } else {
         // 沒有則 加入購物車
         commit('addToCart', product);
