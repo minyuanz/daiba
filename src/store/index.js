@@ -8,11 +8,16 @@ const publicURL =
   process.env.NODE_ENV === "development"
     ? ""
     : "https://tibamef2e.com/chd103/ingrid/koala";
+const publicURLL =
+  process.env.NODE_ENV === "development"
+    ? ""
+    : "https://tibamef2e.com/chd103/g5/mrt";
 export default createStore({
   state: {
     cart: [], // 儲存商品
     favorites: [],  
     purchaseProcess: {},
+    publicURLL
   },
   getters: {
     cartTotal(state) {
