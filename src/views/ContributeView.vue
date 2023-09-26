@@ -174,7 +174,10 @@ export default {
             publicPath: process.env.BASE_URL,
             swipers: [
                 {
-                    image: "../img/Grand Hyatt Taipei.jpg",
+                    // image: "../img/Grand Hyatt Taipei.jpg",
+                    // url: require("../../public/img/Grand Hyatt Taipei.jpg"),
+                    // image: require("../../public/img/Grand Hyatt Taipei.jpg"),
+                    image: `${this.$store.state.publicURLL}/img/Grand Hyatt Taipei.jpg`,
                     station: ["BL12", "R10"],
                     line: ["板南線", "淡水信義線"],
                     tag: "住宿",
@@ -182,7 +185,7 @@ export default {
                     CTName: "君品酒店",
                 },
                 {
-                    image: "../img/Humble Boutique Hotel.jpg",
+                    image: `${this.$store.state.publicURLL}/img/Humble Boutique Hotel.jpg`,
                     station: ["G15", "O08"],
                     line: ["松山新店線", "中和新蘆線"],
                     tag: "住宿",
@@ -190,7 +193,8 @@ export default {
                     CTName: "寒居酒店",
                 },
                 {
-                    image: "../img/Xiangshan.png",
+                    image: `${this.$store.state.publicURLL}/img/Xiangshan.png`,
+                    // image: "../img/Xiangshan.png",
                     station: ["R02"],
                     line: ["淡水信義線"],
                     tag: "景點",
@@ -198,7 +202,8 @@ export default {
                     CTName: "象山",
                 },
                 {
-                    image: "../img/Gui.jpg",
+                    image: `${this.$store.state.publicURLL}/img/Gui.jpg`,
+                    // image: "../img/Gui.jpg",
                     station: ["R12"],
                     line: ["淡水信義線"],
                     tag: "美食",
@@ -206,7 +211,8 @@ export default {
                     CTName: "正宗筒仔米糕",
                 },
                 {
-                    image: "../img/National monument.jpg",
+                    image: `${this.$store.state.publicURLL}/img/National monument.jpg`,
+                    // image: "../img/National monument.jpg",
                     station: ["G10", "R08"],
                     line: ["松山新店線", "淡水信義線"],
                     tag: "景點",
@@ -214,7 +220,8 @@ export default {
                     CTName: "中正紀念堂",
                 },
                 {
-                    image: "../img/Wagui.jpg",
+                    image: `${this.$store.state.publicURLL}/img/Wagui.jpg`,
+                    // image: "../img/Wagui.jpg",
                     station: ["G19"],
                     line: ["松山新店線"],
                     tag: "美食",
@@ -222,7 +229,8 @@ export default {
                     CTName: "饒河碗糕關東煮",
                 },
                 {
-                    image: "../img/Taipei Park.jpg",
+                    image: `${this.$store.state.publicURLL}/img/Taipei Park.jpg`,
+                    // image: "../img/Taipei Park.jpg",
                     station: ["R16"],
                     line: ["淡水信義線"],
                     tag: "景點",
@@ -230,7 +238,8 @@ export default {
                     CTName: "台北兒童新樂園",
                 },
                 {
-                    image: "../img/zoo.jpg",
+                    image: `${this.$store.state.publicURLL}/img/zoo.jpg`,
+                    // image: "../img/zoo.jpg",
                     station: ["BR01"],
                     line: ["文湖線"],
                     tag: "景點",
