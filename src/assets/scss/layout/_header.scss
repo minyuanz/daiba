@@ -181,6 +181,7 @@ header {
     }
 
     .weather {
+      pointer-events: none;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -188,6 +189,9 @@ header {
       right: 20%;
       top: 65%;
       gap: 5px;
+      p{
+          color:#666
+      }
 
       .celsius {
         color: map-get($color, $key: info);
@@ -350,7 +354,17 @@ header {
         }
       }
       .weather {
-        display: none;
+        scale: 0.8;
+        width: 33%;
+        top: 15%;
+        left: 60%;
+        gap: 1rem;
+        border: 2px solid #ddd;
+        padding: 0.5rem;
+        border-radius: 50px;
+        p{
+          color:#666
+        }
       }
     }
 
@@ -375,7 +389,7 @@ header {
             position: fixed;
             width: 30px;
             top: 60px;
-            left: 90%;
+            right: 10%;
           }
         }
 
@@ -398,14 +412,17 @@ header {
           }
         }
       }
-
+      .weather {
+        display: none;
+        }
+      }
       .hbclose {
         display: none;
       }
     }
-  }
-
   .--closeHeader {
     display: block;
   }
-}
+ }
+
+

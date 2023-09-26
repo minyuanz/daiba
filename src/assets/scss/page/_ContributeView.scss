@@ -399,6 +399,39 @@
   opacity: 0.7;
 }
 
+.mrtBanner:nth-of-type(2) {
+    right: 0;
+    transform: rotate(180deg);
+  }
+  
+  .mrtBanner {
+    width: 20%;
+    height: 100vh;
+    display: block;
+    position: fixed;
+    top: 0;
+    z-index: -2;
+  
+    .swiper {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+  
+      .swiper-wrapper {
+        transition-timing-function: linear !important;
+  
+        .swiper-slide {
+          width: 80%;
+        }
+  
+        img {
+          width: 100%;
+          vertical-align: top;
+        }
+      }
+    }
+  }
+
 @media screen and (max-width: 1280px) {
   .CBArea .CBPost {
       width: 1000px;
@@ -485,3 +518,98 @@
       }
   }
 }
+  .mrtBanner {
+    width: 10%;
+  }
+    
+
+@media screen and (max-width: 768px){
+    .CBArea .CBPost {
+        width: 100%;
+        height: 550px;
+  
+        .box {
+            margin: auto;
+            padding: 0;
+  
+            .swiperPost {
+                width: 300px;
+                margin: auto 30px;
+            }
+  
+            .inner {
+                p {
+                    font-size: 16px;
+                    line-height: 24px;
+                }
+  
+                .title {
+                    height: 50%;
+                    width: 98%;
+  
+                    h3 {
+                        font-size: map-get($fontsizes, h3);
+                        line-height: 40px;
+                    }
+  
+                    h4 {
+                        font-size: map-get($fontsizes, h5);
+                    }
+  
+                    .closePost {
+                        font-size: 40px;
+                        width: 50px;
+                        height: 50px;
+                        line-height: 45px;
+                        right: -6%;
+                        top: -48%;
+                    }
+                }
+  
+                .info {
+                    height: auto;
+                    padding-top: 15px;
+  
+                    .PostingDate {
+                        padding: 0;
+                    }
+                }
+  
+                .info::before {
+                    width: 420px;
+                }
+  
+                .txt {
+                    height: 180px;
+  
+                    p {
+                        text-indent: 2em;
+                        padding-top: 16px;
+                    }
+                }
+  
+                .author {
+                    span {
+                        font-size: 16px;
+                        font-weight: 900;
+                        line-height: 16px;
+                    }
+                }
+  
+                .head {
+                    position: absolute;
+                    border-radius: 50%;
+                    width: 90px;
+                    height: 90px;
+                    bottom: -2%;
+                    right: -2%;
+                    border: 6px solid #333;
+                }
+            }
+        }
+    }
+  }
+    .mrtBanner {
+      width: 10%;
+    }
+      

@@ -78,6 +78,25 @@
         height: 100%;
     }
 
+    .name {
+        display: inline-block;
+        position: absolute;
+        top: 60%;
+        left: 15%;
+        color: #fff;
+        background-color: #4448;
+        z-index: 3;
+        padding: 10px 20px;
+        text-align: center;
+        border-radius: 10px 10px 0 0;
+        display: flex;
+        gap: 5px;
+
+        p {
+            font-size: 26px;
+        }
+    }
+
     .speechBalloon {
         background-color: #4448;
         width: 70%;
@@ -85,11 +104,11 @@
         position: absolute;
         bottom: 1%;
         z-index: 2;
-        border-radius: 50px;
+        border-radius: 0 50px 50px 50px;
         left: 0;
         right: 0;
         margin: auto;
-        padding: 3rem;
+        padding: 2.5rem;
         cursor: pointer;
         color: #fff;
         overflow: hidden;
@@ -100,10 +119,12 @@
 
         }
 
+
+
         .inputTxt {
             overflow: hidden;
             white-space: nowrap;
-            animation: typing 3s steps(90, end);
+            animation: typing 2s steps(90, end);
 
         }
 
@@ -117,7 +138,7 @@
             }
         }
 
-        span {
+        .nextBtn {
             font-size: 20px;
             position: absolute;
             right: 5%;
@@ -140,4 +161,157 @@
             }
         }
     }
+
+    .optionsLightbox {
+        z-index: 5;
+        position: absolute;
+        inset: 0;
+
+        .option {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: auto;
+            background-color: #444d;
+            border-radius: 50px;
+            width: 350px;
+            height: 450px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            justify-content: center;
+            align-items: center;
+            z-index: 5;
+
+
+            .btn_s {
+                font-size: 26px;
+                margin: auto;
+            }
+
+        }
+
+    }
+
+
+
+
+    // Loading
+
+    .loading {
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        z-index: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: loading 2s linear;
+        animation-iteration-count: infinite;
+
+        .box {
+            fill: black
+        }
+
+        .text {
+            font-size: 30px;
+            fill: #fff;
+
+        }
+
+        .animation-group {
+            animation: moveBox 2s ease-in-out both infinite;
+        }
+
+        .animation-group:nth-child(2) {
+            animation-delay: 200ms;
+        }
+
+        .animation-group:nth-child(3) {
+            animation-delay: 400ms;
+        }
+
+        .animation-group:nth-child(4) {
+            animation-delay: 500ms;
+        }
+
+        .animation-group:nth-child(5) {
+            animation-delay: 600ms;
+        }
+
+        .animation-group:nth-child(6) {
+            animation-delay: 700ms;
+        }
+
+        .animation-group:nth-child(7) {
+            animation-delay: 800ms;
+        }
+
+        .animation-group:nth-child(8) {
+            animation-delay: 900ms;
+        }
+
+        .animation-group:nth-child(9) {
+            animation-delay: 1000ms;
+        }
+
+        .animation-group:nth-child(10) {
+            animation-delay: 1100ms;
+        }
+
+        @keyframes moveBox {
+            20% {
+                transform: translateY(50px);
+            }
+
+            50% {
+                transform: translateY(50px);
+            }
+        }
+
+        @keyframes loading {
+
+            0% {
+                opacity: 1;
+            }
+
+            20% {
+                opacity: 1;
+            }
+
+            40% {
+                opacity: 1;
+            }
+
+            60% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            98% {
+                opacity: 0.8;
+            }
+
+            100% {
+                opacity: 0;
+            }
+
+        }
+
+
+    }
+
+    // loading 動畫
+
+
+
+
 }
