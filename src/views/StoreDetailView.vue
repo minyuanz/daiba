@@ -69,7 +69,7 @@ export default {
       const currentProductId = this.foundObject.pord_id;
       const filteredProducts = ProTest.filter(item => item.pord_id !== currentProductId);
       const shuffled = filteredProducts.slice().sort(() => 0.5 - Math.random());
-      this.randomProducts = shuffled.slice(0, 4);
+      this.randomProducts = shuffled.slice(0, 4);//切出四張
     },
     decrementCount() {
       if (this.count > 1) {
@@ -236,6 +236,142 @@ export default {
       }
     }
 }
+@media screen and (max-width: 414px){
+  .DetailWrap{
+  max-width: 414px;
+  padding: 2.5rem 1.5rem;
+  margin: auto;
+  width: 100%;
+  .DetailBox{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    .DetailPicBox{
+    display: flex;
+    flex-wrap: wrap;
+     width: 100%;
+     margin: 0;
+     .DetailMainPic{
+        height:400PX;
+        width:100%;
+        img{
+            width: 100%;
+        }
+     }
+     .DetailPic{
+        cursor: pointer;
+        margin: 0;
+        width: 25%;
+        img{
+            height: 100%;
+            width: 100%;
+        }
+     }
+    }
+    .DetailDigBox{
+        margin: 30px 10px;
+        text-align: center;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+     .Digtitle{
+        margin: auto;
+        width: 100%;
+        border-bottom: 2px solid black;
+        font-size:map-get($map: $fontsizes, $key: h2);
+     }
+     .DigPrice{
+        width: 100%;
+        font-size:map-get($map: $fontsizes, $key: h3);
+        color: red;
+        margin: 20px 0 20px 0;
+     }
+     .DigDes{
+        width: 100%;
+        font-size:map-get($map: $fontsizes, $key: p);
+        margin-bottom: 20px;
+     }
+     .DigCountBox{
+        margin: 20px 0px;
+        width: 50%;
+        font-size:map-get($map: $fontsizes, $key: h3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        button{
+            height: 20px;
+            width: 20px;
+            margin:20px 10px;
+            font-size:map-get($map: $fontsizes, $key: p);
+            border-radius: 50%;
+        }
+     }
+     .DigLikeBox{
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        width: 50%;
+        font-size:map-get($map: $fontsizes, $key: h4)
+     }
+     .DigInStore{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size:map-get($map: $fontsizes, $key: h3);
+        width: 100%;
+        border-radius: $border-radius;
+        height: 50px;
+        color: white;
+        background-color: rgb(236, 85, 112);
+        cursor: pointer;
+     }
+     .DigSDES{
+        width: 100%;
+        line-height: 2;
+     }
+    }
+    
+  }
+  .OtherDetailBox{
+      width: 100%;
+      .OtherDetailTitle{
+        text-align: center;
+        letter-spacing: 5px;
+        padding-bottom: 25px;
+        border-bottom: 3px solid black;
+        p{
+          font-size:map-get($map: $fontsizes, $key: h3);
+        }
+      }
+      .OtherDetailCardbox{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin: auto;
+        .OtherDetailCard{
+          padding: 10px;
+          width: 25%;
+          .DetailCardImg{
+            width: 100%;
+            img{
+              width: 100%;
+            }
+          }
 
+        }
+        .DetailCardDes{
+          width: 100%;
+          .CardDesTitle{
+            width: 50%;
+            font-size:map-get($map: $fontsizes, $key: h4);
+          }
+          .CardDesPrice{
+            width: 50%;
+          }
+        }
+      }
+    }
+}
+}
 </style>  
 
