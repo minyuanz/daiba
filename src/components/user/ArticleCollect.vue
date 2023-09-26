@@ -2,7 +2,7 @@
     <div class="collect">
         <h1>文章收藏</h1>
         <div class="collectGrid">
-            <div class="collectCard" v-for="card in cardsDisplay">
+            <div class="collectCard" v-for="(card, index) in cardsDisplay" :key="index">
                 <div class="card-w">
                     <div class="img">
                         <img :src="card.image" alt="">
@@ -16,9 +16,12 @@
                             <span class="blue title-tag">#{{ card.tag2 }}</span>
                         </div>
                         <div class="txt">{{ card.ctx }}</div>
-                        <div class="head" style="overflow: auto;">
-                            <img :src="card.head" alt="">
+                        <div @click="delCollect(index)" class="del">
+                            <i class="fa-solid fa-trash-can"></i>
                         </div>
+                        <!-- <div class="head" style="overflow: auto;">
+                            <img :src="card.head" alt="">
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -68,6 +71,10 @@ export default {
             const endIdx = startIdx + this.pageSize
             this.cardsDisplay = this.cards.slice(startIdx, endIdx);
         },
+        delCollect(index){
+            this.cardsDisplay.splice(index,1)
+            console.log(index);
+        }
     },
     mounted() {
         this.cardsDisplay = this.cards
@@ -99,6 +106,15 @@ export default {
         .card-w {
             // width: 100%;
             margin: 30px 0;
+            .del{
+                svg{
+                    font-size: 24px;
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    cursor: pointer;
+                }
+            }
         }
     }
 }
@@ -129,4 +145,5 @@ export default {
         }
     }
 
-}</style>
+}
+</style>

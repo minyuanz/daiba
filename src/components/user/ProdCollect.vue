@@ -2,13 +2,16 @@
     <div class="prodWrap">
         <h1>商品收藏</h1>
         <div class="prodGrid">
-            <div class="prodCard" v-for="card in cardsDisplay">
+            <div class="prodCard" v-for="(card, index) in cardsDisplay">
                 <div class="pic">
                     <img :src="card.image" alt="">
                 </div>
                 <div class="txt">
                     <h3>{{ card.title }}</h3>
                     <span> NT.{{ card.price }}</span>
+                    <div @click="delCollect(index)" class="del">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,6 +63,10 @@ export default {
             const endIdx = startIdx + this.pageSize
             this.cardsDisplay = this.cards.slice(startIdx, endIdx);
         },
+        delCollect(index) {
+            this.cardsDisplay.splice(index, 1)
+            console.log(index);
+        }
     },
     mounted() {
         this.cardsDisplay = this.cards
@@ -102,6 +109,14 @@ export default {
                 display: flex;
                 align-items: flex-end;
                 justify-content: space-between;
+                // .del{
+
+                svg {
+                    cursor: pointer;
+                    font-size: 24px;
+                }
+
+                // }
             }
         }
     }
