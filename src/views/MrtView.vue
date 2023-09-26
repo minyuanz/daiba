@@ -279,7 +279,7 @@ export default {
             {
               title: "b雲鼎阿二麻辣食堂",
               txt: "阿二麻辣食堂使用多種中藥食材，精心熬煮麻辣湯頭，有別於一般麻辣火鍋店，招牌麻辣系列分為「麻辣煲」與「麻辣鍋」，也有「藥膳」與「紅燒」系列可以選擇，所有鍋底均可以選擇辣度，主食單點區中的滷肉飯、拌麵，也是雲鼎阿二麻辣食堂中相當具有人氣的品項。",
-              url: require("../assets/images/mrt/red/food/atwo.jpg"),
+              url: require("../assets/images/mrtFood/redLine/atwo.jpg"),
             },
             {
               title: "四四南村",
@@ -368,7 +368,7 @@ export default {
             {
               title: "b雲鼎阿二麻辣食堂",
               txt: "阿二麻辣食堂使用多種中藥食材，精心熬煮麻辣湯頭，有別於一般麻辣火鍋店，招牌麻辣系列分為「麻辣煲」與「麻辣鍋」，也有「藥膳」與「紅燒」系列可以選擇，所有鍋底均可以選擇辣度，主食單點區中的滷肉飯、拌麵，也是雲鼎阿二麻辣食堂中相當具有人氣的品項。",
-              url: require("../assets/images/mrt/red/food/atwo.jpg"),
+              url: require("../assets/images/mrtFood/redLine/atwo.jpg"),
             },
             {
               title: "四四南村",
