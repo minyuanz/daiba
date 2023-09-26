@@ -143,7 +143,7 @@
     <div class="mrtBanner">
         <div class="swiper" id="mySwiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for=" in 20">
+                <div class="swiper-slide test" v-for=" in 20">
                     <img src="../../public/img/mrtArrow2.png" alt="" />
                 </div>
             </div>
@@ -153,7 +153,7 @@
     <div class="mrtBanner">
         <div class="swiper" id="mySwiper2">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for=" in 20">
+                <div class="swiper-slide test" v-for=" in 20">
                     <img src="../../public/img/mrtArrow2.png" alt="" />
                 </div>
             </div>
@@ -167,7 +167,6 @@ import Swiper from "swiper/bundle";
 export default {
     data() {
         return {
-            publicPath: process.env.BASE_URL,
             swipers: [
                 {
                     image: "../img/Grand Hyatt Taipei.jpg",
@@ -254,6 +253,7 @@ export default {
             closeTxt: true,
             closePost: false,
             lightBox: false,
+            swiper: false,
         };
     },
     methods: {
@@ -270,9 +270,28 @@ export default {
                 return lineColorTag;
             }
         },
+        // 背景圖
+        initSwiper() {
+            const swiper = new Swiper(".swiper", {
+                direction: "vertical",
+                speed: 3500,
+                loop: true,
+                loopedSlides: 10,
+                autoHeight: true,
+                slidesPerView: "auto",
+                spaceBetween: 0,
+                autoplay: {
+                    delay: 0,
+                    pauseOnMouseEnter: false,
+                    disableOnInteraction: false,
+                },
+            });
+        },
     },
 
+
     mounted() {
+        // 景點輪播
         const swiperBanner = new Swiper(".swiperBanner", {
             direction: "horizontal",
             speed: 2000,
@@ -287,6 +306,8 @@ export default {
                 disableOnInteraction: false,
             },
         });
+
+        // 投稿輪播
         const swiperPost = new Swiper(".swiperPost", {
             effect: "cube",
             cubeEffect: {
@@ -300,20 +321,16 @@ export default {
                 prevEl: ".swiper-button-prev",
             },
         });
-        const swiper = new Swiper(".swiper", {
-            direction: "vertical",
-            speed: 3000,
-            loop: true,
-            loopedSlides: 10,
-            // autoHeight: true,
-            slidesPerView: "auto",
-            spaceBetween: 205,
-            autoplay: {
-                delay: 0,
-                pauseOnMouseEnter: false,
-                disableOnInteraction: false,
-            },
-        });
+
+        // 背景圖輪播
+        setTimeout(() => {
+            this.initSwiper();
+        }, 100); // 延遲100毫秒
     },
 };
 </script>
+
+
+<style scoped lang="scss">
+@import "../assets/scss/page/ContributeView";
+</style>
