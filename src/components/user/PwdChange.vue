@@ -24,8 +24,11 @@
                 <label for="">再次輸入</label>
                 <input type="password" v-model="checkPwd">
             </div>
-            <button class="btn_l">確認更改</button>
-            <button class="btn_s" @click="menu">返回</button>
+            <div class="accurance">
+                <button class="btn_l">確認更改</button>
+                <button class="btn_l btn_undo" @click="menu">返回</button>
+            </div>
+
         </div>
     </div>
 </template>
@@ -63,60 +66,44 @@ export default {
     }
 
     .changebox {
-        margin-top: 50px;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(8, 1fr);
-        justify-items: center;
-        gap: 40px;
+        width: 400px;
+        inset: 0;
+        margin: 5rem auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        gap: 3rem;
 
         .acc {
-            // border: 1px solid red;
-            width: 50%;
-
-            label {
-                // border: 1px solid red;
-                display: inline-block;
-                width: 10%;
-            }
+            width: 100%;
 
             span {
-                // border: 1px solid red;
-                display: inline-block;
-                width: 90%;
+                display: block;
                 text-align: center;
+                // border: 1px solid red;
+                font-size: map-get($map , small);
+                // margin-bottom: 10px;
             }
-
-            // text-align: center;
         }
 
         label {
+            width: 400px;
             display: block;
+            font-size: map-get($map , small);
             margin-bottom: 10px;
         }
 
         input {
-            width: 100%;
+            width: 400px;
+            display: block;
+            font-size: map-get($map , small);
             border: transparent;
             border-bottom: 1px solid #aaa;
         }
 
-        .changeAcc {
-            // border: 1px solid red;
-            width: 50%;
-        }
-
-        .pwd {
-            width: 50%;
-        }
-
-        .changePwd {
-            width: 50%;
-        }
-
-        .checkPwd {
-            width: 50%;
-
+        .accurance>* {
+            margin: .5rem 0;
         }
 
     }
@@ -124,36 +111,25 @@ export default {
 
 @media screen and (max-width:414px) {
     .pwdchange {
+        width: 100%;
+
         .changebox {
+            width: 100%;
+
             .acc {
-                width: 80%;
-
-                label {
-                    width: 20%;
-                }
-
-                span {
-                    width: 80%;
-                }
-            }
-
-            .changeAcc {
-                // border: 1px solid red;
-                width: 80%;
-            }
-
-            .pwd {
-                width: 80%;
-            }
-
-            .changePwd {
-                width: 80%;
-            }
-
-            .checkPwd {
                 width: 80%;
 
             }
         }
+
+        .changebox>* {
+            width: 80%;
+
+            input,
+            label {
+                width: 100%;
+            }
+        }
     }
-}</style>
+}
+</style>

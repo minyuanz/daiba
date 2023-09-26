@@ -8,7 +8,6 @@
   font-size: 21px;
   cursor: pointer;
 }
-
 //
 
 .btn_m {
@@ -46,7 +45,16 @@
   border: none;
   color: white;
 }
-
+.btn_undo{
+  border-color: #aaa;
+  color: #aaa;
+}
+.btn_undo:hover{
+  background-color: #999;
+}
+.btn_undo:active{
+  background-color: #ccc;
+}
 @media screen and (max-width: 414px) {
   .btn_s {
     width: 100px;

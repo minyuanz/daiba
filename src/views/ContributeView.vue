@@ -56,7 +56,7 @@
         </div>
         <div class="toCB">
             <router-link to="/Submit">
-                <ButtonM :HTMLInner="btninner"/>
+                <ButtonM :HTMLInner="btninner" />
             </router-link>
         </div>
     </section>
@@ -170,7 +170,7 @@ import ButtonM from '@/components/ButtonM.vue';
 export default {
     data() {
         return {
-            btninner:"我要投稿",
+            btninner: "我要投稿",
             publicPath: process.env.BASE_URL,
             swipers: [
                 {
@@ -260,8 +260,8 @@ export default {
             lightBox: false,
         };
     },
-    components:{
-    ButtonM
+    components: {
+        ButtonM
     },
     methods: {
         evenPic(taipeisIndex) {

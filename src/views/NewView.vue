@@ -7,7 +7,7 @@
         <!-- 輪播區塊 -->
         <div class="newsSlider swiper-wrapper">
 
-          <div class="newsCtx swiper-slide" v-for="news in newswiper" :key="news_id">
+          <div class="newsCtx swiper-slide" v-for="news in newswiper" :key="news.news_id">
 
             <!-- 背景模糊 -->
             <div class="newsBackpic">
@@ -17,19 +17,21 @@
             <div class="newsBox">
               <div class="newsCtxTxt">
 
-                <div class="newsTag title-tag gray">
-                  <span>#{{ news.news_tag1 }}</span>
-                </div>
-                <div class="newsDate">
-                  <span>
-                    {{ news.news_date }}
-                  </span>
-                </div>
-                <h2>{{ news.news_title }}</h2>
+                <router-link :to="{ name: 'newinside', params: { id: news.news_id } }">
+                  <div class="newsTag title-tag gray">
+                    <span>#{{ news.news_tag1 }}</span>
+                  </div>
+                  <div class="newsDate">
+                    <span>
+                      {{ news.news_date }}
+                    </span>
+                  </div>
+                  <h2 class="titlegh2">{{ news.news_title }}</h2>
+                </router-link>
                 <!-- <h3>{{ news.news_title }}</h3> -->
 
                 <router-link :to="{ name: 'newinside', params: { id: news.news_id } }">
-                  <ButtonS :HTMLInner="btninner"/>
+                  <ButtonS :HTMLInner="btninner" class="rwdbtn" />
                 </router-link>
               </div>
 
@@ -41,8 +43,8 @@
           </div>
 
         </div>
-        <div class="swiper-pagination"></div>
 
+        <div class="swiper-pagination"></div>
       </div>
 
     </div>
@@ -54,7 +56,7 @@
     </div>
 
     <div class="newsList">
-      <div class="newsCard" v-for="card in newsdisplay" :key="news_id">
+      <div class="newsCard" v-for="card in newsdisplay" :key="card.news_id">
         <div class="newsPic">
           <img :src="card.news_pic1" alt="">
         </div>
@@ -82,7 +84,7 @@
               {{ card.news_des1 }}
             </p>
             <router-link :to="{ name: 'newinside', params: { id: card.news_id } }">
-              <ButtonS :HTMLInner="btninner"/>
+              <ButtonS :HTMLInner="btninner" />
             </router-link>
           </div>
         </router-link>
@@ -103,7 +105,7 @@ import ButtonS from '@/components/ButtonS.vue';
 export default {
   data() {
     return {
-      btninner:"更多",
+      btninner: "更多",
       publicPath: process.env.BASE_URL,
       tagtoggle: '所有消息',
       slider: [{
@@ -143,9 +145,9 @@ export default {
       newswiper: [],
     }
   },
-  components:{
+  components: {
     ButtonS
-    },
+  },
   methods: {
     changeHandler(tag) {
       // console.log(tag);
@@ -175,7 +177,7 @@ export default {
       },
       pagination: {
         el: ".swiper-pagination",
-        clickable: true
+        clickable: true,
       },
       // scrollbar: {
       //   // dragcClass:'.swiper-scrollbar'

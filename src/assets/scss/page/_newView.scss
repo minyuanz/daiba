@@ -10,6 +10,7 @@
   h2,
   h3 {
     margin-top: -.5rem;
+    // color: #fff;
   }
 
   .newsSlider {
@@ -225,9 +226,17 @@
           .newsCtxTxt {
             // border: 1px solid red;
             width: 100%;
-            padding: 0 10%;
+            padding: 0 45px;
+            margin: 0;
 
             a {
+              // display: none;
+            }
+            h2{
+              font-size: 20px;
+              height: 100px;
+            }
+            .rwdbtn{
               display: none;
             }
           }
@@ -238,6 +247,9 @@
             margin: 0;
             padding: 0 10%;
             box-shadow: none;
+            &::after{
+              left: 0;
+            }
           }
         }
       }
@@ -259,7 +271,8 @@
 
         .newsTxt {
           width: 100%;
-          margin: 0 10%;
+          padding: 0 30px;
+          // margin: 0 40px;
           // margin: 0;
           // text-align: center;
 
