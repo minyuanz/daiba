@@ -3,11 +3,11 @@
       <div class="DetailBox">
         <div class="DetailPicBox">
             <div class="DetailMainPic"><img :src="selectedImage" alt=""></div>
-            <div class="DetailPic"  @click="selectImage(item.src)">
-              <img v-if="foundObject.prod_img1" :src="foundObject.prod_img1" alt="">
-              <img v-if="foundObject.prod_img2" :src="foundObject.prod_img1" alt="">
-              <img v-if="foundObject.prod_img3" :src="foundObject.prod_img1" alt="">
-              <img v-if="foundObject.prod_img4" :src="foundObject.prod_img1" alt="">
+            <div class="DetailPic">
+              <img @click="selectImage(foundObject.prod_img1)"  :src="foundObject.prod_img1" alt="" >
+              <img @click="selectImage(foundObject.prod_img2)"  :src="foundObject.prod_img2" alt="" >
+              <img @click="selectImage(foundObject.prod_img3)"  :src="foundObject.prod_img3" alt="" >
+              <img @click="selectImage(foundObject.prod_img4)"  :src="foundObject.prod_img4" alt="" >
             </div>
         </div>
         <div class="DetailDigBox">
@@ -57,9 +57,9 @@ export default {
     return {
       foundObject:"",
       randomProducts: [], 
-      selectedImage: 'https://img.shoplineapp.com/media/image_clips/5f7ecf347257270029e5c2dc/original.jpg?1602146100', 
       count: 1,
       value: 0,
+      selectedImage: "",
     };
   },
 
@@ -79,19 +79,20 @@ export default {
     incrementCount() {
       this.count += 1;
     },
-    selectImage(imageSrc) {
-      this.selectedImage = imageSrc;
+    addToCart(product) {
+      console.log('addToCart called with product:', product);
+      console.log('count:', this.count);
+      this.$store.dispatch('addToCart', { ...product, count: this.count });
+      alert("已加入購物車");
     },
-  addToCart(product) {
-    console.log('addToCart called with product:', product);
-  console.log('count:', this.count);
-    this.$store.dispatch('addToCart', { product, count: this.count });
-    alert("已加入購物車");
-  },
+    selectImage(imageSrc) {
+        this.selectedImage = imageSrc; // 将点击的图像路径设置为主图像路径
+      },
   },
   mounted() {
     const idToFind = this.$route.params.id;
     this.foundObject = ProTest.find(item => item.pord_id === idToFind);
+    this.selectedImage = this.foundObject.prod_img1;
     //隨機
     this.generateRandomProducts();
   },
@@ -131,7 +132,8 @@ export default {
      .DetailPic{
         cursor: pointer;
         margin: 5%;
-        width: 15%;
+        width: 20%;
+        display: flex;
         img{
             height: 100%;
             width: 100%;

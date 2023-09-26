@@ -32,7 +32,7 @@ export default createStore({
   mutations: {
     addToCart(state, product) {
       // 添加商品到購物車
-      product.count = 1;
+      product.count = product.count || 1
       state.cart.push(product);
     },
     removeFromCart(state, index) {
