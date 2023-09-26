@@ -11,6 +11,6 @@ module.exports = defineConfig({
       },
     },
   },
-  publicPath: process.env.NODE_ENV === "production" ? "/chd103/g5/mrt/" : "/",
-  outputDir: "mrt",
+  publicPath: process.env.NODE_ENV === "production" ? "/chd103/g5" : "/",
+  // outputDir: "mrt",
 });
