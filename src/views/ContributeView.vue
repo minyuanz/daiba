@@ -98,13 +98,17 @@
                     <div class="swiperPost">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="/img/ice noodle jelly.jpg" />
+                                <img :src="`${this.$store.state.publicURLL}/img/ice noodle jelly.jpg`" />
+                                <!-- <img src="/img/ice noodle jelly.jpg" /> -->
+                                <!-- `${this.$store.state.publicURLL}/img/ice noodle jelly.jpg` -->
                             </div>
                             <div class="swiper-slide">
-                                <img src="/img/ice noodle jelly.jpg" />
+                                <img :src="`${this.$store.state.publicURLL}/img/ice noodle jelly.jpg`" />
+                                <!-- <img src="/img/ice noodle jelly.jpg" /> -->
                             </div>
                             <div class="swiper-slide">
-                                <img src="/img/ice noodle jelly.jpg" />
+                                <img :src="`${this.$store.state.publicURLL}/img/ice noodle jelly.jpg`" />
+                                <!-- <img src="/img/ice noodle jelly.jpg" /> -->
                             </div>
                         </div>
                         <div class="swiper-button-prev"></div>
