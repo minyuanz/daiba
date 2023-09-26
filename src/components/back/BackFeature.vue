@@ -265,11 +265,12 @@ export default {
 .backFeaAdd {
     border: 1px solid #aaa;
     background-color: #fff;
-    border-radius: 20px;
+    // border-radius: 20px;
     width: 900px;
     height: 900px;
     padding: 50px;
     overflow: auto;
+    margin-top: 3rem;
 
     .feaHead {
 

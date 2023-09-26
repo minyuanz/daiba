@@ -139,9 +139,10 @@ export default {
     margin-top: 3rem;
     border: 1px solid #aaa;
     background-color: #fff;
-    border-radius: 20px;
+    // border-radius: 20px;
     width: 900px;
     padding: 50px;
+    margin-top: 3rem;
 
     .ProSearch {
         padding: 10px;
@@ -241,6 +242,7 @@ export default {
     height: 900px;
     overflow: auto;
     padding: 50px;
+    margin-top: 3rem;
 
     .proInfo {
 

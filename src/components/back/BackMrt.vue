@@ -171,9 +171,10 @@ export default {
 .backMrtAdd {
     border: 1px solid #aaa;
     background-color: #fff;
-    border-radius: 20px;
+    // border-radius: 20px;
     width: 900px;
     padding: 50px;
+    margin-top: 3rem;
 
     .addInfo {
         // border: 1px solid red;
