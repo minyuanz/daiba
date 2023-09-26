@@ -333,7 +333,8 @@ export default {
     
   }
   .OtherDetailBox{
-      width: 100%;
+      overflow: hidden;
+        width: 100%;
       .OtherDetailTitle{
         text-align: center;
         letter-spacing: 5px;
@@ -344,13 +345,20 @@ export default {
         }
       }
       .OtherDetailCardbox{
-        width: 100%;
         display: flex;
-        flex-wrap: wrap;
-        margin: auto;
+      flex-wrap: nowrap; 
+      overflow-x: auto; 
+      width: 100%; 
+      margin: auto;
+      scroll-behavior: smooth; /* 增加滑動效果 */
+      -webkit-overflow-scrolling: touch; /* ios滑動效果 */
+      scroll-snap-type: x mandatory; 
+      gap: 10px; 
         .OtherDetailCard{
-          padding: 10px;
-          width: 25%;
+          flex: 0 0 auto; 
+      width: 100%; 
+      box-sizing: border-box; 
+      padding: 10px;
           .DetailCardImg{
             width: 100%;
             img{
