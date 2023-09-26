@@ -103,9 +103,9 @@ export default {
 
 <style lang="scss">
 .backMrt {
+    margin-top: 3rem;
     border: 1px solid #aaa;
     background-color: #fff;
-    border-radius: 20px;
     width: 900px;
     padding: 50px;
 

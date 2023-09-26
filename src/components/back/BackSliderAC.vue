@@ -1,5 +1,5 @@
 <template>
-    <div class="SliderAC">
+    <div class="bSliderAC">
         <div class="pic">
             <img src="https://steam.oxxostudio.tw/webp/gimp/example/simple-keyer-mask-16.webp" />
         </div>
@@ -9,7 +9,7 @@
         </router-link>
         <nav>
             <ul>
-                <li :class="{ 'is-active': $route.path === '/Back/BackMember' }"><router-link to="/Back/BackMember">會員管理</router-link></li>
+                <li :class="{ 'is-active': $route.path === '/Back/BackMember' }"><router-link to="/Back/BackMember" :class="{ 'is-active': $route.path === '/Back/BackMember' }">會員管理</router-link></li>
                 <li :class="{ 'is-active': $route.path === '/Back/BackMrt' }"><router-link to="/Back/BackMrt">捷運站管理</router-link></li>
                 <li :class="{ 'is-active': $route.path === '/Back/BackFeature' }"><router-link to="/Back/BackFeature">推薦管理</router-link></li>
                 <li :class="{ 'is-active': $route.path === '/Back/BackPro' }"><router-link to="/Back/BackPro">商品管理</router-link></li>
@@ -38,6 +38,9 @@ export default {
 <style lang="scss">
 .is-active {
   background-color:  #7d7d7d !important;
+  a{
+    color: #fff;
+  }
 }
 .router-link-exact-acitve{
     background-color: #f00;

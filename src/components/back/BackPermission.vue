@@ -62,9 +62,9 @@ export default {
 
 <style lang="scss">
 .BackPro {
+    margin-top: 3rem;
     border: 1px solid #aaa;
     background-color: #fff;
-    border-radius: 20px;
     width: 900px;
     padding: 50px;
     .ProSearch{
