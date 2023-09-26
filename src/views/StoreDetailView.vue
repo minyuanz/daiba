@@ -17,7 +17,7 @@
             <div class="DigCountBox">
                 數量
                 <button @click="decrementCount">-</button>
-                1
+                {{ count }}
                 <button  @click="incrementCount">+</button>  
             </div>
             <div class="DigLikeBox">
@@ -82,8 +82,10 @@ export default {
     selectImage(imageSrc) {
       this.selectedImage = imageSrc;
     },
-    addToCart(product) {
-    this.$store.dispatch('addToCart', product);
+  addToCart(product) {
+    console.log('addToCart called with product:', product);
+  console.log('count:', this.count);
+    this.$store.dispatch('addToCart', { product, count: this.count });
     alert("已加入購物車");
   },
   },
