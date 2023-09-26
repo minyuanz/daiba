@@ -28,8 +28,10 @@
     <div class="storecardbox">
       <div v-for="item  in paginatedProducts "  :key="item.pord_id"  class="storeCard">
         <router-link :to="'/storeDetail/' + item.pord_id" >
-        <img  class="storeCardimg" :src="item.prod_img1" alt=""/>
-        </router-link>
+          <div class="imgbox">
+          <img  class="storeCardimg" :src="item.prod_img1" alt=""/>
+          </div>
+      </router-link>
         <div class="storeBottom">
           <div class="storeCardText">
             <h3 class="CardDes">{{ item.pord_name }}</h3>
@@ -231,11 +233,15 @@ export default {
       width: 31%;
       overflow: hidden;
       margin-block: 3.5rem;
+      .imgbox{
+        width: 100%;
+        height: 300px;
       .storeCardimg {
         width: 100%;
+        height: 100%;
         cursor: pointer;
       }
-
+      }
       .storeBottom {
         display: flex;
         width: 100%;
