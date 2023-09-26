@@ -157,9 +157,10 @@ export default {
 .BackPerAdd{
     border: 1px solid #aaa;
     background-color: #fff;
-    border-radius: 20px;
+    // border-radius: 20px;
     width: 900px;
     padding: 50px;
+    margin-top: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;

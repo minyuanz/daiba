@@ -1,6 +1,6 @@
 <template>
   <div class="storeWrap">
-    <div class="storeTitle">精選購物</div>
+    <h1 class="storeTitle">精選購物</h1>
     <div class="storeSearch">
       <div class="storeSearchMrt">
         <span>捷運線選擇</span>
@@ -40,30 +40,48 @@
           <div class="storeButton">
             <i class="fa-regular fa-heart" style="cursor: pointer"></i>
             <button class="btn_s" @click="addToCart(item)">加入購物車</button>
-            <div>
-            </div>
+            <div></div>
           </div>
         </div>
       </div>
     </div>
     <div class="pagination">
-      <button class="paginationmain" @click="prevPage" :disabled="currentPage === 1"> ＜ </button>
-      <button class="paginationmain" @click="goToPage(page)" v-for="page in totalPages" :key="page" :class="{ 'current-page': page === currentPage }">{{ page }}</button>
-      <button class="paginationmain" @click="nextPage" :disabled="currentPage === totalPages">＞</button>
+      <button
+        class="paginationmain"
+        @click="prevPage"
+        :disabled="currentPage === 1"
+      >
+        ＜
+      </button>
+      <button
+        class="paginationmain"
+        @click="goToPage(page)"
+        v-for="page in totalPages"
+        :key="page"
+        :class="{ 'current-page': page === currentPage }"
+      >
+        {{ page }}
+      </button>
+      <button
+        class="paginationmain"
+        @click="nextPage"
+        :disabled="currentPage === totalPages"
+      >
+        ＞
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import ProTest from "@/testdata/ProTest.json"
+import ProTest from "@/testdata/ProTest.json";
 export default {
-  components: {
-  },
+  components: {},
   data() {
     return {
       allProducts: ProTest, // 假設顯示所有商品數據
-      pageSize: 6,         // 每頁顯示數量
-      currentPage: 1 ,     // 當前頁數
+      pageSize: 6, // 每頁顯示數量
+      currentPage: 1, // 當前頁數
       testitem: ProTest,
     };
   },
@@ -77,50 +95,46 @@ export default {
     //   });
     // },
     addToCart(product) {
-    this.$store.dispatch('addToCart', product);
-    alert("已加入購物車");
-  },
-  prevPage() {
-    if (this.currentPage > 1) {
-      this.currentPage -= 1;
-    }
-  },
-  nextPage() {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage += 1;
-    }
-  },
-  goToPage(page) {
-    this.currentPage = page;
-  }
+      this.$store.dispatch("addToCart", product);
+      alert("已加入購物車");
+    },
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage -= 1;
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage += 1;
+      }
+    },
+    goToPage(page) {
+      this.currentPage = page;
+    },
   },
   computed: {
-  paginatedProducts() {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    return this.allProducts.slice(startIndex, endIndex);
+    paginatedProducts() {
+      const startIndex = (this.currentPage - 1) * this.pageSize;
+      const endIndex = startIndex + this.pageSize;
+      return this.allProducts.slice(startIndex, endIndex);
+    },
+    totalPages() {
+      return Math.ceil(this.allProducts.length / this.pageSize);
+    },
   },
-  totalPages() {
-    return Math.ceil(this.allProducts.length / this.pageSize);
-  }
-}
 };
 </script>
 
 <style lang="scss">
 .storeWrap {
   max-width: 1200px;
-  padding: 2.5rem 1.5rem;
   margin: auto;
   width: 100%;
 
   .storeTitle {
-    font-size: map-get($map: $fontsizes, $key: h1);
     border-bottom: 5px black solid;
-    padding-bottom: 15px;
-    font-weight: bold;
+    padding: 3rem 0;
     text-align: center;
-    padding: 50px;
   }
   .storeSearch {
     width: 100%;
@@ -274,210 +288,209 @@ export default {
       }
     }
   }
-  .pagination{
+  .pagination {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: auto;
-  .paginationmain{
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-    border: none;
-    background: none;
+    .paginationmain {
+      cursor: pointer;
+      width: 50px;
+      height: 50px;
+      border: none;
+      background: none;
     }
-  .current-page {
-  border: 1px solid black;  
-  border-radius: 50%; 
+    .current-page {
+      border: 1px solid black;
+      border-radius: 50%;
     }
   }
 }
 
 @media screen and (max-width: 414px) {
   .storeWrap {
-  max-width: 414px;
-  padding: 2.5rem 1.5rem;
-  margin: auto;
-  width: 100%;
-
-  .storeTitle {
-    font-size: map-get($map: $fontsizes, $key: h1);
-    border-bottom: NONE;
-    padding-bottom: 15px;
-    font-weight: bold;
-    text-align: center;
-    padding: 50px;
-  }
-  .storeSearch {
-    width: 100%;
-    height: 10vh;
-    display: flex;
-    justify-content: space-evenly;
+    max-width: 414px;
+    padding: 2.5rem 1.5rem;
     margin: auto;
-    align-items: center;
-    font-size: map-get($map: $fontsizes, $key: h4);
-
-    .storeSearchMrt {
-      border: 3px solid black;
-      padding: 0 0rem;
-      margin-right: 0px;
-      span {
-        font-size: map-get($map: $fontsizes, $key: h4);
-        margin-right: 0px;
-      }
-      &:hover .SearchMrtBox {
-        display: block;
-      }
-      .SearchMrtBox {
-        display: none;
-        position: absolute;
-        background-color: white;
-        border: 1px solid #ccc;
-        width: 150px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        li {
-          padding: 12px 16px;
-          text-decoration: none;
-          cursor: pointer;
-          &:hover {
-            background-color: rgb(108, 108, 108);
-            color: #fffcfc;
-          }
-        }
-      }
-    }
-    .storeSearchSta {
-      border: 3px solid black;
-      padding: 0 0rem;
-      margin-right: 0px;
-      span {
-        font-size: map-get($map: $fontsizes, $key: h5);
-        margin-right: 0px;
-      }
-      &:hover .SearchStaBox {
-        display: block;
-      }
-      .SearchStaBox {
-        display: none;
-        position: absolute;
-        background-color: white;
-        border: 1px solid #ccc;
-        width: 150px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        li {
-          padding: 12px 16px;
-          text-decoration: none;
-          cursor: pointer;
-          &:hover {
-            background-color: rgb(108, 108, 108);
-            color: #fffcfc;
-          }
-        }
-      }
-    }
-    .storeSearchSP {
-      border: 3px solid black;
-      padding: 0 0rem;
-      margin-right: 0px;
-      span {
-        font-size: map-get($map: $fontsizes, $key: h4);
-        margin-right: 0px;
-      }
-      &:hover .SearchSPBox {
-        display: block;
-      }
-      .SearchSPBox {
-        display: none;
-        position: absolute;
-        background-color: white;
-        border: 1px solid #ccc;
-        width: 150px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        li {
-          padding: 12px 16px;
-          text-decoration: none;
-          cursor: pointer;
-          &:hover {
-            background-color: rgb(108, 108, 108);
-            color: #fffcfc;
-          }
-        }
-      }
-    }
-  }
-  .storecardbox {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
 
-    .storeCard {
-      margin: 5px;
+    .storeTitle {
+      font-size: map-get($map: $fontsizes, $key: h1);
+      border-bottom: NONE;
+      padding-bottom: 15px;
+      font-weight: bold;
+      text-align: center;
+      padding: 50px;
+    }
+    .storeSearch {
+      width: 100%;
+      height: 10vh;
+      display: flex;
+      justify-content: space-evenly;
+      margin: auto;
+      align-items: center;
+      font-size: map-get($map: $fontsizes, $key: h4);
+
+      .storeSearchMrt {
+        border: 3px solid black;
+        padding: 0 0rem;
+        margin-right: 0px;
+        span {
+          font-size: map-get($map: $fontsizes, $key: h4);
+          margin-right: 0px;
+        }
+        &:hover .SearchMrtBox {
+          display: block;
+        }
+        .SearchMrtBox {
+          display: none;
+          position: absolute;
+          background-color: white;
+          border: 1px solid #ccc;
+          width: 150px;
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          li {
+            padding: 12px 16px;
+            text-decoration: none;
+            cursor: pointer;
+            &:hover {
+              background-color: rgb(108, 108, 108);
+              color: #fffcfc;
+            }
+          }
+        }
+      }
+      .storeSearchSta {
+        border: 3px solid black;
+        padding: 0 0rem;
+        margin-right: 0px;
+        span {
+          font-size: map-get($map: $fontsizes, $key: h5);
+          margin-right: 0px;
+        }
+        &:hover .SearchStaBox {
+          display: block;
+        }
+        .SearchStaBox {
+          display: none;
+          position: absolute;
+          background-color: white;
+          border: 1px solid #ccc;
+          width: 150px;
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          li {
+            padding: 12px 16px;
+            text-decoration: none;
+            cursor: pointer;
+            &:hover {
+              background-color: rgb(108, 108, 108);
+              color: #fffcfc;
+            }
+          }
+        }
+      }
+      .storeSearchSP {
+        border: 3px solid black;
+        padding: 0 0rem;
+        margin-right: 0px;
+        span {
+          font-size: map-get($map: $fontsizes, $key: h4);
+          margin-right: 0px;
+        }
+        &:hover .SearchSPBox {
+          display: block;
+        }
+        .SearchSPBox {
+          display: none;
+          position: absolute;
+          background-color: white;
+          border: 1px solid #ccc;
+          width: 150px;
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          li {
+            padding: 12px 16px;
+            text-decoration: none;
+            cursor: pointer;
+            &:hover {
+              background-color: rgb(108, 108, 108);
+              color: #fffcfc;
+            }
+          }
+        }
+      }
+    }
+    .storecardbox {
+      width: 100%;
       display: flex;
       flex-wrap: wrap;
-      width: 45%;
-      overflow: hidden;
-      .storeCardimg {
-        width: 100%;
-        cursor: pointer;
-      }
+      justify-content: space-evenly;
 
-      .storeBottom {
+      .storeCard {
+        margin: 5px;
         display: flex;
         flex-wrap: wrap;
-        width: 100%;
-        justify-content: space-between;
-
-        .storeCardText {
+        width: 45%;
+        overflow: hidden;
+        .storeCardimg {
           width: 100%;
-          text-align: center;
+          cursor: pointer;
+        }
+
+        .storeBottom {
           display: flex;
           flex-wrap: wrap;
-          flex-direction: column;
-
-          .CardDes {
-            margin: 10px 0 0 0;
-          }
-          .CardPri {
-            color: #5b5b5b;
-          }
-        }
-        .storeButton {
-          margin-top: 10px;
-          display: flex;
-          align-items: end;
           width: 100%;
-          font-size: 30px;
-          justify-content: end;
-          button {
-            font-size: 16px;
-            margin-left: 1rem;
-            width:100px;
+          justify-content: space-between;
+
+          .storeCardText {
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+
+            .CardDes {
+              margin: 10px 0 0 0;
+            }
+            .CardPri {
+              color: #5b5b5b;
+            }
+          }
+          .storeButton {
+            margin-top: 10px;
+            display: flex;
+            align-items: end;
+            width: 100%;
+            font-size: 30px;
+            justify-content: end;
+            button {
+              font-size: 16px;
+              margin-left: 1rem;
+              width: 100px;
+            }
           }
         }
       }
     }
-  }
-  .pagination{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: auto;
-  .paginationmain{
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-    border: none;
-    background: none;
+    .pagination {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      .paginationmain {
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        border: none;
+        background: none;
+      }
+      .current-page {
+        border: 1px solid black;
+        border-radius: 50%;
+      }
     }
-  .current-page {
-  border: 1px solid black;  
-  border-radius: 50%; 
-    }
   }
-}
-
 }
 </style>

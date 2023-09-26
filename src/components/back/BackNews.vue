@@ -199,11 +199,12 @@ export default {
 .newsAdd {
     border: 1px solid #aaa;
     background-color: #fff;
-    border-radius: 20px;
+    // border-radius: 20px;
     width: 900px;
     height: 900px;
     overflow: auto;
     padding: 50px;
+    margin-top: 3rem;
 
     .mainTitle {
         label {
