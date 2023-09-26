@@ -160,7 +160,7 @@
     </div>
     <div class="displaycenter">
       <div class="logo">
-        <img src="../../public/img/logo.png" alt="" />
+        <img src="../../public/img/logo.png" alt="logo" />
       </div>
     </div>
 
