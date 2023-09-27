@@ -69,11 +69,13 @@
         </div>
         <div class="proCtx">
             <label for="">商品描述</label>
-            <input type="text">
+            <textarea class="custom-input"></textarea>
+            <!-- <input type="text"> -->
         </div>
         <div class="proMore">
             <label for="">商品資訊</label>
-            <input type="text">
+            <textarea class="custom-input"></textarea>
+            <!-- <input type="text"> -->
         </div>
         <div class="btn">
             <button @click="addToggle = !addToggle">取消新增</button>
@@ -378,9 +380,13 @@ export default {
             padding: 5px 0;
         }
 
-        input {
-            width: 100%;
+        .custom-input{
+            border: 1px solid #333;
+            // border-top:1px solid transparent;
             height: 200px;
+            width: 100%;
+            padding: 10px;
+            // line-height: 200px;
         }
     }
 
@@ -396,9 +402,13 @@ export default {
             padding: 5px 0;
         }
 
-        input {
-            width: 100%;
+        .custom-input{
+            border: 1px solid #333;
+            // border-top:1px solid transparent;
             height: 200px;
+            width: 100%;
+            padding: 10px;
+            // line-height: 200px;
         }
     }
 

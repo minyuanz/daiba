@@ -75,12 +75,14 @@
                     <input type="file" @change="handleFileChange($event, index)">
                     <img :src="pic.imageURL" v-show="pic.fix">
                 </div>
-                <input type="text">
+                <textarea class="custom-input"></textarea>
+                <!-- <input type="text"> -->
             </div>
         </div>
         <div class="backFeaCtx">
             <label for="">詳細資訊</label>
-            <input type="text">
+            <textarea class="custom-input"></textarea>
+            <!-- <input type="text"> -->
         </div>
         <div class="btn">
             <button @click="addToggle = !addToggle">取消新增</button>
@@ -151,7 +153,7 @@ export default {
                 fix: false
             },],
             imageURL: null,
-            fix:false
+            fix: false
         }
     },
     methods: {
@@ -281,8 +283,12 @@ export default {
             flex-direction: column;
 
             label {
+                display: block;
+                text-align: center;
+                background-color: #ddd;
                 font-size: 24px;
                 font-weight: bold;
+                padding: 5px 0;
             }
 
             input {
@@ -300,8 +306,12 @@ export default {
             margin-top: 30px;
 
             label {
+                display: block;
+                text-align: center;
+                background-color: #ddd;
                 font-size: 24px;
                 font-weight: bold;
+                padding: 5px 0;
             }
 
             .pic {
@@ -341,8 +351,12 @@ export default {
             text-align: center;
 
             label {
+                display: block;
+                text-align: center;
+                background-color: #ddd;
                 font-size: 24px;
                 font-weight: bold;
+                padding: 5px 0;
             }
 
             input {
@@ -382,8 +396,12 @@ export default {
             margin-top: 50px;
 
             label {
+                display: block;
+                text-align: center;
+                background-color: #ddd;
                 font-size: 24px;
                 font-weight: bold;
+                padding: 5px 0;
             }
 
             .pic {
@@ -414,10 +432,15 @@ export default {
                 }
             }
 
-            input {
-                margin-top: 30px;
-                height: 200px;
-            }
+            .custom-input{
+            border: 1px solid #333;
+            // border-top:1px solid transparent;
+            margin-top: 1rem;
+            height: 200px;
+            width: 100%;
+            padding: 10px;
+            // line-height: 200px;
+        }
         }
     }
 
@@ -428,14 +451,22 @@ export default {
         margin-top: 50px;
 
         label {
+            display: block;
+            text-align: center;
+            background-color: #ddd;
             font-size: 24px;
             font-weight: bold;
+            padding: 5px 0;
         }
 
-        input {
+        .custom-input{
+            border: 1px solid #333;
+            // border-top:1px solid transparent;
+            margin-top: 1rem;
             height: 200px;
-            margin-top: 30px;
-            border: 1px solid #aaa;
+            width: 100%;
+            padding: 10px;
+            // line-height: 200px;
         }
     }
 

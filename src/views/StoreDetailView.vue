@@ -84,6 +84,7 @@ export default {
       console.log('count:', this.count);
       this.$store.dispatch('addToCart', { ...product, count: this.count });
       alert("已加入購物車");
+      this.count = 1;
     },
     selectImage(imageSrc) {
         this.selectedImage = imageSrc; 
@@ -133,7 +134,7 @@ export default {
      }
      .DetailPic{
         cursor: pointer;
-        margin: 20px;
+        margin: 20px 0px ;
         width: 20%;
         display: flex;
         img{
@@ -248,7 +249,7 @@ export default {
 @media screen and (max-width: 414px){
   .DetailWrap{
   max-width: 414px;
-  padding: 2.5rem 1.5rem;
+  padding: 0;
   margin: auto;
   width: 100%;
   .DetailBox{
@@ -265,14 +266,19 @@ export default {
         width:100%;
         img{
             width: 100%;
+            height:400PX;
         }
      }
      .DetailPic{
-        cursor: pointer;
         margin: 0;
-        width: 25%;
+        padding:0;
+        cursor: pointer;
+        width: 100%;
+        height: 100px;
         img{
-            height: 100%;
+            margin: 0;
+            padding:0;
+            height:100px;
             width: 100%;
         }
      }

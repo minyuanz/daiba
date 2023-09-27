@@ -174,9 +174,6 @@
       margin: 8% auto;
       padding-block: 1%;
       text-align: center;
-      // border-top: 5px dashed #D9D9D9;
-      // border-bottom: dashed #D9D9D9;
-      // padding-block: 30px;
       position: relative;
 
       h2 {
@@ -222,6 +219,7 @@
   }
 
   .CBList {
+      max-width: 1200px;
       margin: auto;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -232,102 +230,145 @@
 
       .head {
           width: 80px;
-      }
+      } 
   }
 
   .CBPost {
-      width: 1200px;
-      height: 80%;
+      max-width: 1200px;
+      max-height: 700px;
       background-color: #d9d9d9;
       padding: 30px;
       display: flex;
       justify-self: center;
       align-items: center;
       position: fixed;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      left: 0;
+      inset: 0;
       margin: auto;
       z-index: 10;
 
       .box {
-          width: 100%;
-          height: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background-color: #fff;
-          padding: 20px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        padding: 20px;
+        position: relative;
+
+        .closePost {
+            background-color: black;
+            font-size: 50px;
+            font-weight: 1000;
+            color: #fff;
+            border-radius: 50px;
+            width: 60px;
+            height: 60px;
+            display: inline-block;
+            position: absolute;
+            text-align: center;
+            line-height: 50px;
+            right: 0%;
+            top: 0%;
+            cursor: pointer;
+            z-index: 2;
+        }
+        .closePost:hover{
+            background-color: map-get($color, $key: danger);
+        }
+        .head {
+              position: absolute;
+              border-radius: 50%;
+              width: 120px;
+              height: 120px;
+              bottom: -7%;
+              right: -5%;
+              border: 6px solid #333;
+        }
 
           .swiperPost {
-              width: 480px;
-              // height: 680px;
-              margin-right: 50px;
-
+              width: 40%;
+              height: 100%;
+              margin: 0 2rem 0 0;
+              .swiper-button-prev::after,.swiper-button-next::after{
+                scale: .8;
+                color: #fff;
+              }
               .swiper-slide {
+                width: 100%;
+                height: 100%;
                   img {
                       width: 100%;
                       height: 100%;
+                      object-fit: cover;
                   }
               }
           }
 
           .inner {
-              // height: 680px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
 
               p {
-                  font-size: 18px;
+                  font-size: map-get($map,small);
+              }
+
+              .title::after{
+                content: "";
+                position: absolute;
+                width: 90%;
+                border-bottom: 1px solid map-get($color, $key: success);                  
+                bottom: 0;
+                left: 5%;
               }
 
               .title {
                   border-top: 30px solid map-get($color, $key: success);
                   border-left: 30px solid map-get($color, $key: success);
-                  padding-top: 20px;
-                  padding-inline: 20px;
+                  padding-top: 1rem;
+                  padding-inline: 2rem;
                   position: relative;
+                  height: 30%;
 
                   h3 {
                       font-size: map-get($fontsizes, h2);
                       line-height: 70px;
+                      height: 50%;
                   }
 
                   h4 {
                       font-size: map-get($fontsizes, h4);
+                      line-height: 65px;
                   }
 
-                  .closePost {
-                      background-color: black;
-                      font-size: 50px;
-                      font-weight: 1000;
-                      color: #fff;
-                      border-radius: 50px;
-                      width: 60px;
-                      height: 60px;
-                      display: inline-block;
-                      position: absolute;
-                      text-align: center;
-                      line-height: 50px;
-                      right: -5%;
-                      top: -35%;
-                      cursor: pointer;
-                  }
               }
-
-              .info {
-                  background-color: #fff;
-                  padding-left: 50px;
-                  padding-right: 20px;
-                  padding-top: 30px;
-                  padding-bottom: 10px;
+              .scrollbarArea::-webkit-scrollbar {
+                width: 5px;
+                right: -100%;
+              }
+               
+              .scrollbarArea::-webkit-scrollbar-track {
+                box-shadow: inset 0 0 6px #ddd;
+              }
+               
+              .scrollbarArea::-webkit-scrollbar-thumb {
+                border-radius: 10px;
+                background-color: #bbb;
+                cursor: pointer;
+                ;
+              }
+              .scrollbarArea{
+                overflow: auto;
+                .info {
                   width: 100%;
-                  height: 200px;
+                  background-color: #fff;
                   display: inline-grid;
                   position: relative;
-
+                  padding: 1rem 5rem 0;
                   .PostingDate {
                       display: block;
-                      margin-top: auto;
                       text-align: end;
                       color: #999;
                       padding-block: 10px;
@@ -336,35 +377,34 @@
 
               .info::before {
                   content: "";
-                  background-image: url("~@/assets/images/Line.svg");
-                  width: 520px;
-                  height: 2px;
+                  border-bottom: #aaa 3px dashed;
+                  width: calc(90% - 30px);
                   position: absolute;
                   bottom: 0;
-                  left: 9%;
+                  left: calc(5% + 30px) ;
               }
 
               .txt {
                   padding-left: 50px;
                   padding-right: 20px;
-                  height: 280px;
-
                   p {
                       text-indent: 2em;
                       padding-top: 20px;
                   }
               }
+              }
+
 
               .author {
                   display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  padding-left: 50px;
-                  padding-right: 50px;
+                  justify-content: flex-end;
+                  align-items: end;
+                  gap: 1rem;
+                  padding:0 60px 0 50px;
                   height: 50px;
 
                   .line {
-                      width: 300px;
+                      flex: 1;
                       height: 12px;
                       background-color: map-get($color, $key: success);
                   }
@@ -373,16 +413,6 @@
                       font-size: 24px;
                       font-weight: 900;
                   }
-              }
-
-              .head {
-                  position: absolute;
-                  border-radius: 50%;
-                  width: 120px;
-                  height: 120px;
-                  bottom: -2%;
-                  right: -2%;
-                  border: 6px solid #333;
               }
           }
       }
@@ -393,7 +423,7 @@
   width: 100%;
   height: 100%;
   background-color: #000;
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 9;
   opacity: 0.7;
@@ -433,183 +463,134 @@
   }
 
 @media screen and (max-width: 1280px) {
-  .CBArea .CBPost {
-      width: 1000px;
-      height: 550px;
-
-      .box {
-          margin: auto;
-          padding: 0;
-
-          .swiperPost {
-              width: 300px;
-              margin: auto 30px;
-          }
-
-          .inner {
-              p {
-                  font-size: 16px;
-                  line-height: 24px;
-              }
-
-              .title {
-                  height: 50%;
-                  width: 98%;
-
-                  h3 {
-                      font-size: map-get($fontsizes, h3);
-                      line-height: 40px;
-                  }
-
-                  h4 {
-                      font-size: map-get($fontsizes, h5);
-                  }
-
-                  .closePost {
-                      font-size: 40px;
-                      width: 50px;
-                      height: 50px;
-                      line-height: 45px;
-                      right: -6%;
-                      top: -48%;
-                  }
-              }
-
-              .info {
-                  height: auto;
-                  padding-top: 15px;
-
-                  .PostingDate {
-                      padding: 0;
-                  }
-              }
-
-              .info::before {
-                  width: 420px;
-              }
-
-              .txt {
-                  height: 180px;
-
-                  p {
-                      text-indent: 2em;
-                      padding-top: 16px;
-                  }
-              }
-
-              .author {
-                  span {
-                      font-size: 16px;
-                      font-weight: 900;
-                      line-height: 16px;
-                  }
-              }
-
-              .head {
-                  position: absolute;
-                  border-radius: 50%;
-                  width: 90px;
-                  height: 90px;
-                  bottom: -2%;
-                  right: -2%;
-                  border: 6px solid #333;
-              }
-          }
-      }
-  }
-}
-  .mrtBanner {
-    width: 10%;
-  }
-    
-
-@media screen and (max-width: 768px){
-    .CBArea .CBPost {
+  .CBArea{
+    width: 80%;
+    .CBTitle{
         width: 100%;
-        height: 550px;
-  
-        .box {
-            margin: auto;
-            padding: 0;
-  
-            .swiperPost {
-                width: 300px;
-                margin: auto 30px;
+    }
+    .CBTitle::before,.CBTitle::after{
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+    .CBList{
+        gap: 1rem;
+        max-width: 90%;
+        .s-card-h{
+            background-color: #fff;
+            width: 90%;
+            border: 6px solid #ddd;
+            position: relative;
+            padding: 1rem;
+            .text .txt{
+                height: 150px;
+                margin-bottom: 3rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
             }
+            .text img{
+                scale: .7;
+                border-radius: 50%;
+                border: 5px solid #333;
+                width: 40%;
+                position: absolute;
+                right: -13.5%;
+                bottom: -8%;
+            }
+        }
+    }
+    .CBPost {
+        width: 90%;
+        height: 600px;
   
+        .box {  
+          .closePost {
+              scale: .8;
+          }
+          .head {
+                width: 135px;
+                height: 135px;
+                bottom: -6%;
+                right: -6%;
+                border: 7px solid #333;
+          }
+          
             .inner {
                 p {
-                    font-size: 16px;
-                    line-height: 24px;
+                    font-size: map-get($map,small);
+                }
+  
+                .title::after{
+                  content: "";
+                  position: absolute;
+                  width: 90%;
+                  border-bottom: 1px solid map-get($color, $key: success);                  
+                  bottom: -2px;
+                  left: 5%;
                 }
   
                 .title {
-                    height: 50%;
-                    width: 98%;
+                    border-top: 30px solid map-get($color, $key: success);
+                    border-left: 30px solid map-get($color, $key: success);
+                    padding-top: 1rem;
+                    padding-inline: 2rem;
+                    position: relative;
+                    height: 30%;
+                    z-index: 1;
   
                     h3 {
-                        font-size: map-get($fontsizes, h3);
-                        line-height: 40px;
+                        font-size: map-get($fontsizes, h2);
+                        line-height: 70px;
+                        height: 50%;
                     }
   
                     h4 {
-                        font-size: map-get($fontsizes, h5);
+                        font-size: map-get($fontsizes, h4);
+                        margin-top: .5rem;
+                        line-height: normal;
                     }
   
-                    .closePost {
-                        font-size: 40px;
-                        width: 50px;
-                        height: 50px;
-                        line-height: 45px;
-                        right: -6%;
-                        top: -48%;
-                    }
-                }
-  
-                .info {
-                    height: auto;
-                    padding-top: 15px;
-  
-                    .PostingDate {
-                        padding: 0;
-                    }
-                }
-  
-                .info::before {
-                    width: 420px;
-                }
-  
-                .txt {
-                    height: 180px;
-  
-                    p {
-                        text-indent: 2em;
-                        padding-top: 16px;
-                    }
-                }
-  
-                .author {
-                    span {
-                        font-size: 16px;
-                        font-weight: 900;
-                        line-height: 16px;
-                    }
-                }
-  
-                .head {
-                    position: absolute;
-                    border-radius: 50%;
-                    width: 90px;
-                    height: 90px;
-                    bottom: -2%;
-                    right: -2%;
-                    border: 6px solid #333;
                 }
             }
         }
     }
   }
-    .mrtBanner {
-      width: 10%;
+  .mrtBanner {
+    width: 10%;
+  }
+}
+
+   
+
+@media screen and (max-width: 768px){
+    .CBWrapper{
+        width: 100%;
     }
+    .CBArea {
+        width: 100%;
+        .CBTitle{
+            width: 100%;
+        }
+        .CBList{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            .CBPost{
+                width: 100%;
+                .box{
+                    width: 100%;
+                }
+            }
+        }
+    }
+    .lightBox{
+        width: 100%;
+    }
+  }
+ 
+
       
