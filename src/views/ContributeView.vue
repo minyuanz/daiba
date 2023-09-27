@@ -73,28 +73,32 @@
             </div>
         </div>
         <div class="CBList">
-            <div class="card-w" v-for=" in 8" @click="(closePost = !closePost), (lightBox = !lightBox)">
+            <div v-for="index in 8" :key="index" @click="(closePost = !closePost), (lightBox = !lightBox)">
+                <div :class="{'card-w': PC, 's-card-h': !PC}">
                 <div class="img">
-                    <img src="https://picsum.photos/200/280/?random=10" />
+                    <img :src="PC ? 'https://picsum.photos/200/280/?random=10' : 'https://picsum.photos/280/200/?random=10'" />
                 </div>
                 <div class="text">
                     <div class="title">
-                        <h3>五分埔商圈購物</h3>
-                        <p>台北成衣街｜衣服、飾品、配件、包包、帽子批發</p>
-                        <div class="tag">
-                            <span class="title-tag gray">#景點推薦</span>
-                            <span class="title-tag blue">#板南線</span>
-                        </div>
-                        <span class="s_text time">2020-06-15</span>
+                    <h3>五分埔商圈購物</h3>
+                    <p>台北成衣街｜衣服、飾品、配件、包包、帽子批發</p>
+                    <div class="tag">
+                        <span class="title-tag gray">#景點推薦</span>
+                        <span class="title-tag blue">#板南線</span>
+                    </div>
+                    <span class="s_text time">2020-06-15</span>
                     </div>
                     <div class="txt">
-                        　　那天逛完華山KAKAO敗家後，就心血來潮到五分埔去逛逛，真的是久違了好多年，以前學生時期過年領完紅包，一定都是最期待來到五分埔買衣服！如今後來才知道原來這裡除了一般民眾、觀光客買購物衣服的地方以外，原來也有成衣批發商圈，那天去晃晃除了衣服之外，還有包包、飾品、鞋子等等。
+                    那天逛完華山KAKAO敗家後，就心血來潮到五分埔去逛逛，真的是久違了好多年，以前學生時期過年領完紅包，一定都是最期待來到五分埔買衣服！如今後來才知道原來這裡除了一般民眾、觀光客買購物衣服的地方以外，原來也有成衣批發商圈，那天去晃晃除了衣服之外，還有包包、飾品、鞋子等等。
                     </div>
                     <img src="https://picsum.photos/80/80/?random=10" class="head" />
+                </div>
                 </div>
             </div>
             <div class="CBPost" v-show="closePost">
                 <div class="box">
+                    <img src="https://picsum.photos/200/200/?random=10" class="head" />
+                    <span class="closePost" @click="(closePost = !closePost), (lightBox = !lightBox)">✖</span>
                     <div class="swiperPost">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
@@ -113,27 +117,27 @@
                     <div class="inner">
                         <div class="title">
                             <h3>萬華無名粉條冰</h3>
-                            <span class="closePost" @click="(closePost = !closePost), (lightBox = !lightBox)">✖</span>
                             <h4>季節限定手工刀削冰口感特別，冰料全自製自煮！</h4>
                         </div>
-                        <div class="info">
-                            <p>景點：萬華無名手工粉條冰</p>
-                            <p>地址：萬華興寧街上雙園市場騎樓前</p>
-                            <p>電話：(02)2988-2222</p>
-                            <span class="PostingDate">發布日期：2020-06-15</span>
-                        </div>
-                        <div class="txt">
-                            <p>
-                                無名手工刀削冰座落於萬華興寧街上雙園市場騎樓前，這天來訪周邊坐了不少在騎樓下納涼閒聊的老人家，不過實際上前購買的就只僅我與同事，坦白說還蠻令我意外的。
-                                <br />（因為之前看媒體報導人潮都不少）<br />
-                                （2023年再訪陸續都有人買生意很不錯）
-                            </p>
+                        <div class="scrollbarArea">
+                            <div class="info">
+                                <p>景點：萬華無名手工粉條冰</p>
+                                <p>地址：萬華興寧街上雙園市場騎樓前</p>
+                                <p>電話：(02)2988-2222</p>
+                                <span class="PostingDate">發布日期：2020-06-15</span>
+                            </div>
+                            <div class="txt">
+                                <p>
+                                    無名手工刀削冰座落於萬華興寧街上雙園市場騎樓前，這天來訪周邊坐了不少在騎樓下納涼閒聊的老人家，不過實際上前購買的就只僅我與同事，坦白說還蠻令我意外的。
+                                    <br />（因為之前看媒體報導人潮都不少）<br />
+                                    （2023年再訪陸續都有人買生意很不錯）
+                                </p>
+                            </div>
                         </div>
                         <div class="author">
                             <div class="line"></div>
                             <span>TIM SMITH JR.</span>
                         </div>
-                        <img src="https://picsum.photos/200/200/?random=10" class="head" />
                     </div>
                 </div>
             </div>
@@ -170,6 +174,8 @@ import ButtonM from '@/components/ButtonM.vue';
 export default {
     data() {
         return {
+            PC: true,
+            LAP: true,
             btninner: "我要投稿",
             swipers: [
                 {
@@ -273,6 +279,15 @@ export default {
         ButtonM
     },
     methods: {
+        WindowWidth() {
+            if (window.innerWidth <= 1280) {
+                this.LAP = true;
+                this.PC = false;
+            } else {
+                this.PC = true;
+                this.LAP = false;
+            }
+        },    
         evenPic(taipeisIndex) {
             return taipeisIndex % 2 === 0;
         },
@@ -304,7 +319,9 @@ export default {
             });
         },
     },
+    computed: {
 
+    },
 
     mounted() {
         // 景點輪播
@@ -342,6 +359,8 @@ export default {
         setTimeout(() => {
             this.initSwiper();
         }, 100); // 延遲100毫秒
+        this.WindowWidth();
+        window.addEventListener("resize", this.WindowWidth);
     },
 };
 </script>

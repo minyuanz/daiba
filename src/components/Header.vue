@@ -92,7 +92,6 @@
       <router-link to="/about" class="about">關於我們</router-link>
       <router-link to="/Login" class="login">會員中心</router-link>
       <router-link to="/cart" class="cart">購物車({{ this.$store.getters.cartItemCount }})</router-link>
-      <router-link to="/MrtContributeInPage" class="test">排版用之後刪掉</router-link>
     </nav>
   </header>
 </template>
