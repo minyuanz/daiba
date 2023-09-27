@@ -84,9 +84,10 @@ export default {
       console.log('count:', this.count);
       this.$store.dispatch('addToCart', { ...product, count: this.count });
       alert("已加入購物車");
+      this.count = 1;
     },
     selectImage(imageSrc) {
-        this.selectedImage = imageSrc; // 将点击的图像路径设置为主图像路径
+        this.selectedImage = imageSrc; 
       },
   },
   mounted() {
@@ -101,6 +102,7 @@ export default {
     $route(to, from) {
       const idToFind = to.params.id;
       this.foundObject = ProTest.find((item) => item.pord_id === idToFind);
+      this.selectedImage = this.foundObject.prod_img1;
       //更新後 在更新一次隨機清單
       this.generateRandomProducts();
     },
@@ -127,14 +129,16 @@ export default {
         width:100%;
         img{
             width: 100%;
+            height: 500px;
         }
      }
      .DetailPic{
         cursor: pointer;
-        margin: 5%;
+        margin: 20px 0px ;
         width: 20%;
         display: flex;
         img{
+            margin: 0 10px;
             height: 100%;
             width: 100%;
         }
@@ -221,8 +225,10 @@ export default {
           width: 25%;
           .DetailCardImg{
             width: 100%;
+            height: 200px;
             img{
               width: 100%;
+              height: 200px;
             }
           }
 
@@ -243,7 +249,7 @@ export default {
 @media screen and (max-width: 414px){
   .DetailWrap{
   max-width: 414px;
-  padding: 2.5rem 1.5rem;
+  padding: 0;
   margin: auto;
   width: 100%;
   .DetailBox{
@@ -260,14 +266,19 @@ export default {
         width:100%;
         img{
             width: 100%;
+            height:400PX;
         }
      }
      .DetailPic{
-        cursor: pointer;
         margin: 0;
-        width: 25%;
+        padding:0;
+        cursor: pointer;
+        width: 100%;
+        height: 100px;
         img{
-            height: 100%;
+            margin: 0;
+            padding:0;
+            height:100px;
             width: 100%;
         }
      }

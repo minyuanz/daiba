@@ -81,7 +81,7 @@
 }
 
 .card-h {
-  // height: 450px;
+  background-color: #fff;
   width: 300px;
   display: flex;
   flex-direction: column;
@@ -208,24 +208,21 @@
       .tag {
         display: flex;
         flex-wrap: wrap;
-        margin: .5rem 0 0 .2rem;
+        margin: .5rem 0 0 0;
 
         .title-tag {
           margin-top: 0;
           margin-left: 0;
-        }
-
-        .title-tag:nth-last-child(1) {
           margin-bottom: 0;
         }
+
       }
 
       .time {
         color: #999999;
         position: relative;
         display: block;
-        margin-left: 62%;
-        margin-top: -1.2rem;
+        text-align: left;
       }
     }
 

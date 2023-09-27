@@ -37,7 +37,7 @@ export default {
         To(e) {
             let title = e.target.innerText
             this.$emit('title-change', title)
-            // document.querySelector('.SliderAC').style.left = '-100%'
+            document.querySelector('.SliderAC').style.left = '-100%'
         }
     }
 }

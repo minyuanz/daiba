@@ -14,6 +14,7 @@ const publicURLL =
     : "https://tibamef2e.com/chd103/g5";
 export default createStore({
   state: {
+    point:[],//儲存點數
     cart: [], // 儲存商品
     favorites: [],
     purchaseProcess: {},

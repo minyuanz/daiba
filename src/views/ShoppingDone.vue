@@ -2,9 +2,9 @@
     <div class="CartWrap">
       <div class="CartSpeedBox">
         <div class="SpeedNo">
-        <span class="SpeedNoF">1</span>
-        <span>2</span>
-        <span>3</span>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
         </div>
         <div class="SpeedText">
         <div>購物車</div>
@@ -12,11 +12,11 @@
         <div>訂單完成</div>
       </div>
       </div>
-      <div class="CartProBOX">
+      <div class="Doneprobox">
         <i class="fa-solid fa-circle-check icon-size"></i>
         <p>購買完成</p>
       </div>
-      <div class="CartBtmBox">
+      <div class="DoneBtnBox">
         <div class="CartBtnBack" @click="gotoShopping">返回商店</div>
       </div>
     </div>
@@ -90,7 +90,7 @@
       }
     }
 
-    .CartProBOX{
+    .Doneprobox{
       border: 1px solid rgb(210, 210, 210);
       width: 100%;
       display: flex;
@@ -106,13 +106,14 @@
         padding: 60px;
       }
     }
-    .CartBtmBox{
+    .DoneBtnBox{
       width: 100%;
       display: flex;
       justify-content: center;
       align-items:center;
       padding: 20px;
       .CartBtnBack{
+        width: 300px;
         color:rgb(27, 216, 49) ;
         text-align: center;
         cursor: pointer;
