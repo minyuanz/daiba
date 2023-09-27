@@ -1,3 +1,4 @@
+//  標題
 .SubmitTitle {
     h1 {
         text-align: center;
@@ -8,6 +9,7 @@
     }
 }
 
+// 按鈕
 .next {
     margin: 3rem auto;
     text-align: center;
@@ -24,6 +26,7 @@
     }
 }
 
+// 注意事項
 .SubmitNorms {
     margin: auto;
     width: 1200px;
@@ -75,6 +78,7 @@
 
 }
 
+// 要投稿的內容
 .SubmitArea {
     width: 1200px;
     margin: auto;
@@ -189,9 +193,65 @@
     }
 }
 
+// 完成
 .SubmitFinish {
+    margin: auto;
+
     p {
         font-size: 24px;
         text-align: center;
     }
+}
+
+
+
+@media screen and (max-width: 768px) {
+
+    .SubmitNorms {
+        width: 90%;
+    }
+
+    .SubmitArea {
+        width: 90%;
+
+        ul {
+
+            li {
+
+                .select {
+                    width: 100%;
+
+                    select {
+                        width: 100%;
+                        font-size: 16px;
+                    }
+                }
+
+
+
+                .UploadImg {
+                    flex-wrap: wrap;
+                }
+
+                textarea {
+                    height: 400px;
+                }
+
+            }
+        }
+    }
+
+    .SubmitFinish {
+        width: 90%;
+
+        p {
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .btn_s {
+            width: 150px;
+        }
+    }
+
 }

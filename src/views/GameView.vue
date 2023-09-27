@@ -132,6 +132,7 @@
 
       <!-- 讀取畫面 -->
       <div class="loading" v-show="loading">
+        <img src="../../src/assets/images/game/tensha.gif" alt="tensha">
         <svg xmlns="http://www.w3.org/2000/svg" width="600">
           <g class="animation-group">
             <rect class="box" width="50" height="50" rx="4" /><text class="text"

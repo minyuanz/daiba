@@ -34,7 +34,7 @@
         right: -200%;
         top: 10%;
         margin: auto;
-        animation: logo 1.5s  cubic-bezier(0.5, 0.5, 0.4, 1.6);
+        animation: logo 1.5s cubic-bezier(0.5, 0.5, 0.4, 1.6);
         animation-fill-mode: forwards;
     }
 
@@ -71,7 +71,7 @@
             opacity: 1;
             // bottom: 0;
         }
-        
+
     }
 
     .name {
@@ -322,6 +322,16 @@
         animation: loading 2s linear;
         animation-iteration-count: infinite;
 
+        img {
+            position: absolute;
+            bottom: 20%;
+            right: 0;
+            left: 0;
+            margin: auto;
+            width: 400px;
+            height: auto;
+        }
+
         .box {
             fill: black
         }
@@ -567,6 +577,7 @@ img {
     .gameHome {
 
         .gameLogo {
+            top: 20%;
             width: 100%;
         }
 
