@@ -3,13 +3,11 @@
 
   h1 {
     font-size: 40px;
-    margin-top: 5rem;
+    margin: 3rem 0;
     text-align: center;
   }
 
   .pageFeature {
-    margin: 8rem 0;
-    margin-top: 3rem;
     height: 60vh; //450px
     box-shadow: 0 10px 10px #5556;
 
@@ -23,7 +21,7 @@
   .greetingArea {
     width: 100%;
     height: 360px;
-    margin: 8rem 0;
+    margin: 5% 0;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -74,7 +72,7 @@
   .aboutUs {
     width: 100%;
     height: 360px;
-    margin: 8rem 0;
+    margin: 5% 0;
     display: flex;
     justify-content: flex-end;
     align-items: center;
