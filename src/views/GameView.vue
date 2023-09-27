@@ -7,12 +7,10 @@
         <img src="@/assets/images/game/station_AM.jpg" alt="home">
       </div>
       <img src="../assets/images/game/gameLogo.png" alt="gameLogo" class="gameLogo">
-      <!-- <ButtonS class="start" :HTMLInner="btninner[0]" @click="closeName = !closeName" /> -->
       <button class="start btn_s" @click="closeName = !closeName">start</button>
       <div class="name" v-show="closeName">
         <p>請輸入ID</p>
         <input type="text" maxlength="8" v-model="userName">
-        <!-- <ButtonS class="btn_s" :HTMLInner="btninner[1]" @click="checkName" /> -->
         <button class="btn_s" @click="checkName">OK</button>
       </div>
     </div>
@@ -34,7 +32,7 @@
       <div class="speechBalloon" @click="nextMessage" v-show="closeBalloon">
         <!-- <p :class="{ 'inputTxt': inputTxt }" :key="txtKey" @transitionend="animationEnd">{{
           currentMessage.text }}</p> -->
-        <p>{{ currentText.join('') }}</p>
+        <p :key="currentMessage.id">{{ currentText.join('') }}</p>
         <span class="nextBtn">▼</span>
       </div>
       <!-- 選項 -->
@@ -51,7 +49,7 @@
           <button v-if="lineOption" class="btn_s" @click="decideLine($event), options = !options">公寓住宅區</button>
           <button v-if="lineOption" class="btn_s" @click="decideLine($event), options = !options">涼爽鄉下</button>
 
-          <!-- 是與否 -->
+          <!-- 是否買鹹酥雞 -->
           <button v-if="yes_OR_no_Option" class="btn_s" @click="chikinOption = true, yes_OR_no_Option = false">是</button>
           <button v-if="yes_OR_no_Option" class="btn_s"
             @click="options = !options, nextMessage(), nextMessage(), chikinshop = false">否</button>
@@ -60,6 +58,12 @@
           <button v-if="chikinOption" class="btn_s" @click="decideChikin($event), options = !options">炸雞排</button>
           <button v-if="chikinOption" class="btn_s" @click="decideChikin($event), options = !options">炸薯條</button>
           <button v-if="chikinOption" class="btn_s" @click="decideChikin($event), options = !options">茶葉蛋</button>
+
+          <!-- 唱歌 -->
+          <button v-if="karaokeOption" class="btn_s" @click="decidekaraoke($event), options = !options">唱</button>
+          <button v-if="karaokeOption" class="btn_s"
+            @click=" options = !options, nextMessage(), nextMessage()">不唱</button>
+
         </div>
       </div>
 
@@ -81,15 +85,20 @@
       <div class="end" v-show="openEnd">
         <p>冒險的一天結束了！</p>
         <p>根據你的冒險路線，你可以選擇...</p>
+
+        <!-- 點數 -->
         <div class="station">
           <div class="FrontCard">
             <img src="../../public/img/logo.png" alt="logo">
           </div>
           <div class="backCard">
-
+            <div class="point">
+              <p> {{ this.getPoint() }}</p>
+            </div>
           </div>
         </div>
 
+        <!-- 推薦的東西 -->
         <div class="info">
           <div class="FrontCard">
             <img src="../../public/img/logo.png" alt="logo">
@@ -99,17 +108,22 @@
               <div class="img">
                 <img src="https://picsum.photos/280/200/?random=10" />
               </div>
+              <div class="tag">
+                <span class="title-tag blue">#板南線</span>
+                <span class="title-tag red">#淡水信義線</span>
+              </div>
               <div class="text">
                 <div class="title">
                   <h3>原來京站樓上長這樣？</h3>
                   <p>開箱五星級行政豪華客房一泊二食</p>
                 </div>
+
               </div>
             </div>
 
           </div>
         </div>
-        
+
         <div class="btn">
           <button class="btn_s" @click="resetGame">再次冒險</button>
         </div>
@@ -174,14 +188,12 @@ export default {
   data() {
     return {
       btninner: ["START", "OK"],
-      currentMessageIndex: 34, //對話內容索引值
+      currentMessageIndex: 0, //對話內容索引值
       userName: '', //使用者名稱
       closeName: false, //關閉填寫名稱欄位
-      home: false, //遊戲首頁
-      Inner: true, //遊戲內頁
+      home: true, //遊戲首頁
+      Inner: false, //遊戲內頁
       closeTxtName: true, //關閉對話框角色名
-      inputTxt: true, //文字打字機動畫
-      txtKey: 1, //重新瑄染文字讓動畫可以重跑
 
       // 需帶出的物件
       aim: "", //目的
@@ -194,6 +206,7 @@ export default {
       lineOption: false, //捷運選項
       yes_OR_no_Option: false, //是否選項
       chikinOption: false,
+      karaokeOption: false,
 
       // 插圖
       chikinshop: false, //鹹酥雞店
@@ -269,11 +282,9 @@ export default {
           user: true,
           mainOption: true,
         },
-
-        // 美食
         {
           id: 11,
-          text: "沒問題！車掌請前往美食之旅，加速前進！",
+          text: `沒問題！車掌請前往${this.aim}之旅，加速前進！`,
           image: require("@/assets/images/game/carriage_AM.jpg"),
           npc: true,
         },
@@ -329,6 +340,8 @@ export default {
           image: require("@/assets/images/game/tokai.png"),
           user: true,
         },
+
+        // 美食
         {
           id: 20,
           text: "咳咳...好的，美食可以選擇高級餐廳...",
@@ -383,50 +396,222 @@ export default {
           image: require("@/assets/images/game/michi.jpg"),
           npc: true,
         },
+        // 景點
         {
           id: 29,
+          text: "咳咳...好的，首先你有看到那高高的大樓嗎？那就是所謂的101大樓。",
+          image: require("@/assets/images/game/101.jpg"),
+          npc: true,
+        },
+        {
+          id: 30,
+          text: "讓我們上去看看好了。",
+          image: require("@/assets/images/game/101.jpg"),
+          npc: true,
+        },
+        {
+          id: 31,
+          text: "來準備看看從上往下看的台北街景吧！3..2..1..",
+          image: require("@/assets/images/game/101-2.jpg"),
+          npc: true,
+        },
+        {
+          id: 32,
+          text: "登登！很寬廣吧。哦，我看到你家了，在那裡！",
+          image: require("@/assets/images/game/101-3.jpg"),
+          npc: true,
+        },
+        {
+          id: 33,
+          text: "有欸，我家！",
+          image: require("@/assets/images/game/101-3.jpg"),
+          user: true,
+        },
+        {
+          id: 35,
+          text: "才怪...",
+          image: require("@/assets/images/game/101-3.jpg"),
+          user: true,
+        },
+        {
+          id: 36,
+          text: "再來看看北投這裡的日式古蹟，溫泉會館等等...",
+          image: require("@/assets/images/game/oldtown.jpg"),
+          npc: true,
+        },
+        {
+          id: 37,
+          text: "還可以特地泡個溫泉舒服一下。",
+          image: require("@/assets/images/game/onsen.jpg"),
+          npc: true,
+        },
+        {
+          id: 38,
+          text: "另外也有很多百貨公司可以逛逛，也是個好選擇。",
+          image: require("@/assets/images/game/shopping.jpg"),
+          npc: true,
+        },
+        {
+          id: 39,
+          text: "雖然台北是個大都市，但還有保持許多老街可以來體驗。",
+          image: require("@/assets/images/game/shopmachi.jpg"),
+          npc: true,
+        },
+        {
+          id: 40,
+          text: "下一站是台北當代藝術館，想提升你的藝術美感可以來看，你也會變藝術人也說不定！",
+          image: require("@/assets/images/game/art.jpg"),
+          npc: true,
+        },
+        {
+          id: 41,
+          text: "走著走著突然到了唱歌的地方，要唱歌嗎？",
+          image: require("@/assets/images/game/karaoke.jpg"),
+          vo: true,
+        },
+        {
+          id: 42,
+          text: "",
+          image: require("@/assets/images/game/karaoke.jpg"),
+          user: true,
+        },
+        {
+          id: 43,
+          text: "晚上了，可以去的地方有...",
+          image: require("@/assets/images/game/PM.jpg"),
+          npc: true,
+        },
+        {
+          id: 44,
+          text: "狂歡酒吧！",
+          image: require("@/assets/images/game/pub.jpg"),
+          npc: true,
+        },
+        {
+          id: 44,
+          text: "平溪天燈等等的...多重選擇！",
+          image: require("@/assets/images/game/PMLight.jpg"),
+          npc: true,
+        },
+        {
+          id: 45,
+          text: "累了，我們上車回家吧！",
+          image: require("@/assets/images/game/PM.jpg"),
+          npc: true,
+        },
+
+        // 住宿
+        {
+          id: 46,
+          text: "首先來看看類型，普通的商務，最划算的價格。",
+          image: require("@/assets/images/game/hotel.jpg"),
+          npc: true,
+        },
+        {
+          id: 47,
+          text: "日式風格，有些很貴要小心。",
+          image: require("@/assets/images/game/hotel-2.jpg"),
+          npc: true,
+        },
+        {
+          id: 48,
+          text: "英式風格，WOW，高級感。",
+          image: require("@/assets/images/game/hotel-3.jpg"),
+          npc: true,
+        },
+        {
+          id: 49,
+          text: "或是平民風的民宿。好選擇！",
+          image: require("@/assets/images/game/hotel-4.jpg"),
+          npc: true,
+        },
+        {
+          id: 50,
+          text: "我們幫你預定了商務類型的，登記時間。",
+          image: require("@/assets/images/game/hotel-5.jpg"),
+          npc: true,
+        },
+        {
+          id: 51,
+          text: "嗯...真是個好房間！東西放著去閒晃吧。",
+          image: require("@/assets/images/game/hotel-6.jpg"),
+          npc: true,
+        },
+        {
+          id: 52,
+          text: "這是公園！",
+          image: require("@/assets/images/game/park.jpg"),
+          npc: true,
+        },
+        {
+          id: 53,
+          text: "啊！轉眼間已經晚上了，真好玩，回去飯店吧！",
+          image: require("@/assets/images/game/park-2.jpg"),
+          npc: true,
+        },
+        {
+          id: 54,
+          text: "天好黑喔，準備睡覺吧！",
+          image: require("@/assets/images/game/hotel-7.jpg"),
+          npc: true,
+        },
+        {
+          id: 55,
+          text: "...",
+          image: require("@/assets/images/game/hotel-7.jpg"),
+          npc: true,
+        },
+        // 結束
+        {
+          id: 56,
           text: "感謝你搭乘我們的捷運冒險旅程，今天真是開心的一天。",
           image: require("@/assets/images/game/carriage_DUSK.jpg"),
           npc: true,
         },
         {
-          id: 30,
+          id: 57,
+          text: "感謝你搭乘我們的捷運冒險旅程，今天真是開心的一天。",
+          image: require("@/assets/images/game/carriage_DUSK.jpg"),
+          vo: true,
+        },
+        {
+          id: 58,
           text: `下一站，${this.userName}的家站，左側開門。`,
           image: require("@/assets/images/game/carriage_DUSK.jpg"),
           vo: true,
         },
         {
-          id: 31,
+          id: 59,
           text: "！！！？",
           image: require("@/assets/images/game/carriage_DUSK.jpg"),
           user: true,
         },
         {
-          id: 32,
+          id: 60,
           text: "逼逼逼逼逼逼逼逼！登登！",
           image: require("@/assets/images/game/station_DUSK.jpg"),
           vo: true,
         },
         {
-          id: 33,
+          id: 61,
           text: `再會了，${this.userName}。`,
           image: require("@/assets/images/game/station_DUSK.jpg"),
           npc: true,
         },
         {
-          id: 34,
+          id: 62,
           text: "",
           image: require("@/assets/images/game/room.jpg"),
           user: true,
         },
         {
-          id: 35,
+          id: 63,
           text: "原來我在做夢啊...算了，也滿開心的！",
           image: require("@/assets/images/game/room.jpg"),
           user: true,
         },
         {
-          id: 36,
+          id: 64,
           text: "",
           image: require("@/assets/images/game/HOME_PM.jpg"),
           user: true,
@@ -444,240 +629,28 @@ export default {
       return this.messages[this.currentMessageIndex];
     },
   },
-  // created() {
-  // this.messages = [
-  //   {
-  //     id: 1,
-  //     text: "在一個城市中，你想著要去旅行，但卻不知去向，突然聽到了遠處傳來的低沉隆隆聲，彷彿你的冒險即將開始，你抬頭望向遠處，發現一輛神秘的電車正等待著你的到來。你將迎著這趟神秘的旅行搭上車了，不知道它將帶領你前往何方......",
-  //     image: require("@/assets/images/game/station_AM2.jpg"),
-  //     vo: true,
-  //   },
-  //   {
-  //     id: 2,
-  //     text: "...",
-  //     image: require("@/assets/images/game/station_AM2.jpg"),
-  //     vo: true,
-  //   },
-  //   {
-  //     id: 3,
-  //     text: `${this.userName}突然腦袋一片空白不知不覺的搭上了電車...`,
-  //     image: require("@/assets/images/game/black.jpg"),
-  //     vo: true,
-  //   },
-  //   {
-  //     id: 4,
-  //     text: "醒來時自己已經在車上，覺得很不安也很興奮的不知道會往哪裡去。",
-  //     image: require("@/assets/images/game/carriage_AM.jpg"),
-  //     vo: true,
-  //   },
-  //   {
-  //     id: 5,
-  //     text: "沒辦法先找個位置坐吧。",
-  //     image: require("@/assets/images/game/carriage_AM.jpg"),
-  //     user: true,
-  //   },
-  //   {
-  //     id: 6,
-  //     text: "突然有人朝你走了過來...",
-  //     image: require("@/assets/images/game/black.jpg"),
-  //     vo: true,
-  //   },
-  //   {
-  //     id: 7,
-  //     text: "太好了！我們終於有新乘客了...",
-  //     image: require("@/assets/images/game/carriage_AM.jpg"),
-  //     npc: true,
-  //   },
-  //   {
-  //     id: 8,
-  //     text: "你是...?",
-  //     image: require("@/assets/images/game/carriage_AM.jpg"),
-  //     user: true,
-  //   },
-  //   {
-  //     id: 9,
-  //     text: "我是這次冒險中你的導遊，請問你想要前往哪個服務呢？",
-  //     image: require("@/assets/images/game/carriage_AM.jpg"),
-  //     npc: true,
-  //     mainOption: true,
-  //   },
-  //   {
-  //     id: 10,
-  //     text: "",
-  //     image: require("@/assets/images/game/carriage_AM.jpg"),
-  //     user: true,
-  //     mainOption: true,
-  //   },
 
-  //   // 美食
-  //   {
-  //     id: 11,
-  //     text: "沒問題！車掌請前往美食之旅，加速前進！",
-  //     image: require("@/assets/images/game/carriage_AM.jpg"),
-  //     npc: true,
-  //   },
-  //   {
-  //     id: 12,
-  //     text: 'loading',
-  //     image: require("@/assets/images/game/tunnel.jpg"),
-  //     npc: true,
-
-  //   },
-  //   {
-  //     id: 13,
-  //     text: `冒昧問一下，請問${this.userName}住在哪裡呢？`,
-  //     image: require("@/assets/images/game/tunnel.jpg"),
-  //     npc: true,
-
-  //   },
-  //   {
-  //     id: 14,
-  //     text: "依你現在的心情，你會選擇住在？",
-  //     image: require("@/assets/images/game/tunnel.jpg"),
-  //     vo: true,
-  //   },
-  //   {
-  //     id: 14,
-  //     text: "",
-  //     image: require("@/assets/images/game/tunnel.jpg"),
-  //     user: true,
-
-  //   },
-  //   {
-  //     id: 15,
-  //     text: "原來如此！你真是幸福的傢伙。哼哼。好的我們也差不多要到目的地了。",
-  //     image: require("@/assets/images/game/exit.jpg"),
-  //     npc: true,
-  //   },
-  //   {
-  //     id: 16,
-  //     text: "RRRRRRRRRRRRRRRRRRR我的眼睛，出口好刺眼！",
-  //     image: require("@/assets/images/game/exit.jpg"),
-  //     npc: true,
-  //     user: true,
-  //   },
-  //   {
-  //     id: 17,
-  //     text: `${this.userName}你看！是白天欸，台北馬路如虎口，大家要小心哦！`,
-  //     image: require("@/assets/images/game/tokai.png"),
-  //     npc: true,
-  //   },
-  //   {
-  //     id: 18,
-  //     text: "好...",
-  //     image: require("@/assets/images/game/tokai.png"),
-  //     user: true,
-  //   },
-  //   {
-  //     id: 19,
-  //     text: "咳咳...好的，美食可以選擇高級餐廳...",
-  //     image: require("@/assets/images/game/chuuka.jpg"),
-  //     npc: true,
-  //   },
-  //   {
-  //     id: 20,
-  //     text: "或是吵雜的快炒店、居酒屋...",
-  //     image: require("@/assets/images/game/izakaya.jpg"),
-  //     npc: true,
-  //   },
-  //   {
-  //     id: 21,
-  //     text: "或是好玩又好吃又吵雜的夜市！",
-  //     image: require("@/assets/images/game/yoichi.jpg"),
-  //     npc: true,
-  //   },
-  //   {
-  //     id: 22,
-  //     text: `齁齁齁齁，給你近距離看一眼！${this.userName}你肚子餓了吧！`,
-  //     image: require("@/assets/images/game/yoichi-2.jpg"),
-  //     npc: true,
-  //   },
-  //   {
-  //     id: 23,
-  //     text: "不然也可以選擇街道的小吃店。不過要注意...",
-  //     image: require("@/assets/images/game/michi.jpg"),
-  //     npc: true,
-  //   },
-  //   {
-  //     id: 24,
-  //     text: "台北很潮濕，要小心下雨！！",
-  //     image: require("@/assets/images/game/michi-2.jpg"),
-  //     npc: true,
-  //   },
-  //   {
-  //     id: 25,
-  //     text: "眼前遇到了超好吃鹽酥雞店，請問你有要購買嗎？",
-  //     image: require("@/assets/images/game/michi.jpg"),
-  //     vo: true,
-  //   },
-  //   {
-  //     id: 26,
-  //     text: "",
-  //     image: require("@/assets/images/game/michi.jpg"),
-  //     user: true,
-  //   },
-  //   {
-  //     id: 27,
-  //     text: "好的！今天的旅程也該結束了，我們上車吧！",
-  //     image: require("@/assets/images/game/michi.jpg"),
-  //     npc: true,
-  //   },
-  //   {
-  //     id: 27,
-  //     text: "感謝你搭乘我們的捷運冒險旅程，今天真是開心的一天。",
-  //     image: require("@/assets/images/game/carriage_DUSK.jpg"),
-  //     npc: true,
-  //   },
-  //   {
-  //     id: 28,
-  //     text: `下一站，${this.userName}的家站，左側開門。`,
-  //     image: require("@/assets/images/game/carriage_DUSK.jpg"),
-  //     vo: true,
-  //   },
-  //   {
-  //     id: 29,
-  //     text: "！！！？",
-  //     image: require("@/assets/images/game/carriage_DUSK.jpg"),
-  //     user: true,
-  //   },
-  //   {
-  //     id: 30,
-  //     text: "逼逼逼逼逼逼逼逼！登登！",
-  //     image: require("@/assets/images/game/station_DUSK.jpg"),
-  //     vo: true,
-  //   },
-  //   {
-  //     id: 31,
-  //     text: `再會了，${this.userName}。`,
-  //     image: require("@/assets/images/game/station_DUSK.jpg"),
-  //     npc: true,
-  //   },
-  //   {
-  //     id: 32,
-  //     text: "",
-  //     image: require("@/assets/images/game/room.jpg"),
-  //     user: true,
-  //   },
-  //   {
-  //     id: 33,
-  //     text: "原來我在做夢啊...算了，也滿開心的！",
-  //     image: require("@/assets/images/game/room.jpg"),
-  //     user: true,
-  //   },
-  //   {
-  //     id: 34,
-  //     text: "",
-  //     image: require("@/assets/images/game/HOME_PM.jpg"),
-  //     user: true,
-  //   },
-  // ];
-  // },
   methods: {
     // 換下一個內容
     nextMessage() {
       if (this.idx === this.currentMessage.text.length) { //
         if (this.currentMessageIndex < this.messages.length - 1) {
-          this.currentMessageIndex++;
+          if (this.currentMessageIndex === 18) { //分支線18 選擇aim
+            if (this.aim === '景點') {
+              this.currentMessageIndex = 28
+            } else if (this.aim === '住宿') {
+              this.currentMessageIndex = 45
+            } else {
+              this.currentMessageIndex++;
+            }
+          }
+          if (this.currentMessageIndex === 27) {// 分支線27 美食路線
+            this.currentMessageIndex = 55
+          }
+          if (this.currentMessageIndex === 44) {// 分支線44 景點路線
+            this.currentMessageIndex = 55
+          } else
+            this.currentMessageIndex++;
 
           console.log(this.currentMessageIndex)
         }
@@ -686,6 +659,7 @@ export default {
         this.idx = this.currentMessage.text.length;
       }
     },
+
     //確認名字
     checkName() {
       if (this.userName !== '') {
@@ -702,22 +676,20 @@ export default {
       let aim = event.target.innerText;
       if (aim === '吃美食') {
         this.aim = "美食"
-        this.inputTxt = false;
+        this.nextMessage()
         this.nextMessage()
 
       } else if (aim === '逛景點') {
-
         this.aim = "景點"
-        this.inputTxt = false;
+        this.nextMessage()
         this.nextMessage()
 
-      } else if (aim === '輕鬆住宿') {
+      } else if (aim === '住宿放鬆') {
         this.aim = "住宿"
-        this.inputTxt = false;
         this.nextMessage()
-
+        this.nextMessage()
       }
-
+      console.log(this.aim)
     },
 
     // 捷運路線
@@ -770,57 +742,96 @@ export default {
       }
     },
 
+    // 唱歌
+    decidekaraoke(event) {
+      let karaoke = event.target.innerText;
+      if (karaoke === '唱') {
+        this.item = require("@/assets/images/game/mic.png");
+        this.openBag = true;
+        this.nextMessage()
+
+      }
+    },
+
     // 讀取條
     loadingTime() {
 
-      if (this.currentMessageIndex === 11 || this.currentMessageIndex === 33) {
-        this.closeTxtName = false;
-        this.closeBalloon = false;
-        this.loading = true;
-        setTimeout(() => {
-          this.currentMessageIndex++
-          this.loading = false;
-          this.closeTxtName = true;
-          this.closeBalloon = true;
-        }, 2000);
+      this.closeTxtName = false;
+      this.closeBalloon = false;
+      this.loading = true;
+      setTimeout(() => {
+        this.currentMessageIndex++
+        this.loading = false;
+        this.closeTxtName = true;
+        this.closeBalloon = true;
+      }, 2000);
+
+    },
+
+    // 點數
+    getPoint() {
+      if (localStorage.getItem('userData')) {
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        // 增加點數
+      } else {
+        return '登入會員遊玩的話即可獲得點數！'
       }
     },
+
+
     // 重新遊戲
     resetGame() {
       this.currentMessageIndex = 0
       this.closeTxtName = true;
       this.closeBalloon = true;
+      this.openEnd = false;
       this.Inner = false;
       this.home = true;
+      this.aim = '';
+      this.line = '';
+      this.userName = '';
+      
     }
 
 
   },
   watch: {
+    // 判斷index來發動其他事件
     currentMessageIndex(newValue) {
       console.log(newValue)
       if (newValue === 9) {
         this.options = true;
         this.aimOption = true;
-      } else if (newValue === 11) {
+      } else if (newValue === 11 || newValue === 55 || newValue === 61) {
         this.loadingTime()
       }
-      else if (newValue === 13) {
+      else if (newValue === 14) {
         this.options = true;
         this.aimOption = false;
         this.lineOption = true;
-      } else if (newValue === 25) {
+      }
+      else if (newValue === 25) {
         this.chikinshop = true;
       } else if (newValue === 26) {
         this.options = true;
         this.lineOption = false;
         this.yes_OR_no_Option = true;
-      } else if (newValue === 35) {
+      } else if (newValue === 40) {
+        this.options = true;
+        this.lineOption = false;
+        this.karaokeOption = true;
+      } else if (newValue === 54) {
+        this.item = require("@/assets/images/game/makura.png");
+        this.openBag = true;
+      }
+      else if (newValue === 63) {
         this.closeTxtName = false;
         this.closeBalloon = false;
         this.openEnd = true;
       }
     },
+
+    // 打字機動畫
     currentMessage: {
       handler(nVal) {
         if (this.Inner === true) {
@@ -838,15 +849,20 @@ export default {
       },
       immediate: true
     },
+
+    // 更新名字
     userName(newValue) {
       this.messages[2].text = `${newValue}突然腦袋一片空白不知不覺的搭上了電車...`;
       this.messages[12].text = `冒昧問一下，請問${newValue}住在哪裡呢？`;
       this.messages[17].text = `${newValue}你看！是白天欸，`;
       this.messages[22].text = `齁齁齁齁，特寫照！${newValue}你肚子餓了吧`;
-      this.messages[29].text = `下一站，${newValue}的家站，左側開門。`;
-      this.messages[32].text = `再會了，${newValue}。`;
-
-    }
+      this.messages[57].text = `下一站，${newValue}的家站，左側開門。`;
+      this.messages[60].text = `再會了，${newValue}。`;
+    },
+    // 目的
+    aim(newValue) {
+      this.messages[10].text = `沒問題！車掌請前往${newValue}之旅，加速前進！`;
+    },
   },
 };
 </script>
