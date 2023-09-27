@@ -54,14 +54,6 @@
         </li>
         <li>
           <div class="pic">
-            <img src="../../public/img/home/member.jpg" alt="" />
-          </div>
-          <router-link to="/Login" class="login">
-            <p>會員中心</p>
-          </router-link>
-        </li>
-        <li>
-          <div class="pic">
             <img src="../../public/img/home/shop.jpg" alt="" />
           </div>
           <router-link to="/store" class="store">
@@ -73,7 +65,7 @@
             <img src="../../public/img/home/new1.jpg" alt="" />
           </div>
           <router-link to="/New" class="new">
-            <p>最新消息</p>
+            <p>消息資訊</p>
           </router-link>
         </li>
         <li>
@@ -82,6 +74,14 @@
           </div>
           <router-link to="/about" class="about">
             <p>關於我們</p>
+          </router-link>
+        </li>
+        <li>
+          <div class="pic">
+            <img src="../../public/img/home/member.jpg" alt="" />
+          </div>
+          <router-link to="/Login" class="login">
+            <p>會員中心</p>
           </router-link>
         </li>
       </ul>
