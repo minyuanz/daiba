@@ -246,7 +246,7 @@ export default {
         {
           title: "台北車站",
           txt: "為臺灣鐵路管理局、臺灣高速鐵路、及臺北捷運三鐵共構的地下化鐵路車站，不僅是北臺灣首要的交通樞紐，也是臺灣建築規模與運量最大的鐵路車站，每日轉乘的旅客約50萬人次以上，總使用人次居於全球第25名。",
-          url: require("../assets/images/mrtStation/taipei_1.jpg"),
+          url: require("@/assets/images/mrtStation/taipei_1.jpg"),
           isShow: false,
           color: "blue",
           place: [

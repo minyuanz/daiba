@@ -354,15 +354,14 @@
                
               .scrollbarArea::-webkit-scrollbar-thumb {
                 border-radius: 10px;
-                background-color: #fffa;
+                background-color: #ccc;
                 cursor: pointer;
                 ;
               }
               .scrollbarArea{
                 overflow-x: hidden;
                 overflow-y: scroll;
-                margin-right: calc(100% - 50vw);
-                padding: 0 70px 0 0;
+                margin-right: 20px;
                 .info {
                   width: 100% ;
                 //   width: calc(100% + 40px);
@@ -513,6 +512,7 @@
           .closePost {
               scale: .8;
           }
+          .scrollbarArea{ margin-right: -10px;}
           .head {
                 width: 135px;
                 height: 135px;
@@ -607,6 +607,7 @@
                             left: 3%;
                         }
                         .scrollbarArea{ 
+                            margin-right: -15px;
                             margin-top: 15px;
                             .info{
                                 padding: 0.2rem 0 0 2.5rem;
@@ -691,8 +692,7 @@
                                 left: 5px;
                             }
                             .scrollbarArea{ 
-                                margin-right: -20px;
-                                padding: 0 20px 0 0;
+                                margin-right: -10px;
                                 .info{
                                     padding: 0.2rem 0 0 1rem;
                                 }
