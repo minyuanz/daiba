@@ -29,7 +29,6 @@
         <button class="btn_l btnlogin" type="button">
           <router-link to="/User">登入</router-link>
         </button>
-
       </form>
       <router-link to="/RegisterView">還沒有會員 ? 會員註冊</router-link>
     </div>
@@ -48,9 +47,10 @@ export default {
       formAction: "",
     };
   },
-  methods: {
-  },
+  methods: {},
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+@import "../assets/scss/page/_Login.scss";
+</style>

@@ -1,16 +1,19 @@
-
 <template>
   <!-- 遊戲首頁 -->
   <transition name="fade" mode="out-in">
     <div class="gameHome" v-show="home">
       <div class="home">
-        <img src="@/assets/images/game/station_AM.jpg" alt="home">
+        <img src="@/assets/images/game/station_AM.jpg" alt="home" />
       </div>
-      <img src="../assets/images/game/gameLogo.png" alt="gameLogo" class="gameLogo">
+      <img
+        src="../assets/images/game/gameLogo.png"
+        alt="gameLogo"
+        class="gameLogo"
+      />
       <button class="start btn_s" @click="closeName = !closeName">start</button>
       <div class="name" v-show="closeName">
         <p>請輸入ID</p>
-        <input type="text" maxlength="8" v-model="userName">
+        <input type="text" maxlength="8" v-model="userName" />
         <button class="btn_s" @click="checkName">OK</button>
       </div>
     </div>
@@ -20,7 +23,11 @@
   <transition name="fade" mode="out-in">
     <div class="gameInner" v-if="Inner">
       <transition>
-        <img :src="currentMessage.image" alt="Character Image" class="character-image" />
+        <img
+          :src="currentMessage.image"
+          alt="Character Image"
+          class="character-image"
+        />
       </transition>
       <!-- 對話框角色 -->
       <div class="name" v-show="closeTxtName">
@@ -32,52 +39,144 @@
       <div class="speechBalloon" @click="nextMessage" v-show="closeBalloon">
         <!-- <p :class="{ 'inputTxt': inputTxt }" :key="txtKey" @transitionend="animationEnd">{{
           currentMessage.text }}</p> -->
-        <p :key="currentMessage.id">{{ currentText.join('') }}</p>
+        <p :key="currentMessage.id">{{ currentText.join("") }}</p>
         <span class="nextBtn">▼</span>
       </div>
       <!-- 選項 -->
       <div class="lightbox" v-if="options">
         <div v-if="options" class="option">
           <!-- 主選擇 -->
-          <button v-if="aimOption" class="btn_s" @click="decideAim($event), options = !options">吃美食</button>
-          <button v-if="aimOption" class="btn_s" @click="decideAim($event), options = !options">逛景點</button>
-          <button v-if="aimOption" class="btn_s" @click="decideAim($event), options = !options">住宿放鬆</button>
+          <button
+            v-if="aimOption"
+            class="btn_s"
+            @click="decideAim($event), (options = !options)"
+          >
+            吃美食
+          </button>
+          <button
+            v-if="aimOption"
+            class="btn_s"
+            @click="decideAim($event), (options = !options)"
+          >
+            逛景點
+          </button>
+          <button
+            v-if="aimOption"
+            class="btn_s"
+            @click="decideAim($event), (options = !options)"
+          >
+            住宿放鬆
+          </button>
 
           <!-- 住處(捷運線) -->
-          <button v-if="lineOption" class="btn_s" @click="decideLine($event), options = !options">大都市</button>
-          <button v-if="lineOption" class="btn_s" @click="decideLine($event), options = !options">一般都市</button>
-          <button v-if="lineOption" class="btn_s" @click="decideLine($event), options = !options">公寓住宅區</button>
-          <button v-if="lineOption" class="btn_s" @click="decideLine($event), options = !options">涼爽鄉下</button>
+          <button
+            v-if="lineOption"
+            class="btn_s"
+            @click="decideLine($event), (options = !options)"
+          >
+            大都市
+          </button>
+          <button
+            v-if="lineOption"
+            class="btn_s"
+            @click="decideLine($event), (options = !options)"
+          >
+            一般都市
+          </button>
+          <button
+            v-if="lineOption"
+            class="btn_s"
+            @click="decideLine($event), (options = !options)"
+          >
+            公寓住宅區
+          </button>
+          <button
+            v-if="lineOption"
+            class="btn_s"
+            @click="decideLine($event), (options = !options)"
+          >
+            涼爽鄉下
+          </button>
 
           <!-- 是否買鹹酥雞 -->
-          <button v-if="yes_OR_no_Option" class="btn_s" @click="chikinOption = true, yes_OR_no_Option = false">是</button>
-          <button v-if="yes_OR_no_Option" class="btn_s"
-            @click="options = !options, nextMessage(), nextMessage(), chikinshop = false">否</button>
+          <button
+            v-if="yes_OR_no_Option"
+            class="btn_s"
+            @click="(chikinOption = true), (yes_OR_no_Option = false)"
+          >
+            是
+          </button>
+          <button
+            v-if="yes_OR_no_Option"
+            class="btn_s"
+            @click="
+              (options = !options),
+                nextMessage(),
+                nextMessage(),
+                (chikinshop = false)
+            "
+          >
+            否
+          </button>
 
           <!-- 鹹酥雞 -->
-          <button v-if="chikinOption" class="btn_s" @click="decideChikin($event), options = !options">炸雞排</button>
-          <button v-if="chikinOption" class="btn_s" @click="decideChikin($event), options = !options">炸薯條</button>
-          <button v-if="chikinOption" class="btn_s" @click="decideChikin($event), options = !options">茶葉蛋</button>
+          <button
+            v-if="chikinOption"
+            class="btn_s"
+            @click="decideChikin($event), (options = !options)"
+          >
+            炸雞排
+          </button>
+          <button
+            v-if="chikinOption"
+            class="btn_s"
+            @click="decideChikin($event), (options = !options)"
+          >
+            炸薯條
+          </button>
+          <button
+            v-if="chikinOption"
+            class="btn_s"
+            @click="decideChikin($event), (options = !options)"
+          >
+            茶葉蛋
+          </button>
 
           <!-- 唱歌 -->
-          <button v-if="karaokeOption" class="btn_s" @click="decidekaraoke($event), options = !options">唱</button>
-          <button v-if="karaokeOption" class="btn_s"
-            @click=" options = !options, nextMessage(), nextMessage()">不唱</button>
-
+          <button
+            v-if="karaokeOption"
+            class="btn_s"
+            @click="decidekaraoke($event), (options = !options)"
+          >
+            唱
+          </button>
+          <button
+            v-if="karaokeOption"
+            class="btn_s"
+            @click="(options = !options), nextMessage(), nextMessage()"
+          >
+            不唱
+          </button>
         </div>
       </div>
 
       <!-- 插圖 -->
-      <img class="chikinshop" src="~@/assets/images/game/chikin.png" alt="鹹酥雞" v-show="chikinshop">
-
+      <img
+        class="chikinshop"
+        src="~@/assets/images/game/chikin.png"
+        alt="鹹酥雞"
+        v-show="chikinshop"
+      />
 
       <!-- 獲得物品的彈窗 -->
       <div class="lightbox" v-show="openBag">
         <div class="bag">
           <p>獲得了</p>
           <!-- <img src="~@/assets/images/game/flightChikin.png" alt=""> -->
-          <img :src="item" alt="物品">
-          <button class="btn_s" @click="openBag = !openBag, nextMessage()">關閉</button>
+          <img :src="item" alt="物品" />
+          <button class="btn_s" @click="(openBag = !openBag), nextMessage()">
+            關閉
+          </button>
         </div>
       </div>
 
@@ -89,11 +188,11 @@
         <!-- 點數 -->
         <div class="station">
           <div class="FrontCard">
-            <img src="../../public/img/logo.png" alt="logo">
+            <img src="../../public/img/logo.png" alt="logo" />
           </div>
           <div class="backCard">
             <div class="point">
-              <p> {{ this.getPoint() }}</p>
+              <p>{{ this.getPoint() }}</p>
             </div>
           </div>
         </div>
@@ -101,7 +200,7 @@
         <!-- 推薦的東西 -->
         <div class="info">
           <div class="FrontCard">
-            <img src="../../public/img/logo.png" alt="logo">
+            <img src="../../public/img/logo.png" alt="logo" />
           </div>
           <div class="backCard">
             <div class="card-h border-r">
@@ -117,10 +216,8 @@
                   <h3>原來京站樓上長這樣？</h3>
                   <p>開箱五星級行政豪華客房一泊二食</p>
                 </div>
-
               </div>
             </div>
-
           </div>
         </div>
 
@@ -129,67 +226,65 @@
         </div>
       </div>
 
-
       <!-- 讀取畫面 -->
       <div class="loading" v-show="loading">
         <svg xmlns="http://www.w3.org/2000/svg" width="600">
           <g class="animation-group">
-            <rect class="box" width="50" height="50" rx="4" /><text class="text"
-              transform="translate(10.12 35.19)">L</text>
+            <rect class="box" width="50" height="50" rx="4" />
+            <text class="text" transform="translate(10.12 35.19)">L</text>
           </g>
           <g class="animation-group">
-            <rect class="box" x="60" width="50" height="50" rx="4" /><text class="text"
-              transform="translate(68.68 35.19)">O</text>
+            <rect class="box" x="60" width="50" height="50" rx="4" />
+            <text class="text" transform="translate(68.68 35.19)">O</text>
           </g>
           <g class="animation-group">
-            <rect class="box" x="120" width="50" height="50" rx="4" /><text class="text"
-              transform="translate(128.22 35.19)">A</text>
+            <rect class="box" x="120" width="50" height="50" rx="4" />
+            <text class="text" transform="translate(128.22 35.19)">A</text>
           </g>
           <g class="animation-group">
             <rect class="box" x="180" width="50" height="50" rx="4" />
             <text class="text" transform="translate(188.41 35.19)">D</text>
           </g>
           <g class="animation-group">
-            <rect class="box" x="240" width="50" height="50" rx="4" /><text class="text"
-              transform="translate(259.06 35.19)">I</text>
+            <rect class="box" x="240" width="50" height="50" rx="4" />
+            <text class="text" transform="translate(259.06 35.19)">I</text>
           </g>
           <g class="animation-group">
-            <rect class="box" x="300" width="50" height="50" rx="4" /><text class="text"
-              transform="translate(308.83 35.19)">N</text>
+            <rect class="box" x="300" width="50" height="50" rx="4" />
+            <text class="text" transform="translate(308.83 35.19)">N</text>
           </g>
           <g class="animation-group">
-            <rect class="box" x="360" width="50" height="50" rx="4" /><text class="text"
-              transform="translate(368.14 35.19)">G</text>
+            <rect class="box" x="360" width="50" height="50" rx="4" />
+            <text class="text" transform="translate(368.14 35.19)">G</text>
           </g>
           <g class="animation-group">
-            <rect class="box" x="420" width="50" height="50" rx="4" /><text class="text"
-              transform="translate(428.14 35.19)">.</text>
+            <rect class="box" x="420" width="50" height="50" rx="4" />
+            <text class="text" transform="translate(428.14 35.19)">.</text>
           </g>
           <g class="animation-group">
-            <rect class="box" x="480" width="50" height="50" rx="4" /><text class="text"
-              transform="translate(488.14 35.19)">.</text>
+            <rect class="box" x="480" width="50" height="50" rx="4" />
+            <text class="text" transform="translate(488.14 35.19)">.</text>
           </g>
           <g class="animation-group">
-            <rect class="box" x="540" width="50" height="50" rx="4" /><text class="text"
-              transform="translate(548.14 35.19)">.</text>
+            <rect class="box" x="540" width="50" height="50" rx="4" />
+            <text class="text" transform="translate(548.14 35.19)">.</text>
           </g>
         </svg>
       </div>
-
     </div>
   </transition>
 </template>
 
 <script>
-import ButtonS from '@/components/ButtonS.vue'
-import { faRuler } from '@fortawesome/free-solid-svg-icons';
+import ButtonS from "@/components/ButtonS.vue";
+import { faRuler } from "@fortawesome/free-solid-svg-icons";
 
 export default {
   data() {
     return {
       btninner: ["START", "OK"],
       currentMessageIndex: 62, //對話內容索引值
-      userName: '', //使用者名稱
+      userName: "", //使用者名稱
       closeName: false, //關閉填寫名稱欄位
       home: true, //遊戲首頁
       Inner: false, //遊戲內頁
@@ -198,7 +293,6 @@ export default {
       // 需帶出的物件
       aim: "", //目的
       line: "", //捷運線
-
 
       // 選項
       options: false, //選擇視窗
@@ -210,7 +304,7 @@ export default {
 
       // 插圖
       chikinshop: false, //鹹酥雞店
-      item: '', //鹹酥雞店
+      item: "", //鹹酥雞店
 
       // 彈窗
       openBag: false,
@@ -219,7 +313,8 @@ export default {
       // loading
       closeBalloon: true, //關閉對話框
       loading: false, //讀取
-      messages: [  //對話內容
+      messages: [
+        //對話內容
         {
           id: 1,
           text: "在一個城市中，你想著要去旅行，但卻不知去向，突然聽到了遠處傳來的低沉隆隆聲，彷彿你的冒險即將開始，你抬頭望向遠處，發現一輛神秘的電車正等待著你的到來。你將迎著這趟神秘的旅行搭上車了，不知道它將帶領你前往何方......",
@@ -290,17 +385,15 @@ export default {
         },
         {
           id: 12,
-          text: 'loading',
+          text: "loading",
           image: require("@/assets/images/game/tunnel.jpg"),
           npc: true,
-
         },
         {
           id: 13,
           text: `冒昧問一下，請問${this.userName}住在哪裡呢？`,
           image: require("@/assets/images/game/tunnel.jpg"),
           npc: true,
-
         },
         {
           id: 14,
@@ -313,7 +406,6 @@ export default {
           text: "",
           image: require("@/assets/images/game/tunnel.jpg"),
           user: true,
-
         },
         {
           id: 16,
@@ -633,26 +725,29 @@ export default {
   methods: {
     // 換下一個內容
     nextMessage() {
-      if (this.idx === this.currentMessage.text.length) { //
+      if (this.idx === this.currentMessage.text.length) {
+        //
         if (this.currentMessageIndex < this.messages.length - 1) {
-          if (this.currentMessageIndex === 18) { //分支線18 選擇aim
-            if (this.aim === '景點') {
-              this.currentMessageIndex = 28
-            } else if (this.aim === '住宿') {
-              this.currentMessageIndex = 45
+          if (this.currentMessageIndex === 18) {
+            //分支線18 選擇aim
+            if (this.aim === "景點") {
+              this.currentMessageIndex = 28;
+            } else if (this.aim === "住宿") {
+              this.currentMessageIndex = 45;
             } else {
               this.currentMessageIndex++;
             }
           }
-          if (this.currentMessageIndex === 27) {// 分支線27 美食路線
-            this.currentMessageIndex = 55
+          if (this.currentMessageIndex === 27) {
+            // 分支線27 美食路線
+            this.currentMessageIndex = 55;
           }
-          if (this.currentMessageIndex === 44) {// 分支線44 景點路線
-            this.currentMessageIndex = 55
-          } else
-            this.currentMessageIndex++;
+          if (this.currentMessageIndex === 44) {
+            // 分支線44 景點路線
+            this.currentMessageIndex = 55;
+          } else this.currentMessageIndex++;
 
-          console.log(this.currentMessageIndex)
+          console.log(this.currentMessageIndex);
         }
       } else {
         this.currentText.push(this.currentMessage.text.substring(this.idx));
@@ -662,161 +757,143 @@ export default {
 
     //確認名字
     checkName() {
-      if (this.userName !== '') {
+      if (this.userName !== "") {
         this.home = false;
         this.closeName = false;
         this.Inner = true;
       } else {
-        alert('請輸入您的名字');
+        alert("請輸入您的名字");
       }
     },
 
     //決定目的
     decideAim(event) {
       let aim = event.target.innerText;
-      if (aim === '吃美食') {
-        this.aim = "美食"
-        this.nextMessage()
-        this.nextMessage()
-
-      } else if (aim === '逛景點') {
-        this.aim = "景點"
-        this.nextMessage()
-        this.nextMessage()
-
-      } else if (aim === '住宿放鬆') {
-        this.aim = "住宿"
-        this.nextMessage()
-        this.nextMessage()
+      if (aim === "吃美食") {
+        this.aim = "美食";
+        this.nextMessage();
+        this.nextMessage();
+      } else if (aim === "逛景點") {
+        this.aim = "景點";
+        this.nextMessage();
+        this.nextMessage();
+      } else if (aim === "住宿放鬆") {
+        this.aim = "住宿";
+        this.nextMessage();
+        this.nextMessage();
       }
-      console.log(this.aim)
+      console.log(this.aim);
     },
 
     // 捷運路線
     decideLine(event) {
       let line = event.target.innerText;
-      if (line === '大都市') {
-        this.line = ["淡水信義線", "板南線"]
+      if (line === "大都市") {
+        this.line = ["淡水信義線", "板南線"];
         this.inputTxt = false;
-        this.nextMessage()
-
-      } else if (line === '一般都市') {
-
-        this.line = ["板南線", "松山新店線"]
+        this.nextMessage();
+      } else if (line === "一般都市") {
+        this.line = ["板南線", "松山新店線"];
         this.inputTxt = false;
-        this.nextMessage()
-
-      } else if (line === '公寓住宅區') {
-        this.line = ["中和新蘆線", "環狀線", "松山新店線"]
+        this.nextMessage();
+      } else if (line === "公寓住宅區") {
+        this.line = ["中和新蘆線", "環狀線", "松山新店線"];
         this.inputTxt = false;
-        this.nextMessage()
-
-      } else if (line === '涼爽鄉下') {
-        this.line = ["文湖線", "松山新店線"]
+        this.nextMessage();
+      } else if (line === "涼爽鄉下") {
+        this.line = ["文湖線", "松山新店線"];
         this.inputTxt = false;
-        this.nextMessage()
-
+        this.nextMessage();
       }
     },
 
     // 鹹酥雞店
     decideChikin(event) {
       let buyItem = event.target.innerText;
-      if (buyItem === '炸雞排') {
+      if (buyItem === "炸雞排") {
         this.item = require("@/assets/images/game/flightChikin.png");
         this.openBag = true;
         this.chikinshop = false;
-        this.nextMessage()
-
-      } else if (buyItem === '炸薯條') {
+        this.nextMessage();
+      } else if (buyItem === "炸薯條") {
         this.item = require("@/assets/images/game/flightPotato.png");
         this.openBag = true;
         this.chikinshop = false;
-        this.nextMessage()
-
-      } else if (buyItem === '茶葉蛋') {
+        this.nextMessage();
+      } else if (buyItem === "茶葉蛋") {
         this.item = require("@/assets/images/game/teaEgg.png");
         this.openBag = true;
         this.chikinshop = false;
-        this.nextMessage()
+        this.nextMessage();
       }
     },
 
     // 唱歌
     decidekaraoke(event) {
       let karaoke = event.target.innerText;
-      if (karaoke === '唱') {
+      if (karaoke === "唱") {
         this.item = require("@/assets/images/game/mic.png");
         this.openBag = true;
-        this.nextMessage()
-
+        this.nextMessage();
       }
     },
 
     // 讀取條
     loadingTime() {
-
       this.closeTxtName = false;
       this.closeBalloon = false;
       this.loading = true;
       setTimeout(() => {
-        this.currentMessageIndex++
+        this.currentMessageIndex++;
         this.loading = false;
         this.closeTxtName = true;
         this.closeBalloon = true;
       }, 2000);
-
     },
 
     // 點數
     getPoint() {
-      if (localStorage.getItem('userData')) {
-        const userData = JSON.parse(localStorage.getItem('userData'));
+      if (localStorage.getItem("userData")) {
+        const userData = JSON.parse(localStorage.getItem("userData"));
         // 增加點數
       } else {
-        return '登入會員遊玩的話即可獲得點數！'
+        return "登入會員遊玩的話即可獲得點數！";
       }
     },
 
-
     // 重新遊戲
     resetGame() {
-      this.currentMessageIndex = 0
+      this.currentMessageIndex = 0;
       this.closeTxtName = true;
       this.closeBalloon = true;
       this.openEnd = false;
       this.Inner = false;
       this.home = true;
-      this.aim = '';
-      this.line = '';
-      this.userName = '';
+      this.aim = "";
+      this.line = "";
+      this.userName = "";
       this.options = false;
       this.aimOption = false;
       this.lineOption = false;
       this.yes_OR_no_Option = false;
       this.chikinOption = false;
       this.karaokeOption = false;
-
-    }
-
-
+    },
   },
   watch: {
     // 判斷index來發動其他事件
     currentMessageIndex(newValue) {
-      console.log(newValue)
+      console.log(newValue);
       if (newValue === 9) {
         this.options = true;
         this.aimOption = true;
       } else if (newValue === 11 || newValue === 55 || newValue === 61) {
-        this.loadingTime()
-      }
-      else if (newValue === 14) {
+        this.loadingTime();
+      } else if (newValue === 14) {
         this.options = true;
         this.aimOption = false;
         this.lineOption = true;
-      }
-      else if (newValue === 25) {
+      } else if (newValue === 25) {
         this.chikinshop = true;
       } else if (newValue === 26) {
         this.options = true;
@@ -829,8 +906,7 @@ export default {
       } else if (newValue === 54) {
         this.item = require("@/assets/images/game/makura.png");
         this.openBag = true;
-      }
-      else if (newValue === 63) {
+      } else if (newValue === 63) {
         this.closeTxtName = false;
         this.closeBalloon = false;
         this.openEnd = true;
@@ -841,19 +917,19 @@ export default {
     currentMessage: {
       handler(nVal) {
         if (this.Inner === true) {
-          clearInterval(this.timer)
-          this.currentText = []
-          this.idx = 0
+          clearInterval(this.timer);
+          this.currentText = [];
+          this.idx = 0;
           this.timer = setInterval(() => {
-            this.currentText.push(nVal.text[this.idx])
-            this.idx++
-            if (this.idx >= (nVal.text.length)) {
-              clearInterval(this.timer)
+            this.currentText.push(nVal.text[this.idx]);
+            this.idx++;
+            if (this.idx >= nVal.text.length) {
+              clearInterval(this.timer);
             }
-          }, 50)
+          }, 50);
         }
       },
-      immediate: true
+      immediate: true,
     },
 
     // 更新名字
@@ -874,14 +950,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "../assets/scss/page/game";
+@import "../assets/scss/page/_game";
 </style>
-
 
 <style>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity .5s;
+  transition: opacity 0.5s;
 }
 
 .fade-enter,
@@ -900,4 +975,3 @@ export default {
   margin-right: 10px;
 }
 </style>
-
