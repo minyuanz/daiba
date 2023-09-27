@@ -74,7 +74,7 @@ const routes = [
       import(/* webpackChunkName: "Mrt" */ "@/views/MrtView.vue"),
   },
   {
-    path: "/mrtContributeInPage",
+    path: "/mrtContributeInPage/:id",
     name: "mrtContributeInPage",
     // component: MrtContributeInPageView,
     component: () =>
@@ -83,24 +83,14 @@ const routes = [
       ),
   },
   {
-    path: "/MrtCardoneoone",
-    name: "MrtCardoneoone",
+    path: "/MrtCardPage/:id",
+    name: "MrtCardPage",
     // component: MrtContributeInPageView,
     component: () =>
       import(
-        /* webpackChunkName: "MrtContributeInPage" */ "@/views/MrtCardoneoone.vue"
+        /* webpackChunkName: "MrtContributeInPage" */ "@/views/MrtCardPage.vue"
       ),
   },
-  {
-    path: "/MrtCardFour",
-    name: "MrtCardFour",
-    // component: MrtContributeInPageView,
-    component: () =>
-      import(
-        /* webpackChunkName: "MrtContributeInPage" */ "@/views/MrtCardFour.vue"
-      ),
-  },
-
   {
     path: "/Game",
     name: "game",

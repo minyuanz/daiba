@@ -1,12 +1,7 @@
 <template>
   <div class="mrtContibuteInPage">
     <div class="title">
-      <h1>四四南村</h1>
-      <div class="tag">
-        <span class="title-tag gray">#美食推薦</span>
-        <span class="title-tag gray">#景點推薦</span>
-        <span class="title-tag red">#淡水信義線</span>
-      </div>
+      <h1>{{ mrtCardPage.title }}</h1>
     </div>
     <div class="fixCenter">
       <div
@@ -16,11 +11,11 @@
         }"
       >
         <div class="image">
-          <img src="../assets/images/mrtPag/four/four_1.jpg" alt="four_1" />
+          <img :src="mrtCardPage.mrtimg1" alt="" />
         </div>
       </div>
       <p>
-        來到四四南村一定會好奇由來，四四南村是台北市的第一個眷村，由大陸青島遷台的四十四兵工廠員工與眷屬所建，因為還心繫著有一天會反攻大陸，所以在這的住宅構造都很簡陋，想不到這一等就沒有了下文直至現今，原本還有四四東村跟西村，但都市計畫，現存的也只有這塊小小的眷村土地了
+        {{ mrtCardPage.p1 }}
       </p>
     </div>
     <div class="fixCenter part2">
@@ -31,14 +26,12 @@
         }"
       >
         <div class="image">
-          <img src="../assets/images/mrtPag/four/four_2.jpg" alt="four_2" />
+          <img :src="mrtCardPage.mrtimg2" alt="ron1" />
         </div>
       </div>
 
       <p>
-        現有的南村規劃成了信義公民會館，也是眷村文化公園，由四棟建築而組成，分成四個區域有著不同的主題，分別是台北信義親子館、臺北眷村文物館、好丘Good
-        cho’s、跟PLAYground
-        南村劇場‧青鳥·有.設計。眷村中的中央廣場，則是在假日有文青市集
+        {{ mrtCardPage.p2 }}
       </p>
     </div>
     <!-- ------------------------------------------------------------ -->
@@ -50,18 +43,18 @@
     >
       <div class="content">
         <div class="image">
-          <img src="../assets/images/mrtPag/four/four_3.jpg" alt="four_3" />
+          <img :src="mrtCardPage.mrtimg3" alt="ron1" />
         </div>
         <article>
           <p>
-            四四南村B館，主要為四四南村文化保存靜態展示，展示主題包括：四四南村歷史軌跡、眷村藝文、眷村媽媽、眷村美食、眷村生活、遊戲人間、手工藝及多媒體放映室…等等。
+            {{ mrtCardPage.p3 }}
           </p>
         </article>
       </div>
     </div>
     <article class="mbart">
       <p>
-        四四南村B館，主要為四四南村文化保存靜態展示，展示主題包括：四四南村歷史軌跡、眷村藝文、眷村媽媽、眷村美食、眷村生活、遊戲人間、手工藝及多媒體放映室…等等。
+        {{ mrtCardPage.p3 }}
       </p>
     </article>
     <!-- ------------------------------------------------------------ -->
@@ -73,18 +66,18 @@
     >
       <div class="content">
         <div class="image">
-          <img src="../assets/images/mrtPag/four/four_5.jpg" alt="four_5" />
+          <img :src="mrtCardPage.mrtimg4" alt="ron1" />
         </div>
         <article>
           <p>
-            四四南村C館，也有個常態性創意市集，大家熱愛的四四南村美食「好，丘」，餐飲以輕食為主，包括麵包、貝果、漢堡及咖啡飲料等，融合眷村文化提供藝展活動，是一處休閒用餐的好去處。
+            {{ mrtCardPage.p4 }}
           </p>
         </article>
       </div>
     </div>
     <article class="mbart">
       <p>
-        四四南村C館，也有個常態性創意市集，大家熱愛的四四南村美食「好，丘」，餐飲以輕食為主，包括麵包、貝果、漢堡及咖啡飲料等，融合眷村文化提供藝展活動，是一處休閒用餐的好去處。
+        {{ mrtCardPage.p4 }}
       </p>
     </article>
     <div class="seperate">
@@ -100,17 +93,17 @@
       </svg>
     </div>
     <div class="fixCenter detail">
-      <p>
-        《 詳細資訊 》<br />
-        地址: 台北市士林區中山北路五段461巷21號 (近捷運「士林站」2號出口)<br />
-        電話: (02) 2883-6883<br />
-        營業時間:<br />
-        ➢ 週日至週四 16:00~AM 03:00<br />
-        ➢ 週五及週六 16:00~AM 04:00<br />
-        注意事項:<br />
-        ✦ 白天為咖啡廳，晚上是酒吧<br />
-        ✦ PM8:00後才提供調酒
-      </p>
+      <div class="detailTxt">
+        <p>《 詳細資訊 》</p>
+        <p>地址: {{ mrtCardPage.address }}</p>
+        <p>電話: {{ mrtCardPage.tel }}</p>
+      </div>
+      <div class="timelTxt">
+        <p>《 營業時間 》</p>
+        <p>➢ {{ mrtCardPage.time1 }}</p>
+        <p>➢ {{ mrtCardPage.time2 }}</p>
+      </div>
+
       <ButtonM :HTMLInner="btninner" />
     </div>
   </div>
@@ -135,6 +128,7 @@ export default {
       MB: false,
       PC: false,
       btninner: "官方網站",
+      mrtCardPage: "",
     };
   },
   components: {
@@ -143,6 +137,11 @@ export default {
   mounted() {
     this.WindowWidth();
     window.addEventListener("resize", this.WindowWidth);
+
+    const storeId = parseInt(this.$route.params.id);
+    this.mrtCardPage = this.$store.state.mrtCardPage.find(
+      (item) => item.id === storeId
+    );
   },
   methods: {
     WindowWidth() {
