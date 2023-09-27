@@ -233,14 +233,14 @@ export default {
   .CartBtmBox {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: end;
-    padding: 20px;
+    padding: 30px 0;
     .CartBtnBack {
       width: 300px;
       text-align: center;
       cursor: pointer;
-      border: 1px solid red;
+      border: 1px solid #dc4b55;
       border-radius: $border-radius;
       font-size: map-get($map: $fontsizes, $key: h3);
       padding: 10px 40px;
@@ -250,8 +250,8 @@ export default {
       margin-left: 10px;
       text-align: center;
       cursor: pointer;
-      background-color: rgb(236, 85, 112);
-      border: 1px solid red;
+      background-color: #dc4b55;
+      border: 1px solid #dc4b55;
       border-radius: $border-radius;
       font-size: map-get($map: $fontsizes, $key: h3);
       padding: 10px 40px;

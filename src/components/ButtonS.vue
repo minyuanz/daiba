@@ -21,9 +21,6 @@ export default {
     };
   },
   methods: {
-    defaultColor(){
-      // if(!){}
-    },
     changeButtonColor() {
       const num = this.randomNo();
       this.buttonColor = this.randomColor[num];

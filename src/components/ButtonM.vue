@@ -21,9 +21,6 @@ export default {
     };
   },
   methods: {
-    defaultColor(){
-      // if(!){}
-    },
     changeButtonColor() {
       const num = this.randomNo();
       this.buttonColor = this.randomColor[num];
@@ -43,5 +40,8 @@ export default {
 .medium{
   width: 300px;
   height: 40px;
+  button{
+    line-height: 21px;
+  }
 }
 </style>
