@@ -12,7 +12,7 @@
         <div>訂單完成</div>
       </div>
       </div>
-      <div class="CartProBOX">
+      <div class="Doneprobox">
         <i class="fa-solid fa-circle-check icon-size"></i>
         <p>購買完成</p>
       </div>
@@ -90,7 +90,7 @@
       }
     }
 
-    .CartProBOX{
+    .Doneprobox{
       border: 1px solid rgb(210, 210, 210);
       width: 100%;
       display: flex;
