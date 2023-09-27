@@ -1,5 +1,21 @@
 .gameHome {
     position: relative;
+    overflow: hidden;
+    animation: home 1s ease;
+
+
+
+    @keyframes home {
+
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+
+    }
 
     .home {
         margin: 3rem 0;
@@ -8,15 +24,29 @@
         img {
             width: 100%;
             height: 100%;
+            object-fit: cover;
         }
     }
 
     .gameLogo {
         position: absolute;
         left: 0;
-        right: 0;
+        right: -200%;
         top: 10%;
         margin: auto;
+        animation: logo 1.5s  cubic-bezier(0.5, 0.5, 0.4, 1.6);
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes logo {
+        from {
+            right: -200%;
+        }
+
+        to {
+            right: 0;
+        }
+
     }
 
     .start {
@@ -26,6 +56,22 @@
         top: 30%;
         bottom: 0;
         margin: auto;
+        animation: start_btn 2.5s 1.5s ease;
+        animation-fill-mode: forwards;
+        opacity: 0;
+    }
+
+    @keyframes start_btn {
+        from {
+            // bottom: -200%;
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+            // bottom: 0;
+        }
+        
     }
 
     .name {
@@ -76,6 +122,7 @@
     img {
         width: 100%;
         height: 100%;
+        object-fit: cover;
     }
 
     .name {
@@ -508,8 +555,143 @@
 
 }
 
+
+
+
+
 img {
     vertical-align: top;
 }
 
-@media screen and (max-width: 414px) {}
+@media screen and (max-width: 768px) {
+    .gameHome {
+
+        .gameLogo {
+            width: 100%;
+        }
+
+    }
+
+
+    .gameInner {
+
+
+        .name {
+            top: 60%;
+            left: 5%;
+
+            p {
+                font-size: 20px;
+            }
+        }
+
+        .speechBalloon {
+            width: 90%;
+            padding: 1.5rem;
+
+            p {
+                font-size: 18px;
+                line-height: 28px;
+            }
+
+            .nextBtn {
+                font-size: 18px;
+            }
+
+        }
+
+        .lightbox {
+
+            .option {
+
+                .btn_s {
+                    font-size: 20px;
+                    width: 150px;
+                }
+
+            }
+
+        }
+
+        // 插圖
+        .chikinshop {
+            width: 350px;
+            height: 450px;
+        }
+
+
+        // 包包
+        .bag {
+            width: 90%;
+            height: 60%;
+        }
+
+
+        // Loading
+
+        .loading {
+
+            .text {
+                font-size: 20px;
+                fill: #fff;
+
+            }
+
+
+
+        }
+
+
+
+
+
+    }
+
+    .imgFill {
+        object-fit: fill !important;
+    }
+
+    .end {
+
+        overflow: auto;
+
+        p {
+            display: block;
+            width: 100%;
+            font-size: 20px;
+            color: #fff;
+            line-height: 25px;
+        }
+
+        .FrontCard {
+            display: none;
+        }
+
+        .station {
+            .backCard {
+                transform: rotateY(0deg);
+                backface-visibility: initial !important;
+            }
+        }
+
+        .info {
+            margin-left: 0;
+
+            .backCard {
+                transform: rotateY(0deg);
+                backface-visibility: initial !important;
+            }
+        }
+
+        .btn {
+
+            .btn_s {
+                width: 150px;
+            }
+        }
+
+
+
+
+    }
+}

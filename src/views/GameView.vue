@@ -20,7 +20,7 @@
   <transition name="fade" mode="out-in">
     <div class="gameInner" v-if="Inner">
       <transition>
-        <img :src="currentMessage.image" alt="Character Image" class="character-image" />
+        <img :src="currentMessage.image" alt="Character Image" class="character-image" :class="{ imgFill }" />
       </transition>
       <!-- 對話框角色 -->
       <div class="name" v-show="closeTxtName">
@@ -176,6 +176,8 @@
         </svg>
       </div>
 
+
+
     </div>
   </transition>
 </template>
@@ -188,12 +190,14 @@ export default {
   data() {
     return {
       btninner: ["START", "OK"],
-      currentMessageIndex: 62, //對話內容索引值
+      currentMessageIndex: 0, //對話內容索引值
       userName: '', //使用者名稱
       closeName: false, //關閉填寫名稱欄位
       home: true, //遊戲首頁
       Inner: false, //遊戲內頁
       closeTxtName: true, //關閉對話框角色名
+      imgFill: false, //控制圖片css
+      closeBalloon: true, //關閉對話框
 
       // 需帶出的物件
       aim: "", //目的
@@ -217,18 +221,18 @@ export default {
       openEnd: false,
 
       // loading
-      closeBalloon: true, //關閉對話框
+
       loading: false, //讀取
       messages: [  //對話內容
         {
           id: 1,
-          text: "在一個城市中，你想著要去旅行，但卻不知去向，突然聽到了遠處傳來的低沉隆隆聲，彷彿你的冒險即將開始，你抬頭望向遠處，發現一輛神秘的電車正等待著你的到來。你將迎著這趟神秘的旅行搭上車了，不知道它將帶領你前往何方......",
+          text: "",
           image: require("@/assets/images/game/station_AM2.jpg"),
           vo: true,
         },
         {
           id: 2,
-          text: "...",
+          text: "在一個城市中，你想著要去旅行，但卻不知去向，突然聽到了遠處傳來的低沉隆隆聲，彷彿你的冒險即將開始，你抬頭望向遠處，發現一輛神秘的電車正等待著你的到來。你將迎著這趟神秘的旅行搭上車了，不知道它將帶領你前往何方......",
           image: require("@/assets/images/game/station_AM2.jpg"),
           vo: true,
         },
@@ -331,13 +335,13 @@ export default {
         {
           id: 18,
           text: `${this.userName}你看！是白天欸，台北馬路如虎口，大家要小心哦！`,
-          image: require("@/assets/images/game/tokai.png"),
+          image: require("@/assets/images/game/tokai.jpg"),
           npc: true,
         },
         {
           id: 19,
           text: "好...",
-          image: require("@/assets/images/game/tokai.png"),
+          image: require("@/assets/images/game/tokai.jpg"),
           user: true,
         },
 
@@ -666,6 +670,7 @@ export default {
         this.home = false;
         this.closeName = false;
         this.Inner = true;
+        this.nextMessage()
       } else {
         alert('請輸入您的名字');
       }
@@ -818,15 +823,25 @@ export default {
       }
       else if (newValue === 25) {
         this.chikinshop = true;
-      } else if (newValue === 26) {
+      }
+      else if (newValue === 26) {
         this.options = true;
         this.lineOption = false;
         this.yes_OR_no_Option = true;
-      } else if (newValue === 40) {
+      }
+      else if (newValue === 40) {
         this.options = true;
         this.lineOption = false;
         this.karaokeOption = true;
-      } else if (newValue === 54) {
+      }
+      else if (newValue === 39 || newValue === 40 || newValue === 42) {
+        if (window.innerWidth <= 414 && newValue === 39 || newValue === 40 || newValue === 42) {
+          this.imgFill = true
+        } else {
+          this.imgFill = false
+        }
+      }
+      else if (newValue === 54) {
         this.item = require("@/assets/images/game/makura.png");
         this.openBag = true;
       }
