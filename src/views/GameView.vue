@@ -188,7 +188,7 @@ export default {
   data() {
     return {
       btninner: ["START", "OK"],
-      currentMessageIndex: 0, //對話內容索引值
+      currentMessageIndex: 62, //對話內容索引值
       userName: '', //使用者名稱
       closeName: false, //關閉填寫名稱欄位
       home: true, //遊戲首頁
@@ -790,7 +790,13 @@ export default {
       this.aim = '';
       this.line = '';
       this.userName = '';
-      
+      this.options = false;
+      this.aimOption = false;
+      this.lineOption = false;
+      this.yes_OR_no_Option = false;
+      this.chikinOption = false;
+      this.karaokeOption = false;
+
     }
 
 
