@@ -86,7 +86,7 @@ export default {
       alert("已加入購物車");
     },
     selectImage(imageSrc) {
-        this.selectedImage = imageSrc; // 将点击的图像路径设置为主图像路径
+        this.selectedImage = imageSrc; 
       },
   },
   mounted() {
@@ -101,6 +101,7 @@ export default {
     $route(to, from) {
       const idToFind = to.params.id;
       this.foundObject = ProTest.find((item) => item.pord_id === idToFind);
+      this.selectedImage = this.foundObject.prod_img1;
       //更新後 在更新一次隨機清單
       this.generateRandomProducts();
     },
@@ -223,8 +224,10 @@ export default {
           width: 25%;
           .DetailCardImg{
             width: 100%;
+            height: 200px;
             img{
               width: 100%;
+              height: 200px;
             }
           }
 
