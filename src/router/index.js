@@ -13,8 +13,8 @@ const routes = [
     // meta: {
     //   useAppLayout: false, // 不使用 App.vue 佈局
     // },
-    meta:{
-      hideApp:true
+    meta: {
+      hideApp: true,
     },
   },
   {
@@ -83,6 +83,25 @@ const routes = [
       ),
   },
   {
+    path: "/MrtCardoneoone",
+    name: "MrtCardoneoone",
+    // component: MrtContributeInPageView,
+    component: () =>
+      import(
+        /* webpackChunkName: "MrtContributeInPage" */ "@/views/MrtCardoneoone.vue"
+      ),
+  },
+  {
+    path: "/MrtCardFour",
+    name: "MrtCardFour",
+    // component: MrtContributeInPageView,
+    component: () =>
+      import(
+        /* webpackChunkName: "MrtContributeInPage" */ "@/views/MrtCardFour.vue"
+      ),
+  },
+
+  {
     path: "/Game",
     name: "game",
     // component: LoginView,
@@ -129,7 +148,7 @@ const routes = [
     name: "shopping",
     component: () =>
       import(/* webpackChunkName: "Cart" */ "@/views/Shopping.vue"),
-      props: true,
+    props: true,
   },
   {
     path: "/shoppingDone",
@@ -165,74 +184,93 @@ const routes = [
   {
     path: "/Back/BackLogin",
     name: "/BackLogin",
-    meta:{
-      hideApp:true
+    meta: {
+      hideApp: true,
     },
-    component: () => import(/* webpackChunkName: "BackLogin" */ "@/views/Back/BackLogin.vue"),
+    component: () =>
+      import(/* webpackChunkName: "BackLogin" */ "@/views/Back/BackLogin.vue"),
   },
   {
     path: "/Back/BackMember",
     name: "/BackMember",
-    meta:{
-      hideApp:true
+    meta: {
+      hideApp: true,
     },
-    component: () => import(/* webpackChunkName: "BackMember" */ "@/views/Back/BackMember.vue"),
+    component: () =>
+      import(
+        /* webpackChunkName: "BackMember" */ "@/views/Back/BackMember.vue"
+      ),
   },
   {
     path: "/Back/BackMrt",
     name: "/BackMrt",
-    meta:{
-      hideApp:true
+    meta: {
+      hideApp: true,
     },
-    component: () => import(/* webpackChunkName: "BackMrt" */ "@/views/Back/BackMrt.vue"),
+    component: () =>
+      import(/* webpackChunkName: "BackMrt" */ "@/views/Back/BackMrt.vue"),
   },
   {
     path: "/Back/BackFeature",
     name: "/BackFeature",
-    meta:{
-      hideApp:true
+    meta: {
+      hideApp: true,
     },
-    component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackFeature.vue"),
+    component: () =>
+      import(
+        /* webpackChunkName: "BackFeature" */ "@/views/Back/BackFeature.vue"
+      ),
   },
   {
     path: "/Back/BackContri",
     name: "/BackContri",
-    meta:{
-      hideApp:true
+    meta: {
+      hideApp: true,
     },
-    component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackContri.vue"),
+    component: () =>
+      import(
+        /* webpackChunkName: "BackFeature" */ "@/views/Back/BackContri.vue"
+      ),
   },
   {
     path: "/Back/BackNews",
     name: "/BackNews",
-    meta:{
-      hideApp:true
+    meta: {
+      hideApp: true,
     },
-    component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackNews.vue"),
+    component: () =>
+      import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackNews.vue"),
   },
   {
     path: "/Back/BackPermission",
     name: "/BackPermission",
-    meta:{
-      hideApp:true
+    meta: {
+      hideApp: true,
     },
-    component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackPermission.vue"),
+    component: () =>
+      import(
+        /* webpackChunkName: "BackFeature" */ "@/views/Back/BackPermission.vue"
+      ),
   },
   {
     path: "/Back/BackOrder",
     name: "/BackOrder",
-    meta:{
-      hideApp:true
+    meta: {
+      hideApp: true,
     },
-    component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackOrder.vue"),
+    component: () =>
+      import(
+        /* webpackChunkName: "BackFeature" */ "@/views/Back/BackOrder.vue"
+      ),
   },
   {
     path: "/Back/BackPro",
     name: "/BackPro",
-    meta:{
-      hideApp:true
+    meta: {
+      hideApp: true,
     },
-    component: () => import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackPro.vue"),
+    component: () =>
+      import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackPro.vue"),
   },
   {
     path: "/:pathMatch(.*)*",
@@ -240,8 +278,6 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "err" */ "@/views/NotFoundView.vue"),
   },
-  
-  
 ];
 
 const router = createRouter({
