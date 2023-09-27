@@ -444,10 +444,11 @@
     .swiper-button-prev {
       position: absolute;
       margin-block: auto;
-      height: 50%;
+      height: 100%;
       top: 0;
       bottom: 0;
       width: 10%;
+      z-index: 3;
 
       &::after {
         left: 0;
@@ -458,10 +459,11 @@
     .swiper-button-next {
       position: absolute;
       margin-block: auto;
-      height: 50%;
+      height: 100%;
       top: 0;
       bottom: 0;
       width: 10%;
+      z-index: 3;
 
       &::after {
         right: 0;
