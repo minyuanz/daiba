@@ -1,7 +1,7 @@
 [
     {
         "pord_id": "1",
-        "pord_name": "佳德鳳梨酥",
+        "pord_name": "鳳梨酥禮盒",
         "pord_bdes": "台灣十大經典伴手禮，皮薄餡多、鬆香、不黏牙，夾藏著口感細緻的鳳梨美味，輕輕一口就可以感受到精緻茗點。",
         "pord_bdes2": "保存期限40天、12入730克",
         "pord_price": 408,
@@ -11,118 +11,127 @@
           "https://s.yimg.com/ny/api/res/1.2/8uRqoZpuohjf5H4TGtcfZg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQyNw--/https://media.zenfs.com/en/stormmediagroup.com/503e1d14e2e104ea99eabd75774ff721",
         "prod_img2": "https://www.chiate88.com.tw/Uploads/6f5bfbd1-4eca-4526-a20e-6be0edaa45f4.jpe",
         "prod_img3": "https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/N00/060/04/N000600413.jpg&v=6021fb66k&w=375&h=375",
-        "prod_img4": ""
+        "prod_img4": "",
+        "prod_spe":"伴手禮"
       },
       {
-        "pord_id": "我是笨蛋",
-        "pord_name": "你",
-        "pord_bdes": "商品描述",
-        "pord_bdes2": "商品簡述",
-        "pord_price": 3333,
+        "pord_id": "2",
+        "pord_name": "花生糖禮盒",
+        "pord_bdes": "龍情花生糖禮盒，台灣鼓譟為經典的傳承，香濃的花生與麥芽糖的絕美搭配，讓人一口接一口。",
+        "pord_bdes2": "保存期限40天、12入730克",
+        "pord_price": 350,
         "mrt_name": "捷運線名稱",
         "sta_name": "捷運站名稱",
         "prod_img1":
           "https://cdn1.cybassets.com/media/W1siZiIsIjE3OTAyL3Byb2R1Y3RzLzMzNDU5NzIzLzE2MTg1NDM5MTBfMjZlODFiMjg3OTM1MWFjNzg4YTcuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=cc2f0a7416591c69",
         "prod_img2": "",
         "prod_img3": "",
-        "prod_img4": ""
+        "prod_img4": "",
+        "prod_spe":"伴手禮"
       },
       {
-        "pord_id": "商品編號3",
-        "pord_name": "王",
-        "pord_bdes": "商品描述",
-        "pord_bdes2": "商品簡述",
-        "pord_price": 1321651,
+        "pord_id": "3",
+        "pord_name": "花開富貴禮盒",
+        "pord_bdes": "合興壹玖肆柒，創立於1947年的老店「合興壹玖肆柒」，位於人來人往的迪化街，充滿韻味的日式木製裝潢，吸引著往來的旅人們，主打中式傳統的點心",
+        "pord_bdes2": "鬆糕：紫薯楓糖黑豆2個(素)/黑米花生(葷)/桂花芝麻(葷)/紅豆豆沙(素)。",
+        "pord_price": 450,
         "mrt_name": "捷運線名稱",
         "sta_name": "捷運站名稱",
         "prod_img1":
-          "",
-        "prod_img2": "",
-        "prod_img3": "",
-        "prod_img4": ""
+          "https://cdn1.cybassets.com/media/W1siZiIsIjIxODMzL3Byb2R1Y3RzLzM4ODM0NDAxLzE2Njk3MTgyMDRfYWUwNjg1YTg0YWJmMTQ3YWU5NWMuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=a6bc59030dcead17",
+        "prod_img2": "https://cdn1.cybassets.com/media/W1siZiIsIjIxODMzL2F0dGFjaGVkX3Bob3Rvcy8xNjUxODM1ODkyX-apq-W5heW7o-WRii5qcGcuanBlZyJdXQ.jpeg?sha=a5caebf7ac80001a",
+        "prod_img3": "https://www.hoshing1947.com.tw/media/W1siZiIsIjIxODMzL2F0dGFjaGVkX3Bob3Rvcy8xNjUxNjcwNTk1X-i8quaSreWclueJhy0wMi5qcGcuanBlZyJdXQ.jpeg?sha=eedfddd7c28cbc6a",
+        "prod_img4": "",
+        "prod_spe":"伴手禮"
       },
       {
-        "pord_id": "商品編號4",
-        "pord_name": "商品名稱",
-        "pord_bdes": "商品描述",
-        "pord_bdes2": "商品簡述",
-        "pord_price": 65169514965198,
+        "pord_id": "4",
+        "pord_name": "黑胡椒豬肉乾",
+        "pord_bdes": "江記華隆黑胡椒豬肉紙採用用俗稱腰內肉，每隻豬取大約2斤左右，經過特殊中藥及醬油，搭配獨家秘方，以真空按摩方式將原料完全入味，低膽固醇完全沒有油質，入口柔軟，搭配黑胡椒粒，感受特殊的懷舊香味。",
+        "pord_bdes2": "成分：豬後腿心、糖、醬油、鹽(氯化鈉)、黑胡椒粒。 保存30天",
+        "pord_price": 350,
         "mrt_name": "捷運線名稱",
         "sta_name": "捷運站名稱",
         "prod_img1":
-          "",
-        "prod_img2": "",
-        "prod_img3": "",
-        "prod_img4": ""
+          "https://jiang-ji.com/t/sROela6dld%252F1mUvtQj1swfo26KurXrK%252BRk83mXWWgysnu8WOOvP%252BAUlcytTGXe0d?w=400&h=400",
+        "prod_img2": "https://jiang-ji.com/t/6VbO7sGLSBKrC6lPKH3DlZpG5DmQKaHcMSoHViKVmqwj2fQUDFa9pOytG4%252FAAaMawI9xuZtg3jU0ayQlKwByA6PR5fHcwiZb1iI7G7dHlIU%253D?w=100&h=100",
+        "prod_img3": "https://jiang-ji.com/t/6VbO7sGLSBKrC6lPKH3DlYw%252B%252BRilh9krPmlNWEa%252FeuP%252Fs1SXhDHBLHjibb9zvPiCUzEQM%252BZgazpdIcnrX4fdJajkEmdZNUsnDtvLkN%252BUBC0%253D?w=100&h=100",
+        "prod_img4": "",
+        "prod_spe":"伴手禮"
       },
       {
-        "pord_id": "商品編號5",
-        "pord_name": "商品名稱",
-        "pord_bdes": "商品描述",
-        "pord_bdes2": "商品簡述",
-        "pord_price": 888,
+        "pord_id": "5",
+        "pord_name": "蜜汁後肉乾",
+        "pord_bdes": "快車肉乾，台北在地多年老字號肉乾店鋪，一塊好吃的厚肉乾溫度很重要，採用高溫烘烤、再逼出油酯讓肉頻均受熱，考完冷卻時肉汁繪滴滴滴滴，感覺超級美味。",
+        "pord_bdes2": "主要成分:豬肉，糖，醬油以及香辛料   保存期限未開封120天  開封則請盡速食用",
+        "pord_price": 250,
         "mrt_name": "捷運線名稱",
         "sta_name": "捷運站名稱",
         "prod_img1":
-          "",
-        "prod_img2": "",
-        "prod_img3": "",
-        "prod_img4": ""
+          "https://diz36nn4q02zr.cloudfront.net/webapi/imagesV3/Original/SalePage/6017939/1/638310582150230000?v=1",
+        "prod_img2": "https://diz36nn4q02zr.cloudfront.net/webapi/imagesV3/Original/SalePage/6017939/3/638310582150230000?v=1",
+        "prod_img3": "https://shop.r10s.com/09630b60-ec8c-11e4-ad3d-005056b72eb0/upload/KUAICHE_GOODS/A11img130606_02.jpg",
+        "prod_img4": "",
+        "prod_spe":"伴手禮"
       },
       {
-        "pord_id": "商品編號6",
-        "pord_name": "商品名稱",
-        "pord_bdes": "商品描述",
-        "pord_bdes2": "商品簡述",
-        "pord_price": "商品價格",
+        "pord_id": "6",
+        "pord_name": " 紀念章戳精選T恤衫(隨機)",
+        "pord_bdes": "將捷運車站特色紀念章戳衍生各類文創商品，除收藏您的旅行記憶軌跡外，陪您穿搭更有型",
+        "pord_bdes2": "材質：棉、尺寸：衣寬 51 cm、衣長 66 cm、建議身高：150 - 180 cm ",
+        "pord_price": 350,
+        "mrt_name": "",
+        "sta_name": "",
+        "prod_img1":
+          "https://down-tw.img.susercontent.com/file/sg-11134201-22100-avjwusn8dbjv11",
+        "prod_img2": "https://down-tw.img.susercontent.com/file/0c56325c6558862b1dc3a811a18075c8",
+        "prod_img3": "https://down-tw.img.susercontent.com/file/b62d4d216c1ad152f53787e541dc138f",
+        "prod_img4": "https://down-tw.img.susercontent.com/file/913ed3a96404c39e96d9230331698a82",
+        "prod_spe":"紀念品"
+      },
+      {
+        "pord_id": "7",
+        "pord_name": "台北捷運拼圖",
+        "pord_bdes": "以30片拼出捷運路線圖，兼具休閒及娛樂用途，尤其對小朋友有相當好的寓教於樂功能，B5尺寸方便生活旅遊攜帶。",
+        "pord_bdes2": "材質:紙、尺寸：25x18cm",
+        "pord_price": 250,
         "mrt_name": "捷運線名稱",
         "sta_name": "捷運站名稱",
         "prod_img1":
-          "",
-        "prod_img2": "",
-        "prod_img3": "",
-        "prod_img4": ""
+          "https://down-tw.img.susercontent.com/file/70068d67ae3dc53c64e559a79b010b75",
+        "prod_img2": "https://down-tw.img.susercontent.com/file/e5fea7b1b1f8e433f5c2748cd3f8bbcc",
+        "prod_img3": "https://down-tw.img.susercontent.com/file/f49e5c93f4a273a499d05257f1ca931a",
+        "prod_img4": "https://down-tw.img.susercontent.com/file/5ea8ba78e2b677fa9e0601ac79cae2d9",
+        "prod_spe":"紀念品"
       },
       {
-        "pord_id": "商品編號7",
-        "pord_name": "商品名稱",
-        "pord_bdes": "商品描述",
-        "pord_bdes2": "商品簡述",
-        "pord_price": "商品價格",
+        "pord_id": "8",
+        "pord_name": "迴力火車軌道- 高架車站組",
+        "pord_bdes": "可多樣性的軌道組合，玩樂過程中充滿創意及挑戰，快和孩子們一起建構屬於你們的鐵道王國吧！",
+        "pord_bdes2": "內容物：彎軌*12、直軌*10、高橋墩*8、矮橋墩*12、車站月台*1、車站配件*1、平交道底座*2、平交道配件*2、配件1包 ※本商品不含迴力車，可於賣場另外選購!",
+        "pord_price": 990,
         "mrt_name": "捷運線名稱",
         "sta_name": "捷運站名稱",
         "prod_img1":
-          "",
-        "prod_img2": "",
-        "prod_img3": "",
-        "prod_img4": ""
+          "https://down-tw.img.susercontent.com/file/f3a09871e74499c637230b2144b1f984",
+        "prod_img2": "https://down-tw.img.susercontent.com/file/da774b6fc5d42f48c3e9dfca9f516aab",
+        "prod_img3": "https://down-tw.img.susercontent.com/file/13e5ffca3e48a22804b5730bf7f57f9c",
+        "prod_img4": "https://down-tw.img.susercontent.com/file/22f197106c9a3b86feaa5ce88a010ca8",
+        "prod_spe":"紀念品"
       },
       {
-        "pord_id": "商品編號8",
-        "pord_name": "商品名稱",
-        "pord_bdes": "商品描述",
-        "pord_bdes2": "商品簡述",
-        "pord_price": "商品價格",
+        "pord_id": "9",
+        "pord_name": "捷運381型列車組",
+        "pord_bdes": "有動力(慣性齒輪箱)車體1輛 ＋ 無動力車體3輛，可以搭配＂迴力火車軌道- 高架車站組＂做遊玩。",
+        "pord_bdes2": "包裝: 長22.5cm*寬3.5cm*高4.3cm",
+        "pord_price": 300,
         "mrt_name": "捷運線名稱",
         "sta_name": "捷運站名稱",
         "prod_img1":
-          "",
-        "prod_img2": "",
-        "prod_img3": "",
-        "prod_img4": ""
-      },
-      {
-        "pord_id": "商品編號9",
-        "pord_name": "商品名稱",
-        "pord_bdes": "商品描述",
-        "pord_bdes2": "商品簡述",
-        "pord_price": "商品價格",
-        "mrt_name": "捷運線名稱",
-        "sta_name": "捷運站名稱",
-        "prod_img1":
-          "",
-        "prod_img2": "",
-        "prod_img3": "",
-        "prod_img4": ""
+          "https://down-tw.img.susercontent.com/file/efbdb861e0b2114bbcd6f11e60973bf1",
+        "prod_img2": "https://down-tw.img.susercontent.com/file/3e804c49b328691b6bb0870ac6d98839",
+        "prod_img3": "https://down-tw.img.susercontent.com/file/efbdb861e0b2114bbcd6f11e60973bf1",
+        "prod_img4": "https://down-tw.img.susercontent.com/file/3e804c49b328691b6bb0870ac6d98839",
+        "prod_spe":"伴手禮"
       }
 ]

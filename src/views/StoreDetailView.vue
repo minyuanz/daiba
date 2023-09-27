@@ -127,14 +127,16 @@ export default {
         width:100%;
         img{
             width: 100%;
+            height: 500px;
         }
      }
      .DetailPic{
         cursor: pointer;
-        margin: 5%;
+        margin: 20px;
         width: 20%;
         display: flex;
         img{
+            margin: 0 10px;
             height: 100%;
             width: 100%;
         }

@@ -262,7 +262,7 @@ export default {
         justify-content: space-between;
 
         .storeCardText {
-          width: 30%;
+          width: 60%;
           display: flex;
           flex-wrap: wrap;
           flex-direction: column;
