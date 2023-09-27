@@ -1,7 +1,7 @@
 <template>
     <div class="bSliderAC">
         <div class="pic">
-            <img src="https://steam.oxxostudio.tw/webp/gimp/example/simple-keyer-mask-16.webp" />
+            <img src="../../../public/img/logo.png" />
         </div>
         <h3>NAME</h3>
         <router-link to="/Back/BackLogin" >
