@@ -345,25 +345,28 @@
 
               }
               .scrollbarArea::-webkit-scrollbar {
-                width: 5px;
-                right: -100%;
+                width: 8px;
               }
                
               .scrollbarArea::-webkit-scrollbar-track {
-                box-shadow: inset 0 0 6px #ddd;
+                box-shadow: transparent
               }
                
               .scrollbarArea::-webkit-scrollbar-thumb {
                 border-radius: 10px;
-                background-color: #bbb;
+                background-color: #fffa;
                 cursor: pointer;
                 ;
               }
               .scrollbarArea{
-                overflow: auto;
+                overflow-x: hidden;
+                overflow-y: scroll;
+                margin-right: calc(100% - 50vw);
+                padding: 0 70px 0 0;
                 .info {
-                  width: 100%;
-                  background-color: #fff;
+                  width: 100% ;
+                //   width: calc(100% + 40px);
+                  background-color: transparent;
                   display: inline-grid;
                   position: relative;
                   padding: 1rem 5rem 0;
@@ -513,8 +516,8 @@
           .head {
                 width: 135px;
                 height: 135px;
-                bottom: -6%;
-                right: -6%;
+                bottom: -7%;
+                right: -8%;
                 border: 7px solid #333;
           }
           
@@ -575,14 +578,47 @@
             width: 100%;
         }
         .CBList{
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            width: 85%;
+            gap: 0;
             .CBPost{
-                width: 100%;
+                width: 90%;
+                height: 500px;
                 .box{
                     width: 100%;
+                    .head{
+                        bottom: -17%;
+                        right: -10%;
+                    }
+                    .swiperPost{ margin: 1rem;}
+                    .inner{
+                        height: 105%;
+                        .title{
+                            border-top: 18px solid map-get($color, $key: success);
+                            border-left: 18px solid map-get($color, $key: success);
+                            padding-top: 1rem;
+                            padding-inline: 1rem;
+                            height: 30%;
+                            h3{ line-height: 36px;}
+                            h4{ line-height: 21px}
+                        }
+                        .title::after{
+                            width: 93%;
+                            bottom: -15px;
+                            left: 3%;
+                        }
+                        .scrollbarArea{ 
+                            margin-top: 15px;
+                            .info{
+                                padding: 0.2rem 0 0 2.5rem;
+                                span{text-align: start;}
+                            }
+                            .txt{
+                                padding-left: 2.5rem;
+                                margin-top: -1.5rem;
+                            }
+                        }
+                        .author{padding-left: 0;}
+                    }
                 }
             }
         }
@@ -591,6 +627,96 @@
         width: 100%;
     }
   }
- 
+@media screen and (max-width: 414px){
+    .CBWrapper{
+        .talk{display: none;}
+    }
+    .CBArea {
+        width: 100%;
+        .CBTitle{
+            inset: 0;
+            margin: auto;
+            width: 80%;
+        }
+        .CBTitle div{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+        }
+        .CBTitle::before{
+            top: -1rem;
+        }
+        .CBTitle::after{
+            display: none;
+        }
+        .CBTitle div span{
+            display: block;
+            padding: 0 .8rem;
+        }
+        .CBList{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            .CBPost{
+                width: 95%;
+                height: 80%;
+                margin: auto;
+                .box{
+                        flex-direction: column;
+                        width: 100%;
+                        height: 100%;
+                        padding: 0;
+                        .head{
+                            display: none;
+                        }
+                        .closePost{
+                            right: -10%;
+                            top: -5%;
+                        }
+                        .swiperPost{ 
+                            margin: 1rem;
+                            width: 300px;
+                            height: calc(35% - 2rem);
+                        }
+                        .inner{
+                            height: 65%;
+                            .title{
+                                border-top: 0;
+                                border-left: 10px solid map-get($color, $key: success);
+                                padding-inline: 10px;
+                            }
+                            .title::after{
+                                width: 95%;
+                                left: 5px;
+                            }
+                            .scrollbarArea{ 
+                                margin-right: -20px;
+                                padding: 0 20px 0 0;
+                                .info{
+                                    padding: 0.2rem 0 0 1rem;
+                                }
+                                .info::before{
+                                    border-bottom: #aaa 2px dashed;
+                                    width: 95%;
+                                    left: 3%;
+                                }
+                                .txt{
+                                    padding: 0 0.5rem 0 1rem;
+                                }
+                            }
+                            .author{
+                                padding:0 ;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .lightBox{
+        width: 100%;
+    }
+
 
       

@@ -347,6 +347,11 @@ export default {
         // 投稿輪播
         const swiperPost = new Swiper(".swiperPost", {
             effect: "cube",
+            speed: 2000,
+            loop: true,
+            autoplay:{
+                delay:1000
+            },
             cubeEffect: {
                 shadow: true,
                 slideShadows: true,
