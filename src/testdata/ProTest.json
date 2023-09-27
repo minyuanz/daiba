@@ -16,18 +16,18 @@
       },
       {
         "pord_id": "2",
-        "pord_name": "花生糖禮盒",
-        "pord_bdes": "龍情花生糖禮盒，台灣鼓譟為經典的傳承，香濃的花生與麥芽糖的絕美搭配，讓人一口接一口。",
-        "pord_bdes2": "保存期限40天、12入730克",
-        "pord_price": 350,
+        "pord_name": "台北捷運珪藻土杯墊(隨機)",
+        "pord_bdes": "將捷運車站特色紀念章戳衍生各類文創商品，除收藏您的旅行記憶軌跡外，更是生活上不可或缺的實用小品。",
+        "pord_bdes2": "材質：珪藻士、包裝尺寸：9.5 x 9.5 x 1 cm",
+        "pord_price": 180,
         "mrt_name": "捷運線名稱",
         "sta_name": "捷運站名稱",
         "prod_img1":
-          "https://cdn1.cybassets.com/media/W1siZiIsIjE3OTAyL3Byb2R1Y3RzLzMzNDU5NzIzLzE2MTg1NDM5MTBfMjZlODFiMjg3OTM1MWFjNzg4YTcuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=cc2f0a7416591c69",
-        "prod_img2": "",
-        "prod_img3": "",
-        "prod_img4": "",
-        "prod_spe":"伴手禮"
+          "https://down-tw.img.susercontent.com/file/f0832f8699d5c300457d2ad9ff0cc85d",
+        "prod_img2": "https://down-tw.img.susercontent.com/file/4fa1e6f038f101c87a89796ccfee2bea",
+        "prod_img3": "https://down-tw.img.susercontent.com/file/91fa7da011e3442308fd0299ae0075fd",
+        "prod_img4": "https://down-tw.img.susercontent.com/file/072166f0a5c1ed8f1849cc67dcf74e5b",
+        "prod_spe":"紀念品"
       },
       {
         "pord_id": "3",
@@ -53,10 +53,10 @@
         "mrt_name": "捷運線名稱",
         "sta_name": "捷運站名稱",
         "prod_img1":
-          "https://jiang-ji.com/t/sROela6dld%252F1mUvtQj1swfo26KurXrK%252BRk83mXWWgysnu8WOOvP%252BAUlcytTGXe0d?w=400&h=400",
-        "prod_img2": "https://jiang-ji.com/t/6VbO7sGLSBKrC6lPKH3DlZpG5DmQKaHcMSoHViKVmqwj2fQUDFa9pOytG4%252FAAaMawI9xuZtg3jU0ayQlKwByA6PR5fHcwiZb1iI7G7dHlIU%253D?w=100&h=100",
-        "prod_img3": "https://jiang-ji.com/t/6VbO7sGLSBKrC6lPKH3DlYw%252B%252BRilh9krPmlNWEa%252FeuP%252Fs1SXhDHBLHjibb9zvPiCUzEQM%252BZgazpdIcnrX4fdJajkEmdZNUsnDtvLkN%252BUBC0%253D?w=100&h=100",
-        "prod_img4": "",
+          "https://jiang-ji.com/t/sROela6dld%252F1mUvtQj1swfo26KurXrK%252BRk83mXWWgysnu8WOOvP%252BAUlcytTGXe0d",
+        "prod_img2": "https://jiang-ji.com/t/6VbO7sGLSBKrC6lPKH3DlYw%252B%252BRilh9krPmlNWEa%252FeuP%252Fs1SXhDHBLHjibb9zvPiCUzEQM%252BZgazpdIcnrX4fdJajkEmdZNUsnDtvLkN%252BUBC0%253D",
+        "prod_img3": "https://jiang-ji.com/t/6VbO7sGLSBKrC6lPKH3DlZpG5DmQKaHcMSoHViKVmqwj2fQUDFa9pOytG4%252FAAaMawI9xuZtg3jU0ayQlKwByA6PR5fHcwiZb1iI7G7dHlIU%253D",
+        "prod_img4": "https://jiang-ji.com/t/6VbO7sGLSBKrC6lPKH3Dlfqbvf9QYBdEETvbRH10VJeDRGl6xVaKYQuiYM4JKr8Hj99JqZJcndRrOx6RsMsE%252B%252F8pXc8L91B3bvFoH8GIC60%253D",
         "prod_spe":"伴手禮"
       },
       {

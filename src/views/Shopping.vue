@@ -348,10 +348,11 @@ export default {
   .ShopBtmBox{
     width: 100%;
     display: flex;
-    justify-content: right;
-    align-items: end;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
     .ShopBtnBack{
+      width: 300px;
       text-align: center;
       cursor: pointer;
       border: 1px solid red;
@@ -360,6 +361,7 @@ export default {
       padding: 10px 40px;
     }
     .ShopBtnBackNex{
+      width: 300px;
       margin-left: 10px;
       text-align: center;
       cursor: pointer;

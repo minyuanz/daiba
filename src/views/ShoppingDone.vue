@@ -16,7 +16,7 @@
         <i class="fa-solid fa-circle-check icon-size"></i>
         <p>購買完成</p>
       </div>
-      <div class="CartBtmBox">
+      <div class="DoneBtnBox">
         <div class="CartBtnBack" @click="gotoShopping">返回商店</div>
       </div>
     </div>
@@ -106,13 +106,14 @@
         padding: 60px;
       }
     }
-    .CartBtmBox{
+    .DoneBtnBox{
       width: 100%;
       display: flex;
       justify-content: center;
       align-items:center;
       padding: 20px;
       .CartBtnBack{
+        width: 300px;
         color:rgb(27, 216, 49) ;
         text-align: center;
         cursor: pointer;

@@ -233,10 +233,11 @@ export default {
   .CartBtmBox {
     width: 100%;
     display: flex;
-    justify-content: right;
+    justify-content: center;
     align-items: end;
     padding: 20px;
     .CartBtnBack {
+      width: 300px;
       text-align: center;
       cursor: pointer;
       border: 1px solid red;
@@ -245,6 +246,7 @@ export default {
       padding: 10px 40px;
     }
     .CartBtnBackNex {
+      width: 300px;
       margin-left: 10px;
       text-align: center;
       cursor: pointer;
