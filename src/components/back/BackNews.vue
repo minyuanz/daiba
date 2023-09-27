@@ -53,7 +53,8 @@
         </div>
         <div class="Ctx">
             <label for="">內文</label>
-            <input type="text">
+            <textarea class="custom-input"></textarea>
+            <!-- <input type="text"> -->
         </div>
         <div class="btn">
             <button @click="addToggle = !addToggle">取消新增</button>
@@ -314,10 +315,14 @@ export default {
             font-weight: bold;
         }
 
-        input {
+        .custom-input{
+            border: 1px solid #333;
+            // border-top:1px solid transparent;
+            margin-top: 1rem;
             height: 200px;
-            margin-top: 30px;
-            border: 1px solid #aaa;
+            width: 100%;
+            padding: 10px;
+            // line-height: 200px;
         }
     }
 

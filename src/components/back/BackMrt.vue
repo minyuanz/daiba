@@ -67,8 +67,9 @@
         </div>
         <div class="addCtx">
             <span>捷運站描述</span>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid sequi asperiores hic aspernatur excepturi adipisci repudiandae molestias architecto ea, mollitia dolores doloribus suscipit, perspiciatis at nobis tempora numquam! Ipsam, voluptate.</p>
-            <span class="count">0/100字</span>
+            <textarea class="custom-input"></textarea>
+            <!-- <input type="text" class="custom-input"> -->
+            <!-- <span class="count">0/100字</span> -->
         </div>
         <div class="btn">
             <button @click="addToggle = !addToggle">取消新增</button>
@@ -225,10 +226,13 @@ export default {
             background-color: #ddd;
             border: 1px solid #333;
         }
-        p{
+        .custom-input{
             border: 1px solid #333;
             border-top:1px solid transparent;
             height: 200px;
+            width: 100%;
+            padding: 10px;
+            // line-height: 200px;
         }
         .count{
             border: 1px solid transparent;
