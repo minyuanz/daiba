@@ -443,13 +443,30 @@
 
     .swiper-button-prev {
       position: absolute;
-      right: 100%;
-      margin-top: 0;
+      margin-block: auto;
+      height: 50%;
+      top: 0;
+      bottom: 0;
+      width: 10%;
+
+      &::after {
+        left: 0;
+        position: absolute;
+      }
     }
 
     .swiper-button-next {
       position: absolute;
-      margin-top: 0;
+      margin-block: auto;
+      height: 50%;
+      top: 0;
+      bottom: 0;
+      width: 10%;
+
+      &::after {
+        right: 0;
+        position: absolute;
+      }
     }
   }
 }
