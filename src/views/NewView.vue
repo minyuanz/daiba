@@ -26,7 +26,7 @@
                       {{ news.news_date }}
                     </span>
                   </div>
-                  <h2 class="titlegh2">{{ news.news_title }}</h2>
+                  <h2 class="titleh2">{{ news.news_title }}</h2>
                 </router-link>
                 <!-- <h3>{{ news.news_title }}</h3> -->
 
@@ -172,9 +172,9 @@ export default {
       loop: true,
       slidesPerView: 1,
       spaceBetween: 0,
-      autoplay: {
-        delay: 3000
-      },
+      // autoplay: {
+      //   delay: 3000
+      // },
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
