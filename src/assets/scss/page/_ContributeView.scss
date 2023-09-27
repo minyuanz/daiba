@@ -465,6 +465,7 @@
   }
 
 @media screen and (max-width: 1280px) {
+    .mrtBanner{width: 15%;}
   .CBArea{
     width: 80%;
     .CBTitle{
@@ -484,9 +485,13 @@
             border: 6px solid #ddd;
             position: relative;
             padding: 1rem;
+            .title p{
+                line-height: 2rem;
+            }
             .text .txt{
-                height: 150px;
-                margin-bottom: 3rem;
+                height: 45px;
+                line-height: 1.8rem;
+                margin-bottom: 5rem;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 display: -webkit-box;
@@ -500,7 +505,14 @@
                 width: 40%;
                 position: absolute;
                 right: -13.5%;
-                bottom: -8%;
+                bottom: -13%;
+            }
+            .img{
+                height: 210px;
+                img{
+                    object-fit: cover;
+                    height: 100%;
+                }
             }
         }
     }
@@ -580,6 +592,11 @@
         .CBList{
             width: 85%;
             gap: 0;
+            .s-card-h{
+                .text img{
+                    bottom: -7%;
+                }
+            }
             .CBPost{
                 width: 90%;
                 height: 500px;
@@ -659,6 +676,11 @@
             width: 100%;
             display: flex;
             flex-wrap: wrap;
+            .s-card-h{
+                .text img{
+                    bottom: -10%;
+                }
+            }
             .CBPost{
                 width: 95%;
                 height: 80%;
