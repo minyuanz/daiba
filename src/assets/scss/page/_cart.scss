@@ -1,0 +1,206 @@
+.CartWrap {
+    position: relative;
+    max-width: 1200px;
+    padding: 2.5rem 1.5rem;
+    margin: auto;
+    width: 100%;
+    .CartSpeedBox {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      .course{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 3rem 0;
+        div{
+          width: calc(35% - 90px);
+          height: 2px;
+          background-color:#bbb;
+          margin-bottom: 20px;
+        }
+        section{
+          text-align: center;
+          .SpeedNo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: #5555 1px solid;
+            inset: 0;
+            margin: 1rem auto ;
+            color: #fff;
+            line-height: 58px;
+          }
+          .SpeedText {
+            color: #555;
+            width: 72px;
+          }
+        }
+      }
+      .SpeedText {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: auto;
+        div {
+          padding: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: map-get($map: $fontsizes, $key: h3);
+          text-align: center;
+        }
+      }
+    }
+    .CartProBOX {
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+      background-color: rgb(234, 233, 233);
+      width: 100%;
+      .CartProTitle {
+        padding: 30px;
+        text-align: center;
+        color: #555;
+        font-weight: 500;
+      }
+      .CartProCardBox {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        font-size: map-get($map: $fontsizes, $key: h4);
+        background-color: white;
+        border-bottom: 1px solid gray;
+        margin: auto;
+        .CartProCardTitle {
+          width: 100%;
+          display: flex;
+          margin: auto;
+          align-items: center;
+          text-align: center;
+          justify-content: center;
+          padding: 10px 0;
+          div {
+            width: 16%;
+          }
+        }
+        .CartProCardDetail {
+          box-sizing: border-box;
+          box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+          width: 100%;
+          display: flex;
+          margin: auto;
+          align-items: center;
+          text-align: center;
+          justify-content: center;
+          padding: 10px 0;
+          div {
+            width: 16%;
+          }
+          .CardDetailImg {
+            img {
+              width: 100%;
+              height: 150px;
+              padding: 10px;
+            }
+          }
+          // .CardDetailTitle{}
+          // .CardDetailPrice{}
+          .CardDetailCount {
+            display: flex;
+            margin: 0;
+            p {
+              border: 1px solid black;
+              width: 70%;
+            }
+            div {
+              border: 1px solid black;
+              font-size: map-get($map: $fontsizes, $key: h3);
+              width: 30px;
+              height: 30px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+            }
+          }
+          // .CardDetailTotal{}
+          .CardDetailDelet {
+            cursor: pointer;
+            font-weight: bold;
+          }
+        }
+      }
+      .CartProTotalBox {
+        display: flex;
+        padding: 30px;
+        align-items: center;
+        justify-content: right;
+        .CartProTotalTitle {
+          font-size: map-get($map: $fontsizes, $key: h4);
+        }
+        .CartProTotalPrice {
+          padding-left: 10px;
+          letter-spacing: 5px;
+          color: rgb(236, 85, 112);
+          font-size: map-get($map: $fontsizes, $key: h3);
+        }
+      }
+    }
+    .CartBtmBox {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: end;
+      padding: 30px 0;
+      .btn_s{
+        line-height: 36px;
+        border: 1px solid #333;
+      }
+      .btn_s:last-child {
+        line-height: 36px;
+        margin-left: 10px;
+        background-color: map-get($color, danger);
+        text-align: center;
+        cursor: pointer;
+      }
+    }
+  }
+  @media screen and (max-width: 414px){
+    .CartWrap{
+      .CartProBOX .CartProCardBox .CartProCardTitle{
+        justify-content: space-between;
+        padding: 10px 5px;
+        .proName{
+          display: none;
+        }
+      }
+      .CartSpeedBox .course{
+        justify-content: space-around;
+      }
+      .DoneBtnBox,.CartBtmBox {
+        padding-right:0 ;
+        padding-left: 0;
+        width: 100%;
+        display: block;
+        .btn_s{
+          width: 100%;
+          line-height: 36px;
+          border: 1px solid #333;
+        }
+        .btn_s:last-child {
+          margin: 1rem 0;
+        }
+        .btn_m{
+            background-color:map-get($color , success);
+            margin: auto 0;
+            width: 100%;
+            color:#fff;
+        }
+      }
+    }
+  
+  }

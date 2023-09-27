@@ -1,23 +1,29 @@
 <template>
     <div class="CartWrap">
       <div class="CartSpeedBox">
-        <div class="SpeedNo">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
+        <div class="course">
+          <section>
+            <h4 class="SpeedNo unwork">1</h4>
+            <h4 class="SpeedText ">購 物 車</h4>
+          </section>
+          <div></div>
+          <section>
+            <h4 class="SpeedNo unwork">2</h4>
+            <h4 class="SpeedText">付款運送</h4>
+          </section>
+          <div></div>
+          <section>
+            <h4 class="SpeedNo success">3</h4>
+            <h4 class="SpeedText">訂單完成</h4>
+          </section>
         </div>
-        <div class="SpeedText">
-        <div>購物車</div>
-        <div>付款運送</div>
-        <div>訂單完成</div>
-      </div>
       </div>
       <div class="Doneprobox">
         <i class="fa-solid fa-circle-check icon-size"></i>
         <p>購買完成</p>
       </div>
       <div class="DoneBtnBox">
-        <div class="CartBtnBack" @click="gotoShopping">返回商店</div>
+        <div class="btn_m" @click="gotoShopping">返回商店</div>
       </div>
     </div>
   </template>
@@ -112,15 +118,15 @@
       justify-content: center;
       align-items:center;
       padding: 20px;
-      .CartBtnBack{
-        width: 300px;
-        color:rgb(27, 216, 49) ;
-        text-align: center;
-        cursor: pointer;
-        border: 1px solid rgb(27, 216, 49);
-        border-radius: $border-radius;
-        font-size:map-get($map: $fontsizes, $key: h3);
-        padding: 10px 40px;
+      .btn_m{
+        color:map-get($color , success) ;
+        line-height: 36px;
+        border: 1px solid map-get($color , success);
+      }
+      .btn_m:hover{
+        color:#fff;
+        line-height: 36px;
+        background-color:map-get($color , success);
       }
     }
   }

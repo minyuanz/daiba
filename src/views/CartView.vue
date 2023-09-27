@@ -1,27 +1,33 @@
 <template>
   <div class="CartWrap">
     <div class="CartSpeedBox">
-      <div class="SpeedNo">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-      </div>
-      <div class="SpeedText">
-        <div>購物車</div>
-        <div>付款運送</div>
-        <div>訂單完成</div>
+      <div class="course">
+        <section>
+          <h4 class="SpeedNo info">1</h4>
+          <h4 class="SpeedText ">購 物 車</h4>
+        </section>
+        <div></div>
+        <section>
+          <h4 class="SpeedNo unwork">2</h4>
+          <h4 class="SpeedText">付款運送</h4>
+        </section>
+        <div></div>
+        <section>
+          <h4 class="SpeedNo unwork">3</h4>
+          <h4 class="SpeedText">訂單完成</h4>
+        </section>
       </div>
     </div>
     <div class="CartProBOX">
-      <div class="CartProTitle">購物車</div>
+      <h2 class="CartProTitle">購物車</h2>
       <div class="CartProCardBox">
         <div class="CartProCardTitle">
-          <div>商品資料</div>
-          <div></div>
+          <div>商品圖</div>
+          <div class="proName">商品名稱</div>
           <div>單價</div>
           <div>數量</div>
           <div>小計</div>
-          <div></div>
+          <div class="delete">刪除</div>
         </div>
         <div v-for="(product, index) in cartItems" :key="index" class="CartProCardDetail">
           <div class="CardDetailImg">
@@ -44,8 +50,8 @@
       </div>
     </div>
     <div class="CartBtmBox">
-      <div class="CartBtnBack" @click="goToStore">返回購物</div>
-      <div class="CartBtnBackNex" @click="gotoCheckout">前往結帳</div>
+      <div class="btn_s" @click="goToStore">返回購物</div>
+      <div class="btn_s" @click="gotoCheckout">前往結帳</div>
     </div>
   </div>
 </template>
@@ -92,170 +98,5 @@ export default {
 </script>
 
 <style lang="scss">
-.CartWrap {
-  position: relative;
-  max-width: 1200px;
-  padding: 2.5rem 1.5rem;
-  margin: auto;
-  width: 100%;
-  .CartSpeedBox {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    .SpeedNo {
-      position: relative;
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: map-get($map: $fontsizes, $key: h3);
-        text-align: center;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: gray;
-      }
-    }
-    .SpeedText {
-      position: relative;
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      margin: auto;
-      div {
-        padding: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: map-get($map: $fontsizes, $key: h3);
-        text-align: center;
-      }
-    }
-  }
-  .CartProBOX {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    background-color: rgb(234, 233, 233);
-    width: 100%;
-    .CartProTitle {
-      padding: 30px;
-      font-size: map-get($map: $fontsizes, $key: h3);
-    }
-    .CartProCardBox {
-      display: flex;
-      flex-wrap: wrap;
-      width: 100%;
-      font-size: map-get($map: $fontsizes, $key: h4);
-      background-color: white;
-      border-bottom: 1px solid gray;
-      margin: auto;
-      .CartProCardTitle {
-        width: 100%;
-        display: flex;
-        margin: auto;
-        align-items: center;
-        text-align: center;
-        justify-content: center;
-        padding: 10px 0;
-        div {
-          width: 16%;
-        }
-      }
-      .CartProCardDetail {
-        box-sizing: border-box;
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-        width: 100%;
-        display: flex;
-        margin: auto;
-        align-items: center;
-        text-align: center;
-        justify-content: center;
-        padding: 10px 0;
-        div {
-          width: 16%;
-        }
-        .CardDetailImg {
-          img {
-            width: 100%;
-            height: 150px;
-            padding: 10px;
-          }
-        }
-        // .CardDetailTitle{}
-        // .CardDetailPrice{}
-        .CardDetailCount {
-          display: flex;
-          margin: 0;
-          p {
-            border: 1px solid black;
-            width: 70%;
-          }
-          div {
-            border: 1px solid black;
-            font-size: map-get($map: $fontsizes, $key: h3);
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-          }
-        }
-        // .CardDetailTotal{}
-        .CardDetailDelet {
-          cursor: pointer;
-          font-weight: bold;
-        }
-      }
-    }
-    .CartProTotalBox {
-      display: flex;
-      padding: 30px;
-      align-items: center;
-      justify-content: right;
-      .CartProTotalTitle {
-        font-size: map-get($map: $fontsizes, $key: h4);
-      }
-      .CartProTotalPrice {
-        padding-left: 10px;
-        letter-spacing: 5px;
-        color: rgb(236, 85, 112);
-        font-size: map-get($map: $fontsizes, $key: h3);
-      }
-    }
-  }
-  .CartBtmBox {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: end;
-    padding: 30px 0;
-    .CartBtnBack {
-      width: 300px;
-      text-align: center;
-      cursor: pointer;
-      border: 1px solid #dc4b55;
-      border-radius: $border-radius;
-      font-size: map-get($map: $fontsizes, $key: h3);
-      padding: 10px 40px;
-    }
-    .CartBtnBackNex {
-      width: 300px;
-      margin-left: 10px;
-      text-align: center;
-      cursor: pointer;
-      background-color: #dc4b55;
-      border: 1px solid #dc4b55;
-      border-radius: $border-radius;
-      font-size: map-get($map: $fontsizes, $key: h3);
-      padding: 10px 40px;
-    }
-  }
-}
+
 </style>

@@ -1,16 +1,22 @@
 <template>
   <div class="ShopWrap">
     <div class="ShopSpeedBox">
-      <div class="SpeedNo">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
+      <div class="course">
+        <section>
+          <h4 class="SpeedNo unwork">1</h4>
+          <h4 class="SpeedText ">購 物 車</h4>
+        </section>
+        <div></div>
+        <section>
+          <h4 class="SpeedNo info">2</h4>
+          <h4 class="SpeedText">付款運送</h4>
+        </section>
+        <div></div>
+        <section>
+          <h4 class="SpeedNo unwork">3</h4>
+          <h4 class="SpeedText">訂單完成</h4>
+        </section>
       </div>
-      <div class="SpeedText">
-      <div>購物車</div>
-      <div>付款運送</div>
-      <div>訂單完成</div>
-    </div>
     </div>
     <div class="ShopProBOX">
       <div class="ShopProTitle" @click="">合計:NT: {{ cartTotal }}</div>
@@ -103,8 +109,8 @@
       </div>
     </div>
     <div class="ShopBtmBox">
-      <div class="ShopBtnBack" @click="gotoCart">上一頁</div>
-      <div class="ShopBtnBackNex" @click="gotoShoppingDone">訂單確認</div>
+      <div class="btn_s" @click="gotoCart">上一頁</div>
+      <div class="btn_s" @click="gotoShoppingDone">訂單確認</div>
     </div>
   </div>
 </template>
@@ -165,46 +171,41 @@ export default {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    .SpeedNo{
-      position: relative;
-      width: 100%;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      div{  
+    .course{
+        width: 100%;
         display: flex;
-        align-items: center;
         justify-content: center;
-        font-size:map-get($map: $fontsizes, $key: h3);
-        text-align: center;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: gray;
-      }
-    }
-    .SpeedText{
-      position: relative;
-      width: 100%;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      margin: auto;
-      div{
-        padding: 30px;
-        display: flex;
         align-items: center;
-        justify-content: center;
-        font-size:map-get($map: $fontsizes, $key: h3);
-        text-align: center;
+        margin: 3rem 0;
+        div{
+          width: calc(35% - 90px);
+          height: 2px;
+          background-color:#bbb;
+          margin-bottom: 20px;
+        }
+        section{
+          text-align: center;
+          .SpeedNo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: #5555 1px solid;
+            inset: 0;
+            margin: 1rem auto ;
+            color: #fff;
+            line-height: 58px;
+          }
+          .SpeedText {
+            color: #555;
+            width: 72px;
+          }
+        }
       }
-    }
-    
 
   }
   .ShopProBOX{
     position: relative;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
     background-color: rgb(234, 233, 233);
     width: 100%;
     .ShopProTitle{
@@ -277,7 +278,7 @@ export default {
   .ShopPayBox{
     margin: 20px 0;
     width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
     div{
       padding: 30px 10px;
     }
@@ -300,7 +301,7 @@ export default {
   .ShopDelBox{
     margin: 20px 0;
     width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
     div{padding: 30px 10px;}
     .DelTitle{
       padding: 10px 20px;
@@ -320,7 +321,7 @@ export default {
     }
   }
   .ShopSumBox{
-    padding: 50px;
+    padding: 30px 10px;
     display: flex;
     flex-wrap: wrap;
     background-color: rgb(234, 233, 233);
@@ -345,32 +346,52 @@ export default {
       }
     }
   }  
-  .ShopBtmBox{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    .ShopBtnBack{
-      width: 300px;
-      text-align: center;
-      cursor: pointer;
-      border: 1px solid red;
-      border-radius: $border-radius;
-      font-size:map-get($map: $fontsizes, $key: h3);
-      padding: 10px 40px;
+  .ShopBtmBox {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: end;
+      padding: 30px 0;
+      .btn_s{
+        line-height: 36px;
+        border: 1px solid #333;
+      }
+      .btn_s:last-child {
+        line-height: 36px;
+        margin-left: 10px;
+        background-color: map-get($color, danger);
+        text-align: center;
+        cursor: pointer;
+      }
     }
-    .ShopBtnBackNex{
-      width: 300px;
-      margin-left: 10px;
-      text-align: center;
-      cursor: pointer;
-      background-color: rgb(236, 85, 112);
-      border: 1px solid red;
-      border-radius: $border-radius;
-      font-size:map-get($map: $fontsizes, $key: h3);
-      padding: 10px 40px;
-    }
-  }
 }
+@media screen and (max-width: 414px){
+    .ShopWrap{
+      .ShopProBOX .ShopProCardBox .ShopProCardTitle{
+        justify-content: space-between;
+        padding: 10px 5px;
+        .proName{
+          display: none;
+        }
+      }
+      .ShopSpeedBox .course{
+        justify-content: space-around;
+      }
+
+      .ShopBtmBox {
+        width: 100%;
+        display: block;
+        .btn_s{
+          width: 100%;
+          line-height: 36px;
+          border: 1px solid #333;
+        }
+        .btn_s:last-child {
+          margin: 1rem 0;
+        }
+      }
+    }
+    
+  
+  }
 </style>
