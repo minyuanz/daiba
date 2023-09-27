@@ -16,18 +16,21 @@
         </button>
       </div>
       <div class="loginOr">OR</div>
-      <div class="loginEmail">
-        <label for="email">信箱</label>
-        <input type="text" id="email" v-model="userId" />
-      </div>
-      <div class="loginPwd">
-        <label for="pwd">密碼</label>
-        <input type="password" id="pwd" v-model="userPwd" />
-      </div>
-      <router-link to="/ForgetPwd">忘記密碼 ?</router-link>
-      <button class="btn_l btnlogin">
-        <router-link to="/User">登入</router-link>
-      </button>
+      <form action="" method="">
+        <div class="loginEmail">
+          <label for="email">信箱</label>
+          <input type="text" id="email" v-model="userId" />
+        </div>
+        <div class="loginPwd">
+          <label for="pwd">密碼</label>
+          <input type="password" id="pwd" v-model="userPwd" />
+        </div>
+        <router-link to="/ForgetPwd">忘記密碼 ?</router-link>
+        <button class="btn_l btnlogin" type="button">
+          <router-link to="/User">登入</router-link>
+        </button>
+
+      </form>
       <router-link to="/RegisterView">還沒有會員 ? 會員註冊</router-link>
     </div>
   </div>

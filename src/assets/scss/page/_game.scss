@@ -394,7 +394,7 @@
     align-items: center;
     flex-wrap: wrap;
     text-align: center;
-    overflow: auto;
+    overflow: hidden;
 
     p {
         display: block;
@@ -421,7 +421,7 @@
             backface-visibility: hidden;
 
             img {
-                
+
                 width: 40%;
                 height: auto;
                 position: absolute;
@@ -439,6 +439,20 @@
             transform: rotateY(180deg);
             backface-visibility: hidden;
 
+            .point {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                padding: 20px;
+
+                p {
+                    font-size: 20px;
+                    color: #fff;
+
+                }
+            }
 
             .card-h {
                 width: 100%;
@@ -449,7 +463,7 @@
                 color: #fff;
                 display: grid;
                 grid-template-columns: repeat(1, 1fr);
-                gap: 20px;
+                background-color: transparent;
 
                 .img {
 
@@ -460,10 +474,8 @@
 
                 .text {
 
-
                     p {
                         color: #fff;
-                        margin-block: 50px;
                         font-size: 20px;
                     }
 
@@ -472,7 +484,7 @@
                     }
                 }
 
-
+                .tag {}
             }
         }
 
@@ -499,3 +511,5 @@
 img {
     vertical-align: top;
 }
+
+@media screen and (max-width: 414px) {}

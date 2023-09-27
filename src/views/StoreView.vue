@@ -1,7 +1,7 @@
 <template>
   <div class="storeWrap">
     <h1 class="storeTitle">精選購物</h1>
-    <div class="storeSearch">
+    <!-- <div class="storeSearch">
       <div class="storeSearchMrt">
         <span>捷運線選擇</span>
         <i class="fa-solid fa-play fa-rotate-90"></i>
@@ -23,8 +23,8 @@
           <li v-for="i in 5">選項1</li>
         </ul>
       </div>
-      <!-- <button class="storeSearchBt">搜尋</button> -->
-    </div>
+      <button class="storeSearchBt">搜尋</button>
+    </div> -->
     <div class="storecardbox">
       <div v-for="item  in paginatedProducts "  :key="item.pord_id"  class="storeCard">
         <router-link :to="'/storeDetail/' + item.pord_id" >
@@ -132,8 +132,8 @@ export default {
   width: 100%;
 
   .storeTitle {
-    border-bottom: 5px black solid;
-    padding: 3rem 0;
+    // border-bottom: 5px black solid;
+    margin: 3rem 0;
     text-align: center;
   }
   .storeSearch {
@@ -432,11 +432,17 @@ export default {
         flex-wrap: wrap;
         width: 45%;
         overflow: hidden;
-        .storeCardimg {
-          width: 100%;
-          cursor: pointer;
-        }
-
+        .imgbox{
+        width: 100%;
+        height: 200px;
+        object-fit: fill;
+       .storeCardimg {
+        width: 100%;
+        height: 200px;
+        object-fit: fill;
+        cursor: pointer;
+      }
+      }
         .storeBottom {
           display: flex;
           flex-wrap: wrap;

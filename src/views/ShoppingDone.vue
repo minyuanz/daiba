@@ -2,9 +2,9 @@
     <div class="CartWrap">
       <div class="CartSpeedBox">
         <div class="SpeedNo">
-        <span class="SpeedNoF">1</span>
-        <span>2</span>
-        <span>3</span>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
         </div>
         <div class="SpeedText">
         <div>購物車</div>

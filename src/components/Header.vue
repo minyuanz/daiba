@@ -8,66 +8,58 @@
       <div class="line"></div>
 
       <div class="header-container">
-        <div class="header-menu" @click="toggleNav" :class="{ hbclose: hbclose }">
+        <div
+          class="header-menu"
+          @click="toggleNav"
+          :class="{ hbclose: hbclose }"
+        >
           <div class="hambergerIcon" :class="{ open: open }"></div>
         </div>
 
-        <div class="homeNav" @click="toggleNav" :class="{ showHomeNav: showHomeNav }">
+        <div
+          class="homeNav"
+          @click="toggleNav"
+          :class="{ showHomeNav: showHomeNav }"
+        >
           <ul>
             <li>
-              <div class="pic">
-                <img src="../../public/img/home/index_home.jpg" alt="" />
-              </div>
               <router-link to="/mrt" class="mrt">
                 <p>捷運推薦</p>
               </router-link>
             </li>
             <li>
-              <div class="pic">
-                <img src="../../public/img/home/game.jpg" alt="" />
-              </div>
               <router-link to="/game" class="game">
                 <p>捷運冒險</p>
               </router-link>
             </li>
             <li>
-              <div class="pic">
-                <img src="../../public/img/home/contribute.jpg" alt="" />
-              </div>
               <router-link to="/contribute" class="contribute">
                 <p>投稿專欄</p>
               </router-link>
             </li>
             <li>
-              <div class="pic">
-                <img src="../../public/img/home/member.jpg" alt="" />
-              </div>
               <router-link to="/Login" class="login">
                 <p>會員中心</p>
               </router-link>
             </li>
             <li>
-              <div class="pic">
-                <img src="../../public/img/home/shop.jpg" alt="" />
-              </div>
               <router-link to="/store" class="store">
                 <p>精選購物</p>
               </router-link>
             </li>
             <li>
-              <div class="pic">
-                <img src="../../public/img/home/new1.jpg" alt="" />
-              </div>
               <router-link to="/New" class="new">
                 <p>最新消息</p>
               </router-link>
             </li>
             <li>
-              <div class="pic">
-                <img src="../../public/img/home/about.jpg" alt="" />
-              </div>
               <router-link to="/about" class="about">
                 <p>關於我們</p>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/cart" class="cart">
+                <p>購物車({{ this.$store.getters.cartItemCount }})</p>
               </router-link>
             </li>
           </ul>
@@ -88,10 +80,12 @@
       <router-link to="/game" class="game">捷運冒險</router-link>
       <router-link to="/contribute" class="contribute">投稿專欄</router-link>
       <router-link to="/store" class="store">精選購物</router-link>
-      <router-link to="/New" class="new">最新消息</router-link>
+      <router-link to="/New" class="new">消息資訊</router-link>
       <router-link to="/about" class="about">關於我們</router-link>
       <router-link to="/Login" class="login">會員中心</router-link>
-      <router-link to="/cart" class="cart">購物車({{ this.$store.getters.cartItemCount }})</router-link>
+      <router-link to="/cart" class="cart"
+        >購物車({{ this.$store.getters.cartItemCount }})</router-link
+      >
     </nav>
   </header>
 </template>

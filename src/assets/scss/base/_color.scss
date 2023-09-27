@@ -21,7 +21,7 @@ $color: (
 }
 
 .warning {
-  color: map-get($color, $key: warning);
+  background-color: map-get($color, $key: warning);
 }
 
 .tangerine {
