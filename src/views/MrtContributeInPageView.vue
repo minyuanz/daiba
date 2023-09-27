@@ -169,3 +169,7 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+@import "../assets/scss/page/_mrtContributeInPage";
+</style>

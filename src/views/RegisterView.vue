@@ -37,9 +37,7 @@
           <label for="check">再次輸入</label>
           <input type="password" id="check" />
         </div>
-        <button class="btn_l">
-          註冊
-        </button>
+        <button class="btn_l">註冊</button>
       </form>
     </div>
   </div>
@@ -67,4 +65,6 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+@import "../assets/scss/page/_Register";
+</style>
