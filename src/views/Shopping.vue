@@ -2,9 +2,9 @@
   <div class="ShopWrap">
     <div class="ShopSpeedBox">
       <div class="SpeedNo">
-      <span class="SpeedNoF">1</span>
-      <span>2</span>
-      <span>3</span>
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
       </div>
       <div class="SpeedText">
       <div>購物車</div>
@@ -171,7 +171,7 @@ export default {
       display: flex;
       justify-content: space-evenly;
       align-items: center;
-      span{
+      div{  
         display: flex;
         align-items: center;
         justify-content: center;
