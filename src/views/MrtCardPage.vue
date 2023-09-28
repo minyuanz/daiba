@@ -125,8 +125,8 @@ export default {
       backgroundMb3,
       background4,
       backgroundMb4,
-      MB: false,
-      PC: false,
+      MB: true,
+      PC: true,
       btninner: "官方網站",
       mrtCardPage: "",
     };
