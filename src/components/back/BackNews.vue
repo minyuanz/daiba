@@ -209,10 +209,12 @@ export default {
 
     .mainTitle {
         label {
-            font-size: 24px;
-            font-weight: bold;
             display: block;
             text-align: center;
+            background-color: #ddd;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 5px 0;
         }
 
         input {
@@ -226,10 +228,12 @@ export default {
         margin-top: 50px;
 
         label {
-            font-size: 24px;
-            font-weight: bold;
             display: block;
             text-align: center;
+            background-color: #ddd;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 5px 0;
         }
 
         input {
@@ -250,8 +254,12 @@ export default {
             margin-top: 50px;
 
             label {
+                display: block;
+                text-align: center;
+                background-color: #ddd;
                 font-size: 24px;
                 font-weight: bold;
+                padding: 5px 0;
             }
 
             .pic {
@@ -311,11 +319,15 @@ export default {
         margin-top: 50px;
 
         label {
+            display: block;
+            text-align: center;
+            background-color: #ddd;
             font-size: 24px;
             font-weight: bold;
+            padding: 5px 0;
         }
 
-        .custom-input{
+        .custom-input {
             border: 1px solid #333;
             // border-top:1px solid transparent;
             margin-top: 1rem;

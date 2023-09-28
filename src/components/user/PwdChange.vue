@@ -73,7 +73,7 @@ export default {
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
-        gap: 3rem;
+        gap: 2rem;
 
         .acc {
             width: 100%;
