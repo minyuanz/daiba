@@ -21,6 +21,7 @@
         </div>
       </transition>
     </div>
+    <div class="mrtBackground"></div>
 
     <div class="mrtPic">
       <div class="pic mrtGrayStyle border-brownline">
@@ -93,7 +94,9 @@
         <img src="../../public/img/blue.jpeg" alt="blueline" />
       </div>
     </div>
+  </section>
 
+  <section class="mrt-tagGroup">
     <div v-if="MB" class="mrtTag">
       <div
         class="title-tag"
