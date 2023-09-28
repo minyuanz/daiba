@@ -1,9 +1,8 @@
+// 首頁
 .gameHome {
     position: relative;
     overflow: hidden;
     animation: home 1s ease;
-
-
 
     @keyframes home {
 
@@ -114,6 +113,25 @@
 
 }
 
+.gameCostume {
+    position: relative;
+    overflow: hidden;
+    animation: home 1s ease;
+}
+
+.costume {
+    margin: 3rem 0;
+    height: 90vh;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+
+// 遊戲內頁
 .gameInner {
     margin: 3rem 0;
     height: 90vh;
@@ -434,6 +452,7 @@
 
 }
 
+// 結束
 .end {
     width: 70%;
     height: 90%;
@@ -566,11 +585,24 @@
 }
 
 
-
-
-
 img {
     vertical-align: top;
+}
+
+@media screen and (max-height: 600px) {
+    .gameHome {
+
+        .gameLogo {
+            top: 0;
+        }
+
+        .start {
+            top: 50%;
+        }
+    }
+
+
+
 }
 
 @media screen and (max-width: 768px) {
@@ -579,6 +611,7 @@ img {
         .gameLogo {
             top: 20%;
             width: 100%;
+
         }
 
     }

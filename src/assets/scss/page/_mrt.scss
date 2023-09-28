@@ -129,14 +129,35 @@
     }
   }
 
+  @keyframes flyIn {
+    0% {
+      left: 150%;
+    }
+
+    100% {
+      left: 50%;
+    }
+  }
+
+  @keyframes flyInImg {
+    0% {
+      top: -150%;
+    }
+
+    100% {
+      top: 0%;
+    }
+  }
+
   .mrtPic {
     position: relative;
     display: flex;
     min-width: 1200px;
-    left: 50%;
+    left: 150%;
     transform: translate(-50%, 0%);
-    background-color: #000;
+    background-color: #0008;
     padding-block: 30px;
+    animation: flyIn 0.5s forwards;
 
     img {
       object-fit: cover;
@@ -150,8 +171,29 @@
       transform: skew(-5deg);
       position: relative;
       bottom: 10px;
+      top: -150%;
       overflow: hidden;
       cursor: pointer;
+
+      &:nth-child(1) {
+        animation: flyInImg 0.3s 0.5s forwards;
+      }
+
+      &:nth-child(2) {
+        animation: flyInImg 0.3s 0.6s forwards;
+      }
+      &:nth-child(3) {
+        animation: flyInImg 0.3s 0.7s forwards;
+      }
+      &:nth-child(4) {
+        animation: flyInImg 0.3s 0.8s forwards;
+      }
+      &:nth-child(5) {
+        animation: flyInImg 0.3s 0.9s forwards;
+      }
+      &:nth-child(6) {
+        animation: flyInImg 0.3s 1s forwards;
+      }
     }
 
     .mrtMainLine {
@@ -181,11 +223,21 @@
       }
     }
   }
+}
+
+.mrt-tagGroup {
+  max-width: 1280px;
+  margin-inline: auto;
+  position: sticky;
+  backdrop-filter: blur(5px);
+  // background: #000;
+  top: 0;
+  z-index: 3;
 
   .mrtTag {
     display: flex;
     justify-content: space-around;
-    width: 62.5%;
+    width: 100%;
     margin: auto;
     padding-inline: 2%;
     position: relative;
@@ -195,7 +247,7 @@
       font-size: 18px;
       padding: 1rem 0;
       width: 12%;
-      margin: 3rem auto 2rem;
+      margin: 2rem auto 2rem;
       inset: 0;
       position: relative;
       background: #fff;
@@ -207,9 +259,9 @@
         content: "";
         position: absolute;
         height: 95px;
-        bottom: 100%;
+        top: -140%;
         left: 50%;
-        z-index: 0;
+        z-index: -1;
       }
     }
 
@@ -421,6 +473,7 @@
 
             .img {
               height: 55%;
+              overflow: hidden;
 
               img {
                 height: 100%;
@@ -545,17 +598,20 @@
       }
     }
 
-    .mrtTag {
-      width: 100%;
-
-      .title-tag {
-        font-size: 16px;
-        // width: 15%;
-      }
-    }
-
     .mrtGrayStyle {
       display: none;
+    }
+  }
+
+  .mrt-tagGroup {
+    .title-tag {
+      font-size: 16px;
+    }
+  }
+
+  .mrt-tagGroup {
+    .mrtTag {
+      width: 100%;
     }
   }
 }
@@ -589,7 +645,9 @@
         }
       }
     }
+  }
 
+  .mrt-tagGroup {
     .mrtTag {
       width: 100vw;
       max-width: 100vw;
@@ -602,42 +660,42 @@
       .red {
         &::after {
           height: 50px;
-          bottom: 100%;
+          top: -100%;
         }
       }
 
       .blue {
         &::after {
           height: 50px;
-          bottom: 100%;
+          top: -100%;
         }
       }
 
       .green {
         &::after {
           height: 50px;
-          bottom: 100%;
+          top: -100%;
         }
       }
 
       .orange {
         &::after {
           height: 50px;
-          bottom: 100%;
+          top: -100%;
         }
       }
 
       .brown {
         &::after {
           height: 50px;
-          bottom: 100%;
+          top: -100%;
         }
       }
 
       .yellow {
         &::after {
           height: 50px;
-          bottom: 100%;
+          top: -100%;
         }
       }
     }
@@ -692,7 +750,9 @@
       min-width: 100%;
       height: 200px;
     }
+  }
 
+  .mrt-tagGroup {
     .mrtTag {
       padding-inline: 0%;
       justify-content: space-evenly;
@@ -703,6 +763,42 @@
         width: 12%;
         padding: 0.5rem 0;
         margin: 2rem 0px;
+      }
+
+      .red {
+        &::after {
+          top: -150%;
+        }
+      }
+
+      .blue {
+        &::after {
+          top: -150%;
+        }
+      }
+
+      .green {
+        &::after {
+          top: -150%;
+        }
+      }
+
+      .orange {
+        &::after {
+          top: -150%;
+        }
+      }
+
+      .brown {
+        &::after {
+          top: -150%;
+        }
+      }
+
+      .yellow {
+        &::after {
+          top: -150%;
+        }
       }
     }
   }

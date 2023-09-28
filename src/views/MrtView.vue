@@ -21,6 +21,7 @@
         </div>
       </transition>
     </div>
+    <div class="mrtBackground"></div>
 
     <div class="mrtPic">
       <div class="pic mrtGrayStyle border-brownline">
@@ -93,14 +94,15 @@
         <img src="../../public/img/blue.jpeg" alt="blueline" />
       </div>
     </div>
+  </section>
 
+  <section class="mrt-tagGroup">
     <div v-if="MB" class="mrtTag">
       <div
         class="title-tag"
         v-for="(color, index) in selectColor"
         :key="color"
         :class="({ active: selectColor === color }, color)"
-        v-show="showAll || selectColor == color"
         @click="showTag(color)"
         @mouseenter="activate(color)"
         @mouseleave="deactivate(color)"
@@ -115,7 +117,6 @@
         v-for="(color, index) in selectColor"
         :key="color"
         :class="({ active: selectColor === color }, color)"
-        v-show="showAll || selectColor == color"
         @mouseenter="activate(color)"
         @mouseleave="deactivate(color)"
         @click="showTag(color)"
@@ -1663,8 +1664,7 @@ export default {
       this.filteredMrt = this.mrt.filter((item) => item.color === color);
 
       if (window.innerWidth <= 768) {
-        this.selectColor = color;
-        this.showAll = false;
+        this.showAll = true;
       } else {
         this.selectColor = [
           "red",

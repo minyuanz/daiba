@@ -74,25 +74,27 @@
         </div>
         <div class="CBList">
             <div v-for="index in 8" :key="index" @click="(closePost = !closePost), (lightBox = !lightBox)">
-                <div :class="{'card-w': PC, 's-card-h': !PC}">
-                <div class="img">
-                    <img :src="PC ? 'https://picsum.photos/200/280/?random=10' : 'https://picsum.photos/280/200/?random=10'" />
-                </div>
-                <div class="text">
-                    <div class="title">
-                    <h3>五分埔商圈購物</h3>
-                    <p>台北成衣街｜衣服、飾品、配件、包包、帽子批發</p>
-                    <div class="tag">
-                        <span class="title-tag gray">#景點推薦</span>
-                        <span class="title-tag blue">#板南線</span>
+                <div :class="{ 'card-w': PC, 's-card-h': !PC }">
+                    <div class="img">
+                        <img
+                            :src="PC ? 'https://picsum.photos/200/280/?random=10' : 'https://picsum.photos/280/200/?random=10'" />
+                        <img src="https://picsum.photos/80/80/?random=10" class="head" />
                     </div>
-                    <span class="s_text time">2020-06-15</span>
+                    <div class="text">
+                        <div class="title">
+                            <h3>五分埔商圈購物</h3>
+                            <p>台北成衣街｜衣服、飾品、配件、包包、帽子批發</p>
+                            <div class="tag">
+                                <span class="title-tag gray">#景點推薦</span>
+                                <span class="title-tag blue">#板南線</span>
+                            </div>
+                            <span class="s_text time">2020-06-15</span>
+                        </div>
+                        <div class="txt">
+                            那天逛完華山KAKAO敗家後，就心血來潮到五分埔去逛逛，真的是久違了好多年，以前學生時期過年領完紅包，一定都是最期待來到五分埔買衣服！如今後來才知道原來這裡除了一般民眾、觀光客買購物衣服的地方以外，原來也有成衣批發商圈，那天去晃晃除了衣服之外，還有包包、飾品、鞋子等等。
+                        </div>
+
                     </div>
-                    <div class="txt">
-                    那天逛完華山KAKAO敗家後，就心血來潮到五分埔去逛逛，真的是久違了好多年，以前學生時期過年領完紅包，一定都是最期待來到五分埔買衣服！如今後來才知道原來這裡除了一般民眾、觀光客買購物衣服的地方以外，原來也有成衣批發商圈，那天去晃晃除了衣服之外，還有包包、飾品、鞋子等等。
-                    </div>
-                    <img src="https://picsum.photos/80/80/?random=10" class="head" />
-                </div>
                 </div>
             </div>
             <div class="CBPost" v-show="closePost">
@@ -283,15 +285,16 @@ export default {
         ButtonM
     },
     methods: {
-        WindowWidth() {
+        windowWidth() {
             if (window.innerWidth <= 1280) {
                 this.LAP = true;
                 this.PC = false;
+
             } else {
                 this.PC = true;
                 this.LAP = false;
             }
-        },    
+        },
         evenPic(taipeisIndex) {
             return taipeisIndex % 2 === 0;
         },
@@ -328,6 +331,8 @@ export default {
     },
 
     mounted() {
+
+        this.windowWidth()
         // 景點輪播
         const swiperBanner = new Swiper(".swiperBanner", {
             direction: "horizontal",
@@ -349,8 +354,8 @@ export default {
             effect: "cube",
             speed: 2000,
             loop: true,
-            autoplay:{
-                delay:1000
+            autoplay: {
+                delay: 1000
             },
             cubeEffect: {
                 shadow: true,
@@ -368,8 +373,9 @@ export default {
         setTimeout(() => {
             this.initSwiper();
         }, 100); // 延遲100毫秒
-        this.WindowWidth();
-        window.addEventListener("resize", this.WindowWidth);
+
+
+        window.addEventListener("resize", this.windowWidth);
     },
 };
 </script>
