@@ -106,7 +106,7 @@ export default {
       slidesPerView: "auto",
       spaceBetween: 0,
       autoplay: {
-        delay: 0,
+        delay: -1000,
         pauseOnMouseEnter: false,
         disableOnInteraction: false,
       },

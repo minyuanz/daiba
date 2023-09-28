@@ -87,18 +87,17 @@
 @media screen and (max-width: 1280px){
     .mainWrapper{
         .router{
-            width: 20%;
+            width: 15%;
             .title{
-                transform: translateX(-30%) translateY(-50%);
+                transform: translateX(20%) translateY(-50%);
+                a img{
+                    height: 500px;
+                }
             }
-            // .swiper{}
         }
-        // .logo{
-
-        // }
         .back{
             .title{
-                transform: translateX(-30%) translateY(-50%) rotateZ(180deg)
+                transform: translateX(20%) translateY(-50%) rotateZ(180deg)
             }
         } 
         .centerline .logo::after{
