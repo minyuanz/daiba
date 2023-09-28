@@ -93,19 +93,24 @@
       </svg>
     </div>
     <div class="fixCenter detail">
-      <div class="detailTxt">
-        <p>《 詳細資訊 》</p>
-        <p>地址: {{ mrtCardPage.address }}</p>
-        <p>電話: {{ mrtCardPage.tel }}</p>
-      </div>
-      <div class="timelTxt">
-        <p>《 營業時間 》</p>
-        <p>➢ {{ mrtCardPage.time1 }}</p>
-        <p>➢ {{ mrtCardPage.time2 }}</p>
+      <div class="leftSide">
+        <div class="detailTxt">
+          <p>《 詳細資訊 》</p>
+          <p>地址: {{ mrtCardPage.address }}</p>
+          <p>電話: {{ mrtCardPage.tel }}</p>
+        </div>
+        <div class="timelTxt">
+          <p>《 營業時間 》</p>
+          <p>➢ {{ mrtCardPage.time1 }}</p>
+          <p>➢ {{ mrtCardPage.time2 }}</p>
+        </div> 
       </div>
 
-      <ButtonM :HTMLInner="btninner" />
+      <a href="https://www.travel.taipei/" class="officialWeb">
+        <ButtonM :HTMLInner="btninner" />
+      </a>     
     </div>
+
   </div>
 </template>
 <script>
@@ -115,7 +120,7 @@ import background3 from "@../../../public/img/ron/part3bgc.svg";
 import backgroundMb3 from "@../../../public/img/ron/part3_mb.svg";
 import background4 from "@../../../public/img/ron/part4bgc.svg";
 import backgroundMb4 from "@../../../public/img/ron/part4_mb.svg";
-import ButtonL from "@/components/ButtonM.vue";
+import ButtonM from "@/components/ButtonM.vue";
 export default {
   data() {
     return {
@@ -132,7 +137,7 @@ export default {
     };
   },
   components: {
-    ButtonL,
+    ButtonM,
   },
   mounted() {
     this.WindowWidth();
