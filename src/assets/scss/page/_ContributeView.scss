@@ -227,6 +227,7 @@
 
     .card-w {
       cursor: pointer;
+      box-shadow: 1px 3px 10px #6667;
 
       .img {
         position: relative;
@@ -525,6 +526,7 @@
         border: 6px solid #ddd;
         position: relative;
         padding: 1rem;
+        box-shadow: 1px 3px 10px #6667;
 
         .title p {
           line-height: 2rem;
@@ -565,12 +567,13 @@
           .head {
             width: 80px;
             height: 80px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+
           }
         }
       }
     }
     
-
     .CBPost {
       width: 90%;
       height: 600px;
