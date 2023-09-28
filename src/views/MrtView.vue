@@ -1577,6 +1577,7 @@ export default {
     const swiperMRTCard = new Swiper(".swiperMRTCard", {
       direction: "horizontal",
       speed: 500,
+      loop: true,
 
       navigation: {
         nextEl: ".swiper-button-next",

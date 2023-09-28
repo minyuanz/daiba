@@ -404,7 +404,7 @@
       // 卡片樣式
       .swiper-slide {
         width: 300px;
-        height: 520px;
+        height: 550px;
 
         .mrtCardWrap {
           height: 100%;
@@ -532,7 +532,9 @@
 // --------------------------------------------
 
 @media screen and (max-width: 1280px) {
-  .mrtBanner{width: 15%;}
+  .mrtBanner {
+    width: 15%;
+  }
   .mrtLineCheck {
     .mrtPic {
       justify-content: center;
