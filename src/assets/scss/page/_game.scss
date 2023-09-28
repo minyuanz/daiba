@@ -566,11 +566,24 @@
 }
 
 
-
-
-
 img {
     vertical-align: top;
+}
+
+@media screen and (max-height: 600px) {
+    .gameHome {
+
+        .gameLogo {
+            top: 0;
+        }
+
+        .start {
+            top: 50%;
+        }
+    }
+
+
+
 }
 
 @media screen and (max-width: 768px) {
@@ -579,6 +592,7 @@ img {
         .gameLogo {
             top: 20%;
             width: 100%;
+
         }
 
     }

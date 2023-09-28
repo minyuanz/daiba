@@ -157,6 +157,7 @@
       height: 50px;
       line-height: 40px;
       margin: 2.5rem auto;
+
       .medium {
         inset: 0;
         margin: auto;
@@ -226,10 +227,28 @@
 
     .card-w {
       cursor: pointer;
-    }
 
-    .head {
-      width: 80px;
+      .img {
+        position: relative;
+
+        .head {
+          position: absolute;
+          width: 70px;
+          height: 70px;
+          border-radius: 50px;
+          bottom: -3%;
+          left: -4%;
+          border: 3px solid #555;
+          box-shadow: 2px 2px 10px #0009;
+        }
+      }
+
+      .text {
+
+        .txt {
+          -webkit-line-clamp: 3;
+        }
+      }
     }
   }
 
@@ -273,9 +292,11 @@
         cursor: pointer;
         z-index: 2;
       }
+
       .closePost:hover {
         background-color: map-get($color, $key: danger);
       }
+
       .head {
         position: absolute;
         border-radius: 50%;
@@ -290,14 +311,17 @@
         width: 40%;
         height: 100%;
         margin: 0 2rem 0 0;
+
         .swiper-button-prev::after,
         .swiper-button-next::after {
           scale: 0.8;
           color: #fff;
         }
+
         .swiper-slide {
           width: 100%;
           height: 100%;
+
           img {
             width: 100%;
             height: 100%;
@@ -344,6 +368,7 @@
             line-height: 65px;
           }
         }
+
         .scrollbarArea::-webkit-scrollbar {
           width: 8px;
         }
@@ -357,10 +382,12 @@
           background-color: #ccc;
           cursor: pointer;
         }
+
         .scrollbarArea {
           overflow-x: hidden;
           overflow-y: scroll;
           margin-right: 20px;
+
           .info {
             width: 100%;
             //   width: calc(100% + 40px);
@@ -368,6 +395,7 @@
             display: inline-grid;
             position: relative;
             padding: 1rem 5rem 0;
+
             .PostingDate {
               display: block;
               text-align: end;
@@ -388,6 +416,7 @@
           .txt {
             padding-left: 50px;
             padding-right: 20px;
+
             p {
               text-indent: 2em;
               padding-top: 20px;
@@ -463,38 +492,58 @@
 }
 
 @media screen and (max-width: 1280px) {
+
+  // 小於1280px talk不顯示
+  .CBWrapper {
+
+    .talk {
+      display: none;
+    }
+  }
+
   .CBArea {
     width: 80%;
+
     .CBTitle {
       width: 100%;
     }
+
     .CBTitle::before,
     .CBTitle::after {
       width: 100%;
       left: 0;
       right: 0;
     }
+
     .CBList {
       gap: 1rem;
       max-width: 90%;
+
       .s-card-h {
         background-color: #fff;
         width: 90%;
         border: 6px solid #ddd;
         position: relative;
         padding: 1rem;
+
         .title p {
           line-height: 2rem;
         }
+
+        .title .tag {
+          margin: 0.5rem 0;
+        }
+
         .text .txt {
           line-height: 1.8rem;
-          margin-bottom: 5rem;
+          margin-bottom: 0rem;
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
-          -webkit-line-clamp: 2;
+          -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
         }
+
         .text img {
           scale: 0.7;
           border-radius: 50%;
@@ -504,15 +553,24 @@
           right: -13.5%;
           bottom: -13%;
         }
+
         .img {
           height: 210px;
+
           img {
             object-fit: cover;
             height: 100%;
           }
+
+          .head {
+            width: 80px;
+            height: 80px;
+          }
         }
       }
     }
+    
+
     .CBPost {
       width: 90%;
       height: 600px;
@@ -521,9 +579,11 @@
         .closePost {
           scale: 0.8;
         }
+
         .scrollbarArea {
           margin-right: -10px;
         }
+
         .head {
           width: 135px;
           height: 135px;
@@ -571,6 +631,7 @@
       }
     }
   }
+
   .mrtBanner {
     width: 15%;
   }
@@ -580,65 +641,91 @@
   .CBWrapper {
     width: 100%;
   }
+
   .CBArea {
     width: 100%;
+
     .CBTitle {
       width: 100%;
     }
+
     .CBList {
       width: 85%;
       gap: 0;
+
+      .img {
+
+        .head {
+          bottom: -10%;
+          right: -14%;
+        }
+      }
+
       .s-card-h {
         .text img {
           bottom: -7%;
         }
       }
+
       .CBPost {
         width: 90%;
         height: 500px;
+
         .box {
           width: 100%;
+
           .head {
             bottom: -17%;
             right: -10%;
           }
+
           .swiperPost {
             margin: 1rem;
           }
+
           .inner {
             height: 105%;
+
             .title {
               border-top: 18px solid map-get($color, $key: success);
               border-left: 18px solid map-get($color, $key: success);
               padding-top: 1rem;
               padding-inline: 1rem;
               height: 30%;
+
               h3 {
                 line-height: 36px;
               }
+
               h4 {
                 line-height: 21px;
               }
             }
+
             .title::after {
               width: 93%;
               bottom: -15px;
               left: 3%;
             }
+
             .scrollbarArea {
               margin-right: -15px;
               margin-top: 15px;
+
               .info {
                 padding: 0.2rem 0 0 2.5rem;
+
                 span {
                   text-align: start;
                 }
               }
+
               .txt {
                 padding-left: 2.5rem;
                 margin-top: -1.5rem;
               }
             }
+
             .author {
               padding-left: 0;
             }
@@ -647,94 +734,113 @@
       }
     }
   }
+
   .lightBox {
     width: 100%;
   }
 }
+
 @media screen and (max-width: 414px) {
-  .CBWrapper {
-    .talk {
-      display: none;
-    }
-  }
+
+
   .CBArea {
     width: 100%;
+
     .CBTitle {
       inset: 0;
       margin: auto;
       width: 80%;
     }
+
     .CBTitle div {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 5px;
     }
+
     .CBTitle::before {
       top: -1rem;
     }
+
     .CBTitle::after {
       display: none;
     }
+
     .CBTitle div span {
       display: block;
       padding: 0 0.8rem;
     }
+
     .CBList {
       width: 100%;
       display: flex;
       flex-wrap: wrap;
+
       .s-card-h {
         .text img {
           bottom: -10%;
         }
       }
+
       .CBPost {
         width: 95%;
         height: 80%;
         margin: auto;
+
         .box {
           flex-direction: column;
           width: 100%;
           height: 100%;
           padding: 0;
+
           .head {
             display: none;
           }
+
           .closePost {
             right: -10%;
             top: -5%;
           }
+
           .swiperPost {
             margin: 1rem;
             width: 300px;
             height: calc(35% - 2rem);
           }
+
           .inner {
             height: 65%;
+
             .title {
               border-top: 0;
               border-left: 10px solid map-get($color, $key: success);
               padding-inline: 10px;
             }
+
             .title::after {
               width: 95%;
               left: 5px;
             }
+
             .scrollbarArea {
               margin-right: -10px;
+
               .info {
                 padding: 0.2rem 0 0 1rem;
               }
+
               .info::before {
                 border-bottom: #aaa 2px dashed;
                 width: 95%;
                 left: 3%;
               }
+
               .txt {
                 padding: 0 0.5rem 0 1rem;
               }
             }
+
             .author {
               padding: 0;
             }
@@ -743,21 +849,32 @@
       }
     }
   }
-}
-.lightBox {
-  width: 100%;
-}
 
-@media screen and (max-width: 414px) {
-  .CBArea {
-    .CBList {
-      .s-card-h {
-        .text {
-          .txt {
-            margin-bottom: 2rem;
-          }
+  .CBList {
+    .s-card-h {
+      .img {
+        .head {
+          right: -10%;
         }
       }
     }
   }
 }
+
+.lightBox {
+  width: 100%;
+}
+
+// @media screen and (max-width: 414px) {
+//   .CBArea {
+//     .CBList {
+//       .s-card-h {
+//         .text {
+//           .txt {
+//             margin-bottom: 2rem;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
