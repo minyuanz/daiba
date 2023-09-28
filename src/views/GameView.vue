@@ -5,11 +5,7 @@
       <div class="home">
         <img src="@/assets/images/game/station_AM.jpg" alt="home" />
       </div>
-      <img
-        src="../assets/images/game/gameLogo.png"
-        alt="gameLogo"
-        class="gameLogo"
-      />
+      <img src="../assets/images/game/gameLogo.png" alt="gameLogo" class="gameLogo" />
       <button class="start btn_s" @click="closeName = !closeName">start</button>
       <div class="name" v-show="closeName">
         <p>請輸入ID</p>
@@ -19,16 +15,22 @@
     </div>
   </transition>
 
+  <!-- 選擇服裝 -->
+  <!-- <transition name="fade" mode="out-in">
+    <div class="gameCostume" v-show="costume">
+      <div class="costume">
+        <img src="@/assets/images/game/costume.jpg" alt="更衣室">
+      </div>
+
+    </div>
+
+  </transition> -->
+
   <!-- 遊戲內容 -->
   <transition name="fade" mode="out-in">
     <div class="gameInner" v-if="Inner">
       <transition>
-        <img
-          :src="currentMessage.image"
-          alt="Character Image"
-          class="character-image"
-          :class="{ imgFill }"
-        />
+        <img :src="currentMessage.image" alt="Character Image" class="character-image" :class="{ imgFill }" />
       </transition>
       <!-- 對話框角色 -->
       <div class="name" v-show="closeTxtName">
@@ -47,127 +49,66 @@
       <div class="lightbox" v-if="options">
         <div v-if="options" class="option">
           <!-- 主選擇 -->
-          <button
-            v-if="aimOption"
-            class="btn_s"
-            @click="decideAim($event), (options = !options)"
-          >
+          <button v-if="aimOption" class="btn_s" @click="decideAim($event), (options = !options)">
             吃美食
           </button>
-          <button
-            v-if="aimOption"
-            class="btn_s"
-            @click="decideAim($event), (options = !options)"
-          >
+          <button v-if="aimOption" class="btn_s" @click="decideAim($event), (options = !options)">
             逛景點
           </button>
-          <button
-            v-if="aimOption"
-            class="btn_s"
-            @click="decideAim($event), (options = !options)"
-          >
+          <button v-if="aimOption" class="btn_s" @click="decideAim($event), (options = !options)">
             住宿放鬆
           </button>
 
           <!-- 住處(捷運線) -->
-          <button
-            v-if="lineOption"
-            class="btn_s"
-            @click="decideLine($event), (options = !options)"
-          >
+          <button v-if="lineOption" class="btn_s" @click="decideLine($event), (options = !options)">
             大都市
           </button>
-          <button
-            v-if="lineOption"
-            class="btn_s"
-            @click="decideLine($event), (options = !options)"
-          >
+          <button v-if="lineOption" class="btn_s" @click="decideLine($event), (options = !options)">
             一般都市
           </button>
-          <button
-            v-if="lineOption"
-            class="btn_s"
-            @click="decideLine($event), (options = !options)"
-          >
+          <button v-if="lineOption" class="btn_s" @click="decideLine($event), (options = !options)">
             公寓住宅區
           </button>
-          <button
-            v-if="lineOption"
-            class="btn_s"
-            @click="decideLine($event), (options = !options)"
-          >
+          <button v-if="lineOption" class="btn_s" @click="decideLine($event), (options = !options)">
             涼爽鄉下
           </button>
 
           <!-- 是否買鹹酥雞 -->
-          <button
-            v-if="yes_OR_no_Option"
-            class="btn_s"
-            @click="(chikinOption = true), (yes_OR_no_Option = false)"
-          >
+          <button v-if="yes_OR_no_Option" class="btn_s" @click="(chikinOption = true), (yes_OR_no_Option = false)">
             是
           </button>
-          <button
-            v-if="yes_OR_no_Option"
-            class="btn_s"
-            @click="
-              (options = !options),
-                nextMessage(),
-                nextMessage(),
-                (chikinshop = false)
-            "
-          >
+          <button v-if="yes_OR_no_Option" class="btn_s" @click="
+            (options = !options),
+            nextMessage(),
+            nextMessage(),
+            (chikinshop = false)
+            ">
             否
           </button>
 
           <!-- 鹹酥雞 -->
-          <button
-            v-if="chikinOption"
-            class="btn_s"
-            @click="decideChikin($event), (options = !options)"
-          >
+          <button v-if="chikinOption" class="btn_s" @click="decideChikin($event), (options = !options)">
             炸雞排
           </button>
-          <button
-            v-if="chikinOption"
-            class="btn_s"
-            @click="decideChikin($event), (options = !options)"
-          >
+          <button v-if="chikinOption" class="btn_s" @click="decideChikin($event), (options = !options)">
             炸薯條
           </button>
-          <button
-            v-if="chikinOption"
-            class="btn_s"
-            @click="decideChikin($event), (options = !options)"
-          >
+          <button v-if="chikinOption" class="btn_s" @click="decideChikin($event), (options = !options)">
             茶葉蛋
           </button>
 
           <!-- 唱歌 -->
-          <button
-            v-if="karaokeOption"
-            class="btn_s"
-            @click="decidekaraoke($event), (options = !options)"
-          >
+          <button v-if="karaokeOption" class="btn_s" @click="decidekaraoke($event), (options = !options)">
             唱
           </button>
-          <button
-            v-if="karaokeOption"
-            class="btn_s"
-            @click="(options = !options), nextMessage(), nextMessage()"
-          >
+          <button v-if="karaokeOption" class="btn_s" @click="(options = !options), nextMessage(), nextMessage()">
             不唱
           </button>
         </div>
       </div>
 
       <!-- 插圖 -->
-      <img
-        class="chikinshop"
-        src="~@/assets/images/game/chikin.png"
-        alt="鹹酥雞"
-        v-show="chikinshop"
-      />
+      <img class="chikinshop" src="~@/assets/images/game/chikin.png" alt="鹹酥雞" v-show="chikinshop" />
 
       <!-- 獲得物品的彈窗 -->
       <div class="lightbox" v-show="openBag">
@@ -289,6 +230,7 @@ export default {
       userName: "", //使用者名稱
       closeName: false, //關閉填寫名稱欄位
       home: true, //遊戲首頁
+      costume: false, //選擇服裝
       Inner: false, //遊戲內頁
       closeTxtName: true, //關閉對話框角色名
       imgFill: false, //控制圖片css
