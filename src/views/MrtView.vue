@@ -100,7 +100,6 @@
         v-for="(color, index) in selectColor"
         :key="color"
         :class="({ active: selectColor === color }, color)"
-        v-show="showAll || selectColor == color"
         @click="showTag(color)"
         @mouseenter="activate(color)"
         @mouseleave="deactivate(color)"
@@ -115,7 +114,6 @@
         v-for="(color, index) in selectColor"
         :key="color"
         :class="({ active: selectColor === color }, color)"
-        v-show="showAll || selectColor == color"
         @mouseenter="activate(color)"
         @mouseleave="deactivate(color)"
         @click="showTag(color)"
@@ -1663,8 +1661,7 @@ export default {
       this.filteredMrt = this.mrt.filter((item) => item.color === color);
 
       if (window.innerWidth <= 768) {
-        this.selectColor = color;
-        this.showAll = false;
+        this.showAll = true;
       } else {
         this.selectColor = [
           "red",
