@@ -16,6 +16,8 @@
 
             <div class="newsBox">
               <div class="newsCtxTxt">
+
+                <router-link :to="{ name: 'newinside', params: { id: news.news_id } }">
                   <div class="toFlex">
                     <div class="newsTag title-tag gray">
                       <span>#{{ news.news_tag1 }}</span>
@@ -27,6 +29,7 @@
                     </div>
                   </div>
                   <h2 class="titleh2">{{ news.news_title }}</h2>
+                </router-link>
                 <!-- <h3>{{ news.news_title }}</h3> -->
 
                 <router-link :to="{ name: 'newinside', params: { id: news.news_id } }">
@@ -46,49 +49,45 @@
     </div>
 
     <div class="newsBtnlist">
-      <button v-for="btn in btns" class="btn_s" @click="changeHandler(btn.tag), showNewsList =! showNewsList">
+      <button v-for="btn in btns" class="btn_s" @click="changeHandler(btn.tag)">
         {{ btn.tag }}
       </button>
     </div>
 
-    <transition name="fade" mode="out-in">
-      <div :key="showNewsList" class="newsList">
-        <div class="newsCard" v-for="card in newsdisplay" :key="card.news_id">
-          <div class="newsPic">
-            <img :src="card.news_pic1" alt="">
-          </div>
-          <div class="hover-container" @mouseenter="handleHover(true)" @mouseleave="handleHover(false)" >
-            <router-link :to="{ name: 'newinside', params: { id: card.news_id } }">
-              <div class="newsTxt">
-                <div class="toFlex">
-                  <div class="newsTag title-tag gray">
-                    <span>
-                      #{{ card.news_tag1 }}
-                    </span>
-                  </div>
-                  <div class="newsDate">
-                    <span>
-                      {{ card.news_date }}
-                    </span>
-                  </div>
-                </div>
-
-                <h3 class="newsTitle">
-                  {{ card.news_title }}
-                </h3>
-                <p class="newsCtx">
-                  {{ card.news_des1 }}
-                </p>
-              </div>
-              <router-link :to="{ name: 'newinside', params: { id: card.news_id } }">
-                <ButtonS :HTMLInner="btninner"/>
-              </router-link>
-            </router-link>
-          </div>
+    <div class="newsList">
+      <div class="newsCard" v-for="card in newsdisplay" :key="card.news_id">
+        <div class="newsPic">
+          <img :src="card.news_pic1" alt="">
         </div>
+        <router-link :to="{ name: 'newinside', params: { id: card.news_id } }">
+          <div class="newsTxt">
+            <div class="toFlex">
+              <div class="newsTag title-tag gray">
+                <span>
+                  #{{ card.news_tag1 }}
+                </span>
+              </div>
+              <div class="newsDate">
+                <span>
+                  {{ card.news_date }}
+                </span>
+              </div>
+            </div>
+
+            <h3 class="newsTitle">
+              {{ card.news_title }}
+            </h3>
+            <p class="newsCtx">
+              {{ card.news_des1 }}
+            </p>
+          </div>
+          <router-link :to="{ name: 'newinside', params: { id: card.news_id } }">
+            <ButtonS :HTMLInner="btninner" />
+          </router-link>
+        </router-link>
       </div>
-    </transition>
-    
+    </div>
+
   </div>
   <!-- <Page :total="40" size="small" /> -->
 </template>
@@ -101,7 +100,6 @@ import ButtonS from '@/components/ButtonS.vue';
 export default {
   data() {
     return {
-      showNewsList: true,
       btninner: "更多",
       publicPath: process.env.BASE_URL,
       tagtoggle: '所有消息',
@@ -143,12 +141,9 @@ export default {
     }
   },
   components: {
-    ButtonS,
+    ButtonS
   },
   methods: {
-    // toggleNewList() {
-    //   this.showButtonList = !this.showButtonList; // 切换按钮列表的显示和隐藏状态
-    // },
     changeHandler(tag) {
       // console.log(tag);
       this.tagtoggle = tag !== "最新消息" && tag !== "活動消息" ? "所有消息" : tag;
@@ -160,19 +155,7 @@ export default {
         }
       })
       this.newsdisplay = res
-    },
-    handleHover(isHovered) {
-      // Handle hover events here
-      if (isHovered) {
-        // Mouse entered
-        console.log('Mouse entered');
-        // Trigger any hover effect you want
-      } else {
-        // Mouse left
-        console.log('Mouse left');
-        // Undo any hover effect you applied
-      }
-    },
+    }
   },
   mounted() {
     this.newsdisplay = this.newslist
@@ -207,10 +190,4 @@ export default {
 </script>
 <style lang="scss">
 @import "@/assets/scss/page/newView";
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active 在2.1.8中新增 */ {
-  opacity: 0;
-}
 </style>
