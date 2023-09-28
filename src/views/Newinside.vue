@@ -19,12 +19,12 @@
     <div class="newsinBtn">
       <!-- <button class="btn_s"> -->
         <router-link to="/home">
-          <ButtonS :HTMLInner="btninner[1]"/>
+          <ButtonS :HTMLInner="btninner"/>
         </router-link>
       <!-- </button> -->
       <router-link to="/new">
         <button class="btn_s"> 
-        上一頁
+        消息一覽
         </button>
       </router-link>
     </div>
@@ -38,7 +38,7 @@ import ButtonS from '@/components/ButtonS.vue';
 export default {
   data() {
     return {
-      btninner:["上一頁","官方網站"],
+      btninner:"官方網站",
       publicPath: process.env.BASE_URL,
       news: {
         tag: "活動消息",
