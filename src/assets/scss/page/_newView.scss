@@ -49,12 +49,9 @@
       }
 
       .newsBox {
-        // border: 1px solid red;
         width: 1000px;
-        // width: 100%;
         height: 300px;
         margin: 100px auto;
-        // margin-top: 100px;
         display: flex;
         justify-content: center;
 
@@ -65,22 +62,27 @@
           margin: auto 2rem;
           padding-left: 10%;
           a {
+            .toFlex{
+              display: flex;
+              align-items: end;
+              gap: 1rem;
+              .newsTag {
+                background-color: #fff;
+                margin: 0;
+              }
 
-            .newsTag {
-              background-color: #fff;
-              margin: 0;
-              margin-bottom: 0.8rem;
-            }
-
-            .newsDate {
-              span {
-                color: #fff;
-                letter-spacing: 0.25rem;
+              .newsDate {
+                span {
+                  color: #fff;
+                  letter-spacing: 0.25rem;
+                }
               }
             }
-
             .titleh2 {
               color: #fff;
+              font-weight: 500;
+              line-height: 3.2rem;
+              margin: 1rem 0;
               &:hover {
                 color: #999;
               }
@@ -139,8 +141,7 @@
   .newsList {
     // border: 1px solid red;
     width: 1200px;
-    margin: auto;
-    margin-top: 5%;
+    margin: 2rem auto;
     position: relative;
 
     .newsCard {
@@ -151,7 +152,7 @@
       padding: 5% 0;
 
       .newsPic {
-        box-shadow: 10px 10px 10px #666;
+        box-shadow: 10px 10px 10px #6666;
 
         img {
           width: 300px;
@@ -159,37 +160,32 @@
           vertical-align: bottom;
         }
       }
-
-      .newsTxt {
+      a{
         position: relative;
-        margin-left: 3%;
+        .newsTxt {
+          position: relative;
+          margin-left: 3%;
 
-        .newsDate {
-          span {
-            letter-spacing: 0.25rem;
+          .toFlex{
+            display: flex;
+            align-items: end;
+            gap: .5rem;
+            .newsDate {
+              margin-bottom: 0.8rem;
+              span {
+                letter-spacing: 0.25rem;
+              }
+            }
+            .newsTag {
+              margin: 0 10px 0.8rem 0;
+                // margin-right: 10px;
+            }
           }
         }
-
-        .newsTag {
-          margin: 0 10px 0.8rem 0;
-          // margin-right: 10px;
-        }
-
-        button {
-          // border: 1px solid red;
-          // border: none;
+        a{
           position: absolute;
           right: 0;
-          top: 0;
-
-          a {
-            display: block;
-            line-height: 36px;
-            border: none;
-            // height: 100%;
-            // border: 1px solid red;
-            // pointer-events: none;
-          }
+          top: 0%;
         }
       }
     }

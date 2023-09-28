@@ -18,13 +18,15 @@
               <div class="newsCtxTxt">
 
                 <router-link :to="{ name: 'newinside', params: { id: news.news_id } }">
-                  <div class="newsTag title-tag gray">
-                    <span>#{{ news.news_tag1 }}</span>
-                  </div>
-                  <div class="newsDate">
-                    <span>
-                      {{ news.news_date }}
-                    </span>
+                  <div class="toFlex">
+                    <div class="newsTag title-tag gray">
+                      <span>#{{ news.news_tag1 }}</span>
+                    </div>
+                    <div class="newsDate">
+                      <span>
+                        {{ news.news_date }}
+                      </span>
+                    </div>
                   </div>
                   <h2 class="titleh2">{{ news.news_title }}</h2>
                 </router-link>
@@ -39,11 +41,8 @@
                 <img :src="news.news_pic1" alt="">
               </div>
             </div>
-
           </div>
-
         </div>
-
         <div class="swiper-pagination"></div>
       </div>
 
@@ -62,35 +61,31 @@
         </div>
         <router-link :to="{ name: 'newinside', params: { id: card.news_id } }">
           <div class="newsTxt">
-            <!-- <div class="newsTag title-tag gray">
-            <span>
-              #{{ card.news_tag }}
-            </span>
-          </div> -->
-            <div class="newsTag title-tag gray">
-              <span>
-                #{{ card.news_tag1 }}
-              </span>
+            <div class="toFlex">
+              <div class="newsTag title-tag gray">
+                <span>
+                  #{{ card.news_tag1 }}
+                </span>
+              </div>
+              <div class="newsDate">
+                <span>
+                  {{ card.news_date }}
+                </span>
+              </div>
             </div>
-            <div class="newsDate">
-              <span>
-                {{ card.news_date }}
-              </span>
-            </div>
+
             <h3 class="newsTitle">
               {{ card.news_title }}
             </h3>
             <p class="newsCtx">
               {{ card.news_des1 }}
             </p>
-            <router-link :to="{ name: 'newinside', params: { id: card.news_id } }">
-              <ButtonS :HTMLInner="btninner" />
-            </router-link>
           </div>
+          <router-link :to="{ name: 'newinside', params: { id: card.news_id } }">
+            <ButtonS :HTMLInner="btninner" />
+          </router-link>
         </router-link>
       </div>
-
-
     </div>
 
   </div>
@@ -172,9 +167,9 @@ export default {
       loop: true,
       slidesPerView: 1,
       spaceBetween: 0,
-      // autoplay: {
-      //   delay: 3000
-      // },
+      autoplay: {
+        delay: 3000
+      },
       pagination: {
         el: ".swiper-pagination",
         clickable: true,

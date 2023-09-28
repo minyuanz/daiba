@@ -23,6 +23,8 @@ export default createStore({
       {
         id: 1,
         title: "台北101",
+        grayTag:"景點推薦",
+        colorTag:['信義安和'],
         mrtimg1: require("../assets/images/mrtPag/oneoone/oneoone_1.jpg"),
         p1: "TAIPEI 101座落於台北最菁華地段，是國內建築界有史以來最大的工程專案。該專案主要由國內十四家企業共同組成的台北金融大樓股份有限公司，與國內外專業團隊聯手規劃，並由國際級建築大師李祖原精心設計，超越單一量體的設計觀，以吉祥數字「八」（「發」的諧音），作為設計單元。",
         mrtimg2: require("../assets/images/mrtPag/oneoone/oneoone_2.jpg"),
@@ -40,6 +42,8 @@ export default createStore({
       {
         id: 2,
         title: "四四南村",
+        grayTag:"#景點推薦",
+        colorTag:"#信義安和",
         mrtimg1: require("../assets/images/mrtPag/four/four_1.jpg"),
         p1: "來到四四南村一定會好奇由來，四四南村是台北市的第一個眷村，由大陸青島遷台的四十四兵工廠員工與眷屬所建，因為還心繫著有一天會反攻大陸，所以在這的住宅構造都很簡陋，想不到這一等就沒有了下文直至現今，原本還有四四東村跟西村，但都市計畫，現存的也只有這塊小小的眷村土地了",
         mrtimg2: require("../assets/images/mrtPag/four/four_2.jpg"),

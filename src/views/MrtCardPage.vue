@@ -2,6 +2,12 @@
   <div class="mrtContibuteInPage">
     <div class="title">
       <h1>{{ mrtCardPage.title }}</h1>
+      <div class="tag">
+        <span class="title-tag gray">{{mrtCardPage.grayTag}}</span>
+        <span class="title-tag red">
+          {{mrtCardPage.colorTag}}
+        </span>
+      </div>
     </div>
     <div class="fixCenter">
       <div
@@ -147,6 +153,7 @@ export default {
     this.mrtCardPage = this.$store.state.mrtCardPage.find(
       (item) => item.id === storeId
     );
+    console.log(this.$store.state.mrtCardPage);
   },
   methods: {
     WindowWidth() {
