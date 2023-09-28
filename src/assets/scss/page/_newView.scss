@@ -61,6 +61,7 @@
           inset: 0;
           margin: auto 2rem;
           padding-left: 10%;
+          a {
             .toFlex{
               display: flex;
               align-items: end;
@@ -82,6 +83,10 @@
               font-weight: 500;
               line-height: 3.2rem;
               margin: 1rem 0;
+              &:hover {
+                color: #999;
+              }
+            }
           }
 
           button {
@@ -153,7 +158,6 @@
           width: 300px;
           height: 200px;
           vertical-align: bottom;
-          object-fit: cover;
         }
       }
       a{
@@ -294,10 +298,6 @@
       }
     }
   }
-}
-
-.easeInOut{
-  animation: opaIn .3s ease 0;
 }
 
 //v-show="card.tag1 == tagtoggle"
