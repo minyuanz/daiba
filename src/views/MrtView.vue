@@ -96,10 +96,14 @@
   </section>
 
   <section class="mrt-tagGroup">
-    <div class="dark5 slim"></div>
-    <div class="dark6 slim"></div>
-    <div class="dark7 slim"></div>
-    <div class="dark8 slim"></div>
+    <div class="lineGroup">
+      <div class="dark5 slim"></div>
+      <div class="dark6 slim"></div>
+      <div class="dark7 slim"></div>
+      <div class="dark8 slim"></div>
+      <div class="dark9 slim"></div>
+    </div>
+
     <div v-if="MB" class="mrtTag">
       <div
         class="title-tag"
