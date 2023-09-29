@@ -21,7 +21,6 @@
         </div>
       </transition>
     </div>
-    <div class="mrtBackground"></div>
 
     <div class="mrtPic">
       <div class="pic mrtGrayStyle border-brownline">
@@ -97,6 +96,10 @@
   </section>
 
   <section class="mrt-tagGroup">
+    <div class="dark5 slim"></div>
+    <div class="dark6 slim"></div>
+    <div class="dark7 slim"></div>
+    <div class="dark8 slim"></div>
     <div v-if="MB" class="mrtTag">
       <div
         class="title-tag"

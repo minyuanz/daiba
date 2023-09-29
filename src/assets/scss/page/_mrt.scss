@@ -226,6 +226,33 @@
 }
 
 .mrt-tagGroup {
+  position: relative;
+
+  .slim {
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    z-index: -1;
+  }
+
+  .dark5 {
+    background-color: #808080;
+    top: -2px;
+  }
+  .dark6 {
+    background-color: #9a9a9a;
+    margin-block: 2rem;
+  }
+
+  .dark7 {
+    background-color: #b4b4b4;
+    margin-block: 4rem;
+  }
+  .dark8 {
+    background-color: #cccccc;
+    margin-block: 6rem;
+  }
+
   max-width: 1280px;
   margin-inline: auto;
   position: sticky;
