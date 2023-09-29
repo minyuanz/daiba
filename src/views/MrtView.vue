@@ -32,7 +32,7 @@
 
       <div class="mrtMainLine">
         <div
-          class="pic border-redline"
+          class="pic border-redline mrtRedBoy"
           @click="showTag('red')"
           @mouseenter="activate('red')"
           @mouseleave="deactivate('red')"
@@ -41,7 +41,7 @@
           <img src="../../public/img/red.jpeg" alt="redline" />
         </div>
         <div
-          class="pic border-blueline"
+          class="pic border-blueline mrtBlueBoy"
           @click="showTag('blue')"
           @mouseenter="activate('blue')"
           @mouseleave="deactivate('blue')"
@@ -50,7 +50,7 @@
           <img src="../../public/img/blue.jpeg" alt="blueline" />
         </div>
         <div
-          class="pic border-greenline"
+          class="pic border-greenline mrtGreenBoy"
           @click="showTag('green')"
           @mouseenter="activate('green')"
           @mouseleave="deactivate('green')"
@@ -59,7 +59,7 @@
           <img src="../../public/img/green.jpeg" alt="greenline" />
         </div>
         <div
-          class="pic border-orangeline"
+          class="pic border-orangeline mrtOrangeBoy"
           @click="showTag('orange')"
           @mouseenter="activate('orange')"
           @mouseleave="deactivate('orange')"
@@ -68,7 +68,7 @@
           <img src="../../public/img/orange.jpeg" alt="orangeline" />
         </div>
         <div
-          class="pic border-brownline"
+          class="pic border-brownline mrtBrownBoy"
           @click="showTag('brown')"
           @mouseenter="activate('brown')"
           @mouseleave="deactivate('brown')"
@@ -77,7 +77,7 @@
           <img src="../../public/img/brown.jpeg" alt="brownline" />
         </div>
         <div
-          class="pic border-yellowline"
+          class="pic border-yellowline mrtYellowBoy"
           @click="showTag('yellow')"
           @mouseenter="activate('yellow')"
           @mouseleave="deactivate('yellow')"
@@ -221,8 +221,10 @@
 
 <script>
 import Swiper from "swiper/bundle";
+import gsap from "gsap";
 import "swiper/swiper-bundle.css";
 import { pushScopeId } from "vue";
+
 export default {
   data() {
     return {
@@ -1578,6 +1580,73 @@ export default {
   },
 
   mounted() {
+    gsap.fromTo(
+      ".mrtRedBoy",
+      {
+        y: "-120%",
+      },
+      {
+        y: "0%",
+        duration: 0.3,
+        delay: 0.5,
+      }
+    );
+    gsap.fromTo(
+      ".mrtBlueBoy",
+      {
+        y: "-120%",
+      },
+      {
+        y: "0%",
+        duration: 0.3,
+        delay: 0.6,
+      }
+    );
+    gsap.fromTo(
+      ".mrtGreenBoy",
+      {
+        y: "-120%",
+      },
+      {
+        y: "0%",
+        duration: 0.3,
+        delay: 0.7,
+      }
+    );
+    gsap.fromTo(
+      ".mrtOrangeBoy",
+      {
+        y: "-120%",
+      },
+      {
+        y: "0%",
+        duration: 0.3,
+        delay: 0.8,
+      }
+    );
+    gsap.fromTo(
+      ".mrtBrownBoy",
+      {
+        y: "-120%",
+      },
+      {
+        y: "0%",
+        duration: 0.3,
+        delay: 0.9,
+      }
+    );
+    gsap.fromTo(
+      ".mrtYellowBoy",
+      {
+        y: "-120%",
+      },
+      {
+        y: "0%",
+        duration: 0.3,
+        delay: 1,
+      }
+    );
+
     const swiperMRTCard = new Swiper(".swiperMRTCard", {
       direction: "horizontal",
       speed: 500,

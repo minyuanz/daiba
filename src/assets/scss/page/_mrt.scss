@@ -139,16 +139,6 @@
     }
   }
 
-  @keyframes flyInImg {
-    0% {
-      top: -150%;
-    }
-
-    100% {
-      top: 0%;
-    }
-  }
-
   .mrtPic {
     position: relative;
     display: flex;
@@ -171,29 +161,8 @@
       transform: skew(-5deg);
       position: relative;
       bottom: 10px;
-      top: -150%;
       overflow: hidden;
       cursor: pointer;
-
-      &:nth-child(1) {
-        animation: flyInImg 0.3s 0.5s forwards;
-      }
-
-      &:nth-child(2) {
-        animation: flyInImg 0.3s 0.6s forwards;
-      }
-      &:nth-child(3) {
-        animation: flyInImg 0.3s 0.7s forwards;
-      }
-      &:nth-child(4) {
-        animation: flyInImg 0.3s 0.8s forwards;
-      }
-      &:nth-child(5) {
-        animation: flyInImg 0.3s 0.9s forwards;
-      }
-      &:nth-child(6) {
-        animation: flyInImg 0.3s 1s forwards;
-      }
     }
 
     .mrtMainLine {
@@ -286,7 +255,7 @@
         content: "";
         position: absolute;
         height: 95px;
-        top: -140%;
+        top: -150%;
         left: 50%;
         z-index: -1;
       }
