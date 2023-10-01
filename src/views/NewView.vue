@@ -16,17 +16,17 @@
 
             <div class="newsBox">
               <div class="newsCtxTxt">
-                  <div class="toFlex">
-                    <div class="newsTag title-tag gray">
-                      <span>#{{ news.news_tag1 }}</span>
-                    </div>
-                    <div class="newsDate">
-                      <span>
-                        {{ news.news_date }}
-                      </span>
-                    </div>
+                <div class="toFlex">
+                  <div class="newsTag title-tag gray">
+                    <span>#{{ news.news_tag1 }}</span>
                   </div>
-                  <h2 class="titleh2">{{ news.news_title }}</h2>
+                  <div class="newsDate">
+                    <span>
+                      {{ news.news_date }}
+                    </span>
+                  </div>
+                </div>
+                <h2 class="titleh2">{{ news.news_title }}</h2>
                 <!-- <h3>{{ news.news_title }}</h3> -->
 
                 <router-link :to="{ name: 'newinside', params: { id: news.news_id } }">
@@ -46,7 +46,7 @@
     </div>
 
     <div class="newsBtnlist">
-      <button v-for="btn in btns" class="btn_s" @click="changeHandler(btn.tag), showNewsList =! showNewsList">
+      <button v-for="btn in btns" class="btn_s" @click="changeHandler(btn.tag), showNewsList = !showNewsList">
         {{ btn.tag }}
       </button>
     </div>
@@ -57,7 +57,7 @@
           <div class="newsPic">
             <img :src="card.news_pic1" alt="">
           </div>
-          <div class="hover-container" @mouseenter="handleHover(true)" @mouseleave="handleHover(false)" >
+          <div class="hover-container" @mouseenter="handleHover(true)" @mouseleave="handleHover(false)">
             <router-link :to="{ name: 'newinside', params: { id: card.news_id } }">
               <div class="newsTxt">
                 <div class="toFlex">
@@ -81,14 +81,14 @@
                 </p>
               </div>
               <router-link :to="{ name: 'newinside', params: { id: card.news_id } }">
-                <ButtonS :HTMLInner="btninner"/>
+                <ButtonS :HTMLInner="btninner" />
               </router-link>
             </router-link>
           </div>
         </div>
       </div>
     </transition>
-    
+
   </div>
   <!-- <Page :total="40" size="small" /> -->
 </template>
@@ -138,8 +138,9 @@ export default {
         tag: '活動消息'
       }],
       newslist: news,
-      newsdisplay: [],
-      newswiper: [],
+      newsdisplay: [],//篩選用
+      newswiper: [],//輪播用
+      newstest: []
     }
   },
   components: {
@@ -170,6 +171,18 @@ export default {
         // Undo any hover effect you applied
       }
     },
+    fetchData() {
+      fetch(`http://localhost/dai/public/phps/getNews.php`)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          this.newstest = data; // 更新數據到news
+        })
+        .catch((error) => {
+          console.error('數據傳輸失敗：', error);
+        });
+    }
   },
   mounted() {
     this.newsdisplay = this.newslist
@@ -199,15 +212,24 @@ export default {
         }
       }
     });
+    this.fetchData()
+
   },
 }
 </script>
 <style lang="scss">
 @import "@/assets/scss/page/newView";
-.fade-enter-active, .fade-leave-active {
+
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 0.5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active 在2.1.8中新增 */ {
+
+.fade-enter,
+.fade-leave-to
+
+/* .fade-leave-active 在2.1.8中新增 */
+  {
   opacity: 0;
 }
 </style>
