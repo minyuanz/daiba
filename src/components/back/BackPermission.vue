@@ -11,13 +11,13 @@
             <p>權限等級</p>
             <p>權限開關</p>
         </div>
-        <div class="ProInfro"  v-for="item  in item "  :key="item.pord_id">
-            <p>{{ item.prod_id }}</p>
-            <p>{{ item.prod_name }}</p>
-            <p>{{ item.prod_name }}</p>
+        <div class="ProInfro" v-for="admin in admins" :key="admin.admin_id">
+            <p>{{ admin.admin_id }}</p>
+            <p>{{ admin.admin_acc }}</p>
+            <p>{{ admin.admin_lv }}</p>
             <div class="upcheck">
                 <label class="ios-switch">
-                <input type="checkbox" v-model="item.isChecked" />
+                <input type="checkbox" v-model="admin.admin_sich" />
                 <span class="slider"></span>
                 </label>
             </div>
@@ -31,31 +31,77 @@
             <div class="PerAddTITLE">新增管理員帳號:</div>
             <div>
                 <label for="">管理員帳號：</label>
-                <input type="text" >
+                <input type="text" id="admin_acc" v-model="newAdmin.admin_acc" />
             </div>
             <div>
                 <label for="">管理員密碼：</label>
-                <input type="text" >
+                <input type="password" id="admin_pas" v-model="newAdmin.admin_pas" />
             </div>
             <div class="btn">
                 <button @click="addToggle = !addToggle">取消新增</button>
-                <button @click="addToggle = !addToggle">確認新增</button>
+                <button @click="addAdmin">確認新增</button>
             </div>
         </form>
     </div>
 </template>
 
 <script>
-import BackProTest from "@/testdata/BackProTest.json"
+import axios from 'axios';
+// import BackProTest from "@/testdata/BackProTest.json"
 export default {
     data() {
         return {
             addToggle:true,
-            item:BackProTest,
+            // item:BackProTest,
             isSwitchOn: false,
-            items: BackProTest.map((item) => ({...item,isChecked: false,})), 
-
+            // items: BackProTest.map((item) => ({...item,isChecked: false,})), 
+            admins: [],
+            newAdmin: {
+                admin_acc: "",
+                admin_pas: ""
+            },
         }
+    },
+    created() {
+    this.fetchData(); 
+    },
+    methods: {
+        addAdmin() {
+            // 建立數據資料夾好發給PHP做處理新增
+            const formData = new FormData();
+            formData.append("admin_acc", this.newAdmin.admin_acc);
+            formData.append("admin_pas", this.newAdmin.admin_pas);
+
+            fetch(`http://localhost/dai/public/phps/CreatPermissionAC.php`, {
+                method: "post",
+                body: formData
+            })
+                .then(res => res.json())
+                .then((res) => {
+                    if (!res.error) {
+                        // 如果正確 清空表單
+                        this.newAdmin.admin_acc = "";
+                        this.newAdmin.admin_pas = "";
+                        this.addToggle = !this.addToggle;
+                        alert( res.msg);
+                    } else {
+                        alert('新增失敗：' + res.msg);
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        fetchData() {
+            console.log('Fetching data...'); //測試顯示數據
+            axios.get('http://localhost/dai/public/phps/PremissonM.php')
+            .then((response) => {
+            this.admins = response.data; // 更新數據到 admins
+        })
+            .catch((error) => {
+            console.error('數據傳輸失敗：', error);
+        });
+},
     }
 }
 </script>
