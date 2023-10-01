@@ -28,11 +28,11 @@
     <div class="newsAdd" v-else>
         <div class="mainTitle">
             <label for="">消息標題</label>
-            <input type="text">
+            <input type="text" v-model="formData.title">
         </div>
         <div class="secTitle">
             <label for="">文章副標</label>
-            <input type="text">
+            <input type="text" v-model="formData.sectitle">
         </div>
         <div class="mainPic">
             <div class="uploadPic">
@@ -40,25 +40,25 @@
                 <div class="pic">
                     <p>＋</p>
                     <input type="file" @change="FileChange">
-                    <img :src="imageURL" v-show="fix">
+                    <img :src="formData.imageURL" v-show="fix">
                 </div>
             </div>
         </div>
         <div class="choose">
             <label for="">消息分類：</label>
-            <select name="" id="">
-                <option value="">活動消息</option>
-                <option value="">最新消息</option>
+            <select name="" id="" v-model="formData.tag">
+                <option value="活動消息">活動消息</option>
+                <option value="活動消息">最新消息</option>
             </select>
         </div>
         <div class="Ctx">
             <label for="">內文</label>
-            <textarea class="custom-input"></textarea>
+            <textarea class="custom-input" v-model="formData.content"></textarea>
             <!-- <input type="text"> -->
         </div>
         <div class="btn">
             <button @click="addToggle = !addToggle">取消新增</button>
-            <button @click="addToggle = !addToggle">確認新增</button>
+            <button @click="addNews">確認新增</button>
         </div>
     </div>
 </template>
@@ -71,8 +71,14 @@ export default {
             item: BackProTest,
             items: BackProTest.map((item) => ({ ...item, isChecked: false, })),
             addToggle: true,
-            imageURL: null,
-            fix: false
+            fix: false,
+            formData: {
+                title: "",
+                sectitle: "",
+                tag: "",
+                imageURL: null,
+                content: "",
+            },
         }
     },
     methods: {
@@ -85,7 +91,7 @@ export default {
 
             reader.onload = () => {
                 // 當讀取完成時觸發
-                this.imageURL = reader.result; // 將 Data URL 賦值給圖片的 src
+                this.formData.imageURL = reader.result; // 將 Data URL 賦值給圖片的 src
             };
 
             if (file) {
@@ -94,6 +100,10 @@ export default {
             this.fix = true
 
         },
+        addNews() {
+            console.log(111);
+            // this.addToggle = !this.addToggle
+        }
     },
 }
 </script>
