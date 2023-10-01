@@ -19,11 +19,11 @@
       <form action="" method="post">
         <div class="loginEmail">
           <label for="email">信箱</label>
-          <input type="text" id="email" v-model="memId" />
+          <input type="email" id="email" name="email" v-model="memEmail" />
         </div>
         <div class="loginPwd">
           <label for="pwd">密碼</label>
-          <input type="password" id="pwd" v-model="memPwd" />
+          <input type="password" id="pwd" name="pwd" v-model="memPwd" />
         </div>
         <router-link to="/ForgetPwd">忘記密碼 ?</router-link>
         <button class="btn_l btnlogin" type="button" @click="login">
@@ -39,18 +39,67 @@
 export default {
   data() {
     return {
-      memId: "",
+      memEmail: "",
       memPwd: "",
     };
   },
   methods: {
     login() {
-      if (this.memId == "" && this.memPwd == "") {
+      if (this.memEmail == "" && this.memPwd == "") {
         alert("請輸入帳號和密碼")
       }
       else {
-        // fetch()
-        console.log(111);
+        // 創建一個新的 FormData 對象
+        let formData = new FormData();
+        // 將表單數據添加到 FormData 對象中
+        formData.append("memEmail", this.memEmail);
+        formData.append("memPwd", this.memPwd);
+
+
+        fetch(`http://localhost/dai/public/phps/login.php`, {
+          method: "post",
+          // headers: {
+          //   'content-type': 'multipart/form-data'
+          // },
+          // credentials: 'include',
+          body: formData
+        })
+          .then(res => res.json())
+          .then((res) => {
+            console.log(res);
+            if (!res.error) {
+              alert('login成功');
+              // clearForm();
+              // this.$router.push("/home")
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+        // console.log(111);
+        // fetch("http://localhost/dai/public/phps/login.php", {
+        //   method: "post",
+        //   headers: {
+        //     "Content-Type": "application/x-www-form-urlencoded"
+        //   },
+        //   // // credentials: "include",
+        //   body: new URLSearchParams({
+        //     mem_email: this.memEmail,
+        //     mem_pwd: this.memPwd
+        //   })
+        // })
+        //   .then(res => res.json())
+        //   .then((res) => {
+        //     console.log(res);
+        //     if (!res.error) {
+        //       alert('login成功');
+
+        //     }
+        //   })
+        //   .catch(function (error) {
+        //     console.log(error);
+
+        //   })
       }
       // this.$router.push("/User")
     }
