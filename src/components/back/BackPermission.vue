@@ -11,14 +11,14 @@
             <p>權限等級</p>
             <p>權限開關</p>
         </div>
-        <div class="ProInfro"  v-for="item  in item "  :key="item.pord_id">
-            <p>{{ item.prod_id }}</p>
-            <p>{{ item.prod_name }}</p>
-            <p>{{ item.prod_name }}</p>
+        <div class="ProInfro" v-for="admin in admins" :key="admin.admin_id">
+            <p>{{ admin.admin_id }}</p>
+            <p>{{ admin.admin_acc }}</p>
+            <p>{{ admin.admin_lv }}</p>
             <div class="upcheck">
                 <label class="ios-switch">
-                <input type="checkbox" v-model="item.isChecked" />
-                <span class="slider"></span>
+                    <input type="checkbox" :checked="admin.admin_sich === '1'" @change="togglePermission(admin)" />
+                    <span class="slider" :style="{ backgroundColor: admin.admin_sich === '1' ? '#4CAF50' : '#565656' }"></span>
                 </label>
             </div>
         </div>
@@ -31,31 +31,117 @@
             <div class="PerAddTITLE">新增管理員帳號:</div>
             <div>
                 <label for="">管理員帳號：</label>
-                <input type="text" >
+                <input type="text" id="admin_acc" v-model="newAdmin.admin_acc" />
             </div>
             <div>
                 <label for="">管理員密碼：</label>
-                <input type="text" >
+                <input type="password" id="admin_pas" v-model="newAdmin.admin_pas" />
             </div>
             <div class="btn">
                 <button @click="addToggle = !addToggle">取消新增</button>
-                <button @click="addToggle = !addToggle">確認新增</button>
+                <button @click="addAdmin">確認新增</button>
             </div>
         </form>
     </div>
 </template>
 
 <script>
-import BackProTest from "@/testdata/BackProTest.json"
+import axios from 'axios';
+// import BackProTest from "@/testdata/BackProTest.json"
 export default {
     data() {
         return {
             addToggle:true,
-            item:BackProTest,
+            // item:BackProTest,
             isSwitchOn: false,
-            items: BackProTest.map((item) => ({...item,isChecked: false,})), 
-
+            // items: BackProTest.map((item) => ({...item,isChecked: false,})), 
+            admins: [],
+            newAdmin: {
+                admin_acc: "",
+                admin_pas: ""
+            },
         }
+    },
+    created() {
+    this.fetchData(); 
+    },
+    methods: {
+    addAdmin() {
+      const { admin_acc, admin_pas } = this.newAdmin;
+      const usernamePattern = /^[a-zA-Z0-9]{1,15}$/;
+      const passwordPattern = /^[a-zA-Z0-9]{1,15}$/;
+
+      if (!usernamePattern.test(admin_acc)) {
+        alert('管理員帳號必須是英文字母和數字，最多15個字符。');
+        return;
+      }
+
+      if (!passwordPattern.test(admin_pas)) {
+        alert('管理員密碼必須是英文字母和數字，最多15個字符。');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("admin_acc", admin_acc);
+      formData.append("admin_pas", admin_pas);
+
+      fetch(`http://localhost/dai/public/phps/CreatPermissionAC.php`, {
+        method: "post",
+        body: formData
+      })
+        .then(res => res.json())
+        .then((res) => {
+          if (!res.error) {
+            // 如果正確 清空表單
+            this.newAdmin.admin_acc = "";
+            this.newAdmin.admin_pas = "";
+            // 切换回 addToggle
+            this.addToggle = !this.addToggle;
+            alert( res.msg);
+          } else {
+            alert('新增失敗：' + res.msg);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+        fetchData() {
+            console.log('Fetching data...'); //測試顯示數據
+            axios.get('http://localhost/dai/public/phps/PremissonM.php')
+            .then((response) => {
+            this.admins = response.data; // 更新數據到 admins
+        })
+            .catch((error) => {
+            console.error('數據傳輸失敗：', error);
+        });
+},
+togglePermission(admin) {
+  // 更改狀態
+  admin.admin_sich = admin.admin_sich === '1' ? '0' : '1';
+  axios.post('http://localhost/dai/public/phps/ContralPermissionAC.php', {
+    admin_id: admin.admin_id,
+    admin_sich: admin.admin_sich,
+  })
+  .then((response) => {
+    // 檢查
+    if (response.data.success) {
+      console.log('权限已更新');
+      alert('权限已成功变更');
+    } else {
+      console.error('权限更新失败');
+      alert('权限更新失败');
+      // 如果失敗則保持原本渲染的狀態
+      admin.admin_sich = admin.admin_sich === '1' ? '0' : '1';
+    }
+  })
+  .catch((error) => {
+    console.error('更新请求失败：', error);
+    alert('更新请求失败');
+    // 如果失敗則保持原本渲染的狀態
+    admin.admin_sich = admin.admin_sich === '1' ? '0' : '1';
+  });
+},
     }
 }
 </script>

@@ -12,11 +12,11 @@
             <p>發布日期</p>
             <p>編輯</p>
         </div>
-        <div class="NewsInfro" v-for="item  in item " :key="item.pord_id">
-            <p>{{ item.prod_id }}</p>
-            <p>{{ item.prod_name }}</p>
-            <p>{{ item.prod_price }}</p>
-            <p>{{ item.prod_date }}</p>
+        <div class="NewsInfro" v-for="news  in news " :key="news.news_id">
+            <p>{{ news.news_id }}</p>
+            <p>{{ news.news_tag2 }}</p>
+            <p>{{ news.news_title }}</p>
+            <p>{{ news.news_date }}</p>
             <div class="edit">
                 <i class="fa-solid fa-pen-to-square"></i>
             </div>
@@ -25,14 +25,14 @@
             <button @click="addToggle = !addToggle">新增消息</button>
         </div>
     </div>
-    <div class="newsAdd" v-else>
+    <form class="newsAdd" v-else>
         <div class="mainTitle">
             <label for="">消息標題</label>
-            <input type="text">
+            <input type="text" v-model="formData.title" id="news_title">
         </div>
         <div class="secTitle">
             <label for="">文章副標</label>
-            <input type="text">
+            <input type="text" v-model="formData.sectitle" id="news_bdes">
         </div>
         <div class="mainPic">
             <div class="uploadPic">
@@ -40,27 +40,27 @@
                 <div class="pic">
                     <p>＋</p>
                     <input type="file" @change="FileChange">
-                    <img :src="imageURL" v-show="fix">
+                    <img :src="formData.imageURL" v-show="fix">
                 </div>
             </div>
         </div>
         <div class="choose">
             <label for="">消息分類：</label>
-            <select name="" id="">
-                <option value="">活動消息</option>
-                <option value="">最新消息</option>
+            <select name="" id="" v-model="formData.tag">
+                <option value="活動消息">活動消息</option>
+                <option value="活動消息">最新消息</option>
             </select>
         </div>
         <div class="Ctx">
             <label for="">內文</label>
-            <textarea class="custom-input"></textarea>
+            <textarea class="custom-input" v-model="formData.content"></textarea>
             <!-- <input type="text"> -->
         </div>
         <div class="btn">
             <button @click="addToggle = !addToggle">取消新增</button>
-            <button @click="addToggle = !addToggle">確認新增</button>
+            <button @click="addNews" type="button">確認新增</button>
         </div>
-    </div>
+    </form>
 </template>
 
 <script>
@@ -71,8 +71,15 @@ export default {
             item: BackProTest,
             items: BackProTest.map((item) => ({ ...item, isChecked: false, })),
             addToggle: true,
-            imageURL: null,
-            fix: false
+            fix: false,
+            formData: {
+                title: "",
+                sectitle: "",
+                tag: "",
+                imageURL: null,
+                content: "",
+            },
+            news: []
         }
     },
     methods: {
@@ -85,7 +92,7 @@ export default {
 
             reader.onload = () => {
                 // 當讀取完成時觸發
-                this.imageURL = reader.result; // 將 Data URL 賦值給圖片的 src
+                this.formData.imageURL = reader.result; // 將 Data URL 賦值給圖片的 src
             };
 
             if (file) {
@@ -94,6 +101,46 @@ export default {
             this.fix = true
 
         },
+        addNews() {
+
+            // 建立數據資料夾好發給PHP做處理新增
+            const formData = new FormData();
+            formData.append("news_title", this.formData.title);
+            formData.append("news_sectitle", this.formData.sectitle);
+            formData.append("news_tag", this.formData.tag);
+            formData.append("news_imageURL", this.formData.imageURL);
+            formData.append("news_content", this.formData.content);
+
+            fetch(`http://localhost/dai/public/phps/addNews.php`, {
+                method: "post",
+                body: formData
+            })
+                .then(res => res.json())
+                .then((res) => {
+                    if (!res.error) {
+                        alert("add success")
+                        this.addToggle = !this.addToggle;
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        fetchData() {
+            fetch(`http://localhost/dai/public/phps/getNews.php`)
+                .then((response) => {
+                    return response.json();
+                })
+                .then((data) => {
+                    this.news = data; // 更新數據到news
+                })
+                .catch((error) => {
+                    console.error('數據傳輸失敗：', error);
+                });
+        }
+    },
+    mounted() {
+        this.fetchData()
     },
 }
 </script>
@@ -104,7 +151,9 @@ export default {
     border: 1px solid #aaa;
     background-color: #fff;
     width: 900px;
+    height: 900px;
     padding: 50px;
+    overflow: scroll;
 
     .NewsSearch {
         padding: 10px;
