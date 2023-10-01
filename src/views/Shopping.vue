@@ -23,6 +23,7 @@
 
       <div class="ShopProCardBox">
         <div class="ShopProCardTitle">
+          <div>商品圖片</div>
           <div>商品資料</div>
           <div>單價</div>
           <div>數量</div>
@@ -38,48 +39,51 @@
             <p>{{ product.count }}</p>
           </div>
           <div class="CardDetailTotal">NT${{ product.pord_price * product.count }}</div>
-          <div class="CardDetailDelet"></div>
         </div>
       </div>
     </div>
     <div class="ShopPayBox">
       <div class="PayTItle">付款方式</div>
-      <div class="PayCredit"><input  type="radio" name="Pay" value="信用卡付款"  v-model="selectedPayment">信用卡付款</div>
-      <div class="PayCash"><input  type="radio" name="Pay" value="貨到付款"  v-model="selectedPayment">貨到付款</div>
-      <transition name="slide-fade">
-      <form class="ShopCredCard" v-if="selectedPayment === '信用卡付款'" >
-      <div class="form-group" >
-        <label for="creditCardNumber">信用卡號碼</label>
-        <input
-          type="text"
-          id="creditCardNumber"
-          name="creditCardNumber"
-          placeholder="信用卡號碼"
-          v-model="creditCardNumber"
-        />
+      <div class="checking">
+        <div class="PayCredit"><input  type="radio" name="Pay" value="信用卡付款"  v-model="selectedPayment">信用卡付款</div>
+        <transition name="slide-fade">
+            <form class="ShopCredCard" v-if="selectedPayment === '信用卡付款'" >
+            <div class="form-group" >
+              <label for="creditCardNumber">信用卡號碼</label>
+              <input
+                type="text"
+                id="creditCardNumber"
+                name="creditCardNumber"
+                placeholder="信用卡號碼"
+                v-model="creditCardNumber"
+              />
+            </div>
+            <div class="form-group">
+              <label for="expirationDate">有效日期</label>
+              <input
+                type="text"
+                id="expirationDate"
+                name="expirationDate"
+                placeholder="MM/YY"
+                v-model="expirationDate"
+              />
+            </div>
+            <div class="form-group">
+              <label for="securityCode">安全碼</label>
+              <input
+                type="text"
+                id="securityCode"
+                name="securityCode"
+                placeholder="卡片安全碼"
+                v-model="securityCode"
+              />
+            </div>
+          </form>
+        </transition>
+        <div class="PayCash"><input  type="radio" name="Pay" value="貨到付款"  v-model="selectedPayment">貨到付款</div>
       </div>
-      <div class="form-group">
-        <label for="expirationDate">有效日期</label>
-        <input
-          type="text"
-          id="expirationDate"
-          name="expirationDate"
-          placeholder="MM/YY"
-          v-model="expirationDate"
-        />
-      </div>
-      <div class="form-group">
-        <label for="securityCode">安全碼</label>
-        <input
-          type="text"
-          id="securityCode"
-          name="securityCode"
-          placeholder="卡片安全碼"
-          v-model="securityCode"
-        />
-      </div>
-    </form>
-  </transition>
+     
+      
     </div>
     <div class="ShopDelBox">
       <div class="DelTitle">運送方式</div>
@@ -92,20 +96,20 @@
     </div>
     <div class="ShopSumBox">
       <div >
-      <p>折扣後小計</p> 
-      <p class="SumBoxNo">NT:{{ cartTotal }}</p>
+      <p>折扣後小計:</p> 
+      <p class="SumBoxNo">NT${{ cartTotal }}</p>
       </div>
       <div >
-      <p>運費</p> 
-      <p class="SumBoxNo">NT:150</p>
+      <p>運費:</p> 
+      <p class="SumBoxNo">NT$150</p>
       </div>
-      <div >
-      <p>商品金額總計</p> 
-      <p class="SumBoxNoex">NT:{{ cartTotal +150 }}</p>
+      <div>
+      <p>商品金額總計:</p> 
+      <p class="SumBoxNoex">NT${{ cartTotal +150 }}</p>
       </div>
       <div >
       <p></p> 
-      <p>(含運費)</p>
+      <p class="SumBoxNoex">(含運費)</p>
       </div>
     </div>
     <div class="ShopBtmBox">
@@ -239,9 +243,9 @@ export default {
         align-items: center;
         text-align: center;
         justify-content: center;
-        padding: 10px 0;
+        padding: 10px 15px;
         div{
-          width: 16%;
+          width: 20%;
         }
       }
       .ShopProCardDetail{
@@ -252,17 +256,21 @@ export default {
         align-items: center;
         text-align: center;
         justify-content: center;
-        padding: 10px 0;
+        padding: 10px 5px;
         div{
-          width: 16%;
+          width: 20%;
         }
         .CardDetailImg{
           img{
             width: 100%;
             height:150px;
+            vertical-align: top;
+            object-fit: cover;
           }
         }
-        .CardDetailTitle{}
+        .CardDetailTitle{
+          padding: 0 1rem;
+        }
         .CardDetailPrice{}
         .CardDetailCount{
           display: flex;
@@ -276,25 +284,34 @@ export default {
 
   }
   .ShopPayBox{
-    margin: 20px 0;
+    margin: 3rem 0;
     width: 100%;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
-    div{
-      padding: 30px 10px;
-    }
     .PayTItle{
       padding: 10px 20px;
       background-color: rgb(234, 233, 233); ;
     }
-    label {
-    display: block;
-    font-weight: bold;
-    input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 16px;
+    .checking{
+      padding: 1rem 10px;
+      div{
+        padding: 1rem 10px;
+        display: flex;
+        gap: 1.2rem;
+        label {
+          display: block;
+          font-weight: bold;
+          width: 60px;
+          line-height: 21px;
+          text-align: right;
+          margin-left: 2.3rem;
+          input[type="text"] {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+          font-size: 16px;
+          }
+      }
     }
   }
   }
@@ -302,9 +319,9 @@ export default {
     margin: 20px 0;
     width: 100%;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
-    div{padding: 30px 10px;}
+    div{padding: 20px 10px;}
     .DelTitle{
-      padding: 10px 20px;
+      padding: 1rem 20px;
       background-color: rgb(234, 233, 233); 
     }
     .DelComent{
@@ -326,23 +343,27 @@ export default {
     flex-wrap: wrap;
     background-color: rgb(234, 233, 233);
     justify-content: flex-end;
-    flex-wrap: wrap;
     div{
       display: flex;
       flex-wrap: wrap;
+      gap: 20px;
       width: 100%;
       justify-content:flex-end;
       p{
-        width: 200px;
-       padding-right:30px ;
+        width: 115px;
        line-height: 2;
+       text-align: right;
       }
       .SumBoxNo{
-        font-size:map-get($map: $fontsizes, $key: h3);
+        width: 95px;
+        font-size:map-get($map: $fontsizes, $key: h4);
+        text-align: left;
       }
       .SumBoxNoex{
-        font-size:map-get($map: $fontsizes, $key: h3);
-        color: red;
+        width: 95px;
+        font-size:map-get($map: $fontsizes, $key: h4);
+        color: map-get($color, $key: danger);
+        text-align: left;
       }
     }
   }  
@@ -368,6 +389,7 @@ export default {
 @media screen and (max-width: 414px){
     .ShopWrap{
       .ShopProBOX .ShopProCardBox .ShopProCardTitle{
+
         justify-content: space-between;
         padding: 10px 5px;
         .proName{
@@ -377,7 +399,24 @@ export default {
       .ShopSpeedBox .course{
         justify-content: space-around;
       }
+      .ShopSumBox{
+        width: 100%;
 
+        div{
+          // display: block;
+          justify-content: flex-start;
+          text-align: left;
+          gap: 0;
+          p{
+            text-align: left;
+            padding-left: 1rem;
+          }
+          .SumBoxNo,.SumBoxNoex{
+            margin-left: 0rem;
+          }
+        }
+
+      }
       .ShopBtmBox {
         width: 100%;
         display: block;
