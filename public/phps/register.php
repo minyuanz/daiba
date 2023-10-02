@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin:*");
 
 try {
 
-    require_once("connect_chd103g5.php");
+    require_once("connect_chd103g5_2.php");
 	$sql = "insert into member (mem_name, mem_birth, mem_phone, mem_email, mem_pwd) values (:mem_name, :mem_birth, :mem_phone, :mem_email, :mem_pwd)";
     $member = $pdo->prepare( $sql );
     $member->bindValue(":mem_name", $_POST["name"]);

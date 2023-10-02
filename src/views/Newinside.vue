@@ -1,6 +1,6 @@
 <template>
   <div class="newsinWrap">
-    <span class="newsinTag title-tag gray">#{{ foundObject.news_tag }}</span>
+    <span class="newsinTag title-tag gray">#{{ foundObject.news_tag1 }}</span>
     <span class="newsindate"> 發佈日期：{{ foundObject.news_date }}</span>
     <h1>{{ foundObject.news_title }}</h1>
 
@@ -42,17 +42,7 @@ export default {
       publicPath: process.env.BASE_URL,
       foundObject: "",
       newstest: "",
-      newsqaq: ""
-      // news: {
-      //   tag: "活動消息",
-      //   date: "2023-07-07",
-      //   title: "植感生活－植物郵票與押花特展",
-      //   image: require("../../public/img/newsbackimg.jpg"),
-      //   image1: require("../../public/img/news4.png"),
-      //   contents:
-      //     "綠色植物的生命力，讓人感到快樂與朝氣。為鼓勵大眾親近植物，本館特規劃「植感生活－植物郵票與押花特展」，期透過展出郵票與手作押花作品，使民眾認識植物，推廣香草植物的多元應用與花藝美學，讓生活增添綠意與愜意。",
-      // },
-
+      newsqaq: "",
     };
   },
   components: {
@@ -60,13 +50,20 @@ export default {
   },
   methods: {
     fetchData() {
+      // 獲得newsinside/id的id值
+      let idToFind = this.$route.params.id;
+      // 獲得資料庫的消息列表
       fetch(`http://localhost/dai/public/phps/getNews.php`)
         .then((response) => {
           return response.json();
         })
         .then((data) => {
-          this.newstest = data; // 更新數據到news
-          console.log(this.newstest);
+          // 更新數據到newstest
+          this.newstest = data;
+          // 提出newstest資料中news_id等於idToFind的那筆放進newsqaq
+          this.newsqaq = this.newstest.find(item => item.news_id === idToFind)
+          // this.foundObject = this.newstest.find(item => item.news_id === idToFind);
+
         })
         .catch((error) => {
           console.error('數據傳輸失敗：', error);
@@ -88,15 +85,19 @@ export default {
         clickable: true,
       },
     })
-    const idToFind = this.$route.params.id;
-    console.log(idToFind);
-    this.foundObject = news.find(item => item.news_id === idToFind);
-    console.log(this.foundObject);
-    this.fetchData()
     // console.log(this.newstest);
-    // this.newsqaq = this.newstest.find(item => item.news_id === idToFind)
+    let idToFind = this.$route.params.id;
+    console.log(idToFind);
+    // this.fetchData()
+    this.foundObject = news.find(item => item.news_id === idToFind);
+    // console.log(this.foundObject);
 
   }
+  , created() {
+    this.fetchData()
+    // console.log(this.newstest);
+
+  },
 }
 </script>
 
