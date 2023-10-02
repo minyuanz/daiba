@@ -23,8 +23,8 @@
 
       <div class="ShopProCardBox">
         <div class="ShopProCardTitle">
-          <div>商品圖片</div>
-          <div>商品資料</div>
+          <div>圖片</div>
+          <div>資料</div>
           <div>單價</div>
           <div>數量</div>
           <div>小計</div>
