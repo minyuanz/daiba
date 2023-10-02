@@ -11,7 +11,7 @@ try {
 
     echo json_encode($result);
 } catch (PDOException $e) {
-    $response = array('error' => true, 'msg' => '获取管理员数据失败: ' . $e->getMessage());
+    $response = array('error' => true, 'msg' => '獲取管理員數據失敗: ' . $e->getMessage());
     echo json_encode($response);
 }
 
