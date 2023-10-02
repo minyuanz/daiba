@@ -126,18 +126,18 @@ togglePermission(admin) {
   .then((response) => {
     // 檢查
     if (response.data.success) {
-      console.log('权限已更新');
-      alert('权限已成功变更');
+      console.log('權限已更新');
+      alert('權限已更新成功');
     } else {
-      console.error('权限更新失败');
-      alert('权限更新失败');
+      console.error('權限更新失败');
+      alert('權限更新失敗');
       // 如果失敗則保持原本渲染的狀態
       admin.admin_sich = admin.admin_sich === '1' ? '0' : '1';
     }
   })
   .catch((error) => {
-    console.error('更新请求失败：', error);
-    alert('更新请求失败');
+    console.error('更新請求失敗：', error);
+    alert('更新請求失敗');
     // 如果失敗則保持原本渲染的狀態
     admin.admin_sich = admin.admin_sich === '1' ? '0' : '1';
   });
