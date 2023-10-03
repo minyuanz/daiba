@@ -1,7 +1,6 @@
 <?php
-header("Access-Control-Allow-Origin: http://localhost:8080");
-header("Access-Control-Allow-Methods: POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+header("Access-Control-Allow-Origin:*");
 try {
     $fileNames = array();
 
@@ -10,25 +9,24 @@ try {
     var_dump($_POST); 
     
     for ($i = 1; $i <= 4; $i++) { 
-        if ($_FILES["image{$i}"]["error"] === 0) { 
-            $dir = "/img/product";  
+        if ($_FILES["prod_img{$i}"]["error"] === 0) { 
+            $dir = "../img/product/"; 
             if (!file_exists($dir)) {
-                mkdir($dir);
+                mkdir($dir);  
             }
            
-            $filename = uniqid() . '.' . pathinfo($_FILES["image{$i}"]["name"], PATHINFO_EXTENSION);
+            $filename = uniqid() . '.' . pathinfo($_FILES["prod_img{$i}"]["name"], PATHINFO_EXTENSION);
             $to = $dir . $filename;
-            if (move_uploaded_file($_FILES["image{$i}"]["tmp_name"], $to)) {
-                $fileNames[] = $filename; //將圖片文字帶入數據
+            if (move_uploaded_file($_FILES["prod_img{$i}"]["tmp_name"], $to)) {
+                $fileNames[] = $filename;
             } else {
-                echo "文件移動失敗：", $_FILES["image{$i}"]["error"], "<br>";
-                $fileNames[] = ""; // 如果沒有澤為空字串
+                echo "文件移動失敗：", $_FILES["prod_img{$i}"]["error"], "<br>";
+                $fileNames[] = "";
             }
         } else {
             $fileNames[] = ""; 
         }
     }
-
     require_once("connect_chd103g5_2.php");
 
     $sql = "INSERT INTO product (prod_name, prod_price, prod_type, sta_id, prod_des1, prod_des2, prod_img1, prod_img2, prod_img3, prod_img4) 
