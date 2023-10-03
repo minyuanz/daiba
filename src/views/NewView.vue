@@ -53,7 +53,7 @@
 
     <transition name="fade" mode="out-in">
       <div :key="showNewsList" class="newsList">
-        <div class="newsCard" v-for="card in newsdisplay" :key="card.news_id">
+        <div class="newsCard" v-for="card in newstest" :key="card.news_id">
           <div class="newsPic">
             <img :src="card.news_pic1" alt="">
           </div>
