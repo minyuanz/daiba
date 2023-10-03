@@ -110,7 +110,10 @@
         v-for="(color, index) in selectColor"
         :key="color"
         :class="({ active: selectColor === color }, color)"
-        @click="showTag(color)"
+        @click="
+          showTag(color);
+          scrollTop();
+        "
         @mouseenter="activate(color)"
         @mouseleave="deactivate(color)"
       >
@@ -126,7 +129,10 @@
         :class="({ active: selectColor === color }, color)"
         @mouseenter="activate(color)"
         @mouseleave="deactivate(color)"
-        @click="showTag(color)"
+        @click="
+          showTag(color);
+          scrollTop();
+        "
       >
         {{ upperCaseColorsPC[index] }}
       </div>
@@ -165,7 +171,7 @@
     <div class="dottedLine"></div>
   </div>
   <!-- 站點板塊 -->
-  <div class="mrtWrappo">
+  <div class="mrtWrappo" id="mrtWrappo">
     <div class="mrtWrap" v-for="item in filteredMrt">
       <div class="mrtSta">
         <!-- 站點文字介紹 -->
@@ -176,7 +182,14 @@
           </p>
         </div>
         <!-- 站點圖跟捷運圖 -->
-        <div class="mrtStaBox" @click="item.isShow = !item.isShow">
+        <div
+          class="mrtStaBox"
+          @click="
+            (closePost = !closePost),
+              (lightBox = !lightBox),
+              (item.isShow = !item.isShow)
+          "
+        >
           <div class="mrtStaMaruBox">
             <img
               class="mrtStaMaru"
@@ -190,37 +203,51 @@
         </div>
       </div>
       <!------------------------美食住宿景點卡片 ------------------------------------->
-      <transition appear name="fade" mode="out-in">
-        <div class="swiperMRTCard" v-show="item.isShow">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="(itemplace, index) in item.place">
-              <!-- <router-link
+      <div class="CBPost" v-show="closePost && item.isShow">
+        <div class="box">
+          <span
+            class="closePost"
+            @click="(closePost = !closePost), (lightBox = !lightBox)"
+            >✖</span
+          >
+
+          <transition appear name="fade" mode="out-in">
+            <div class="swiperMRTCard">
+              <div class="swiper-wrapper">
+                <div
+                  class="swiper-slide"
+                  v-for="(itemplace, index) in item.place"
+                >
+                  <!-- <router-link
                 :to="{ path: itemplace?.router ? itemplace.router : '/' }"
                 > -->
-              <router-link :to="`/MrtCardPage/${itemplace.id}`">
-                <div class="mrtCardWrap">
-                  <!-- 卡片 -->
-                  <div class="card-h border-r">
-                    <div class="img">
-                      <img :src="itemplace.url" alt="" />
-                    </div>
-                    <div class="text">
-                      <div class="title">
-                        <h3>{{ itemplace.title }}</h3>
+                  <router-link :to="`/MrtCardPage/${itemplace.id}`">
+                    <div class="mrtCardWrap">
+                      <!-- 卡片 -->
+                      <div class="card-h border-r">
+                        <div class="img">
+                          <img :src="itemplace.url" alt="" />
+                        </div>
+                        <div class="text">
+                          <div class="title">
+                            <h3>{{ itemplace.title }}</h3>
+                          </div>
+                          <div class="txt">{{ itemplace.txt }}</div>
+                        </div>
                       </div>
-                      <div class="txt">{{ itemplace.txt }}</div>
                     </div>
-                  </div>
+                  </router-link>
                 </div>
-              </router-link>
+              </div>
+              <div class="swiper-button-prev swiper-btn"></div>
+              <div class="swiper-button-next swiper-btn"></div>
             </div>
-          </div>
-          <div class="swiper-button-prev swiper-btn"></div>
-          <div class="swiper-button-next swiper-btn"></div>
+          </transition>
         </div>
-      </transition>
+      </div>
     </div>
   </div>
+  <div class="lightBox" v-show="lightBox"></div>
 </template>
 
 <script>
@@ -232,6 +259,8 @@ import { pushScopeId } from "vue";
 export default {
   data() {
     return {
+      lightBox: false,
+      closePost: false,
       originalPlaceData: [],
       defaultColor: "red",
       selectedColor: "red",
@@ -1734,6 +1763,13 @@ export default {
     deactivate(color) {
       this.isActive[color] = false;
     },
+
+    scrollTop() {
+      document
+        .querySelector("#mrtWrappo")
+        .scrollIntoView({ behavior: "smooth" });
+    },
+
     showTag(color) {
       this.selectedColor = color;
       this.filteredMrt = this.mrt.filter((item) => item.color === color);
