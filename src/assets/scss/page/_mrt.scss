@@ -590,7 +590,7 @@
 // --------------------------------------------
 
 @media screen and (max-width: 1280px) {
-  .mrtBanner {
+  .mrtBanner{
     width: 15%;
   }
   .mrtLineCheck {
@@ -607,16 +607,12 @@
       display: none;
     }
   }
-
-  .mrt-tagGroup {
-    .title-tag {
-      font-size: 16px;
-    }
-  }
-
-  .mrt-tagGroup {
-    .mrtTag {
-      width: 100%;
+  /* 站點板塊 */
+  .mrtWrappo {
+    .mrtWrap {
+      .swiperMRTCard {
+        width: 100%;
+      }
     }
   }
 }
@@ -711,10 +707,8 @@
     .mrtWrap {
       .swiperMRTCard {
         width: 80%;
-
         .swiper-slide {
           height: 450px;
-
           .mrtCardWrap {
             .card-h {
               width: 300px;
