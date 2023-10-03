@@ -31,25 +31,26 @@
         </div>
     </div>
     <div class="proAdd" v-else>
+        <form @submit.prevent="addNewProduct" enctype="multipart/form-data">
         <div class="proInfo">
             <p>新增商品資訊</p>
             <div class="name">
                 <label>商品名稱：</label>
-                <input type="text">
+                <input type="text" id="prodName" v-model="newProduct.prod_name">
             </div>
             <div class="price">
                 <label for="">商品價格：</label>
-                <input type="text">
+                <input type="text" id="prodPrice" v-model="newProduct.prod_price">
             </div>
         </div>
         <div class="proTag">
             <p>新增商品標籤</p>
             <label for="">商品分類：</label>
-            <select name="" id="">
+            <select id="prodType" v-model="newProduct.prod_type">
                 <option value="food">food</option>
             </select>
             <label for="">捷運站：</label>
-            <select name="" id="">
+            <select id="staId" v-model="newProduct.sta_id">
                 <option value="BL">BL</option>
             </select>
         </div>
@@ -57,11 +58,32 @@
             <p class="title">商品照</p>
             <p class="title">(第一張為商品版頭)</p>
             <div class="picArea">
-                <div class="uploadPic" v-for="(pic, index) in pics" :key="index">
+                <div class="uploadPic">
                     <div class="pic">
-                        <p>＋</p>
-                        <input type="file" @change="handleFileChange($event, index)">
-                        <img :src="pic.imageURL" v-show="pic.fix">
+                    <p>＋</p>
+                    <input type="file" name="image1" @change="handleFileChange($event, 0)">
+                    <img :src="pics[0].imageURL" v-show="pics[0].fix">
+                    </div>
+                </div>
+                <div class="uploadPic">
+                    <div class="pic">
+                    <p>＋</p>
+                    <input type="file" name="image2" @change="handleFileChange($event, 1)">
+                    <img :src="pics[1].imageURL" v-show="pics[1].fix">
+                    </div>
+                </div>
+                <div class="uploadPic">
+                    <div class="pic">
+                    <p>＋</p>
+                    <input type="file" name="image3" @change="handleFileChange($event, 2)">
+                    <img :src="pics[2].imageURL" v-show="pics[2].fix">
+                    </div>
+                </div>
+                <div class="uploadPic">
+                    <div class="pic">
+                    <p>＋</p>
+                    <input type="file" name="image4" @change="handleFileChange($event, 3)">
+                    <img :src="pics[3].imageURL" v-show="pics[3].fix">
                     </div>
                 </div>
                 <!-- <button>+</button> -->
@@ -69,48 +91,48 @@
         </div>
         <div class="proCtx">
             <label for="">商品描述</label>
-            <textarea class="custom-input"></textarea>
+            <textarea class="custom-input" v-model="newProduct.prod_des1"></textarea>
             <!-- <input type="text"> -->
         </div>
         <div class="proMore">
             <label for="">商品資訊</label>
-            <textarea class="custom-input"></textarea>
+            <textarea class="custom-input" v-model="newProduct.prod_des2"></textarea>
             <!-- <input type="text"> -->
         </div>
         <div class="btn">
             <button @click="addToggle = !addToggle">取消新增</button>
-            <button @click="addToggle = !addToggle">確認新增</button>
+            <button type="submit">確認新增</button>
         </div>
+    </form>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
-// import BackProTest from "@/testdata/BackProTest.json"
 export default {
     data() {
         return {
+            newProduct: {
+            prod_name: '',
+            prod_price: '',
+            prod_type: 'food',
+            sta_id: 'BL',
+            prod_des1: '',
+            prod_des2: '',
+            prod_img1: null,
+            prod_img2: null,
+            prod_img3: null,
+            prod_img4: null,
+            },
             products: [],
-            // item: BackProTest,
+            pics: [
+            { imageURL: null, fix: false },
+            { imageURL: null, fix: false },
+            { imageURL: null, fix: false },
+            { imageURL: null, fix: false }
+            ],
             isSwitchOn: false,
-            // items: BackProTest.map((item) => ({ ...item, isChecked: false, })),
             addToggle: true,
-            pics: [{
-                imageURL: null,
-                fix: false
-            }, {
-                imageURL: null,
-                fix: false
-            }, {
-                imageURL: null,
-                fix: false
-            },{
-                imageURL: null,
-                fix: false
-            },],
-
-
-
         }
     },
     created() {
@@ -118,23 +140,20 @@ export default {
     },
     methods: {
         handleFileChange(e, index) {
-            const files = e.target.files; // 獲取所有所選文件
+        const files = e.target.files;
+        for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+        reader.onload = () => {
+            this.pics[index].imageURL = reader.result;
+        };
 
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const reader = new FileReader();
-                reader.onload = () => {
-                    // 當讀取完成時觸發
-                    this.pics[index].imageURL = reader.result; // 將 Data URL 賦值給圖片的 src
-                };
-                // this.pics[index].imageURL = true;
-                // 
-                if (file) {
-                    reader.readAsDataURL(file); // 讀取文件內容，以 Data URL 形式
-                }
-            }
-            this.pics[index].fix = true
-
+        if (file) {
+            reader.readAsDataURL(file);
+            this.newProduct[`prod_img${index + 1}`] = file;
+        }
+        }
+        this.pics[index].fix = true;
         },
         fetchData() {
             axios.get('http://localhost/dai/public/phps/ProductM.php')
@@ -170,8 +189,50 @@ export default {
                 product.prod_status = product.prod_status === '1' ? '0' : '1';
             });
         },
-    },
+        addNewProduct() {
+        const formData = new FormData();
+        formData.append('prod_name', this.newProduct.prod_name);
+        formData.append('prod_price', this.newProduct.prod_price);
+        formData.append('prod_type', this.newProduct.prod_type);
+        formData.append('sta_id', this.newProduct.sta_id);
+        formData.append('prod_des1', this.newProduct.prod_des1);
+        formData.append('prod_des2', this.newProduct.prod_des2);
+        formData.append('prod_img1', this.newProduct.prod_img1);
+        formData.append('prod_img2', this.newProduct.prod_img2);
+        formData.append('prod_img3', this.newProduct.prod_img3);
+        formData.append('prod_img4', this.newProduct.prod_img4);
 
+        axios.post('http://localhost/dai/public/phps/CreatProduct.php', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then((response) => {
+            if (response.data.success) {
+                alert('商品已成功新增');
+                // 清空表單字串
+                this.newProduct = {
+                    prod_name: '',
+                    prod_price: '',
+                    prod_type: 'food',
+                    sta_id: 'BL',
+                    prod_des1: '',
+                    prod_des2: '',
+                    prod_img1: null,
+                    prod_img2: null,
+                    prod_img3: null,
+                    prod_img4: null,
+                };
+                this.fetchData();
+            } else {
+                alert('商品新增失敗');
+            }
+        })
+        .catch((error) => {
+            console.error('新增商品請求失敗：', error);
+        });
+    },
+    },
 }
 </script>
 
