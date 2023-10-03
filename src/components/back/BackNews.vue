@@ -39,7 +39,7 @@
                 <label for="">版頭圖片</label>
                 <div class="pic">
                     <p>＋</p>
-                    <input type="file" @change="FileChange">
+                    <input type="file" @change="FileChange" name="image">
                     <img :src="formData.imageURL" v-show="fix">
                 </div>
             </div>
@@ -84,16 +84,20 @@ export default {
     },
     methods: {
         FileChange(e) {
+            console.log(e.target.files[0].name);
             const file = e.target.files[0]; // 獲取所有所選文件
             const reader = new FileReader();
+            let URL = "../../img/"
+            let fileName = file.name
 
             console.log(file);
             console.log(reader);
 
-            reader.onload = () => {
-                // 當讀取完成時觸發
-                this.formData.imageURL = reader.result; // 將 Data URL 賦值給圖片的 src
-            };
+            this.formData.imageURL = `${URL}${fileName}`
+            // reader.onload = () => {
+            //     // 當讀取完成時觸發
+            //     this.formData.imageURL = reader.result; // 將 Data URL 賦值給圖片的 src
+            // };
 
             if (file) {
                 reader.readAsDataURL(file); // 讀取文件內容，以 Data URL 形式
