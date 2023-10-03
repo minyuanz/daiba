@@ -12,17 +12,17 @@
             <p>編輯</p>
             <p>上架/下架</p>
         </div>
-        <div class="ProInfro" v-for="item  in item " :key="item.pord_id">
-            <p>{{ item.prod_id }}</p>
-            <p>{{ item.prod_name }}</p>
-            <p>{{ item.prod_price }}</p>
+        <div class="ProInfro" v-for="product in products" :key="product.prod_id">
+            <p>{{ product.prod_id }}</p>
+            <p>{{ product.prod_name }}</p>
+            <p>{{ product.prod_price }}</p>
             <div class="edit">
                 <i class="fa-solid fa-pen-to-square"></i>
             </div>
             <div class="upcheck">
                 <label class="ios-switch">
-                    <input type="checkbox" v-model="item.isChecked" />
-                    <span class="slider"></span>
+                    <input type="checkbox" :checked="product.prod_status === '1'" @change="toggleProductStatus(product)" />
+                    <span class="slider" :style="{ backgroundColor: product.prod_status === '1' ? '#4CAF50' : '#565656' }"></span>
                 </label>
             </div>
         </div>
@@ -85,13 +85,15 @@
 </template>
 
 <script>
-import BackProTest from "@/testdata/BackProTest.json"
+import axios from 'axios';
+// import BackProTest from "@/testdata/BackProTest.json"
 export default {
     data() {
         return {
-            item: BackProTest,
+            products: [],
+            // item: BackProTest,
             isSwitchOn: false,
-            items: BackProTest.map((item) => ({ ...item, isChecked: false, })),
+            // items: BackProTest.map((item) => ({ ...item, isChecked: false, })),
             addToggle: true,
             pics: [{
                 imageURL: null,
@@ -110,6 +112,9 @@ export default {
 
 
         }
+    },
+    created() {
+        this.fetchData(); 
     },
     methods: {
         handleFileChange(e, index) {
@@ -130,6 +135,40 @@ export default {
             }
             this.pics[index].fix = true
 
+        },
+        fetchData() {
+            axios.get('http://localhost/dai/public/phps/ProductM.php')
+            .then((response) => {
+            this.products = response.data; // 更新數據到 products
+        })
+            .catch((error) => {
+            console.error('數據傳輸失敗：', error);
+        });
+        },
+        toggleProductStatus(product) {
+            product.prod_status = product.prod_status === '1' ? '0' : '1';
+            axios.post('http://localhost/dai/public/phps/ContralProductsich.php', {
+                prod_id: product.prod_id,
+                prod_status: product.prod_status,
+            })
+            .then((response) => {
+                // 檢查
+                if (response.data.success) {
+                    // console.log('商品狀態已更新');
+                    alert('商品狀態更新成功');
+                } else {
+                    // console.error('商品狀態更新失敗');
+                    alert('商品狀態更新失敗');
+                    // 如果失敗回歸原本狀態
+                    product.prod_status = product.prod_status === '1' ? '0' : '1';
+                }
+            })
+            .catch((error) => {
+                console.error('更新失敗：', error);
+                alert('更新失敗');
+                // 如果失敗回歸原本狀態
+                product.prod_status = product.prod_status === '1' ? '0' : '1';
+            });
         },
     },
 

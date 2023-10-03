@@ -1,10 +1,10 @@
 <template>
     <div class="BackPro" v-if="addToggle">
-        <div class="ProSearch">
-            商品編號查詢:
+        <!-- <div class="ProSearch">
+            管理帳號查詢:
             <input type="text">
             <button class ="ProSearchBtn">查詢</button>
-        </div>
+        </div> -->
         <div class="ProTitle">
             <p>管理編號</p>
             <p>管理帳號</p>
@@ -15,6 +15,7 @@
             <p>{{ admin.admin_id }}</p>
             <p>{{ admin.admin_acc }}</p>
             <p>{{ admin.admin_lv }}</p>
+
             <div class="upcheck">
                 <label class="ios-switch">
                     <input type="checkbox" :checked="admin.admin_sich === '1'" @change="togglePermission(admin)" />
@@ -107,7 +108,6 @@ export default {
         });
     },
         fetchData() {
-            console.log('Fetching data...'); //測試顯示數據
             axios.get('http://localhost/dai/public/phps/PremissonM.php')
             .then((response) => {
             this.admins = response.data; // 更新數據到 admins
