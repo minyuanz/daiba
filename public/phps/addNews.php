@@ -8,7 +8,34 @@ header("Access-Control-Allow-Origin:*"); // 允许任何来源访问
 // https://www.php.net/manual/zh/function.uniqid.php
 // https://www.php.net/manual/zh/features.file-upload.post-method.php
 
+    
+
+
+
 try {
+    // if ( $_FILES["image"]["error"] === 0) {
+    //     //-----------------決定好資料夾的路徑
+    //     $dir = "../img/";
+    //     if( !file_exists($dir) ){
+    //         mkdir($dir);
+    //     }
+                
+    //     $from = $_FILES["image"]["tmp_name"];
+
+    //     //-----------------決定檔案名稱
+    //     //$fileName = $_FILES["image"]["name"]; //原檔名
+    //     $filename = uniqid(); //使用uniqid()來當做主檔名 650aad4a96a29
+    //     $pathInfo = pathinfo($_FILES["image"]["name"]);//取得檔案的資訊放在陣列中
+    //     $fileExt = $pathInfo["extension"]; //check.ico, smile.gif
+    //     $filename = "{$filename}.{$fileExt}"; //加上副檔名的檔名 650aad4a96a29.ico
+
+    //     $to = $dir . $filename;
+    //     copy($from, $to);
+    // } else {
+    //     $fileName = "";
+    // }
+
+
     require_once("connect_chd103g5_2.php");
     //變數名稱 = $_post[formData的key值]
     $news_title=$_POST['news_title'];
