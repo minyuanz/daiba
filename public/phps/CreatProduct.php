@@ -39,10 +39,10 @@ try {
     $stmt->bindValue(":sta_id", $_POST["sta_id"]);
     $stmt->bindValue(":prod_des1", $_POST["prod_des1"]);
     $stmt->bindValue(":prod_des2", $_POST["prod_des2"]);
-    $stmt->bindValue(":prod_img1", $fileNames[0]); // 插入文件名
-    $stmt->bindValue(":prod_img2", $fileNames[1]); // 插入文件名
-    $stmt->bindValue(":prod_img3", $fileNames[2]); // 插入文件名
-    $stmt->bindValue(":prod_img4", $fileNames[3]); // 插入文件名
+    $stmt->bindValue(":prod_img1", $fileNames[0]); 
+    $stmt->bindValue(":prod_img2", $fileNames[1]); 
+    $stmt->bindValue(":prod_img3", $fileNames[2]); 
+    $stmt->bindValue(":prod_img4", $fileNames[3]); 
 
     $stmt->execute();
     echo "新增成功~";

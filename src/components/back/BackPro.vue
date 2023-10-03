@@ -190,48 +190,47 @@ export default {
             });
         },
         addNewProduct() {
-        const formData = new FormData();
-        formData.append('prod_name', this.newProduct.prod_name);
-        formData.append('prod_price', this.newProduct.prod_price);
-        formData.append('prod_type', this.newProduct.prod_type);
-        formData.append('sta_id', this.newProduct.sta_id);
-        formData.append('prod_des1', this.newProduct.prod_des1);
-        formData.append('prod_des2', this.newProduct.prod_des2);
-        formData.append('prod_img1', this.newProduct.prod_img1);
-        formData.append('prod_img2', this.newProduct.prod_img2);
-        formData.append('prod_img3', this.newProduct.prod_img3);
-        formData.append('prod_img4', this.newProduct.prod_img4);
+    const formData = new FormData();
+    formData.append('prod_name', this.newProduct.prod_name);
+    formData.append('prod_price', this.newProduct.prod_price);
+    formData.append('prod_type', this.newProduct.prod_type);
+    formData.append('sta_id', this.newProduct.sta_id);
+    formData.append('prod_des1', this.newProduct.prod_des1);
+    formData.append('prod_des2', this.newProduct.prod_des2);
+    formData.append('prod_img1', this.newProduct.prod_img1);
+    formData.append('prod_img2', this.newProduct.prod_img2);
+    formData.append('prod_img3', this.newProduct.prod_img3);
+    formData.append('prod_img4', this.newProduct.prod_img4);
 
-        axios.post('http://localhost/dai/public/phps/CreatProduct.php', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        })
-        .then((response) => {
-            if (response.data.success) {
-                alert('商品已成功新增');
-                // 清空表單字串
-                this.newProduct = {
-                    prod_name: '',
-                    prod_price: '',
-                    prod_type: 'food',
-                    sta_id: 'BL',
-                    prod_des1: '',
-                    prod_des2: '',
-                    prod_img1: null,
-                    prod_img2: null,
-                    prod_img3: null,
-                    prod_img4: null,
-                };
-                this.fetchData();
-            } else {
-                alert('商品新增失敗');
-            }
-        })
-        .catch((error) => {
-            console.error('新增商品請求失敗：', error);
-        });
-    },
+    axios.post('http://localhost/dai/public/phps/CreatProduct.php', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    })
+    .then((response) => {
+        if (response.data.success) {
+            alert('商品已成功新增');
+            // 清空表单字段
+            this.newProduct = {
+                prod_name: '',
+                prod_price: '',
+                prod_type: 'food',
+                sta_id: 'BL',
+                prod_des1: '',
+                prod_des2: '',
+                prod_img1: null,
+                prod_img2: null,
+                prod_img3: null,
+                prod_img4: null,
+            };
+        } else {
+            alert('商品新增失敗');
+        }
+    })
+    .catch((error) => {
+        console.error('新增商品請求失敗：', error);
+    });
+},
     },
 }
 </script>
