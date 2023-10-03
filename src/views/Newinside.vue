@@ -1,19 +1,19 @@
 <template>
   <div class="newsinWrap">
-    <span class="newsinTag title-tag gray">#{{ foundObject.news_tag1 }}</span>
-    <span class="newsindate"> 發佈日期：{{ foundObject.news_date }}</span>
-    <h1>{{ foundObject.news_title }}</h1>
+    <span class="newsinTag title-tag gray">#{{ newsqaq.news_tag1 }}</span>
+    <span class="newsindate"> 發佈日期：{{ newsqaq.news_date }}</span>
+    <h1>{{ newsqaq.news_title }}</h1>
 
     <div class="swiper">
       <div class="newsinpic swiper-wrapper">
-        <img :src="foundObject.news_pic1" alt="" class="swiper-slide" />
-        <img :src="foundObject.news_pic1" alt="" class="swiper-slide" />
+        <img :src="newsqaq.news_pic1" alt="" class="swiper-slide" />
+        <img :src="newsqaq.news_pic1" alt="" class="swiper-slide" />
       </div>
       <div class="swiper-pagination"></div>
     </div>
 
     <div class="newsintxt">
-      <p>{{ foundObject.news_des1 }}</p>
+      <p>{{ newsqaq.news_des1 }}</p>
     </div>
 
     <div class="newsinBtn">
@@ -91,10 +91,9 @@ export default {
     // this.fetchData()
     this.foundObject = news.find(item => item.news_id === idToFind);
     // console.log(this.foundObject);
-
+    this.fetchData()
   }
   , created() {
-    this.fetchData()
     // console.log(this.newstest);
 
   },
