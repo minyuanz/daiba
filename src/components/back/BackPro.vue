@@ -17,7 +17,7 @@
             <p>{{ product.prod_name }}</p>
             <p>{{ product.prod_price }}</p>
             <div class="edit">
-                <i class="fa-solid fa-pen-to-square"></i>
+                <button @click="startEditMode(product)">編輯</button>
             </div>
             <div class="upcheck">
                 <label class="ios-switch">
@@ -107,6 +107,83 @@
         </div>
     </form>
     </div>
+    <div class="proAdd" v-if="editMode">
+        <form @submit.prevent="updateProduct" enctype="multipart/form-data">
+        <div class="proInfo">
+            <p>編輯商品資訊</p>
+            <div class="name">
+                <label>商品名稱：</label>
+                <input type="text" id="prodName" v-model="currentEditProduct.prod_name">
+            </div>
+            <div class="price">
+                <label for="">商品價格：</label>
+                <input type="text" id="prodPrice" v-model="currentEditProduct.prod_price">
+            </div>
+        </div>
+        <div class="proTag">
+            <p>新增商品標籤</p>
+            <label for="">商品分類：</label>
+            <select id="prodType" v-model="newProduct.prod_type">
+                <option value="food">美食</option>
+                <option value="viewpoint">景點</option>
+                <option value="stay">住宿</option>
+            </select>
+            <label for="">捷運站：</label>
+            <select id="staId" v-model="newProduct.sta_id">
+                <option value="BL">BL</option>
+            </select>
+        </div>
+        <div class="proPic">
+            <p class="title">商品照</p>
+            <p class="title">(第一張為商品版頭)</p>
+            <div class="picArea">
+                <div class="uploadPic">
+                    <div class="pic">
+                    <p>＋</p>
+                    <input type="file" name="image1" @change="handleFileChange($event, 0)">
+                    <img :src="pics[0].imageURL" v-show="pics[0].fix">
+                    </div>
+                </div>
+                <div class="uploadPic">
+                    <div class="pic">
+                    <p>＋</p>
+                    <input type="file" name="image2" @change="handleFileChange($event, 1)">
+                    <img :src="pics[1].imageURL" v-show="pics[1].fix">
+                    </div>
+                </div>
+                <div class="uploadPic">
+                    <div class="pic">
+                    <p>＋</p>
+                    <input type="file" name="image3" @change="handleFileChange($event, 2)">
+                    <img :src="pics[2].imageURL" v-show="pics[2].fix">
+                    </div>
+                </div>
+                <div class="uploadPic">
+                    <div class="pic">
+                    <p>＋</p>
+                    <input type="file" name="image4" @change="handleFileChange($event, 3)">
+                    <img :src="pics[3].imageURL" v-show="pics[3].fix">
+                    </div>
+                </div>
+                <!-- <button>+</button> -->
+            </div>
+        </div>
+        <div class="proCtx">
+            <label for="">商品描述</label>
+            <textarea class="custom-input" v-model="newProduct.prod_des1"></textarea>
+            <!-- <input type="text"> -->
+        </div>
+        <div class="proMore">
+            <label for="">商品資訊</label>
+            <textarea class="custom-input" v-model="newProduct.prod_des2"></textarea>
+            <!-- <input type="text"> -->
+        </div>
+        <div class="btn">
+            <button @click="addToggle = !addToggle">取消編輯</button>
+            <button  type="submit">確認編輯</button>
+        </div>
+    </form>
+    </div>
 </template>
 
 <script>
@@ -135,12 +212,23 @@ export default {
             ],
             isSwitchOn: false,
             addToggle: true,
+            editMode: false, // 編輯模式的開啟與否
+            currentEditProduct: null, // 當前編輯的商品
         }
     },
     created() {
         this.fetchData(); 
     },
     methods: {
+        startEditMode(product) {
+            this.editMode = true; // 进入编辑模式
+            this.currentEditProduct = { ...product }; // 复制商品对象以防止直接修改原始数据
+    },
+    updateProduct() {
+      // 在这里执行更新商品信息的操作
+      // 使用 this.currentEditProduct 中的数据
+      // 更新成功后设置 this.editMode = false; 退出编辑模式
+    },
         handleFileChange(e, index) {
         const files = e.target.files;
         for (let i = 0; i < files.length; i++) {
@@ -212,7 +300,6 @@ export default {
     .then((response) => {
         if (response.status === 200) { //檢查http  狀態碼來判別 php新增成功與否
             alert('商品已成功新增');
-            //清空圖片的顯示
             this.pics = [
                 { imageURL: null, fix: false },
                 { imageURL: null, fix: false },
