@@ -47,7 +47,9 @@
             <p>新增商品標籤</p>
             <label for="">商品分類：</label>
             <select id="prodType" v-model="newProduct.prod_type">
-                <option value="food">food</option>
+                <option value="food">美食</option>
+                <option value="viewpoint">景點</option>
+                <option value="stay">住宿</option>
             </select>
             <label for="">捷運站：</label>
             <select id="staId" v-model="newProduct.sta_id">
@@ -101,7 +103,7 @@
         </div>
         <div class="btn">
             <button @click="addToggle = !addToggle">取消新增</button>
-            <button type="submit">確認新增</button>
+            <button  type="submit">確認新增</button>
         </div>
     </form>
     </div>
@@ -208,13 +210,20 @@ export default {
         },
     })
     .then((response) => {
-        if (response.data.success) {
+        if (response.status === 200) { //檢查http  狀態碼來判別 php新增成功與否
             alert('商品已成功新增');
-            // 清空表单字段
+            //清空圖片的顯示
+            this.pics = [
+                { imageURL: null, fix: false },
+                { imageURL: null, fix: false },
+                { imageURL: null, fix: false },
+                { imageURL: null, fix: false }
+            ];
+            // 下面為新增成功後 清空表單
             this.newProduct = {
                 prod_name: '',
                 prod_price: '',
-                prod_type: 'food',
+                prod_type: 'food',  
                 sta_id: 'BL',
                 prod_des1: '',
                 prod_des2: '',
