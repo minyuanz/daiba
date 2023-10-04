@@ -46,7 +46,9 @@ export default {
   methods: {
     login() {
       if (this.memEmail == "" && this.memPwd == "") {
-        alert("請輸入帳號和密碼")
+        // alert("請輸入帳號和密碼")
+        this.$router.push("/user")
+
       }
       else {
         // 創建一個新的 FormData 對象

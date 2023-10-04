@@ -14,11 +14,11 @@
         </div>
         <div class="NewsInfro" v-for="news  in news " :key="news.news_id">
             <p>{{ news.news_id }}</p>
-            <p>{{ news.news_tag2 }}</p>
+            <p>{{ news.news_tag1 }}</p>
             <p>{{ news.news_title }}</p>
             <p>{{ news.news_date }}</p>
-            <div class="edit">
-                <i class="fa-solid fa-pen-to-square"></i>
+            <div class="edit" >
+                <i class="fa-solid fa-pen-to-square" ></i>
             </div>
         </div>
         <div class="addSta">
@@ -48,7 +48,7 @@
             <label for="">消息分類：</label>
             <select name="" id="" v-model="formData.tag">
                 <option value="活動消息">活動消息</option>
-                <option value="活動消息">最新消息</option>
+                <option value="最新消息">最新消息</option>
             </select>
         </div>
         <div class="Ctx">

@@ -11,7 +11,7 @@
 
             <!-- 背景模糊 -->
             <div class="newsBackpic">
-              <img :src="news.news_pic1" alt="">
+              <img :src="`${this.$store.state.imgURL}` + news.news_pic1" alt="">
             </div>
 
             <div class="newsBox">
@@ -35,7 +35,7 @@
               </div>
 
               <div class="newsCtxPic">
-                <img :src="news.news_pic1" alt="">
+                <img :src="`${this.$store.state.imgURL}` + news.news_pic1" alt="">
               </div>
             </div>
           </div>
@@ -53,9 +53,9 @@
 
     <transition name="fade" mode="out-in">
       <div :key="showNewsList" class="newsList">
-        <div class="newsCard" v-for="card in newstest" :key="card.news_id">
+        <div class="newsCard" v-for="card in newsdisplay" :key="card.news_id">
           <div class="newsPic">
-            <img :src="`${this.$store.state.imgURL}`+card.news_pic1" alt="">
+            <img :src="`${this.$store.state.imgURL}` + card.news_pic1" alt="">
           </div>
           <div class="hover-container" @mouseenter="handleHover(true)" @mouseleave="handleHover(false)">
             <router-link :to="{ name: 'newinside', params: { id: card.news_id } }">
@@ -89,8 +89,19 @@
       </div>
     </transition>
 
+    <!-- <div class="pagination">
+      <button class="paginationmain" @click="prevPage" :disabled="currentPage === 1">
+        ＜
+      </button>
+      <button class="paginationmain" @click="goToPage(page)" v-for="page in totalPages" :key="page"
+        :class="{ 'current-page': page === currentPage }">
+        {{ page }}
+      </button>
+      <button class="paginationmain" @click="nextPage" :disabled="currentPage === totalPages">
+        ＞
+      </button>
+    </div> -->
   </div>
-  <!-- <Page :total="40" size="small" /> -->
 </template>
 
 <script>
@@ -101,33 +112,11 @@ import ButtonS from '@/components/ButtonS.vue';
 export default {
   data() {
     return {
+      // pageSize: 4, // 每頁顯示數量
+      // currentPage: 1, // 當前頁數
       showNewsList: true,
       btninner: "更多",
-      publicPath: process.env.BASE_URL,
       tagtoggle: '所有消息',
-      slider: [{
-        tag: '活動消息',
-        date: '2023-07-04',
-        title: '植感生活',
-        title2: '－植物郵票與押花特展',
-        image: require('../../public/img/newsbackimg.jpg')
-      },
-      {
-        tag: '活動消息2',
-        date: '2023-07-04',
-        title: '植感生活',
-        title2: '－植物郵票與押花特展',
-        image: require('../../public/img/newsbackimg2.png')
-        // image: '../img/newsbackimg2.png'
-      },
-      {
-        tag: '活動消息3',
-        date: '2023-07-04',
-        title: '植感生活',
-        title2: '－植物郵票與押花特展',
-        image: require('../../public/img/newsbackimg.jpg')
-      }
-      ],
       btns: [{
         tag: '所有消息'
       },
@@ -137,7 +126,7 @@ export default {
       {
         tag: '活動消息'
       }],
-      newslist: news,
+      // newslist: news,
       newsdisplay: [],//篩選用
       newswiper: [],//輪播用
       newstest: []
@@ -146,11 +135,35 @@ export default {
   components: {
     ButtonS,
   },
+  computed: {
+    // paginatedNews() {
+    //   const startIndex = (this.currentPage - 1) * this.pageSize; //0
+    //   const endIndex = startIndex + this.pageSize; //4
+    //   return this.newstest.slice(startIndex, endIndex);
+    // },
+    // totalPages() {
+    //   return Math.ceil(this.newstest.length / this.pageSize);
+    // },
+  },
   methods: {
+    // prevPage() {
+    //   if (this.currentPage > 1) {
+    //     this.currentPage -= 1;
+    //   }
+    // },
+    // nextPage() {
+    //   if (this.currentPage < this.totalPages) {
+    //     this.currentPage += 1;
+    //   }
+    // },
+    // goToPage(page) {
+    //   this.currentPage = page;
+    // },
+    // 
     changeHandler(tag) {
       // console.log(tag);
       this.tagtoggle = tag !== "最新消息" && tag !== "活動消息" ? "所有消息" : tag;
-      let res = this.newslist.filter(item => {
+      let res = this.newstest.filter(item => {
         if (item.news_tag == this.tagtoggle) {
           return true
         } else if (item.news_tag1 == this.tagtoggle) {
@@ -177,7 +190,9 @@ export default {
           return response.json();
         })
         .then((data) => {
-          this.newstest = data; // 更新數據到news
+          this.newstest = data; //更新數據到news
+          this.newsdisplay = this.newstest
+          this.newswiper = this.newstest.slice(0, 3)
         })
         .catch((error) => {
           console.error('數據傳輸失敗：', error);
@@ -185,8 +200,8 @@ export default {
     }
   },
   mounted() {
-    this.newsdisplay = this.newslist
-    this.newswiper = this.newslist.slice(0, 3)
+    // this.newsdisplay = this.newslist
+    // this.newswiper = this.newslist.slice(0, 3)
     const swiper = new Swiper(".swiper", {
       // Optional parameters
       direction: "horizontal",

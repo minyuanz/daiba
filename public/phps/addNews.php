@@ -15,21 +15,20 @@ header("Access-Control-Allow-Origin:*"); // 允许任何来源访问
 try {
     if ( $_FILES["news_imageURL"]["error"] === 0) {
         //-----------------決定好資料夾的路徑
-        $dir = "../img/news/";
+        $dir = "../img/";
         if( !file_exists($dir) ){
             mkdir($dir);
         }
                 
         $from = $_FILES["news_imageURL"]["tmp_name"];
-
-        $filename = basename($_FILES["news_imageURL"]["name"]);
+        // $filename = basename($_FILES["news_imageURL"]["name"]);
         
         //-----------------決定檔案名稱
-        // //$fileName = $_FILES["news_imageURL"]["name"]; //原檔名
-        // $filename = uniqid(); //使用uniqid()來當做主檔名 650aad4a96a29
-        // $pathInfo = pathinfo($_FILES["news_imageURL"]["name"]);//取得檔案的資訊放在陣列中
-        // $fileExt = $pathInfo["extension"]; //check.ico, smile.gif
-        // $filename = "{$filename}.{$fileExt}"; //加上副檔名的檔名 650aad4a96a29.ico
+        //$fileName = $_FILES["news_imageURL"]["name"]; //原檔名
+        $filename = uniqid(); //使用uniqid()來當做主檔名
+        $pathInfo = pathinfo($_FILES["news_imageURL"]["name"]);//取得檔案的資訊放在陣列中
+        $fileExt = $pathInfo["extension"]; //取得副檔名
+        $filename = "{$filename}.{$fileExt}"; //加上副檔名的檔名 
 
         $to = $dir . $filename;
         copy($from, $to);
