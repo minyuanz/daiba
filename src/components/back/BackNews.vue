@@ -40,7 +40,7 @@
                 <div class="pic">
                     <p>＋</p>
                     <input type="file" @change="FileChange" name="image">
-                    <img :src="formData.imageURL" v-show="fix">
+                    <img :src="picURL" v-show="fix">
                 </div>
             </div>
         </div>
@@ -79,6 +79,7 @@ export default {
                 imageURL: null,
                 content: "",
             },
+            picURL:"",
             news: []
         }
     },
@@ -93,14 +94,15 @@ export default {
             console.log(file);
             console.log(reader);
 
-            this.formData.imageURL = `${URL}${fileName}`
-            // reader.onload = () => {
-            //     // 當讀取完成時觸發
-            //     this.formData.imageURL = reader.result; // 將 Data URL 賦值給圖片的 src
-            // };
+            // this.formData.imageURL = `${URL}${fileName}`
+            reader.onload = () => {
+                // 當讀取完成時觸發
+                this.picURL = reader.result; // 將 Data URL 賦值給圖片的 src
+            };
 
             if (file) {
                 reader.readAsDataURL(file); // 讀取文件內容，以 Data URL 形式
+                this.formData.imageURL=file
             }
             this.fix = true
 
@@ -122,7 +124,7 @@ export default {
                 .then(res => res.json())
                 .then((res) => {
                     if (!res.error) {
-                        alert("add success")
+                        alert(res.msg)
                         this.addToggle = !this.addToggle;
                     }
                 })

@@ -8,10 +8,17 @@ const publicURL =
   process.env.NODE_ENV === "development"
     ? ""
     : "https://tibamef2e.com/chd103/ingrid/koala";
+    
 const publicURLL =
   process.env.NODE_ENV === "development"
     ? ""
     : "https://tibamef2e.com/chd103/g5";
+
+const imgURL =process.env.NODE_ENV === "development" ? "http://localhost/dai/public/img/news" : ""
+
+
+
+
 export default createStore({
   state: {
     point:[],//儲存點數
@@ -19,6 +26,7 @@ export default createStore({
     favorites: [],
     purchaseProcess: {},
     publicURLL,
+    imgURL, //圖片路徑
     mrtCardPage: [
       {
         id: 1,
