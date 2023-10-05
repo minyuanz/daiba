@@ -1,17 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin:*"); // 允许任何来源访问
 
-// header("Content-Type: application/json");
-
-// images
-// https://www.php.net/manual/zh/function.pathinfo.php
-// https://www.php.net/manual/zh/function.uniqid.php
-// https://www.php.net/manual/zh/features.file-upload.post-method.php
-
-    
-
-
-
 try {
     if ( $_FILES["news_imageURL"]["error"] === 0) {
         //-----------------決定好資料夾的路徑
@@ -21,10 +10,8 @@ try {
         }
                 
         $from = $_FILES["news_imageURL"]["tmp_name"];
-        // $filename = basename($_FILES["news_imageURL"]["name"]);
         
         //-----------------決定檔案名稱
-        //$fileName = $_FILES["news_imageURL"]["name"]; //原檔名
         $filename = uniqid(); //使用uniqid()來當做主檔名
         $pathInfo = pathinfo($_FILES["news_imageURL"]["name"]);//取得檔案的資訊放在陣列中
         $fileExt = $pathInfo["extension"]; //取得副檔名
@@ -42,7 +29,6 @@ try {
     $news_title=$_POST['news_title'];
     $news_bdes=$_POST['news_sectitle'];
     $news_tag1=$_POST['news_tag'];
-    // $news_pic1=$_POST['news_imageURL'];
     $news_des1=$_POST['news_content'];
     
 	$sql = "insert into news (news_title, news_bdes, news_date, news_tag, news_tag1, news_pic1, news_des1) values (:news_title, :news_bdes, :news_date, :news_tag, :news_tag1, :news_pic1, :news_des1)";

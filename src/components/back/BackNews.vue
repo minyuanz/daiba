@@ -121,7 +121,6 @@ export default {
             news: [],
             editMode: false, // 編輯模式的開啟與否
             currentEditnews: "", // 編輯的資料
-            // currentpicURL:""
         }
     },
     methods: {

@@ -72,7 +72,7 @@ export default {
             if (!res.error) {
               alert('login成功');
               // clearForm();
-              // this.$router.push("/home")
+              this.$router.push("/user")
             }
           })
           .catch(function (error) {
