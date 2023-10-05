@@ -1,5 +1,5 @@
 <template>
-    <div class="BackPro" v-if="addToggle">
+    <div class="BackPro" v-if="addToggle" v-show="!editMode">
         <div class="ProSearch">
             商品編號查詢:
             <input type="text">
@@ -63,28 +63,28 @@
                 <div class="uploadPic">
                     <div class="pic">
                     <p>＋</p>
-                    <input type="file" name="image1" @change="handleFileChange($event, 0)">
+                    <input type="file" name="image1" @change="handleFileChange($event, 0 ,'add')">
                     <img :src="pics[0].imageURL" v-show="pics[0].fix">
                     </div>
                 </div>
                 <div class="uploadPic">
                     <div class="pic">
                     <p>＋</p>
-                    <input type="file" name="image2" @change="handleFileChange($event, 1)">
+                    <input type="file" name="image2" @change="handleFileChange($event, 1 ,'add')">
                     <img :src="pics[1].imageURL" v-show="pics[1].fix">
                     </div>
                 </div>
                 <div class="uploadPic">
                     <div class="pic">
                     <p>＋</p>
-                    <input type="file" name="image3" @change="handleFileChange($event, 2)">
+                    <input type="file" name="image3" @change="handleFileChange($event, 2 ,'add')">
                     <img :src="pics[2].imageURL" v-show="pics[2].fix">
                     </div>
                 </div>
                 <div class="uploadPic">
                     <div class="pic">
                     <p>＋</p>
-                    <input type="file" name="image4" @change="handleFileChange($event, 3)">
+                    <input type="file" name="image4" @change="handleFileChange($event, 3 ,'add')">
                     <img :src="pics[3].imageURL" v-show="pics[3].fix">
                     </div>
                 </div>
@@ -121,15 +121,15 @@
             </div>
         </div>
         <div class="proTag">
-            <p>新增商品標籤</p>
+            <p>更改商品標籤</p>
             <label for="">商品分類：</label>
-            <select id="prodType" v-model="newProduct.prod_type">
+            <select id="prodType" v-model="currentEditProduct.prod_type">
                 <option value="food">美食</option>
                 <option value="viewpoint">景點</option>
                 <option value="stay">住宿</option>
             </select>
             <label for="">捷運站：</label>
-            <select id="staId" v-model="newProduct.sta_id">
+            <select id="staId" v-model="currentEditProduct.sta_id">
                 <option value="BL">BL</option>
             </select>
         </div>
@@ -140,29 +140,33 @@
                 <div class="uploadPic">
                     <div class="pic">
                     <p>＋</p>
-                    <input type="file" name="image1" @change="handleFileChange($event, 0)">
-                    <img :src="pics[0].imageURL" v-show="pics[0].fix">
+                    <img :src="`${this.$store.state.imgURLp}` +  currentEditProduct.prod_img1" v-if=" currentEditProduct.prod_img1 !== '' ? true : false" >
+                    <input type="file" name="image1" @change="handleFileChange($event, 0 , 'edit' )">
+                    <img :src="originalpics[0].imageURL" v-show="originalpics[0].fix" >
                     </div>
                 </div>
                 <div class="uploadPic">
                     <div class="pic">
                     <p>＋</p>
-                    <input type="file" name="image2" @change="handleFileChange($event, 1)">
-                    <img :src="pics[1].imageURL" v-show="pics[1].fix">
+                    <img :src="`${this.$store.state.imgURLp}` +  currentEditProduct.prod_img2" v-if=" currentEditProduct.prod_img2 !== '' ? true : false" >
+                    <input type="file" name="image2" @change="handleFileChange($event, 1, 'edit')">
+                    <img :src="originalpics[1].imageURL" v-show="originalpics[1].fix">
                     </div>
                 </div>
                 <div class="uploadPic">
                     <div class="pic">
                     <p>＋</p>
-                    <input type="file" name="image3" @change="handleFileChange($event, 2)">
-                    <img :src="pics[2].imageURL" v-show="pics[2].fix">
+                    <img :src="`${this.$store.state.imgURLp}` +  currentEditProduct.prod_img3" v-if=" currentEditProduct.prod_img3 !== '' ? true : false" >
+                    <input type="file" name="image3" @change="handleFileChange($event, 2, 'edit')">
+                    <img :src="originalpics[2].imageURL" v-show="originalpics[2].fix">
                     </div>
                 </div>
                 <div class="uploadPic">
                     <div class="pic">
                     <p>＋</p>
-                    <input type="file" name="image4" @change="handleFileChange($event, 3)">
-                    <img :src="pics[3].imageURL" v-show="pics[3].fix">
+                    <img :src="`${this.$store.state.imgURLp}` +  currentEditProduct.prod_img4" v-if=" currentEditProduct.prod_img4 !== '' ? true : false" >
+                    <input type="file" name="image4" @change="handleFileChange($event, 3, 'edit')">
+                    <img :src="originalpics[3].imageURL" v-show="originalpics[3].fix">
                     </div>
                 </div>
                 <!-- <button>+</button> -->
@@ -170,16 +174,16 @@
         </div>
         <div class="proCtx">
             <label for="">商品描述</label>
-            <textarea class="custom-input" v-model="newProduct.prod_des1"></textarea>
+            <textarea class="custom-input" v-model="currentEditProduct.prod_des1"></textarea>
             <!-- <input type="text"> -->
         </div>
         <div class="proMore">
             <label for="">商品資訊</label>
-            <textarea class="custom-input" v-model="newProduct.prod_des2"></textarea>
+            <textarea class="custom-input" v-model="currentEditProduct.prod_des2"></textarea>
             <!-- <input type="text"> -->
         </div>
         <div class="btn">
-            <button @click="addToggle = !addToggle">取消編輯</button>
+            <button  @click="cancelEdit">取消編輯</button>
             <button  type="submit">確認編輯</button>
         </div>
     </form>
@@ -204,8 +208,14 @@ export default {
             prod_img4: null,
             },
             products: [],
-            pics: [
+            pics: [  //新增圖片站存
             { imageURL: null, fix: false },
+            { imageURL: null, fix: false },
+            { imageURL: null, fix: false },
+            { imageURL: null, fix: false }
+            ],
+            originalpics: [  //編輯圖片站存
+            { imageURL: null, fix: false },//`${this.$store.state.imgURL}` + currentEditProduct.prod_img1, fix: false
             { imageURL: null, fix: false },
             { imageURL: null, fix: false },
             { imageURL: null, fix: false }
@@ -214,6 +224,7 @@ export default {
             addToggle: true,
             editMode: false, // 編輯模式的開啟與否
             currentEditProduct: null, // 當前編輯的商品
+            mode: 'add'
         }
     },
     created() {
@@ -221,29 +232,93 @@ export default {
     },
     methods: {
         startEditMode(product) {
-            this.editMode = true; // 进入编辑模式
-            this.currentEditProduct = { ...product }; // 复制商品对象以防止直接修改原始数据
+            this.editMode = true; // 用v-shoW進入編輯模式
+            this.currentEditProduct = { ...product }; // 複製數據進入編輯
     },
     updateProduct() {
-      // 在这里执行更新商品信息的操作
-      // 使用 this.currentEditProduct 中的数据
-      // 更新成功后设置 this.editMode = false; 退出编辑模式
+      const formData = new FormData();
+
+      formData.append('prod_id', this.currentEditProduct.prod_id); 
+      formData.append('prod_name', this.currentEditProduct.prod_name);
+      formData.append('prod_price', this.currentEditProduct.prod_price);
+      formData.append('prod_type', this.currentEditProduct.prod_type);
+      formData.append('sta_id', this.currentEditProduct.sta_id);
+      formData.append('prod_des1', this.currentEditProduct.prod_des1);
+      formData.append('prod_des2', this.currentEditProduct.prod_des2);
+      formData.append('prod_img1', this.currentEditProduct.prod_img1);      // 添加圖片（如果需要的话）
+      formData.append('prod_img2', this.currentEditProduct.prod_img2);
+      formData.append('prod_img3', this.currentEditProduct.prod_img3);
+      formData.append('prod_img4', this.currentEditProduct.prod_img4);
+
+      axios
+        .post('http://localhost/dai/public/phps/UpdateProduct.php', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            alert('商品已成功更新');
+            this.editMode = false; // 退出编辑模式
+            // 清空編輯圖片顯示的圖片
+            this.currentEditProduct.prod_img1 = null;
+            this.currentEditProduct.prod_img2 = null;
+            this.currentEditProduct.prod_img3 = null;
+            this.currentEditProduct.prod_img4 = null;
+          } else {
+            alert('商品更新失败');
+          }
+        })
+        .catch((error) => {
+          console.error('更新商品请求失败：', error);
+        });
     },
-        handleFileChange(e, index) {
-        const files = e.target.files;
-        for (let i = 0; i < files.length; i++) {
+
+    handleFileChange(e, index, mode) {
+    const files = e.target.files;
+    for (let i = 0; i < files.length; i++) {
         const file = files[i];
         const reader = new FileReader();
         reader.onload = () => {
-            this.pics[index].imageURL = reader.result;
+            if (mode === 'add') {
+                this.pics[index].imageURL = reader.result;
+            } else if (mode === 'edit') {
+                this.originalpics[index].imageURL = reader.result; // 使用 originalpics 數據
+            }
         };
 
         if (file) {
             reader.readAsDataURL(file);
-            this.newProduct[`prod_img${index + 1}`] = file;
+            if (mode === 'add') {
+                this.newProduct[`prod_img${index + 1}`] = file;
+            } else if (mode === 'edit') {
+                this.currentEditProduct[`prod_img${index + 1}`] = file;
+            }
         }
-        }
+    }
+    if (mode === 'add') {
         this.pics[index].fix = true;
+    } else if (mode === 'edit') {
+        this.originalpics[index].fix = true; // 使用 originalpics 數據
+    }
+    },
+        cancelEdit() { //取消編輯並清空圖片
+            this.editMode = false; 
+            this. originalpics = [
+                { imageURL: null, fix: false },
+                { imageURL: null, fix: false },
+                { imageURL: null, fix: false },
+                { imageURL: null, fix: false }
+            ];
+        },
+        cancelAdd() { //取消新增並清空圖片
+            this.addToggle = true; // 
+            this. pics = [
+                { imageURL: null, fix: false },
+                { imageURL: null, fix: false },
+                { imageURL: null, fix: false },
+                { imageURL: null, fix: false }
+            ];
         },
         fetchData() {
             axios.get('http://localhost/dai/public/phps/ProductM.php')
@@ -298,7 +373,7 @@ export default {
         },
     })
     .then((response) => {
-        if (response.status === 200) { //檢查http  狀態碼來判別 php新增成功與否
+        if (response.status === 200) { //檢查http  來判別php新增與否 
             alert('商品已成功新增');
             this.pics = [
                 { imageURL: null, fix: false },
