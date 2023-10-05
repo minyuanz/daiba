@@ -46,8 +46,8 @@ export default {
   methods: {
     login() {
       if (this.memEmail == "" && this.memPwd == "") {
-        // alert("請輸入帳號和密碼")
-        this.$router.push("/user")
+        alert("請輸入帳號和密碼")
+        // this.$router.push("/user")
 
       }
       else {
@@ -61,7 +61,7 @@ export default {
         fetch(`http://localhost/dai/public/phps/login.php`, {
           method: "post",
           // headers: {
-          //   'content-type': 'multipart/form-data'
+          //   'content-type': 'application/x-www-form-urlencoded'
           // },
           // credentials: 'include',
           body: formData
