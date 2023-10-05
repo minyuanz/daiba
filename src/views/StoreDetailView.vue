@@ -260,16 +260,15 @@ export default {
 }
 @media screen and (max-width: 414px){
   .DetailWrap{
-  max-width: 414px;
+  width: 90%;
   padding: 0;
   margin: auto;
-  width: 100%;
   .DetailBox{
-    display: flex;
-    flex-wrap: wrap;
+    display: block;
     width: 100%;
     .DetailPicBox{
     display: flex;
+    gap: .5rem;
     flex-wrap: wrap;
      width: 100%;
      margin: 0;
@@ -281,86 +280,67 @@ export default {
             height:400PX;
         }
      }
-     .DetailPic{
-        margin: 0;
-        padding:0;
+     .DetailPicBox{
+      width: 100%;
+      .DetailPic{
+        width: 25%;
         cursor: pointer;
-        width: 100%;
-        height: 100px;
-        img{
-            margin: 0;
-            padding:0;
-            height:100px;
-            width: 100%;
-        }
+          height: 100px;
+          img{
+              margin: 0;
+              padding:0;
+              height:100px;
+              width: 100%;
+          }
+     }
      }
     }
     .DetailDigBox{
-        margin: 30px 10px;
+        margin: 30px auto;
+        display: block;
+        width: 100%;
         text-align: center;
-        display: flex;
-        flex-wrap: wrap;
-        width: 100%;
-     .Digtitle{
-        margin: auto;
-        width: 100%;
-        border-bottom: 2px solid black;
-        font-size:map-get($map: $fontsizes, $key: h2);
-     }
-     .DigPrice{
-        width: 100%;
-        font-size:map-get($map: $fontsizes, $key: h3);
-        color: red;
-        margin: 20px 0 20px 0;
-     }
-     .DigDes{
-        width: 100%;
-        font-size:map-get($map: $fontsizes, $key: p);
-        margin-bottom: 20px;
-     }
-     .DigCountBox{
-        margin: 20px 0px;
-        width: 50%;
-        font-size:map-get($map: $fontsizes, $key: h3);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        button{
-            height: 20px;
-            width: 20px;
-            margin:20px 10px;
-            font-size:map-get($map: $fontsizes, $key: p);
-            border-radius: 50%;
+        .top{
+          height: 355px;
+          display: block;
+          .Digtitle{
+              margin: 2rem auto;
+          }
+          .DigPrice{
+              margin-bottom:2rem;
+          }
+          .DigDes{
+              margin-bottom: 20px;
+              text-align: left;
+          }
+          .DigCountBox{
+              margin: 20px auto;
+              inset: 0;
+              width: 70%;
+              font-size:map-get($map: $fontsizes, $key: h3);
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              button{
+                  height: 35px;
+                  width: 35px;
+                  margin:20px 10px;
+                  font-size:map-get($map: $fontsizes, $key: h3);
+                  border-radius: 50%;
+              }
+          }
         }
-     }
-     .DigLikeBox{
-        display: flex;
-        justify-content: end;
-        align-items: center;
-        width: 50%;
-        font-size:map-get($map: $fontsizes, $key: h4)
-     }
-     .DigInStore{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size:map-get($map: $fontsizes, $key: h3);
-        width: 100%;
-        border-radius: $border-radius;
-        height: 50px;
-        color: white;
-        background-color: rgb(236, 85, 112);
-        cursor: pointer;
-     }
-     .DigSDES{
-        width: 100%;
-        line-height: 2;
-     }
+        .DigDes{
+              margin:0 0 20px 0;
+          }
     }
     
   }
   .OtherDetailBox{
-      overflow: hidden;
+        overflow-x: scroll; 
+        scroll-behavior: smooth; /* 增加滑動效果 */
+        -webkit-overflow-scrolling: touch; /* ios滑動效果 */
+        scroll-snap-type: x mandatory; 
         width: 100%;
       .OtherDetailTitle{
         text-align: center;
@@ -373,40 +353,24 @@ export default {
       }
       .OtherDetailCardbox{
         display: flex;
-      flex-wrap: nowrap; 
-      overflow-x: auto; 
-      width: 100%; 
-      margin: auto;
-      scroll-behavior: smooth; /* 增加滑動效果 */
-      -webkit-overflow-scrolling: touch; /* ios滑動效果 */
-      scroll-snap-type: x mandatory; 
-      gap: 10px; 
+        width: 80%; 
+        margin:2rem auto;
+        gap: 10px; 
         .OtherDetailCard{
           flex: 0 0 auto; 
-      width: 100%; 
-      box-sizing: border-box; 
-      padding: 10px;
+          width: 100%; 
+          box-sizing: border-box; 
+          padding: 10px;
           .DetailCardImg{
             width: 100%;
             img{
               width: 100%;
             }
           }
-
-        }
-        .DetailCardDes{
-          width: 100%;
-          .CardDesTitle{
-            width: 50%;
-            font-size:map-get($map: $fontsizes, $key: h4);
-          }
-          .CardDesPrice{
-            width: 50%;
-          }
         }
       }
     }
-}
+  }
 }
 </style>  
 
