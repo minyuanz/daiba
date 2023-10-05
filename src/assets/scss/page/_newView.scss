@@ -6,7 +6,7 @@
     margin: 3rem 0 1rem 0;
   }
 
-  h2,
+  container h2,
   h3 {
     margin-top: -0.5rem;
     // color: #fff;
@@ -61,27 +61,30 @@
           inset: 0;
           margin: auto 2rem;
           padding-left: 10%;
-            .toFlex{
-              display: flex;
-              align-items: end;
-              gap: 1rem;
-              .newsTag {
-                background-color: #fff;
-                margin: 0;
-              }
 
-              .newsDate {
-                span {
-                  color: #fff;
-                  letter-spacing: 0.25rem;
-                }
+          .toFlex {
+            display: flex;
+            align-items: end;
+            gap: 1rem;
+
+            .newsTag {
+              background-color: #fff;
+              margin: 0;
+            }
+
+            .newsDate {
+              span {
+                color: #fff;
+                letter-spacing: 0.25rem;
               }
             }
-            .titleh2 {
-              color: #fff;
-              font-weight: 500;
-              line-height: 3.2rem;
-              margin: 1rem 0;
+          }
+
+          .titleh2 {
+            color: #fff;
+            font-weight: 500;
+            line-height: 3.2rem;
+            margin: 1rem 0;
           }
 
           button {
@@ -148,6 +151,7 @@
 
       .newsPic {
         box-shadow: 10px 10px 10px #6666;
+        // width: 2%;
 
         img {
           width: 300px;
@@ -156,29 +160,41 @@
           object-fit: cover;
         }
       }
-      a{
-        position: relative;
-        .newsTxt {
-          position: relative;
-          margin-left: 3%;
 
-          .toFlex{
-            display: flex;
-            align-items: end;
-            gap: .5rem;
-            .newsDate {
-              margin-bottom: 0.8rem;
-              span {
-                letter-spacing: 0.25rem;
+      a {
+        position: relative;
+        // width: 900px;
+        // .hover-container {
+          // width: 60%;
+
+
+          .newsTxt {
+            position: relative;
+            margin-left: 3%;
+            width: 900px;
+
+            .toFlex {
+              display: flex;
+              align-items: end;
+              gap: .5rem;
+
+              .newsDate {
+                margin-bottom: 0.8rem;
+
+                span {
+                  letter-spacing: 0.25rem;
+                }
+              }
+
+              .newsTag {
+                margin: 0 10px 0.8rem 0;
+                // margin-right: 10px;
               }
             }
-            .newsTag {
-              margin: 0 10px 0.8rem 0;
-                // margin-right: 10px;
-            }
           }
-        }
-        a{
+        // }
+
+        a {
           position: absolute;
           right: 0;
           top: 0%;
@@ -204,6 +220,25 @@
     width: 15px;
     height: 15px;
   }
+
+  // .pagination {
+  //   width: 100%;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   margin: auto;
+  //   .paginationmain {
+  //     cursor: pointer;
+  //     width: 50px;
+  //     height: 50px;
+  //     border: none;
+  //     background: none;
+  //   }
+  //   .current-page {
+  //     border: 1px solid black;
+  //     border-radius: 50%;
+  //   }
+  // }
 }
 
 @media screen and (max-width: 414px) {
@@ -270,6 +305,7 @@
 
       .newsCard {
         width: 100%;
+
         // margin: auto;
 
         .newsTxt {
@@ -287,6 +323,7 @@
             display: none;
           }
         }
+
 
         .newsPic {
           display: none;

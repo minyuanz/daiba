@@ -47,19 +47,21 @@ export default {
     login() {
       if (this.memEmail == "" && this.memPwd == "") {
         alert("請輸入帳號和密碼")
+        // this.$router.push("/user")
+
       }
       else {
         // 創建一個新的 FormData 對象
         let formData = new FormData();
         // 將表單數據添加到 FormData 對象中
-        formData.append("memEmail", this.memEmail);
-        formData.append("memPwd", this.memPwd);
+        formData.append("mem_email", this.memEmail);
+        formData.append("mem_pwd", this.memPwd);
 
 
         fetch(`http://localhost/dai/public/phps/login.php`, {
           method: "post",
           // headers: {
-          //   'content-type': 'multipart/form-data'
+          //   'content-type': 'application/x-www-form-urlencoded'
           // },
           // credentials: 'include',
           body: formData

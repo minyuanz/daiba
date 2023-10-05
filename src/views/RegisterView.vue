@@ -95,9 +95,6 @@ export default {
 
         fetch(`http://localhost/dai/public/phps/register.php`, {
           method: "post",
-          // headers: {
-          //   'content-type': 'multipart/form-data'
-          // },
           body: formData
         })
           .then(res => res.json())

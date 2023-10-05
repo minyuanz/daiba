@@ -5,11 +5,11 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
 try {
-    // 获取帐号和密码
+    // 獲取帳號密碼
     $admin_acc = $_POST['admin_acc'];
     $admin_pas = $_POST['admin_pas'];
     
-    // 设置默认的管理等级
+    // 設置默認等級
     $admin_lv = "管理員";
 
     $sql = "INSERT INTO admin (admin_acc, admin_pas, admin_lv) VALUES (:admin_acc, :admin_pas, :admin_lv)";
@@ -22,11 +22,9 @@ try {
 
     $stmt->execute();
 
-    // 成功的响应
     $response = array('error' => false, 'msg' => '新增管理員成功');
     echo json_encode($response);
 } catch (PDOException $e) {
-    // 错误的响应
     $response = array('error' => true, 'msg' => '新增管理員失敗: ' . $e->getMessage());
     echo json_encode($response);
 }

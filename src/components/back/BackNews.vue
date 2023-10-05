@@ -14,11 +14,11 @@
         </div>
         <div class="NewsInfro" v-for="news  in news " :key="news.news_id">
             <p>{{ news.news_id }}</p>
-            <p>{{ news.news_tag2 }}</p>
+            <p>{{ news.news_tag1 }}</p>
             <p>{{ news.news_title }}</p>
             <p>{{ news.news_date }}</p>
-            <div class="edit">
-                <i class="fa-solid fa-pen-to-square"></i>
+            <div class="edit" >
+                <i class="fa-solid fa-pen-to-square" ></i>
             </div>
         </div>
         <div class="addSta">
@@ -39,8 +39,8 @@
                 <label for="">版頭圖片</label>
                 <div class="pic">
                     <p>＋</p>
-                    <input type="file" @change="FileChange">
-                    <img :src="formData.imageURL" v-show="fix">
+                    <input type="file" @change="FileChange" name="image">
+                    <img :src="picURL" v-show="fix">
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@
             <label for="">消息分類：</label>
             <select name="" id="" v-model="formData.tag">
                 <option value="活動消息">活動消息</option>
-                <option value="活動消息">最新消息</option>
+                <option value="最新消息">最新消息</option>
             </select>
         </div>
         <div class="Ctx">
@@ -79,24 +79,30 @@ export default {
                 imageURL: null,
                 content: "",
             },
+            picURL:"",
             news: []
         }
     },
     methods: {
         FileChange(e) {
+            console.log(e.target.files[0].name);
             const file = e.target.files[0]; // 獲取所有所選文件
             const reader = new FileReader();
+            let URL = "../../img/"
+            let fileName = file.name
 
             console.log(file);
             console.log(reader);
 
+            // this.formData.imageURL = `${URL}${fileName}`
             reader.onload = () => {
                 // 當讀取完成時觸發
-                this.formData.imageURL = reader.result; // 將 Data URL 賦值給圖片的 src
+                this.picURL = reader.result; // 將 Data URL 賦值給圖片的 src
             };
 
             if (file) {
                 reader.readAsDataURL(file); // 讀取文件內容，以 Data URL 形式
+                this.formData.imageURL=file
             }
             this.fix = true
 
@@ -118,7 +124,7 @@ export default {
                 .then(res => res.json())
                 .then((res) => {
                     if (!res.error) {
-                        alert("add success")
+                        alert(res.msg)
                         this.addToggle = !this.addToggle;
                     }
                 })
