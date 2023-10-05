@@ -54,8 +54,8 @@ export default {
         // 創建一個新的 FormData 對象
         let formData = new FormData();
         // 將表單數據添加到 FormData 對象中
-        formData.append("memEmail", this.memEmail);
-        formData.append("memPwd", this.memPwd);
+        formData.append("mem_email", this.memEmail);
+        formData.append("mem_pwd", this.memPwd);
 
 
         fetch(`http://localhost/dai/public/phps/login.php`, {
