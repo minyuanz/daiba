@@ -26,7 +26,7 @@
             </div>
             <!-- 下一步 -->
             <div class="next">
-                <ButtonS class="btn_s" :HTMLInner="btninner[0]" @click="ToSubmit"/>
+                <ButtonS class="btn_s" :HTMLInner="btninner[0]" @click="ToSubmit" />
                 <!-- <button class="btn_s" @click="ToSubmit">下一步</button> -->
             </div>
         </div>
@@ -34,62 +34,62 @@
 
     <!-- 填寫頁面 -->
     <section class="SubmitArea" v-show="Submit">
-
-        <ul>
-            <li>
-                <label for="title">標題</label>
-                <input type="txt" v-model="title" @input="checkTitle">
-                <span v-if="titleError">請輸入標題</span>
-            </li>
-            <li>
-                <label for="title">副標題</label>
-                <input type="txt" v-model="subtitle" @input="checkSubTitle">
-                <span v-if="subTitleError">請輸入副標題</span>
-            </li>
-            <li>
-                <label for="title">選擇分類</label>
-                <div class="select">
-                    <select name="" id="" v-model="selectedLine"
-                        @change="checkClass(selectedLine, selectedStation, selectedClass)">
-                        <option value="0">請選擇捷運線</option>
-                        <option value="blue">板南線</option>
-                    </select>
-                    <select name="" id="" v-model="selectedStation"
-                        @change="checkClass(selectedLine, selectedStation, selectedClass)">
-                        <option value="0">請選擇捷運站</option>
-                        <option value="Banqiao">板橋</option>
-                    </select>
-                    <select name="" id="" v-model="selectedClass"
-                        @change="checkClass(selectedLine, selectedStation, selectedClass)">
-                        <option value="0">請選擇項目</option>
-                        <option value="eats">美食</option>
-                    </select>
-                </div>
-                <span v-if="classError">請選擇分類</span>
-            </li>
-            <li>
-                <label for="title">上傳圖片</label>
-                <div class="UploadImg">
-                    <div class="img" v-for="i in 3" :key="i">
-                        <p>＋</p>
-                        <input type="file" accept="image/*" multiple @change="handleFileUpload(i, $event)">
-                        <img v-if="imgsData[i]" :src="uploadedImages[i]" alt="">
+        <form @submit.prevent="addNewSubmit" enctype="multipart/form-data">
+            <ul>
+                <li>
+                    <label for="title">標題</label>
+                    <input type="txt" v-model="newSubmitArticle.title" @input="checkTitle">
+                    <span v-if="titleError">請輸入標題</span>
+                </li>
+                <li>
+                    <label for="title">副標題</label>
+                    <input type="txt" v-model="newSubmitArticle.subTitle" @input="checkSubTitle">
+                    <span v-if="subTitleError">請輸入副標題</span>
+                </li>
+                <li>
+                    <label for="title">選擇分類</label>
+                    <div class="select">
+                        <select name="" id="" v-model="newSubmitArticle.line" @change="checkClass(newSubmitArticle)">
+                            <option value="0">請選擇捷運線</option>
+                            <option value="blue">板南線</option>
+                        </select>
+                        <select name="" id="" v-model="newSubmitArticle.station" @change="checkClass(newSubmitArticle)">
+                            <option value="0">請選擇捷運站</option>
+                            <option value="Banqiao">板橋</option>
+                        </select>
+                        <select name="" id="" v-model="newSubmitArticle.class" @change="checkClass(newSubmitArticle)">
+                            <option value="0">請選擇項目</option>
+                            <option value="eats">美食</option>
+                            <option value="spot">景點</option>
+                            <option value="hotel">住宿</option>
+                        </select>
                     </div>
-                </div>
-                <span v-if="imageError">請至少上傳一張圖片</span>
-            </li>
-            <li>
-                <label for="txt">內文</label>
-                <textarea name="" id="txt" cols="30" rows="10" style="resize:none" v-model="txt"
-                    @input="checkTxt"></textarea>
-                <span v-if="txtError">請輸入內文</span>
-            </li>
-        </ul>
+                    <span v-if="classError">請選擇分類</span>
+                </li>
+                <li>
+                    <label for="title">上傳圖片</label>
+                    <div class="UploadImg">
+                        <div class="img" v-for="i in 3" :key="inputKey">
+                            <p>＋</p>
+                            <input type="file" accept="image/*" multiple @change="handleFileUpload(i, $event)"
+                                :name="img + inputKey">
+                            <img v-if="imgsData[i]" :src="uploadedImages[i]" alt="">
+                        </div>
+                    </div>
+                    <span v-if="imageError">請至少上傳一張圖片</span>
+                </li>
+                <li>
+                    <label for="txt">內文</label>
+                    <textarea name="" id="txt" cols="30" rows="10" style="resize:none" v-model="newSubmitArticle.content"
+                        @input="checkTxt"></textarea>
+                    <span v-if="txtError">請輸入內文</span>
+                </li>
+            </ul>
 
-        <div class="next">
-            <ButtonS class="btn_s" :HTMLInner="btninner[0]" @click="Send"/>
-        </div>
-
+            <div class="next">
+                <ButtonS class="btn_s" :HTMLInner="btninner[0]" type="submit" />
+            </div>
+        </form>
 
     </section>
 
@@ -99,7 +99,7 @@
         <p>感謝您的投稿，我們將為您審核，請耐心等候。</p>
         <div class="next">
             <router-link to="/Contribute" class="btn_s">
-                <ButtonS :HTMLInner="btninner[1]"/>
+                <ButtonS :HTMLInner="btninner[1]" />
             </router-link>
         </div>
     </section>
@@ -109,10 +109,11 @@
 <script>
 import { Checkbox } from 'view-ui-plus';
 import ButtonS from '@/components/ButtonS.vue';
+import axios from 'axios';
 export default {
     data() {
         return {
-            btninner:["下一步","返回投稿熱門"],
+            btninner: ["下一步", "返回投稿熱門"],
             Norms: true,
             Submit: false,
             Finish: false,
@@ -124,18 +125,26 @@ export default {
             classError: false,
             imageError: false,
             txtError: false,
-            selectedLine: '0',
-            selectedStation: '0',
-            selectedClass: '0',
             uploadedImages: [],
             imgsData: [],
+            inputKey: 1,
+            newSubmitArticle: {
+                title: '',
+                subTitle: '',
+                line: '0',
+                station: '0',
+                class: '0',
+                pic1: null,
+                pic2: null,
+                pic3: null,
+                content: '',
+            },
 
         }
     },
-    components:{
-    ButtonS
+    components: {
+        ButtonS
     },
-
     methods: {
         ToSubmit() {
             let consent = document.getElementById('checkbox').checked
@@ -148,28 +157,28 @@ export default {
         },
 
         checkTitle() {
-            if (this.title === '') {
+            if (this.newSubmitArticle.title === '') {
                 this.titleError = true;
             } else {
                 this.titleError = false;
             }
         },
         checkSubTitle() {
-            if (this.subtitle === '') {
+            if (this.newSubmitArticle.subTitle === '') {
                 this.subTitleError = true;
             } else {
                 this.subTitleError = false;
             }
         },
-        checkClass(selectedLine, selectedStation, selectedClass) {
-            if (selectedLine === '0' || selectedStation === '0' || selectedClass === '0') {
+        checkClass(newSubmitArticle) {
+            if (newSubmitArticle.line === '0' || newSubmitArticle.section === '0' || newSubmitArticle.class === '0') {
                 this.classError = true;
             } else {
                 this.classError = false;
             }
         },
         checkTxt() {
-            if (this.txt === '') {
+            if (this.newSubmitArticle.txt === '') {
                 this.txtError = true;
             } else {
                 this.txtError = false;
@@ -186,7 +195,7 @@ export default {
         Send() {
             this.checkTitle();
             this.checkSubTitle();
-            this.checkClass(this.selectedLine, this.selectedStation, this.selectedClass);
+            // this.checkClass();
             this.checkTxt();
             this.checkImg();
 
@@ -194,24 +203,72 @@ export default {
                 alert('請檢查輸入欄位');
                 return; // 停止执行
             } else {
-                this.Submit = false;
-                this.Finish = true;
+
             }
 
         },
+        // 預覽圖片
         handleFileUpload(index, event) {
             const fileInput = event.target;
             const files = fileInput.files;
             console.log(fileInput)
             console.log(files)
-            
+
             for (let j = 0; j < files.length; j++) {
                 const file = files[j];
 
                 this.uploadedImages[index] = URL.createObjectURL(file);
                 this.imgsData[index] = true;
+                this.newSubmitArticle[`pic${index}`] = file;
+
+
+
             }
 
+
+        },
+        addNewSubmit() {
+            console.log(this.newSubmitArticle)
+            const formData = new FormData();
+            formData.append('art_title', this.newSubmitArticle.title);
+            formData.append('art_subTitle', this.newSubmitArticle.subTitle);
+            formData.append('sta_id', this.newSubmitArticle.station);
+            formData.append('fea_id', this.newSubmitArticle.class);
+            formData.append('art_pic1', this.newSubmitArticle.pic1);
+            formData.append('art_pic2', this.newSubmitArticle.pic2);
+            formData.append('art_pic3', this.newSubmitArticle.pic3);
+            formData.append('art_content', this.newSubmitArticle.content);
+
+            axios.post('http://localhost/dai/public/phps/submit.php', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+                .then((response) => {
+                    if (response.status === 200) { //檢查http  狀態碼來判別 php新增成功與否
+                        alert('');
+                        this.Submit = false;
+                        this.Finish = true;
+                        // 下面為新增成功後 清空表單
+
+                        this.newSubmitArticle = {
+                            title: '',
+                            subTitle: '',
+                            line: '0',
+                            station: '0',
+                            class: '0',
+                            pic1: null,
+                            pic2: null,
+                            pic3: null,
+                            content: '',
+                        };
+                    } else {
+                        this.Send();
+                    }
+                })
+                .catch((error) => {
+                    console.error('新增商品請求失敗：', error);
+                });
         },
     }
 }

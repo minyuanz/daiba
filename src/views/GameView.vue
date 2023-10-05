@@ -32,7 +32,7 @@
         <img src="@/assets/images/game/costume.jpg" alt="更衣室">
       </div>
       <div class="main">
-        <div class="model" @drop="dropped($event)" @dragover="allowDrop($event)">
+        <div class="model" >
           <img src="~@/assets/images/game/costume/doll_naked.png" alt="人物">
         </div>
         <div class="list">
@@ -44,9 +44,8 @@
             <span @click="selectType($event)">配件</span>
           </div>
           <div class="item" data-role="drag-drop-container">
-            <div class="pic" v-for="item in newCostumeItem" :key="itemIndex" draggable="true"
-              @dragstart="startDrag($event)">
-              <img :src="item.img" :alt="item.alt" draggable="true" :class="className(item.alt)">
+            <div class="pic" v-for="item in newCostumeItem" :key="itemIndex">
+              <img :src="item.img" :alt="item.alt">
             </div>
           </div>
 
@@ -802,19 +801,19 @@ export default {
         this.newCostumeItem = this.costumeItem.filter(costumeItem => costumeItem.alt === type);
       }
     },
-    className(itemAlt) {
-      if (itemAlt === '上衣') {
-        return 'top'
-      } else if (itemAlt === '下身') {
-        return 'bottom'
-      } else if (itemAlt === '套裝') {
-        return 'suit'
-      } else if (itemAlt === '外套') {
-        return 'outer '
-      } else if (itemAlt === '配件') {
-        return 'acc'
-      }
-    },
+    // className(itemAlt) {
+    //   if (itemAlt === '上衣') {
+    //     return 'top'
+    //   } else if (itemAlt === '下身') {
+    //     return 'bottom'
+    //   } else if (itemAlt === '套裝') {
+    //     return 'suit'
+    //   } else if (itemAlt === '外套') {
+    //     return 'outer '
+    //   } else if (itemAlt === '配件') {
+    //     return 'acc'
+    //   }
+    // },
 
     // 拖曳
     startDrag(event) {
