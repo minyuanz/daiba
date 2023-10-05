@@ -8,15 +8,15 @@
         "mrt_name": "捷運線名稱",
         "sta_name": "捷運站名稱",
         "prod_img1":
-          "https://s.yimg.com/ny/api/res/1.2/8uRqoZpuohjf5H4TGtcfZg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTY0MDtoPTQyNw--/https://media.zenfs.com/en/stormmediagroup.com/503e1d14e2e104ea99eabd75774ff721",
-        "prod_img2": "https://www.chiate88.com.tw/Uploads/6f5bfbd1-4eca-4526-a20e-6be0edaa45f4.jpe",
-        "prod_img3": "https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/N00/060/04/N000600413.jpg&v=6021fb66k&w=375&h=375",
+          "https://shoplineimg.com/59e80dc25521157e6000317c/611e157dc817f700388f6c61/800x.webp?source_format=png",
+        "prod_img2": "https://shoplineimg.com/59e80dc25521157e6000317c/611e157dfcdb72003e8b68d9/800x.webp?source_format=png",
+        "prod_img3": "https://shoplineimg.com/59e80dc25521157e6000317c/611e157b4554d40038c3e8fb/800x.webp?source_format=png",
         "prod_img4": "",
         "prod_spe":"伴手禮"
       },
       {
         "pord_id": "2",
-        "pord_name": "台北捷運珪藻土杯墊(隨機)",
+        "pord_name": "台捷珪藻土杯墊(隨機)",
         "pord_bdes": "將捷運車站特色紀念章戳衍生各類文創商品，除收藏您的旅行記憶軌跡外，更是生活上不可或缺的實用小品。",
         "pord_bdes2": "材質：珪藻士、包裝尺寸：9.5 x 9.5 x 1 cm",
         "pord_price": 180,
@@ -76,7 +76,7 @@
       },
       {
         "pord_id": "6",
-        "pord_name": " 紀念章戳精選T恤衫(隨機)",
+        "pord_name": " 紀念章戳T恤(隨機)",
         "pord_bdes": "將捷運車站特色紀念章戳衍生各類文創商品，除收藏您的旅行記憶軌跡外，陪您穿搭更有型",
         "pord_bdes2": "材質：棉、尺寸：衣寬 51 cm、衣長 66 cm、建議身高：150 - 180 cm ",
         "pord_price": 350,
@@ -106,7 +106,7 @@
       },
       {
         "pord_id": "8",
-        "pord_name": "迴力火車軌道- 高架車站組",
+        "pord_name": "迴力火車-高架車站",
         "pord_bdes": "可多樣性的軌道組合，玩樂過程中充滿創意及挑戰，快和孩子們一起建構屬於你們的鐵道王國吧！",
         "pord_bdes2": "內容物：彎軌*12、直軌*10、高橋墩*8、矮橋墩*12、車站月台*1、車站配件*1、平交道底座*2、平交道配件*2、配件1包 ※本商品不含迴力車，可於賣場另外選購!",
         "pord_price": 990,
