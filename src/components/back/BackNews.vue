@@ -1,5 +1,5 @@
 <template>
-    <div class="BackNews" v-if="addToggle">
+    <div class="BackNews" v-if="addToggle" v-show="!editMode">
         <div class="NewsSearch">
             商品編號查詢:
             <input type="text">
@@ -12,13 +12,13 @@
             <p>發布日期</p>
             <p>編輯</p>
         </div>
-        <div class="NewsInfro" v-for="news  in news " :key="news.news_id">
+        <div class="NewsInfro" v-for="news in news " :key="news.news_id">
             <p>{{ news.news_id }}</p>
             <p>{{ news.news_tag1 }}</p>
             <p>{{ news.news_title }}</p>
             <p>{{ news.news_date }}</p>
-            <div class="edit" >
-                <i class="fa-solid fa-pen-to-square" ></i>
+            <div class="edit" @click="startEditMode(news)">
+                <i class="fa-solid fa-pen-to-square"></i>
             </div>
         </div>
         <div class="addSta">
@@ -40,7 +40,7 @@
                 <div class="pic">
                     <p>＋</p>
                     <input type="file" @change="FileChange" name="image">
-                    <img :src="picURL" v-show="fix">
+                    <img :src="picURL" v-show="show">
                 </div>
             </div>
         </div>
@@ -61,6 +61,44 @@
             <button @click="addNews" type="button">確認新增</button>
         </div>
     </form>
+    <form class="newsAdd" v-if="editMode">
+        <div class="mainTitle">
+            <label for="">消息標題</label>
+            <input type="text" v-model="currentEditnews.news_title" id="news_title">
+        </div>
+        <div class="secTitle">
+            <label for="">文章副標</label>
+            <input type="text" v-model="currentEditnews.news_bdes" id="news_bdes">
+        </div>
+        <div class="mainPic">
+            <div class="uploadPic">
+                <label for="">版頭圖片</label>
+                <div class="pic">
+                    <p>＋</p>
+                    <img :src="`${this.$store.state.imgURL}` + currentEditnews.news_pic1"
+                        v-if="currentEditnews.news_pic1 !== '' ? true : false">
+                    <input type="file" @change="FileUpdate" name="image">
+                    <img :src="picURL" alt="" v-show="show">
+                </div>
+            </div>
+        </div>
+        <div class="choose">
+            <label for="">消息分類：</label>
+            <select name="" id="" v-model="currentEditnews.news_tag1">
+                <option value="活動消息">活動消息</option>
+                <option value="最新消息">最新消息</option>
+            </select>
+        </div>
+        <div class="Ctx">
+            <label for="">內文</label>
+            <textarea class="custom-input" v-model="currentEditnews.news_des1"></textarea>
+            <!-- <input type="text"> -->
+        </div>
+        <div class="btn">
+            <button @click="cancelEdit">取消編輯</button>
+            <button type="button" @click="updateNews">確認編輯</button>
+        </div>
+    </form>
 </template>
 
 <script>
@@ -68,10 +106,10 @@ import BackProTest from "@/testdata/BackProTest.json"
 export default {
     data() {
         return {
-            item: BackProTest,
-            items: BackProTest.map((item) => ({ ...item, isChecked: false, })),
+            // item: BackProTest,
+            // items: BackProTest.map((item) => ({ ...item, isChecked: false, })),
             addToggle: true,
-            fix: false,
+            show: false,
             formData: {
                 title: "",
                 sectitle: "",
@@ -79,22 +117,31 @@ export default {
                 imageURL: null,
                 content: "",
             },
-            picURL:"",
-            news: []
+            picURL: "",
+            news: [],
+            editMode: false, // 編輯模式的開啟與否
+            currentEditnews: "", // 編輯的資料
+            // currentpicURL:""
         }
     },
     methods: {
+        cancelEdit() {
+            this.editMode = false;  //取消編輯並清空圖片
+            this.show = false;
+            this.picURL = ""
+        },
+        startEditMode(news) {
+            this.editMode = true; // 用v-show進入編輯模式
+            this.currentEditnews = { ...news }; // 複製數據進入編輯
+        },
         FileChange(e) {
             console.log(e.target.files[0].name);
             const file = e.target.files[0]; // 獲取所有所選文件
             const reader = new FileReader();
-            let URL = "../../img/"
-            let fileName = file.name
 
-            console.log(file);
-            console.log(reader);
+            // console.log(file);
+            // console.log(reader);
 
-            // this.formData.imageURL = `${URL}${fileName}`
             reader.onload = () => {
                 // 當讀取完成時觸發
                 this.picURL = reader.result; // 將 Data URL 賦值給圖片的 src
@@ -102,9 +149,29 @@ export default {
 
             if (file) {
                 reader.readAsDataURL(file); // 讀取文件內容，以 Data URL 形式
-                this.formData.imageURL=file
+                this.formData.imageURL = file
             }
-            this.fix = true
+            this.show = true
+
+        },
+        FileUpdate(e) {
+            console.log(e.target.files[0].name);
+            const file = e.target.files[0]; // 獲取所有所選文件
+            const reader = new FileReader();
+
+            // console.log(file);
+            // console.log(reader);
+
+            reader.onload = () => {
+                // 當讀取完成時觸發
+                this.picURL = reader.result; // 將 Data URL 賦值給圖片的 src
+            };
+
+            if (file) {
+                reader.readAsDataURL(file); // 讀取文件內容，以 Data URL 形式
+                this.currentEditnews.news_pic1 = file
+            }
+            this.show = true
 
         },
         addNews() {
@@ -126,6 +193,31 @@ export default {
                     if (!res.error) {
                         alert(res.msg)
                         this.addToggle = !this.addToggle;
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        updateNews() {
+            const formData = new FormData();
+            formData.append('news_id', this.currentEditnews.news_id);
+            formData.append("news_title", this.currentEditnews.news_title);
+            formData.append("news_sectitle", this.currentEditnews.news_bdes);
+            formData.append("news_tag", this.currentEditnews.news_tag1);
+            formData.append("news_imageURL", this.currentEditnews.news_pic1);
+            formData.append("news_content", this.currentEditnews.news_des1);
+
+            fetch(`http://localhost/dai/public/phps/UpdateNews.php`, {
+                method: "post",
+                body: formData
+            })
+                .then(res => res.json())
+                .then((res) => {
+                    if (!res.error) {
+                        alert(res.msg)
+                        this.editMode = false; // 退出编辑模式
+                        this.currentEditProduct.news_pic1 = null;
                     }
                 })
                 .catch(function (error) {
