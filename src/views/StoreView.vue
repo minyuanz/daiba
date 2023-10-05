@@ -29,18 +29,19 @@
       <div v-for="item  in paginatedProducts "  :key="item.pord_id"  class="storeCard">
         <router-link :to="'/storeDetail/' + item.pord_id" >
           <div class="imgbox">
-          <img  class="storeCardimg" :src="item.prod_img1" alt=""/>
+            <img  class="storeCardimg" :src="item.prod_img1" alt=""/>
+            <div class="storeButton">
+              <i class="fa-regular fa-heart" style="cursor: pointer"></i>
+            </div>
           </div>
       </router-link>
         <div class="storeBottom">
           <div class="storeCardText">
-            <h3 class="CardDes">{{ item.pord_name }}</h3>
-            <h4 class="CardPri">NT${{ item.pord_price }}</h4>
+            <h2 class="CardDes">{{ item.pord_name }}</h2>
+            <h3 class="CardPri">NT${{ item.pord_price }}</h3>
           </div>
           <div class="storeButton">
-            <i class="fa-regular fa-heart" style="cursor: pointer"></i>
             <button class="btn_s" @click="addToCart(item)">加入購物車</button>
-            <div></div>
           </div>
         </div>
       </div>
@@ -242,47 +243,61 @@ export default {
     justify-content: space-between;
 
     .storeCard {
-      display: flex;
-      flex-wrap: wrap;
-      width: 31%;
+      border: #eee 8px solid;
+      width: 32%;
       overflow: hidden;
-      margin-block: 3.5rem;
+      padding: 2rem;
+      margin-block: 2rem;
       .imgbox{
         width: 100%;
-        height: 300px;
+        // height: 300px;
+        position: relative;
       .storeCardimg {
-        width: 400px;
-        height: 300px;
+        width: 100%;
         cursor: pointer;
+        object-fit: cover;
       }
+      .storeButton {
+          position: absolute;
+          right: 10px;
+          bottom: 10px;
+          font-size: 30px;
+          z-index: 2;
+          .fa-heart{
+            color:#ddd;
+            // background-color: #fff;
+          }
+        }
       }
       .storeBottom {
-        display: flex;
+        // display: flex;
         width: 100%;
-        justify-content: space-between;
+        position: relative;
 
         .storeCardText {
-          width: 60%;
+          width: 100%;
           display: flex;
           flex-wrap: wrap;
           flex-direction: column;
 
           .CardDes {
-            margin: 10px 0 0 0;
+            font-size: 30px;
+            margin: 10px 0 ;
+            // color: #444;
+
           }
           .CardPri {
             color: #5b5b5b;
           }
         }
         .storeButton {
-          display: flex;
-          align-items: end;
-          width: 70%;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          width: 180;
           font-size: 30px;
-          justify-content: end;
           button {
-            margin-left: 1rem;
-            width: 60%;
+            width: 160px;
           }
         }
       }
@@ -293,16 +308,19 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: auto;
+    margin: 5rem auto;
     .paginationmain {
+      margin: 0 .5rem;
       cursor: pointer;
-      width: 50px;
-      height: 50px;
+      width: 45px;
+      height: 45px;
       border: none;
       background: none;
+      color: #555;
+      font-size:18px;
     }
     .current-page {
-      border: 1px solid black;
+      border: 1px solid #999;
       border-radius: 50%;
     }
   }
@@ -435,11 +453,10 @@ export default {
         .imgbox{
         width: 100%;
         height: 200px;
-        object-fit: fill;
        .storeCardimg {
         width: 100%;
         height: 200px;
-        object-fit: fill;
+        object-fit: cover;
         cursor: pointer;
       }
       }
@@ -487,13 +504,15 @@ export default {
       margin: auto;
       .paginationmain {
         cursor: pointer;
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
         border: none;
         background: none;
+        color: #555;
+        font-size: 18px;
       }
       .current-page {
-        border: 1px solid black;
+        border: 1px solid #999;
         border-radius: 50%;
       }
     }

@@ -164,7 +164,7 @@
                 <div class="uploadPic">
                     <div class="pic">
                     <p>＋</p>
-                    <img :src="`${this.$store.state.imgURLp}` +  currentEditProduct.prod_img4" v-if=" currentEditProduct.prod_img4 !== '' ? true : false" >
+                    <img :src="`${this.$store.state.imgURLp}` +  currentEditProduct.prod_img14" v-if=" currentEditProduct.prod_img4 !== '' ? true : false" >
                     <input type="file" name="image4" @change="handleFileChange($event, 3, 'edit')">
                     <img :src="originalpics[3].imageURL" v-show="originalpics[3].fix">
                     </div>

@@ -1,30 +1,33 @@
 <?php
 // session_start();
-header("Access-Control-Allow-Origin:*");
-$email = $_POST["email"];
-$pwd = $_POST["pwd"];
-$errMsg = "";
-try {
+    header("Access-Control-Allow-Origin:*");
+    session_start();
+    $email = $_POST["mem_email"];
+    $pwd = $_POST["mem_pwd"];
+    $errMsg = "";
+    try {
 
-    require_once("connect_chd103g5.php");
-	$sql = "select * from member where mem_email=:mem_email and mem_pwd=:mem_pwd";
+        require_once("connect_chd103g5_2.php");
+        $sql = "select * from member where mem_email=:mem_email and mem_pwd=:mem_pwd";
 
-    $member = $pdo->prepare( $sql ); //先編譯好
-    $member->bindValue(":mem_email", $email); //代入資料
-    $member->bindValue(":mem_pwd", $pwd);
-    $member->execute();//執行之
+        $member = $pdo->prepare( $sql ); //先編譯好
+        $member->bindValue(":mem_email", $email); //代入資料
+        $member->bindValue(":mem_pwd", $pwd);
+        $member->execute();//執行之
 
-    // 獲取資料庫中的會員資訊
-    if( $member->rowCount() == 0 ){//找不到
-        $errMsg .= "帳密錯誤, <a href='sessionLogin.html'>重新登入</a><br>";
+        // 獲取資料庫中的會員資訊
+        if( $member->rowCount() == 0 ){//找不到
+        // $errMsg .= "帳密錯誤, <a href='sessionLogin.html'>重新登入</a><br>";
+        echo "{}";
     }else{
         $memRow = $member->fetch(PDO::FETCH_ASSOC);
         //登入成功,將登入者的資料寫入session
-        session_start();
-        // $_SESSION["email"] = $memRow["email"];
-        // $_SESSION["pwd"] = $memRow["pwd"];
-        $_SESSION['member'] = $memRow;
-        echo json_encode($memRow);
+        // session_start();
+        $_SESSION["mem_email"] = $memRow["mem_email"];
+        $_SESSION["mem_pwd"] = $memRow["mem_pwd"];
+        // $_SESSION['member'] = $memRow;
+        $result = ["mem_email"=>$memRow["mem_email"], "mem_pwd"=>$memRow["mem_pwd"]];
+        echo json_encode($result);
     }
 } catch (PDOException $e) {
     $errMsg .= "錯誤 : ".$e -> getMessage()."<br>";
