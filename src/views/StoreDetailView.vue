@@ -2,7 +2,12 @@
     <div class="DetailWrap" >
       <div class="DetailBox">
         <div class="DetailPicBox">
-            <div class="DetailMainPic"><img :src="selectedImage" alt=""></div>
+            <div class="DetailMainPic">
+              <img :src="selectedImage" alt="">
+              <div class="DigLikeBox">
+                  <i class="fa-regular fa-heart" style="cursor: pointer;"></i>
+              </div>
+            </div>
             <div class="DetailPic">
               <img @click="selectImage(foundObject.prod_img1)"  :src="foundObject.prod_img1" alt="" >
               <img @click="selectImage(foundObject.prod_img2)"  :src="foundObject.prod_img2" alt="" >
@@ -11,29 +16,27 @@
             </div>
         </div>
         <div class="DetailDigBox">
+          <div class="top">
             <h2 class="Digtitle">{{ foundObject.pord_name }}</h2>
             <div class="DigPrice">NT.{{ foundObject.pord_price }}</div>
             <div class="DigDes">{{ foundObject.pord_bdes }}</div>
-            <div class="DigCountBox">
-                數量
-                <button @click="decrementCount">-</button>
-                {{ count }}
-                <button  @click="incrementCount">+</button>  
-            </div>
-            <div class="DigLikeBox">
-                <i class="fa-regular fa-heart" style="cursor: pointer;"></i>
-                加入收藏
-            </div>
+              <div class="DigCountBox">
+                  數量
+                  <button @click="decrementCount">-</button>
+                  {{ count }}
+                  <button  @click="incrementCount">+</button>  
+              </div>
             <div class="DigInStore"  @click="addToCart(foundObject)">加入購物車</div>
-            <div class="DigSDES">
-                商品訊息:
-                {{ foundObject.pord_bdes2 }}
-            </div>
+          </div>
+          <div class="DigSDES">
+              商品訊息:
+              {{ foundObject.pord_bdes2 }}
+          </div>
         </div>
       </div>
       <div class="OtherDetailBox">
         <div class="OtherDetailTitle">
-          <p>你可能會喜歡</p>
+          <h3>你可能會喜歡</h3>
         </div>
         <div class="OtherDetailCardbox">
           <router-link v-for="product in randomProducts" :key="product.pord_id" :to="'/storeDetail/' + product.pord_id" class="OtherDetailCard" @click="generateRandomProducts">
@@ -119,17 +122,25 @@ export default {
   .DetailBox{
     display: flex;
     width: 100%;
+    gap: 3rem;
     .DetailPicBox{
     display: flex;
     flex-wrap: wrap;
      width: 50%;
-     margin: 5%;
      .DetailMainPic{
+        position: relative;
         height:500PX;
         width:100%;
         img{
             width: 100%;
             height: 500px;
+        }
+        .DigLikeBox{
+          position: absolute;
+          font-size: 36px;
+          bottom: 1rem;
+          right: 1rem;
+          color: #eee;
         }
      }
      .DetailPic{
@@ -138,97 +149,101 @@ export default {
         width: 20%;
         display: flex;
         img{
-            margin: 0 10px;
+            margin: 0 10px 0 0;
             height: 100%;
             width: 100%;
         }
      }
     }
     .DetailDigBox{
-        display: flex;
-        flex-wrap: wrap;
+        // display: flex;
+        // flex-wrap: wrap;
         width: 50%;
-     .Digtitle{
-        margin: auto;
-        width: 100%;
-        border-bottom: 2px solid black;
-        font-size:map-get($map: $fontsizes, $key: h2);
-     }
-     .DigPrice{
-        width: 100%;
-        font-size:map-get($map: $fontsizes, $key: h3);
-        color: red;
-        margin: 20px 0 20px 0;
-     }
-     .DigDes{
-        width: 100%;
-        font-size:map-get($map: $fontsizes, $key: p);
-        margin-bottom: 20px;
-     }
-     .DigCountBox{
-        width: 50%;
-        font-size:map-get($map: $fontsizes, $key: p);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        button{
-            height: 30px;
-            width: 30px;
-            margin:30px;
-            font-size:map-get($map: $fontsizes, $key: p);
-            border-radius: 50%;
+        // gap: 2rem;
+        .top{
+          display: flex;
+          flex-direction: column;
+          height: 500px;
+          justify-content: space-between;
+          .Digtitle{
+              margin:0 auto;
+              width: 100%;
+              border-bottom: 2px solid black;
+              font-size:map-get($map: $fontsizes, $key: h2);
+          }
+          .DigPrice{
+              width: 100%;
+              font-size:map-get($map: $fontsizes, $key: h3);
+              color: red;
+              margin: 20px 0 20px 0;
+          }
+          .DigDes{
+              width: 100%;
+              font-size:map-get($map: $fontsizes, $key: p);
+              line-height: 1.8rem;
+              // margin-bottom: 20px;
+          }
+          .DigCountBox{
+                width: 50%;
+                font-size:21px;
+                display: flex;
+                align-items: center;
+                button{
+                    height: 30px;
+                    width: 30px;
+                    margin:30px;
+                    font-size:map-get($map: $fontsizes, $key: p);
+                    border-radius: 50%;
+                }
+            }
+
+          .DigInStore{
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size:map-get($map: $fontsizes, $key: h3);
+              width: 100%;
+              border-radius: $border-radius;
+              height: 50px;
+              color: white;
+              background-color: rgb(236, 85, 112);
+              cursor: pointer;
+          }
         }
-     }
-     .DigLikeBox{
-        display: flex;
-        justify-content: end;
-        align-items: center;
-        width: 50%;
-     }
-     .DigInStore{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size:map-get($map: $fontsizes, $key: h3);
-        width: 100%;
-        border-radius: $border-radius;
-        height: 50px;
-        color: white;
-        background-color: rgb(236, 85, 112);
-        cursor: pointer;
-     }
+
      .DigSDES{
         width: 100%;
         line-height: 2;
+        margin-top: 20px;
      }
     }
     
   }
   .OtherDetailBox{
+    margin-top: 2rem;
       width: 100%;
       .OtherDetailTitle{
         text-align: center;
         letter-spacing: 5px;
         padding-bottom: 25px;
         border-bottom: 3px solid black;
-        p{
-          font-size:map-get($map: $fontsizes, $key: h3);
-        }
       }
       .OtherDetailCardbox{
         width: 100%;
         display: flex;
-        flex-wrap: wrap;
-        margin: auto;
+        gap: 1rem;
+        margin: 1rem auto;
         .OtherDetailCard{
+          border: #eee 5px solid;
           padding: 10px;
           width: 25%;
           .DetailCardImg{
             width: 100%;
-            height: 200px;
+            height: 240px;
             img{
               width: 100%;
-              height: 200px;
+              height: 100%;
+              object-fit: cover;
             }
           }
 
@@ -236,11 +251,8 @@ export default {
         .DetailCardDes{
           width: 100%;
           .CardDesTitle{
-            width: 50%;
+            margin-top: .5rem;
             font-size:map-get($map: $fontsizes, $key: h4);
-          }
-          .CardDesPrice{
-            width: 50%;
           }
         }
       }
