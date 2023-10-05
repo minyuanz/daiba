@@ -311,12 +311,11 @@ export default {
           }
           .DigDes{
               margin-bottom: 20px;
-              text-align: left;
           }
           .DigCountBox{
               margin: 20px auto;
               inset: 0;
-              width: 70%;
+              width: 65%;
               font-size:map-get($map: $fontsizes, $key: h3);
               display: flex;
               justify-content: space-between;
