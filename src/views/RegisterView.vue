@@ -78,10 +78,10 @@ export default {
       this.isValidPassword = regex.test(this.formData.pwd);
     },
     addToDb() {
-      this.validateName();
+      // this.validateName();
       this.validateEmail();
       this.validatePassword();
-      if (this.isValidName && this.isValidEmail && this.isValidPassword) {
+      if (this.isValidEmail && this.isValidPassword) {
 
         // 創建一個新的 FormData 對象
         let formData = new FormData();

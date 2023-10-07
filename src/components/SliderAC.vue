@@ -3,9 +3,9 @@
         <div class="pic">
             <img src="https://steam.oxxostudio.tw/webp/gimp/example/simple-keyer-mask-16.webp" />
         </div>
-        <h3>NAME</h3>
+        <h3>{{ name }}</h3>
         <button>
-            <router-link to="/home" class="logout">登出</router-link>
+            <router-link to="/home" class="logout" @click="logout">登出</router-link>
         </button>
         <nav>
             <ul>
@@ -30,6 +30,11 @@ export default {
             // toggle:''
         }
     },
+    props: {
+        'name': {
+            type: String
+        }
+    },
     methods: {
         backAC() {
             document.querySelector('.SliderAC').style.left = '-100%'
@@ -38,6 +43,10 @@ export default {
             let title = e.target.innerText
             this.$emit('title-change', title)
             document.querySelector('.SliderAC').style.left = '-100%'
+        },
+        logout() {
+            document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            this.$router.push('/login')
         }
     }
 }

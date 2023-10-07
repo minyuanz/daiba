@@ -167,7 +167,7 @@ const routes = [
       ),
   },
   {
-    path: "/user",
+    path: "/user/:id",
     name: "/user",
     component: () => import(/* webpackChunkName: "User" */ "@/views/User.vue"),
   },

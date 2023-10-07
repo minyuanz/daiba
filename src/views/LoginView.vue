@@ -47,8 +47,6 @@ export default {
     login() {
       if (this.memEmail == "" && this.memPwd == "") {
         alert("請輸入帳號和密碼")
-        // this.$router.push("/user")
-
       }
       else {
         // 創建一個新的 FormData 對象
@@ -60,51 +58,49 @@ export default {
 
         fetch(`http://localhost/dai/public/phps/login.php`, {
           method: "post",
-          // headers: {
-          //   'content-type': 'application/x-www-form-urlencoded'
-          // },
-          // credentials: 'include',
           body: formData
         })
           .then(res => res.json())
           .then((res) => {
-            console.log(res);
-            if (!res.error) {
-              alert('login成功');
-              // clearForm();
-              this.$router.push("/user")
+            if (res.result["mem_id"]) {
+              // console.log(res);
+              // 建立cookie
+              let user = JSON.stringify(res.result);
+              document.cookie = "user= " + user + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
+              localStorage.setItem("user", user)
+              // console.log(user);
+              // 獲得memId、存進vuex的memId、動態路由至memId的會員頁
+              let id = res.result.mem_id
+              this.$store.commit("getId", id)
+              this.$router.push(`/user/${id}`)
+              // console.log(id);
             }
           })
           .catch(function (error) {
             console.log(error);
           })
-        // console.log(111);
-        // fetch("http://localhost/dai/public/phps/login.php", {
-        //   method: "post",
-        //   headers: {
-        //     "Content-Type": "application/x-www-form-urlencoded"
-        //   },
-        //   // // credentials: "include",
-        //   body: new URLSearchParams({
-        //     mem_email: this.memEmail,
-        //     mem_pwd: this.memPwd
-        //   })
-        // })
-        //   .then(res => res.json())
-        //   .then((res) => {
-        //     console.log(res);
-        //     if (!res.error) {
-        //       alert('login成功');
-
-        //     }
-        //   })
-        //   .catch(function (error) {
-        //     console.log(error);
-
-        //   })
       }
-      // this.$router.push("/User")
     }
+  },
+  mounted() {
+    const name = "user" + "=";
+    const decodedCookie = decodeURIComponent(document.cookie);
+    const cookieArray = decodedCookie.split(';');
+
+    for (let i = 0; i < cookieArray.length; i++) {
+      let cookie = cookieArray[i];
+      while (cookie.charAt(0) === ' ') {
+        cookie = cookie.substring(1);
+      }
+      if (cookie.indexOf(name) === 0) {
+        console.log(cookie.substring(name.length, cookie.length));
+        if (cookie.substring(name.length, cookie.length)) {
+          // 有cookie的話路由依據該會員的memId進入頁面、memId是從vuex抓過來
+          this.$router.push(`/user/${this.$store.state.memId}`);
+        }
+      }
+    }
+    return "";
   },
 };
 </script>

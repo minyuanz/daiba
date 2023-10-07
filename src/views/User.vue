@@ -21,10 +21,10 @@
       <span>會員自訂</span>
     </div>
     <!-- 左邊選單 -->
-    <SliderAC class="userSlider" @title-change="titleUpdate" />
+    <SliderAC class="userSlider" @title-change="titleUpdate" :name="member.mem_name" />
     <!-- 右邊選單 -->
     <!-- 會員資料 -->
-    <UserInfo v-if="'會員資料' == title" />
+    <UserInfo v-if="'會員資料' == title" :email="member.mem_email" />
     <!-- 投稿文章 -->
     <ArticleInfo id="ArticleInfo" v-else-if="'投稿文章' == title" />
     <!-- 文章收藏 -->
@@ -56,18 +56,35 @@ export default {
   data() {
     return {
       title: "會員資料",
+      memberlist: "",
+      member: ""
     };
+  },
+  provide() {
+    return { email: 'this.member.mem_email' }
   },
   computed: {},
   methods: {
     sliderAC() {
-      // console.log(111)
       document.querySelector(".userSlider").style.left = "0";
     },
     titleUpdate(title) {
       console.log(title);
       this.title = title;
     },
+    fetchMember() {
+      let idToFind = this.$route.params.id;
+
+      fetch('http://localhost/dai/public/phps/getMember.php')
+        .then(res => res.json())
+        .then((res) => {
+          this.memberlist = res
+          this.member = this.memberlist.find(item => item.mem_id === idToFind)
+        })
+        .catch((error) => {
+          console.error('傳輸失敗', error)
+        })
+    }
   },
   mounted() {
     let app = document.getElementById("app");
@@ -87,6 +104,7 @@ export default {
     row3.style.width = `${app.clientWidth}px`;
     // window.addEventListener('resize', () => {
     // })
+    this.fetchMember();
   },
 };
 </script>

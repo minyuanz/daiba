@@ -28,7 +28,7 @@
     <!-- 更改手機號碼 -->
     <PhoneChange id="PhoneChange" v-else-if="'更改手機號碼' == toggle" @toggle-change="toggleUpdate" />
     <!-- 更改信箱 -->
-    <MailChange id="MailChange" v-else-if="'更改信箱' == toggle" @toggle-change="toggleUpdate" />
+    <MailChange id="MailChange" v-else-if="'更改信箱' == toggle" @toggle-change="toggleUpdate" :email="email" />
 </template>
 
 <script>
@@ -48,6 +48,11 @@ export default {
             toggle: '會員資料'
         }
     },
+    // props: {
+    //     email: {
+    //         type: String
+    //     }
+    // },
     methods: {
         toggleUpdate() {
             this.toggle = '會員資料'

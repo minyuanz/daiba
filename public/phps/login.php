@@ -22,12 +22,10 @@
     }else{
         $memRow = $member->fetch(PDO::FETCH_ASSOC);
         //登入成功,將登入者的資料寫入session
-        // session_start();
         $_SESSION["mem_email"] = $memRow["mem_email"];
         $_SESSION["mem_pwd"] = $memRow["mem_pwd"];
-        // $_SESSION['member'] = $memRow;
         $result = ["mem_email"=>$memRow["mem_email"], "mem_pwd"=>$memRow["mem_pwd"]];
-        echo json_encode($result);
+        echo json_encode(["result"=>$memRow]);
     }
 } catch (PDOException $e) {
     $errMsg .= "錯誤 : ".$e -> getMessage()."<br>";
