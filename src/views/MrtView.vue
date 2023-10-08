@@ -198,7 +198,7 @@
             />
           </div>
           <div class="mrtStaPicBox">
-            <img class="mrtStaPic" :src="item.sta_pictor" alt="" />
+            <img class="mrtStaPic" :src="`./img/${item.sta_pictor}`" alt="" />
           </div>
         </div>
       </div>
