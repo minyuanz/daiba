@@ -1,6 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin:*");
-
+header("Content-Type: application/json; charset=UTF-8");
 try {
     if ( $_FILES["news_imageURL"]["error"] === 0) {
         //-----------------決定好資料夾的路徑
