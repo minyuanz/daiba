@@ -124,9 +124,8 @@
             <p>更改商品標籤</p>
             <label for="">商品分類：</label>
             <select id="prodType" v-model="currentEditProduct.prod_type">
-                <option value="food">美食</option>
-                <option value="viewpoint">景點</option>
-                <option value="stay">住宿</option>
+                <option value="Souvenir">伴手禮</option>
+                <option value="memento">紀念品</option>
             </select>
             <label for="">捷運站：</label>
             <select id="staId" v-model="currentEditProduct.sta_id">
