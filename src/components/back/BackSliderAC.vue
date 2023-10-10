@@ -3,7 +3,7 @@
         <div class="pic">
             <img src="../../../public/img/logo.png" />
         </div>
-        <h3>{{ $store.state.loggedInUser }}</h3>
+        <h3>{{ loggedInUser }}</h3>
         <!-- <router-link to="/Back/BackLogin" > -->
         <button @click="logout">登出</button>
         <!-- </router-link> -->
@@ -41,7 +41,20 @@ export default {
     },
     },
     computed: {
-
+        loggedInUser() {
+      // 從loco獲取數據 帶入名字
+      const storedUser = localStorage.getItem('BackloginContent');
+      return storedUser ? JSON.parse(storedUser).acc : '';
+    },
+    },
+    created() {
+    // 在網頁渲染前，檢查loco是否有登入訊息
+    const storedUser = localStorage.getItem('BackloginContent');
+    if (storedUser) {
+      const user = JSON.parse(storedUser).acc;
+      // 將訊息設置到 Vuex 中
+      this.$store.commit('setLoggedInUser', user);
+    }
     },
 }
 </script>
