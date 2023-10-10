@@ -60,9 +60,9 @@ export default {
       member: ""
     };
   },
-  provide() {
-    return { email: 'this.member.mem_email' }
-  },
+  // provide() {
+  //   return { email: `this.member.mem_email` }
+  // },
   computed: {},
   methods: {
     sliderAC() {
@@ -86,6 +86,21 @@ export default {
         })
     }
   },
+  // beforeRouteEnter(to, from) {
+  //   // ...
+  //   console.log(to);
+  //   console.log(from);
+
+  //   let isLogin = localStorage.getItem('user')
+  //   if (isLogin) {
+  //     // next()
+  //     // return true
+  //     this.$router.push(`/user/${id}`)
+  //   } else {
+  //     return '/login'
+  //   }
+
+  // },
   mounted() {
     let app = document.getElementById("app");
     // alert(app.clientHeight)

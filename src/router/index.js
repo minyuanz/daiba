@@ -39,6 +39,9 @@ const routes = [
   {
     path: "/login",
     name: "login",
+    meta: {
+      isAuth: true
+    },
     component: () =>
       import(/* webpackChunkName: "Login" */ "@/views/LoginView.vue"),
   },
@@ -169,6 +172,9 @@ const routes = [
   {
     path: "/user/:id",
     name: "/user",
+    meta: {
+      isAuth: true
+    },
     component: () => import(/* webpackChunkName: "User" */ "@/views/User.vue"),
   },
   {
@@ -278,5 +284,19 @@ const router = createRouter({
     return { top: 0 };
   },
 });
+
+// router.beforeEach((to, from) => {
+//   // 檢查用户是否已登录 並 ❗️避免無限重定向
+//   if (to.meta.isAuth && to.name !== 'Login') {
+//     const isLogin = localStorage.getItem('user')
+//     if (isLogin) {
+//       return true
+//     } else {
+//       return '/login'
+//     }
+//   } else {
+//     return true
+//   }
+// })
 
 export default router;

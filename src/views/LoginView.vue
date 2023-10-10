@@ -82,6 +82,24 @@ export default {
       }
     }
   },
+  beforeRouteEnter(to, from) {
+    // ...
+    // console.log(to);
+    // console.log(from);
+    // if (to.meta.isAuth && to.name !== 'login') {
+    // let isLogin = localStorage.getItem('user')
+    // if (isLogin) {
+    //   // next()
+    //   // return true
+    //   this.$router.push(`/user/${id}`)
+    // } else {
+    //   return '/login'
+    // } else {
+    //   return true
+    // }
+    // next()
+  },
+
   mounted() {
     const name = "user" + "=";
     const decodedCookie = decodeURIComponent(document.cookie);

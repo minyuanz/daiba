@@ -25,14 +25,14 @@ export default {
             changemail: '',
         }
     },
-    inject: [
-        'email'
-    ],
-    // props: {
-    //     email: {
-    //         type: String
-    //     }
-    // },
+    // inject: [
+    //     'email'
+    // ],
+    props: {
+        email: {
+            type: String
+        }
+    },
     methods: {
         menu() {
             this.$emit('toggle-change')
