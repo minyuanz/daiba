@@ -19,7 +19,7 @@
       <p>編輯</p>
       <p>刪除</p>
     </div>
-    <div class="mrtInfo" v-for="addMrt in mrts">
+    <div class="mrtInfo" v-for="(addMrt, index) in mrts" :key="index">
       <p>{{ addMrt.sta_id }}</p>
       <p>{{ addMrt.mrt_code1 }}</p>
       <p>{{ addMrt.mrt_code2 }}</p>
@@ -30,7 +30,7 @@
           編輯
         </button>
       </div>
-      <div class="del" @click="deletMode()">
+      <div class="del" @click="deleteMode(addMrt.sta_id)">
         <i class="fa-solid fa-circle-xmark fa-xl"></i>
       </div>
     </div>
@@ -206,6 +206,7 @@ export default {
       editMode: false,
     };
   },
+
   created() {
     this.fetchData();
   },
@@ -215,6 +216,29 @@ export default {
       this.show = false;
       this.picURL = "";
     },
+
+    deleteMode(itemId) {
+      if (confirm("確定要刪除這個項目嗎？")) {
+        // 發送 DELETE 請求到後端
+        axios
+          .delete(
+            `http://localhost/dai/public/phps/deleteMrt.php?itemId=${itemId}`
+          )
+          .then((response) => {
+            if (response.data.success) {
+              // 刪除成功的處理邏輯
+              console.log(response.data.msg);
+            } else {
+              // 刪除失敗的處理邏輯
+              console.log(response.data.msg);
+            }
+          })
+          .catch((error) => {
+            console.error("刪除請求失敗：", error);
+          });
+      }
+    },
+
     startEditMode(newMrt) {
       this.editMode = true; // 用v-show進入編輯模式
       // this.addToggle = false;
@@ -261,6 +285,7 @@ export default {
       }
       this.show = true;
     },
+
     fetchData() {
       axios
         .get("http://localhost/dai/public/phps/mrt.php")
@@ -316,11 +341,24 @@ export default {
         method: "post",
         body: formData,
       })
+        // .then((res) => res.json())
+        // .then((res) => {
+        //   if (!res.error) {
+        //     console.log("成功响应:", res);
+        //     alert(res.msg); // 弹出成功提醒
+        //     this.addToggle = false; // 关闭新增站的页面
+        //   } else {
+        //     console.log("失败响应:", res);
+        //   }
+        // })
+        // .catch(function (error) {
+        //   console.log("请求失败:", error);
+        // });
         .then((res) => res.json())
         .then((res) => {
           if (!res.error) {
             alert(res.msg);
-            this.addToggle = !this.addToggle;
+            this.addToggle = false;
           }
         })
         .catch(function (error) {

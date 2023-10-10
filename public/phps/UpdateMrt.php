@@ -77,7 +77,7 @@ try {
 
     $mrts->execute();
 
-    $result=array("error" => false, "msg" => "新增成功");
+    $result=array("error" => false, "msg" => "更新成功");
     echo json_encode($result);
 } catch (Exception $e) {
     echo "錯誤行號 : ", $e->getLine(), "<br>";
