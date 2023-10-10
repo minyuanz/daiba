@@ -3,10 +3,10 @@
         <div class="pic">
             <img src="../../../public/img/logo.png" />
         </div>
-        <h3>NAME</h3>
-        <router-link to="/Back/BackLogin" >
-        <button>登出</button>
-        </router-link>
+        <h3>{{ $store.state.loggedInUser }}</h3>
+        <!-- <router-link to="/Back/BackLogin" > -->
+        <button @click="logout">登出</button>
+        <!-- </router-link> -->
         <nav>
             <ul>
                 <li :class="{ 'is-active': $route.path === '/Back/BackMember' }"><router-link to="/Back/BackMember" :class="{ 'is-active': $route.path === '/Back/BackMember' }">會員管理</router-link></li>
@@ -29,6 +29,16 @@ export default {
         }
     },
     methods: {
+        logout() {
+      //清除vuex狀態
+      this.$store.commit('setLoggedInUser', null);
+
+      // 清除loco狀態
+      localStorage.removeItem('BackloginContent');
+
+      // 然後導向登入頁面
+      this.$router.push('/Back/BackLogin');
+    },
     },
     computed: {
 

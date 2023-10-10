@@ -30,6 +30,7 @@ export default createStore({
     imgURL, //圖片路徑
     imgURLp,//商品圖片路徑
     memId: "", // 存會員的memId
+    loggedInUser: null, // 後台登入狀態
     mrtCardPage: [
       {
         id: 1,
@@ -120,7 +121,10 @@ export default createStore({
     getId(state, memId) {
       // 拿到會員的memId
       state.memId = memId
-    }
+    },
+    setLoggedInUser(state, user) {//後台loco的數據暫存
+      state.loggedInUser = user;
+    },
   },
   actions: {
     addToCart({ commit, state }, product) {
@@ -147,6 +151,11 @@ export default createStore({
       if (index !== -1) {
         commit("removeFromCart", index);
       }
+    },
+    login({ commit }, user) {
+      // 針對登入後的操錯 這邊先暫存  之後用權限備用
+      // 假设登录成功后，后端返回的用户信息包含在 user 对象中
+      commit('setLoggedInUser', user);
     },
     // clearCart({ commit }) {
     //   // 清空購物車
