@@ -2,7 +2,7 @@
   <div class="backMrt" v-if="addToggle" v-show="!editMode">
     <div class="mrtSearch">
       <label for="">請選擇捷運線：</label>
-      <select name="" id="">
+      <select name="" id="" v-model="newMrt.mrt_id1">
         <option value="BL">BL</option>
         <option value="BR">BR</option>
         <option value="G">G</option>
@@ -17,7 +17,7 @@
       <p>捷運站代碼2</p>
       <p>站名</p>
       <p>編輯</p>
-      <p>刪除</p>
+      <!-- <p>刪除</p> -->
     </div>
     <div class="mrtInfo" v-for="(addMrt, index) in mrts" :key="index">
       <p>{{ addMrt.sta_id }}</p>
@@ -30,16 +30,16 @@
           編輯
         </button>
       </div>
-      <div class="del" @click="deleteMode(addMrt.sta_id)">
+      <!-- <div class="del" @click="deleteMode(addMrt.sta_id)">
         <i class="fa-solid fa-circle-xmark fa-xl"></i>
-      </div>
+      </div> -->
     </div>
     <div class="addSta">
       <button @click="addToggle = !addToggle">新增捷運站</button>
     </div>
   </div>
   <div class="backMrtAdd" v-else>
-    <form @submit.prevent="addnewMrt" enctype="multipart/form-data">
+    <form @submit="addnewMrt" enctype="multipart/form-data">
       <p>你正在新增車站：</p>
       <div class="addInfo">
         <div class="pic">
@@ -102,7 +102,7 @@
   </div>
 
   <div class="backMrtAdd" v-if="editMode">
-    <form @submit.prevent="addnewMrt" enctype="multipart/form-data">
+    <form @submit="addnewMrt" enctype="multipart/form-data">
       <p>你正在新增車站：</p>
       <div class="addInfo">
         <div class="pic">
@@ -184,6 +184,7 @@ import BackMrt from "@/testdata/BackMrt.json";
 export default {
   data() {
     return {
+      show: false,
       currentEditMrt: "",
       mrts: [],
       addToggle: true,
@@ -211,33 +212,41 @@ export default {
     this.fetchData();
   },
   methods: {
+    async handleSubmit(event) {
+      event.preventDefault(); // 阻止默認的提交行爲
+      // 處理表單提交邏輯
+      await this.addNewMrt(); // 確保非同步請求完成
+      // 可以在這裡進行狀態更改
+      this.addToggle = false;
+    },
+
     cancelEdit() {
       this.editMode = false; //取消編輯並清空圖片
       this.show = false;
       this.picURL = "";
     },
 
-    deleteMode(itemId) {
-      if (confirm("確定要刪除這個項目嗎？")) {
-        // 發送 DELETE 請求到後端
-        axios
-          .delete(
-            `http://localhost/dai/public/phps/deleteMrt.php?itemId=${itemId}`
-          )
-          .then((response) => {
-            if (response.data.success) {
-              // 刪除成功的處理邏輯
-              console.log(response.data.msg);
-            } else {
-              // 刪除失敗的處理邏輯
-              console.log(response.data.msg);
-            }
-          })
-          .catch((error) => {
-            console.error("刪除請求失敗：", error);
-          });
-      }
-    },
+    // deleteMode(itemId) {
+    //   if (confirm("確定要刪除這個項目嗎？")) {
+    //     // 發送 DELETE 請求到後端
+    //     axios
+    //       .delete(
+    //         `http://localhost/dai/public/phps/deleteMrt.php?itemId=${itemId}`
+    //       )
+    //       .then((response) => {
+    //         if (response.data.success) {
+    //           // 刪除成功的處理邏輯
+    //           console.log(response.data.msg);
+    //         } else {
+    //           // 刪除失敗的處理邏輯
+    //           console.log(response.data.msg);
+    //         }
+    //       })
+    //       .catch((error) => {
+    //         console.error("刪除請求失敗：", error);
+    //       });
+    //   }
+    // },
 
     startEditMode(newMrt) {
       this.editMode = true; // 用v-show進入編輯模式
@@ -417,17 +426,17 @@ export default {
     padding: 10px 0;
     border-bottom: 1px solid #aaa;
 
-    .del {
-      svg {
-        padding: 5%;
-        cursor: pointer;
-        transition: all 0.3s;
+    // .del {
+    //   svg {
+    //     padding: 5%;
+    //     cursor: pointer;
+    //     transition: all 0.3s;
 
-        &:hover {
-          color: crimson;
-        }
-      }
-    }
+    //     &:hover {
+    //       color: crimson;
+    //     }
+    //   }
+    // }
 
     .edit {
       button {
