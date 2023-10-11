@@ -3,7 +3,7 @@
         <div class="pic">
             <img src="https://steam.oxxostudio.tw/webp/gimp/example/simple-keyer-mask-16.webp" />
         </div>
-        <h3>{{ member.mem_name }}</h3>
+        <h3>{{ this.$store.state.memInfo.mem_name }}</h3>
         <button>
             <router-link to="/home" class="logout" @click="logout">登出</router-link>
         </button>
@@ -30,7 +30,13 @@ export default {
     data() {
         return {
             // toggle:''
+            // member: this.$store.state.memInfo
             member: this.$store.state.memInfo
+        }
+    },
+    computed: {
+        member() {
+            return this.member.mem_name
         }
     },
     methods: {

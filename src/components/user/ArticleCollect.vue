@@ -2,11 +2,7 @@
   <div class="collect">
     <h1>文章收藏</h1>
     <div class="collectGrid">
-      <div
-        class="collectCard"
-        v-for="(card, index) in cardsDisplay"
-        :key="index"
-      >
+      <div class="collectCard" v-for="(card, index) in cardsDisplay" :key="index">
         <div class="s-card-h">
           <div class="img">
             <img :src="card.image" alt="" />
@@ -174,6 +170,7 @@ export default {
         top: -5%;
         cursor: pointer;
         z-index: 2;
+
         &:hover {
           background-color: map-get($color, $key: danger);
         }

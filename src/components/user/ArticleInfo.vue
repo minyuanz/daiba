@@ -6,9 +6,9 @@
         <div class="card-h">
           <div class="img">
             <img :src="card.image" alt="" />
-            <div class="head">
+            <!-- <div class="head">
               <img :src="card.head" alt="" />
-            </div>
+            </div> -->
           </div>
           <div class="text">
             <div class="title">
@@ -25,13 +25,7 @@
           </p>
         </div>
       </div>
-      <Page
-        :total="cards.length"
-        size="small"
-        :page-size="pageSize"
-        @on-change="updatePage"
-        id="page"
-      />
+      <!-- <Page :total="cards.length" size="small" :page-size="pageSize" @on-change="updatePage" id="page" /> -->
     </div>
   </div>
 </template>
@@ -101,6 +95,7 @@ export default {
       cardsDisplay: [],
       pageSize: 6,
       currentPage: 1,
+      article: []
     };
   },
   methods: {
@@ -112,6 +107,17 @@ export default {
       const endIdx = startIdx + this.pageSize;
       this.cardsDisplay = this.cards.slice(startIdx, endIdx);
     },
+    getArticle() {
+      let id = this.$store.state.memInfo.mem_id
+      fetch(`http://localhost/dai/public/phps/getProdCollect.php?memId=${memId}`)
+        .then(res => res.json())
+        .then((res) => {
+          this.article = res
+        })
+        .catch((error) => {
+          console.error('數據傳輸失敗：', error);
+        });
+    }
   },
   mounted() {
     this.cardsDisplay = this.cards;
@@ -149,9 +155,13 @@ export default {
         margin: 0;
 
         .img {
-          .head {
-            overflow: auto;
+          img {
+            border-radius: 0px;
           }
+
+          // .head {
+          //   overflow: auto;
+          // }
         }
       }
     }

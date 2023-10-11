@@ -34,24 +34,28 @@ export default {
             this.$emit('toggle-change')
         },
         updatePhone() {
-            // 建立數據資料夾好發給PHP做處理新增
-            const formData = new FormData();
-            formData.append("changePhone", this.changePhone);
-            formData.append("mem_id", this.member.mem_id);
-            fetch('http://localhost/dai/public/phps/UpdateMemberPhone.php', {
-                method: 'post',
-                body: formData
-            })
-                .then(res => res.json())
-                .then((res) => {
-                    if (!res.error) {
-                        alert(res.msg);
-                        this.menu()
-                    }
+            if (this.changePhone == '') {
+                alert("請輸入手機")
+            } else {
+                // 建立數據資料夾好發給PHP做處理新增
+                const formData = new FormData();
+                formData.append("mem_phone", this.changePhone);
+                formData.append("mem_id", this.member.mem_id);
+                fetch('http://localhost/dai/public/phps/UpdateMemberPhone.php', {
+                    method: 'post',
+                    body: formData
                 })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                    .then(res => res.json())
+                    .then((res) => {
+                        if (!res.error) {
+                            alert(res.msg);
+                            this.menu()
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
         }
     }
 }
@@ -148,4 +152,5 @@ export default {
             }
         }
     }
-}</style>
+}
+</style>

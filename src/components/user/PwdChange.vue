@@ -5,13 +5,13 @@
             <div class="acc">
                 <label for="">帳號</label>
                 <!-- <input type="text"> -->
-                <span>name</span>
+                <span>{{ this.$store.state.memInfo.mem_name }}</span>
             </div>
             <div class="changeAcc">
                 <label for="">帳號更改</label>
                 <input type="text" v-model="changeAcc">
             </div>
-            <button class="btn_l">確認更改</button>
+            <button class="btn_l" @click="updateName">確認更改</button>
             <div class="pwd">
                 <label for="">原密碼</label>
                 <input type="password" v-model="pwd">
@@ -20,12 +20,12 @@
                 <label for="">新密碼</label>
                 <input type="password" v-model="changePwd">
             </div>
-            <div class="checkPwd">
+            <!-- <div class="checkPwd">
                 <label for="">再次輸入</label>
                 <input type="password" v-model="checkPwd">
-            </div>
+            </div> -->
             <div class="accurance">
-                <button class="btn_l">確認更改</button>
+                <button class="btn_l" @click="updatePwd">確認更改</button>
                 <button class="btn_l btn_undo" @click="menu">返回</button>
             </div>
 
@@ -40,12 +40,64 @@ export default {
             changeAcc: '',
             pwd: '',
             changePwd: '',
-            checkPwd: ''
+            checkPwd: '',
+            member: this.$store.state.memInfo
         }
     },
     methods: {
         menu() {
             this.$emit('toggle-change')
+        },
+        updateName() {
+            if (this.changeAcc == '') {
+                alert('請輸入新帳號')
+            } else {
+                // 建立數據資料夾好發給PHP做處理新增
+                const formData = new FormData();
+                formData.append("mem_name", this.changeAcc);
+                formData.append("mem_id", this.member.mem_id);
+                fetch('http://localhost/dai/public/phps/UpdateMemberName.php', {
+                    method: 'post',
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then((res) => {
+                        if (!res.error) {
+                            alert(res.msg);
+                            this.menu()
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        },
+        updatePwd() {
+
+            if (this.pwd !== this.changePwd) {
+                alert("請輸入相同的密碼")
+            } else {
+                // 建立數據資料夾好發給PHP做處理新增
+                const formData = new FormData();
+                // formData.append("chcek_pwd", this.changePwd);
+                formData.append("mem_pwd", this.pwd);
+                formData.append("mem_id", this.member.mem_id);
+
+                fetch('http://localhost/dai/public/phps/UpdateMemberPwd.php', {
+                    method: 'post',
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then((res) => {
+                        if (!res.error) {
+                            alert(res.msg);
+                            this.menu()
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
         }
     }
 }

@@ -2,26 +2,26 @@
   <div class="prodWrap">
     <h1>商品收藏</h1>
     <div class="prodGrid">
-      <div class="prodCard" v-for="(card, index) in cardsDisplay">
+      <div class="prodCard" v-for="(card, index) in prodCollect">
         <div class="pic">
-          <img :src="card.image" alt="" />
+          <img :src="`${this.$store.state.imgURLp}` + card.prod_img1" alt="" />
         </div>
         <div class="txt">
-          <h3>{{ card.title }}</h3>
-          <span> NT.{{ card.price }}</span>
+          <h3>{{ card.prod_name }}</h3>
+          <span> NT.{{ card.prod_price }}</span>
           <div @click="delCollect(index)" class="del">
             <i class="fa-solid fa-trash-can"></i>
           </div>
         </div>
       </div>
     </div>
-    <Page
+    <!-- <Page
       :total="cards.length"
       size="small"
       :page-size="pageSize"
       @on-change="updatePage"
       id="page"
-    />
+    /> -->
   </div>
 </template>
 
@@ -65,6 +65,7 @@ export default {
       cardsDisplay: [],
       pageSize: 6,
       currentPage: 1,
+      prodCollect: []
     };
   },
   methods: {
@@ -80,9 +81,22 @@ export default {
       this.cardsDisplay.splice(index, 1);
       console.log(index);
     },
+    getCollect() {
+      let memId = this.$store.state.memInfo.mem_id
+      fetch(`http://localhost/dai/public/phps/getProdCollect.php?memId=${memId}`)
+        .then(res => res.json())
+        .then((res) => {
+          this.prodCollect = res
+        })
+        .catch((error) => {
+          console.error('數據傳輸失敗：', error);
+        });
+
+    }
   },
   mounted() {
     this.cardsDisplay = this.cards;
+    this.getCollect()
   },
 };
 </script>
@@ -112,7 +126,8 @@ export default {
     .prodCard {
       .pic {
         img {
-          width: 100%;
+          width: 250px;
+          height: 200px;
         }
       }
 

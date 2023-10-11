@@ -22,7 +22,7 @@ try {
 
     $news->execute();
 
-    $result=array("error" => false, "msg" => "新增成功");
+    $result=array("error" => false, "msg" => "修改成功");
     echo json_encode($result);
 } catch (Exception $e) {
     echo "錯誤行號 : ", $e->getLine(), "<br>";

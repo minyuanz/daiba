@@ -30,7 +30,7 @@ export default createStore({
     imgURL, //圖片路徑
     imgURLp,//商品圖片路徑
     memId: "", // 存會員的memId
-    memInfo:"",
+    memInfo: "",
     loggedInUser: null, // 後台登入狀態
     mrtCardPage: [
       {
@@ -122,7 +122,7 @@ export default createStore({
     getId(state, memId) {
       // 拿到會員的memId
       state.memId = memId
-    }, 
+    },
     getInfo(state, memInfo) {
       // 拿到會員的memInfo
       state.memInfo = memInfo
