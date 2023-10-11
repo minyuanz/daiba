@@ -3,23 +3,23 @@
       <div class="DetailBox">
         <div class="DetailPicBox">
             <div class="DetailMainPic">
-              <img :src="selectedImage" alt="">
+              <img :src="`${this.$store.state.imgURLp}`+ selectedImage" alt="">
               <div class="DigLikeBox">
                   <i class="fa-regular fa-heart" style="cursor: pointer;"></i>
               </div>
             </div>
             <div class="DetailPic">
-              <img @click="selectImage(foundObject.prod_img1)"  :src="foundObject.prod_img1" alt="" >
-              <img @click="selectImage(foundObject.prod_img2)"  :src="foundObject.prod_img2" alt="" >
-              <img @click="selectImage(foundObject.prod_img3)"  :src="foundObject.prod_img3" alt="" >
-              <img @click="selectImage(foundObject.prod_img4)"  :src="foundObject.prod_img4" alt="" >
+              <img @click="selectImage(foundObject.prod_img1)"  :src="`${this.$store.state.imgURLp}` +  foundObject.prod_img1" alt="" >
+              <img @click="selectImage(foundObject.prod_img2)"  :src="`${this.$store.state.imgURLp}` +  foundObject.prod_img2" alt="" >
+              <img @click="selectImage(foundObject.prod_img3)"  :src="`${this.$store.state.imgURLp}` +  foundObject.prod_img3" alt="" >
+              <img @click="selectImage(foundObject.prod_img4)"  :src="`${this.$store.state.imgURLp}` +  foundObject.prod_img4" alt="" >
             </div>
         </div>
         <div class="DetailDigBox">
           <div class="top">
-            <h2 class="Digtitle">{{ foundObject.pord_name }}</h2>
-            <div class="DigPrice">NT.{{ foundObject.pord_price }}</div>
-            <div class="DigDes">{{ foundObject.pord_bdes }}</div>
+            <h2 class="Digtitle">{{ foundObject.prod_name }}</h2>
+            <div class="DigPrice">NT.{{ foundObject.prod_price }}</div>
+            <div class="DigDes">{{ foundObject.prod_bdes }}</div>
               <div class="DigCountBox">
                   數量
                   <button @click="decrementCount">-</button>
@@ -30,7 +30,7 @@
           </div>
           <div class="DigSDES">
               商品訊息:
-              {{ foundObject.pord_bdes2 }}
+              {{ foundObject.prod_bdes2 }}
           </div>
         </div>
       </div>
@@ -39,13 +39,13 @@
           <h3>你可能會喜歡</h3>
         </div>
         <div class="OtherDetailCardbox">
-          <router-link v-for="product in randomProducts" :key="product.pord_id" :to="'/storeDetail/' + product.pord_id" class="OtherDetailCard" @click="generateRandomProducts">
+          <router-link v-for="product in randomProducts" :key="product.prod_id" :to="'/storeDetail/' + product.prod_id" class="OtherDetailCard">
             <div class="DetailCardImg">
-              <img :src="product.prod_img1" alt="">
+              <img :src="`${this.$store.state.imgURLp}` +  product.prod_img1"  alt="">
             </div>
             <div class="DetailCardDes">
-              <h4 class="CardDesTitle">{{ product.pord_name }}</h4>
-              <p class="CardDesPrice">NT${{ product.pord_price }}</p>
+              <h4 class="CardDesTitle">{{ product.prod_name }}</h4>
+              <p class="CardDesPrice">NT${{ product.prod_price }}</p>
             </div>
           </router-link>
         </div>  
@@ -54,7 +54,8 @@
 </template>
 
 <script>
-import ProTest from "@/testdata/ProTest.json"
+// import ProTest from "@/testdata/ProTest.json"
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -63,16 +64,17 @@ export default {
       count: 1,
       value: 0,
       selectedImage: "",
+      allProducts: [], 
     };
   },
 
   methods: {
     //產生隨機卡片
     generateRandomProducts() {
-      const currentProductId = this.foundObject.pord_id;
-      const filteredProducts = ProTest.filter(item => item.pord_id !== currentProductId);
+      const currentProductId = this.foundObject.prod_id;
+      const filteredProducts = this.allProducts.filter(item => item.prod_id !== currentProductId);
       const shuffled = filteredProducts.slice().sort(() => 0.5 - Math.random());
-      this.randomProducts = shuffled.slice(0, 4);//切出四張
+      this.randomProducts = shuffled.slice(0, 4);
     },
     decrementCount() {
       if (this.count > 1) {
@@ -90,21 +92,27 @@ export default {
       this.count = 1;
     },
     selectImage(imageSrc) {
-        this.selectedImage = imageSrc; 
-      },
+     this.selectedImage = imageSrc;
+    },
   },
   mounted() {
-    const idToFind = this.$route.params.id;
-    this.foundObject = ProTest.find(item => item.pord_id === idToFind);
-    this.selectedImage = this.foundObject.prod_img1;
-    //隨機
-    this.generateRandomProducts();
-  },
+  const idToFind = this.$route.params.id;
+  axios.get('http://localhost/dai/public/phps/ProductM.php')
+    .then((response) => {
+      this.allProducts = response.data;
+      this.foundObject = this.allProducts.find(item => item.prod_id === idToFind);
+      this.selectedImage = this.foundObject.prod_img1;
+      this.generateRandomProducts();
+    })
+    .catch((error) => {
+      console.error('傳輸數據失敗：', error);
+    });
+},
   watch: {
     // 觀察路徑的變化更改數據 因為mounted只能一次  所以用 watch
     $route(to, from) {
       const idToFind = to.params.id;
-      this.foundObject = ProTest.find((item) => item.pord_id === idToFind);
+      this.foundObject = this.allProducts.find((item) => item.prod_id === idToFind);
       this.selectedImage = this.foundObject.prod_img1;
       //更新後 再更新一次隨機清單
       this.generateRandomProducts();

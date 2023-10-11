@@ -296,8 +296,8 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     const BackloginContent = JSON.parse(localStorage.getItem('BackloginContent'));
     if (!BackloginContent || !BackloginContent.acc || !BackloginContent.pwd) {
-      alert('必须登录才能访问此页面');
-      next({ name: 'BackLogin' }); // 如果没有登入則導航到登入畫面
+      alert('必須登入才能造訪此網頁');
+      next({ name: 'BackLogin' }); // 如果沒有登入則導航到登入畫面
     } else {
       next(); // 
     }

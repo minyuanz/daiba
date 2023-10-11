@@ -27,9 +27,9 @@
     </div> -->
     <div class="storecardbox">
       <div v-for="item  in paginatedProducts "  :key="item.pord_id"  class="storeCard">
-        <router-link :to="'/storeDetail/' + item.pord_id" >
+        <router-link :to="'/storeDetail/' + item.prod_id" >
           <div class="imgbox">
-            <img  class="storeCardimg" :src="item.prod_img1" alt=""/>
+            <img  class="storeCardimg" :src="`${this.$store.state.imgURLp}` +  item.prod_img1"/>
             <div class="storeButton">
               <i class="fa-regular fa-heart" style="cursor: pointer"></i>
             </div>
@@ -37,8 +37,8 @@
       </router-link>
         <div class="storeBottom">
           <div class="storeCardText">
-            <h2 class="CardDes">{{ item.pord_name }}</h2>
-            <h3 class="CardPri">NT${{ item.pord_price }}</h3>
+            <h2 class="CardDes">{{ item.prod_name }}</h2>
+            <h3 class="CardPri">NT${{ item.prod_price }}</h3>
           </div>
           <div class="storeButton">
             <button class="btn_s" @click="addToCart(item)">加入購物車</button>
@@ -75,18 +75,31 @@
 </template>
 
 <script>
-import ProTest from "@/testdata/ProTest.json";
+// import ProTest from "@/testdata/ProTest.json";
+import axios from 'axios';
 export default {
   components: {},
   data() {
     return {
-      allProducts: ProTest, // 假設顯示所有商品數據
+      allProducts: [], // 假設顯示所有商品數據
       pageSize: 6, // 每頁顯示數量
       currentPage: 1, // 當前頁數
-      testitem: ProTest,
+      // testitem: ProTest,
     };
   },
+  created() {
+        this.fetchData(); 
+    },
   methods: {
+    fetchData() {
+            axios.get('http://localhost/dai/public/phps/ProductM.php')
+            .then((response) => {
+            this.allProducts = response.data; // 更新數據到 products
+        })
+            .catch((error) => {
+            console.error('數據傳輸失敗：', error);
+        });
+        },
     // goToStoreDetail(Detail) {
     //   this.$router.push({
     //     name: 'storeDetail',

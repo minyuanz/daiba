@@ -14,9 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $prod_id = $data->prod_id;
         $prod_status = $data->prod_status;
 
-        // 使用 PDO 执行 SQL 更新操作
         $sql = "UPDATE product SET prod_status = :prod_status WHERE prod_id = :prod_id";
-        $stmt = $pdo->prepare($sql);
+        $stmt = $pdo->prepare($sql); 
         $stmt->bindParam(':prod_status', $prod_status, PDO::PARAM_STR);
         $stmt->bindParam(':prod_id', $prod_id, PDO::PARAM_INT);
         $stmt->execute();
@@ -25,15 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->rowCount() > 0) {
             $response = array("success" => true);
         } else {
-            $response = array("success" => false, "msg" => "商品状态更新失败");
+            $response = array("success" => false, "msg" => "商品狀態更新失敗");
         }
     } else {
-        $response = array("success" => false, "msg" => "参数 prod_id 和 prod_status 缺失");
+        $response = array("success" => false, "msg" => "參數 prod_id 和 prod_status 遺失");
     }
 } else {
     header('HTTP/1.1 200 OK');
 }
 
-// 输出 JSON 响应
 echo json_encode($response);
 ?>
