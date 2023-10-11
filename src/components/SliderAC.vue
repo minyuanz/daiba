@@ -45,7 +45,8 @@ export default {
             document.querySelector('.SliderAC').style.left = '-100%'
         },
         logout() {
-            document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            // document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            localStorage.removeItem('user');
             this.$router.push('/login')
         }
     }

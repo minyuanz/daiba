@@ -42,19 +42,19 @@
         <div class="feaHead">
             <div class="mainTitle">
                 <label for="">文章標題</label>
-                <input type="text">
+                <input type="text" v-model="formData.title">
             </div>
             <div class="mainPic">
                 <label for="">版頭圖片</label>
                 <div class="pic">
                     <p>＋</p>
                     <input type="file" @change="FileChange">
-                    <img :src="imageURL" alt="" v-show="fix">
+                    <img :src="picURL" alt="" v-show="fix">
                 </div>
             </div>
             <div class="secTitle">
                 <label for="">文章副標</label>
-                <input type="text">
+                <input type="text" v-model="formData.secTitle">
             </div>
             <div class="selectTAg">
                 <label for="">捷運站：</label>
@@ -62,7 +62,9 @@
                     <option value="BL01">BL01</option>
                 </select>
                 <label for="">推薦分類：</label>
-                <select name="" id="">
+                <select name="" id="" v-model="formData.tag">
+                    <option value="food">food</option>
+                    <option value="food">food</option>
                     <option value="food">food</option>
                 </select>
             </div>
@@ -73,20 +75,20 @@
                 <div class="pic">
                     <p>＋</p>
                     <input type="file" @change="handleFileChange($event, index)">
-                    <img :src="pic.imageURL" v-show="pic.fix">
+                    <img :src="pic.picURL" v-show="pic.fix">
                 </div>
-                <textarea class="custom-input"></textarea>
+                <textarea class="custom-input" v-model="pic.ctx"></textarea>
                 <!-- <input type="text"> -->
             </div>
         </div>
         <div class="backFeaCtx">
             <label for="">詳細資訊</label>
-            <textarea class="custom-input"></textarea>
+            <textarea class="custom-input" v-model="moreinfo"></textarea>
             <!-- <input type="text"> -->
         </div>
         <div class="btn">
             <button @click="addToggle = !addToggle">取消新增</button>
-            <button @click="addToggle = !addToggle">確認新增</button>
+            <button @click="addFeature" type="button">確認新增</button>
         </div>
     </div>
 </template>
@@ -139,21 +141,34 @@ export default {
                 Date: '2023-02-03'
             },],
             addToggle: true,
+            picURL: null,
+            fix: false,
             pics: [{
                 title: '圖片一',
                 imageURL: null,
-                fix: false
+                ctx: "",
+                fix: false,
+                picURL:""
             }, {
                 title: '圖片二',
                 imageURL: null,
-                fix: false
+                ctx: "",
+                fix: false,
+                picURL:""
             }, {
                 title: '圖片三',
                 imageURL: null,
-                fix: false
+                ctx: "",
+                fix: false,
+                picURL:""
             },],
-            imageURL: null,
-            fix: false
+            formData: {
+                title: "",
+                secTitle: "",
+                imageURL: "",
+                tag: "",
+            },
+            moreinfo: ""
         }
     },
     methods: {
@@ -165,12 +180,12 @@ export default {
                 const reader = new FileReader();
                 reader.onload = () => {
                     // 當讀取完成時觸發
-                    this.pics[index].imageURL = reader.result; // 將 Data URL 賦值給圖片的 src
+                    this.pics[index].picURL = reader.result; // 將 Data URL 賦值給圖片的 src
                 };
-                // this.pics[index].imageURL = true;
-                // 
+                
                 if (file) {
                     reader.readAsDataURL(file); // 讀取文件內容，以 Data URL 形式
+                    this.pics[index].imageURL = file // 讀取文件內容，以 Data URL 形式
                 }
             }
             this.pics[index].fix = true
@@ -185,15 +200,40 @@ export default {
 
             reader.onload = () => {
                 // 當讀取完成時觸發
-                this.imageURL = reader.result; // 將 Data URL 賦值給圖片的 src
+                this.picURL = reader.result; // 將 Data URL 賦值給圖片的 src
             };
 
             if (file) {
-                reader.readAsDataURL(file); // 讀取文件內容，以 Data URL 形式
+                reader.readAsDataURL(file);
+                this.formData.imageURL = file // 讀取文件內容，以 Data URL 形式
             }
             this.fix = true
 
         },
+        addFeature() {
+            // 建立數據資料夾好發給PHP做處理新增
+            const formData = new FormData();
+            formData.append("news_title", this.formData.title);
+            formData.append("news_sectitle", this.formData.sectitle);
+            formData.append("news_tag", this.formData.tag);
+            formData.append("news_imageURL", this.formData.imageURL);
+            formData.append("news_content", this.formData.content);
+
+            fetch(`http://localhost/dai/public/phps/addNews.php`, {
+                method: "post",
+                body: formData,
+            })
+                .then((res) => res.json())
+                .then((res) => {
+                    if (!res.error) {
+                        alert(res.msg);
+                        this.addToggle = !this.addToggle;
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
 
     }
 }
@@ -432,15 +472,15 @@ export default {
                 }
             }
 
-            .custom-input{
-            border: 1px solid #333;
-            // border-top:1px solid transparent;
-            margin-top: 1rem;
-            height: 200px;
-            width: 100%;
-            padding: 10px;
-            // line-height: 200px;
-        }
+            .custom-input {
+                border: 1px solid #333;
+                // border-top:1px solid transparent;
+                margin-top: 1rem;
+                height: 200px;
+                width: 100%;
+                padding: 10px;
+                // line-height: 200px;
+            }
         }
     }
 
@@ -459,7 +499,7 @@ export default {
             padding: 5px 0;
         }
 
-        .custom-input{
+        .custom-input {
             border: 1px solid #333;
             // border-top:1px solid transparent;
             margin-top: 1rem;
