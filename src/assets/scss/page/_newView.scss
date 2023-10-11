@@ -267,6 +267,11 @@
               .newsTag{
                 width: 130px;
               }
+              .newsDate{
+                display: block;
+                width: 100%;
+                text-align: center;
+              }
             }
 
             .titleh2 {
@@ -309,9 +314,12 @@
     .newsBtnlist {
       width: 100%;
       border: none;
-      // text-align: center;
-      // margin: 5% 10% 0;
-      padding: 0 30px;
+      padding: 0 15px;
+      display: flex;
+      justify-content: center;
+      button{
+        width: 150px;
+      }
     }
 
     .newsList {
@@ -319,28 +327,34 @@
 
       .newsCard {
         width: 100%;
-
-        // margin: auto;
-
-        .newsTxt {
-          width: 100%;
-          padding: 0 30px;
-          // margin: 0 40px;
-          margin: 0;
-          // text-align: center;
-
-          p {
-            display: none;
-          }
-
-          .btn_s {
-            display: none;
-          }
-        }
-
-
-        .newsPic {
+        .newsPic{
           display: none;
+        }
+        .hover-container{
+          width: 100%;
+          .newsTxt {
+            width: 100%;
+            padding: 0 15px;
+            margin: 0;
+            p {
+              display: none;
+            }
+          }
+          a{
+            a{
+              position: absolute;
+              right: 15px;
+              display: block;
+              width: 130px;
+              .small{
+                width: 100%;
+                button{
+                  width: 100%;
+                }
+              }
+            }
+          }
+
         }
       }
     }
