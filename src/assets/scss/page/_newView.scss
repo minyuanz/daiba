@@ -254,16 +254,26 @@
           // margin-top: 100px;
           // text-align: left;
           .newsCtxTxt {
-            // border: 1px solid red;
+            display: flex;
+            flex-direction: column-reverse;
             width: 100%;
             padding: 0 45px;
-            margin: 0;
-
-            a {
-              // display: none;
+            margin: 0 0 2rem 0;
+            .toFlex{
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              gap: 0rem;
+              .newsTag{
+                width: 130px;
+              }
             }
 
-            .titleh2 {}
+            .titleh2 {
+              height: 36px;
+              text-align: center;
+              font-size: 30px;
+            }
 
             h2 {
               // color:#fff;
@@ -282,6 +292,10 @@
             margin: 0;
             padding: 0 10%;
             box-shadow: none;
+            img{
+              border: 3px solid #fff;
+              box-shadow: 0 5px 8px #3335;
+            }
 
             &::after {
               // left: 0;
