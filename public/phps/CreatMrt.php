@@ -5,18 +5,18 @@ try {
     $fileNames = array();
     var_dump($_FILES); 
     var_dump($_POST); 
-        if ($_FILES["sta_pictor"]["error"] === 0) { 
+        if ($_FILES["news_imageURL"]["error"] === 0) { 
             $dir = "../img/"; 
             if (!file_exists($dir)) {
                 mkdir($dir);  
             }
            
-            $filename = uniqid() . '.' . pathinfo($_FILES["sta_pictor"]["name"], PATHINFO_EXTENSION);
+            $filename = uniqid() . '.' . pathinfo($_FILES["news_imageURL"]["name"], PATHINFO_EXTENSION);
             $to = $dir . $filename;
-            if (move_uploaded_file($_FILES["sta_pictor"]["tmp_name"], $to)) {
+            if (move_uploaded_file($_FILES["news_imageURL"]["tmp_name"], $to)) {
                 $fileNames[] = $filename;
             } else {
-                echo "文件移動失敗：", $_FILES["sta_pictor"]["error"], "<br>";
+                echo "文件移動失敗：", $_FILES["news_imageURL"]["error"], "<br>";
                 $fileNames[] = "";
             }
         } else {
@@ -38,7 +38,10 @@ try {
     $stmt->bindValue(":sta_describe", $_POST["sta_describe"]); 
 
     $stmt->execute();
-    echo "新增成功~";
+    $result=array("error" => false, "msg" => "新增成功");
+    echo json_encode($result);
+
+    // echo "新增成功~";
 } catch (Exception $e) {
     echo "錯誤行號 : ", $e->getLine(), "<br>";
     echo "錯誤原因 : ", $e->getMessage(), "<br>";
