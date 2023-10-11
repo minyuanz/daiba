@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import router from './router'; 
 // import HomeView from "../views/HomeView.vue";
 // import LoginView from "@/views/LoginView.vue";
 // import storeView from "@/views/storeView.vue";
@@ -191,6 +192,7 @@ const routes = [
     name: "/BackMember",
     meta: {
       hideApp: true,
+      requiresAuth: true, // 設置登入守衛
     },
     component: () =>
       import(
@@ -202,6 +204,7 @@ const routes = [
     name: "/BackMrt",
     meta: {
       hideApp: true,
+      requiresAuth: true, // 設置登入守衛
     },
     component: () =>
       import(/* webpackChunkName: "BackMrt" */ "@/views/Back/BackMrt.vue"),
@@ -211,6 +214,7 @@ const routes = [
     name: "/BackFeature",
     meta: {
       hideApp: true,
+      requiresAuth: true, // 設置登入守衛
     },
     component: () =>
       import(
@@ -222,6 +226,7 @@ const routes = [
     name: "/BackContri",
     meta: {
       hideApp: true,
+      requiresAuth: true, // 設置登入守衛
     },
     component: () =>
       import(
@@ -233,6 +238,7 @@ const routes = [
     name: "/BackNews",
     meta: {
       hideApp: true,
+      requiresAuth: true, // 設置登入守衛
     },
     component: () =>
       import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackNews.vue"),
@@ -242,6 +248,7 @@ const routes = [
     name: "/BackPermission",
     meta: {
       hideApp: true,
+      requiresAuth: true, // 設置登入守衛
     },
     component: () =>
       import(
@@ -253,6 +260,7 @@ const routes = [
     name: "/BackOrder",
     meta: {
       hideApp: true,
+      requiresAuth: true, // 設置登入守衛
     },
     component: () =>
       import(
@@ -264,6 +272,7 @@ const routes = [
     name: "/BackPro",
     meta: {
       hideApp: true,
+      requiresAuth: true, // 設置登入守衛
     },
     component: () =>
       import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackPro.vue"),
@@ -280,11 +289,22 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
   scrollBehavior(to, from, savedPosition) {
-    // 始终滚动到顶部
+    // 始終滾動到頂部
     return { top: 0 };
   },
 });
-
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    const isLogin = localStorage.getItem('user'); // 檢查用戶登入狀態
+    if (!isLogin) {
+      next({ name: '/BackLogin' }); // 如果沒有登入則導向登入畫面
+    } else {
+      next(); // 繼續路由導航
+    }
+  } else {
+    next(); // 不需要登入，直接繼續路由導航
+  }
+});
 // router.beforeEach((to, from) => {
 //   // 檢查用户是否已登录 並 ❗️避免無限重定向
 //   if (to.meta.isAuth && to.name !== 'Login') {
