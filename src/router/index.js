@@ -171,7 +171,7 @@ const routes = [
   },
   {
     path: "/user/:id",
-    name: "/user",
+    name: "user",
     meta: {
       isAuth: true
     },
@@ -305,7 +305,7 @@ router.beforeEach((to, from, next) => {
     next(); // 不需要登入，可以額外設置這邊暫時不用只保留
   }
 });
-  // router.beforeEach((to, from) => {
+// router.beforeEach((to, from) => {
 //   // 檢查用户是否已登录 並 ❗️避免無限重定向
 //   if (to.meta.isAuth && to.name !== 'Login') {
 //     const isLogin = localStorage.getItem('user')

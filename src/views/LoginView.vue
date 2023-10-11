@@ -55,7 +55,8 @@ export default {
         formData.append("mem_email", this.memEmail);
         formData.append("mem_pwd", this.memPwd);
 
-
+        // https://tibamef2e.com/chd103/g5
+        // http://localhost/dai/public
         fetch(`http://localhost/dai/public/phps/login.php`, {
           method: "post",
           body: formData
@@ -79,32 +80,60 @@ export default {
       }
     }
   },
-  beforeRouteEnter(to, from) {
-    // ...
-    console.log(to);
-    console.log(from);
-    // if (to.meta.isAuth && to.name !== 'login') {
-    //   let isLogin = localStorage.getItem('user')
-    //   if (isLogin) {
-    //     this.$router.push(`/user/${this.$store.state.memId}`)
-    //   }
-    // }
-    //   // next()
-    //   // return true
-    //   
-    // } else {
-    //   return '/login'
-    // } else {
-    // return true
-  },
-
-  mounted() {
+  beforeRouteEnter(to, from, next) {
+    // 在進入路由前執行以下操作
     let isLogin = localStorage.getItem('user')
     if (isLogin) {
-      this.$router.push(`/user/${isLogin}`)
+      // 如果使用者已登入，可以進入路由
+      console.log(to.meta);
+      next(`/user/${isLogin}`);
     } else {
-      return '/login'
+      // 如果使用者未登入，導向登入頁面
+      next();
     }
+  },
+  // beforeRouteEnter(to, from, next) {
+
+  // console.log(to);
+
+  // console.log(from);
+
+  // let isLogin = localStorage.getItem('user')
+
+  // if (isLogin) {
+  //   // this.$router.push(`/user/${isLogin}`)
+  //   // return '/user'
+  //   next(this.$router.push(`/user/${isLogin}`));
+  //   // console.log(isLogin);
+  // } else {
+  //   // return '/login'
+  //   next()
+  // }
+  // ...
+  // console.log(to);
+  // console.log(from);
+  // if (to.meta.isAuth && to.name !== 'login') {
+  //   let isLogin = localStorage.getItem('user')
+  //   if (isLogin) {
+  //     this.$router.push(`/user/${this.$store.state.memId}`)
+  //   }
+  // }
+  //   // next()
+  //   // return true
+  //   
+  // } else {
+  //   return '/login'
+  // } else {
+  // return true
+  // },
+
+  mounted() {
+    // let isLogin = localStorage.getItem('user')
+    // if (isLogin) {
+    //   this.$router.push(`/user/${isLogin}`)
+    // } else {
+    //   return '/login'
+    // }
 
     // const name = "user" + "=";
     // const decodedCookie = decodeURIComponent(document.cookie);
