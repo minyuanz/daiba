@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import router from './router'; 
 // import HomeView from "../views/HomeView.vue";
 // import LoginView from "@/views/LoginView.vue";
 // import storeView from "@/views/storeView.vue";
@@ -180,7 +179,7 @@ const routes = [
   },
   {
     path: "/Back/BackLogin",
-    name: "/BackLogin",
+    name: "BackLogin",
     meta: {
       hideApp: true,
     },
@@ -297,7 +296,8 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     const isLogin = localStorage.getItem('user'); // 檢查用戶登入狀態
     if (!isLogin) {
-      next({ name: '/BackLogin' }); // 如果沒有登入則導向登入畫面
+      alert('必須登入才能訪問此頁面');
+      next({ name: 'BackLogin' }); // 如果沒有登入則導向登入畫面
     } else {
       next(); // 繼續路由導航
     }
@@ -305,7 +305,7 @@ router.beforeEach((to, from, next) => {
     next(); // 不需要登入，直接繼續路由導航
   }
 });
-// router.beforeEach((to, from) => {
+  // router.beforeEach((to, from) => {
 //   // 檢查用户是否已登录 並 ❗️避免無限重定向
 //   if (to.meta.isAuth && to.name !== 'Login') {
 //     const isLogin = localStorage.getItem('user')
