@@ -676,11 +676,15 @@
 
         .box {
           .closePost {
+            top: -3%;
+            right: -3%;
             scale: 0.8;
           }
-
           .swiperMRTCard {
             width: 100%;
+            .swiper-slide {
+              height: 530px;
+            }
           }
         }
       }
@@ -791,7 +795,10 @@
           .swiperPost {
             margin: 1rem;
           }
-
+          .closePost {
+            top: -2%;
+            right: 4%;
+          }
           .inner {
             height: 105%;
           }
@@ -908,7 +915,10 @@
           width: 100%;
           height: 100%;
           padding: 0;
-
+          .closePost {
+            top: 16%;
+            right: 0%;
+          }
           // 卡片輪播
           .swiperMRTCard {
             .swiper-button-prev {

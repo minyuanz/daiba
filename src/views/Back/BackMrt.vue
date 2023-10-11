@@ -28,4 +28,6 @@ export default {
         margin: auto;
         display: flex;
     }
+
+
 </style>
