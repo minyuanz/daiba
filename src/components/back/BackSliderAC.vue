@@ -3,10 +3,10 @@
         <div class="pic">
             <img src="../../../public/img/logo.png" />
         </div>
-        <h3>NAME</h3>
-        <router-link to="/Back/BackLogin" >
-        <button>登出</button>
-        </router-link>
+        <h3>{{ loggedInUser }}</h3>
+        <!-- <router-link to="/Back/BackLogin" > -->
+        <button @click="logout">登出</button>
+        <!-- </router-link> -->
         <nav>
             <ul>
                 <li :class="{ 'is-active': $route.path === '/Back/BackMember' }"><router-link to="/Back/BackMember" :class="{ 'is-active': $route.path === '/Back/BackMember' }">會員管理</router-link></li>
@@ -29,9 +29,32 @@ export default {
         }
     },
     methods: {
+        logout() {
+      //清除vuex狀態
+      this.$store.commit('setLoggedInUser', null);
+
+      // 清除loco狀態
+      localStorage.removeItem('BackloginContent');
+
+      // 然後導向登入頁面
+      this.$router.push('/Back/BackLogin');
+    },
     },
     computed: {
-
+        loggedInUser() {
+      // 從loco獲取數據 帶入名字
+      const storedUser = localStorage.getItem('BackloginContent');
+      return storedUser ? JSON.parse(storedUser).acc : '';
+    },
+    },
+    created() {
+    // 在網頁渲染前，檢查loco是否有登入訊息
+    const storedUser = localStorage.getItem('BackloginContent');
+    if (storedUser) {
+      const user = JSON.parse(storedUser).acc;
+      // 將訊息設置到 Vuex 中
+      this.$store.commit('setLoggedInUser', user);
+    }
     },
 }
 </script>

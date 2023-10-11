@@ -172,13 +172,13 @@
   </div>
   <!-- 站點板塊 -->
   <div class="mrtWrappo" id="mrtWrappo">
-    <div class="mrtWrap" v-for="item in filteredMrt">
+    <div class="mrtWrap" v-for="(item, index) in mrtstaGroup" :key="index">
       <div class="mrtSta">
         <!-- 站點文字介紹 -->
         <div class="mrtStaTxt">
-          <h2>{{ item.title }}</h2>
+          <h2>{{ item.sta_name }}</h2>
           <p>
-            {{ item.txt }}
+            {{ item.sta_describe }}
           </p>
         </div>
         <!-- 站點圖跟捷運圖 -->
@@ -198,7 +198,7 @@
             />
           </div>
           <div class="mrtStaPicBox">
-            <img class="mrtStaPic" :src="item.url" alt="" />
+            <img class="mrtStaPic" :src="`./img/${item.sta_pictor}`" alt="" />
           </div>
         </div>
       </div>
@@ -255,10 +255,12 @@ import Swiper from "swiper/bundle";
 import gsap from "gsap";
 import "swiper/swiper-bundle.css";
 import { pushScopeId } from "vue";
+import axios from "axios";
 
 export default {
   data() {
     return {
+      mrtstaGroup: [],
       lightBox: false,
       closePost: false,
       originalPlaceData: [],
@@ -1613,6 +1615,17 @@ export default {
   },
 
   mounted() {
+    axios
+      .get("http://localhost/dai/public/phps/mrt.php")
+      .then((res) => {
+        console.log("got it", res);
+        this.mrtstaGroup = res.data;
+        // console.log(mrtstaGroup);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+
     gsap.fromTo(
       ".mrtRedBoy",
       {

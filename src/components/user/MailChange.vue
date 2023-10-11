@@ -4,7 +4,7 @@
         <div class="changebox">
             <div class="mail">
                 <label for="">信箱</label>
-                <span>qaq@gmail.com</span>
+                <span>{{ email }}</span>
             </div>
             <div class="changeMail">
                 <label for="">新信箱</label>
@@ -23,6 +23,14 @@ export default {
     data() {
         return {
             changemail: '',
+        }
+    },
+    // inject: [
+    //     'email'
+    // ],
+    props: {
+        email: {
+            type: String
         }
     },
     methods: {
@@ -121,4 +129,5 @@ export default {
             }
         }
     }
-}</style>
+}
+</style>

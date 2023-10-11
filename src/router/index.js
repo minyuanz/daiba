@@ -39,6 +39,9 @@ const routes = [
   {
     path: "/login",
     name: "login",
+    meta: {
+      isAuth: true
+    },
     component: () =>
       import(/* webpackChunkName: "Login" */ "@/views/LoginView.vue"),
   },
@@ -167,13 +170,16 @@ const routes = [
       ),
   },
   {
-    path: "/user",
+    path: "/user/:id",
     name: "/user",
+    meta: {
+      isAuth: true
+    },
     component: () => import(/* webpackChunkName: "User" */ "@/views/User.vue"),
   },
   {
     path: "/Back/BackLogin",
-    name: "/BackLogin",
+    name: "BackLogin",
     meta: {
       hideApp: true,
     },
@@ -185,6 +191,7 @@ const routes = [
     name: "/BackMember",
     meta: {
       hideApp: true,
+      requiresAuth: true, // 設置登入守衛
     },
     component: () =>
       import(
@@ -196,6 +203,7 @@ const routes = [
     name: "/BackMrt",
     meta: {
       hideApp: true,
+      requiresAuth: true, // 設置登入守衛
     },
     component: () =>
       import(/* webpackChunkName: "BackMrt" */ "@/views/Back/BackMrt.vue"),
@@ -205,6 +213,7 @@ const routes = [
     name: "/BackFeature",
     meta: {
       hideApp: true,
+      requiresAuth: true, // 設置登入守衛
     },
     component: () =>
       import(
@@ -216,6 +225,7 @@ const routes = [
     name: "/BackContri",
     meta: {
       hideApp: true,
+      requiresAuth: true, // 設置登入守衛
     },
     component: () =>
       import(
@@ -227,6 +237,7 @@ const routes = [
     name: "/BackNews",
     meta: {
       hideApp: true,
+      requiresAuth: true, // 設置登入守衛
     },
     component: () =>
       import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackNews.vue"),
@@ -236,6 +247,7 @@ const routes = [
     name: "/BackPermission",
     meta: {
       hideApp: true,
+      requiresAuth: true, // 設置登入守衛
     },
     component: () =>
       import(
@@ -247,6 +259,7 @@ const routes = [
     name: "/BackOrder",
     meta: {
       hideApp: true,
+      requiresAuth: true, // 設置登入守衛
     },
     component: () =>
       import(
@@ -258,6 +271,7 @@ const routes = [
     name: "/BackPro",
     meta: {
       hideApp: true,
+      requiresAuth: true, // 設置登入守衛
     },
     component: () =>
       import(/* webpackChunkName: "BackFeature" */ "@/views/Back/BackPro.vue"),
@@ -274,9 +288,35 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
   scrollBehavior(to, from, savedPosition) {
-    // 始终滚动到顶部
+    // 始終滾動到頂部
     return { top: 0 };
   },
 });
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    const BackloginContent = JSON.parse(localStorage.getItem('BackloginContent'));
+    if (!BackloginContent || !BackloginContent.acc || !BackloginContent.pwd) {
+      alert('必须登录才能访问此页面');
+      next({ name: 'BackLogin' }); // 如果没有登入則導航到登入畫面
+    } else {
+      next(); // 
+    }
+  } else {
+    next(); // 不需要登入，可以額外設置這邊暫時不用只保留
+  }
+});
+  // router.beforeEach((to, from) => {
+//   // 檢查用户是否已登录 並 ❗️避免無限重定向
+//   if (to.meta.isAuth && to.name !== 'Login') {
+//     const isLogin = localStorage.getItem('user')
+//     if (isLogin) {
+//       return true
+//     } else {
+//       return '/login'
+//     }
+//   } else {
+//     return true
+//   }
+// })
 
 export default router;
