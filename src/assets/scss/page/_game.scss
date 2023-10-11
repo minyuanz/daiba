@@ -379,13 +379,15 @@
 
                 .pic {
 
-
                     img {
+                        padding: 1rem;
                         object-fit: cover;
                         cursor: pointer;
+                        border-radius: 20px;
 
                         &:hover {
-                            background-color: chocolate;
+                            background-color: #bdf9;
+                            animation: zooming .3s infinite alternate;
                         }
 
                     }
@@ -413,7 +415,14 @@
         animation-fill-mode: forwards;
         z-index: 10;
     }
-
+    @keyframes zooming{
+        0%{
+            scale: 1;
+        }
+        100%{
+            scale: 1.05;
+        }
+    }
     @keyframes closeEye {
         0% {
             opacity: 1;
