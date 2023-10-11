@@ -52,7 +52,7 @@ export default {
                 //登入成功後移動到這個頁面
                 this.$router.push('/Back/BackMember');
                 // 儲存用戶訊息到 Vuex
-                this.$store.commit('setLoggedInUser', adminId);
+                this.$store.commit('setLoggedInUser', 'true');
                 // 儲存用戶訊息到 localStorage
                 this.setBackloginaccLocalStorage(adminId, adminPwd);
             } else {

@@ -294,15 +294,15 @@ const router = createRouter({
 });
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    const isLogin = localStorage.getItem('user'); // 檢查用戶登入狀態
-    if (!isLogin) {
-      alert('必須登入才能訪問此頁面');
-      next({ name: 'BackLogin' }); // 如果沒有登入則導向登入畫面
+    const BackloginContent = JSON.parse(localStorage.getItem('BackloginContent'));
+    if (!BackloginContent || !BackloginContent.acc || !BackloginContent.pwd) {
+      alert('必须登录才能访问此页面');
+      next({ name: 'BackLogin' }); // 如果没有登入則導航到登入畫面
     } else {
-      next(); // 繼續路由導航
+      next(); // 
     }
   } else {
-    next(); // 不需要登入，直接繼續路由導航
+    next(); // 不需要登入，可以額外設置這邊暫時不用只保留
   }
 });
   // router.beforeEach((to, from) => {
