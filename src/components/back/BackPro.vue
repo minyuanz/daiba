@@ -320,7 +320,7 @@ export default {
             ];
         },
         fetchData() {
-            axios.get('http://localhost/dai/public/phps/ProductM.php')
+            axios.get('http://localhost/dai/public/phps/BackProductM.php')
             .then((response) => {
             this.products = response.data; // 更新數據到 products
         })

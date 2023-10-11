@@ -77,7 +77,7 @@ export default createStore({
     cartTotal(state) {
       // 計算總價
       return state.cart.reduce(
-        (total, product) => total + product.pord_price * product.count,
+        (total, product) => total + product.prod_price * product.count,
         0
       );
     },
@@ -103,7 +103,7 @@ export default createStore({
     incrementCount(state, product) {
       // 在購物車中 增加數量
       const cartItem = state.cart.find(
-        (item) => item.pord_id === product.pord_id
+        (item) => item.prod_id === product.prod_id
       );
       if (cartItem) {
         cartItem.count++;
@@ -112,7 +112,7 @@ export default createStore({
     decrementCount(state, product) {
       // 在購物車中減少數量
       const cartItem = state.cart.find(
-        (item) => item.pord_id === product.pord_id
+        (item) => item.prod_id === product.pord_id
       );
       if (cartItem && cartItem.count > 1) {
         cartItem.count--;
@@ -130,7 +130,7 @@ export default createStore({
     addToCart({ commit, state }, product) {
       // 檢查購物車中 商品是否重複
       const existingProduct = state.cart.find(
-        (item) => item.pord_id === product.pord_id
+        (item) => item.prod_id === product.prod_id
       );
 
       if (existingProduct) {
@@ -145,7 +145,7 @@ export default createStore({
     removeFromCart({ commit, state }, product) {
       // 移除購物車該商品
       const index = state.cart.findIndex(
-        (item) => item.pord_id === product.pord_id
+        (item) => item.prod_id === product.prod_id
       );
 
       if (index !== -1) {
