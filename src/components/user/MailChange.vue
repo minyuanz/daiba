@@ -4,14 +4,14 @@
         <div class="changebox">
             <div class="mail">
                 <label for="">信箱</label>
-                <span>{{ email }}</span>
+                <span>{{ member.mem_email }}</span>
             </div>
             <div class="changeMail">
                 <label for="">新信箱</label>
                 <input type="text" v-model="changemail">
             </div>
             <div class="accurance">
-                <button class="btn_l">確認更改</button>
+                <button class="btn_l" @click="updateEmail">確認更改</button>
                 <button class="btn_l btn_undo" @click="menu">返回</button>
             </div>
         </div>
@@ -23,19 +23,32 @@ export default {
     data() {
         return {
             changemail: '',
-        }
-    },
-    // inject: [
-    //     'email'
-    // ],
-    props: {
-        email: {
-            type: String
+            member: this.$store.state.memInfo
         }
     },
     methods: {
         menu() {
             this.$emit('toggle-change')
+        },
+        updateEmail() {
+            // 建立數據資料夾好發給PHP做處理新增
+            const formData = new FormData();
+            formData.append("mem_email", this.changemail);
+            formData.append("mem_id", this.member.mem_id);
+            fetch('http://localhost/dai/public/phps/UpdateMemberEmail.php', {
+                method: 'post',
+                body:formData
+            })
+                .then(res => res.json())
+                .then((res) => {
+                    if (!res.error) {
+                        alert(res.msg);
+                        this.menu()
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     }
 }

@@ -3,7 +3,7 @@
         <div class="pic">
             <img src="https://steam.oxxostudio.tw/webp/gimp/example/simple-keyer-mask-16.webp" />
         </div>
-        <h3>{{ name }}</h3>
+        <h3>{{ member.mem_name }}</h3>
         <button>
             <router-link to="/home" class="logout" @click="logout">登出</router-link>
         </button>
@@ -24,15 +24,13 @@
 </template>
 
 <script>
+
+// import {memInfo} from 'vuex'
 export default {
     data() {
         return {
             // toggle:''
-        }
-    },
-    props: {
-        'name': {
-            type: String
+            member: this.$store.state.memInfo
         }
     },
     methods: {

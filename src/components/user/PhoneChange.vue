@@ -5,14 +5,14 @@
             <div class="phone">
                 <label for="">手機號碼</label>
                 <!-- <input type="text"> -->
-                <span>0912-345-678</span>
+                <span>{{ member.mem_phone }}</span>
             </div>
             <div class="changePhone">
                 <label for="">新手機號碼</label>
                 <input type="text" v-model="changePhone">
             </div>
             <div class="accurance">
-                <button class="btn_l">確認更改</button>
+                <button class="btn_l" @click="updatePhone">確認更改</button>
                 <button class="btn_l btn_undo" @click="menu">返回</button>
             </div>
 
@@ -25,11 +25,33 @@ export default {
     data() {
         return {
             changePhone: '',
+            member: this.$store.state.memInfo
+
         }
     },
     methods: {
         menu() {
             this.$emit('toggle-change')
+        },
+        updatePhone() {
+            // 建立數據資料夾好發給PHP做處理新增
+            const formData = new FormData();
+            formData.append("changePhone", this.changePhone);
+            formData.append("mem_id", this.member.mem_id);
+            fetch('http://localhost/dai/public/phps/UpdateMemberPhone.php', {
+                method: 'post',
+                body: formData
+            })
+                .then(res => res.json())
+                .then((res) => {
+                    if (!res.error) {
+                        alert(res.msg);
+                        this.menu()
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     }
 }
@@ -61,12 +83,12 @@ export default {
         .phone {
 
             label {
-                font-size: map-get($map , small );
+                font-size: map-get($map , small);
                 display: inline-block;
             }
 
             span {
-                font-size: map-get($map , small );
+                font-size: map-get($map , small);
                 display: inline-block;
                 width: 100%;
                 text-align: center;
@@ -75,8 +97,9 @@ export default {
             // text-align: center;
         }
 
-        label,input {
-            font-size: map-get($map , small );
+        label,
+        input {
+            font-size: map-get($map , small);
             display: block;
             width: 100%;
             margin-bottom: 10px;
@@ -86,30 +109,43 @@ export default {
             border: transparent;
             border-bottom: 1px solid #aaa;
         }
-        button{
+
+        button {
             margin: .5rem 0;
         }
-        }
-
-
     }
+
+
+}
 
 @media screen and (max-width:414px) {
     .phonechange {
         height: 670px;
+
         .changebox {
             width: 80%;
+
             .phone {
-                label { width: 35%;}
-                span { width: 65%;}
+                label {
+                    width: 35%;
+                }
+
+                span {
+                    width: 65%;
+                }
             }
 
             .changePhone {
                 display: flex;
-                label { width: 35%;}
-                input { width: 65%;}
+
+                label {
+                    width: 35%;
+                }
+
+                input {
+                    width: 65%;
+                }
             }
         }
     }
-}
-</style>
+}</style>

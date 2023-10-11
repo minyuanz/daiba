@@ -21,10 +21,10 @@
       <span>會員自訂</span>
     </div>
     <!-- 左邊選單 -->
-    <SliderAC class="userSlider" @title-change="titleUpdate" :name="member.mem_name" />
+    <SliderAC class="userSlider" @title-change="titleUpdate" />
     <!-- 右邊選單 -->
     <!-- 會員資料 -->
-    <UserInfo v-if="'會員資料' == title" :email="member.mem_email" />
+    <UserInfo v-if="'會員資料' == title" />
     <!-- 投稿文章 -->
     <ArticleInfo id="ArticleInfo" v-else-if="'投稿文章' == title" />
     <!-- 文章收藏 -->
@@ -80,27 +80,13 @@ export default {
         .then((res) => {
           this.memberlist = res
           this.member = this.memberlist.find(item => item.mem_id === idToFind)
+          this.$store.commit("getInfo", this.member)
         })
         .catch((error) => {
           console.error('傳輸失敗', error)
         })
     }
   },
-  // beforeRouteEnter(to, from) {
-  //   // ...
-  //   console.log(to);
-  //   console.log(from);
-
-  //   let isLogin = localStorage.getItem('user')
-  //   if (isLogin) {
-  //     // next()
-  //     // return true
-  //     this.$router.push(`/user/${id}`)
-  //   } else {
-  //     return '/login'
-  //   }
-
-  // },
   mounted() {
     let app = document.getElementById("app");
     // alert(app.clientHeight)
