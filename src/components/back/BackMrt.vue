@@ -2,14 +2,12 @@
   <div class="backMrt" v-if="addToggle" v-show="!editMode">
     <div class="mrtSearch">
       <label for="">請選擇捷運線：</label>
-      <select name="" id="" v-model="newMrt.mrt_id1">
-        <option value="BL">BL</option>
-        <option value="BR">BR</option>
-        <option value="G">G</option>
-        <option value="O">O</option>
-        <option value="R">R</option>
+      <select name="mrtLine" id="mrtLine" v-model="selectMrtId">
+        <option v-for="mrtId in selectedMrtLine" :key="mrtId" :value="mrtId">
+          {{ mrtId }}
+        </option>
       </select>
-      <button class="btnsearch">查詢</button>
+      <button class="btnsearch" @click="filterOptions()">查詢</button>
     </div>
     <div class="mrtTitle">
       <p>捷運站編號</p>
@@ -19,7 +17,7 @@
       <p>編輯</p>
       <!-- <p>刪除</p> -->
     </div>
-    <div class="mrtInfo" v-for="(addMrt, index) in mrts" :key="index">
+    <div class="mrtInfo" v-for="(addMrt, index) in filteredMrtIds" :key="index">
       <p>{{ addMrt.sta_id }}</p>
       <p>{{ addMrt.mrt_code1 }}</p>
       <p>{{ addMrt.mrt_code2 }}</p>
@@ -167,8 +165,6 @@
           class="custom-input"
           v-model="currentEditMrt.sta_describe"
         ></textarea>
-        <!-- <input type="text" class="custom-input"> -->
-        <!-- <span class="count">0/100字</span> -->
       </div>
       <div class="btn">
         <button @click="cancelEdit">取消編輯</button>
@@ -184,6 +180,9 @@ import BackMrt from "@/testdata/BackMrt.json";
 export default {
   data() {
     return {
+      selectedMrtLine: [],
+      selectMrtId: "R",
+      filteredMrtIds: [],
       show: false,
       currentEditMrt: "",
       mrts: [],
@@ -211,7 +210,38 @@ export default {
   created() {
     this.fetchData();
   },
+
   methods: {
+    filterOptions() {
+      const selectedLine = this.selectMrtId;
+      if (selectedLine === "BL") {
+        this.filteredMrtIds = this.mrts.filter(
+          (mrts) =>
+            mrts.mrt_id1 === selectedLine || mrts.mrt_id2 === selectedLine
+        );
+      } else if (selectedLine === "BR") {
+        this.filteredMrtIds = this.mrts.filter(
+          (mrts) =>
+            mrts.mrt_id1 === selectedLine || mrts.mrt_id2 === selectedLine
+        );
+      } else if (selectedLine === "R") {
+        this.filteredMrtIds = this.mrts.filter(
+          (mrts) =>
+            mrts.mrt_id1 === selectedLine || mrts.mrt_id2 === selectedLine
+        );
+      } else if (selectedLine === "O") {
+        this.filteredMrtIds = this.mrts.filter(
+          (mrts) =>
+            mrts.mrt_id1 === selectedLine || mrts.mrt_id2 === selectedLine
+        );
+      } else if (selectedLine === "G") {
+        this.filteredMrtIds = this.mrts.filter(
+          (mrts) =>
+            mrts.mrt_id1 === selectedLine || mrts.mrt_id2 === selectedLine
+        );
+      }
+    },
+
     async handleSubmit(event) {
       event.preventDefault(); // 阻止默認的提交行爲
       // 處理表單提交邏輯
@@ -300,6 +330,13 @@ export default {
         .get("http://localhost/dai/public/phps/mrt.php")
         .then((response) => {
           this.mrts = response.data;
+          console.log(this.mrts);
+          this.filteredMrtIds = this.mrts.filter(
+            (mrts) => mrts.mrt_id1 === "R"
+          );
+          console.log(this.filteredMrtIds);
+          const mrtIds = this.mrts.map((mrt) => mrt.mrt_id1);
+          this.selectedMrtLine = [...new Set(mrtIds)];
         })
         .catch((error) => {
           console.error("數據傳輸失敗：", error);
