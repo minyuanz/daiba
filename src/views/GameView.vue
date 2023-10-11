@@ -1,41 +1,74 @@
 <template>
   <!-- 遊戲首頁 -->
-  <transition name="fade" mode="out-in">
-    <div class="gameHome" v-show="home">
-      <div class="home">
-        <img src="@/assets/images/game/station_AM.jpg" alt="home" />
-      </div>
-      <img src="../assets/images/game/gameLogo.png" alt="gameLogo" class="gameLogo" v-show="gameLogo" />
-      <button class="start btn_s" @click="closeName = !closeName" v-show="startBtn">start</button>
-      <div class="name" v-show="closeName">
-        <p>請輸入ID</p>
-        <input type="text" maxlength="8" v-model="userName" />
-        <button class="btn_s" @click="checkName">OK</button>
-      </div>
-      <transition>
-        <div class="mode" v-show="mode">
-          <div class="toCostume" @click="home = !home, costume = !costume">
-            <p>選擇穿搭</p>
-          </div>
-          <div class="toGame" @click="home = !home, Inner = !Inner, nextMessage()">
-            <p>直接遊玩</p>
-          </div>
-        </div>
-      </transition>
+
+  <section class="gameHome" v-show="home">
+    <div class="home">
+      <img src="@/assets/images/game/station_AM.jpg" alt="home" />
     </div>
-  </transition>
+    <img src="../assets/images/game/gameLogo.png" alt="gameLogo" class="gameLogo" v-show="gameLogo" />
+    <button class="start btn_s" @click="closeName = !closeName" v-show="startBtn">start</button>
+
+    <!-- 名稱彈窗 -->
+    <div class="name" v-show="closeName">
+      <p>請輸入ID</p>
+      <input type="text" maxlength="8" v-model="userName" />
+      <button class="btn_s" @click="checkName">OK</button>
+    </div>
+    <transition>
+
+      <!-- 選擇模式 -->
+      <div class="mode" v-show="mode">
+        <div class="toCostume" @click="home = !home, costume = !costume, startCostume()">
+          <p>選擇穿搭</p>
+        </div>
+        <div class="toGame" @click="home = !home, Inner = !Inner, starGameScene()">
+          <p>直接遊玩</p>
+        </div>
+      </div>
+
+    </transition>
+  </section>
+
 
   <!-- 選擇服裝 -->
   <transition name="fade" mode="out-in">
-    <div class="gameCostume" v-show="costume">
+    <section class="gameCostume" v-show="costume">
       <div class="costume">
         <img src="@/assets/images/game/costume.jpg" alt="更衣室">
       </div>
       <div class="main">
-        <div class="model" >
-          <img src="~@/assets/images/game/costume/doll_naked.png" alt="人物">
+
+        <!-- 試衣間 -->
+        <div class="fittingRoom">
+
+          <!--人物 -->
+          <div class="model">
+            <a href="" id="downloadModel" style="display: none;"></a>
+            <img src="~@/assets/images/game/costume/doll_naked.png" alt="人物">
+            <img class="tryItem" :class="`item${tryItem.id}`" :src="tryItem.img" :alt="tryItem.alt"
+              v-for="tryItem in tryItems" @mousedown="upZIndex($event)">
+          </div>
+
+          <!-- 下方按鈕 -->
+          <div class="btn">
+            <button class="btn_s" @click="downloadModel">下載穿搭</button>
+            <button class="btn_s" @click="costume = false, Inner = !Inner, starGameScene()">決定</button>
+            <button class="btn_s" @click="tryItems = []">RESET</button>
+          </div>
+
+          <!-- 垃圾桶 -->
+          <div class="delBox" ref="delBox" @mouseup="delItem()">
+            <img src="~@/assets/images/game/costume/delbox.png" alt="回收動畫">
+            <img src="~@/assets/images/game/costume/recycle-symbol.png" alt="回收logo" v-show="recycleing" class="recycle">
+            <!-- 火動畫 -->
+            <div class="flame" v-show="fireing"></div>
+          </div>
         </div>
+
+        <!-- 服裝清單 -->
         <div class="list">
+
+          <!-- 分類 -->
           <div class="type">
             <span @click="selectType($event)">上衣</span>
             <span @click="selectType($event)">下身</span>
@@ -43,42 +76,67 @@
             <span @click="selectType($event)">外套</span>
             <span @click="selectType($event)">配件</span>
           </div>
+
+          <!-- 物品 -->
           <div class="item" data-role="drag-drop-container">
-            <div class="pic" v-for="item in newCostumeItem" :key="itemIndex">
-              <img :src="item.img" :alt="item.alt">
+            <div class="pic" v-for=" item  in  newCostumeItem " :key="itemIndex">
+              <img :src="item.img" :alt="item.alt" @click="tryOn(item)">
             </div>
           </div>
 
         </div>
       </div>
 
+      <!-- 過場動畫 -->
+      <svg id="curtain" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path fill="#000" d="M 100,0 L 0,0 L 0,130 c 0,-17, 23,-30, 50,-30 c 27,0, 50,13, 50,30 Z">
+          <animate id="curtainAnimate" attributeName="d" begin="indefinite" dur="1s" fill="freeze" keyTimes="0; 0.7; 1"
+            values="M 100,0 L 0,0 L 0,130 c 0,-17, 23,-30, 50,-30 c 27,0, 50,13, 50,30 Z;
+                     M 100,0 L 0,0 L 0,50  c 0,-17, 23,-30, 50,-30 c 27,0, 50,13, 50,30 Z;
+                     M 100,0 L 0,0 L 0,0   c 0,0, 50,0, 50,0       c 0,0, 50,0, 50,0 Z" />
+        </path>
+        <!-- 設置svg動畫屬性 執行完成之後控制css 設置成none -->
+        <set begin="curtainAnimate.end" attributeType="CSS" attributeName="display" to="none" />
+      </svg>
 
-    </div>
+    </section>
+
 
   </transition>
 
   <!--遊戲內容 -->
+
   <transition name="fade" mode="out-in">
-    <div class="gameInner" v-if="Inner">
+    <section class="gameInner" v-show="Inner">
+
+      <!-- 開場動畫背景 -->
+      <div class="starLightBox"></div>
+
+      <!-- 開場動畫 -->
+      <div class="starGameScene"></div>
+
+      <!-- 背景 -->
       <transition>
         <img :src="currentMessage.image" alt="Character Image" class="character-image" :class="{ imgFill }" />
       </transition>
+
       <!-- 對話框角色 -->
       <div class="name" v-show="closeTxtName">
-        <p v-if="currentMessage.vo">???</p>
-        <p v-if="currentMessage.user">{{ userName }}</p>
-        <p v-if="currentMessage.npc">NPC</p>
+        <p v-show="currentMessage.vo">???</p>
+        <p v-show="currentMessage.user">{{ userName }}</p>
+        <p v-show="currentMessage.npc">NPC</p>
       </div>
+
       <!-- 對話框 -->
       <div class="speechBalloon" @click="nextMessage" v-show="closeBalloon">
-        <!-- <p :class="{ 'inputTxt': inputTxt }" :key="txtKey" @transitionend="animationEnd">{{
-          currentMessage.text }}</p> -->
         <p :key="currentMessage.id">{{ currentText.join("") }}</p>
         <span class="nextBtn">▼</span>
       </div>
+
       <!-- 選項 -->
       <div class="lightbox" v-if="options">
         <div v-if="options" class="option">
+
           <!-- 主選擇 -->
           <button v-if="aimOption" class="btn_s" @click="decideAim($event), (options = !options)">
             吃美食
@@ -201,7 +259,7 @@
 
       <!-- 讀取畫面 -->
       <div class="loading" v-show="loading">
-        <img src="../../src/assets/images/game/tensha.gif" alt="tensha" />
+        <img src="../../src/assets/images/game/MRT.gif" alt="捷運動畫" id="MRT" :key="MRTkey++" />
         <svg xmlns="http://www.w3.org/2000/svg" width="600">
           <g class="animation-group">
             <rect class="box" width="50" height="50" rx="4" />
@@ -245,16 +303,21 @@
           </g>
         </svg>
       </div>
-    </div>
+    </section>
   </transition>
 </template>
 
 <script>
 import ButtonS from "@/components/ButtonS.vue";
 import { faRuler } from "@fortawesome/free-solid-svg-icons";
+import $ from 'jquery'
+import 'jquery-ui-dist/jquery-ui'
+import html2canvas from "html2canvas";
+import { faThinkPeaks } from "@fortawesome/free-brands-svg-icons";
 
 
 export default {
+
   data() {
     return {
       btninner: ["START", "OK"],
@@ -262,49 +325,61 @@ export default {
       userName: "", //使用者名稱
       closeName: false, //關閉填寫名稱欄位
       gameLogo: true,
-      home: false, //遊戲首頁
+      home: true, //遊戲首頁
       startBtn: true, //開始按鈕
       mode: false, //選擇模式
-      costume: true, //選擇服裝
+      costume: false, //選擇服裝
       Inner: false, //遊戲內頁
-      closeTxtName: true, //關閉對話框角色名
       imgFill: false, //控制圖片css
-      closeBalloon: true, //關閉對話框
+      closeTxtName: true,
+      closeBalloon: true,
 
       // 服裝
       costumeItem: [
         // 上身
-        { img: require('@/assets/images/game/costume/black_sweater.png'), alt: '上衣' },
-        { img: require('@/assets/images/game/costume/blue_shirt.png'), alt: '上衣' },
-        { img: require('@/assets/images/game/costume/yellow_upper.png'), alt: '上衣' },
-        { img: require('@/assets/images/game/costume/white_tshirt.png'), alt: '上衣' },
+        { id: 1, img: require('@/assets/images/game/costume/black_sweater.png'), alt: '上衣' },
+        { id: 2, img: require('@/assets/images/game/costume/blue_shirt.png'), alt: '上衣' },
+        { id: 3, img: require('@/assets/images/game/costume/yellow_upper.png'), alt: '上衣' },
+        { id: 4, img: require('@/assets/images/game/costume/white_tshirt.png'), alt: '上衣' },
 
         // 下身
-        { img: require('@/assets/images/game/costume/blue_shorts.png'), alt: '下身' },
-        { img: require('@/assets/images/game/costume/navy_skirt.png'), alt: '下身' },
-        { img: require('@/assets/images/game/costume/white_trousers.png'), alt: '下身' },
+        { id: 5, img: require('@/assets/images/game/costume/blue_shorts.png'), alt: '下身' },
+        { id: 6, img: require('@/assets/images/game/costume/navy_skirt.png'), alt: '下身' },
+        { id: 7, img: require('@/assets/images/game/costume/white_trousers.png'), alt: '下身' },
 
         // 套裝
-        { img: require('@/assets/images/game/costume/red_dress.png'), alt: '套裝' },
-        { img: require('@/assets/images/game/costume/sportClothes.png'), alt: '套裝' },
+        { id: 8, img: require('@/assets/images/game/costume/red_dress.png'), alt: '套裝' },
+        { id: 9, img: require('@/assets/images/game/costume/sportClothes.png'), alt: '套裝' },
 
         // 外套
-        { img: require('@/assets/images/game/costume/pink_baseballJacket.png'), alt: '外套' },
-        { img: require('@/assets/images/game/costume/tiffany_coat.png'), alt: '外套' },
+        { id: 10, img: require('@/assets/images/game/costume/pink_baseballJacket.png'), alt: '外套' },
+        { id: 11, img: require('@/assets/images/game/costume/tiffany_coat.png'), alt: '外套' },
 
         // 配件
-        { img: require('@/assets/images/game/costume/black_sockes.png'), alt: '配件' },
-        { img: require('@/assets/images/game/costume/white_longSocks.png'), alt: '配件' },
-        { img: require('@/assets/images/game/costume/pink_longSocks.png'), alt: '配件' },
-        { img: require('@/assets/images/game/costume/yellow_socks.png'), alt: '配件' },
-        { img: require('@/assets/images/game/costume/black_shoes.png'), alt: '配件' },
-        { img: require('@/assets/images/game/costume/white_shoes.png'), alt: '配件' },
-        { img: require('@/assets/images/game/costume/brown_shoes.png'), alt: '配件' },
-        { img: require('@/assets/images/game/costume/sandals.png'), alt: '配件' },
-      ],
-      itemIndex: 0,
+        { id: 12, img: require('@/assets/images/game/costume/black_sockes.png'), alt: '配件' },
+        { id: 13, img: require('@/assets/images/game/costume/white_longSocks.png'), alt: '配件' },
+        { id: 14, img: require('@/assets/images/game/costume/pink_longSocks.png'), alt: '配件' },
+        { id: 15, img: require('@/assets/images/game/costume/yellow_socks.png'), alt: '配件' },
+        { id: 16, img: require('@/assets/images/game/costume/black_shoes.png'), alt: '配件' },
+        { id: 17, img: require('@/assets/images/game/costume/white_shoes.png'), alt: '配件' },
+        { id: 18, img: require('@/assets/images/game/costume/brown_shoes.png'), alt: '配件' },
+        { id: 19, img: require('@/assets/images/game/costume/sandals.png'), alt: '配件' },
+      ], //清單
 
-      newCostumeItem: [],
+      itemIndex: 0, //Key
+      zIndex: 1,  //階級
+
+      newCostumeItem: [
+        { id: 1, img: require('@/assets/images/game/costume/black_sweater.png'), alt: '上衣' },
+        { id: 2, img: require('@/assets/images/game/costume/blue_shirt.png'), alt: '上衣' },
+        { id: 3, img: require('@/assets/images/game/costume/yellow_upper.png'), alt: '上衣' },
+        { id: 4, img: require('@/assets/images/game/costume/white_tshirt.png'), alt: '上衣' },
+      ], //篩選服裝 預設為上衣
+      tryItems: [], //選擇的服裝
+      fireing: false,
+      recycleing: true,
+      tagTryItem: [],
+
 
       // 需帶出的物件
       aim: "", //目的
@@ -315,20 +390,20 @@ export default {
       aimOption: false, //主選項
       lineOption: false, //捷運選項
       yes_OR_no_Option: false, //是否選項
-      chikinOption: false,
-      karaokeOption: false,
+      chikinOption: false, //炸機
+      karaokeOption: false, //唱歌
 
       // 插圖
       chikinshop: false, //鹹酥雞店
       item: "", //鹹酥雞店
 
       // 彈窗
-      openBag: false,
-      openEnd: false,
+      openBag: false, //獲得物品
+      openEnd: false, //結束
 
       // loading
-
       loading: false, //讀取
+      MRTkey: 1,
 
       // 對話內容
       messages: [
@@ -742,6 +817,7 @@ export default {
   },
 
   methods: {
+
     // 換下一個內容
     nextMessage() {
       if (this.idx === this.currentMessage.text.length) {
@@ -786,6 +862,15 @@ export default {
       }
     },
 
+    // 換裝動畫
+    startCostume() {
+      var animateElement = document.getElementById("curtainAnimate")
+      setTimeout(() => {
+        animateElement.beginElement()
+      }, 500);
+
+    },
+
     // 服裝分類
     selectType(event) {
       let type = event.target.innerText;
@@ -801,51 +886,75 @@ export default {
         this.newCostumeItem = this.costumeItem.filter(costumeItem => costumeItem.alt === type);
       }
     },
-    // className(itemAlt) {
-    //   if (itemAlt === '上衣') {
-    //     return 'top'
-    //   } else if (itemAlt === '下身') {
-    //     return 'bottom'
-    //   } else if (itemAlt === '套裝') {
-    //     return 'suit'
-    //   } else if (itemAlt === '外套') {
-    //     return 'outer '
-    //   } else if (itemAlt === '配件') {
-    //     return 'acc'
-    //   }
-    // },
 
-    // 拖曳
-    startDrag(event) {
-      console.log(event.target.outerHTML)
-      event.dataTransfer.setData('text/plain', event.target.outerHTML)
+
+    // 新增衣服 + 拖曳
+    tryOn(item) {
+      if (!this.tryItems.includes(item)) {  //如果當前沒有所選的衣服則新增
+        this.tryItems.push(item);
+      } else {
+        let i = this.tryItems.indexOf(item) //如有找到則搜尋衣服的位置並刪除
+        if (i !== -1) {
+          this.tryItems.splice(i, 1)
+        }
+
+      }
+
+      this.$nextTick(() => {
+        const newTryItem = document.querySelector('.tryItem:last-child');
+        if (newTryItem) {
+          $(newTryItem).draggable({
+            containment: '.fittingRoom',
+          });
+        }
+      });
     },
 
-    dropped(event) {
-      let model = document.querySelector('.model')
-      let main = document.querySelector('.main')
-      event.preventDefault();
-      let imgHTML = event.dataTransfer.getData('text/plain');
-      let newImg = document.createElement('span');
-      newImg.innerHTML = imgHTML;
-
-      const offsetX = event.clientX - model.getBoundingClientRect().left;
-      const offsetY = event.clientY - model.getBoundingClientRect().top;
-      console.log(model.getBoundingClientRect().left)
-      console.log(model.getBoundingClientRect().top)
-      console.log(offsetX)
-      console.log(offsetY)
-
-      // newImg.style.position = 'absolute';
-      // newImg.style.left = offsetX  + 'px';
-      // newImg.style.top = offsetY  + 'px';
-
-      model.appendChild(newImg);
+    // 再次點擊試穿的衣服時，階級增加
+    upZIndex(event) {
+      event.target.style.zIndex = this.zIndex++   //增加當前目標的z-index
+      let className = event.target.classList.toString()   //獲得當前目標的class名稱 並轉為字串
+      let matches = className.match(/\d+/); //只篩選出數字
+      let id = matches[0];
+      this.tagTryItem = this.tryItems.filter(tryItems => tryItems.id == id) //將試穿的陣列清單中以id去抓取當前目標並給予當前目標試穿的陣列
     },
 
-    allowDrop(event) {
-      event.preventDefault();
+
+    // 刪除衣服
+    delItem() {
+      let i = this.tryItems.indexOf(this.tagTryItem[0]) //搜尋當前目標在試穿清單中的位置 有找到之後並刪除
+      console.log(i)
+      if (i !== -1) {
+        this.recycleing = false
+        this.fireing = true
+        this.tryItems.splice(i, 1)
+        setTimeout(() => {
+          this.fireing = false
+          this.recycleing = true
+        }, 1000);
+      }
     },
+
+
+    // 轉成圖片檔並下載
+    downloadModel() {
+      let outfit = document.getElementById('downloadModel')  //抓到a標籤
+      html2canvas(document.querySelector('.model')).then(function (canvas) {  //html2canvas套件轉成canvas
+        outfit.href = canvas.toDataURL()   //給予連結(canvas)
+        outfit.download = 'your outfit.png'; //→ 指定預設下載名稱
+        outfit.click(); //直接讓outfit被點擊
+      })
+
+
+    },
+
+    // 遊戲開場動畫
+    starGameScene() {
+      setTimeout(() => {
+        this.nextMessage()
+      }, 3000);
+    },
+
 
     //決定目的
     decideAim(event) {
@@ -921,14 +1030,12 @@ export default {
 
     // 讀取條
     loadingTime() {
-      this.closeTxtName = false;
-      this.closeBalloon = false;
       this.loading = true;
+      this.MRTkey++
       setTimeout(() => {
         this.currentMessageIndex++;
         this.loading = false;
-        this.closeTxtName = true;
-        this.closeBalloon = true;
+        this.MRTkey++
       }, 2000);
     },
 
@@ -959,6 +1066,9 @@ export default {
       this.yes_OR_no_Option = false;
       this.chikinOption = false;
       this.karaokeOption = false;
+      this.mode = false;
+      this.gameLogo = true;
+      this.startBtn = true;
     },
   },
   watch: {
@@ -1047,7 +1157,7 @@ export default {
 <style>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: opacity 0.8s;
 }
 
 .fade-enter,
