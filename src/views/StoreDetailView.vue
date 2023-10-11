@@ -106,7 +106,7 @@ export default {
       const idToFind = to.params.id;
       this.foundObject = ProTest.find((item) => item.pord_id === idToFind);
       this.selectedImage = this.foundObject.prod_img1;
-      //更新後 在更新一次隨機清單
+      //更新後 再更新一次隨機清單
       this.generateRandomProducts();
     },
   },
