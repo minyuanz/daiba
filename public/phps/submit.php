@@ -13,7 +13,7 @@ try {
     
     for ($i = 1; $i <= 3; $i++) { 
         if ($_FILES["art_pic{$i}"]["error"] === 0) { 
-            $dir = "../img/article/"; 
+            $dir = "../img/"; 
             if (!file_exists($dir)) {
                 mkdir($dir);  
             }
@@ -32,12 +32,13 @@ try {
     }
     require_once("connect_chd103g5_2.php");
 
-    $sql = "INSERT INTO `article` (`sta_id`, `fea_id`, `art_title`, `art_subTitle`, `art_content`, `art_pic1`, `art_pic2`, `art_pic3`, `art_date`, `art_status`) 
-    VALUES (:sta_id, :fea_id, :art_Title, :art_subTitle, :art_content, :art_pic1, :art_pic2, :art_pic3,:art_date, :art_status);";
+    $sql = "INSERT INTO `article` (`sta_id`, `fea_id`, `art_title`, `art_subTitle`, `art_content`,`art_address`, `art_pic1`, `art_pic2`, `art_pic3`, `art_date`, `art_status`) 
+    VALUES (:sta_id, :fea_id, :art_Title, :art_subTitle, :art_content,:art_address, :art_pic1, :art_pic2, :art_pic3,:art_date, :art_status);";
     
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(":art_Title", $_POST["art_title"]);
     $stmt->bindValue(":art_subTitle", $_POST["art_subTitle"]);
+    $stmt->bindValue(":art_address", $_POST["art_address"]);
     $stmt->bindValue(":sta_id", $_POST["sta_id"]);
     $stmt->bindValue(":fea_id", $_POST["fea_id"]);
     $stmt->bindValue(":art_pic1", $fileNames[0]);

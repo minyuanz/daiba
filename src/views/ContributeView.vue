@@ -1,6 +1,7 @@
 <template>
     <section class="CBWrapper">
         <h1>投稿熱門</h1>
+        <!-- 跑馬燈區 -->
         <div class="swiperBanner">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="(taipeis, taipeisIndex) in swipers" :key="taipeisIndex"
@@ -47,6 +48,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- 引導訊息 -->
         <div v-show="closeTxt" class="talk">
             <p>
                 還有其他推薦的捷運美食、景點與住宿嗎？<br />
@@ -54,6 +57,8 @@
             </p>
             <span @click="closeTxt = !closeTxt">✖</span>
         </div>
+
+        <!-- 我要投稿 -->
         <div class="toCB">
             <router-link to="/Submit">
                 <ButtonM :HTMLInner="btninner" />
@@ -64,6 +69,8 @@
     <section class="CBArea">
         <div class="CBTitle">
             <h2>投稿專欄</h2>
+
+            <!-- 標籤 -->
             <div>
                 <span v-for="(CBtag, tagindex) in CBtag" :key="tagindex" class="gray">#{{ CBtag }}</span>
             </div>
@@ -72,31 +79,35 @@
                     :class="getClassObject(MRTLine, MRTLineindex)">#{{ MRTLine }}</span>
             </div>
         </div>
+
+        <!-- 文章清單 -->
         <div class="CBList">
-            <div v-for="index in 8" :key="index" @click="(closePost = !closePost), (lightBox = !lightBox)">
+            <div v-for="itemList in CBList" :key="itemList.art_no"
+                @click="(closePost = !closePost), (lightBox = !lightBox), openInner(itemList)">
                 <div :class="{ 'card-w': PC, 's-card-h': !PC }">
                     <div class="img">
-                        <img
-                            :src="PC ? 'https://picsum.photos/200/280/?random=10' : 'https://picsum.photos/280/200/?random=10'" />
-                        <img src="https://picsum.photos/80/80/?random=10" class="head" />
+                        <img :src="`${this.$store.state.imgURL}` + itemList.art_pic1" alt="">
+                        <!-- <img :src="PC ? 'https://picsum.photos/200/280/?random=10' : 'https://picsum.photos/280/200/?random=10'" /> -->
+                        <!-- <img src="https://picsum.photos/80/80/?random=10" class="head" /> -->
                     </div>
                     <div class="text">
                         <div class="title">
-                            <h3>五分埔商圈購物</h3>
-                            <p>台北成衣街｜衣服、飾品、配件、包包、帽子批發</p>
+                            <h3>{{ itemList.art_title }}</h3>
+                            <p>{{ itemList.art_subTitle }}</p>
                             <div class="tag">
                                 <span class="title-tag gray">#景點推薦</span>
                                 <span class="title-tag blue">#板南線</span>
                             </div>
-                            <span class="s_text time">2020-06-15</span>
+                            <span class="s_text time">{{ itemList.art_date }}</span>
                         </div>
                         <div class="txt">
-                            那天逛完華山KAKAO敗家後，就心血來潮到五分埔去逛逛，真的是久違了好多年，以前學生時期過年領完紅包，一定都是最期待來到五分埔買衣服！如今後來才知道原來這裡除了一般民眾、觀光客買購物衣服的地方以外，原來也有成衣批發商圈，那天去晃晃除了衣服之外，還有包包、飾品、鞋子等等。
+                            {{ itemList.art_content }}
                         </div>
 
                     </div>
                 </div>
             </div>
+            <!-- 文章內容 -->
             <div class="CBPost" v-show="closePost">
                 <div class="box">
                     <img src="https://picsum.photos/200/200/?random=10" class="head" />
@@ -104,17 +115,13 @@
                     <div class="swiperPost">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img :src="`${this.$store.state.publicURLL}/img/ice noodle jelly.jpg`" />
-                                <!-- <img src="/img/ice noodle jelly.jpg" /> -->
-                                <!-- `${this.$store.state.publicURLL}/img/ice noodle jelly.jpg` -->
+                                <img :src="`${this.$store.state.imgURL}` + CBPost.art_pic1" alt="">
                             </div>
                             <div class="swiper-slide">
-                                <img :src="`${this.$store.state.publicURLL}/img/ice noodle jelly.jpg`" />
-                                <!-- <img src="/img/ice noodle jelly.jpg" /> -->
+                                <img :src="`${this.$store.state.imgURL}` + CBPost.art_pic2" alt="">
                             </div>
                             <div class="swiper-slide">
-                                <img :src="`${this.$store.state.publicURLL}/img/ice noodle jelly.jpg`" />
-                                <!-- <img src="/img/ice noodle jelly.jpg" /> -->
+                                <img :src="`${this.$store.state.imgURL}` + CBPost.art_pic3" alt="">
                             </div>
                         </div>
                         <div class="swiper-button-prev"></div>
@@ -122,22 +129,16 @@
                     </div>
                     <div class="inner">
                         <div class="title">
-                            <h3>萬華無名粉條冰</h3>
-                            <h4>季節限定手工刀削冰口感特別，冰料全自製自煮！</h4>
+                            <h3>{{ CBPost.art_title }}</h3>
+                            <h4>{{ CBPost.art_subTitle }}</h4>
                         </div>
                         <div class="scrollbarArea">
                             <div class="info">
-                                <p>景點：萬華無名手工粉條冰</p>
-                                <p>地址：萬華興寧街上雙園市場騎樓前</p>
-                                <p>電話：(02)2988-2222</p>
-                                <span class="PostingDate">發布日期：2020-06-15</span>
+                                <p>地址：{{ CBPost.art_address }}</p>
+                                <span class="PostingDate">發布日期：{{ CBPost.art_date }}</span>
                             </div>
                             <div class="txt">
-                                <p>
-                                    無名手工刀削冰座落於萬華興寧街上雙園市場騎樓前，這天來訪周邊坐了不少在騎樓下納涼閒聊的老人家，不過實際上前購買的就只僅我與同事，坦白說還蠻令我意外的。
-                                    <br />（因為之前看媒體報導人潮都不少）<br />
-                                    （2023年再訪陸續都有人買生意很不錯）
-                                </p>
+                                <p>{{ CBPost.art_content }}</p>
                             </div>
                         </div>
                         <div class="author">
@@ -150,8 +151,10 @@
         </div>
     </section>
 
+    <!-- 燈箱 -->
     <div class="lightBox" v-show="lightBox"></div>
 
+    <!-- 背景輪播 -->
     <div class="mrtBanner">
         <div class="swiper" id="mySwiper">
             <div class="swiper-wrapper">
@@ -162,6 +165,7 @@
         </div>
     </div>
 
+    <!-- 背景輪播 -->
     <div class="mrtBanner">
         <div class="swiper" id="mySwiper2">
             <div class="swiper-wrapper">
@@ -177,17 +181,17 @@
 import { faL } from "@fortawesome/free-solid-svg-icons";
 import Swiper from "swiper/bundle";
 import ButtonM from '@/components/ButtonM.vue';
+import axios from 'axios';
 export default {
     data() {
         return {
+            CBList: [],
+            CBPost: [],
             PC: true,
             LAP: true,
             btninner: "我要投稿",
             swipers: [
                 {
-                    // image: "../img/Grand Hyatt Taipei.jpg",
-                    // url: require("../../public/img/Grand Hyatt Taipei.jpg"),
-                    // image: require("../../public/img/Grand Hyatt Taipei.jpg"),
                     image: `${this.$store.state.publicURLL}/img/Grand Hyatt Taipei.jpg`,
                     station: ["BL12", "R10"],
                     line: ["板南線", "淡水信義線"],
@@ -325,6 +329,12 @@ export default {
                 },
             });
         },
+        openInner(item) {
+            this.CBPost = item
+            // this.closePost = false
+            this.lightBox = true
+
+        }
     },
     computed: {
 
@@ -377,7 +387,17 @@ export default {
 
         window.addEventListener("resize", this.windowWidth);
     },
-};
+    created() {
+        axios.get('http://localhost/dai/public/phps/getArticle.php')
+            .then((res) => {
+                this.CBList = res.data
+                console.log(this.CBList)
+            })
+            .catch((error) => {
+                console.error('資料失敗：', error);
+            });
+    }
+}
 </script>
 
 
