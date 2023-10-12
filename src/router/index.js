@@ -170,7 +170,7 @@ const routes = [
       ),
   },
   {
-    path: "/user/:id",
+    path: "/user",
     name: "user",
     meta: {
       isAuth: true
