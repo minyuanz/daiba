@@ -14,19 +14,19 @@
             <p>文章內容</p>
             <p>核准狀態</p>
         </div>
-        <div class="NewsInfro"  v-for="item  in item "  :key="item.pord_id">
-            <p>{{ item.prod_id }}</p>
-            <p>{{ item.prod_type }}</p>
-            <p>{{ item.prod_name }}</p>
-            <p>{{ item.prod_id }}</p>
-            <p>{{ item.prod_date }}</p>
-            <div>
+        <div class="NewsInfro"  v-for="item  in items "  :key="item.art_no">
+            <p>{{ item.art_no }}</p>
+            <p>{{ item.fea_id }}</p>
+            <p>{{ item.art_title }}</p>
+            <p>{{ item.mem_id }}</p>
+            <p>{{ item.art_date }}</p>
+            <div>   
                 <button @click="showItemDetail(item)" >查閱</button>
             </div>    
             <div class="upcheck">
                 <label class="ios-switch">
-                <input type="checkbox" v-model="item.isChecked" />
-                <span class="slider"></span>
+                    <input type="checkbox" :checked="item.art_status === '1'" @change="togglePermission(item)" />
+                    <span class="slider" :style="{ backgroundColor: item.art_status === '1' ? '#4CAF50' : '#565656' }"></span>
                 </label>
             </div>
         </div>
@@ -53,21 +53,19 @@
                   </div>
                   <div class="inner">
                       <div class="title">
-                          <h3>{{ selectedItem.prod_name }}</h3>
+                          <h3>{{ selectedItem.art_title }}</h3>
                           <span class="closePost" @click="(closePost = !closePost), (lightBox = !lightBox)">✖</span>
-                          <h4>季節限定手工刀削冰口感特別，冰料全自製自煮！</h4>
+                          <h4>{{ selectedItem.art_subTitle	 }}</h4>
                       </div>
                       <div class="info">
-                          <p>景點：萬華無名手工粉條冰</p>
+                          <!-- <p>景點：萬華無名手工粉條冰</p>
                           <p>地址：萬華興寧街上雙園市場騎樓前</p>
-                          <p>電話：(02)2988-2222</p>
-                          <span class="PostingDate">發布日期：{{ selectedItem.prod_date }}</span>
+                          <p>電話：(02)2988-2222</p> -->
+                          <span class="PostingDate">發布日期：{{ selectedItem.art_date }}</span>
                       </div>
                       <div class="txt">
                           <p>
-                              無名手工刀削冰座落於萬華興寧街上雙園市場騎樓前，這天來訪周邊坐了不少在騎樓下納涼閒聊的老人家，不過實際上前購買的就只僅我與同事，坦白說還蠻令我意外的。
-                              <br />（因為之前看媒體報導人潮都不少）<br />
-                              （2023年再訪陸續都有人買生意很不錯）
+                            {{ selectedItem.art_content }}
                           </p>
                       </div>
                       <div class="author">
@@ -84,15 +82,17 @@
 </template>
 
 <script>
-import BackProTest from "@/testdata/BackProTest.json"
+// import BackProTest from "@/testdata/BackProTest.json"
 import Swiper from "swiper/bundle";
+import axios from 'axios';
 export default {
     data() {
         return {
             selectedItem: {}, //用於保存資料
             closePost:false,
-            item:BackProTest,
-            items: BackProTest.map((item) => ({...item,isChecked: false,})), 
+            items:[],
+            // item:BackProTest,
+            // items: BackProTest.map((item) => ({...item,isChecked: false,})), 
 
         }
     },
@@ -110,11 +110,44 @@ export default {
               prevEl: ".swiper-button-prev",
           },
       });
+      axios.get('http://localhost/dai/public/phps/BackContriM.php')
+            .then((response) => {
+                this.items = response.data;
+            })
+            .catch((error) => {
+                console.error('獲取數據失敗：', error);
+            });
         },
-        methods: {
+    methods: {
     showItemDetail(item) {
       this.selectedItem = { ...item }; //拷貝目標訊息
       this.closePost = true; //顯示點擊項目資料
+    },
+    togglePermission(item) {
+    // 更改狀態
+    item.art_status = item.art_status === '1' ? '0' : '1';
+    axios.post('http://localhost/dai/public/phps/ContralBackContri.php', {
+    art_no: item.art_no,
+    art_status:item.art_status,
+    })
+    .then((response) => {
+    // 檢查
+    if (response.data.success) {
+      console.log('權限已更新');
+      alert('權限已更新成功');
+    } else {
+      console.error('權限更新失败');
+      alert('權限更新失敗');
+      // 如果失敗則保持原本渲染的狀態
+      item.art_status = item.art_status === '1' ? '0' : '1';
+    }
+    })
+    .catch((error) => {
+    console.error('更新請求失敗：', error);
+    alert('更新請求失敗');
+    // 如果失敗則保持原本渲染的狀態
+    item.art_status = item.art_status === '1' ? '0' : '1';
+    });
     },
   },
 }
