@@ -190,6 +190,7 @@ export default {
           return response.json();
         })
         .then((data) => {
+          console.log(data);
           this.newstest = data; //更新數據到news
           this.newsdisplay = this.newstest
           this.newswiper = this.newstest.slice(0, 3)
