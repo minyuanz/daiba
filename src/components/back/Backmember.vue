@@ -33,47 +33,7 @@
 export default {
     data() {
         return {
-            infos: [{
-                status: false,
-                id: 'N.123456789',
-                acc: 'qaqqqwe',
-                name: '我是誰',
-                phone: '0912345678'
-            },
-            {
-                status: false,
-                id: 'N.123456789',
-                acc: 'qaqqqwe',
-                name: '我是誰',
-                phone: '0912345678'
-            },
-            {
-                status: false,
-                id: 'N.123456789',
-                acc: 'qaqqqwe',
-                name: '我是誰',
-                phone: '0912345678'
-            },{
-                status: false,
-                id: 'N.123456789',
-                acc: 'qaqqqwe',
-                name: '我是誰',
-                phone: '0912345678'
-            },{
-                status: false,
-                id: 'N.123456789',
-                acc: 'qaqqqwe',
-                name: '我是誰',
-                phone: '0912345678'
-            },{
-                status: false,
-                id: 'N.123456789',
-                acc: 'qaqqqwe',
-                name: '我是誰',
-                phone: '0912345678'
-            },],
             search:''
-
         }
     },
 }
