@@ -9,12 +9,9 @@ const publicURL =
     ? ""
     : "https://tibamef2e.com/chd103/ingrid/koala";
 
-const publicURLL =
-  process.env.NODE_ENV === "development"
-    ? ""
-    : "https://tibamef2e.com/chd103/g5";
+const publicURLL = "https://tibamef2e.com/chd103/g5";
 
-const imgURL = process.env.NODE_ENV === "development" ? "http://localhost/dai/public/img/" : "";
+// const imgURL = process.env.NODE_ENV === "development" ? "http://localhost/dai/public/img/" : "https://tibamef2e.com/chd103/g5";
 const imgURLp = process.env.NODE_ENV === "development" ? "http://localhost/dai/public/img/product/" : ""
 
 
@@ -27,7 +24,7 @@ export default createStore({
     favorites: [],
     purchaseProcess: {},
     publicURLL,
-    imgURL, //圖片路徑
+    imgURL: process.env.VUE_APP_IMG_URL, //圖片路徑
     imgURLp,//商品圖片路徑
     memId: "", // 存會員的memId
     memInfo: "",

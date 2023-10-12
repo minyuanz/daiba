@@ -42,7 +42,7 @@ export default {
         }
     },
     mounted() {
-        axios.get('http://localhost/dai/public/phps/BackMemberM.php')
+        axios.get(`${this.$apiUrl('CBackMemberM.php')}`)
             .then((response) => {
                 this.members = response.data;
             })
@@ -54,7 +54,7 @@ export default {
     togglePermission(member) {
         // 更改狀態
         member.mem_status = member.mem_status === '1' ? '0' : '1';
-        axios.post('http://localhost/dai/public/phps/ContralMemberAC.php', {
+        axios.post(`${this.$apiUrl('ContralMemberAC.php')}`, {
         mem_id: member.mem_id,
         mem_status: member.mem_status,
         })

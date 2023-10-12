@@ -12,4 +12,6 @@ import "@fortawesome/fontawesome-free/js/all.js";
 
 import 'swiper/css/bundle';
 
-createApp(App).use(store).use(router).use(ViewUIPlus).mount("#app");
+import imgUrl from "./assets/js/url.js"
+
+createApp(App).use(store).use(router).use(imgUrl).use(ViewUIPlus).mount("#app");
