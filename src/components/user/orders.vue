@@ -1,31 +1,33 @@
 <template>
     <div class="orderWrap">
-        <h1> 訂單查詢 </h1>
-        <div class="orderGrid">
-            <div class="orderTitle">
-                <p>訂單編號</p>
-                <!-- <p>商品名稱</p> -->
-                <p>總金額</p>
-                <p>訂單狀態</p>
-            </div>
-            <div class="orderList" v-for=" (order, index) in ordersDisplay"
-                @click="ordersDisplay[index].isShow = !ordersDisplay[index].isShow">
-                <div class="order">
-                    <p>{{ order.no }}</p>
-                    <!-- <p>{{ order.name }}</p> -->
-                    <p> NT {{ order.total }}</p>
-                    <p>{{ order.status }}</p>
+        <div class="content">
+            <h1> 訂單查詢 </h1>
+            <div class="orderGrid">
+                <div class="orderTitle">
+                    <p>訂單編號</p>
+                    <!-- <p>商品名稱</p> -->
+                    <p>總金額</p>
+                    <p>訂單狀態</p>
                 </div>
-                <div class="orderInfo" v-show="orders[index].isShow">
-                    <div class="infoTitle">
-                        <p>商品名稱</p>
-                        <p>單價</p>
-                        <p>數量</p>
+                <div class="orderList" v-for=" (order, index) in ordersDisplay"
+                    @click="ordersDisplay[index].isShow = !ordersDisplay[index].isShow">
+                    <div class="order">
+                        <p>{{ order.no }}</p>
+                        <!-- <p>{{ order.name }}</p> -->
+                        <p> NT {{ order.total }}</p>
+                        <p>{{ order.status }}</p>
                     </div>
-                    <div class="infoCtx">
-                        <p>{{ order.name }}</p>
-                        <p>NT {{ order.price }}</p>
-                        <p>{{ order.count }}</p>
+                    <div class="orderInfo" v-show="orders[index].isShow">
+                        <div class="infoTitle">
+                            <p>商品名稱</p>
+                            <p>單價</p>
+                            <p>數量</p>
+                        </div>
+                        <div class="infoCtx">
+                            <p>{{ order.name }}</p>
+                            <p>NT {{ order.price }}</p>
+                            <p>{{ order.count }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -103,40 +105,38 @@ export default {
     border-radius: 20px;
     width: 900px;
 
-    h1 {
-        text-align: center;
-        margin: 30px 0;
+    .content::-webkit-scrollbar {
+        width: 15px;
     }
 
-    .orderGrid {
-        .orderTitle {
-            border: 1px solid #aaa;
-            background-color: #e6e6e6;
-            // border-radius: 20px;
-            width: 80%;
-            padding: 10px 0;
-            margin: auto;
-            display: flex;
+    .content::-webkit-scrollbar-track {
+        box-shadow: #aaa;
+    }
 
-
-            p {
-                // border: 1px solid red;
-                width: 100%;
-                text-align: center;
-            }
+    .content::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: #ccc;
+        cursor: pointer;
+    }
+    .content{
+        height: 90%;
+        overflow-y: scroll;
+        h1 {
+            text-align: center;
+            margin: 30px 0;
         }
 
-        .orderList {
-            border: 1px solid #aaa;
-            background-color: #ebebeb;
-            width: 80%;
-            margin: 50px auto;
-            padding: 30px 0;
-            cursor: pointer;
-
-            .order {
+        .orderGrid {
+            .orderTitle {
+                border: 1px solid #aaa;
+                background-color: #e6e6e6;
+                // border-radius: 20px;
+                width: 80%;
+                padding: 10px 0;
+                margin: auto;
                 display: flex;
-                // border: 1px solid red;
+
+
                 p {
                     // border: 1px solid red;
                     width: 100%;
@@ -144,21 +144,41 @@ export default {
                 }
             }
 
-            .orderInfo {
-                background-color: #fff;
-                // border: 1px solid red;
-                margin: 10px 0;
+            .orderList {
+                border: 1px solid #aaa;
+                border-top: transparent;
+                background-color: #ebebeb;
+                width: 80%;
+                margin: 0 auto;
+                padding: 5px 0;
+                cursor: pointer;
 
-                .infoTitle,
-                .infoCtx {
-                    width: 60%;
-                    margin: auto;
+                .order {
                     display: flex;
-
+                    // border: 1px solid red;
                     p {
                         // border: 1px solid red;
                         width: 100%;
                         text-align: center;
+                    }
+                }
+
+                .orderInfo {
+                    background-color: #fff;
+                    // border: 1px solid red;
+                    margin: 10px 0;
+
+                    .infoTitle,
+                    .infoCtx {
+                        width: 100%;
+                        margin: auto;
+                        display: flex;
+                        justify-content: space-between;
+                        p {
+                            // border: 1px solid red;
+                            width: 100%;
+                            text-align: center;
+                        }
                     }
                 }
             }
