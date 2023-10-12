@@ -97,7 +97,7 @@
     <div class="pointBox">
       <div class="title">使用點數</div>
       <div class="pointRemain">
-        <p>{{member}}，您尚有:{{point}}點</p>
+        <p>{{member}}，您尚有:{{point}}點，是否使用點數:</p>
         <div class="usePoint"><input id="use" type="radio" name="point" value="usePoint" v-model="SelectionPointUse"><label for="use">使用點數折抵</label></div>
         <div class="withoutPoint"><input id="noUse" type="radio" name="withoutPoint" value="nope" v-model="SelectionPointUse"><label for="noUse">不使用點數折抵</label></div>
       </div>
@@ -220,7 +220,7 @@ export default {
   }
   .ShopProBOX{
     position: relative;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
     background-color: rgb(234, 233, 233);
     width: 100%;
     .ShopProTitle{
@@ -245,7 +245,6 @@ export default {
       width: 100%;
       font-size:map-get($map: $fontsizes, $key: h4);
       background-color: white;
-      border-bottom: 1px solid gray;
       margin: auto;
       .ShopProCardTitle{
         width: 100%;
@@ -260,7 +259,7 @@ export default {
         }
       }
       .ShopProCardDetail{
-        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 4px;
         width: 100%;
         display: flex;
         margin: auto;
@@ -296,7 +295,7 @@ export default {
   .ShopPayBox{
     margin: 3rem 0;
     width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
     .PayTItle{
       padding: 10px 20px;
       background-color: rgb(234, 233, 233); ;
@@ -328,7 +327,7 @@ export default {
   .ShopDelBox{
     margin: 20px 0;
     width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
     div{padding: 20px 10px;}
     .DelTitle{
       padding: 1rem 20px;
@@ -350,7 +349,7 @@ export default {
   .pointBox{
     margin: 20px 0;
     width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px;
     div{padding: 20px 10px;}  
     .title{
       padding: 1rem 20px;
@@ -358,10 +357,11 @@ export default {
     }
     .pointRemain{
       padding: 1rem 10px;
-      div{
+      div,p{
         padding: 1rem 10px;
         display: flex;
         gap: 1.2rem;
+
           label {
             display: block;
             width: 100%;

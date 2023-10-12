@@ -58,7 +58,7 @@
       }
     }
     .CartProBOX {
-      box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 10px;
       background-color: rgb(234, 233, 233);
       width: 100%;
       .CartProTitle {
@@ -76,7 +76,7 @@
         width: 100%;
         font-size: map-get($map: $fontsizes, $key: h4);
         background-color: white;
-        border-bottom: 1px solid gray;
+        // border-bottom: 1px solid gray;
         margin: auto;
         .CartProCardTitle {
           width: 100%;
