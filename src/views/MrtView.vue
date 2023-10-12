@@ -33,7 +33,7 @@
       <div class="mrtMainLine">
         <div
           class="pic border-redline mrtRedBoy"
-          @click="showTag('red')"
+          @click="filterOptions(color);"
           @mouseenter="activate('red')"
           @mouseleave="deactivate('red')"
           :class="{ active: isActive.red }"
@@ -42,7 +42,7 @@
         </div>
         <div
           class="pic border-blueline mrtBlueBoy"
-          @click="showTag('blue')"
+          @click="filterOptions(color);"
           @mouseenter="activate('blue')"
           @mouseleave="deactivate('blue')"
           :class="{ active: isActive.blue }"
@@ -51,7 +51,7 @@
         </div>
         <div
           class="pic border-greenline mrtGreenBoy"
-          @click="showTag('green')"
+          @click="filterOptions(color);"
           @mouseenter="activate('green')"
           @mouseleave="deactivate('green')"
           :class="{ active: isActive.green }"
@@ -60,7 +60,7 @@
         </div>
         <div
           class="pic border-orangeline mrtOrangeBoy"
-          @click="showTag('orange')"
+          @click="filterOptions(color);"
           @mouseenter="activate('orange')"
           @mouseleave="deactivate('orange')"
           :class="{ active: isActive.orange }"
@@ -69,7 +69,7 @@
         </div>
         <div
           class="pic border-brownline mrtBrownBoy"
-          @click="showTag('brown')"
+          @click="filterOptions(color);"
           @mouseenter="activate('brown')"
           @mouseleave="deactivate('brown')"
           :class="{ active: isActive.brown }"
@@ -78,7 +78,7 @@
         </div>
         <div
           class="pic border-yellowline mrtYellowBoy"
-          @click="showTag('yellow')"
+          @click="filterOptions(color);"
           @mouseenter="activate('yellow')"
           @mouseleave="deactivate('yellow')"
           :class="{ active: isActive.yellow }"
@@ -206,10 +206,10 @@
       </div>
       <!------------------------美食住宿景點卡片 ------------------------------------->
       <div class="CBPost" v-show="closePost && item.isShow">
-        <div class="box">
+        <div class="box" v-if="item.isShow">
           <span
             class="closePost"
-            @click="(closePost = !closePost), (lightBox = !lightBox)"
+            @click="toggleMtrStaBox(item)"
             >✖</span
           >
 
@@ -559,6 +559,11 @@ export default {
         },
       });
     },
+    toggleMtrStaBox(item) {
+      this.closePost = !this.closePost
+      item.isShow = !item.isShow
+      this.lightBox = !this.lightBox
+    },
   },
 
   computed: {
@@ -581,8 +586,53 @@ export default {
       }
     },
   },
+  watch: {
+    lightBox(nVal) {
+      if (!nVal) return
+      this.$nextTick(() => {
+        this.swiperMRTCard = new Swiper(".swiperMRTCard", {
+          direction: "horizontal",
+          speed: 500,
+          loop: true,
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+          breakpoints: {
+            375: {
+              slidesPerView: 1,
+              slidesPerGroup: 1,
+              spaceBetween: 30,
+            },
+            415: {
+              slidesPerView: 1,
+              slidesPerGroup: 1,
+              spaceBetween: 30,
+            },
+            577: {
+              slidesPerView: 2,
+              slidesPerGroup: 2,
+              spaceBetween: 30,
+            },
+            769: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1281: {
+              slidesPerView: 4,
+              slidesPerGroup: 4,
+              spaceBetween: 50,
+            },
+          },
+        });
+      })
+    },
+  },
 
   created() {},
+  beforeUnmount() {
+    this.swiperMRTCard?.destroy()
+  },
 };
 </script>
 
@@ -603,7 +653,7 @@ export default {
   }
 
   100% {
-    filter: brightness(120%);
+    filter: brightness(150%);
   }
 }
 </style>
