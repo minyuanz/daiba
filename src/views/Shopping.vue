@@ -8,7 +8,7 @@
         </section>
         <div></div>
         <section>
-          <h4 class="SpeedNo info">2</h4>
+          <h4 class="SpeedNo info">2</h4> 
           <h4 class="SpeedText">付款運送</h4>
         </section>
         <div></div>
@@ -88,10 +88,10 @@
     <div class="ShopDelBox">
       <div class="DelTitle">運送方式</div>
       <div class="DelComent">
-        <div > 收件人姓名:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="請輸入收件人姓名"/></div> 
-        <div > 收件人電話:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="09XXXXXXXX"/></div> 
-        <div > 收件人信箱:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="請輸入信箱"/></div> 
-        <div > 收件人地址:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="清輸入地址"/></div> 
+        <div > 收件人姓名:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="請輸入收件人姓名" v-model="ord_name" /></div> 
+        <div > 收件人電話:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="09XXXXXXXX" v-model="ord_phone" /></div> 
+        <div > 收件人信箱:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="請輸入信箱" v-model="ord_email" /></div> 
+        <div > 收件人地址:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="清輸入地址" v-model="ord_address" /></div> 
       </div>
     </div>
     <div class="pointBox">
@@ -139,6 +139,10 @@ export default {
       expirationDate: '',
       securityCode: '',
       SelectionPointUse:'',
+      ord_name: '', // 訂單姓名
+      ord_phone: '', // 訂單電話
+      ord_email: '', // 訂單信箱
+      ord_address: '', // 訂單地址
     };
   },
   computed: {
@@ -153,8 +157,44 @@ export default {
     gotoCart(){
       this.$router.push("/Cart"); 
     },
-    gotoShoppingDone(){
-      this.$router.push("/ShoppingDone"); 
+    gotoShoppingDone() {
+      // 發送的數據
+      const orderDetails = this.cartItems.map(product => ({//此唯一單單的明細
+      prod_id: product.prod_id,
+      orderdetail_count: product.count,
+      buy_price: product.prod_price * product.count,
+      }));
+      const user = localStorage.getItem('user');
+      const mem_id = JSON.parse(user).mem_id;
+      const orderData = {
+        mem_id: mem_id, //用戶id
+        cartTotal: this.cartTotal, // 購物車總價
+        ord_name: this.ord_name, // 收件人源
+        ord_phone: this.ord_phone, // 收件電話
+        ord_email: this.ord_email, // 收件信箱
+        ord_address: this.ord_address, // 收件地址
+        selectedPayment: this.selectedPayment, // 付款方式
+        creditCardNumber: this.creditCardNumber, // 信用卡號
+        expirationDate: this.expirationDate, // 有效期限
+        securityCode: this.securityCode, // 安全碼
+        SelectionPointUse: this.SelectionPointUse, // 是否使用折扣
+        orderDetails: orderDetails,
+      };
+      fetch('http://localhost/dai/public/phps/CreatOrderandDetail.php', {
+        method: 'POST',
+        body: JSON.stringify(orderData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          // 處裡後端響應
+          console.log(data);
+        })
+        .catch(error => {
+          console.error(error);
+        });
     },
     cartTotal() {
       return this.$store.getters.cartTotal;

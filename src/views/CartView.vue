@@ -91,8 +91,16 @@ export default {
       this.$router.push("/Store");
     },
     gotoCheckout() {
-  this.$router.push({ name: 'shopping', params: { cartItems: this.cartItems } });
-},
+    const userInfo = localStorage.getItem('user');
+    if (userInfo) {
+      // 檢查用戶是否登入，有的話前往結帳頁面
+      this.$router.push({ name: 'shopping', params: { cartItems: this.cartItems } });
+    } else {
+      // 如果未登入則跳轉登入頁面
+      alert("請先登入會員");
+      this.$router.push('/login');
+    }
+  },
   },
 };
 </script>
