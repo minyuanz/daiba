@@ -162,6 +162,10 @@ export default createStore({
       // 假设登录成功后，后端返回的用户信息包含在 user 对象中
       commit('setLoggedInUser', user);
     },
+    setInfo({ commit }, user) {
+      // 拿到會員的memInfo
+      commit('getInfo', user);
+    },
     // clearCart({ commit }) {
     //   // 清空購物車
     //   commit('clearCart');

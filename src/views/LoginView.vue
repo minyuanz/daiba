@@ -41,7 +41,7 @@ export default {
     return {
       memEmail: "",
       memPwd: "",
-      new:"",
+      new: "",
     };
   },
   methods: {
@@ -65,14 +65,14 @@ export default {
           .then(res => res.json())
           .then((res) => {
             if (res.result && res.result.mem_id) {
-            let user = JSON.stringify(res.result);
-            localStorage.setItem("user", user);
-            let id = res.result.mem_id;
-            this.$store.commit("getId", id);
-            this.$router.push(`/user`);
-          } else {
-            alert("帳號或密碼有誤");
-          }
+              let user = JSON.stringify(res.result);
+              localStorage.setItem("user", user);
+              let id = res.result.mem_id;
+              this.$store.commit("getId", id);
+              this.$router.push(`/user`);
+            } else {
+              alert("帳號或密碼有誤");
+            }
           })
           .catch(function (error) {
             console.log(error);
