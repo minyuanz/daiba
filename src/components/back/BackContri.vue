@@ -36,17 +36,17 @@
                   <div class="swiperPost">
                       <div class="swiper-wrapper">
                           <div class="swiper-slide">
-                              <img :src="selectedItem.prod_img1" />
+                              <img :src="`${this.$store.state.imgURL}` +  selectedItem.art_pic1"  />
                           </div>
                           <div class="swiper-slide">
-                              <img :src="selectedItem.prod_img2" />
+                              <img :src="`${this.$store.state.imgURL}` +  selectedItem.art_pic2" />
                           </div>
                           <div class="swiper-slide">
-                              <img :src="selectedItem.prod_img3" />
+                              <img :src="`${this.$store.state.imgURL}` +  selectedItem.art_pic3" />
                           </div>
-                          <div class="swiper-slide">
+                          <!-- <div class="swiper-slide">
                               <img :src="selectedItem.prod_img4" />
-                          </div>
+                          </div> -->
                       </div>
                       <div class="swiper-button-prev"></div>
                       <div class="swiper-button-next"></div>

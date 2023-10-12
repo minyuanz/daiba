@@ -30,6 +30,7 @@ try {
             $fileNames[] = ""; 
         }
     }
+    $art_status = 0;
     require_once("connect_chd103g5_2.php");
 
     $sql = "INSERT INTO `article` (`sta_id`, `fea_id`, `art_title`, `art_subTitle`, `art_content`,`art_address`, `art_pic1`, `art_pic2`, `art_pic3`, `art_date`, `art_status`) 
