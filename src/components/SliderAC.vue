@@ -4,7 +4,7 @@
             <img src="https://steam.oxxostudio.tw/webp/gimp/example/simple-keyer-mask-16.webp" />
         </div>
         <h3>{{ this.$store.state.memInfo.mem_name }}</h3>
-        <!-- <h3>{{ member }}</h3> -->
+        <h3>{{ member }}</h3>
         <button>
             <router-link to="/home" class="logout" @click="logout">登出</router-link>
         </button>
@@ -32,12 +32,12 @@ export default {
         return {
             // toggle:''
             // member: this.$store.state.memInfo
-            member: this.$store.state.memInfo,
+            // member: this.$store.state.memInfo,
         }
     },
     computed: {
         member() {
-            return this.member.mem_name
+            return  this.$store.state.memInfo.mem_name || ''
         }
     },
     methods: {

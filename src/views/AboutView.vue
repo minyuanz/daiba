@@ -63,7 +63,7 @@
         </p>
       </article>
       <div class="pic">
-        <img src="../../src/assets/images/101.jpg" alt="taipei101" />
+        <img :src="`${imgURL}/src/assets/images/101.jpg`" alt="taipei101" />
       </div>
     </div>
     <article class="mbArt">
@@ -177,6 +177,11 @@ export default {
   },
   created() {
     this.importImages();
+  },
+  computed: {
+    imgURL() {
+      return this.$store.state.imgURL
+    },
   },
   methods: {
     importImages() {
