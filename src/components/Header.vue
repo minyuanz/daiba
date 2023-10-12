@@ -8,19 +8,11 @@
       <div class="line"></div>
 
       <div class="header-container">
-        <div
-          class="header-menu"
-          @click="toggleNav"
-          :class="{ hbclose: hbclose }"
-        >
+        <div class="header-menu" @click="toggleNav" :class="{ hbclose: hbclose }">
           <div class="hambergerIcon" :class="{ open: open }"></div>
         </div>
 
-        <div
-          class="homeNav"
-          @click="toggleNav"
-          :class="{ showHomeNav: showHomeNav }"
-        >
+        <div class="homeNav" @click="toggleNav" :class="{ showHomeNav: showHomeNav }">
           <ul>
             <li>
               <router-link to="/mrt" class="mrt">
@@ -74,6 +66,14 @@
           <p class="celsius" :class="{ hot: hot }">{{ weather.temp_c }}°</p>
         </div>
       </template>
+
+      <div class="user" v-if="islogin">
+        <p>{{ userData.mem_name }}</p>
+        <p id="signOut" @click="signOut">登出</p>
+      </div>
+
+
+
     </div>
     <nav class="navbar">
       <router-link to="/mrt" class="mrt">捷運推薦</router-link>
@@ -83,9 +83,7 @@
       <router-link to="/New" class="new">消息資訊</router-link>
       <router-link to="/about" class="about">關於我們</router-link>
       <router-link to="/Login" class="login">會員中心</router-link>
-      <router-link to="/cart" class="cart"
-        >購物車({{ this.$store.getters.cartItemCount }})</router-link
-      >
+      <router-link to="/cart" class="cart">購物車({{ this.$store.getters.cartItemCount }})</router-link>
     </nav>
   </header>
 </template>
@@ -100,7 +98,6 @@ export default {
       weather: {},
       hot: false,
       showHomeNav: false,
-      login:false
     };
   },
   computed: {
@@ -110,6 +107,12 @@ export default {
     hbclose() {
       return this.$route.path === "/home";
     },
+    userData() {
+      return this.$store.state.memInfo
+    },
+    islogin() {
+      return !!this.userData.mem_name
+    }
   },
 
   methods: {
@@ -117,9 +120,20 @@ export default {
       this.open = !this.open;
       this.showHomeNav = !this.showHomeNav;
     },
+    signOut() {
+      localStorage.removeItem('user')
+      this.$store.dispatch('setInfo', {})
+      // this.$router.push(`/login`)
+
+    }
   },
 
   mounted() {
+    const userStorage = localStorage.getItem('user')
+    if (userStorage) {
+      this.$store.dispatch('setInfo', JSON.parse(userStorage))
+      console.log(JSON.parse(userStorage))
+    }
     fetch(
       "https://api.weatherapi.com/v1/current.json?q=Taipei&lang=zh_tw&key=831993a5339d4b7cadc74621231609"
     )
@@ -134,7 +148,6 @@ export default {
         if (this.weather.temp_c >= 30) {
           this.hot = true;
         }
-        // console.log(this.weather)
       });
 
     // gsap.fromTo(
@@ -173,6 +186,7 @@ export default {
     //   }
     // );
   },
+
 };
 </script>
 
