@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     login() {
-      if (this.memEmail == "" && this.memPwd == "") {
+      if (this.memEmail == "" || this.memPwd == "") {
         alert("請輸入帳號和密碼")
       }
       else {
@@ -64,12 +64,10 @@ export default {
           .then(res => res.json())
           .then((res) => {
             if (res.result["mem_id"]) {
-              // 建立cookie
-              // let user = JSON.stringify(res.result);
-              // document.cookie = "user= " + user + "; expires=Thu, 01 Jan 2025 00:00:00 UTC; path=/";
-              localStorage.setItem("user", res.result["mem_id"])
-              // 獲得memId、存進vuex的memId、動態路由至memId的會員頁
-              let id = res.result.mem_id
+              let user = JSON.stringify(res.result);
+              localStorage.setItem("user", user)
+              // 獲得memId、存進vuex的memId
+              let id = res.result["mem_id"]
               this.$store.commit("getId", id)
               this.$router.push(`/user`)
             }
@@ -80,18 +78,19 @@ export default {
       }
     }
   },
-  beforeRouteEnter(to, from, next) {
-    // 在進入路由前執行以下操作
-    let isLogin = localStorage.getItem('user')
-    if (isLogin) {
-      // 如果使用者已登入，可以進入路由
-      console.log(to.meta);
-      next(`/user/${isLogin}`);
-    } else {
-      // 如果使用者未登入，導向登入頁面
-      next();
-    }
-  },
+  // beforeRouteEnter(to, from, next) {
+  //   // 在進入路由前執行以下操作
+  //   let isLogin = localStorage.getItem('user')
+  //   if (!isLogin) {
+  //     // 如果使用者已登入，可以進入路由
+  //     // console.log(to.meta);
+  //     next(`/login`);
+  //   } 
+  //   else {
+  //     next(`/user`);
+  //     // 如果使用者未登入，導向登入頁面
+  //   }
+  // },
   // beforeRouteEnter(to, from, next) {
 
   // console.log(to);
@@ -128,12 +127,12 @@ export default {
   // },
 
   mounted() {
-    // let isLogin = localStorage.getItem('user')
-    // if (isLogin) {
-    //   this.$router.push(`/user/${isLogin}`)
-    // } else {
-    //   return '/login'
-    // }
+    let isLogin = localStorage.getItem('user')
+    if (isLogin) {
+      this.$router.push(`/user`)
+    } else {
+      return '/login'
+    }
 
     // const name = "user" + "=";
     // const decodedCookie = decodeURIComponent(document.cookie);

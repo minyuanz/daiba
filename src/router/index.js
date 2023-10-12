@@ -305,6 +305,16 @@ router.beforeEach((to, from, next) => {
     next(); // 不需要登入，可以額外設置這邊暫時不用只保留
   }
 });
+
+router.beforeEach((to, from, next) => {
+  const login = JSON.parse(localStorage.getItem('user'));
+  if (!login && to.name == 'user') {
+    alert('必須登入才能造訪此網頁');
+    next({ name: 'login' }); // 如果沒有登入則導航到登入畫面
+  } else {
+    next();
+  }
+});
 // router.beforeEach((to, from) => {
 //   // 檢查用户是否已登录 並 ❗️避免無限重定向
 //   if (to.meta.isAuth && to.name !== 'Login') {
