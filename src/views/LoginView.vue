@@ -70,7 +70,9 @@ export default {
               let id = res.result["mem_id"]
               this.$store.commit("getId", id)
               this.$router.push(`/user`)
-            }
+            }else {
+            alert("帳號或密碼有誤");
+          }
           })
           .catch(function (error) {
             console.log(error);
