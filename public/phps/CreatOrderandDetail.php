@@ -43,7 +43,7 @@ try {
     $sql = "INSERT INTO `orderdetail` (ord_id, prod_id, orderdetail_count, buy_price)
     VALUES (:ord_id, :prod_id, :orderdetail_count, :buy_price)";
     $stmt = $pdo->prepare($sql);
-    echo json_encode(["1111" => "Order placement failed"]);
+    // echo json_encode(["1111" => "Order placement failed"]);
 
     // 插入訂單明細數據
     foreach ($orderDetails as $orderDetail) {
