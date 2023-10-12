@@ -6,8 +6,8 @@
 
     <div class="swiper">
       <div class="newsinpic swiper-wrapper">
-        <img :src="`${this.$store.state.imgURL}`+newsqaq.news_pic1" alt="" class="swiper-slide" />
-        <img :src="`${this.$store.state.imgURL}`+newsqaq.news_pic1" alt="" class="swiper-slide" />
+        <img :src="`${this.$store.state.imgURL}` + newsqaq.news_pic1" alt="" class="swiper-slide" />
+        <img :src="`${this.$store.state.imgURL}` + newsqaq.news_pic1" alt="" class="swiper-slide" />
       </div>
       <div class="swiper-pagination"></div>
     </div>

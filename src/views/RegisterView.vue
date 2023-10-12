@@ -33,10 +33,10 @@
           <label for="pwd">密碼</label>
           <input type="password" id="pwd" v-model="formData.pwd" required="true" placeholder="請輸入最少6碼，並包含字母及數字" />
         </div>
-        <div class="registerCheck">
+        <!-- <div class="registerCheck">
           <label for="check">再次輸入</label>
           <input type="password" id="check" required="true" />
-        </div>
+        </div> -->
         <button class="btn_l" type="button" @click="addToDb">註冊</button>
       </form>
     </div>
