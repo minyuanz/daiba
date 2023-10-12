@@ -6,35 +6,77 @@
             <button class="btnsearch">查詢</button>
         </div>
         <div class="memberTitle">
-            <p>狀態</p>
             <p>會員編號</p>
-            <p>會員帳號</p>
+            <p>會員信箱</p>
             <p>姓名</p>
             <p>電話</p>
-            <p></p>
+            <!-- <p></p> -->
+            <p>狀態</p>
         </div>
-        <div class="memberInfo" v-for="info in infos">
+        <div class="memberInfo" v-for="member in members">
+            <p>{{ member.mem_id }}</p>
+            <p>{{ member.mem_email }}</p>
+            <p>{{ member.mem_name }}</p>
+            <p>{{ member.mem_phone }}</p>
+            <!-- <button class="findd">查閱</button> -->
             <div class="toggle">
-                <label class="switch">
+                <label class="ios-switch">
+                    <input type="checkbox" :checked="member.mem_status === '1'" @change="togglePermission(member)" />
+                    <span class="slider" :style="{ backgroundColor: member.mem_status === '1' ? '#4CAF50' : '#565656' }"></span>
+                </label>
+                <!-- <label class="switch">
                     <input type="checkbox" v-model="info.status">
                     <span class="slider round"></span>
-                </label>
+                </label> -->
             </div>
-            <p>{{ info.id }}</p>
-            <p>{{ info.acc }}</p>
-            <p>{{ info.name }}</p>
-            <p>{{ info.phone }}</p>
-            <p>查閱</p>
         </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     data() {
         return {
-            search:''
+            members:[],
         }
+    },
+    mounted() {
+        axios.get('http://localhost/dai/public/phps/BackMemberM.php')
+            .then((response) => {
+                this.members = response.data;
+            })
+            .catch((error) => {
+                console.error('獲取數據失敗：', error);
+            });
+    },
+    methods:{
+    togglePermission(member) {
+        // 更改狀態
+        member.mem_status = member.mem_status === '1' ? '0' : '1';
+        axios.post('http://localhost/dai/public/phps/ContralMemberAC.php', {
+        mem_id: member.mem_id,
+        mem_status: member.mem_status,
+        })
+        .then((response) => {
+            // 檢查
+            if (response.data.success) {
+            console.log('權限已更新');
+            alert('權限已更新成功');
+            } else {
+            console.error('權限更新失败');
+            alert('權限更新失敗');
+            // 如果失敗則保持原本渲染的狀態
+            member.mem_status = member.mem_status === '1' ? '0' : '1';
+            }
+        })
+        .catch((error) => {
+            console.error('更新請求失敗：', error);
+            alert('更新請求失敗');
+            // 如果失敗則保持原本渲染的狀態
+            member.mem_status = member.mem_status === '1' ? '0' : '1';
+        });
+        },
     },
 }
 </script>
@@ -87,7 +129,6 @@ export default {
         align-items: center;
         padding: 5px 0;
         border-bottom: 1px solid #aaa;
-
         .toggle {
             .switch {
                 position: relative;
@@ -147,11 +188,57 @@ export default {
             }
         }
 
-        .toggle,
+        .toggle,button,
         p {
             // border: 1px solid red;
-            width: 100%;
+            width: 16%;
             text-align: center;
+        }
+        .toggle{
+            .ios-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+  background-color: #ccc;
+  border-radius: 15px;
+}
+
+.ios-switch input {
+  display: none;
+}
+
+.ios-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #565656;
+  border-radius: 15px;
+  transition: 0.4s;
+}
+
+.ios-switch input:checked + .slider {
+  background-color: #4CAF50;
+}
+
+.ios-switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+.ios-switch input:checked + .slider:before {
+  transform: translateX(30px);
+}   
         }
     }
 }
