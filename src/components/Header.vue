@@ -100,6 +100,7 @@ export default {
       weather: {},
       hot: false,
       showHomeNav: false,
+      login:false
     };
   },
   computed: {
