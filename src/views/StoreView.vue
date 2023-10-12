@@ -30,9 +30,9 @@
         <router-link :to="'/storeDetail/' + item.prod_id" >
           <div class="imgbox">
             <img  class="storeCardimg" :src="`${this.$store.state.imgURLp}` +  item.prod_img1"/>
-            <div class="storeButton">
+            <!-- <div class="storeButton addToHeart">
               <i class="fa-regular fa-heart" style="cursor: pointer"></i>
-            </div>
+            </div> -->
           </div>
       </router-link>
         <div class="storeBottom">
