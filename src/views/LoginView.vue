@@ -71,7 +71,7 @@ export default {
               // 獲得memId、存進vuex的memId、動態路由至memId的會員頁
               let id = res.result.mem_id
               this.$store.commit("getId", id)
-              this.$router.push(`/user/${id}`)
+              this.$router.push(`/user`)
             }
           })
           .catch(function (error) {
