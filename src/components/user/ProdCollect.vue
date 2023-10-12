@@ -78,8 +78,16 @@ export default {
       this.cardsDisplay = this.cards.slice(startIdx, endIdx);
     },
     delCollect(index) {
-      this.cardsDisplay.splice(index, 1);
-      console.log(index);
+      let memId = this.$store.state.memInfo.mem_id
+      let i = index + 1
+      fetch(`http://localhost/dai/public/phps/getProdCollect.php?memId=${memId}&index=${i}`)
+        .then(res => res.json())
+        .then((res) => {
+          this.prodCollect = res
+        })
+        .catch((error) => {
+          console.error('數據傳輸失敗：', error);
+        });
     },
     getCollect() {
       let memId = this.$store.state.memInfo.mem_id
