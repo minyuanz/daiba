@@ -349,10 +349,10 @@ export default {
     .storeTitle {
       font-size: map-get($map: $fontsizes, $key: h1);
       border-bottom: NONE;
-      padding-bottom: 15px;
       font-weight: bold;
       text-align: center;
-      padding: 50px;
+      padding: 0;
+      
     }
     .storeSearch {
       width: 100%;
@@ -454,56 +454,53 @@ export default {
     .storecardbox {
       width: 100%;
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-evenly;
+      // flex-wrap: wrap;
+      // justify-content: flex-start;
+      gap: 16px;
 
       .storeCard {
-        margin: 5px;
+        margin: 0px;
         display: flex;
-        flex-wrap: wrap;
-        width: 45%;
-        overflow: hidden;
+        flex-direction: column;
+        width: calc(50% - 8px);
+        padding: 0.8rem;
         .imgbox{
-        width: 100%;
-        height: 200px;
        .storeCardimg {
         width: 100%;
-        height: 200px;
         object-fit: cover;
         cursor: pointer;
       }
+      .storeButton{
+          right: 5px;
+          bottom: 5px;
+        }
       }
         .storeBottom {
+          margin-top: .2rem;
           display: flex;
-          flex-wrap: wrap;
-          width: 100%;
+          flex: 1;
+          flex-direction: column;
           justify-content: space-between;
-
           .storeCardText {
             width: 100%;
-            text-align: center;
-            display: flex;
-            flex-wrap: wrap;
-            flex-direction: column;
-
             .CardDes {
-              margin: 10px 0 0 0;
+              margin: 0px 0 0 0;
+              font-size: 18px;
+              line-height: 24px;
             }
             .CardPri {
               color: #5b5b5b;
+              font-size: 18px;
+              line-height: 24px;
             }
           }
           .storeButton {
             margin-top: 10px;
-            display: flex;
-            align-items: end;
+            display: block;
             width: 100%;
-            font-size: 30px;
-            justify-content: end;
+            position: relative;
             button {
-              font-size: 16px;
-              margin-left: 1rem;
-              width: 100px;
+              width: 100%;
             }
           }
         }
@@ -514,7 +511,7 @@ export default {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: auto;
+      margin: 5rem auto 0;
       .paginationmain {
         cursor: pointer;
         width: 45px;
