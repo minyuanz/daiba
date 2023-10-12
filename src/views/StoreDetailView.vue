@@ -110,13 +110,11 @@ export default {
         alert('請先登入')
         this.$router.push('/login')
       } else {
-        // console.log(222);
-
+        // if(){
+        // }
         const formData = new FormData();
         formData.append("mem_id", userinfo.mem_id);
         formData.append("prod_id", this.foundObject.prod_id);
-        // formData.append("prod_price", this.foundObject.prod_price);
-        // formData.append("prod_img", this.foundObject.prod_img1);
 
         fetch('http://localhost/dai/public/phps/addToCollect.php', {
           method: 'post',

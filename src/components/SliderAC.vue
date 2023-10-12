@@ -1,9 +1,10 @@
 <template>
     <div class="SliderAC">
-        <!-- <div class="pic">
+        <div class="pic">
             <img src="https://steam.oxxostudio.tw/webp/gimp/example/simple-keyer-mask-16.webp" />
-        </div> -->
+        </div>
         <h3>{{ this.$store.state.memInfo.mem_name }}</h3>
+        <!-- <h3>{{ member }}</h3> -->
         <button>
             <router-link to="/home" class="logout" @click="logout">登出</router-link>
         </button>
