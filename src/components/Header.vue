@@ -68,7 +68,7 @@
       </template>
 
       <div class="user" v-if="islogin">
-        <p>{{ userData.mem_name }}</p>
+        <p id="userName">{{ userData.mem_name }}</p>
         <p id="signOut" @click="signOut">登出</p>
       </div>
 
@@ -123,7 +123,9 @@ export default {
     signOut() {
       localStorage.removeItem('user')
       this.$store.dispatch('setInfo', {})
-      // this.$router.push(`/login`)
+      if (this.$router.currentRoute.value.path === '/user') {
+        this.$router.push('/home');
+      }
 
     }
   },
@@ -149,6 +151,7 @@ export default {
           this.hot = true;
         }
       });
+   
 
     // gsap.fromTo(
     //   ".showHomeNav ul li:nth-child(1)",

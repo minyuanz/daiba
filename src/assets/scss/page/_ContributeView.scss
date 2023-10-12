@@ -149,22 +149,15 @@
     margin: auto;
     margin-top: 2%;
 
-    a {
-      display: block;
-      inset: 0;
-      text-align: center;
-      width: 300px;
-      height: 50px;
-      line-height: 40px;
-      margin: 2.5rem auto;
 
-      .medium {
-        inset: 0;
-        margin: auto;
-      }
+
+    .medium {
+      inset: 0;
+      margin: auto;
     }
   }
 }
+
 
 .CBArea {
   width: 1200px;
@@ -573,7 +566,7 @@
         }
       }
     }
-    
+
     .CBPost {
       width: 90%;
       height: 600px;

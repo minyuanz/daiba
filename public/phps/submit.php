@@ -1,6 +1,7 @@
 <?php
 print_r($_POST);
 header("Access-Control-Allow-Origin:*");
+
 try {
     $fileNames = array();
     $art_status = 0;
@@ -33,10 +34,11 @@ try {
     $art_status = 0;
     require_once("connect_chd103g5_2.php");
 
-    $sql = "INSERT INTO `article` (`sta_id`, `fea_id`, `art_title`, `art_subTitle`, `art_content`,`art_address`, `art_pic1`, `art_pic2`, `art_pic3`, `art_date`, `art_status`) 
-    VALUES (:sta_id, :fea_id, :art_Title, :art_subTitle, :art_content,:art_address, :art_pic1, :art_pic2, :art_pic3,:art_date, :art_status);";
+    $sql = "INSERT INTO `article` (`mem_id`,`sta_id`, `fea_id`, `art_title`, `art_subTitle`, `art_content`,`art_address`, `art_pic1`, `art_pic2`, `art_pic3`, `art_date`, `art_status`) 
+    VALUES (:mem_id, :sta_id, :fea_id, :art_Title, :art_subTitle, :art_content,:art_address, :art_pic1, :art_pic2, :art_pic3,:art_date, :art_status);";
     
     $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(":mem_id", $_POST["mem_id"]); 
     $stmt->bindValue(":art_Title", $_POST["art_title"]);
     $stmt->bindValue(":art_subTitle", $_POST["art_subTitle"]);
     $stmt->bindValue(":art_address", $_POST["art_address"]);
@@ -54,6 +56,8 @@ try {
 } catch (Exception $e) {
     echo "錯誤行號 : ", $e->getLine(), "<br>";
     echo "錯誤原因 : ", $e->getMessage(), "<br>";
+    
     echo $_POST["station"];
 }
+
 ?>

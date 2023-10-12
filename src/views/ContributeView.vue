@@ -60,9 +60,7 @@
 
         <!-- 我要投稿 -->
         <div class="toCB">
-            <router-link to="/Submit">
-                <ButtonM :HTMLInner="btninner" />
-            </router-link>
+            <ButtonM :HTMLInner="btninner" @click="toSubmit" />
         </div>
     </section>
 
@@ -334,6 +332,15 @@ export default {
             // this.closePost = false
             this.lightBox = true
 
+        },
+        toSubmit() {
+            if (localStorage.getItem('user')) {
+                this.$router.push('/Submit')
+            } else {
+                alert('請先登入會員 ')
+                this.$router.push('/login')
+
+            }
         }
     },
     computed: {
