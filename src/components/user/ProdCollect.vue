@@ -79,14 +79,24 @@ export default {
     },
     delCollect(index) {
       let memId = this.$store.state.memInfo.mem_id
-      let i = index + 1
-      fetch(`http://localhost/dai/public/phps/getProdCollect.php?memId=${memId}&index=${i}`)
+      let prod_id=this.prodCollect[index].prod_id
+
+      const formData = new FormData();
+      formData.append("mem_id", memId);
+      formData.append("prod_id", prod_id);
+
+      fetch('http://localhost/dai/public/phps/delCollect.php', {
+        method: 'post',
+        body: formData
+      })
         .then(res => res.json())
         .then((res) => {
-          this.prodCollect = res
+          if (!res.error) {
+            alert(res.msg);
+          }
         })
-        .catch((error) => {
-          console.error('數據傳輸失敗：', error);
+        .catch(function (error) {
+          console.log(error);
         });
     },
     getCollect() {

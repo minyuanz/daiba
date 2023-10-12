@@ -1,14 +1,14 @@
 <template>
     <div class="pwdchange">
-        <h1>更改帳號/密碼</h1>
+        <h1>更改名稱/密碼</h1>
         <div class="changebox">
             <div class="acc">
-                <label for="">帳號</label>
+                <label for="">名稱</label>
                 <!-- <input type="text"> -->
                 <span>{{ this.$store.state.memInfo.mem_name }}</span>
             </div>
             <div class="changeAcc">
-                <label for="">帳號更改</label>
+                <label for="">名稱更改</label>
                 <input type="text" v-model="changeAcc">
             </div>
             <button class="btn_l" @click="updateName">確認更改</button>
