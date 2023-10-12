@@ -3,10 +3,10 @@
 
         <h1>會員資料</h1>
         <div class="userBtn">
-            <!-- <button class="ChangAC" @click="To">
+            <button class="ChangAC" @click="To">
                 <i class="fa-solid fa-face-laugh"></i>
                 更改基本資料
-            </button> -->
+            </button>
             <button class="ChangAC" @click="To">
                 <i class="fa-solid fa-lock"></i>
                 更改名稱/密碼
@@ -83,7 +83,7 @@ export default {
         // border: 1px solid red;
         margin-top: 100px;
         // width: 500px;
-        // display: flex;
+        display: flex;
         justify-content: center;
         flex-wrap: wrap;
         padding: 0 100px;
@@ -91,7 +91,7 @@ export default {
         // text-align: center;
         button {
             height: 100px;
-            margin: 50px auto;
+            margin: 50px;
             // background-color: #fff;
         }
     }
