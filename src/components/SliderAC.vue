@@ -32,7 +32,7 @@ export default {
         return {
             // toggle:''
             // member: this.$store.state.memInfo
-            member: this.$store.state.memInfo
+            member: this.$store.state.memInfo,
         }
     },
     computed: {
