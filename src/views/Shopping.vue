@@ -31,14 +31,14 @@
         </div>
         <div v-for="(product, index) in cartItems" :key="index" class="ShopProCardDetail">
           <div class="CardDetailImg">
-            <img :src="product.prod_img1" alt="" />
+            <img :src="`${this.$store.state.imgURLp}` +  product.prod_img1" alt="">
           </div>
-          <div class="CardDetailTitle">{{ product.pord_name }}</div>
-          <div class="CardDetailPrice">NT${{ product.pord_price }}</div>
+          <div class="CardDetailTitle">{{ product.prod_name }}</div>
+          <div class="CardDetailPrice">NT${{ product.prod_price }}</div>
           <div class="CardDetailCount">
             <p>{{ product.count }}</p>
           </div>
-          <div class="CardDetailTotal">NT${{ product.pord_price * product.count }}</div>
+          <div class="CardDetailTotal">NT${{ product.prod_price * product.count }}</div>
         </div>
       </div>
     </div>
