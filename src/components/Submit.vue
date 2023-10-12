@@ -47,6 +47,11 @@
                     <span v-if="subTitleError">請輸入副標題</span>
                 </li>
                 <li>
+                    <label for="title">地址</label>
+                    <input type="txt" v-model="newSubmitArticle.address" @input="checkSubTitle">
+                    <span v-if="addressError">請輸入地址</span>
+                </li>
+                <li>
                     <label for="title">選擇分類</label>
                     <div class="select">
                         <select name="" id="" v-model="newSubmitArticle.line" @change="checkClass(newSubmitArticle)">
@@ -55,13 +60,13 @@
                         </select>
                         <select name="" id="" v-model="newSubmitArticle.station" @change="checkClass(newSubmitArticle)">
                             <option value="0">請選擇捷運站</option>
-                            <option value="Banqiao">板橋</option>
+                            <option value="10">板橋</option>
                         </select>
                         <select name="" id="" v-model="newSubmitArticle.class" @change="checkClass(newSubmitArticle)">
                             <option value="0">請選擇項目</option>
-                            <option value="eats">美食</option>
-                            <option value="spot">景點</option>
-                            <option value="hotel">住宿</option>
+                            <option value="1">美食</option>
+                            <option value="2">景點</option>
+                            <option value="3">住宿</option>
                         </select>
                     </div>
                     <span v-if="classError">請選擇分類</span>
@@ -72,7 +77,7 @@
                         <div class="img" v-for="i in 3" :key="inputKey">
                             <p>＋</p>
                             <input type="file" accept="image/*" multiple @change="handleFileUpload(i, $event)"
-                                :name="img + inputKey">
+                                :name="'img' + inputKey">
                             <img v-if="imgsData[i]" :src="uploadedImages[i]" alt="">
                         </div>
                     </div>
@@ -125,15 +130,17 @@ export default {
             classError: false,
             imageError: false,
             txtError: false,
+            addressError: false,
             uploadedImages: [],
             imgsData: [],
             inputKey: 1,
             newSubmitArticle: {
                 title: '',
                 subTitle: '',
-                line: '0',
-                station: '0',
-                class: '0',
+                address: '',
+                line: 0,
+                station: 0,
+                class: 0,
                 pic1: null,
                 pic2: null,
                 pic3: null,
@@ -168,6 +175,11 @@ export default {
                 this.subTitleError = true;
             } else {
                 this.subTitleError = false;
+            }
+            if (this.newSubmitArticle.address === '') {
+                this.addressError = true;
+            } else {
+                this.addressError = false;
             }
         },
         checkClass(newSubmitArticle) {
@@ -227,11 +239,14 @@ export default {
 
 
         },
+        
+        // POST到後端
         addNewSubmit() {
             console.log(this.newSubmitArticle)
             const formData = new FormData();
             formData.append('art_title', this.newSubmitArticle.title);
             formData.append('art_subTitle', this.newSubmitArticle.subTitle);
+            formData.append('art_address', this.newSubmitArticle.address);
             formData.append('sta_id', this.newSubmitArticle.station);
             formData.append('fea_id', this.newSubmitArticle.class);
             formData.append('art_pic1', this.newSubmitArticle.pic1);
@@ -246,7 +261,6 @@ export default {
             })
                 .then((response) => {
                     if (response.status === 200) { //檢查http  狀態碼來判別 php新增成功與否
-                        alert('');
                         this.Submit = false;
                         this.Finish = true;
                         // 下面為新增成功後 清空表單
@@ -254,9 +268,10 @@ export default {
                         this.newSubmitArticle = {
                             title: '',
                             subTitle: '',
-                            line: '0',
-                            station: '0',
-                            class: '0',
+                            address: '',
+                            line: 0,
+                            station: 0,
+                            class: 0,
                             pic1: null,
                             pic2: null,
                             pic3: null,
