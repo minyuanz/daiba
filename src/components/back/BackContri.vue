@@ -58,6 +58,7 @@
                           <h4>{{ selectedItem.art_subTitle	 }}</h4>
                       </div>
                       <div class="info">
+                        <p>地址：{{ selectedItem.art_address }}</p>
                           <!-- <p>景點：萬華無名手工粉條冰</p>
                           <p>地址：萬華興寧街上雙園市場騎樓前</p>
                           <p>電話：(02)2988-2222</p> -->
