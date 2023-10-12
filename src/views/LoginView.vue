@@ -41,6 +41,7 @@ export default {
     return {
       memEmail: "",
       memPwd: "",
+      new:"",
     };
   },
   methods: {
