@@ -154,7 +154,7 @@ header {
       align-items: center;
       justify-content: center;
       position: absolute;
-      right: 28%;
+      left: 22%;
       top: 65%;
       gap: 5px;
 
@@ -182,15 +182,22 @@ header {
       align-items: center;
       text-align: center;
       position: absolute;
-      right: 15%;
+      right: 22%;
       top: 65%;
-      gap: 15px;
+      gap: 20px;
+
+      #userName {
+        font-weight: 600;
+        color: #333;
+      }
 
       #signOut {
         cursor: pointer;
 
+
         &:hover {
           color: map-get($color, $key: danger);
+          font-weight: 600;
         }
       }
     }
@@ -411,6 +418,10 @@ header {
           color: #666;
         }
       }
+
+      .user {
+        display: none;
+      }
     }
 
     .icon {
@@ -456,6 +467,10 @@ header {
       }
 
       .weather {
+        display: none;
+      }
+
+      .user {
         display: none;
       }
     }

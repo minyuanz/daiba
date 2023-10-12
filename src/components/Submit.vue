@@ -239,7 +239,7 @@ export default {
 
 
         },
-        
+
         // POST到後端
         addNewSubmit() {
             console.log(this.newSubmitArticle)
@@ -253,6 +253,7 @@ export default {
             formData.append('art_pic2', this.newSubmitArticle.pic2);
             formData.append('art_pic3', this.newSubmitArticle.pic3);
             formData.append('art_content', this.newSubmitArticle.content);
+            formData.append('mem_id', parseInt(this.$store.state.memInfo.mem_id));
 
             axios.post('http://localhost/dai/public/phps/submit.php', formData, {
                 headers: {
@@ -285,6 +286,9 @@ export default {
                     console.error('新增商品請求失敗：', error);
                 });
         },
+    }
+    , mounted() {
+        console.log(parseInt(this.$store.state.memInfo.mem_id))
     }
 }
 

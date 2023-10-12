@@ -19,7 +19,7 @@ export default {
     return {
       apikey: "831993a5339d4b7cadc74621231609",
       weather: {},
-      userData: {},
+  
     };
   },
   components: {
@@ -43,9 +43,6 @@ export default {
         this.weather = json.current;
       });
 
-    if (localStorage.getItem('user')) {
-      this.userData = JSON.parse(localStorage.getItem('user'));
-    }
   },
 };
 </script>
