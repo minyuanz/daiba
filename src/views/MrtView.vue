@@ -1876,7 +1876,7 @@ export default {
   }
 
   100% {
-    filter: brightness(150%);
+    filter: brightness(120%);
   }
 }
 </style>

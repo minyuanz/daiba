@@ -94,6 +94,14 @@
         <div > 收件人地址:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="清輸入地址"/></div> 
       </div>
     </div>
+    <div class="pointBox">
+      <div class="title">使用點數</div>
+      <div class="pointRemain">
+        <p>{{member}}，您尚有:{{point}}點</p>
+        <div class="usePoint"><input id="use" type="radio" name="point" value="usePoint" v-model="SelectionPointUse"><label for="use">使用點數折抵</label></div>
+        <div class="withoutPoint"><input id="noUse" type="radio" name="withoutPoint" value="nope" v-model="SelectionPointUse"><label for="noUse">不使用點數折抵</label></div>
+      </div>
+    </div>
     <div class="ShopSumBox">
       <div >
       <p>折扣後小計:</p> 
@@ -124,10 +132,13 @@
 export default {
   data() {
     return {
+      member:'會員',
+      point:20,
       selectedPayment: '' ,
       creditCardNumber: '',
       expirationDate: '',
       securityCode: '',
+      SelectionPointUse:'',
     };
   },
   computed: {
@@ -271,7 +282,6 @@ export default {
         .CardDetailTitle{
           padding: 0 1rem;
         }
-        .CardDetailPrice{}
         .CardDetailCount{
           display: flex;
           margin: 0;
@@ -337,6 +347,30 @@ export default {
       }
     }
   }
+  .pointBox{
+    margin: 20px 0;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+    div{padding: 20px 10px;}  
+    .title{
+      padding: 1rem 20px;
+      background-color: rgb(234, 233, 233); 
+    }
+    .pointRemain{
+      padding: 1rem 10px;
+      div{
+        padding: 1rem 10px;
+        display: flex;
+        gap: 1.2rem;
+          label {
+            display: block;
+            width: 100%;
+            line-height: 21px;
+            text-align: left;
+          }
+        }
+    }
+  }
   .ShopSumBox{
     padding: 30px 10px;
     display: flex;
@@ -367,6 +401,7 @@ export default {
       }
     }
   }  
+
   .ShopBtmBox {
       width: 100%;
       display: flex;
