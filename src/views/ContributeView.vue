@@ -70,11 +70,11 @@
 
             <!-- 標籤 -->
             <div>
-                <span v-for="(  CBtag, tagindex  ) in   CBtag  " :key=" tagindex " class="gray">#{{ CBtag }}</span>
+                <span v-for="(  CBtag, tagindex  ) in   CBtag  " :key="tagindex" class="gray">#{{ CBtag }}</span>
             </div>
             <div>
-                <span v-for="(  MRTLine, MRTLineindex  ) in   MRTLine  " :key=" MRTLineindex "
-                    :class=" getClassObject(MRTLine, MRTLineindex) ">#{{ MRTLine }}</span>
+                <span v-for="(  MRTLine, MRTLineindex  ) in   MRTLine  " :key="MRTLineindex"
+                    :class="getClassObject(MRTLine, MRTLineindex)">#{{ MRTLine }}</span>
             </div>
         </div>
 
@@ -82,11 +82,11 @@
 
         <!-- 文章清單 -->
         <div class="CBList">
-            <div v-for="  itemList   in   CBList  " :key=" itemList.art_no "
+            <div v-for="  itemList   in   CBList  " :key="itemList.art_no"
                 @click="(closePost = !closePost), (lightBox = !lightBox), openInner(itemList)">
-                <div :class=" { 'card-w': PC, 's-card-h': !PC } ">
+                <div :class="{ 'card-w': PC, 's-card-h': !PC }">
                     <div class="img">
-                        <img :src=" `${this.$store.state.imgURL}` + itemList.art_pic1 " alt="">
+                        <img :src="`${this.$store.state.imgURL}` + itemList.art_pic1" alt="">
                         <!-- <img :src="PC ? 'https://picsum.photos/200/280/?random=10' : 'https://picsum.photos/280/200/?random=10'" /> -->
                         <!-- <img src="https://picsum.photos/80/80/?random=10" class="head" /> -->
                     </div>
@@ -108,20 +108,20 @@
                 </div>
             </div>
             <!-- 文章內容 -->
-            <div class="CBPost" v-show=" closePost ">
+            <div class="CBPost" v-show="closePost">
                 <div class="box">
                     <img src="https://picsum.photos/200/200/?random=10" class="head" />
                     <span class="closePost" @click="(closePost = !closePost), (lightBox = !lightBox)">✖</span>
                     <div class="swiperPost">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img :src=" `${this.$store.state.imgURL}` + CBPost.art_pic1 " alt="">
+                                <img :src=$imgUrl(CBPost.art_pic1) alt="圖片1">
                             </div>
                             <div class="swiper-slide">
-                                <img :src=" `${this.$store.state.imgURL}` + CBPost.art_pic2 " alt="">
+                                <img :src=$imgUrl(CBPost.art_pic2) alt="圖片2">
                             </div>
                             <div class="swiper-slide">
-                                <img :src=" `${this.$store.state.imgURL}` + CBPost.art_pic3 " alt="">
+                                <img :src=$imgUrl(CBPost.art_pic3) alt="圖片3">
                             </div>
                         </div>
                         <div class="swiper-button-prev"></div>
@@ -143,7 +143,7 @@
                         </div>
                         <div class="author">
                             <div class="line"></div>
-                            <span>TIM SMITH JR.</span>
+                            <span>{{CBPost.mem_name}}</span>
                         </div>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
     </section>
 
     <!-- 燈箱 -->
-    <div class="lightBox" v-show=" lightBox "></div>
+    <div class="lightBox" v-show="lightBox"></div>
 
     <!-- 背景輪播 -->
     <div class="mrtBanner">
@@ -345,12 +345,8 @@ export default {
             }
         }
     },
-    computed: {
-
-    },
 
     mounted() {
-
         this.windowWidth()
         // 景點輪播
         const swiperBanner = new Swiper(".swiperBanner", {
@@ -399,8 +395,11 @@ export default {
     created() {
         axios.get(`${this.$apiUrl('getArticle.php')}`)
             .then((res) => {
+                console.log(res)
                 this.CBList = res.data
                 console.log(this.CBList)
+                this.CBPost = this.CBList[0]
+                console.log(this.CBPost);
             })
             .catch((error) => {
                 console.error('資料失敗：', error);

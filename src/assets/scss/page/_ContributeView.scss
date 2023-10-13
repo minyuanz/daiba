@@ -182,7 +182,7 @@
         padding: 1px 3px;
         font-weight: 600;
         margin-right: 5px;
-        cursor: pointer;
+
         letter-spacing: 0.1rem;
       }
     }
@@ -221,9 +221,15 @@
     .card-w {
       cursor: pointer;
       box-shadow: 1px 3px 6px #0006;
+      height: 350px;
 
       .img {
         position: relative;
+
+        img {
+          object-fit: cover;
+          object-position: center;
+        }
 
         .head {
           position: absolute;
@@ -238,9 +244,20 @@
       }
 
       .text {
+        padding-top: 1rem;
+
+        .title {
+          p {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1;
+            font-size: 15px;
+          }
+        }
 
         .txt {
-          -webkit-line-clamp: 3;
+          -webkit-line-clamp: 5;
         }
       }
     }
@@ -388,20 +405,26 @@
             background-color: transparent;
             display: inline-grid;
             position: relative;
-            padding: 1rem 5rem 0;
+            padding: 1rem 0.5rem 0;
+
+            p {
+              padding-left: 3.5rem;
+            }
 
             .PostingDate {
               display: block;
               text-align: end;
               color: #999;
-              padding-block: 10px;
+              padding-bottom: 1.5rem;
+              margin-top: 1rem;
+              margin-left: auto;
             }
           }
 
           .info::before {
             content: "";
             border-bottom: #aaa 3px dashed;
-            width: calc(90% - 30px);
+            width: calc(90% - 0px);
             position: absolute;
             bottom: 0;
             left: calc(5% + 30px);
@@ -523,6 +546,12 @@
 
         .title p {
           line-height: 2rem;
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          font-size: 15px;
+
         }
 
         .title .tag {

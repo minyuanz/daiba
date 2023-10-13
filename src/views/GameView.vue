@@ -217,16 +217,21 @@
         <p>根據你的冒險路線，你可以選擇...</p>
 
         <!-- 點數 -->
+        <form @submit.prevent="addPoint" enctype="multipart/form-data">
         <div class="station">
           <div class="FrontCard">
             <img src="../../public/img/logo.png" alt="logo" />
           </div>
           <div class="backCard">
             <div class="point">
-              <p>{{ this.getPoint() }}</p>
+              <p>{{ this.isUserData() }}</p>
+              <button v-if="this.$store.state.memInfo" type="submit">獲取點數</button>
+              <p v-show="showPoint">獲得點數：10點！</p>
+              
             </div>
           </div>
         </div>
+      </form>
 
         <!-- 推薦的東西 -->
         <div class="info">
@@ -314,6 +319,7 @@ import $ from 'jquery'
 import 'jquery-ui-dist/jquery-ui'
 import html2canvas from "html2canvas";
 import { faThinkPeaks } from "@fortawesome/free-brands-svg-icons";
+import axios from 'axios';
 
 
 export default {
@@ -321,15 +327,15 @@ export default {
   data() {
     return {
       btninner: ["START", "OK"],
-      currentMessageIndex: 0, //對話內容索引值
+      currentMessageIndex: 60, //對話內容索引值
       userName: "", //使用者名稱
       closeName: false, //關閉填寫名稱欄位
       gameLogo: true,
-      home: true, //遊戲首頁
+      home: false, //遊戲首頁
       startBtn: true, //開始按鈕
       mode: false, //選擇模式
       costume: false, //選擇服裝
-      Inner: false, //遊戲內頁
+      Inner: true, //遊戲內頁
       imgFill: false, //控制圖片css
       closeTxtName: true,
       closeBalloon: true,
@@ -404,6 +410,11 @@ export default {
       // loading
       loading: false, //讀取
       MRTkey: 1,
+
+      //會員資料
+      userId:null,
+      point:null,
+      showPoint:false,
 
       // 對話內容
       messages: [
@@ -814,6 +825,16 @@ export default {
     currentMessage() {
       return this.messages[this.currentMessageIndex];
     },
+    getPoint(){
+      axios.get(`${this.$apiUrl('getMember.php')}`)
+            .then((res) => {
+                console.log(res)
+                
+            })
+            .catch((error) => {
+                console.error('資料失敗：', error);
+            });
+    }
   },
 
   methods: {
@@ -842,7 +863,6 @@ export default {
             this.currentMessageIndex = 55;
           } else this.currentMessageIndex++;
 
-          console.log(this.currentMessageIndex);
         }
       } else {
         this.currentText.push(this.currentMessage.text.substring(this.idx));
@@ -1039,14 +1059,44 @@ export default {
       }, 2000);
     },
 
-    // 點數
-    getPoint() {
-      if (localStorage.getItem("userData")) {
-        const userData = JSON.parse(localStorage.getItem("userData"));
-        // 增加點數
-      } else {
+    isUserData(){
+      if (!this.$store.state.memInfo){
         return "登入會員遊玩的話即可獲得點數！";
       }
+    },
+
+
+    // 點數
+    addPoint() {
+      
+        this.userId = this.$store.state.memInfo.mem_id
+        this.point = parseInt(this.$store.state.memInfo.mem_point)
+        console.log(this.point);
+        this.point+=10
+        console.log(this.point);
+        const formData = new FormData();
+        formData.append('mem_id',this.userId)
+        formData.append('mem_point',this.point)
+        axios.post(`${this.$apiUrl('addPoint.php')}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+                .then((response) => {
+                    if (response.status === 200) { //檢查http  狀態碼來判別 php新增成功與否
+                    this.showPoint = true
+
+                    } else {
+                        console.log('error');
+                    }
+                })
+                .catch((error) => {
+                    console.error('上傳點數失敗：', error);
+                });
+        
+      
+        
+    
     },
 
     // 重新遊戲
