@@ -64,9 +64,9 @@
                         </select>
                         <select name="" id="" v-model="newSubmitArticle.class" @change="checkClass(newSubmitArticle)">
                             <option value="0">請選擇項目</option>
-                            <option value="1">美食</option>
-                            <option value="2">景點</option>
-                            <option value="3">住宿</option>
+                            <option value="美食推薦">美食</option>
+                            <option value="景點推薦">景點</option>
+                            <option value="住宿推薦">住宿</option>
                         </select>
                     </div>
                     <span v-if="classError">請選擇分類</span>
@@ -140,7 +140,7 @@ export default {
                 address: '',
                 line: 0,
                 station: 0,
-                class: 0,
+                class: '0',
                 pic1: null,
                 pic2: null,
                 pic3: null,
@@ -248,7 +248,7 @@ export default {
             formData.append('art_subTitle', this.newSubmitArticle.subTitle);
             formData.append('art_address', this.newSubmitArticle.address);
             formData.append('sta_id', this.newSubmitArticle.station);
-            formData.append('fea_id', this.newSubmitArticle.class);
+            formData.append('fea_tag', this.newSubmitArticle.class);
             formData.append('art_pic1', this.newSubmitArticle.pic1);
             formData.append('art_pic2', this.newSubmitArticle.pic2);
             formData.append('art_pic3', this.newSubmitArticle.pic3);

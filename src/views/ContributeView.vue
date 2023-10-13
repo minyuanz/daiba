@@ -95,7 +95,7 @@
                             <h3>{{ itemList.art_title }}</h3>
                             <p>{{ itemList.art_subTitle }}</p>
                             <div class="tag">
-                                <span class="title-tag gray">{{feaTag(itemList.fea_id) }}</span>
+                                <span class="title-tag gray">{{itemList.fea_tag}}</span>
                                 <span class="title-tag" :class="artChooseTag(itemList.mrt_id1)">{{colorClassMap2[itemList.mrt_id1]}}</span>
                                 <span class="title-tag" :class="artChooseTag(itemList.mrt_id2)">{{colorClassMap2[itemList.mrt_id2]}}</span>
                             </div>
@@ -377,16 +377,7 @@ export default {
             }
 
     },
-    //標籤判斷
-    feaTag(id){
-        if(id === '1'){
-            return '美食推薦'
-        }else if(id === '2'){
-            return '景點推薦'
-        }else{
-            return '住宿推薦'
-        }
-    },
+
 
 },
 

@@ -858,7 +858,7 @@ export default {
             }
     
             // 推薦
-            axios.get(`${this.$apiUrl('getMember.php')}`)
+            axios.get(`${this.$apiUrl('.php')}`)
             .then((res) => {
                 console.log(res) //抓取資料
                 const matchingUser = res.data.find(user => user.mem_id === this.$store.state.memInfo.mem_id); //資料中和目前登入的ID配對

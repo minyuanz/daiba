@@ -35,8 +35,8 @@ try {
     require_once("connect_chd103g5_2.php");
 
     // Article
-    $sql = "INSERT INTO `article` (`mem_id`,`sta_id`, `fea_id`, `art_title`, `art_subTitle`, `art_content`,`art_address`, `art_pic1`, `art_pic2`, `art_pic3`, `art_date`, `art_status`) 
-    VALUES (:mem_id, :sta_id, :fea_id, :art_Title, :art_subTitle, :art_content,:art_address, :art_pic1, :art_pic2, :art_pic3,:art_date, :art_status);";
+    $sql = "INSERT INTO `article` (`mem_id`,`sta_id`, `fea_tag`, `art_title`, `art_subTitle`, `art_content`,`art_address`, `art_pic1`, `art_pic2`, `art_pic3`, `art_date`, `art_status`) 
+    VALUES (:mem_id, :sta_id, :fea_tag, :art_Title, :art_subTitle, :art_content,:art_address, :art_pic1, :art_pic2, :art_pic3,:art_date, :art_status);";
     
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(":mem_id", $_POST["mem_id"]); 
@@ -44,7 +44,7 @@ try {
     $stmt->bindValue(":art_subTitle", $_POST["art_subTitle"]);
     $stmt->bindValue(":art_address", $_POST["art_address"]);
     $stmt->bindValue(":sta_id", $_POST["sta_id"]);
-    $stmt->bindValue(":fea_id", $_POST["fea_id"]);
+    $stmt->bindValue(":fea_tag", $_POST["fea_tag"]);
     $stmt->bindValue(":art_pic1", $fileNames[0]);
     $stmt->bindValue(":art_pic2", $fileNames[1]);
     $stmt->bindValue(":art_pic3", $fileNames[2]); 
