@@ -2,16 +2,15 @@
     <div class="pwdchange">
         <h1>更改名稱/密碼</h1>
         <div class="changebox">
-            <div class="acc">
+            <!-- <div class="acc">
                 <label for="">名稱</label>
-                <!-- <input type="text"> -->
                 <span>{{ this.$store.state.memInfo.mem_name }}</span>
             </div>
             <div class="changeAcc">
                 <label for="">名稱更改</label>
                 <input type="text" v-model="changeAcc">
             </div>
-            <button class="btn_l" @click="updateName">確認更改</button>
+            <button class="btn_l" @click="updateName">確認更改</button> -->
             <div class="pwd">
                 <label for="">原密碼</label>
                 <input type="password" v-model="pwd">
@@ -48,30 +47,30 @@ export default {
         menu() {
             this.$emit('toggle-change')
         },
-        updateName() {
-            if (this.changeAcc == '') {
-                alert('請輸入新帳號')
-            } else {
-                // 建立數據資料夾好發給PHP做處理新增
-                const formData = new FormData();
-                formData.append("mem_name", this.changeAcc);
-                formData.append("mem_id", this.member.mem_id);
-                fetch('http://localhost/dai/public/phps/UpdateMemberName.php', {
-                    method: 'post',
-                    body: formData
-                })
-                    .then(res => res.json())
-                    .then((res) => {
-                        if (!res.error) {
-                            alert(res.msg);
-                            this.menu()
-                        }
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            }
-        },
+        // updateName() {
+        //     if (this.changeAcc == '') {
+        //         alert('請輸入新帳號')
+        //     } else {
+        //         // 建立數據資料夾好發給PHP做處理新增
+        //         const formData = new FormData();
+        //         formData.append("mem_name", this.changeAcc);
+        //         formData.append("mem_id", this.member.mem_id);
+        //         fetch('http://localhost/dai/public/phps/UpdateMemberName.php', {
+        //             method: 'post',
+        //             body: formData
+        //         })
+        //             .then(res => res.json())
+        //             .then((res) => {
+        //                 if (!res.error) {
+        //                     alert(res.msg);
+        //                     this.menu()
+        //                 }
+        //             })
+        //             .catch(function (error) {
+        //                 console.log(error);
+        //             });
+        //     }
+        // },
         updatePwd() {
 
             if (this.pwd !== this.changePwd) {

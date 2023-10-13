@@ -11,12 +11,12 @@
             </button>
             <div class="changeName">
                 <label for="">名稱：</label>
-                <input type="text" v-model="changeName">
+                <input type="text" v-model="changeAcc">
             </div>
-            <div class="changeBir">
+            <!-- <div class="changeBir">
                 <label for="">生日：</label>
                 <input type="date" v-model="changeBir">
-            </div>
+            </div> -->
             <!-- <div class="changeSex">
                 <label for="sex">性別：</label>
                 <select name="" id="sex" v-model="changeSex">
@@ -25,7 +25,7 @@
                 </select>
             </div> -->
             <div class="acurrance">
-                <button class="btn_l">確認更改</button>
+                <button class="btn_l" @click="updateName">確認更改</button>
                 <button class="btn_l btn_undo" @click="menu">返回</button>
             </div>
         </div>
@@ -37,15 +37,40 @@ export default {
     data() {
         return {
             toggle: '',
-            changeName: '',
-            changeBir: '',
-            changeSex: '男'
+            changeAcc: '',
+            member: this.$store.state.memInfo
+            // changeBir: '',
+            // changeSex: '男'
         }
     },
     methods: {
         menu() {
             this.$emit('toggle-change')
-        }
+        },
+        updateName() {
+            if (this.changeAcc == '') {
+                alert('請輸入新名稱')
+            } else {
+                // 建立數據資料夾好發給PHP做處理新增
+                const formData = new FormData();
+                formData.append("mem_name", this.changeAcc);
+                formData.append("mem_id", this.member.mem_id);
+                fetch('http://localhost/dai/public/phps/UpdateMemberName.php', {
+                    method: 'post',
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then((res) => {
+                        if (!res.error) {
+                            alert(res.msg);
+                            this.menu()
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        },
     }
 }
 </script>
