@@ -1,524 +1,543 @@
 <template>
-    <div class="backFeature" v-if="addToggle">
-        <div class="feaSearch">
-            <label for="">請選擇捷運線：</label>
-            <select name="" id="">
-                <option :value="line.name" v-for="line in lines">{{ line.name }}</option>
-            </select>
-            <label for="">請選擇捷運站：</label>
-            <select name="" id="">
-                <option :value="sta.name" v-for="sta in stations">{{ sta.name }}</option>
-            </select>
-            <label for="">請選擇分類：</label>
-            <select name="" id="">
-                <option :value="fea.name" v-for="fea in features">{{ fea.name }}</option>
-            </select>
-        </div>
-        <div class="feaTitle">
-            <p>站名</p>
-            <p>標題</p>
-            <p>推薦分類</p>
-            <p>更新時間</p>
-            <p>編輯</p>
-            <p>刪除</p>
-        </div>
-        <div class="feaInfo" v-for="info in infos">
-            <p>{{ info.staName }}</p>
-            <p>{{ info.Title }}</p>
-            <p>{{ info.Fea }}</p>
-            <p>{{ info.Date }}</p>
-            <div class="edit">
-                <i class="fa-solid fa-pen-to-square"></i>
-            </div>
-            <div class="del">
-                <i class="fa-solid fa-circle-xmark"></i>
-            </div>
-        </div>
-        <div class="addSta">
-            <button @click="addToggle = !addToggle">新增推薦</button>
-        </div>
+  <div class="backFeature" v-if="addToggle">
+    <div class="feaSearch">
+      <label for="">請選擇捷運線：</label>
+      <select name="" id="">
+        <option :value="line.name" v-for="line in lines">
+          {{ line.name }}
+        </option>
+      </select>
+      <label for="">請選擇捷運站：</label>
+      <select name="" id="">
+        <option :value="sta.name" v-for="sta in stations">
+          {{ sta.name }}
+        </option>
+      </select>
+      <label for="">請選擇分類：</label>
+      <select name="" id="">
+        <option :value="fea.name" v-for="fea in features">
+          {{ fea.name }}
+        </option>
+      </select>
     </div>
-    <div class="backFeaAdd" v-else>
-        <div class="feaHead">
-            <div class="mainTitle">
-                <label for="">文章標題</label>
-                <input type="text" v-model="formData.title">
-            </div>
-            <div class="mainPic">
-                <label for="">版頭圖片</label>
-                <div class="pic">
-                    <p>＋</p>
-                    <input type="file" @change="FileChange">
-                    <img :src="picURL" alt="" v-show="fix">
-                </div>
-            </div>
-            <div class="secTitle">
-                <label for="">文章副標</label>
-                <input type="text" v-model="formData.secTitle">
-            </div>
-            <div class="selectTAg">
-                <label for="">捷運站：</label>
-                <select name="" id="">
-                    <option value="BL01">BL01</option>
-                </select>
-                <label for="">推薦分類：</label>
-                <select name="" id="" v-model="formData.tag">
-                    <option value="food">food</option>
-                    <option value="food">food</option>
-                    <option value="food">food</option>
-                </select>
-            </div>
-        </div>
-        <div class="backFeaInfo">
-            <div class="uploadPic" v-for="(pic, index) in pics" :key="index">
-                <label for="">{{ pic.title }}</label>
-                <div class="pic">
-                    <p>＋</p>
-                    <input type="file" @change="handleFileChange($event, index)">
-                    <img :src="pic.picURL" v-show="pic.fix">
-                </div>
-                <textarea class="custom-input" v-model="pic.ctx"></textarea>
-                <!-- <input type="text"> -->
-            </div>
-        </div>
-        <div class="backFeaCtx">
-            <label for="">詳細資訊</label>
-            <textarea class="custom-input" v-model="moreinfo"></textarea>
-            <!-- <input type="text"> -->
-        </div>
-        <div class="btn">
-            <button @click="addToggle = !addToggle">取消新增</button>
-            <button @click="addFeature" type="button">確認新增</button>
-        </div>
+    <div class="feaTitle">
+      <p>站名</p>
+      <p>標題</p>
+      <p>推薦分類</p>
+      <p>更新時間</p>
+      <p>編輯</p>
+      <p>刪除</p>
     </div>
+    <div class="feaInfo" v-for="info in infos">
+      <p>{{ info.staName }}</p>
+      <p>{{ info.Title }}</p>
+      <p>{{ info.Fea }}</p>
+      <p>{{ info.Date }}</p>
+      <div class="edit">
+        <i class="fa-solid fa-pen-to-square"></i>
+      </div>
+      <div class="del">
+        <i class="fa-solid fa-circle-xmark"></i>
+      </div>
+    </div>
+    <div class="addSta">
+      <button @click="addToggle = !addToggle">新增推薦</button>
+    </div>
+  </div>
+  <div class="backFeaAdd" v-else>
+    <div class="feaHead">
+      <div class="mainTitle">
+        <label for="">文章標題</label>
+        <input type="text" v-model="formData.title" />
+      </div>
+      <div class="mainPic">
+        <label for="">版頭圖片</label>
+        <div class="pic">
+          <p>＋</p>
+          <input type="file" @change="FileChange" />
+          <img :src="picURL" alt="" v-show="fix" />
+        </div>
+      </div>
+      <div class="secTitle">
+        <label for="">文章副標</label>
+        <input type="text" v-model="formData.secTitle" />
+      </div>
+      <div class="selectTAg">
+        <label for="">捷運站：</label>
+        <select name="" id="">
+          <option value="BL01">BL01</option>
+        </select>
+        <label for="">推薦分類：</label>
+        <select name="" id="" v-model="formData.tag">
+          <option value="food">food</option>
+          <option value="food">food</option>
+          <option value="food">food</option>
+        </select>
+      </div>
+    </div>
+    <div class="backFeaInfo">
+      <div class="uploadPic" v-for="(pic, index) in pics" :key="index">
+        <label for="">{{ pic.title }}</label>
+        <div class="pic">
+          <p>＋</p>
+          <input type="file" @change="handleFileChange($event, index)" />
+          <img :src="pic.picURL" v-show="pic.fix" />
+        </div>
+        <textarea class="custom-input" v-model="pic.ctx"></textarea>
+        <!-- <input type="text"> -->
+      </div>
+    </div>
+    <div class="backFeaCtx">
+      <label for="">詳細資訊</label>
+      <textarea class="custom-input" v-model="moreinfo"></textarea>
+      <!-- <input type="text"> -->
+    </div>
+    <div class="btn">
+      <button @click="addToggle = !addToggle">取消新增</button>
+      <button @click="addFeature" type="button">確認新增</button>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            lines: [{
-                name: 'BL線',
-            },
-            {
-                name: 'R線',
-            },
-            {
-                name: 'O線',
-            },
-            {
-                name: 'G線',
-            }],
-            stations: [{
-                name: 'BL01'
-            }, {
-                name: 'BL02'
-            }, {
-                name: 'BL03'
-            },],
-            features: [{
-                name: '美食'
-            },
-            {
-                name: '景點'
-            }, {
-                name: '住宿'
-            }],
-            infos: [{
-                staName: '板橋',
-                Title: '漢堡',
-                Fea: '美食',
-                Date: '2023-02-03'
-            }, {
-                staName: '板橋',
-                Title: '漢堡',
-                Fea: '美食',
-                Date: '2023-02-03'
-            }, {
-                staName: '板橋',
-                Title: '漢堡',
-                Fea: '美食',
-                Date: '2023-02-03'
-            },],
-            addToggle: true,
-            picURL: null,
-            fix: false,
-            pics: [{
-                title: '圖片一',
-                imageURL: null,
-                ctx: "",
-                fix: false,
-                picURL:""
-            }, {
-                title: '圖片二',
-                imageURL: null,
-                ctx: "",
-                fix: false,
-                picURL:""
-            }, {
-                title: '圖片三',
-                imageURL: null,
-                ctx: "",
-                fix: false,
-                picURL:""
-            },],
-            formData: {
-                title: "",
-                secTitle: "",
-                imageURL: "",
-                tag: "",
-            },
-            moreinfo: ""
+  data() {
+    return {
+      lines: [
+        {
+          name: "BL線",
+        },
+        {
+          name: "R線",
+        },
+        {
+          name: "O線",
+        },
+        {
+          name: "G線",
+        },
+      ],
+      stations: [
+        {
+          name: "BL01",
+        },
+        {
+          name: "BL02",
+        },
+        {
+          name: "BL03",
+        },
+      ],
+      features: [
+        {
+          name: "美食",
+        },
+        {
+          name: "景點",
+        },
+        {
+          name: "住宿",
+        },
+      ],
+      infos: [
+        {
+          staName: "板橋",
+          Title: "漢堡",
+          Fea: "美食",
+          Date: "2023-02-03",
+        },
+        {
+          staName: "板橋",
+          Title: "漢堡",
+          Fea: "美食",
+          Date: "2023-02-03",
+        },
+        {
+          staName: "板橋",
+          Title: "漢堡",
+          Fea: "美食",
+          Date: "2023-02-03",
+        },
+      ],
+      addToggle: true,
+      picURL: null,
+      fix: false,
+      pics: [
+        {
+          title: "圖片一",
+          imageURL: null,
+          ctx: "",
+          fix: false,
+          picURL: "",
+        },
+        {
+          title: "圖片二",
+          imageURL: null,
+          ctx: "",
+          fix: false,
+          picURL: "",
+        },
+        {
+          title: "圖片三",
+          imageURL: null,
+          ctx: "",
+          fix: false,
+          picURL: "",
+        },
+      ],
+      formData: {
+        title: "",
+        secTitle: "",
+        imageURL: "",
+        tag: "",
+      },
+      moreinfo: "",
+    };
+  },
+  methods: {
+    handleFileChange(e, index) {
+      const files = e.target.files; // 獲取所有所選文件
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+        reader.onload = () => {
+          // 當讀取完成時觸發
+          this.pics[index].picURL = reader.result; // 將 Data URL 賦值給圖片的 src
+        };
+
+        if (file) {
+          reader.readAsDataURL(file); // 讀取文件內容，以 Data URL 形式
+          this.pics[index].imageURL = file; // 讀取文件內容，以 Data URL 形式
         }
+      }
+      this.pics[index].fix = true;
     },
-    methods: {
-        handleFileChange(e, index) {
-            const files = e.target.files; // 獲取所有所選文件
+    FileChange(e) {
+      const file = e.target.files[0]; // 獲取所有所選文件
+      const reader = new FileReader();
 
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const reader = new FileReader();
-                reader.onload = () => {
-                    // 當讀取完成時觸發
-                    this.pics[index].picURL = reader.result; // 將 Data URL 賦值給圖片的 src
-                };
-                
-                if (file) {
-                    reader.readAsDataURL(file); // 讀取文件內容，以 Data URL 形式
-                    this.pics[index].imageURL = file // 讀取文件內容，以 Data URL 形式
-                }
-            }
-            this.pics[index].fix = true
+      console.log(file);
+      console.log(reader);
 
-        },
-        FileChange(e) {
-            const file = e.target.files[0]; // 獲取所有所選文件
-            const reader = new FileReader();
+      reader.onload = () => {
+        // 當讀取完成時觸發
+        this.picURL = reader.result; // 將 Data URL 賦值給圖片的 src
+      };
 
-            console.log(file);
-            console.log(reader);
+      if (file) {
+        reader.readAsDataURL(file);
+        this.formData.imageURL = file; // 讀取文件內容，以 Data URL 形式
+      }
+      this.fix = true;
+    },
+    addFeature() {
+      // 建立數據資料夾好發給PHP做處理新增
+      const formData = new FormData();
+      formData.append("news_title", this.formData.title);
+      formData.append("news_sectitle", this.formData.sectitle);
+      formData.append("news_tag", this.formData.tag);
+      formData.append("news_imageURL", this.formData.imageURL);
+      formData.append("news_content", this.formData.content);
 
-            reader.onload = () => {
-                // 當讀取完成時觸發
-                this.picURL = reader.result; // 將 Data URL 賦值給圖片的 src
-            };
-
-            if (file) {
-                reader.readAsDataURL(file);
-                this.formData.imageURL = file // 讀取文件內容，以 Data URL 形式
-            }
-            this.fix = true
-
-        },
-        addFeature() {
-            // 建立數據資料夾好發給PHP做處理新增
-            const formData = new FormData();
-            formData.append("news_title", this.formData.title);
-            formData.append("news_sectitle", this.formData.sectitle);
-            formData.append("news_tag", this.formData.tag);
-            formData.append("news_imageURL", this.formData.imageURL);
-            formData.append("news_content", this.formData.content);
-
-            fetch(`http://localhost/dai/public/phps/addNews.php`, {
-                method: "post",
-                body: formData,
-            })
-                .then((res) => res.json())
-                .then((res) => {
-                    if (!res.error) {
-                        alert(res.msg);
-                        this.addToggle = !this.addToggle;
-                    }
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
-
-    }
-}
+      fetch(`http://localhost/dai/public/phps/addNews.php`, {
+        method: "post",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (!res.error) {
+            alert(res.msg);
+            this.addToggle = !this.addToggle;
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+  },
+};
 </script>
 
 <style lang="scss">
 .backFeature {
-    margin-top: 3rem;
-    border: 1px solid #aaa;
-    background-color: #fff;
-    width: 900px;
-    padding: 50px;
+  margin-top: 3rem;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  width: 900px;
+  padding: 50px;
+  height: 900px;
+  overflow-y: scroll;
 
-    .feaSearch {
-        // border: 1px solid red;
-        margin: 10px 0;
-        display: flex;
-        align-items: center;
+  .feaSearch {
+    // border: 1px solid red;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
 
-        select {
-            height: 30px;
-            margin-right: 30px;
-            width: 100px;
-            text-align: center;
-        }
-
-
+    select {
+      height: 30px;
+      margin-right: 30px;
+      width: 100px;
+      text-align: center;
     }
+  }
 
-    .feaTitle {
-        // border: 1px solid red;
-        display: flex;
-        justify-content: space-evenly;
-        background-color: #ddd;
-        padding: 5px 0;
+  .feaTitle {
+    // border: 1px solid red;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #ddd;
+    padding: 5px 0;
 
-        p {
-            // border: 1px solid red;
-            width: 100%;
-            text-align: center;
-        }
+    p {
+      // border: 1px solid red;
+      width: 100%;
+      text-align: center;
     }
+  }
 
-    .feaInfo {
-        // border: 1px solid red;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        padding: 5px 0;
-        border-bottom: 1px solid #aaa;
+  .feaInfo {
+    // border: 1px solid red;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #aaa;
 
-        div,
-        p {
-            // border: 1px solid red;
-            width: 100%;
-            text-align: center;
-        }
+    div,
+    p {
+      // border: 1px solid red;
+      width: 100%;
+      text-align: center;
     }
+  }
 
-    .addSta {
-        margin-top: 50px;
-        text-align: center;
-        // border: 1px solid red;
+  .addSta {
+    margin-top: 50px;
+    text-align: center;
+    // border: 1px solid red;
 
-        button {
-            padding: 10px 30px;
-        }
+    button {
+      padding: 10px 30px;
     }
+  }
 }
 
 .backFeaAdd {
-    border: 1px solid #aaa;
-    background-color: #fff;
-    // border-radius: 20px;
-    width: 900px;
-    height: 900px;
-    padding: 50px;
-    overflow: auto;
-    margin-top: 3rem;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  // border-radius: 20px;
+  width: 900px;
+  height: 900px;
+  padding: 50px;
+  overflow: auto;
+  margin-top: 3rem;
 
-    .feaHead {
+  .feaHead {
+    // border: 1px solid red;
+    .mainTitle {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
 
-        // border: 1px solid red;
-        .mainTitle {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-
-            label {
-                display: block;
-                text-align: center;
-                background-color: #ddd;
-                font-size: 24px;
-                font-weight: bold;
-                padding: 5px 0;
-            }
-
-            input {
-                margin-top: 30px;
-                padding: 5px 0;
-                border: 1px solid #aaa;
-            }
-        }
-
-        .mainPic {
-            // border: 1px solid red;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            margin-top: 30px;
-
-            label {
-                display: block;
-                text-align: center;
-                background-color: #ddd;
-                font-size: 24px;
-                font-weight: bold;
-                padding: 5px 0;
-            }
-
-            .pic {
-                border: 1px solid #aaa;
-                margin-top: 30px;
-                position: relative;
-
-                p {
-                    font-size: 24px;
-                    line-height: 200px;
-                }
-
-                input {
-                    border: 1px solid red;
-                    position: absolute;
-                    inset: 0;
-                    width: 100%;
-                    height: 100%;
-                    opacity: 0;
-                    z-index: 9;
-                }
-
-                img {
-                    position: absolute;
-                    inset: 0;
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-        }
-
-        .secTitle {
-            // border: 1px solid red;
-            margin-top: 30px;
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-
-            label {
-                display: block;
-                text-align: center;
-                background-color: #ddd;
-                font-size: 24px;
-                font-weight: bold;
-                padding: 5px 0;
-            }
-
-            input {
-                border: 1px solid #aaa;
-                margin-top: 30px;
-                padding: 5px 0;
-            }
-        }
-
-        .selectTAg {
-            // border: 1px solid red;
-            display: flex;
-            align-items: center;
-            justify-content: space-evenly;
-            margin-top: 30px;
-
-            label {
-                // width: 15%;
-            }
-
-            select {
-                width: 200px;
-            }
-        }
-    }
-
-    .backFeaInfo {
-        margin-top: 50px;
-        padding-top: 30px;
-        border-top: 1px dashed #aaa;
-
-        .uploadPic {
-            // border: 1px solid red; text-align: center;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            margin-top: 50px;
-
-            label {
-                display: block;
-                text-align: center;
-                background-color: #ddd;
-                font-size: 24px;
-                font-weight: bold;
-                padding: 5px 0;
-            }
-
-            .pic {
-                border: 1px dashed #aaa;
-                margin-top: 30px;
-                position: relative;
-
-                p {
-                    // font-size: 24px;
-                    line-height: 200px;
-                }
-
-                input {
-                    border: 1px solid red;
-                    position: absolute;
-                    inset: 0;
-                    width: 100%;
-                    height: 100%;
-                    opacity: 0;
-                    z-index: 9;
-                }
-
-                img {
-                    position: absolute;
-                    inset: 0;
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-
-            .custom-input {
-                border: 1px solid #333;
-                // border-top:1px solid transparent;
-                margin-top: 1rem;
-                height: 200px;
-                width: 100%;
-                padding: 10px;
-                // line-height: 200px;
-            }
-        }
-    }
-
-    .backFeaCtx {
-        display: flex;
-        flex-direction: column;
+      label {
+        display: block;
         text-align: center;
-        margin-top: 50px;
+        background-color: #ddd;
+        font-size: 24px;
+        font-weight: bold;
+        padding: 5px 0;
+      }
 
-        label {
-            display: block;
-            text-align: center;
-            background-color: #ddd;
-            font-size: 24px;
-            font-weight: bold;
-            padding: 5px 0;
-        }
-
-        .custom-input {
-            border: 1px solid #333;
-            // border-top:1px solid transparent;
-            margin-top: 1rem;
-            height: 200px;
-            width: 100%;
-            padding: 10px;
-            // line-height: 200px;
-        }
-    }
-
-    .btn {
-        // border: 1px solid red;
+      input {
         margin-top: 30px;
-        text-align: right;
-
-        button {
-            margin-left: 20px;
-            padding: 10px 20px;
-        }
+        padding: 5px 0;
+        border: 1px solid #aaa;
+      }
     }
+
+    .mainPic {
+      // border: 1px solid red;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+
+      label {
+        display: block;
+        text-align: center;
+        background-color: #ddd;
+        font-size: 24px;
+        font-weight: bold;
+        padding: 5px 0;
+      }
+
+      .pic {
+        border: 1px solid #aaa;
+        margin-top: 30px;
+        position: relative;
+
+        p {
+          font-size: 24px;
+          line-height: 200px;
+        }
+
+        input {
+          border: 1px solid red;
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          z-index: 9;
+        }
+
+        img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+
+    .secTitle {
+      // border: 1px solid red;
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+
+      label {
+        display: block;
+        text-align: center;
+        background-color: #ddd;
+        font-size: 24px;
+        font-weight: bold;
+        padding: 5px 0;
+      }
+
+      input {
+        border: 1px solid #aaa;
+        margin-top: 30px;
+        padding: 5px 0;
+      }
+    }
+
+    .selectTAg {
+      // border: 1px solid red;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      margin-top: 30px;
+
+      label {
+        // width: 15%;
+      }
+
+      select {
+        width: 200px;
+      }
+    }
+  }
+
+  .backFeaInfo {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px dashed #aaa;
+
+    .uploadPic {
+      // border: 1px solid red; text-align: center;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      margin-top: 50px;
+
+      label {
+        display: block;
+        text-align: center;
+        background-color: #ddd;
+        font-size: 24px;
+        font-weight: bold;
+        padding: 5px 0;
+      }
+
+      .pic {
+        border: 1px dashed #aaa;
+        margin-top: 30px;
+        position: relative;
+
+        p {
+          // font-size: 24px;
+          line-height: 200px;
+        }
+
+        input {
+          border: 1px solid red;
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          z-index: 9;
+        }
+
+        img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .custom-input {
+        border: 1px solid #333;
+        // border-top:1px solid transparent;
+        margin-top: 1rem;
+        height: 200px;
+        width: 100%;
+        padding: 10px;
+        // line-height: 200px;
+      }
+    }
+  }
+
+  .backFeaCtx {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 50px;
+
+    label {
+      display: block;
+      text-align: center;
+      background-color: #ddd;
+      font-size: 24px;
+      font-weight: bold;
+      padding: 5px 0;
+    }
+
+    .custom-input {
+      border: 1px solid #333;
+      // border-top:1px solid transparent;
+      margin-top: 1rem;
+      height: 200px;
+      width: 100%;
+      padding: 10px;
+      // line-height: 200px;
+    }
+  }
+
+  .btn {
+    // border: 1px solid red;
+    margin-top: 30px;
+    text-align: right;
+
+    button {
+      margin-left: 20px;
+      padding: 10px 20px;
+    }
+  }
 }
 </style>

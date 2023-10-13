@@ -252,7 +252,7 @@ export default {
   width: 900px;
   height: 900px;
   padding: 50px;
-  overflow: scroll;
+  overflow-y: scroll;
 
   .NewsSearch {
     padding: 10px;
