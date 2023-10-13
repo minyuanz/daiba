@@ -19,7 +19,7 @@ try {
     
     // echo json_encode($result);
 
-    if(!empty($result)){
+    if(empty($result)){
         $sql = "insert into pro_collect (mem_id, prod_id) values (:mem_id, :prod_id)";
     
         $news = $pdo->prepare( $sql );
@@ -33,7 +33,9 @@ try {
         echo json_encode($result);
 
     } else{
-        echo 'added';
+        $result=array("error" => false, "msg" => "已經加入收藏清單");
+
+        echo json_encode($result);
     };
     // require_once("connect_chd103g5_2.php");
     //變數名稱 = $_post[formData的key值]
