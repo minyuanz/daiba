@@ -8,8 +8,10 @@ try {
     // 連接資料庫
     require_once("connect_chd103g5_2.php");
     // sql指令
-	$sql = "SELECT e.*, d.mem_name,d.mem_id FROM article e
-    LEFT JOIN member d ON e.mem_id = d.mem_id;"
+	$sql = "SELECT e.*, d.mem_name, d.mem_id, c.sta_id, c.mrt_id1, c.mrt_id2
+    FROM article e
+    LEFT JOIN member d ON e.mem_id = d.mem_id
+    LEFT JOIN mrtstation c ON e.sta_id = c.sta_id;";
     // 
     $news = $pdo->query( $sql );
     $result=$news->fetchAll(PDO::FETCH_ASSOC);

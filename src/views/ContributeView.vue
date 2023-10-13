@@ -70,11 +70,11 @@
 
             <!-- 標籤 -->
             <div>
-                <span v-for="(  CBtag, tagindex  ) in   CBtag  " :key="tagindex" class="gray">#{{ CBtag }}</span>
+                <span v-for="(  CBtag, tagindex  ) in   CBtag  " :key="tagindex" class="gray">{{ CBtag }}</span>
             </div>
             <div>
                 <span v-for="(  MRTLine, MRTLineindex  ) in   MRTLine  " :key="MRTLineindex"
-                    :class="getClassObject(MRTLine, MRTLineindex)">#{{ MRTLine }}</span>
+                    :class="getClassObject(MRTLine, MRTLineindex)">{{ MRTLine }}</span>
             </div>
         </div>
 
@@ -95,8 +95,9 @@
                             <h3>{{ itemList.art_title }}</h3>
                             <p>{{ itemList.art_subTitle }}</p>
                             <div class="tag">
-                                <span class="title-tag gray">#景點推薦</span>
-                                <span class="title-tag blue">#板南線</span>
+                                <span class="title-tag gray">{{feaTag(itemList.fea_id) }}</span>
+                                <span class="title-tag" :class="artChooseTag(itemList.mrt_id1)">{{colorClassMap2[itemList.mrt_id1]}}</span>
+                                <span class="title-tag" :class="artChooseTag(itemList.mrt_id2)">{{colorClassMap2[itemList.mrt_id2]}}</span>
                             </div>
                             <span class="s_text time">{{ itemList.art_date }}</span>
                         </div>
@@ -262,6 +263,7 @@ export default {
                     CTName: "台北市立動物園",
                 },
             ],
+            colorSimple:['BL','R','G','O','BR','Y'],
             colorClassMap: {
                 板南線: "blue",
                 淡水信義線: "red",
@@ -270,12 +272,21 @@ export default {
                 文湖線: "brown",
                 環狀線: "yellow",
             },
-            CBtag: ["所有文章", "美食推薦", "景點推薦", "住宿推薦"],
+            colorClassMap2:{
+                BL:"板南線",
+                R:"淡水信義線",
+                G:"松山新店線",
+                O:"中和新蘆線",
+                BR:"文湖線",
+                Y:"環狀線",
+            }
+            ,
+            CBtag: ["美食推薦", "景點推薦", "住宿推薦"],
             MRTLine: [
-                "中和新蘆線",
+                "板南線",
                 "淡水信義線",
                 "松山新店線",
-                "板南線",
+                "中和新蘆線",
                 "文湖線",
                 "環狀線",
             ],
@@ -329,12 +340,16 @@ export default {
                 },
             });
         },
+
+        //打開文章內容
         openInner(item) {
             this.CBPost = item
             // this.closePost = false
             this.lightBox = true
 
         },
+
+        // 我要投稿驗證
         toSubmit() {
             if (localStorage.getItem('user')) {
                 this.$router.push('/Submit')
@@ -343,8 +358,37 @@ export default {
                 this.$router.push('/login')
 
             }
+        },
+
+        // 捷運站顏色
+        artChooseTag(id){
+            if(id === 'BL'){
+                return 'blue'
+            }else if( id === "R"){
+                return 'red'
+            }else if( id === 'G'){
+                return 'green'
+            }else if( id === 'O'){
+                return 'orange'
+            }else if( id === 'BR'){
+                return 'brown'
+            }else if ( id === 'Y'){
+                return 'yellow'
+            }
+
+    },
+    //標籤判斷
+    feaTag(id){
+        if(id === '1'){
+            return '美食推薦'
+        }else if(id === '2'){
+            return '景點推薦'
+        }else{
+            return '住宿推薦'
         }
     },
+
+},
 
     mounted() {
         this.windowWidth()
