@@ -189,8 +189,12 @@ export default {
       })
         .then(response => response.json())
         .then(data => {
-          // 處裡後端響應
-          console.log(data);
+          // 回傳訊息
+        console.log(data);
+              // 清空購物車
+        this.$store.commit('clearCart');
+        alert('訂單送出成功');
+        this.$router.push('/shoppingDone');
         })
         .catch(error => {
           console.error(error);
