@@ -724,7 +724,15 @@ p {
     right: -15px;
     width: 15px;
     height: 150%;
-    background-image: linear-gradient(#a87b52 5%, #dd4d54 10%, #ffbb33 30%, #fff04b 45%, #4bc887 70%, #32c8e1 85%, #9164cd);
+    background-image: linear-gradient(
+      #a87b52 5%,
+      #dd4d54 10%,
+      #ffbb33 30%,
+      #fff04b 45%,
+      #4bc887 70%,
+      #32c8e1 85%,
+      #9164cd
+    );
     /* border: 1px solid red; */
   }
 }
@@ -821,7 +829,15 @@ p {
     right: -15px;
     width: 15px;
     height: 150%;
-    background-image: linear-gradient(#a87b52 5%, #dd4d54 10%, #ffbb33 30%, #fff04b 45%, #4bc887 70%, #32c8e1 85%, #9164cd);
+    background-image: linear-gradient(
+      #a87b52 5%,
+      #dd4d54 10%,
+      #ffbb33 30%,
+      #fff04b 45%,
+      #4bc887 70%,
+      #32c8e1 85%,
+      #9164cd
+    );
     /* border: 1px solid red; */
   }
 }
@@ -1252,24 +1268,28 @@ footer .footerTxt p {
   .CartWrap .CartSpeedBox .course {
     justify-content: space-around;
   }
-  .CartWrap .DoneBtnBox, .CartWrap .CartBtmBox {
+  .CartWrap .DoneBtnBox,
+  .CartWrap .CartBtmBox {
     padding-right: 0;
     padding-left: 0;
     width: 100%;
     display: block;
   }
-  .CartWrap .DoneBtnBox .btn_s, .CartWrap .CartBtmBox .btn_s {
+  .CartWrap .DoneBtnBox .btn_s,
+  .CartWrap .CartBtmBox .btn_s {
     width: 100%;
     line-height: 36px;
     border: 1px solid #333;
   }
-  .CartWrap .DoneBtnBox .btn_s:last-child, .CartWrap .CartBtmBox .btn_s:last-child {
+  .CartWrap .DoneBtnBox .btn_s:last-child,
+  .CartWrap .CartBtmBox .btn_s:last-child {
     margin: 1rem 0;
   }
-  .CartWrap .DoneBtnBox .btn_m, .CartWrap .CartBtmBox .btn_m {
+  .CartWrap .DoneBtnBox .btn_m,
+  .CartWrap .CartBtmBox .btn_m {
     background-color: #4bc887;
     margin: auto 0;
     width: 100%;
     color: #fff;
   }
-}/*# sourceMappingURL=main.css.map */
+} /*# sourceMappingURL=main.css.map */
