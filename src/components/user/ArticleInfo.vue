@@ -12,7 +12,7 @@
           </div>
           <div class="text">
             <div class="title">
-              <span class="gray title-tag">#{{ card.fea_id }}</span>
+              <span class="gray title-tag">#{{ card.fea_tag }}</span>
               <h3>{{ card.art_title }}</h3>
               <p>{{ card.art_subTitle }}</p>
             </div>

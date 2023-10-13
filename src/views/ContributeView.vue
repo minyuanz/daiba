@@ -82,8 +82,8 @@
 
         <!-- 文章清單 -->
         <div class="CBList">
-            <div v-for="  itemList   in   CBList  " :key="itemList.art_no"
-                @click="(closePost = !closePost), (lightBox = !lightBox), openInner(itemList)">
+            <div v-for="  (itemList, index)    in   CBList  " :key="itemList.art_no"
+                @click="(closePost = !closePost), (lightBox = !lightBox), openInner(itemList, index)">
                 <div :class="{ 'card-w': PC, 's-card-h': !PC }">
                     <div class="img">
                         <img :src="`${this.$store.state.imgURL}` + itemList.art_pic1" alt="">
@@ -95,9 +95,11 @@
                             <h3>{{ itemList.art_title }}</h3>
                             <p>{{ itemList.art_subTitle }}</p>
                             <div class="tag">
-                                <span class="title-tag gray">{{itemList.fea_tag}}</span>
-                                <span class="title-tag" :class="artChooseTag(itemList.mrt_id1)">{{colorClassMap2[itemList.mrt_id1]}}</span>
-                                <span class="title-tag" :class="artChooseTag(itemList.mrt_id2)">{{colorClassMap2[itemList.mrt_id2]}}</span>
+                                <span class="title-tag gray">{{ itemList.fea_tag }}</span>
+                                <span class="title-tag" :class="artChooseTag(itemList.mrt_id1)">{{
+                                    colorClassMap2[itemList.mrt_id1] }}</span>
+                                <span class="title-tag" :class="artChooseTag(itemList.mrt_id2)">{{
+                                    colorClassMap2[itemList.mrt_id2] }}</span>
                             </div>
                             <span class="s_text time">{{ itemList.art_date }}</span>
                         </div>
@@ -133,6 +135,9 @@
                             <h3>{{ CBPost.art_title }}</h3>
                             <h4>{{ CBPost.art_subTitle }}</h4>
                         </div>
+                        <div class="DigLikeBox" @click="addToCollect">
+                            <i class="fa-regular fa-heart" style="cursor: pointer;"></i>
+                        </div>
                         <div class="scrollbarArea">
                             <div class="info">
                                 <p>地址：{{ CBPost.art_address }}</p>
@@ -144,7 +149,7 @@
                         </div>
                         <div class="author">
                             <div class="line"></div>
-                            <span>{{CBPost.mem_name}}</span>
+                            <span>{{ CBPost.mem_name }}</span>
                         </div>
                     </div>
                 </div>
@@ -263,7 +268,7 @@ export default {
                     CTName: "台北市立動物園",
                 },
             ],
-            colorSimple:['BL','R','G','O','BR','Y'],
+            colorSimple: ['BL', 'R', 'G', 'O', 'BR', 'Y'],
             colorClassMap: {
                 板南線: "blue",
                 淡水信義線: "red",
@@ -272,13 +277,13 @@ export default {
                 文湖線: "brown",
                 環狀線: "yellow",
             },
-            colorClassMap2:{
-                BL:"板南線",
-                R:"淡水信義線",
-                G:"松山新店線",
-                O:"中和新蘆線",
-                BR:"文湖線",
-                Y:"環狀線",
+            colorClassMap2: {
+                BL: "板南線",
+                R: "淡水信義線",
+                G: "松山新店線",
+                O: "中和新蘆線",
+                BR: "文湖線",
+                Y: "環狀線",
             }
             ,
             CBtag: ["美食推薦", "景點推薦", "住宿推薦"],
@@ -294,6 +299,8 @@ export default {
             closePost: false,
             lightBox: false,
             swiper: false,
+            artId: '', // get art_id
+            memId: '' // get mem_id
         };
     },
     components: {
@@ -342,11 +349,12 @@ export default {
         },
 
         //打開文章內容
-        openInner(item) {
+        openInner(item, index) {
             this.CBPost = item
             // this.closePost = false
             this.lightBox = true
-
+            this.artId = this.CBList[index].art_id
+            this.memId = this.CBList[index].mem_id
         },
 
         // 我要投稿驗證
@@ -361,25 +369,59 @@ export default {
         },
 
         // 捷運站顏色
-        artChooseTag(id){
-            if(id === 'BL'){
+        artChooseTag(id) {
+            if (id === 'BL') {
                 return 'blue'
-            }else if( id === "R"){
+            } else if (id === "R") {
                 return 'red'
-            }else if( id === 'G'){
+            } else if (id === 'G') {
                 return 'green'
-            }else if( id === 'O'){
+            } else if (id === 'O') {
                 return 'orange'
-            }else if( id === 'BR'){
+            } else if (id === 'BR') {
                 return 'brown'
-            }else if ( id === 'Y'){
+            } else if (id === 'Y') {
                 return 'yellow'
             }
 
+        },
+
+        // 加入收藏
+        addToCollect() {
+            // console.log(111);
+            let user = localStorage.getItem('user')
+            let userinfo = JSON.parse(user)
+            // console.log(userinfo);
+            // console.log(this.artId);
+
+            if (!user) {
+                alert('請先登入')
+                this.$router.push('/login')
+            } else if (userinfo.mem_id == this.memId) {
+                alert('請收藏其他投稿，自己的不可收藏')
+            } else {
+                const formData = new FormData();
+                formData.append("mem_id", userinfo.mem_id);
+                formData.append("art_id", this.artId);
+
+                fetch('http://localhost/dai/public/phps/addToArticleCollect.php', {
+                    method: 'post',
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then((res) => {
+                        if (!res.error) {
+                            alert(res.msg);
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
+        }
+
+
     },
-
-
-},
 
     mounted() {
         this.windowWidth()

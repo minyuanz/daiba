@@ -2,20 +2,22 @@
   <div class="collect">
     <h1>投稿收藏</h1>
     <div class="collectGrid">
-      <div class="collectCard" v-for="(card, index) in cardsDisplay" :key="index">
+      <div class="collectCard" v-for="(card, index) in articleCollect" :key="index">
         <div class="s-card-h">
           <div class="img">
-            <img :src="card.image" alt="" />
+            <img :src="card.art_pic1" alt="" />
           </div>
           <div class="text">
             <div class="title">
-              <h4>{{ card.title }}</h4>
-              <p>{{ card.title2 }}</p>
-              <div class="time">{{ card.date }}</div>
-              <span class="gray title-tag">#{{ card.tag }}</span>
-              <span class="blue title-tag">#{{ card.tag2 }}</span>
+              <h4>{{ card.art_title }}</h4>
+              <p>{{ card.art_subTitle }}</p>
+              <div class="time">{{ card.art_date }}</div>
+              <!-- 推薦tag -->
+              <span class="gray title-tag">#{{ card.fea_tag }}</span>
+              <!-- 捷運線tag-->
+              <!-- <span class="blue title-tag">#{{ card.tag2 }}</span> -->
             </div>
-            <!-- <div class="txt">{{ card.ctx }}</div> -->
+            <!-- <div class="txt">{{ card.art_content }}</div> -->
             <div @click="delCollect(index)" class="del">✖</div>
             <!-- <span class="closePost">✖</span> -->
             <!-- <div class="head" style="overflow: auto;">
@@ -98,7 +100,7 @@ export default {
       cardsDisplay: [],
       pageSize: 2,
       currentPage: 1,
-      articleCollect:[]
+      articleCollect: []
     };
   },
   methods: {
@@ -111,12 +113,35 @@ export default {
       this.cardsDisplay = this.cards.slice(startIdx, endIdx);
     },
     delCollect(index) {
-      this.cardsDisplay.splice(index, 1);
-      console.log(index);
-    },
-    getMemberArticle() {
+      // console.log(index);
+
       let memId = this.$store.state.memInfo.mem_id
-      fetch(`http://localhost/dai/public/phps/getMemberArticle.php?memId=${memId}`)
+      let art_id = this.articleCollect[index].art_id
+
+      console.log(memId);
+      console.log(art_id);
+
+      const formData = new FormData();
+      formData.append("mem_id", memId);
+      formData.append("art_id", art_id);
+
+      fetch('http://localhost/dai/public/phps/delArticleCollect.php', {
+        method: 'post',
+        body: formData
+      })
+        .then(res => res.json())
+        .then((res) => {
+          if (!res.error) {
+            alert(res.msg);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+    getArticleCollect() {
+      let memId = this.$store.state.memInfo.mem_id
+      fetch(`http://localhost/dai/public/phps/getArticleCollect.php?memId=${memId}`)
         .then(res => res.json())
         .then((res) => {
           this.articleCollect = res
@@ -128,7 +153,7 @@ export default {
   },
   mounted() {
     this.cardsDisplay = this.cards;
-    this.getMemberArticle()
+    this.getArticleCollect()
   },
 };
 </script>
@@ -159,6 +184,7 @@ export default {
       margin: auto;
       margin-bottom: 10%;
       width: 250px;
+      height: 350px;
 
       .img {
         img {
