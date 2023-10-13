@@ -1,27 +1,27 @@
 <template>
   <div class="artWrap">
-    <h1>投稿文章</h1>
+    <h1>我的投稿</h1>
     <div class="artGrid">
-      <div class="artCard" v-for="card in cardsDisplay">
+      <div class="artCard" v-for="card in articleCollect">
         <div class="card-h">
           <div class="img">
-            <img :src="card.image" alt="" />
+            <img :src=$imgUrl(card.art_pic1) alt="" />
             <!-- <div class="head">
               <img :src="card.head" alt="" />
             </div> -->
           </div>
           <div class="text">
             <div class="title">
-              <span class="gray title-tag">#{{ card.tag }}</span>
-              <h3>{{ card.title }}</h3>
-              <p>{{ card.title2 }}</p>
+              <span class="gray title-tag">#{{ card.fea_id }}</span>
+              <h3>{{ card.art_title }}</h3>
+              <p>{{ card.art_subTitle }}</p>
             </div>
           </div>
           <span class="time">
-            {{ card.date }}
+            {{ card.art_date }}
           </span>
           <p class="txt">
-            {{ card.ctx }}
+            {{ card.art_content }}
           </p>
         </div>
       </div>
@@ -95,7 +95,7 @@ export default {
       cardsDisplay: [],
       pageSize: 6,
       currentPage: 1,
-      article: []
+      articleCollect: []
     };
   },
   methods: {
@@ -107,12 +107,12 @@ export default {
       const endIdx = startIdx + this.pageSize;
       this.cardsDisplay = this.cards.slice(startIdx, endIdx);
     },
-    getArticle() {
-      let id = this.$store.state.memInfo.mem_id
-      fetch(`http://localhost/dai/public/phps/getProdCollect.php?memId=${memId}`)
+    getMemberArticle() {
+      let memId = this.$store.state.memInfo.mem_id
+      fetch(`http://localhost/dai/public/phps/getMemberArticle.php?memId=${memId}`)
         .then(res => res.json())
         .then((res) => {
-          this.article = res
+          this.articleCollect = res
         })
         .catch((error) => {
           console.error('數據傳輸失敗：', error);
@@ -121,6 +121,7 @@ export default {
   },
   mounted() {
     this.cardsDisplay = this.cards;
+    this.getMemberArticle()
   },
 };
 </script>

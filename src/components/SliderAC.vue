@@ -11,8 +11,8 @@
         <nav>
             <ul>
                 <li @click="To"><router-link to="">會員資料</router-link></li>
-                <li @click="To"><router-link to="">投稿文章</router-link></li>
-                <li @click="To"><router-link to="">文章收藏</router-link></li>
+                <li @click="To"><router-link to="">我的投稿</router-link></li>
+                <li @click="To"><router-link to="">投稿收藏</router-link></li>
                 <li @click="To"><router-link to="">商品收藏</router-link></li>
                 <li @click="To"><router-link to="">訂單查詢</router-link></li>
             </ul>

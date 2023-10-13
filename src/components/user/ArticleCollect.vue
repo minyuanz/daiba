@@ -1,6 +1,6 @@
 <template>
   <div class="collect">
-    <h1>文章收藏</h1>
+    <h1>投稿收藏</h1>
     <div class="collectGrid">
       <div class="collectCard" v-for="(card, index) in cardsDisplay" :key="index">
         <div class="s-card-h">
@@ -98,6 +98,7 @@ export default {
       cardsDisplay: [],
       pageSize: 2,
       currentPage: 1,
+      articleCollect:[]
     };
   },
   methods: {
@@ -113,9 +114,21 @@ export default {
       this.cardsDisplay.splice(index, 1);
       console.log(index);
     },
+    getMemberArticle() {
+      let memId = this.$store.state.memInfo.mem_id
+      fetch(`http://localhost/dai/public/phps/getMemberArticle.php?memId=${memId}`)
+        .then(res => res.json())
+        .then((res) => {
+          this.articleCollect = res
+        })
+        .catch((error) => {
+          console.error('數據傳輸失敗：', error);
+        });
+    }
   },
   mounted() {
     this.cardsDisplay = this.cards;
+    this.getMemberArticle()
   },
 };
 </script>
