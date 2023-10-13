@@ -330,15 +330,15 @@ export default {
   data() {
     return {
       btninner: ["START", "OK"],
-      currentMessageIndex: 60, //對話內容索引值
+      currentMessageIndex: 0, //對話內容索引值
       userName: "", //使用者名稱
       closeName: false, //關閉填寫名稱欄位
       gameLogo: true,
-      home: false, //遊戲首頁
+      home: true, //遊戲首頁
       startBtn: true, //開始按鈕
       mode: false, //選擇模式
       costume: false, //選擇服裝
-      Inner: true, //遊戲內頁
+      Inner: false, //遊戲內頁
       imgFill: false, //控制圖片css
       closeTxtName: true,
       closeBalloon: true,
@@ -835,13 +835,10 @@ export default {
             // 會員
       axios.get(`${this.$apiUrl('getMember.php')}`)
             .then((res) => {
-                console.log(res) //抓取資料
+                //抓取資料res
                 const matchingUser = res.data.find(user => user.mem_id === this.$store.state.memInfo.mem_id); //資料中和目前登入的ID配對
                 this.userId = matchingUser.mem_id   //現在的會員的id
                 this.point = parseInt(matchingUser.mem_point) //現在會員的點數資料 + 轉成int
-                console.log(matchingUser);
-                console.log(this.userId)
-                console.log(this.point)
                 
             })
             .catch((error) => {
@@ -858,20 +855,20 @@ export default {
             }
     
             // 推薦
-            axios.get(`${this.$apiUrl('.php')}`)
-            .then((res) => {
-                console.log(res) //抓取資料
-                const matchingUser = res.data.find(user => user.mem_id === this.$store.state.memInfo.mem_id); //資料中和目前登入的ID配對
-                this.userId = matchingUser.mem_id   //現在的會員的id
-                this.point = parseInt(matchingUser.mem_point) //現在會員的點數資料 + 轉成int
-                console.log(matchingUser);
-                console.log(this.userId)
-                console.log(this.point)
+            // axios.get(`${this.$apiUrl('.php')}`)
+            // .then((res) => {
+            //     console.log(res) //抓取資料
+            //     const matchingUser = res.data.find(user => user.mem_id === this.$store.state.memInfo.mem_id); //資料中和目前登入的ID配對
+            //     this.userId = matchingUser.mem_id   //現在的會員的id
+            //     this.point = parseInt(matchingUser.mem_point) //現在會員的點數資料 + 轉成int
+            //     console.log(matchingUser);
+            //     console.log(this.userId)
+            //     console.log(this.point)
                 
-            })
-            .catch((error) => {
-                console.error('資料失敗：', error);
-            });
+            // })
+            // .catch((error) => {
+            //     console.error('資料失敗：', error);
+            // });
   },
 
 

@@ -111,7 +111,7 @@
             <!-- 文章內容 -->
             <div class="CBPost" v-show="closePost">
                 <div class="box">
-                    <img src="https://picsum.photos/200/200/?random=10" class="head" />
+                    <img src="https://steam.oxxostudio.tw/webp/gimp/example/simple-keyer-mask-16.webp" class="head" />
                     <span class="closePost" @click="(closePost = !closePost), (lightBox = !lightBox)">✖</span>
                     <div class="swiperPost">
                         <div class="swiper-wrapper">
