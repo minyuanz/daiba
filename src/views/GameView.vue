@@ -825,17 +825,23 @@ export default {
     currentMessage() {
       return this.messages[this.currentMessageIndex];
     },
-    getPoint(){
+  },
+  mounted(){
+  
       axios.get(`${this.$apiUrl('getMember.php')}`)
             .then((res) => {
                 console.log(res)
+                console.log(typeof res);
+                this.userId = this.$store.state.memInfo.mem_id
+                // this.point = this.$store.state.memInfo.mem_id
                 
             })
             .catch((error) => {
                 console.error('資料失敗：', error);
             });
-    }
+    
   },
+
 
   methods: {
 
