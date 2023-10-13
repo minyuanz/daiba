@@ -70,21 +70,23 @@
 
             <!-- 標籤 -->
             <div>
-                <span v-for="(CBtag, tagindex) in CBtag" :key="tagindex" class="gray">#{{ CBtag }}</span>
+                <span v-for="(  CBtag, tagindex  ) in   CBtag  " :key=" tagindex " class="gray">#{{ CBtag }}</span>
             </div>
             <div>
-                <span v-for="(MRTLine, MRTLineindex) in MRTLine" :key="MRTLineindex"
-                    :class="getClassObject(MRTLine, MRTLineindex)">#{{ MRTLine }}</span>
+                <span v-for="(  MRTLine, MRTLineindex  ) in   MRTLine  " :key=" MRTLineindex "
+                    :class=" getClassObject(MRTLine, MRTLineindex) ">#{{ MRTLine }}</span>
             </div>
         </div>
 
+
+
         <!-- 文章清單 -->
         <div class="CBList">
-            <div v-for="itemList in CBList" :key="itemList.art_no"
+            <div v-for="  itemList   in   CBList  " :key=" itemList.art_no "
                 @click="(closePost = !closePost), (lightBox = !lightBox), openInner(itemList)">
-                <div :class="{ 'card-w': PC, 's-card-h': !PC }">
+                <div :class=" { 'card-w': PC, 's-card-h': !PC } ">
                     <div class="img">
-                        <img :src="`${this.$store.state.imgURL}` + itemList.art_pic1" alt="">
+                        <img :src=" `${this.$store.state.imgURL}` + itemList.art_pic1 " alt="">
                         <!-- <img :src="PC ? 'https://picsum.photos/200/280/?random=10' : 'https://picsum.photos/280/200/?random=10'" /> -->
                         <!-- <img src="https://picsum.photos/80/80/?random=10" class="head" /> -->
                     </div>
@@ -106,20 +108,20 @@
                 </div>
             </div>
             <!-- 文章內容 -->
-            <div class="CBPost" v-show="closePost">
+            <div class="CBPost" v-show=" closePost ">
                 <div class="box">
                     <img src="https://picsum.photos/200/200/?random=10" class="head" />
                     <span class="closePost" @click="(closePost = !closePost), (lightBox = !lightBox)">✖</span>
                     <div class="swiperPost">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img :src="`${this.$store.state.imgURL}` + CBPost.art_pic1" alt="">
+                                <img :src=" `${this.$store.state.imgURL}` + CBPost.art_pic1 " alt="">
                             </div>
                             <div class="swiper-slide">
-                                <img :src="`${this.$store.state.imgURL}` + CBPost.art_pic2" alt="">
+                                <img :src=" `${this.$store.state.imgURL}` + CBPost.art_pic2 " alt="">
                             </div>
                             <div class="swiper-slide">
-                                <img :src="`${this.$store.state.imgURL}` + CBPost.art_pic3" alt="">
+                                <img :src=" `${this.$store.state.imgURL}` + CBPost.art_pic3 " alt="">
                             </div>
                         </div>
                         <div class="swiper-button-prev"></div>
@@ -150,13 +152,13 @@
     </section>
 
     <!-- 燈箱 -->
-    <div class="lightBox" v-show="lightBox"></div>
+    <div class="lightBox" v-show=" lightBox "></div>
 
     <!-- 背景輪播 -->
     <div class="mrtBanner">
         <div class="swiper" id="mySwiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide test" v-for=" in 20">
+                <div class="swiper-slide test" v-for=" in   20  ">
                     <img src="../../public/img/mrtArrow2.png" alt="" />
                 </div>
             </div>
@@ -167,7 +169,7 @@
     <div class="mrtBanner">
         <div class="swiper" id="mySwiper2">
             <div class="swiper-wrapper">
-                <div class="swiper-slide test" v-for=" in 20">
+                <div class="swiper-slide test" v-for=" in   20  ">
                     <img src="../../public/img/mrtArrow2.png" alt="" />
                 </div>
             </div>
@@ -395,7 +397,7 @@ export default {
         window.addEventListener("resize", this.windowWidth);
     },
     created() {
-        axios.get('http://localhost/dai/public/phps/getArticle.php')
+        axios.get(`${this.$apiUrl('getArticle.php')}`)
             .then((res) => {
                 this.CBList = res.data
                 console.log(this.CBList)
