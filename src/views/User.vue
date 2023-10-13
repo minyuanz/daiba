@@ -25,10 +25,10 @@
     <!-- 右邊選單 -->
     <!-- 會員資料 -->
     <UserInfo v-if="'會員資料' == title" />
-    <!-- 投稿文章 -->
-    <ArticleInfo id="ArticleInfo" v-else-if="'投稿文章' == title" />
-    <!-- 文章收藏 -->
-    <ArticleCollect v-else-if="'文章收藏' == title" />
+    <!-- 我的投稿 -->
+    <ArticleInfo id="ArticleInfo" v-else-if="'我的投稿' == title" />
+    <!-- 投稿收藏 -->
+    <ArticleCollect v-else-if="'投稿收藏' == title" />
     <!-- 商品收藏 -->
     <ProdCollect v-else-if="'商品收藏' == title" />
     <!-- 訂單查詢 -->
