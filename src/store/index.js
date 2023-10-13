@@ -94,10 +94,10 @@ export default createStore({
       // 刪除商品
       state.cart.splice(index, 1);
     },
-    // clearCart(state) {
-    //   // 清空購物車
-    //   state.cart = [];
-    // },
+    clearCart(state) {
+      // 清空購物車
+      state.cart = [];
+    },
     incrementCount(state, product) {
       // 在購物車中 增加數量
       const cartItem = state.cart.find(
