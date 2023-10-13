@@ -3,6 +3,7 @@
     <div class="mrtSearch">
       <label for="">請選擇捷運線：</label>
       <select name="mrtLine" id="mrtLine" v-model="selectMrtId">
+        <option value="ALL">全部</option>
         <option v-for="mrtId in selectedMrtLine" :key="mrtId" :value="mrtId">
           {{ mrtId }}
         </option>
@@ -180,8 +181,9 @@ import BackMrt from "@/testdata/BackMrt.json";
 export default {
   data() {
     return {
+      mrtId: "",
       selectedMrtLine: [],
-      selectMrtId: "R",
+      selectMrtId: "ALL",
       filteredMrtIds: [],
       show: false,
       currentEditMrt: "",
@@ -219,6 +221,8 @@ export default {
           (mrts) =>
             mrts.mrt_id1 === selectedLine || mrts.mrt_id2 === selectedLine
         );
+      } else if (selectedLine === "ALL") {
+        this.filteredMrtIds = this.mrts;
       } else if (selectedLine === "BR") {
         this.filteredMrtIds = this.mrts.filter(
           (mrts) =>
@@ -330,11 +334,9 @@ export default {
         .get("http://localhost/dai/public/phps/mrt.php")
         .then((response) => {
           this.mrts = response.data;
-          console.log(this.mrts);
-          this.filteredMrtIds = this.mrts.filter(
-            (mrts) => mrts.mrt_id1 === "R"
-          );
-          console.log(this.filteredMrtIds);
+          // console.log(this.mrts);
+          this.filteredMrtIds = this.mrts;
+          // console.log(this.filteredMrtIds);
           const mrtIds = this.mrts.map((mrt) => mrt.mrt_id1);
           this.selectedMrtLine = [...new Set(mrtIds)];
         })
@@ -422,6 +424,8 @@ export default {
   background-color: #fff;
   width: 900px;
   padding: 50px;
+  height: 900px;
+  overflow-y: scroll;
 
   .mrtSearch {
     // border: 1px solid red;
