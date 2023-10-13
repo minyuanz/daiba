@@ -224,9 +224,12 @@
           </div>
           <div class="backCard">
             <div class="point">
-              <p>{{ this.isUserData() }}</p>
-              <button v-if="this.$store.state.memInfo" type="submit">獲取點數</button>
-              <p v-show="showPoint">獲得點數：10點！</p>
+              <p v-if="notLogin">登入會員遊玩的話即可獲得點數！</p>
+              <div>
+                <p v-show="showPoint">獲得點數：10點！</p>
+               <button class="btn_s" v-if="isLogin" type="submit">獲取點數</button>
+            </div>
+              
               
             </div>
           </div>
@@ -415,6 +418,8 @@ export default {
       userId:null,
       point:null,
       showPoint:false,
+      isLogin:false,
+      notLogin:false,
 
       // 對話內容
       messages: [
@@ -827,19 +832,46 @@ export default {
     },
   },
   mounted(){
-  
+            // 會員
       axios.get(`${this.$apiUrl('getMember.php')}`)
             .then((res) => {
-                console.log(res)
-                console.log(typeof res);
-                this.userId = this.$store.state.memInfo.mem_id
-                // this.point = this.$store.state.memInfo.mem_id
+                console.log(res) //抓取資料
+                const matchingUser = res.data.find(user => user.mem_id === this.$store.state.memInfo.mem_id); //資料中和目前登入的ID配對
+                this.userId = matchingUser.mem_id   //現在的會員的id
+                this.point = parseInt(matchingUser.mem_point) //現在會員的點數資料 + 轉成int
+                console.log(matchingUser);
+                console.log(this.userId)
+                console.log(this.point)
                 
             })
             .catch((error) => {
                 console.error('資料失敗：', error);
             });
+
+            // 判斷會員顯示
+            if(this.$store.state.memInfo){
+              this.isLogin = true
+              this.notLogin = false
+            }else{
+              this.notLogin = true
+              this.isLogin = false
+            }
     
+            // 推薦
+            axios.get(`${this.$apiUrl('getMember.php')}`)
+            .then((res) => {
+                console.log(res) //抓取資料
+                const matchingUser = res.data.find(user => user.mem_id === this.$store.state.memInfo.mem_id); //資料中和目前登入的ID配對
+                this.userId = matchingUser.mem_id   //現在的會員的id
+                this.point = parseInt(matchingUser.mem_point) //現在會員的點數資料 + 轉成int
+                console.log(matchingUser);
+                console.log(this.userId)
+                console.log(this.point)
+                
+            })
+            .catch((error) => {
+                console.error('資料失敗：', error);
+            });
   },
 
 
@@ -1065,19 +1097,9 @@ export default {
       }, 2000);
     },
 
-    isUserData(){
-      if (!this.$store.state.memInfo){
-        return "登入會員遊玩的話即可獲得點數！";
-      }
-    },
-
 
     // 點數
     addPoint() {
-      
-        this.userId = this.$store.state.memInfo.mem_id
-        this.point = parseInt(this.$store.state.memInfo.mem_point)
-        console.log(this.point);
         this.point+=10
         console.log(this.point);
         const formData = new FormData();

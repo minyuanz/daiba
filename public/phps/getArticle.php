@@ -9,7 +9,7 @@ try {
     require_once("connect_chd103g5_2.php");
     // sql指令
 	$sql = "SELECT e.*, d.mem_name,d.mem_id FROM article e
-    LEFT JOIN member d ON e.mem_id = d.mem_id;"
+    LEFT JOIN member d ON e.mem_id = d.mem_id;";
     // 
     $news = $pdo->query( $sql );
     $result=$news->fetchAll(PDO::FETCH_ASSOC);
