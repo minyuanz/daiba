@@ -23,32 +23,44 @@ export default {
     data() {
         return {
             changemail: '',
-            member: this.$store.state.memInfo
+            member: this.$store.state.memInfo,
+            isValidEmail: ''
         }
     },
     methods: {
         menu() {
             this.$emit('toggle-change')
         },
+        validateEmail() {
+            // 正则表达式示例：验证电子邮件地址
+            var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            this.isValidEmail = regex.test(this.changemail);
+        },
         updateEmail() {
-            // 建立數據資料夾好發給PHP做處理新增
-            const formData = new FormData();
-            formData.append("mem_email", this.changemail);
-            formData.append("mem_id", this.member.mem_id);
-            fetch('http://localhost/dai/public/phps/UpdateMemberEmail.php', {
-                method: 'post',
-                body:formData
-            })
-                .then(res => res.json())
-                .then((res) => {
-                    if (!res.error) {
-                        alert(res.msg);
-                        this.menu()
-                    }
+            this.validateEmail()
+            if (!this.isValidEmail) {
+                alert('請輸入正確的格式')
+            } else {
+                // 建立數據資料夾好發給PHP做處理新增
+                const formData = new FormData();
+                formData.append("mem_email", this.changemail);
+                formData.append("mem_id", this.member.mem_id);
+                // this.$apiUrl('UpdateMemberEmail.php')
+                fetch(this.$apiUrl('UpdateMemberEmail.php'), {
+                    method: 'post',
+                    body: formData
                 })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                    .then(res => res.json())
+                    .then((res) => {
+                        if (!res.error) {
+                            alert(res.msg);
+                            this.menu()
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
         }
     }
 }

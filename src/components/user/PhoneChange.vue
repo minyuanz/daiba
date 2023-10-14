@@ -9,7 +9,7 @@
             </div>
             <div class="changePhone">
                 <label for="">新手機號碼</label>
-                <input type="text" v-model="changePhone">
+                <input type="text" v-model="changePhone" placeholder="請輸入10碼手機號碼">
             </div>
             <div class="accurance">
                 <button class="btn_l" @click="updatePhone">確認更改</button>
@@ -25,7 +25,8 @@ export default {
     data() {
         return {
             changePhone: '',
-            member: this.$store.state.memInfo
+            member: this.$store.state.memInfo,
+            isValidPhone: ''
 
         }
     },
@@ -33,15 +34,25 @@ export default {
         menu() {
             this.$emit('toggle-change')
         },
+
+        validatePhone() {
+            // 正则表达式示例：09开头的10位数字
+            var regex = /^09\d{8}$/;
+            this.isValidPhone = regex.test(this.changePhone);
+        },
         updatePhone() {
+            this.validatePhone()
             if (this.changePhone == '') {
                 alert("請輸入手機")
-            } else {
+            } else if (!this.isValidPhone) {
+                alert('請輸入正確的格式')
+            } else if (this.isValidPhone) {
                 // 建立數據資料夾好發給PHP做處理新增
                 const formData = new FormData();
                 formData.append("mem_phone", this.changePhone);
                 formData.append("mem_id", this.member.mem_id);
-                fetch('http://localhost/dai/public/phps/UpdateMemberPhone.php', {
+                // this.$apiUrl('UpdateMemberPhone.php')
+                fetch(this.$apiUrl('UpdateMemberPhone.php'), {
                     method: 'post',
                     body: formData
                 })

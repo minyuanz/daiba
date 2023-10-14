@@ -2,6 +2,7 @@
   <!-- <header-area /> -->
   <!-- <pre>{{ $imgUrl('aa/bbb.jpg') }}</pre> -->
   <!-- <pre>{{ $apiUrl('aa/bbb.php') }}</pre> -->
+  <!-- <pre>{{ $apiUrl('getNews.php') }}</pre> -->
   <header-area v-if="!$route.meta.hideApp"> </header-area>
   <!-- <div :class="{'body': poke }" > </div> -->
 
@@ -21,7 +22,7 @@ export default {
     return {
       apikey: "831993a5339d4b7cadc74621231609",
       weather: {},
-  
+
     };
   },
   components: {

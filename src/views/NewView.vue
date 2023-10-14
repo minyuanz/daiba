@@ -11,7 +11,7 @@
 
             <!-- 背景模糊 -->
             <div class="newsBackpic">
-              <img :src="`${this.$store.state.imgURL}` + news.news_pic1" alt="">
+              <img :src=$imgUrl(news.news_pic1) alt="">
             </div>
 
             <div class="newsBox">
@@ -35,7 +35,7 @@
               </div>
 
               <div class="newsCtxPic">
-                <img :src="`${this.$store.state.imgURL}` + news.news_pic1" alt="">
+                <img :src=$imgUrl(news.news_pic1) alt="">
               </div>
             </div>
           </div>
@@ -55,7 +55,7 @@
       <div :key="showNewsList" class="newsList">
         <div class="newsCard" v-for="card in newsdisplay" :key="card.news_id">
           <div class="newsPic">
-            <img :src="`${this.$store.state.imgURL}` + card.news_pic1" alt="">
+            <img :src=$imgUrl(card.news_pic1) alt="">
           </div>
           <div class="hover-container" @mouseenter="handleHover(true)" @mouseleave="handleHover(false)">
             <router-link :to="{ name: 'newinside', params: { id: card.news_id } }">
@@ -129,7 +129,8 @@ export default {
       // newslist: news,
       newsdisplay: [],//篩選用
       newswiper: [],//輪播用
-      newstest: []
+      newstest: [],
+      url: this.$apiUrl('getNews.php')
     }
   },
   components: {
@@ -185,7 +186,10 @@ export default {
       }
     },
     fetchData() {
-      fetch(`http://localhost/dai/public/phps/getNews.php`)
+      // $apiUrl('getNews.php')
+      // http://localhost/dai/public/phps/getNews.php
+      // let url = this.$apiUrl('getNews.php')
+      fetch(this.$apiUrl('getNews.php'))
         .then((response) => {
           return response.json();
         })

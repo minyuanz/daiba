@@ -50,7 +50,6 @@
         margin: 20px auto;
 
         svg {
-
           font-size: 16px;
           color: #1063df;
         }
@@ -62,7 +61,6 @@
       position: relative;
       margin-top: 50px;
       text-align: center;
-
 
       &::before {
         content: "";
@@ -86,6 +84,7 @@
     .loginEmail,
     .loginPwd {
       margin-top: 50px;
+      position: relative;
 
       label {
         display: block;
@@ -104,23 +103,31 @@
         border: transparent;
         border-bottom: 1px solid #000;
       }
+      .eyeOpen {
+        // border: 1px solid red;
+        position: absolute;
+        right: 3.5rem;
+        top: 2.3rem;
+        cursor: pointer;
+        // font-size: 24px;
+      }
     }
 
     button {
       display: block;
       margin: auto;
-      a{
+      a {
         // border: 1px solid red;
         margin: 0;
         width: 100%;
         text-align: center;
         line-height: 34px;
-        &:hover{
-          color:#fff;
+        &:hover {
+          color: #fff;
         }
       }
     }
-    
+
     a {
       text-align: left;
       // border: 1px solid red;
@@ -164,7 +171,7 @@
       .loginOther {
         // margin-top: 50px;
         text-align: center;
-        
+
         button {
           display: inline;
           width: 50px;
@@ -182,7 +189,7 @@
           }
         }
       }
-      .btnlogin{
+      .btnlogin {
         width: 50%;
       }
     }

@@ -5,7 +5,8 @@
       <div class="collectCard" v-for="(card, index) in articleCollect" :key="index">
         <div class="s-card-h">
           <div class="img">
-            <img :src="card.art_pic1" alt="" />
+            <!-- $imgUrl(card.art_pic1) -->
+            <img :src=$imgUrl(card.art_pic1) alt="" />
           </div>
           <div class="text">
             <div class="title">
@@ -141,7 +142,13 @@ export default {
     },
     getArticleCollect() {
       let memId = this.$store.state.memInfo.mem_id
-      fetch(`http://localhost/dai/public/phps/getArticleCollect.php?memId=${memId}`)
+      let formData = new FormData()
+      formData.append("mem_id", memId);
+      // this.$apiUrl('getArticleCollect.php')
+      fetch(this.$apiUrl('getArticleCollect.php'), {
+        method: 'post',
+        body: formData
+      })
         .then(res => res.json())
         .then((res) => {
           this.articleCollect = res

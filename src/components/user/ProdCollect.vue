@@ -4,7 +4,8 @@
     <div class="prodGrid">
       <div class="prodCard" v-for="(card, index) in prodCollect">
         <div class="pic">
-          <img :src="`${this.$store.state.imgURLp}` + card.prod_img1" alt="" />
+          <!-- $imgUrl(card.prod_img1) -->
+          <img :src=$imgUrl(card.prod_img1) alt="" />
         </div>
         <div class="txt">
           <h3>{{ card.prod_name }}</h3>
@@ -79,13 +80,14 @@ export default {
     },
     delCollect(index) {
       let memId = this.$store.state.memInfo.mem_id
-      let prod_id=this.prodCollect[index].prod_id
+      let prod_id = this.prodCollect[index].prod_id
 
       const formData = new FormData();
       formData.append("mem_id", memId);
       formData.append("prod_id", prod_id);
+      // this.$apiUrl('delCollect.php')
 
-      fetch('http://localhost/dai/public/phps/delCollect.php', {
+      fetch(this.$apiUrl('delCollect.php'), {
         method: 'post',
         body: formData
       })
@@ -101,7 +103,13 @@ export default {
     },
     getCollect() {
       let memId = this.$store.state.memInfo.mem_id
-      fetch(`http://localhost/dai/public/phps/getProdCollect.php?memId=${memId}`)
+      let formData = new FormData()
+      formData.append("mem_id", memId);
+      // this.$apiUrl('getArticleCollect.php')
+      fetch(this.$apiUrl('getProdCollect.php'), {
+        method: 'post',
+        body: formData
+      })
         .then(res => res.json())
         .then((res) => {
           this.prodCollect = res

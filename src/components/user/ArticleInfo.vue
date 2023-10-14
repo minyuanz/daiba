@@ -109,7 +109,15 @@ export default {
     },
     getMemberArticle() {
       let memId = this.$store.state.memInfo.mem_id
-      fetch(`http://localhost/dai/public/phps/getMemberArticle.php?memId=${memId}`)
+      // `http://localhost/dai/public/phps/getMemberArticle.php?memId=${memId}`
+      // this.$apiUrl('getMemberArticle.php?memId=${memId}')
+
+      let formData = new FormData()
+      formData.append("mem_id", memId);
+      fetch(this.$apiUrl('getMemberArticle.php'), {
+        method: 'post',
+        body: formData
+      })
         .then(res => res.json())
         .then((res) => {
           this.articleCollect = res
@@ -150,7 +158,7 @@ export default {
     .artCard {
       .card-h {
         border: 1px solid #aaa;
-        width: 100%;
+        width: 250px;
         height: 350px;
         overflow: auto;
         margin: 0;

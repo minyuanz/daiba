@@ -75,10 +75,8 @@
         <label for="">版頭圖片</label>
         <div class="pic">
           <p>＋</p>
-          <img
-            :src="`${this.$store.state.imgURL}` + currentEditnews.news_pic1"
-            v-if="currentEditnews.news_pic1 !== '' ? true : false"
-          />
+          <!-- $imgUrl(currentEditnews.news_pic1) -->
+          <img :src=$imgUrl(currentEditnews.news_pic1) v-if="currentEditnews.news_pic1 !== '' ? true : false" />
           <input type="file" @change="FileUpdate" name="image" />
           <img :src="picURL" alt="" v-show="show" />
         </div>
@@ -93,10 +91,7 @@
     </div>
     <div class="Ctx">
       <label for="">內文</label>
-      <textarea
-        class="custom-input"
-        v-model="currentEditnews.news_des1"
-      ></textarea>
+      <textarea class="custom-input" v-model="currentEditnews.news_des1"></textarea>
       <!-- <input type="text"> -->
     </div>
     <div class="btn">
@@ -185,7 +180,8 @@ export default {
       formData.append("news_imageURL", this.formData.imageURL);
       formData.append("news_content", this.formData.content);
 
-      fetch(`http://localhost/dai/public/phps/addNews.php`, {
+      // this.$apiUrl('addNews.php')
+      fetch(this.$apiUrl('addNews.php'), {
         method: "post",
         body: formData,
       })
@@ -209,7 +205,8 @@ export default {
       formData.append("news_imageURL", this.currentEditnews.news_pic1);
       formData.append("news_content", this.currentEditnews.news_des1);
 
-      fetch(`http://localhost/dai/public/phps/UpdateNews.php`, {
+      // this.$apiUrl('UpdateNews.php')
+      fetch(this.$apiUrl('UpdateNews.php'), {
         method: "post",
         body: formData,
       })
@@ -226,7 +223,8 @@ export default {
         });
     },
     fetchData() {
-      fetch(`http://localhost/dai/public/phps/getNews.php`)
+      // this.$apiUrl('getNews.php')
+      fetch(this.$apiUrl('getNews.php'))
         .then((response) => {
           return response.json();
         })
@@ -283,6 +281,11 @@ export default {
     padding: 5px 0;
     border-bottom: 1px solid #aaa;
 
+    .edit {
+      cursor: pointer;
+      // border: 1px solid red;
+    }
+
     div,
     p {
       width: 100%;
@@ -314,7 +317,7 @@ export default {
       transition: 0.4s;
     }
 
-    .ios-switch input:checked + .slider {
+    .ios-switch input:checked+.slider {
       background-color: #4caf50;
     }
 
@@ -330,7 +333,7 @@ export default {
       transition: 0.4s;
     }
 
-    .ios-switch input:checked + .slider:before {
+    .ios-switch input:checked+.slider:before {
       transform: translateX(30px);
     }
   }

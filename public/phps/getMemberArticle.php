@@ -8,7 +8,7 @@ try {
     // 連接資料庫
     require_once("connect_chd103g5_2.php");
     // sql指令
-    $memId=$_GET['memId'];
+    $memId=$_POST['mem_id'];
 
 	$sql = "select * from article WHERE mem_id  = $memId" ;
     // 

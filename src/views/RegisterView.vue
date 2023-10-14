@@ -23,7 +23,7 @@
         </div>
         <div class="registerTel">
           <label for="tel">電話</label>
-          <input type="text" id="tel" v-model="formData.tel" required="true" />
+          <input type="text" id="tel" v-model="formData.tel" required="true" placeholder="請輸入10碼手機號碼" />
         </div>
         <div class="registerEmail">
           <label for="email">信箱</label>
@@ -31,7 +31,13 @@
         </div>
         <div class="registerPwd">
           <label for="pwd">密碼</label>
-          <input type="password" id="pwd" v-model="formData.pwd" required="true" placeholder="請輸入最少6碼，並包含字母及數字" />
+          <input :type="typeChange" id="pwd" v-model="formData.pwd" placeholder="請輸入最少6碼，並包含字母及數字" />
+          <div class="eyeOpen" @click="open" v-show="openEye">
+            <i class="fa-solid fa-eye"></i>
+          </div>
+          <div class="eyeOpen" @click="close" v-show="closeEye">
+            <i class="fa-solid fa-eye-slash"></i>
+          </div>
         </div>
         <!-- <div class="registerCheck">
           <label for="check">再次輸入</label>
@@ -58,14 +64,39 @@ export default {
       //正則判斷
       isValidName: "",
       isValidEmail: "",
-      isValidPassword: ""
+      isValidPassword: "",
+      isValidPhone: "",
+      openPwd: false,
+      openEye: true,
+      closeEye: false
+
     };
   },
+  computed: {
+    typeChange() {
+      return this.openPwd == false ? 'password' : 'text'
+    },
+  },
   methods: {
+    open() {
+      this.openPwd = true
+      this.openEye = !this.openEye
+      this.closeEye = !this.closeEye
+    },
+    close() {
+      this.openPwd = false
+      this.openEye = !this.openEye
+      this.closeEye = !this.closeEye
+    },
     validateName() {
       // 正则表达式示例：只包含字母和空格的姓名
       var regex = /^[A-Za-z\s]+$/;
       this.isValidName = regex.test(this.formData.name);
+    },
+    validatePhone() {
+      // 正则表达式示例：09开头的10位数字
+      var regex = /^09\d{8}$/;
+      this.isValidPhone = regex.test(this.formData.tel);
     },
     validateEmail() {
       // 正则表达式示例：验证电子邮件地址
@@ -81,19 +112,20 @@ export default {
       // this.validateName();
       this.validateEmail();
       this.validatePassword();
-      if (this.isValidEmail && this.isValidPassword) {
+      this.validatePhone();
+      if (this.isValidEmail && this.isValidPassword && this.isValidPhone) {
 
         // 創建一個新的 FormData 對象
         let formData = new FormData();
         // 將表單數據添加到 FormData 對象中
         formData.append("name", this.formData.name);
-        // formData.append("gender", this.formData.gender);
         formData.append("bir", this.formData.bir);
         formData.append("tel", this.formData.tel);
         formData.append("email", this.formData.email);
         formData.append("pwd", this.formData.pwd);
 
-        fetch(`http://localhost/dai/public/phps/register.php`, {
+        // this.$apiUrl('register.php')
+        fetch(this.$apiUrl('register.php'), {
           method: "post",
           body: formData
         })

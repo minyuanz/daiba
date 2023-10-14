@@ -55,7 +55,9 @@ export default {
                 const formData = new FormData();
                 formData.append("mem_name", this.changeAcc);
                 formData.append("mem_id", this.member.mem_id);
-                fetch('http://localhost/dai/public/phps/UpdateMemberName.php', {
+
+                // this.$apiUrl('UpdateMemberName.php')
+                fetch(this.$apiUrl('UpdateMemberName.php'), {
                     method: 'post',
                     body: formData
                 })

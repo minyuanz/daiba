@@ -23,7 +23,13 @@
         </div>
         <div class="loginPwd">
           <label for="pwd">密碼</label>
-          <input type="password" id="pwd" name="pwd" v-model="memPwd" />
+          <input :type="typeChange" id="pwd" name="pwd" v-model="memPwd" />
+          <div class="eyeOpen" @click="open" v-show="openEye">
+            <i class="fa-solid fa-eye"></i>
+          </div>
+          <div class="eyeOpen" @click="close" v-show="closeEye">
+            <i class="fa-solid fa-eye-slash"></i>
+          </div>
         </div>
         <router-link to="/ForgetPwd">忘記密碼 ?</router-link>
         <button class="btn_l btnlogin" type="button" @click="login">
@@ -42,9 +48,29 @@ export default {
       memEmail: "",
       memPwd: "",
       new: "",
+      openPwd: false,
+      openEye: true,
+      closeEye: false
+      // closeEye: false
     };
   },
+  computed: {
+    typeChange() {
+      return this.openPwd == false ? 'password' : 'text'
+    },
+  },
   methods: {
+    open() {
+      console.log(11);
+      this.openPwd = true
+      this.openEye = !this.openEye
+      this.closeEye = !this.closeEye
+    },
+    close() {
+      this.openPwd = false
+      this.openEye = !this.openEye
+      this.closeEye = !this.closeEye
+    },
     login() {
       if (this.memEmail == "" || this.memPwd == "") {
         alert("請輸入帳號和密碼")
@@ -58,7 +84,8 @@ export default {
 
         // https://tibamef2e.com/chd103/g5
         // http://localhost/dai/public
-        fetch(`http://localhost/dai/public/phps/login.php`, {
+        // this.$apiUrl('login.php')
+        fetch(this.$apiUrl('login.php'), {
           method: "post",
           body: formData
         })
@@ -80,53 +107,6 @@ export default {
       }
     }
   },
-  // beforeRouteEnter(to, from, next) {
-  //   // 在進入路由前執行以下操作
-  //   let isLogin = localStorage.getItem('user')
-  //   if (!isLogin) {
-  //     // 如果使用者已登入，可以進入路由
-  //     // console.log(to.meta);
-  //     next(`/login`);
-  //   } 
-  //   else {
-  //     next(`/user`);
-  //     // 如果使用者未登入，導向登入頁面
-  //   }
-  // },
-  // beforeRouteEnter(to, from, next) {
-
-  // console.log(to);
-
-  // console.log(from);
-
-  // let isLogin = localStorage.getItem('user')
-
-  // if (isLogin) {
-  //   // this.$router.push(`/user/${isLogin}`)
-  //   // return '/user'
-  //   next(this.$router.push(`/user/${isLogin}`));
-  //   // console.log(isLogin);
-  // } else {
-  //   // return '/login'
-  //   next()
-  // }
-  // ...
-  // console.log(to);
-  // console.log(from);
-  // if (to.meta.isAuth && to.name !== 'login') {
-  //   let isLogin = localStorage.getItem('user')
-  //   if (isLogin) {
-  //     this.$router.push(`/user/${this.$store.state.memId}`)
-  //   }
-  // }
-  //   // next()
-  //   // return true
-  //   
-  // } else {
-  //   return '/login'
-  // } else {
-  // return true
-  // },
 
   mounted() {
     let isLogin = localStorage.getItem('user')
@@ -135,25 +115,6 @@ export default {
     } else {
       return '/login'
     }
-
-    // const name = "user" + "=";
-    // const decodedCookie = decodeURIComponent(document.cookie);
-    // const cookieArray = decodedCookie.split(';');
-
-    // for (let i = 0; i < cookieArray.length; i++) {
-    //   let cookie = cookieArray[i];
-    //   while (cookie.charAt(0) === ' ') {
-    //     cookie = cookie.substring(1);
-    //   }
-    //   if (cookie.indexOf(name) === 0) {
-    //     console.log(cookie.substring(name.length, cookie.length));
-    //     if (cookie.substring(name.length, cookie.length)) {
-    //       // 有cookie的話路由依據該會員的memId進入頁面、memId是從vuex抓過來
-    //       this.$router.push(`/user/${this.$store.state.memId}`);
-    //     }
-    //   }
-    // }
-    // return "";
   },
 };
 </script>

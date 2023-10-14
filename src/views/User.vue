@@ -60,9 +60,6 @@ export default {
       member: ""
     };
   },
-  // provide() {
-  //   return { email: `this.member.mem_email` }
-  // },
   computed: {},
   methods: {
     sliderAC() {
@@ -78,7 +75,8 @@ export default {
       let idToFind = JSON.parse(user).mem_id
       console.log(JSON.parse(user).mem_id);
 
-      fetch('http://localhost/dai/public/phps/getMember.php')
+      // this.$apiUrl('getMember.php')
+      fetch(this.$apiUrl('getMember.php'))
         .then(res => res.json())
         .then((res) => {
           this.memberlist = res
@@ -90,18 +88,7 @@ export default {
         })
     }
   },
-  // beforeRouteEnter(to, from, next) {
-  //   // 在進入路由前執行以下操作
-  //   let isLogin = localStorage.getItem('user')
-  //   if (!isLogin) {
-  //     // 如果使用者已登入，可以進入路由
-  //     console.log(to.meta);
-  //     next(`/login`);
-  //   } 
-  //   else {
-  //     next(`/user`); // 如果使用者未登入，導向登入頁面
-  //   }
-  // },
+
   mounted() {
     let app = document.getElementById("app");
     // alert(app.clientHeight)
@@ -121,14 +108,6 @@ export default {
     // window.addEventListener('resize', () => {
     // })
     this.fetchMember();
-
-    // let isLogin = localStorage.getItem('user')
-    // if (!isLogin) {
-    //   this.$router.push(`/login`)
-    // } 
-    // else {
-    //   return '/login'
-    // }
   },
 };
 </script>

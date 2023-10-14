@@ -6,8 +6,9 @@
 
     <div class="swiper">
       <div class="newsinpic swiper-wrapper">
-        <img :src="`${this.$store.state.imgURL}` + newsqaq.news_pic1" alt="" class="swiper-slide" />
-        <img :src="`${this.$store.state.imgURL}` + newsqaq.news_pic1" alt="" class="swiper-slide" />
+        <!-- $imgUrl(newsqaq.news_pic1) -->
+        <img :src=$imgUrl(newsqaq.news_pic1) alt="" class="swiper-slide" />
+        <img :src=$imgUrl(newsqaq.news_pic1) alt="" class="swiper-slide" />
       </div>
       <div class="swiper-pagination"></div>
     </div>
@@ -53,7 +54,7 @@ export default {
       // 獲得newsinside/id的id值
       let idToFind = this.$route.params.id;
       // 獲得資料庫的消息列表
-      fetch(`http://localhost/dai/public/phps/getNews.php`)
+      fetch(this.$apiUrl('getNews.php'))
         .then((response) => {
           return response.json();
         })

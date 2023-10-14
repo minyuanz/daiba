@@ -9,7 +9,7 @@ try {
     // 連接資料庫
     require_once("connect_chd103g5_2.php");
 
-    $memId=$_GET['memId'];
+    $memId=$_POST['mem_id'];
     // sql指令
 	$sql = "SELECT pro_collect.mem_id, pro_collect.prod_id, member.mem_name, member.mem_name, member.mem_email, product.prod_id, product.prod_name, product.prod_price, product.prod_img1 FROM pro_collect JOIN member ON pro_collect.mem_id = member.mem_id JOIN product ON pro_collect.prod_id = product.prod_id WHERE pro_collect.mem_id = $memId";
     // 

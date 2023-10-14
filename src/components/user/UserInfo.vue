@@ -9,7 +9,7 @@
             </button>
             <button class="ChangAC" @click="To">
                 <i class="fa-solid fa-lock"></i>
-                更改名稱/密碼
+                更改密碼
             </button>
             <button class="ChangAC" @click="To">
                 <i class="fa-solid fa-phone"></i>
@@ -23,12 +23,12 @@
     </div>
     <!-- 更改基本資料 -->
     <AccChange id="AccChange" v-else-if="'更改基本資料' == toggle" @toggle-change="toggleUpdate" />
-    <!-- 更改名稱/密碼 -->
-    <PwdChange id="PwdChange" v-else-if="'更改名稱/密碼' == toggle" @toggle-change="toggleUpdate" />
+    <!-- 更改密碼 -->
+    <PwdChange id="PwdChange" v-else-if="'更改密碼' == toggle" @toggle-change="toggleUpdate" />
     <!-- 更改手機號碼 -->
     <PhoneChange id="PhoneChange" v-else-if="'更改手機號碼' == toggle" @toggle-change="toggleUpdate" />
     <!-- 更改信箱 -->
-    <MailChange id="MailChange" v-else-if="'更改信箱' == toggle" @toggle-change="toggleUpdate" :email="this.email" />
+    <MailChange id="MailChange" v-else-if="'更改信箱' == toggle" @toggle-change="toggleUpdate" />
 </template>
 
 <script>
@@ -48,11 +48,11 @@ export default {
             toggle: '會員資料'
         }
     },
-    props: {
-        email: {
-            type: String
-        }
-    },
+    // props: {
+    //     email: {
+    //         type: String
+    //     }
+    // },
     methods: {
         toggleUpdate() {
             this.toggle = '會員資料'

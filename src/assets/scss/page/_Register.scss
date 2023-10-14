@@ -93,6 +93,15 @@
       .registerPwd {
         width: 100%;
         grid-area: 4/1/5/3;
+        position: relative;
+        .eyeOpen {
+          // border: 1px solid red;
+          position: absolute;
+          right: 1rem;
+          top: 2.5rem;
+          cursor: pointer;
+          // font-size: 24px;
+        }
       }
 
       .registerCheck {
