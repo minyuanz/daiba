@@ -53,6 +53,10 @@ try {
     
     $stmt->execute();
     echo "新增成功~";
+    // 
+
+
+    
 } catch (Exception $e) {
     echo "錯誤行號 : ", $e->getLine(), "<br>";
     echo "錯誤原因 : ", $e->getMessage(), "<br>";
