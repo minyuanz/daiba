@@ -100,7 +100,6 @@ export default {
       .then((response) => {
         if (response.data.success) {
           alert('訂單狀態已更新');
-          // 如果需要，您可以在此处刷新订单列表
         } else {
           alert('訂單狀態更新失敗');
         }

@@ -78,9 +78,6 @@
             </div>
             <div class="info">
               <p>地址：{{ selectedItem.art_address }}</p>
-              <!-- <p>景點：萬華無名手工粉條冰</p>
-                          <p>地址：萬華興寧街上雙園市場騎樓前</p>
-                          <p>電話：(02)2988-2222</p> -->
               <span class="PostingDate"
                 >發布日期：{{ selectedItem.art_date }}</span
               >
@@ -155,11 +152,11 @@ export default {
         .then((response) => {
           // 檢查
           if (response.data.success) {
-            console.log("權限已更新");
-            alert("權限已更新成功");
+            console.log("狀態已更新");
+            alert("狀態已更新成功");
           } else {
-            console.error("權限更新失败");
-            alert("權限更新失敗");
+            console.error("狀態更新失败");
+            alert("狀態更新失敗");
             // 如果失敗則保持原本渲染的狀態
             item.art_status = item.art_status === "1" ? "0" : "1";
           }
