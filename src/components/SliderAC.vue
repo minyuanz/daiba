@@ -1,7 +1,8 @@
 <template>
     <div class="SliderAC">
         <div class="pic">
-            <img src="https://steam.oxxostudio.tw/webp/gimp/example/simple-keyer-mask-16.webp" />
+            <!-- $imgUrl(userImg) -->
+            <img :src=$imgUrl(userImg) />
         </div>
         <h3>{{ this.$store.state.memInfo.mem_name }}</h3>
         <!-- <h3>{{ member }}</h3> -->
@@ -32,12 +33,19 @@ export default {
         return {
             // toggle:''
             // member: this.$store.state.memInfo
-            // member: this.$store.state.memInfo,
+            member: this.$store.state.memInfo,
         }
     },
     computed: {
         member() {
-            return  this.$store.state.memInfo.mem_name || ''
+            return this.$store.state.memInfo.mem_name || ''
+        },
+        userImg() {
+            if (this.$store.state.memInfo.mem_img) {
+                return this.$store.state.memInfo.mem_img
+            } else {
+                return 'user.png'
+            }
         }
     },
     methods: {
