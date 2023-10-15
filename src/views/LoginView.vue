@@ -85,6 +85,7 @@ export default {
         // https://tibamef2e.com/chd103/g5
         // http://localhost/dai/public
         // this.$apiUrl('login.php')
+        // aaa
         fetch(this.$apiUrl('login.php'), {
           method: "post",
           body: formData
