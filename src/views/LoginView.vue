@@ -50,7 +50,8 @@ export default {
       new: "",
       openPwd: false,
       openEye: true,
-      closeEye: false
+      closeEye: false,
+      url: this.$apiUrl('login.php')
       // closeEye: false
     };
   },
