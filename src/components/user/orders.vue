@@ -79,8 +79,13 @@ export default {
       this.ordersDisplay = this.orders.slice(startIdx, endIdx);
     },
     toggleOrderInfo(order) {
-        order.isShow = !order.isShow;
-        },
+    //先將所有的訂單ishow設為false
+    this.orders.forEach(item => {
+      item.isShow = false;
+    });
+    //點擊後轉為true
+    order.isShow = true;
+  },
     loadPreviousPage() {//上一  頁
         if (this.currentPage > 1) {
             this.updatePage(this.currentPage - 1);

@@ -53,7 +53,7 @@ export default {
   },
   mounted() {
     axios
-      .get(`${this.$apiUrl("CBackMemberM.php")}`)
+      .get(`${this.$apiUrl("BackMemberM.php")}`)
       .then((response) => {
         this.members = response.data;
       })

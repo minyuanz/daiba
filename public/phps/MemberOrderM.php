@@ -20,7 +20,7 @@ if ($memberId === false) {
 
         echo json_encode($result);
     } catch (PDOException $e) {
-        $response = array('error' => true, 'msg' => '数据库查询失败: ' . $e->getMessage());
+        $response = array('error' => true, 'msg' => '數據查詢失敗: ' . $e->getMessage());
         echo json_encode($response);
     }
 }
