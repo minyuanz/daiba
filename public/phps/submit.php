@@ -54,11 +54,18 @@ try {
     
     $stmt->execute();
     echo "新增成功~";
+<<<<<<< HEAD
 
     // SELECT article_collect.mem_id, article_collect.art_title, member.mem_name, member.mem_email, article.art_subTitle, article.art_content, article.art_date, article.fea_id, article.art_pic1 FROM article_collect JOIN member ON article_collect.mem_id = member.mem_id JOIN article ON article_collect.art_title = article.art_title WHERE article_collect.mem_id = 5;
 
     // SELECT article_collect.mem_id, member.mem_name, member.mem_email, article_collect.art_title, article.art_subTitle, article.art_content, article.art_date, article.fea_id, article.art_pic1 FROM article_collect JOIN member ON article_collect.mem_id = member.mem_id JOIN article ON article_collect.art_title = article.art_title WHERE article_collect.mem_id = 5;
 
+=======
+    // 
+
+
+    
+>>>>>>> meme
 } catch (Exception $e) {
     echo "錯誤行號 : ", $e->getLine(), "<br>";
     echo "錯誤原因 : ", $e->getMessage(), "<br>";
