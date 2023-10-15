@@ -9,10 +9,10 @@ if (isset($_GET['orderId'])) {
     $orderId = $_GET['orderId'];
 
     // 使用订单ID从数据库中获取相关的订单明细
-    $query = "SELECT od.prod_id, od.orderdetail_count, od.buy_price, p.prod_name
-    FROM orderdetail od
-    JOIN product p ON od.prod_id = p.prod_id
-    WHERE od.ord_id = :orderId";
+    $query = "SELECT od.prod_id, od.orderdetail_count, od.buy_price, p.prod_name, p.prod_img1
+              FROM orderdetail od
+              JOIN product p ON od.prod_id = p.prod_id
+              WHERE od.ord_id = :orderId";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':orderId', $orderId, PDO::PARAM_INT);
 

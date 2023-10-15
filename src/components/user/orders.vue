@@ -17,12 +17,13 @@
                     </div>
                     <div class="orderInfo" v-show="order.isShow">
                         <div class="infoTitle">
-                            <p>商品名稱</p>
+                            <p>商品圖片</p>
                             <p>商品名稱</p>
                             <p>價格</p>
                             <p>數量</p>
                         </div>
                         <div class="infoCtx" v-for="detail in order.details" :key="detail.prod_id">
+                            <img :src="`${this.$store.state.imgURLp}` +  detail.prod_img1" alt="">
                             <p>{{ detail.prod_name }}</p>
                             <p>NT {{ detail.buy_price }}</p>
                             <p>{{ detail.orderdetail_count }}</p>
@@ -194,6 +195,10 @@ export default {
                             // border: 1px solid red;
                             width: 100%;
                             text-align: center;
+                        }
+                        img{
+                            width:100%;
+                            height:100px ;
                         }
                     }
                 }
