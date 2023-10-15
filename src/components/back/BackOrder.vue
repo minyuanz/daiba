@@ -18,12 +18,12 @@
       <p>{{ order.mem_id }}</p>
       <p>{{ order.ord_price }}</p>
       <div class="edit">
-        <select name="" id="">
-          <option value="">備貨中</option>
-          <option value="">配送中</option>
-          <option value="">配送完成</option>
-        </select>
-      </div>
+        <select v-model="order.ord_status" @change="updateOrderStatus(order)">
+            <option value="0">備貨中</option>
+            <option value="1">配送中</option>
+            <option value="2">配送完成</option>
+          </select>
+        </div>
       <div>
         <button class="DetailBtn" @click="showOrderDetails(order)">訂單詳情</button>
       </div>
@@ -85,6 +85,29 @@ export default {
           };
           this.showOrderDetailsPage = true;
         });
+    },
+    updateOrderStatus(order) {
+      const newStatus = order.ord_status;
+      const orderId = order.ord_id;
+      axios.post('http://localhost/dai/public/phps/UpdateOrderStatus.php', {
+        orderId: orderId,
+        newStatus: newStatus,
+      }, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+      .then((response) => {
+        if (response.data.success) {
+          alert('訂單狀態已更新');
+          // 如果需要，您可以在此处刷新订单列表
+        } else {
+          alert('訂單狀態更新失敗');
+        }
+      })
+      .catch((error) => {
+        alert('請求失敗');
+      });
     },
   },
 };

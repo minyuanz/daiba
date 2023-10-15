@@ -13,7 +13,7 @@
                     <div class="order">
                         <p>{{ order.ord_id }}</p>
                         <p>NT {{ order.ord_price }}</p>
-                        <p>{{ getOrderStatusText(order.ord_status) }}</p>
+                        <p style="border: 1px solid black; font-weight: bold;" >{{ getOrderStatusText(order.ord_status) }}</p>
                     </div>
                     <div class="orderInfo" v-show="order.isShow">
                         <div class="infoTitle">
@@ -104,7 +104,7 @@ export default {
             return "準備中";
             case 1:
             return "運送中";
-            case 3:
+            case 2:
             return "完成配送";
             default:
             return "請聯繫客服";
