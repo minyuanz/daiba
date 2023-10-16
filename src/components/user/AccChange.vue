@@ -177,7 +177,7 @@ export default {
             height: 100%;
             border-radius: 100px;
             vertical-align: top;
-            border: 1px solid black;
+            border: 10px solid black;
         }
     }
 

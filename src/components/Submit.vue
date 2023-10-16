@@ -54,13 +54,18 @@
                 <li>
                     <label for="title">選擇分類</label>
                     <div class="select">
-                        <select name="" id="" v-model="newSubmitArticle.line" @change="checkClass(newSubmitArticle)">
+                        <select name="" id="" v-model="newSubmitArticle.line[0]" @change="checkClass(newSubmitArticle)">
                             <option value="0">請選擇捷運線</option>
-                            <option value="blue">板南線</option>
+                            <option value="R">淡水信義線</option>
+                            <option value="BL">板南線</option>
+                            <option value="G">松山新店線</option>
+                            <option value="O">中和新蘆線</option>
+                            <option value="BR">文湖線</option>
+                            <option value="Y">環狀線</option>
                         </select>
-                        <select name="" id="" v-model="newSubmitArticle.station" @change="checkClass(newSubmitArticle)">
+                        <select name="" id="" v-model="newSubmitArticle.station[0]" @change="checkClass(newSubmitArticle)">
                             <option value="0">請選擇捷運站</option>
-                            <option value="10">板橋</option>
+                            <option v-for="station in selectStations" :value="station">{{ station }}</option>
                         </select>
                         <select name="" id="" v-model="newSubmitArticle.class" @change="checkClass(newSubmitArticle)">
                             <option value="0">請選擇項目</option>
@@ -68,7 +73,34 @@
                             <option value="景點推薦">景點</option>
                             <option value="住宿推薦">住宿</option>
                         </select>
+                        <div id="addLineBtn" @click="select2 = !select2">  
+                            <p>{{ !select2 ? '＋':'ー'}}</p>
+                        </div>
                     </div>
+                    <div class="select" v-if="select2">
+                        <select name="" id="" v-model="newSubmitArticle.line[1]" @change="checkClass(newSubmitArticle)">
+                            <option value="0">請選擇捷運線</option>
+                            <option value="R">淡水信義線</option>
+                            <option value="BL">板南線</option>
+                            <option value="G">松山新店線</option>
+                            <option value="O">中和新蘆線</option>
+                            <option value="BR">文湖線</option>
+                            <option value="Y">環狀線</option>
+                        </select>
+                        <select name="" id="" v-model="newSubmitArticle.station[1]" @change="checkClass(newSubmitArticle)">
+                            <option value="0">請選擇捷運站</option>
+                            <option v-for="station in selectStations2" :value="station">{{ station }}</option>
+                        </select>
+                        <select name="" id="" v-model="newSubmitArticle.class" @change="checkClass(newSubmitArticle)">
+                            <option value="0">請選擇項目</option>
+                            <option value="美食推薦">美食</option>
+                            <option value="景點推薦">景點</option>
+                            <option value="住宿推薦">住宿</option>
+                        </select>
+                        <div id="addLineBtn" @click="addLine">  
+                            <p>{{ !select2 ? '＋':'ー'}}</p>
+                        </div>
+                    </div>    
                     <span v-if="classError">請選擇分類</span>
                 </li>
                 <li>
@@ -134,12 +166,22 @@ export default {
             uploadedImages: [],
             imgsData: [],
             inputKey: 1,
+            stations:{
+                'R':['象山','台北101/世貿','信義安和','大安','大安森林公園','東門','中正紀念堂','台大醫院','台北車站','中山','雙連','民權西路','圓山','劍潭','士林','芝山','明德','石牌','唭哩岸','奇岩','北投','復興崗','忠義','關渡','竹圍','紅樹林','淡水'],
+                'BL':['頂埔','永寧','土城','海山','亞東醫院','府中','板橋','新埔','江子翠','龍山寺','西門','台北車站','善導寺','忠孝新生','忠孝復興','忠孝敦化','國父紀念館','市政府','永春','後山埤','昆陽','南港','南港展覽館'],
+                'G':['新店','新店區公所','七張','大坪林','景美','萬隆','公館','台電大樓','古亭','中正紀念堂','小南門','西門','北門','中山','松江南京','南京復興','台北小巨蛋','南京三民','松山'],
+                'O':['南勢角','景安','永安市場','頂溪','古亭','東門','忠孝新生','松江南京','行天宮','中山國小','民權西路','大橋頭','台北橋','菜寮','三重','先嗇宮','頭前庄','新莊','永春','輔大','丹鳳','迴龍','三重國小','三和國中','徐匯中學','三民高中','蘆洲'],
+                'BR':['動物園','木柵','萬芳社區','萬芳醫院','辛亥','麟光','六張犁','科技大樓','大安','忠孝復興','南京復興','中山國中','松山機場','大直','劍南路','西湖','港墘','文德','內湖','大湖公園','葫洲','東湖','南港軟體園區','南港展覽館'],
+                'Y':['大坪林','十四張','秀朗橋','景平','景平','景安','中和','橋和','中原','板新','板橋','新埔民生','頭前庄','幸福','新北產業園區'],
+
+            },
+            select2:false,
             newSubmitArticle: {
                 title: '',
                 subTitle: '',
                 address: '',
-                line: 0,
-                station: 0,
+                line: ['0','0'],
+                station: ['0','0'],
                 class: '0',
                 pic1: null,
                 pic2: null,
@@ -188,6 +230,9 @@ export default {
             } else {
                 this.classError = false;
             }
+            
+            console.log(this.newSubmitArticle.station[0]);
+            console.log(this.newSubmitArticle.station[1]);
         },
         checkTxt() {
             if (this.newSubmitArticle.txt === '') {
@@ -239,21 +284,31 @@ export default {
 
 
         },
+        addLine(){
+            this.lineCount <= 1?  this.lineCount++ :  this.lineCount--
+            if(this.lineCount === 1){
+                this.newSubmitArticle.station[1] = '0'
+                this.newSubmitArticle.line[1] = '0'
+            }
+            
+        },
 
         // POST到後端
         addNewSubmit() {
-            console.log(this.newSubmitArticle)
+            const memId = this.$store.state.memInfo.mem_id;
             const formData = new FormData();
             formData.append('art_title', this.newSubmitArticle.title);
             formData.append('art_subTitle', this.newSubmitArticle.subTitle);
             formData.append('art_address', this.newSubmitArticle.address);
-            formData.append('sta_id', this.newSubmitArticle.station);
+            formData.append('sta_id1', this.newSubmitArticle.line[0]);
+            formData.append('sta_id2', this.newSubmitArticle.line[1]);
             formData.append('fea_tag', this.newSubmitArticle.class);
             formData.append('art_pic1', this.newSubmitArticle.pic1);
             formData.append('art_pic2', this.newSubmitArticle.pic2);
             formData.append('art_pic3', this.newSubmitArticle.pic3);
             formData.append('art_content', this.newSubmitArticle.content);
-            formData.append('mem_id', parseInt(this.$store.state.memInfo.mem_id));
+            formData.append('mem_id', memId);
+            
 
             axios.post('http://localhost/dai/public/phps/submit.php', formData, {
                 headers: {
@@ -270,8 +325,8 @@ export default {
                             title: '',
                             subTitle: '',
                             address: '',
-                            line: 0,
-                            station: 0,
+                            line: ['0','0'],
+                            station: ['0','0'],
                             class: 0,
                             pic1: null,
                             pic2: null,
@@ -283,12 +338,21 @@ export default {
                     }
                 })
                 .catch((error) => {
-                    console.error('新增商品請求失敗：', error);
+                    console.error('傳送請求失敗：', error);
                 });
         },
     }
-    , mounted() {
-        console.log(parseInt(this.$store.state.memInfo.mem_id))
+    ,
+    computed:{
+        selectStations(){
+            return this.stations[this.newSubmitArticle.line[0]]
+        },
+        selectStations2(){
+            return this.stations[this.newSubmitArticle.line[1]]
+        }
+        
+      
+        
     }
 }
 
