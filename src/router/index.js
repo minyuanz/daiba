@@ -248,6 +248,7 @@ const routes = [
     meta: {
       hideApp: true,
       requiresAuth: true, // 設置登入守衛
+      requiresMainAccount: true//設置更高權限
     },
     component: () =>
       import(
@@ -296,13 +297,21 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     const BackloginContent = JSON.parse(localStorage.getItem('BackloginContent'));
     if (!BackloginContent || !BackloginContent.acc || !BackloginContent.pwd) {
-      alert('必須登入才能造訪此網頁');
-      next({ name: 'BackLogin' }); // 如果沒有登入則導航到登入畫面
+      alert('您必須登入才能造訪此葉面');
+      next({ name: 'BackLogin' }); // 如果沒有登入則導到這邊
+    } else if (to.matched.some(record => record.meta.requiresMainAccount)) {
+      // 這邊檢查是否為main
+      if (BackloginContent.acc === 'main' && BackloginContent.pwd === 'main') {
+        next();
+      } else {
+        alert('您無權訪問此葉面');
+        next({ name: '/BackMember' }); // 如果不是main則 到回member
+      }
     } else {
-      next(); // 
+      next(); 
     }
   } else {
-    next(); // 不需要登入，可以額外設置這邊暫時不用只保留
+    next(); 
   }
 });
 

@@ -57,6 +57,7 @@
                 placeholder="信用卡號碼"
                 v-model="creditCardNumber"
               />
+              <span v-if="paymentError && !creditCardNumberRegex.test(creditCardNumber)" class="error-message" style="color: red;">信用卡號碼格式不正確</span>
             </div>
             <div class="form-group">
               <label for="expirationDate">有效日期</label>
@@ -67,6 +68,7 @@
                 placeholder="MM/YY"
                 v-model="expirationDate"
               />
+              <span v-if="paymentError && !expirationDateRegex.test(expirationDate)" class="error-message" style="color: red;">有效日期格式不正確</span>
             </div>
             <div class="form-group">
               <label for="securityCode">安全碼</label>
@@ -77,11 +79,13 @@
                 placeholder="卡片安全碼"
                 v-model="securityCode"
               />
+              <span v-if="paymentError && !securityCodeRegex.test(securityCode)" class="error-message" style="color: red;">安全碼格式不正確</span>
             </div>
           </form>
         </transition>
         <div class="PayCash"><input  type="radio" name="Pay" value="貨到付款"  v-model="selectedPayment">貨到付款</div>
       </div>
+      <div v-if="paymentError" class="error-message"></div>
      
       
     </div>
@@ -143,6 +147,10 @@ export default {
       ord_phone: '', // 訂單電話
       ord_email: '', // 訂單信箱
       ord_address: '', // 訂單地址
+      paymentError: false,
+      creditCardNumberRegex: /^\d{13,19}$/,
+      expirationDateRegex: /^(0[1-9]|1[0-2])\/\d{2}$/,
+      securityCodeRegex: /^\d{3,4}$/,
     };
   },
   computed: {
@@ -158,7 +166,12 @@ export default {
       this.$router.push("/Cart"); 
     },
     gotoShoppingDone() {
-      // 發送的數據
+      if (this.selectedPayment === '信用卡付款') {
+        if (!this.validateCreditCard()) {
+          this.paymentError = true;
+          return;
+        }
+      }
       const orderDetails = this.cartItems.map(product => ({//此唯一單單的明細
       prod_id: product.prod_id,
       orderdetail_count: product.count,
@@ -200,6 +213,20 @@ export default {
           console.error(error);
         });
     },
+    validateCreditCard() {
+      const creditCardNumberRegex = /^\d{13,19}$/;
+      const expirationDateRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
+      const securityCodeRegex = /^\d{3,4}$/;
+
+          if (
+          !creditCardNumberRegex.test(this.creditCardNumber) ||
+          !expirationDateRegex.test(this.expirationDate) ||
+          !securityCodeRegex.test(this.securityCode)
+        ) {
+          return false;
+        }
+        return true;
+      },
     cartTotal() {
       return this.$store.getters.cartTotal;
     },
