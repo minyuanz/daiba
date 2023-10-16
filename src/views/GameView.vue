@@ -1,7 +1,7 @@
 <template>
   <!-- 遊戲首頁 -->
 
-  <section class="gameHome" v-show="home">
+  <section class="gameHome" v-if="home">
     <div class="home">
       <img src="@/assets/images/game/station_AM.jpg" alt="home" />
     </div>

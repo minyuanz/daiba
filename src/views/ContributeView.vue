@@ -117,7 +117,7 @@
                     <span class="closePost" @click="(closePost = !closePost), (lightBox = !lightBox)">✖</span>
                     <div class="swiperPost">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">
+                            <div class="swiper-slide" v-if="CBPost.art_pic1">
                                 <img :src=$imgUrl(CBPost.art_pic1) alt="圖片1">
                             </div>
                             <div class="swiper-slide" v-if="CBPost.art_pic2">
@@ -368,7 +368,7 @@ export default {
             speed: 2000,
             loop: true,
             autoplay: {
-                delay: 1000
+                delay: 30
             },
             cubeEffect: {
                 shadow: true,
@@ -384,9 +384,6 @@ export default {
 
             this.CBPost = []
             this.CBPost = item
-            console.log(item);
-            console.log(this.CBPost);
-            // this.closePost = false
             this.lightBox = true
             this.artId = this.CBList[index].art_id
             this.memId = this.CBList[index].mem_id
@@ -492,6 +489,8 @@ export default {
             },
         });
 
+         
+
         // 背景圖輪播
         setTimeout(() => {
             this.initSwiper();
@@ -505,7 +504,7 @@ export default {
         axios.get(`${this.$apiUrl('getArticle.php')}`)
             .then((res) => {
                 this.CBList = res.data
-                this.CBPost = this.CBList[0]
+                // this.CBPost = this.CBList[0]
             })
             .catch((error) => {
                 console.error('資料失敗：', error);
