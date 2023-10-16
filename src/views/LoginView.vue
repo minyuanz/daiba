@@ -93,7 +93,9 @@ export default {
         })
           .then(res => res.json())
           .then((res) => {
-            if (res.result && res.result.mem_id) {
+            if (res.blocked) {
+          alert(res.message); // 此為後台判斷帳號已封鎖的警示
+        }  else if(res.result && res.result.mem_id) {
               let user = JSON.stringify(res.result);
               localStorage.setItem("user", user);
               let id = res.result.mem_id;

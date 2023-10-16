@@ -8,7 +8,7 @@
     try {
 
         require_once("connect_chd103g5_2.php");
-        $sql = "select * from member where mem_email=:mem_email and mem_pwd=:mem_pwd";
+        $sql = "select * from member where mem_email=:mem_email and mem_pwd=:mem_pwd" ;
 
         $member = $pdo->prepare( $sql ); //先編譯好
         $member->bindValue(":mem_email", $email); //代入資料
@@ -18,14 +18,18 @@
         // 獲取資料庫中的會員資訊
         if( $member->rowCount() == 0 ){//找不到
         // $errMsg .= "帳密錯誤, <a href='sessionLogin.html'>重新登入</a><br>";
-        echo "{}";
-    }else{
+        echo json_encode([]);
+    }else {
         $memRow = $member->fetch(PDO::FETCH_ASSOC);
-        //登入成功,將登入者的資料寫入session
-        $_SESSION["mem_email"] = $memRow["mem_email"];
-        $_SESSION["mem_pwd"] = $memRow["mem_pwd"];
-        $result = ["mem_email"=>$memRow["mem_email"], "mem_pwd"=>$memRow["mem_pwd"]];
-        echo json_encode(["result"=>$memRow]);
+
+        if ($memRow["mem_status"] != 1) {
+            echo json_encode(["blocked" => true, "message" => "您的帳號已經被封鎖，請聯絡管理員"]);
+        } else {
+            // 登入成功，將登入者的數據寫入 session
+            $_SESSION["mem_email"] = $memRow["mem_email"];
+            $_SESSION["mem_pwd"] = $memRow["mem_pwd"];
+            echo json_encode(["result" => $memRow]);
+        }
     }
 } catch (PDOException $e) {
     $errMsg .= "錯誤 : ".$e -> getMessage()."<br>";
