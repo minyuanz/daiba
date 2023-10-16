@@ -13,7 +13,7 @@
       <!-- <p></p> -->
       <p>狀態</p>
     </div>
-    <div class="memberInfo" v-for="member in members">
+    <div class="memberInfo" v-for="member in filter">
       <p>{{ member.mem_id }}</p>
       <p>{{ member.mem_email }}</p>
       <p>{{ member.mem_name }}</p>
@@ -21,18 +21,11 @@
       <!-- <button class="findd">查閱</button> -->
       <div class="toggle">
         <label class="ios-switch">
-          <input
-            type="checkbox"
-            :checked="member.mem_status === '1'"
-            @change="togglePermission(member)"
-          />
-          <span
-            class="slider"
-            :style="{
-              backgroundColor:
-                member.mem_status === '1' ? '#4CAF50' : '#565656',
-            }"
-          ></span>
+          <input type="checkbox" :checked="member.mem_status === '1'" @change="togglePermission(member)" />
+          <span class="slider" :style="{
+            backgroundColor:
+              member.mem_status === '1' ? '#4CAF50' : '#565656',
+          }"></span>
         </label>
         <!-- <label class="switch">
                     <input type="checkbox" v-model="info.status">
@@ -49,7 +42,22 @@ export default {
   data() {
     return {
       members: [],
+      // memberlist: [],
+      search: '',
+      // aa: ''
     };
+  },
+  computed: {
+    filter() {
+      if (this.search == '') {
+        return this.members
+      } else {
+        return this.members.filter(member => {
+          return this.search == member.mem_id
+        })
+      }
+
+    }
   },
   mounted() {
     axios
@@ -142,6 +150,7 @@ export default {
     align-items: center;
     padding: 5px 0;
     border-bottom: 1px solid #aaa;
+
     .toggle {
       .switch {
         position: relative;
@@ -179,15 +188,15 @@ export default {
         transition: 0.4s;
       }
 
-      input:checked + .slider {
+      input:checked+.slider {
         background-color: #f32121;
       }
 
-      input:focus + .slider {
+      input:focus+.slider {
         box-shadow: 0 0 1px #f32121;
       }
 
-      input:checked + .slider:before {
+      input:checked+.slider:before {
         transform: translateX(26px);
       }
 
@@ -208,6 +217,7 @@ export default {
       width: 16%;
       text-align: center;
     }
+
     .toggle {
       .ios-switch {
         position: relative;
@@ -234,7 +244,7 @@ export default {
         transition: 0.4s;
       }
 
-      .ios-switch input:checked + .slider {
+      .ios-switch input:checked+.slider {
         background-color: #4caf50;
       }
 
@@ -250,7 +260,7 @@ export default {
         transition: 0.4s;
       }
 
-      .ios-switch input:checked + .slider:before {
+      .ios-switch input:checked+.slider:before {
         transform: translateX(30px);
       }
     }
