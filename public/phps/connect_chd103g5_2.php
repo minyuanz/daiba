@@ -1,13 +1,13 @@
 <?php 
 header("Access-Control-Allow-Origin:*");
 
-    $dbname = "tibamefe_chd103g5"; 
-    $user = "tibamefe_since2021";
-    $password = "vwRBSb.j&K#E";
+    // $dbname = "tibamefe_chd103g5"; 
+    // $user = "tibamefe_since2021";
+    // $password = "vwRBSb.j&K#E";
 
-    // $dbname = "daibatest";
-    // $user = "root";
-    // $password = "";
+    $dbname = "daibatest";
+    $user = "root";
+    $password = "";
 
     $dsn = "mysql:host=localhost;port=3306;dbname=$dbname;charset=utf8";
 
