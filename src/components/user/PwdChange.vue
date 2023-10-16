@@ -27,7 +27,7 @@
             </div>
             <div class="checkPwd">
                 <label for="">再次確認</label>
-                <input :type="typeChange" v-model="checkPwd">
+                <input :type="typeChange" v-model="checkPwd" ref="checkPwd">
                 <div class="eyeOpen" @click="open" v-show="openEye">
                     <i class="fa-solid fa-eye"></i>
                 </div>
@@ -82,6 +82,7 @@ export default {
 
             if (this.changePwd !== this.checkPwd) {
                 alert("請輸入相同的密碼")
+                this.$refs.checkPwd.focus()
             } else {
                 // 建立數據資料夾好發給PHP做處理新增
                 const formData = new FormData();
@@ -104,8 +105,8 @@ export default {
                     .catch(function (error) {
                         console.log(error);
                     });
+                location.reload();
             }
-            location.reload();
         }
     }
 }
