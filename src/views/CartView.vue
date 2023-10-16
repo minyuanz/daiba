@@ -93,9 +93,13 @@ export default {
     gotoCheckout() {
     const userInfo = localStorage.getItem('user');
     if (userInfo) {
+      if (this.cartItems.length > 0) {
       // 檢查用戶是否登入，有的話前往結帳頁面
       this.$router.push({ name: 'shopping', params: { cartItems: this.cartItems } });
-    } else {
+    }else {
+      alert("購物車是空的，請先選購商品");
+    } 
+    }else {
       // 如果未登入則跳轉登入頁面
       alert("請先登入會員");
       this.$router.push('/login');

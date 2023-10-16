@@ -92,10 +92,15 @@
     <div class="ShopDelBox">
       <div class="DelTitle">運送方式</div>
       <div class="DelComent">
-        <div > 收件人姓名:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="請輸入收件人姓名" v-model="ord_name" /></div> 
-        <div > 收件人電話:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="09XXXXXXXX" v-model="ord_phone" /></div> 
-        <div > 收件人信箱:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="請輸入信箱" v-model="ord_email" /></div> 
-        <div > 收件人地址:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="請輸入地址" v-model="ord_address" /></div> 
+        <div > 收件人姓名:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="請輸入收件人姓名" v-model="ord_name" required/></div> 
+        <div > 收件人電話:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="09XXXXXXXX" v-model="ord_phone" required/></div> 
+        <div > 收件人信箱:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="請輸入信箱" v-model="ord_email" required/></div> 
+        <div > 收件人地址:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="請輸入地址" v-model="ord_address" required /></div>
+        <div class="error-message" v-if="showErrorMessages">
+          <ul>
+            <li v-for="message in errorMessages" style="color: red;">{{ message }}</li>
+          </ul>
+        </div> 
       </div>
     </div>
     <div class="pointBox">
@@ -161,6 +166,8 @@ export default {
       ord_email: '', // 訂單信箱
       ord_address: '', // 訂單地址
       paymentError: false,
+      showErrorMessages: false,
+      errorMessages: [],
       creditCardNumberRegex: /^\d{13,19}$/,
       expirationDateRegex: /^(0[1-9]|1[0-2])\/\d{2}$/,
       securityCodeRegex: /^\d{3,4}$/,
@@ -182,11 +189,22 @@ export default {
       this.$router.push("/Cart"); 
     },
     gotoShoppingDone() {
+      this.errorMessages = [];
+      this.showErrorMessages = false;
+
       if (this.selectedPayment === '信用卡付款') {
         if (!this.validateCreditCard()) {
           this.paymentError = true;
           return;
         }
+      }
+      if (!this.ord_name || !this.ord_phone || !this.ord_email || !this.ord_address) {
+      this.errorMessages.push('請填寫所有收件欄位資訊'); 
+      }
+        // 如果有錯誤則顯示
+      if (this.errorMessages.length > 0) {
+        this.showErrorMessages = true;
+        return; 
       }
       //如果有選擇使用點數的話
       if(this.SelectionPointUse){ 
