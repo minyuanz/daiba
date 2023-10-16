@@ -113,7 +113,7 @@
             <!-- 文章內容 -->
             <div class="CBPost" v-show="closePost">
                 <div class="box">
-                    <img src="https://steam.oxxostudio.tw/webp/gimp/example/simple-keyer-mask-16.webp" class="head" />
+                    <img :src=$imgUrl(CBPost.mem_img) class="head" />
                     <span class="closePost" @click="(closePost = !closePost), (lightBox = !lightBox)">✖</span>
                     <div class="swiperPost">
                         <div class="swiper-wrapper">
@@ -384,6 +384,7 @@ export default {
 
             this.CBPost = []
             this.CBPost = item
+            
             this.lightBox = true
             this.artId = this.CBList[index].art_id
             this.memId = this.CBList[index].mem_id

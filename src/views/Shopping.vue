@@ -91,14 +91,19 @@
         <div > 收件人姓名:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="請輸入收件人姓名" v-model="ord_name" /></div> 
         <div > 收件人電話:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="09XXXXXXXX" v-model="ord_phone" /></div> 
         <div > 收件人信箱:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="請輸入信箱" v-model="ord_email" /></div> 
-        <div > 收件人地址:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="清輸入地址" v-model="ord_address" /></div> 
+        <div > 收件人地址:<input type="text" id="creditCardNumber" name="creditCardNumber" placeholder="請輸入地址" v-model="ord_address" /></div> 
       </div>
     </div>
     <div class="pointBox">
       <div class="title">使用點數</div>
       <div class="pointRemain">
-        <p>{{member}}，您尚有:{{point}}點，是否使用點數:</p>
-        <div class="usePoint"><input id="use" type="radio" name="point" value="usePoint" v-model="SelectionPointUse"><label for="use">使用點數折抵</label></div>
+        <p>{{userId}}，您尚有:{{userPoint}}點，是否使用點數:</p>
+        <div class="usePoint">
+          <input id="use" type="radio" name="point" value="usePoint" v-model="SelectionPointUse">
+          <label for="use">使用點數折抵
+            <input id="inputPoint" type="number"  v-model="inputPoint" @change="checkPoint">點
+          </label>
+        </div>
         <div class="withoutPoint"><input id="noUse" type="radio" name="withoutPoint" value="nope" v-model="SelectionPointUse"><label for="noUse">不使用點數折抵</label></div>
       </div>
     </div>
@@ -111,9 +116,13 @@
       <p>運費:</p> 
       <p class="SumBoxNo">NT$150</p>
       </div>
+      <div >
+      <p>點數折抵:</p> 
+      <p class="SumBoxNo">{{ inputPoint ? `NT$${inputPoint}` : 'NT$0' }}</p>
+      </div>
       <div>
       <p>商品金額總計:</p> 
-      <p class="SumBoxNoex">NT${{ cartTotal +150 }}</p>
+      <p class="SumBoxNoex">NT${{ cartTotal +150 - inputPoint }}</p>
       </div>
       <div >
       <p></p> 
@@ -129,11 +138,15 @@
 
 
 <script>
+import axios from 'axios';
 export default {
+  
   data() {
     return {
-      member:'會員',
-      point:20,
+      userId:'',
+      userPoint:null,
+      inputPoint:null,
+      newPoint:null,
       selectedPayment: '' ,
       creditCardNumber: '',
       expirationDate: '',
@@ -158,6 +171,10 @@ export default {
       this.$router.push("/Cart"); 
     },
     gotoShoppingDone() {
+      //如果有選擇使用點數的話
+      if(this.SelectionPointUse){ 
+        this.newPoint = this.userPoint - this.inputPoint //剩餘點數 = 會員點數 - 使用點數
+      }
       // 發送的數據
       const orderDetails = this.cartItems.map(product => ({//此唯一單單的明細
       prod_id: product.prod_id,
@@ -178,6 +195,7 @@ export default {
         expirationDate: this.expirationDate, // 有效期限
         securityCode: this.securityCode, // 安全碼
         SelectionPointUse: this.SelectionPointUse, // 是否使用折扣
+        newPoint: this.newPoint, // 剩餘點數
         orderDetails: orderDetails,
       };
       fetch('http://localhost/dai/public/phps/CreatOrderandDetail.php', {
@@ -203,6 +221,33 @@ export default {
     cartTotal() {
       return this.$store.getters.cartTotal;
     },
+
+    // 驗證輸入的點數是否足夠
+    checkPoint(){
+      // 如果輸入的大於持有點數則清空所輸入的值
+      if(this.inputPoint > this.userPoint){
+        alert("當前會員點數不足，請輸入正確的會員點數")
+        this.inputPoint = null
+      }
+      
+      
+      
+      
+    },
+  },
+  mounted(){
+    // 獲得會員資料
+    axios.get(`${this.$apiUrl('getMember.php')}`)
+            .then((res) => {
+              const matchingUser = res.data.find(user => user.mem_id === this.$store.state.memInfo.mem_id); //資料中和目前登入的ID配對
+                this.userId = matchingUser.mem_id   //現在的會員的id
+                this.userPoint = parseInt(matchingUser.mem_point) //現在會員的點數資料 + 轉成int
+               
+                // this.CBPost = this.CBList[0]
+            })
+            .catch((error) => {
+                console.error('資料失敗：', error);
+            });
   },
 };
 </script>
@@ -261,6 +306,15 @@ export default {
         }
       }
 
+  }
+
+  #inputPoint{
+    margin-inline:5px;
+    width:80px;
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button{
+        -webkit-appearance:none;
+      }
   }
   .ShopProBOX{
     position: relative;
@@ -353,7 +407,7 @@ export default {
         label {
           display: block;
           font-weight: bold;
-          width: 60px;
+          width: 90px;
           line-height: 21px;
           text-align: right;
           margin-left: 2.3rem;

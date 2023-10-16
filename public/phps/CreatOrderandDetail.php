@@ -18,6 +18,7 @@ $creditCardNumber = $data->creditCardNumber;
 $expirationDate = $data->expirationDate;
 $securityCode = $data->securityCode;
 $SelectionPointUse = $data->SelectionPointUse;
+$newPoint = $data->newPoint;
 $orderDetails = $data->orderDetails;
 
 try {
@@ -53,6 +54,17 @@ try {
         $stmt->bindValue(":buy_price", $orderDetail->buy_price);
         $stmt->execute();
     }
+
+    // 扣點數
+    $sql = "UPDATE member
+    SET mem_point = :mem_point
+    WHERE mem_id = :mem_id;";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(":mem_id", $mem_id);
+    $stmt->bindValue(":mem_point", $newPoint);
+    $stmt->execute();
+    
 
     $pdo->commit();
     echo json_encode(["message" => "Order placed successfully"]);
