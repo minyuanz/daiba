@@ -42,7 +42,6 @@ export default {
     )
       .then((res) => res.json())
       .then((json) => {
-        console.log(json.current);
         this.weather = json.current;
       });
 

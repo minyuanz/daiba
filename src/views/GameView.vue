@@ -9,7 +9,7 @@
     <button class="start btn_s" @click="closeName = !closeName" v-show="startBtn">start</button>
 
     <!-- 名稱彈窗 -->
-    <div class="name" v-show="closeName">
+    <div class="name" v-if="closeName">
       <p>請輸入ID</p>
       <input type="text" maxlength="8" v-model="userName" />
       <button class="btn_s" @click="checkName">OK</button>
@@ -17,7 +17,7 @@
     <transition>
 
       <!-- 選擇模式 -->
-      <div class="mode" v-show="mode">
+      <div class="mode" v-if="mode">
         <div class="toCostume" @click="home = !home, costume = !costume, startCostume()">
           <p>選擇穿搭</p>
         </div>
@@ -107,7 +107,7 @@
   <!--遊戲內容 -->
 
   <transition name="fade" mode="out-in">
-    <section class="gameInner" v-show="Inner">
+    <section class="gameInner" v-if="Inner">
 
       <!-- 開場動畫背景 -->
       <div class="starLightBox"></div>
@@ -212,7 +212,7 @@
       </div>
 
       <!-- 結束畫面 -->
-      <div class="end" v-show="openEnd">
+      <div class="end" v-if="openEnd">
         <p>冒險的一天結束了！</p>
         <p>根據你的冒險路線，你可以選擇...</p>
 
@@ -266,8 +266,8 @@
       </div>
 
       <!-- 讀取畫面 -->
-      <div class="loading" v-show="loading">
-        <img src="../../src/assets/images/game/MRT.gif" alt="捷運動畫" id="MRT" :key="MRTkey++" />
+      <div class="loading" v-if="loading">
+        <img src="../../src/assets/images/game/MRT.gif" alt="捷運動畫" id="MRT" />
         <svg xmlns="http://www.w3.org/2000/svg" width="600">
           <g class="animation-group">
             <rect class="box" width="50" height="50" rx="4" />
@@ -1086,7 +1086,6 @@ export default {
     // 讀取條
     loadingTime() {
       this.loading = true;
-      this.MRTkey++
       setTimeout(() => {
         this.currentMessageIndex++;
         this.loading = false;

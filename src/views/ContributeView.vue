@@ -82,7 +82,7 @@
 
         <!-- 文章清單 -->
         <div class="CBList">
-            <div v-for="  (itemList, index)    in   CBList  " :key="itemList.art_no"
+            <div v-for="  (itemList, index)    in   paginatedList  " :key="itemList.art_no"
                 @click="(closePost = !closePost), (lightBox = !lightBox), openInner(itemList, index)">
                 <div :class="{ 'card-w': PC, 's-card-h': !PC }">
                     <div class="img">
@@ -120,10 +120,10 @@
                             <div class="swiper-slide">
                                 <img :src=$imgUrl(CBPost.art_pic1) alt="圖片1">
                             </div>
-                            <div class="swiper-slide">
+                            <div class="swiper-slide" v-if="CBPost.art_pic2">
                                 <img :src=$imgUrl(CBPost.art_pic2) alt="圖片2">
                             </div>
-                            <div class="swiper-slide">
+                            <div class="swiper-slide" v-if="CBPost.art_pic3">
                                 <img :src=$imgUrl(CBPost.art_pic3) alt="圖片3">
                             </div>
                         </div>
@@ -155,6 +155,16 @@
                 </div>
             </div>
         </div>
+        <div class="pagination">
+      <button class="paginationmain" @click="prevPage" :disabled="currentPage === 1" >＜</button>
+
+      <button class="paginationmain" @click="goToPage(page)" v-for="page in totalPages" :key="page"
+        :class="{ 'current-page': page === currentPage }">
+        {{ page }}
+      </button>
+
+      <button class="paginationmain" @click="nextPage" :disabled="currentPage === totalPages">＞</button>
+    </div>
     </section>
 
     <!-- 燈箱 -->
@@ -300,7 +310,9 @@ export default {
             lightBox: false,
             swiper: false,
             artId: '', // get art_id
-            memId: '' // get mem_id
+            memId: '', // get mem_id
+            pageSize: 6, // 每頁顯示數量
+            currentPage: 1, // 當前頁數
         };
     },
     components: {
@@ -350,7 +362,30 @@ export default {
 
         //打開文章內容
         openInner(item, index) {
+            // 輪播
+            const swiperPost = new Swiper(".swiperPost", {
+            effect: "cube",
+            speed: 2000,
+            loop: true,
+            autoplay: {
+                delay: 1000
+            },
+            cubeEffect: {
+                shadow: true,
+                slideShadows: true,
+                shadowOffset: 20,
+                shadowScale: 0.94,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            });
+
+            this.CBPost = []
             this.CBPost = item
+            console.log(item);
+            console.log(this.CBPost);
             // this.closePost = false
             this.lightBox = true
             this.artId = this.CBList[index].art_id
@@ -418,8 +453,24 @@ export default {
                         console.log(error);
                     });
             }
-        }
+        },
 
+        // 上一頁
+        prevPage(){
+            if(this.currentPage > 1){
+                this.currentPage -= 1} 
+        },
+
+        // 下一頁
+        nextPage(){
+            if(this.currentPage < this.totalPages){
+                this.currentPage += 1} 
+        },
+        
+        // 前往該頁數
+        goToPage(page){
+            this.currentPage = page;
+        },
 
     },
 
@@ -441,26 +492,6 @@ export default {
             },
         });
 
-        // 投稿輪播
-        const swiperPost = new Swiper(".swiperPost", {
-            effect: "cube",
-            speed: 2000,
-            loop: true,
-            autoplay: {
-                delay: 1000
-            },
-            cubeEffect: {
-                shadow: true,
-                slideShadows: true,
-                shadowOffset: 20,
-                shadowScale: 0.94,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-        });
-
         // 背景圖輪播
         setTimeout(() => {
             this.initSwiper();
@@ -470,18 +501,29 @@ export default {
         window.addEventListener("resize", this.windowWidth);
     },
     created() {
+        // 從後端資料庫抓取所有資料
         axios.get(`${this.$apiUrl('getArticle.php')}`)
             .then((res) => {
-                console.log(res)
                 this.CBList = res.data
-                console.log(this.CBList)
                 this.CBPost = this.CBList[0]
-                console.log(this.CBPost);
             })
             .catch((error) => {
                 console.error('資料失敗：', error);
             });
-    }
+    },
+    computed:{ 
+        //算出所有的頁數
+        totalPages() {
+            return Math.ceil(this.CBList.length / this.pageSize);
+        },
+
+    // 顯示頁面的資料
+        paginatedList() {
+            const startIndex = (this.currentPage - 1) * this.pageSize; //算出上一頁跑到陣列第幾個
+            const endIndex = startIndex + this.pageSize;  
+            return this.CBList.slice(startIndex, endIndex);
+        },
+},
 }
 </script>
 
