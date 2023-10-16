@@ -2,7 +2,7 @@
   <div class="BackNews">
     <div class="NewsSearch">
       投稿編號查詢:
-      <input type="text" />
+      <input type="text" v-model="search" />
       <button class="NewsSearchBtn">查詢</button>
     </div>
     <div class="NewsTitle">
@@ -14,7 +14,7 @@
       <p>文章內容</p>
       <p>核准狀態</p>
     </div>
-    <div class="NewsInfro" v-for="item in items" :key="item.art_no">
+    <div class="NewsInfro" v-for="item in filter" :key="item.art_no">
       <p>{{ item.art_id }}</p>
       <p>{{ item.fea_tag }}</p>
       <p>{{ item.art_title }}</p>
@@ -25,17 +25,10 @@
       </div>
       <div class="upcheck">
         <label class="ios-switch">
-          <input
-            type="checkbox"
-            :checked="item.art_status === '1'"
-            @change="togglePermission(item)"
-          />
-          <span
-            class="slider"
-            :style="{
-              backgroundColor: item.art_status === '1' ? '#4CAF50' : '#565656',
-            }"
-          ></span>
+          <input type="checkbox" :checked="item.art_status === '1'" @change="togglePermission(item)" />
+          <span class="slider" :style="{
+            backgroundColor: item.art_status === '1' ? '#4CAF50' : '#565656',
+          }"></span>
         </label>
       </div>
     </div>
@@ -45,19 +38,13 @@
           <div class="swiperPost">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
-                <img
-                  :src="`${this.$store.state.imgURL}` + selectedItem.art_pic1"
-                />
+                <img :src="`${this.$store.state.imgURL}` + selectedItem.art_pic1" />
               </div>
               <div class="swiper-slide">
-                <img
-                  :src="`${this.$store.state.imgURL}` + selectedItem.art_pic2"
-                />
+                <img :src="`${this.$store.state.imgURL}` + selectedItem.art_pic2" />
               </div>
               <div class="swiper-slide">
-                <img
-                  :src="`${this.$store.state.imgURL}` + selectedItem.art_pic3"
-                />
+                <img :src="`${this.$store.state.imgURL}` + selectedItem.art_pic3" />
               </div>
               <!-- <div class="swiper-slide">
                               <img :src="selectedItem.prod_img4" />
@@ -69,18 +56,12 @@
           <div class="inner">
             <div class="title">
               <h3>{{ selectedItem.art_title }}</h3>
-              <span
-                class="closePost"
-                @click="(closePost = !closePost), (lightBox = !lightBox)"
-                >✖</span
-              >
+              <span class="closePost" @click="(closePost = !closePost), (lightBox = !lightBox)">✖</span>
               <h4>{{ selectedItem.art_subTitle }}</h4>
             </div>
             <div class="info">
               <p>地址：{{ selectedItem.art_address }}</p>
-              <span class="PostingDate"
-                >發布日期：{{ selectedItem.art_date }}</span
-              >
+              <span class="PostingDate">發布日期：{{ selectedItem.art_date }}</span>
             </div>
             <div class="txt">
               <p>
@@ -109,9 +90,22 @@ export default {
       selectedItem: {}, //用於保存資料
       closePost: false,
       items: [],
+      search: ''
       // item:BackProTest,
       // items: BackProTest.map((item) => ({...item,isChecked: false,})),
     };
+  },
+  computed: {
+    filter() {
+      if (this.search == '') {
+        return this.items
+      } else {
+        return this.items.filter(item => {
+          return this.search == item.art_id
+        })
+      }
+
+    }
   },
   mounted() {
     const swiperPost = new Swiper(".swiperPost", {
@@ -184,12 +178,14 @@ export default {
 
   .NewsSearch {
     padding: 10px;
+
     .NewsSearchBtn {
       width: 80px;
       height: 28px;
       margin-left: 10px;
     }
   }
+
   .NewsTitle {
     display: flex;
     justify-content: space-evenly;
@@ -213,11 +209,13 @@ export default {
     p {
       width: 100%;
       text-align: center;
+
       button {
         width: 70px;
         height: 40px;
       }
     }
+
     .ios-switch {
       position: relative;
       display: inline-block;
@@ -243,7 +241,7 @@ export default {
       transition: 0.4s;
     }
 
-    .ios-switch input:checked + .slider {
+    .ios-switch input:checked+.slider {
       background-color: #4caf50;
     }
 
@@ -259,7 +257,7 @@ export default {
       transition: 0.4s;
     }
 
-    .ios-switch input:checked + .slider:before {
+    .ios-switch input:checked+.slider:before {
       transform: translateX(30px);
     }
   }

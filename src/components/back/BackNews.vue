@@ -2,8 +2,8 @@
   <div class="BackNews" v-if="addToggle" v-show="!editMode">
     <div class="NewsSearch">
       商品編號查詢:
-      <input type="text" />
-      <button class="NewsSearchBtn">查詢</button>
+      <input type="text" v-model="search" />
+      <!-- <button class="NewsSearchBtn">查詢</button> -->
     </div>
     <div class="NewsTitle">
       <p>編號</p>
@@ -12,7 +12,7 @@
       <p>發布日期</p>
       <p>編輯</p>
     </div>
-    <div class="NewsInfro" v-for="news in news" :key="news.news_id">
+    <div class="NewsInfro" v-for="news in filter" :key="news.news_id">
       <p>{{ news.news_id }}</p>
       <p>{{ news.news_tag1 }}</p>
       <p>{{ news.news_title }}</p>
@@ -120,8 +120,21 @@ export default {
       picURL: "",
       news: [],
       editMode: false, // 編輯模式的開啟與否
-      currentEditnews: "", // 編輯的資料
+      currentEditnews: "",
+      search: '' // 編輯的資料
     };
+  },
+  computed: {
+    filter() {
+      if (this.search == '') {
+        return this.news
+      } else {
+        return this.news.filter(news => {
+          return this.search == news.news_id
+        })
+      }
+
+    }
   },
   methods: {
     cancelEdit() {

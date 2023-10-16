@@ -42,9 +42,8 @@ export default {
   data() {
     return {
       members: [],
-      // memberlist: [],
+      memberlist: [],
       search: '',
-      // aa: ''
     };
   },
   computed: {
@@ -52,11 +51,8 @@ export default {
       if (this.search == '') {
         return this.members
       } else {
-        return this.members.filter(member => {
-          return this.search == member.mem_id
-        })
+        return this.members.filter(member => this.search == member.mem_id)
       }
-
     }
   },
   mounted() {
