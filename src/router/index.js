@@ -304,7 +304,7 @@ router.beforeEach((to, from, next) => {
       if (BackloginContent.acc === 'main' && BackloginContent.pwd === 'main') {
         next();
       } else {
-        alert('您無權訪問此葉面');
+        alert('您無權訪問此頁面');
         next({ name: '/BackMember' }); // 如果不是main則 到回member
       }
     } else {
