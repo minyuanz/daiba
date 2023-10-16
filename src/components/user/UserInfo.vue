@@ -48,11 +48,6 @@ export default {
             toggle: '會員資料'
         }
     },
-    // props: {
-    //     email: {
-    //         type: String
-    //     }
-    // },
     methods: {
         toggleUpdate() {
             this.toggle = '會員資料'
