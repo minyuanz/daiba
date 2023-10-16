@@ -24,14 +24,17 @@
                 <div class="registerTel">
                     <label for="tel">電話</label>
                     <input type="text" id="tel" v-model="formData.tel" required="true" placeholder="請輸入10碼手機號碼" />
+                    <div v-if="!isValidPhone" class="error-message" style="color: red;">電話格式不正確</div>
                 </div>
                 <div class="registerEmail">
                     <label for="email">信箱</label>
                     <input type="email" id="email" v-model="formData.email" required="true" ref="emailInput" />
+                    <div v-if="!isValidEmail" class="error-message" style="color: red;">信箱格式不正確</div>
                 </div>
                 <div class="registerPwd">
                     <label for="pwd">密碼</label>
                     <input :type="typeChange" id="pwd" v-model="formData.pwd" placeholder="請輸入最少6碼，並包含字母及數字" />
+                    <div v-if="!isValidPassword" class="error-message" style="color: red;">密碼格式不正確</div>
                     <div class="eyeOpen" @click="open" v-show="openEye">
                         <i class="fa-solid fa-eye"></i>
                     </div>
@@ -62,14 +65,13 @@ export default {
                 pwd: ""
             },
             //正則判斷
-            isValidName: "",
-            isValidEmail: "",
-            isValidPassword: "",
-            isValidPhone: "",
+            isValidName: false,
+            isValidEmail: true,
+            isValidPassword: true,
+            isValidPhone: true,
             openPwd: false,
             openEye: true,
             closeEye: false
-
         };
     },
     computed: {
@@ -113,8 +115,9 @@ export default {
             this.validateEmail();
             this.validatePassword();
             this.validatePhone();
-            if (this.isValidEmail && this.isValidPassword && this.isValidPhone) {
-
+            if ( !this.isValidEmail || !this.isValidPassword || !this.isValidPhone) {
+            alert("信箱、密碼或電話規格有誤，請填寫正確的資訊。");
+        } else {
                 // 創建一個新的 FormData 對象
                 let formData = new FormData();
                 // 將表單數據添加到 FormData 對象中
