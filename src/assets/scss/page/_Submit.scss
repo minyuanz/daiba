@@ -9,6 +9,22 @@
     }
 }
 
+#addLineBtn {
+    cursor: pointer;
+    padding: 10px;
+    border: 1.5px solid black;
+    border-radius: 50px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    p {
+        font-size: 28px;
+    }
+}
+
 // 按鈕
 .next {
     margin: 3rem auto;

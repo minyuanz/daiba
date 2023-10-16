@@ -70,11 +70,11 @@
 
             <!-- 標籤 -->
             <div>
-                <span v-for="(  CBtag, tagindex  ) in   CBtag  " :key="tagindex" class="gray">{{ CBtag }}</span>
+                <span v-for="(  CBtag, tagindex  ) in   CBtag  " :key="tagindex" class="gray">#{{ CBtag }}</span>
             </div>
             <div>
                 <span v-for="(  MRTLine, MRTLineindex  ) in   MRTLine  " :key="MRTLineindex"
-                    :class="getClassObject(MRTLine, MRTLineindex)">{{ MRTLine }}</span>
+                    :class="getClassObject(MRTLine, MRTLineindex)">#{{ MRTLine }}</span>
             </div>
         </div>
 
@@ -95,11 +95,11 @@
                             <h3>{{ itemList.art_title }}</h3>
                             <p>{{ itemList.art_subTitle }}</p>
                             <div class="tag">
-                                <span class="title-tag gray">{{ itemList.fea_tag }}</span>
-                                <span class="title-tag" :class="artChooseTag(itemList.mrt_id1)">{{
-                                    colorClassMap2[itemList.mrt_id1] }}</span>
-                                <span class="title-tag" :class="artChooseTag(itemList.mrt_id2)">{{
-                                    colorClassMap2[itemList.mrt_id2] }}</span>
+                                <span class="title-tag gray">#{{ itemList.fea_tag }}</span>
+                                <span class="title-tag" :class="artChooseTag(itemList.sta_id1)">#{{
+                                    colorClassMap2[itemList.sta_id1] }}</span>
+                                <span class="title-tag" :class="artChooseTag(itemList.sta_id2)">
+                                {{itemList.sta_id2 ? '#' +colorClassMap2[itemList.sta_id2] : null }}</span>
                             </div>
                             <span class="s_text time">{{ itemList.art_date }}</span>
                         </div>
@@ -309,7 +309,7 @@ export default {
             closePost: false,
             lightBox: false,
             swiper: false,
-            artId: '', // get art_id
+            artNo: '', // get art_id
             memId: '', // get mem_id
             pageSize: 6, // 每頁顯示數量
             currentPage: 1, // 當前頁數
@@ -435,7 +435,7 @@ export default {
             } else {
                 const formData = new FormData();
                 formData.append("mem_id", userinfo.mem_id);
-                formData.append("art_id", this.artId);
+                formData.append("art_no", this.artNo);
 
                 fetch('http://localhost/dai/public/phps/addToArticleCollect.php', {
                     method: 'post',
@@ -505,7 +505,6 @@ export default {
         axios.get(`${this.$apiUrl('getArticle.php')}`)
             .then((res) => {
                 this.CBList = res.data
-                // this.CBPost = this.CBList[0]
             })
             .catch((error) => {
                 console.error('資料失敗：', error);
