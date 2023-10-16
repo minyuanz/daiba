@@ -87,6 +87,8 @@ export default {
       formData.append("prod_id", prod_id);
       // this.$apiUrl('delCollect.php')
 
+      confirm('確定取消收藏嗎?')
+
       fetch(this.$apiUrl('delCollect.php'), {
         method: 'post',
         body: formData
@@ -100,6 +102,7 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
+      location.reload();
     },
     getCollect() {
       let memId = this.$store.state.memInfo.mem_id

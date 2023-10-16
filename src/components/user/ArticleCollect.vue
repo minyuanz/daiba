@@ -126,6 +126,8 @@ export default {
       formData.append("mem_id", memId);
       formData.append("art_id", art_id);
 
+      confirm('確定取消收藏嗎?')
+
       fetch('http://localhost/dai/public/phps/delArticleCollect.php', {
         method: 'post',
         body: formData
@@ -139,6 +141,7 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
+        location.reload();
     },
     getArticleCollect() {
       let memId = this.$store.state.memInfo.mem_id

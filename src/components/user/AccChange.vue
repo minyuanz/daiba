@@ -97,7 +97,7 @@ export default {
                 .catch(function (error) {
                     console.log(error);
                 });
-
+            location.reload();
         },
         updateName() {
             if (this.changeAcc == '') {
@@ -125,6 +125,7 @@ export default {
                         console.log(error);
                     });
             }
+            location.reload();
         },
     }
 }
