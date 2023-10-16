@@ -126,7 +126,7 @@
       </div>
       <div>
       <p>商品金額總計:</p> 
-      <p class="SumBoxNoex">NT${{ cartTotal +150 - inputPoint }}</p>
+      <p class="SumBoxNoex" >NT${{ total }} </p>
       </div>
       <div >
       <p></p> 
@@ -173,6 +173,9 @@ export default {
     cartTotal() {
       return this.$store.getters.cartTotal; 
     },
+    total(){
+      return this.$store.getters.cartTotal  + 150 - this.inputPoint;
+    },
   },
   methods: {
     gotoCart(){
@@ -189,6 +192,7 @@ export default {
       if(this.SelectionPointUse){ 
         this.newPoint = this.userPoint - this.inputPoint //剩餘點數 = 會員點數 - 使用點數
       }
+
       // 發送的數據
       const orderDetails = this.cartItems.map(product => ({//此唯一單單的明細
       prod_id: product.prod_id,
@@ -255,6 +259,10 @@ export default {
       // 如果輸入的大於持有點數則清空所輸入的值
       if(this.inputPoint > this.userPoint){
         alert("當前會員點數不足，請輸入正確的會員點數")
+        this.inputPoint = null
+      }
+      if(this.total <= 0){
+        alert('使用的點數已超過當前金額，請重新輸入')
         this.inputPoint = null
       }
       

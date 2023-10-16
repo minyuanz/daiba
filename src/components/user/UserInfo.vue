@@ -2,7 +2,6 @@
     <div class="userInfo" id="userInfo" v-if="'會員資料' == toggle">
 
         <h1>會員資料</h1>
-        <p id="userPoint">剩餘點數：{{this.$store.state.memInfo.mem_point}}點</p>
         <div class="userBtn">
             <button class="ChangAC" @click="To">
                 <i class="fa-solid fa-face-laugh"></i>
