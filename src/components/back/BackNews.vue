@@ -18,7 +18,10 @@
       <p>{{ news.news_title }}</p>
       <p>{{ news.news_date }}</p>
       <div class="edit" @click="startEditMode(news)">
-        <i class="fa-solid fa-pen-to-square"></i>
+        <button>
+          <i class="fa-solid fa-pen-to-square"></i>
+          編輯
+        </button>
       </div>
     </div>
     <div class="addSta">
@@ -76,7 +79,10 @@
         <div class="pic">
           <p>＋</p>
           <!-- $imgUrl(currentEditnews.news_pic1) -->
-          <img :src=$imgUrl(currentEditnews.news_pic1) v-if="currentEditnews.news_pic1 !== '' ? true : false" />
+          <img
+            :src="$imgUrl(currentEditnews.news_pic1)"
+            v-if="currentEditnews.news_pic1 !== '' ? true : false"
+          />
           <input type="file" @change="FileUpdate" name="image" />
           <img :src="picURL" alt="" v-show="show" />
         </div>
@@ -91,7 +97,10 @@
     </div>
     <div class="Ctx">
       <label for="">內文</label>
-      <textarea class="custom-input" v-model="currentEditnews.news_des1"></textarea>
+      <textarea
+        class="custom-input"
+        v-model="currentEditnews.news_des1"
+      ></textarea>
       <!-- <input type="text"> -->
     </div>
     <div class="btn">
@@ -194,7 +203,7 @@ export default {
       formData.append("news_content", this.formData.content);
 
       // this.$apiUrl('addNews.php')
-      fetch(this.$apiUrl('addNews.php'), {
+      fetch(this.$apiUrl("addNews.php"), {
         method: "post",
         body: formData,
       })
@@ -219,7 +228,7 @@ export default {
       formData.append("news_content", this.currentEditnews.news_des1);
 
       // this.$apiUrl('UpdateNews.php')
-      fetch(this.$apiUrl('UpdateNews.php'), {
+      fetch(this.$apiUrl("UpdateNews.php"), {
         method: "post",
         body: formData,
       })
@@ -237,7 +246,7 @@ export default {
     },
     fetchData() {
       // this.$apiUrl('getNews.php')
-      fetch(this.$apiUrl('getNews.php'))
+      fetch(this.$apiUrl("getNews.php"))
         .then((response) => {
           return response.json();
         })
@@ -256,6 +265,22 @@ export default {
 </script>
 
 <style lang="scss">
+.edit {
+  button {
+    border: 2px solid #666;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5%;
+    transition: all 0.3s;
+
+    &:hover {
+      border: 2px solid #333;
+      background-color: #ddd;
+    }
+  }
+}
+
 .BackNews {
   margin-top: 3rem;
   border: 1px solid #aaa;
@@ -330,7 +355,7 @@ export default {
       transition: 0.4s;
     }
 
-    .ios-switch input:checked+.slider {
+    .ios-switch input:checked + .slider {
       background-color: #4caf50;
     }
 
@@ -346,7 +371,7 @@ export default {
       transition: 0.4s;
     }
 
-    .ios-switch input:checked+.slider:before {
+    .ios-switch input:checked + .slider:before {
       transform: translateX(30px);
     }
   }

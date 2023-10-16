@@ -11,12 +11,19 @@
       <p>編輯</p>
       <p>上架/下架</p>
     </div>
-    <div class="ProInfro" v-for="product in filteredProducts" :key="product.prod_id">
+    <div
+      class="ProInfro"
+      v-for="product in filteredProducts"
+      :key="product.prod_id"
+    >
       <p>{{ product.prod_id }}</p>
       <p>{{ product.prod_name }}</p>
       <p>{{ product.prod_price }}</p>
       <div class="edit">
-        <button @click="startEditMode(product)">編輯</button>
+        <button @click="startEditMode(product)">
+          <i class="fa-solid fa-pen-to-square"></i>
+          編輯
+        </button>
       </div>
       <div class="upcheck">
         <label class="ios-switch">
@@ -286,7 +293,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      searchKeyword: '', 
+      searchKeyword: "",
       newProduct: {
         prod_name: "",
         prod_price: "",
@@ -322,15 +329,15 @@ export default {
     };
   },
   computed: {
-  filteredProducts() {
-    if (this.searchKeyword) {
-      return this.products.filter(product =>
-        product.prod_id.includes(this.searchKeyword)
-      );
-    } else {
-      return this.products; // 如果搜尋為空直則顯示全部產品
-    }
-  },
+    filteredProducts() {
+      if (this.searchKeyword) {
+        return this.products.filter((product) =>
+          product.prod_id.includes(this.searchKeyword)
+        );
+      } else {
+        return this.products; // 如果搜尋為空直則顯示全部產品
+      }
+    },
   },
   created() {
     this.fetchData();
@@ -518,6 +525,22 @@ export default {
 </script>
 
 <style lang="scss">
+.edit {
+  button {
+    border: 2px solid #666;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5%;
+    transition: all 0.3s;
+
+    &:hover {
+      border: 2px solid #333;
+      background-color: #ddd;
+    }
+  }
+}
+
 .BackPro {
   margin-top: 3rem;
   border: 1px solid #aaa;

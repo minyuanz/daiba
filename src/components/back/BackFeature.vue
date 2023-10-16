@@ -34,7 +34,10 @@
       <p>{{ info.Fea }}</p>
       <p>{{ info.Date }}</p>
       <div class="edit">
-        <i class="fa-solid fa-pen-to-square"></i>
+        <button>
+          <i class="fa-solid fa-pen-to-square"></i>
+          編輯
+        </button>
       </div>
       <div class="del">
         <i class="fa-solid fa-circle-xmark"></i>
@@ -260,6 +263,22 @@ export default {
 </script>
 
 <style lang="scss">
+.edit {
+  button {
+    border: 2px solid #666;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5%;
+    transition: all 0.3s;
+
+    &:hover {
+      border: 2px solid #333;
+      background-color: #ddd;
+    }
+  }
+}
+
 .backFeature {
   margin-top: 3rem;
   border: 1px solid #aaa;

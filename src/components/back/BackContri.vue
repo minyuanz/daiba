@@ -211,8 +211,19 @@ export default {
       text-align: center;
 
       button {
-        width: 70px;
-        height: 40px;
+        // width: 70px;
+        // height: 40px;
+        border: 2px solid #666;
+        background-color: transparent;
+        cursor: pointer;
+        border-radius: 5px;
+        padding: 5%;
+        transition: all 0.3s;
+
+        &:hover {
+          // border: 2px solid #333;
+          background-color: #ddd;
+        }
       }
     }
 

@@ -33,7 +33,7 @@
       <div class="mrtMainLine">
         <div
           class="pic border-redline mrtRedBoy"
-          @click="filterOptions(color);"
+          @click="filterOptions(color)"
           @mouseenter="activate('red')"
           @mouseleave="deactivate('red')"
           :class="{ active: isActive.red }"
@@ -42,7 +42,7 @@
         </div>
         <div
           class="pic border-blueline mrtBlueBoy"
-          @click="filterOptions(color);"
+          @click="filterOptions(color)"
           @mouseenter="activate('blue')"
           @mouseleave="deactivate('blue')"
           :class="{ active: isActive.blue }"
@@ -51,7 +51,7 @@
         </div>
         <div
           class="pic border-greenline mrtGreenBoy"
-          @click="filterOptions(color);"
+          @click="filterOptions(color)"
           @mouseenter="activate('green')"
           @mouseleave="deactivate('green')"
           :class="{ active: isActive.green }"
@@ -60,7 +60,7 @@
         </div>
         <div
           class="pic border-orangeline mrtOrangeBoy"
-          @click="filterOptions(color);"
+          @click="filterOptions(color)"
           @mouseenter="activate('orange')"
           @mouseleave="deactivate('orange')"
           :class="{ active: isActive.orange }"
@@ -69,7 +69,7 @@
         </div>
         <div
           class="pic border-brownline mrtBrownBoy"
-          @click="filterOptions(color);"
+          @click="filterOptions(color)"
           @mouseenter="activate('brown')"
           @mouseleave="deactivate('brown')"
           :class="{ active: isActive.brown }"
@@ -78,7 +78,7 @@
         </div>
         <div
           class="pic border-yellowline mrtYellowBoy"
-          @click="filterOptions(color);"
+          @click="filterOptions(color)"
           @mouseenter="activate('yellow')"
           @mouseleave="deactivate('yellow')"
           :class="{ active: isActive.yellow }"
@@ -207,11 +207,7 @@
       <!------------------------美食住宿景點卡片 ------------------------------------->
       <div class="CBPost" v-show="closePost && item.isShow">
         <div class="box" v-if="item.isShow">
-          <span
-            class="closePost"
-            @click="toggleMtrStaBox(item)"
-            >✖</span
-          >
+          <span class="closePost" @click="toggleMtrStaBox(item)">✖</span>
 
           <transition appear name="fade" mode="out-in">
             <div class="swiperMRTCard">
@@ -514,24 +510,24 @@ export default {
         .scrollIntoView({ behavior: "smooth" });
     },
 
-    showTag(color) {
-      this.selectedColor = color;
-      this.filteredMrt = this.mrt.filter((item) => item.color === color);
+    // showTag(color) {
+    //   this.selectedColor = color;
+    //   this.filteredMrt = this.mrt.filter((item) => item.color === color);
 
-      if (window.innerWidth <= 768) {
-        this.showAll = true;
-      } else {
-        this.selectColor = [
-          "red",
-          "blue",
-          "green",
-          "orange",
-          "brown",
-          "yellow",
-        ];
-        this.showAll = true;
-      }
-    },
+    //   if (window.innerWidth <= 768) {
+    //     this.showAll = true;
+    //   } else {
+    //     this.selectColor = [
+    //       "red",
+    //       "blue",
+    //       "green",
+    //       "orange",
+    //       "brown",
+    //       "yellow",
+    //     ];
+    //     this.showAll = true;
+    //   }
+    // },
     //rwd判斷
     WindowWidth() {
       if (window.innerWidth <= 768) {
@@ -560,9 +556,9 @@ export default {
       });
     },
     toggleMtrStaBox(item) {
-      this.closePost = !this.closePost
-      item.isShow = !item.isShow
-      this.lightBox = !this.lightBox
+      this.closePost = !this.closePost;
+      item.isShow = !item.isShow;
+      this.lightBox = !this.lightBox;
     },
   },
 
@@ -588,7 +584,7 @@ export default {
   },
   watch: {
     lightBox(nVal) {
-      if (!nVal) return
+      if (!nVal) return;
       this.$nextTick(() => {
         this.swiperMRTCard = new Swiper(".swiperMRTCard", {
           direction: "horizontal",
@@ -625,13 +621,13 @@ export default {
             },
           },
         });
-      })
+      });
     },
   },
 
   created() {},
   beforeUnmount() {
-    this.swiperMRTCard?.destroy()
+    this.swiperMRTCard?.destroy();
   },
 };
 </script>
