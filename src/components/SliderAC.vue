@@ -5,6 +5,7 @@
             <img :src=$imgUrl(userImg) />
         </div>
         <h3>{{ this.$store.state.memInfo.mem_name }}</h3>
+        <h4>我的點數：{{ this.$store.state.memInfo.mem_point }}</h4>
         <!-- <h3>{{ member }}</h3> -->
         <button>
             <router-link to="/home" class="logout" @click="logout">登出</router-link>
@@ -58,8 +59,8 @@ export default {
             document.querySelector('.SliderAC').style.left = '-100%'
         },
         logout() {
-            // document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
             localStorage.removeItem('user');
+            this.$store.dispatch('setInfo', {})
             this.$router.push('/login')
         }
     }
