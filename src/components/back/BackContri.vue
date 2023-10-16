@@ -15,8 +15,8 @@
       <p>核准狀態</p>
     </div>
     <div class="NewsInfro" v-for="item in items" :key="item.art_no">
-      <p>{{ item.art_no }}</p>
-      <p>{{ item.fea_id }}</p>
+      <p>{{ item.art_id }}</p>
+      <p>{{ item.fea_tag }}</p>
       <p>{{ item.art_title }}</p>
       <p>{{ item.mem_id }}</p>
       <p>{{ item.art_date }}</p>

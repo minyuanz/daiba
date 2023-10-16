@@ -2,8 +2,7 @@
   <div class="BackPro" v-if="addToggle" v-show="!editMode">
     <div class="ProSearch">
       商品編號查詢:
-      <input type="text" />
-      <button class="ProSearchBtn">查詢</button>
+      <input type="text" v-model="searchKeyword" @input="filterProducts" />
     </div>
     <div class="ProTitle">
       <p>商品編號</p>
@@ -12,7 +11,7 @@
       <p>編輯</p>
       <p>上架/下架</p>
     </div>
-    <div class="ProInfro" v-for="product in products" :key="product.prod_id">
+    <div class="ProInfro" v-for="product in filteredProducts" :key="product.prod_id">
       <p>{{ product.prod_id }}</p>
       <p>{{ product.prod_name }}</p>
       <p>{{ product.prod_price }}</p>
@@ -287,6 +286,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      searchKeyword: '', 
       newProduct: {
         prod_name: "",
         prod_price: "",
@@ -320,6 +320,17 @@ export default {
       currentEditProduct: null, // 當前編輯的商品
       mode: "add",
     };
+  },
+  computed: {
+  filteredProducts() {
+    if (this.searchKeyword) {
+      return this.products.filter(product =>
+        product.prod_id.includes(this.searchKeyword)
+      );
+    } else {
+      return this.products; // 如果搜尋為空直則顯示全部產品
+    }
+  },
   },
   created() {
     this.fetchData();

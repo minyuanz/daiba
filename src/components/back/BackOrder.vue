@@ -3,8 +3,7 @@
   <div class="BackOrder" v-if="!showOrderDetailsPage" >
     <div class="OrderSearch">
       訂單編號查詢:
-      <input type="text" />
-      <button class="OrderSearchBtn">查詢</button>
+      <input type="text" v-model="searchKeyword" @input="filterOrders" />
     </div>
     <div class="OrderTitle">
       <p>訂單編號</p>
@@ -13,7 +12,7 @@
       <p>物流狀態</p>
       <p>訂單詳情</p>
     </div>
-    <div class="OrderInfro" v-for="order in orders" >
+    <div class="OrderInfro" v-for="order in filteredOrders" >
       <p>{{ order.ord_id }}</p>
       <p>{{ order.mem_id }}</p>
       <p>{{ order.ord_price }}</p>
@@ -68,6 +67,7 @@ export default {
       orders: [],
       selectedOrder: null,
       showOrderDetailsPage: false,
+      searchKeyword: '',
     };
   },
   mounted() {
@@ -107,6 +107,18 @@ export default {
       .catch((error) => {
         alert('請求失敗');
       });
+    },
+  },
+  computed: {
+    filteredOrders() {
+      // 使用搜索關鍵字過濾訂單
+      if (this.searchKeyword) {
+        return this.orders.filter(order =>
+          order.ord_id.toString().includes(this.searchKeyword)
+        );
+      } else {
+        return this.orders; // 如果搜索關鍵字為空，則顯示所有訂單
+      }
     },
   },
 };
