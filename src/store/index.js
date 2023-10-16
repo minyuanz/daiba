@@ -110,7 +110,7 @@ export default createStore({
     decrementCount(state, product) {
       // 在購物車中減少數量
       const cartItem = state.cart.find(
-        (item) => item.prod_id === product.pord_id
+        (item) => item.prod_id === product.prod_id
       );
       if (cartItem && cartItem.count > 1) {
         cartItem.count--;
