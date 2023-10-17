@@ -82,7 +82,7 @@
 
         <!-- 文章清單 -->
         <div class="CBList">
-            <div v-for="  (itemList, index)    in   paginatedList  " :key="itemList.art_no"
+            <div v-for="  (itemList, index)    in   paginatedList  " :key="itemList.art_id"
                 @click="(closePost = !closePost), (lightBox = !lightBox), openInner(itemList, index)">
                 <div :class="{ 'card-w': PC, 's-card-h': !PC }">
                     <div class="img">
@@ -136,7 +136,8 @@
                             <h4>{{ CBPost.art_subTitle }}</h4>
                         </div>
                         <div class="DigLikeBox" @click="addToCollect">
-                            <i class="fa-regular fa-heart" style="cursor: pointer;"></i>
+                            <i v-if="toCollect" class="fa-solid fa-heart" style="color: #ff0000;cursor: pointer;"></i>
+                            <i v-else class="fa-regular fa-heart" style="cursor: pointer;"></i>
                         </div>
                         <div class="scrollbarArea">
                             <div class="info">
@@ -309,8 +310,10 @@ export default {
             closePost: false,
             lightBox: false,
             swiper: false,
-            artNo: '', // get art_id
+            artId: '', // get art_id
             memId: '', // get mem_id
+            userALLArtCollect:[],
+            userArtCollect:'',
             pageSize: 6, // 每頁顯示數量
             currentPage: 1, // 當前頁數
         };
@@ -319,6 +322,7 @@ export default {
         ButtonM
     },
     methods: {
+
         windowWidth() {
             if (window.innerWidth <= 1280) {
                 this.LAP = true;
@@ -362,7 +366,7 @@ export default {
 
         //打開文章內容
         openInner(item, index) {
-            // 輪播
+            // 輪播w
             const swiperPost = new Swiper(".swiperPost", {
             effect: "cube",
             speed: 2000,
@@ -384,7 +388,9 @@ export default {
 
             this.CBPost = []
             this.CBPost = item
-            
+            this.userArtCollect = this.userALLArtCollect[ parseInt(this.CBPost.art_id) - 1].art_id
+            console.log( parseInt(this.CBPost.art_id) - 1);
+            console.log(this.userArtCollect);
             this.lightBox = true
             this.artId = this.CBList[index].art_id
             this.memId = this.CBList[index].mem_id
@@ -435,7 +441,7 @@ export default {
             } else {
                 const formData = new FormData();
                 formData.append("mem_id", userinfo.mem_id);
-                formData.append("art_no", this.artNo);
+                formData.append("art_id", this.artId);
 
                 fetch('http://localhost/dai/public/phps/addToArticleCollect.php', {
                     method: 'post',
@@ -470,6 +476,7 @@ export default {
             this.currentPage = page;
         },
 
+
     },
 
     mounted() {
@@ -490,6 +497,25 @@ export default {
             },
         });
 
+        // const swiperPost = new Swiper(".swiperPost", {
+        //     effect: "cube",
+        //     speed: 2000,
+        //     loop: true,
+        //     autoplay: {
+        //         delay: 30
+        //     },
+        //     cubeEffect: {
+        //         shadow: true,
+        //         slideShadows: true,
+        //         shadowOffset: 20,
+        //         shadowScale: 0.94,
+        //     },
+        //     navigation: {
+        //         nextEl: ".swiper-button-next",
+        //         prevEl: ".swiper-button-prev",
+        //     },
+        //     });
+
          
 
         // 背景圖輪播
@@ -499,16 +525,54 @@ export default {
 
 
         window.addEventListener("resize", this.windowWidth);
+
+        
     },
     created() {
-        // 從後端資料庫抓取所有資料
+        // 從後端資料庫抓取投稿已審核的資料
         axios.get(`${this.$apiUrl('getArticle.php')}`)
             .then((res) => {
                 this.CBList = res.data
+                // console.log(res.data);
+                this.CBPost = this.CBList[0]
             })
             .catch((error) => {
                 console.error('資料失敗：', error);
             });
+
+
+
+        axios.get(`${this.$apiUrl('getALLArticleCollect.php')}`)
+        .then((res) => {
+            console.log(res.data);
+            const matchingUser = res.data.filter(user => user.mem_id === this.$store.state.memInfo.mem_id); //資料中和目前登入的ID配對
+            this. userALLArtCollect = matchingUser
+            console.log(this. userALLArtCollect);
+        })
+        .catch((error) => {
+            console.error('資料失敗：', error);
+        });
+
+
+            
+        //抓取會員收藏的狀態
+        // let memId = this.$store.state.memInfo.mem_id
+        // let formData = new FormData()
+        // formData.append("mem_id", memId);
+        // // this.$apiUrl('getArticleCollect.php')
+        // fetch(this.$apiUrl('getALLArticleCollect.php'), {
+        //   method: 'post',
+        //   body: formData
+        // })
+        //   .then(res => res.json())
+        //   .then((res) => {
+        //     this.userArtCollect = res
+        //   })
+        //   .catch((error) => {
+        //     console.error('數據傳輸失敗：', error);
+        //   });
+
+    
     },
     computed:{ 
         //算出所有的頁數
@@ -522,7 +586,19 @@ export default {
             const endIndex = startIndex + this.pageSize;  
             return this.CBList.slice(startIndex, endIndex);
         },
-},
+
+        toCollect() {
+            console.log(this.userArtCollect);
+              console.log(this.CBPost.art_id);
+           if (this.userArtCollect === this.CBPost.art_id) {
+            //   console.log(this.userArtCollect);
+            //   console.log(this.CBPost.art_id);
+              return true;
+            }
+            
+            
+        },
+}
 }
 </script>
 

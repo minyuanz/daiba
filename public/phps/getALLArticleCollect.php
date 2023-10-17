@@ -1,5 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin:*");
+header("Access-Control-Allow-Origin:*"); // 允许任何来源访问
 
 // header("Content-Type: application/json");
 
@@ -8,12 +8,10 @@ try {
     // 連接資料庫
     require_once("connect_chd103g5_2.php");
     // sql指令
-	$sql = "SELECT e.*, d.mem_name, d.mem_id, d.mem_img FROM article e
-    LEFT JOIN member d ON e.mem_id = d.mem_id
-    WHERE e.art_status = 1";
+	$sql = "SELECT * FROM article_collect ORDER BY art_id ";
     // 
-    $article = $pdo->query( $sql );
-    $result=$article->fetchAll(PDO::FETCH_ASSOC);
+    $collect = $pdo->query( $sql );
+    $result=$collect->fetchAll(PDO::FETCH_ASSOC);
     
     echo json_encode($result);
 
