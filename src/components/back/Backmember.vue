@@ -3,7 +3,7 @@
     <div class="memberSearch">
       <label for="">會員編號查詢：</label>
       <input type="text" v-model="search" />
-      <button class="btnsearch">查詢</button>
+      <!-- <button class="btnsearch">查詢</button> -->
     </div>
     <div class="memberTitle">
       <p>會員編號</p>

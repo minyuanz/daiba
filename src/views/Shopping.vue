@@ -31,7 +31,7 @@
         </div>
         <div v-for="(product, index) in cartItems" :key="index" class="ShopProCardDetail">
           <div class="CardDetailImg">
-            <img :src="`${this.$store.state.imgURLp}` +  product.prod_img1" alt="">
+            <img  :src=$imgUrl(product.prod_img1) alt="">
           </div>
           <div class="CardDetailTitle">{{ product.prod_name }}</div>
           <div class="CardDetailPrice">NT${{ product.prod_price }}</div>
@@ -234,7 +234,7 @@ export default {
         newPoint: this.newPoint, // 剩餘點數
         orderDetails: orderDetails,
       };
-      fetch('http://localhost/dai/public/phps/CreatOrderandDetail.php', {
+      fetch(this.$apiUrl('CreatOrderandDetail.php'), {
         method: 'POST',
         body: JSON.stringify(orderData),
         headers: {

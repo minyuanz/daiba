@@ -9,13 +9,13 @@
           </div>
         </div>
         <div class="DetailPic">
-          <img @click="selectImage(foundObject.prod_img1)" :src="`${this.$store.state.imgURLp}` + foundObject.prod_img1"
+          <img @click="selectImage(foundObject.prod_img1)" :src=$imgUrl(foundObject.prod_img1)
             alt="">
-          <img @click="selectImage(foundObject.prod_img2)" :src="`${this.$store.state.imgURLp}` + foundObject.prod_img2"
+          <img @click="selectImage(foundObject.prod_img2)" :src=$imgUrl(foundObject.prod_img2)
             alt="">
-          <img @click="selectImage(foundObject.prod_img3)" :src="`${this.$store.state.imgURLp}` + foundObject.prod_img3"
+          <img @click="selectImage(foundObject.prod_img3)" :src=$imgUrl(foundObject.prod_img3)
             alt="">
-          <img @click="selectImage(foundObject.prod_img4)" :src="`${this.$store.state.imgURLp}` + foundObject.prod_img4"
+          <img @click="selectImage(foundObject.prod_img4)" :src=$imgUrl(foundObject.prod_img4)
             alt="">
         </div>
       </div>
@@ -116,7 +116,7 @@ export default {
         formData.append("mem_id", userinfo.mem_id);
         formData.append("prod_id", this.foundObject.prod_id);
 
-        fetch('http://localhost/dai/public/phps/addToCollect.php', {
+        fetch(this.$apiUrl('addToCollect.php'), {
           method: 'post',
           body: formData
         })
@@ -135,7 +135,7 @@ export default {
   },
   mounted() {
     const idToFind = this.$route.params.id;
-    axios.get('http://localhost/dai/public/phps/ProductM.php')
+    axios.get(this.$apiUrl('ProductM.php'))
       .then((response) => {
         this.allProducts = response.data;
         this.foundObject = this.allProducts.find(item => item.prod_id === idToFind);
