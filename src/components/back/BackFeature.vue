@@ -78,7 +78,10 @@
         </div>
         <div class="selectTAg">
           <label for="">捷運站：</label>
-          <input type="text" v-model="formData.sta_name" />
+          <select name="sta_name" v-model="formData.sta_name">
+            <option value="">請選擇捷運站</option>
+            <option v-for="station in mrtStations" :value="station.sta_name" :key="station.id">{{ station.sta_name }}</option>
+          </select>
           <label for="">推薦分類：</label>
           <select name="" id="" v-model="formData.fea_name">
             <option value="景點">景點</option>
@@ -358,6 +361,14 @@ export default {
   },
   created() {
     this.fetchData();
+    axios
+    .get("http://localhost/dai/public/phps/GetMrtStations.php") 
+    .then((response) => {
+      this.mrtStations = response.data;
+    })
+    .catch((error) => {
+      console.error("獲取捷運站數據失敗：", error);
+    });
   },
   methods: {
     fetchData() {
