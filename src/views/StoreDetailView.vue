@@ -3,7 +3,7 @@
     <div class="DetailBox">
       <div class="DetailPicBox">
         <div class="DetailMainPic">
-          <img :src="`${this.$store.state.imgURLp}` + selectedImage" alt="">
+          <img  :src=$imgUrl(selectedImage) alt="">
           <div class="DigLikeBox" @click="addToCollect">
             <i class="fa-regular fa-heart" style="cursor: pointer;"></i>
           </div>
@@ -46,7 +46,7 @@
         <router-link v-for="product in randomProducts" :key="product.prod_id" :to="'/storeDetail/' + product.prod_id"
           class="OtherDetailCard">
           <div class="DetailCardImg">
-            <img :src="`${this.$store.state.imgURLp}` + product.prod_img1" alt="">
+            <img  :src=$imgUrl(product.prod_img1) alt="">
           </div>
           <div class="DetailCardDes">
             <h4 class="CardDesTitle">{{ product.prod_name }}</h4>

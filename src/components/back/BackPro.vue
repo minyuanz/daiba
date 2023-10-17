@@ -66,10 +66,10 @@
           <option value="Souvenir">伴手禮</option>
           <option value="memento">紀念品</option>
         </select>
-        <label for="">捷運站：</label>
+        <!-- <label for="">捷運站：</label>
         <select id="staId" v-model="newProduct.sta_id">
           <option value="BL">BL</option>
-        </select>
+        </select> -->
       </div>
       <div class="proPic">
         <p class="title">商品照</p>
@@ -172,10 +172,10 @@
           <option value="Souvenir">伴手禮</option>
           <option value="memento">紀念品</option>
         </select>
-        <label for="">捷運站：</label>
+        <!-- <label for="">捷運站：</label>
         <select id="staId" v-model="currentEditProduct.sta_id">
           <option value="BL">BL</option>
-        </select>
+        </select> -->
       </div>
       <div class="proPic">
         <p class="title">商品照</p>

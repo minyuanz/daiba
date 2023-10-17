@@ -3,7 +3,6 @@
     <div class="NewsSearch">
       投稿編號查詢:
       <input type="text" v-model="search" />
-      <button class="NewsSearchBtn">查詢</button>
     </div>
     <div class="NewsTitle">
       <p>編號</p>
