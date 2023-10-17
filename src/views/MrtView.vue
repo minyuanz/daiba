@@ -280,7 +280,7 @@
       </div>
     </div>
   </div>
-  <div class="lightBox" v-show="lightBox"></div>
+  <div class="lightBox" v-show="lightBox"  @click="toggleBox(item)"></div>
 </template>
 
 <script>
@@ -614,6 +614,12 @@ export default {
       item.isShow = !item.isShow;
       this.lightBox = !this.lightBox;
     },
+
+    toggleBox(item){
+      this.closePost = !this.closePost;
+      // item.isShow = !item.isShow;
+      this.lightBox = !this.lightBox;
+    }
   },
 
   computed: {
