@@ -14,7 +14,7 @@
       <p>文章內容</p>
       <p>核准狀態</p>
     </div>
-    <div class="NewsInfro" v-for="item in items" :key="item.art_id">
+    <div class="NewsInfro" v-for="item in filter" :key="item.art_id">
       <p>{{ item.art_id }}</p>
       <p>{{ item.fea_tag }}</p>
       <p>{{ item.art_title }}</p>
