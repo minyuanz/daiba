@@ -495,14 +495,14 @@ export default {
             this.newProduct = {
               prod_name: "",
               prod_price: "",
-              prod_type: "food",
-              sta_id: "BL",
+              prod_type: "",
               prod_des1: "",
               prod_des2: "",
               prod_img1: null,
               prod_img2: null,
               prod_img3: null,
               prod_img4: null,
+
             };
           } else {
             alert("商品新增失敗");
@@ -511,6 +511,7 @@ export default {
         .catch((error) => {
           console.error("新增商品請求失敗：", error);
         });
+        location.reload();
     },
   },
 };
