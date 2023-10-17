@@ -265,9 +265,9 @@
             <transition appear name="box" mode="out-in">
               <div class="checkBox" style="" v-if="showCheckBox">
                 <div class="box">
-                  <button class="place" @click="selectType('景點')" style="border-radius: 20px;border: 3px solid #d9d9d9;background: white;">景點</button>
-                  <button class="food" @click="selectType('美食')" style="border-radius: 20px;border: 3px solid #d9d9d9;background: white;">美食</button>
-                  <button class="hotel" @click="selectType('住宿')" style="border-radius: 20px;border: 3px solid #d9d9d9;background: white;">住宿</button>
+                  <button class="place" @click="selectType('景點')">景點</button>
+                  <button class="food" @click="selectType('美食')">美食</button>
+                  <button class="hotel" @click="selectType('住宿')">住宿</button>
                 </div>
                 <div class="triangle"></div>
               </div>
