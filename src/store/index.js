@@ -14,21 +14,24 @@ const publicURLL =
     ? ""
     : "https://tibamef2e.com/chd103/g5";
 
-const imgURL = process.env.NODE_ENV === "development" ? "http://localhost/dai/public/img/" : "";
-const imgURLp = process.env.NODE_ENV === "development" ? "http://localhost/dai/public/img/product/" : ""
-
-
-
+const imgURL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost/dai/public/img/"
+    : "";
+const imgURLp =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost/dai/public/img/product/"
+    : "";
 
 export default createStore({
   state: {
-    point: [],//儲存點數
+    point: [], //儲存點數
     cart: [], // 儲存商品
     favorites: [],
     purchaseProcess: {},
     publicURLL,
     imgURL, //圖片路徑
-    imgURLp,//商品圖片路徑
+    imgURLp, //商品圖片路徑
     memId: "", // 存會員的memId
     memInfo: "",
     loggedInUser: null, // 後台登入狀態
@@ -37,7 +40,7 @@ export default createStore({
         id: 1,
         title: "台北101",
         grayTag: "景點推薦",
-        colorTag: ['信義安和'],
+        colorTag: ["信義安和"],
         mrtimg1: require("../assets/images/mrtPag/oneoone/oneoone_1.jpg"),
         p1: "TAIPEI 101座落於台北最菁華地段，是國內建築界有史以來最大的工程專案。該專案主要由國內十四家企業共同組成的台北金融大樓股份有限公司，與國內外專業團隊聯手規劃，並由國際級建築大師李祖原精心設計，超越單一量體的設計觀，以吉祥數字「八」（「發」的諧音），作為設計單元。",
         mrtimg2: require("../assets/images/mrtPag/oneoone/oneoone_2.jpg"),
@@ -121,13 +124,14 @@ export default createStore({
     },
     getId(state, memId) {
       // 拿到會員的memId
-      state.memId = memId
+      state.memId = memId;
     },
     getInfo(state, memInfo) {
       // 拿到會員的memInfo
-      state.memInfo = memInfo
+      state.memInfo = memInfo;
     },
-    setLoggedInUser(state, user) {//後台loco的數據暫存
+    setLoggedInUser(state, user) {
+      //後台loco的數據暫存
       state.loggedInUser = user;
     },
   },
@@ -160,7 +164,7 @@ export default createStore({
     login({ commit }, user) {
       // 針對登入後的操錯 這邊先暫存  之後用權限備用
       // 假设登录成功后，后端返回的用户信息包含在 user 对象中
-      commit('setLoggedInUser', user);
+      commit("setLoggedInUser", user);
     },
     // clearCart({ commit }) {
     //   // 清空購物車
