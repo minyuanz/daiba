@@ -14,7 +14,7 @@
       <p>文章內容</p>
       <p>核准狀態</p>
     </div>
-    <div class="NewsInfro" v-for="item in filter" :key="item.art_no">
+    <div class="NewsInfro" v-for="item in items" :key="item.art_id">
       <p>{{ item.art_id }}</p>
       <p>{{ item.fea_tag }}</p>
       <p>{{ item.art_title }}</p>
@@ -140,7 +140,7 @@ export default {
       item.art_status = item.art_status === "1" ? "0" : "1";
       axios
         .post("http://localhost/dai/public/phps/ContralBackContri.php", {
-          art_no: item.art_no,
+          art_id: item.art_id,
           art_status: item.art_status,
         })
         .then((response) => {
