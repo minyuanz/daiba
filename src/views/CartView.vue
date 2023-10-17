@@ -31,7 +31,7 @@
         </div>
         <div v-for="(product, index) in cartItems" :key="index" class="CartProCardDetail">
           <div class="CardDetailImg">
-            <img :src="`${this.$store.state.imgURLp}` +  product.prod_img1" alt="">
+            <img :src="$imgUrl(product.prod_img1)" alt="">
           </div>
           <div class="CardDetailTitle">{{ product.prod_name }}</div>
           <div class="CardDetailPrice">{{ product.prod_price }}</div>
