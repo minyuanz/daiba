@@ -29,7 +29,7 @@
       <div v-for="item  in paginatedProducts "  :key="item.pord_id"  class="storeCard">
         <router-link :to="'/storeDetail/' + item.prod_id" >
           <div class="imgbox">
-            <img  class="storeCardimg" :src="`${this.$store.state.imgURLp}` +  item.prod_img1"/>
+            <img  class="storeCardimg" :src=$imgUrl(item_prod_img1)/>
             <!-- <div class="storeButton addToHeart">
               <i class="fa-regular fa-heart" style="cursor: pointer"></i>
             </div> -->
@@ -92,7 +92,7 @@ export default {
     },
   methods: {
     fetchData() {
-            axios.get('http://localhost/dai/public/phps/ProductM.php')
+            axios.get(this.$apiUrl('ProductM.php'))
             .then((response) => {
             this.allProducts = response.data; // 更新數據到 products
         })

@@ -23,7 +23,7 @@
                             <p>數量</p>
                         </div>
                         <div class="infoCtx" v-for="detail in order.details" :key="detail.prod_id">
-                            <img :src="`${this.$store.state.imgURLp}` +  detail.prod_img1" alt="">
+                            <img :src=$imgUrl(detail.prod_img1) alt="">
                             <p>{{ detail.prod_name }}</p>
                             <p>NT {{ detail.buy_price }}</p>
                             <p>{{ detail.orderdetail_count }}</p>
@@ -49,7 +49,8 @@ export default {
     },
     methods: {
     fetchOrders(memberId) {
-    axios.get(`http://localhost/dai/public/phps/MemberOrderM.php?memberId=${memberId}`)
+    const apiUrl = this.$apiUrl(`MemberOrderM.php?memberId=${memberId}`);
+    axios.get(apiUrl)
       .then((response) => {
         this.orders = response.data; 
         this.updatePage(1); 
@@ -59,8 +60,8 @@ export default {
       });
   },
   loadOrderDetails(orderId) {
-  axios
-    .get(`http://localhost/dai/public/phps/MemberOrderDerailM.php?orderId=${orderId}`)
+    const apiUrl = this.$apiUrl(`MemberOrderDerailM.php?orderId=${orderId}`);
+    axios.get(apiUrl)
     .then((response) => {
       const orderIndex = this.orders.findIndex(order => order.ord_id === orderId);
       if (orderIndex !== -1) {
