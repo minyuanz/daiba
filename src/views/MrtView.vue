@@ -4,24 +4,6 @@
   </div>
 
   <section class="mrtLineCheck">
-    <div class="mrtTagbar" @click="checkShow">
-      <div class="outer-circle"></div>
-      <div class="color-circle"></div>
-      <div class="inner-circle">
-        <img src="../../public/img/mrtImg.png" alt="" />
-      </div>
-      <transition appear name="box" mode="out-in">
-        <div class="checkBox" v-if="showCheckBox">
-          <div class="box">
-            <button class="place" @click="resetToPlace">景點</button>
-            <button class="food" @click="changeContent('hotel')">美食</button>
-            <button class="hotel" @click="changeContent('hotel')">住宿</button>
-          </div>
-          <div class="triangle"></div>
-        </div>
-      </transition>
-    </div>
-
     <div class="mrtPic">
       <div class="pic mrtGrayStyle border-brownline">
         <img src="../../public/img/brown.jpeg" alt="brownline" />
@@ -144,14 +126,14 @@
       >
         {{ upperCaseColorsMB[index] }}
       </button>
-    </div>
+    </div>  
 
     <div v-if="PC" class="mrtTag">
       <button
         class="title-tag"
         v-for="(color, index) in selectColor"
         :key="color"
-        :class="BGColor(color), color"
+        :class="(BGColor(color), color)"
         @mouseenter="activate(color)"
         @mouseleave="deactivate(color)"
         @click="
@@ -215,7 +197,7 @@
               (lightBox = !lightBox),
               (item.isShow = !item.isShow),
               showMrtCard(item)
-          "
+              selectedType = '景點';"
         >
           <div class="mrtStaMaruBox">
             <img
@@ -233,7 +215,6 @@
       <div class="CBPost" v-show="closePost && item.isShow">
         <div class="box" v-if="item.isShow">
           <span class="closePost" @click="toggleMtrStaBox(item)">✖</span>
-
           <transition appear name="fade" mode="out-in">
             <div class="swiperMRTCard">
               <div class="swiper-wrapper">
@@ -241,16 +222,18 @@
                   class="swiper-slide"
                   v-for="(itemplace, index) in item.place"
                 > -->
-                <div
-                  class="swiper-slide"
-                  v-for="(itemCard, index) in filteredMrtCard"
-                  :key="index"
-                >
+                <div class="swiper-slide" v-for="(itemCard, index) in filteredMrtCard" :key="index" :class="{ 'hidden': selectedType !== '' && itemCard.fea_name !== selectedType }">
+                  <div class="cardHeight" v-if="selectedType === '' || itemCard.fea_name === selectedType">
                   <!-- <router-link
                 :to="{ path: itemplace?.router ? itemplace.router : '/' }"
                 > -->
-                  <router-link to="/MrtCardPage/:id"
-                    ><div class="mrtCardWrap">
+                  <router-link
+                    :to="{
+                      name: 'MrtCardPage',
+                      params: { id: itemCard.special_id },
+                    }"
+                    >
+                    <div class="mrtCardWrap">
                       <!-- 卡片 -->
                       <div class="card-h border-r">
                         <div class="img">
@@ -263,19 +246,41 @@
                           <div class="txt">{{ itemCard.special_des }}</div>
                         </div>
                       </div>
-                    </div></router-link
-                  >
+                    </div>
+                    </router-link>
+                </div>
                 </div>
               </div>
-              <div class="swiper-button-prev swiper-btn"></div>
-              <div class="swiper-button-next swiper-btn"></div>
+              <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
             </div>
           </transition>
+          <!-- to="/MrtCardPage/:id" -->
         </div>
+        <!-- ---------------------按鈕 -->
+        <div class="mrtTagbar" @click="checkShow">
+            <div class="outer-circle"></div>
+            <div class="color-circle"></div>
+            <div class="inner-circle">
+              <img src="../../public/img/mrtImg.png" alt="" />
+            </div>
+            <transition appear name="box" mode="out-in">
+              <div class="checkBox" style="" v-if="showCheckBox">
+                <div class="box">
+                  <button class="place" @click="selectType('景點')">景點</button>
+                  <button class="food" @click="selectType('美食')">美食</button>
+                  <button class="hotel" @click="selectType('住宿')">住宿</button>
+                </div>
+                <div class="triangle"></div>
+              </div>
+            </transition>
+          </div>
+
+      <!-- --------------------- -->
       </div>
     </div>
   </div>
-  <div class="lightBox" v-show="lightBox"></div>
+  <div class="lightBox" v-show="lightBox"  @click="toggleBox(item)"></div>
 </template>
 
 <script>
@@ -288,6 +293,8 @@ import axios from "axios";
 export default {
   data() {
     return {
+      selectedType: '景點',
+      selectedFeature: "",
       selectMrtId: "R",
       mrtstaGroup: [],
       filteredMrtCard: [],
@@ -515,28 +522,31 @@ export default {
       this.lightBox = true;
       item.isShow = true;
     },
-
-    changeContent(type) {
-      // 保存原始資料
-      if (this.originalPlaceData.length === 0) {
-        this.originalPlaceData = this.filteredMrt.map((item) => ({ ...item }));
-      }
-
-      this.filteredMrt.forEach((item) => {
-        item.isShow = false;
-        item.place = item[type];
-      });
+    selectType(type) {
+    this.selectedType = type;
     },
+    // changeContent(type) {
+    //   // 保存原始資料
+    //   this.selectedFeature = type;
+    //   if (this.originalPlaceData.length === 0) {
+    //     this.originalPlaceData = this.filteredMrt.map((item) => ({ ...item }));
+    //   }
 
-    resetToPlace() {
-      if (this.originalPlaceData.length > 0) {
-        this.filteredMrt.forEach((item, index) => {
-          item.isShow = false;
-          item.place = this.originalPlaceData[index].place;
-        });
-        this.originalPlaceData = []; // 清空暫存的資料
-      }
-    },
+    //   this.filteredMrt.forEach((item) => {
+    //     item.isShow = false;
+    //     item.place = item[type];
+    //   });
+    // },
+
+    // resetToPlace() {
+    //   if (this.originalPlaceData.length > 0) {
+    //     this.filteredMrt.forEach((item, index) => {
+    //       item.isShow = false;
+    //       item.place = this.originalPlaceData[index].place;
+    //     });
+    //     this.originalPlaceData = []; // 清空暫存的資料
+    //   }
+    // },
 
     someMethod() {
       if (Array.isArray(this.selectColor)) {
@@ -604,6 +614,12 @@ export default {
       item.isShow = !item.isShow;
       this.lightBox = !this.lightBox;
     },
+
+    toggleBox(item){
+      this.closePost = !this.closePost;
+      // item.isShow = !item.isShow;
+      this.lightBox = !this.lightBox;
+    }
   },
 
   computed: {
@@ -701,5 +717,8 @@ export default {
   100% {
     filter: brightness(150%);
   }
+}
+.hidden {
+  display: none;
 }
 </style>

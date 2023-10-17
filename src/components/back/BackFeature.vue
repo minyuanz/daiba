@@ -78,7 +78,10 @@
         </div>
         <div class="selectTAg">
           <label for="">捷運站：</label>
-          <input type="text" v-model="formData.sta_name" />
+          <select name="sta_name" v-model="formData.sta_name">
+            <option value="">請選擇捷運站</option>
+            <option v-for="station in mrtStations" :value="station.sta_name" :key="station.id">{{ station.sta_name }}</option>
+          </select>
           <label for="">推薦分類：</label>
           <select name="" id="" v-model="formData.fea_name">
             <option value="景點">景點</option>
@@ -215,7 +218,7 @@
           <div class="pic">
             <p>＋</p>
             <img
-              :src="`${this.$store.state.imgURL}` + editFeature.special_pic2"
+              :src="$imgUrl(editFeature.special_pic2)"
               v-if="editFeature.special_pic2 !== '' ? true : false"
             />
             <input
@@ -223,7 +226,7 @@
               name="image2"
               @change="handleFileChange($event, 1, 'edit')"
             />
-            <img :src="originalpics[1].imageURL" v-show="originalpics[1].fix" />
+            <img :src="originalpics[1].imageURL" v-show="originalpics[1].fix"  />
           </div>
           <textarea
             class="custom-input"
@@ -235,7 +238,7 @@
           <div class="pic">
             <p>＋</p>
             <img
-              :src="`${this.$store.state.imgURL}` + editFeature.special_pic3"
+            :src="$imgUrl(editFeature.special_pic3)"
               v-if="editFeature.special_pic3 !== '' ? true : false"
             />
             <input
@@ -255,7 +258,7 @@
           <div class="pic">
             <p>＋</p>
             <img
-              :src="`${this.$store.state.imgURL}` + editFeature.special_pic4"
+            :src="$imgUrl(editFeature.special_pic4)"
               v-if="editFeature.special_pic4 !== '' ? true : false"
             />
             <input
@@ -275,7 +278,7 @@
           <div class="pic">
             <p>＋</p>
             <img
-              :src="`${this.$store.state.imgURL}` + editFeature.special_pic5"
+            :src="$imgUrl(editFeature.special_pic5)"
               v-if="editFeature.special_pic5 !== '' ? true : false"
             />
             <input
@@ -358,11 +361,19 @@ export default {
   },
   created() {
     this.fetchData();
+    axios
+    .get(this.$apiUrl('GetMrtStations.php')) 
+    .then((response) => {
+      this.mrtStations = response.data;
+    })
+    .catch((error) => {
+      console.error("獲取捷運站數據失敗：", error);
+    });
   },
   methods: {
     fetchData() {
       axios
-        .get("http://localhost/dai/public/phps/BackFeatureM.php")
+        .get(this.$apiUrl('BackFeatureM.php'))
         .then((response) => {
           this.features = response.data; // 更新數據到 features
         })
@@ -487,7 +498,7 @@ export default {
       formData.append("special_ctx5", this.formData.special_ctx5);
 
       axios
-        .post("http://localhost/dai/public/phps/CreatFeature.php", formData, {
+        .post(this.$apiUrl('CreatFeature.php'), formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -540,7 +551,7 @@ export default {
       formData.append("special_id", this.editFeature.special_id);
 
       axios
-        .post("http://localhost/dai/public/phps/UpdateFeature.php", formData, {
+        .post(this.$apiUrl('UpdateFeature.php'), formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
