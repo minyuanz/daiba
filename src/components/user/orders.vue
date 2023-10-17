@@ -9,7 +9,7 @@
                     <p>總金額</p>
                     <p>訂單狀態</p>
                 </div>
-                <div class="orderList" v-for="order in ordersDisplay" :key="order.ord_id" @click="loadOrderDetails(order.ord_id)">
+                <div class="orderList" v-for="order in orders" :key="order.ord_id" @click="loadOrderDetails(order.ord_id)">
                     <div class="order">
                         <p>{{ order.ord_id }}</p>
                         <p>NT {{ order.ord_price }}</p>
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <Page :total="orders.length" size="small" :page-size="pageSize" @on-change="updatePage" id="page" />
+        <!-- <Page :total="orders.length" size="small" :page-size="pageSize" @on-change="updatePage" id="page" /> -->
     </div>
 </template>
 
