@@ -659,7 +659,7 @@ p {
   height: 100%;
   border-radius: 100px;
   vertical-align: top;
-  border: 8px solid black;
+  border: 1px solid black;
 }
 .SliderAC button {
   background-color: #fff;
@@ -724,15 +724,7 @@ p {
     right: -15px;
     width: 15px;
     height: 150%;
-    background-image: linear-gradient(
-      #a87b52 5%,
-      #dd4d54 10%,
-      #ffbb33 30%,
-      #fff04b 45%,
-      #4bc887 70%,
-      #32c8e1 85%,
-      #9164cd
-    );
+    background-image: linear-gradient(#a87b52 5%, #dd4d54 10%, #ffbb33 30%, #fff04b 45%, #4bc887 70%, #32c8e1 85%, #9164cd);
     /* border: 1px solid red; */
   }
 }
@@ -748,7 +740,7 @@ p {
   justify-content: center;
   font-size: 18px;
   height: 900px;
-  margin-top: 3rem;
+  margin-block: 3rem;
 }
 .bSliderAC .pic {
   width: 180px;
@@ -787,18 +779,17 @@ p {
 .bSliderAC ul {
   margin-block: 20px;
 }
-.bSliderAC ul li {
-  border-radius: 10px;
+.bSliderAC ul a {
+  display: block;
   width: 80%;
+  border-radius: 10px;
   padding: 10px;
   margin: auto;
   margin-bottom: 1.5rem;
 }
-.bSliderAC ul li:hover {
+.bSliderAC ul a:active, .bSliderAC ul a:hover {
+  color: #fff !important;
   background-color: #7d7d7d;
-}
-.bSliderAC ul li:hover a {
-  color: #fff;
 }
 .bSliderAC .userback {
   display: none;
@@ -829,15 +820,7 @@ p {
     right: -15px;
     width: 15px;
     height: 150%;
-    background-image: linear-gradient(
-      #a87b52 5%,
-      #dd4d54 10%,
-      #ffbb33 30%,
-      #fff04b 45%,
-      #4bc887 70%,
-      #32c8e1 85%,
-      #9164cd
-    );
+    background-image: linear-gradient(#a87b52 5%, #dd4d54 10%, #ffbb33 30%, #fff04b 45%, #4bc887 70%, #32c8e1 85%, #9164cd);
     /* border: 1px solid red; */
   }
 }
@@ -1151,7 +1134,7 @@ footer .footerTxt p {
   text-align: center;
 }
 .CartWrap .CartProBOX {
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 10px;
   background-color: rgb(234, 233, 233);
   width: 100%;
 }
@@ -1161,13 +1144,15 @@ footer .footerTxt p {
   color: #555;
   font-weight: 500;
 }
+.CartWrap .CartProBOX .CartProTitle .delete {
+  width: 60px;
+}
 .CartWrap .CartProBOX .CartProCardBox {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   font-size: 18px;
   background-color: white;
-  border-bottom: 1px solid gray;
   margin: auto;
 }
 .CartWrap .CartProBOX .CartProCardBox .CartProCardTitle {
@@ -1176,11 +1161,16 @@ footer .footerTxt p {
   margin: auto;
   align-items: center;
   text-align: center;
-  justify-content: center;
+  justify-content: space-evenly;
   padding: 10px 0;
 }
 .CartWrap .CartProBOX .CartProCardBox .CartProCardTitle div {
+  display: inline;
   width: 16%;
+}
+.CartWrap .CartProBOX .CartProCardBox .CartProCardTitle .delete {
+  display: inline-block;
+  width: 36px;
 }
 .CartWrap .CartProBOX .CartProCardBox .CartProCardDetail {
   box-sizing: border-box;
@@ -1190,16 +1180,17 @@ footer .footerTxt p {
   margin: auto;
   align-items: center;
   text-align: center;
-  justify-content: center;
+  justify-content: space-evenly;
   padding: 10px 0;
 }
 .CartWrap .CartProBOX .CartProCardBox .CartProCardDetail div {
   width: 16%;
 }
 .CartWrap .CartProBOX .CartProCardBox .CartProCardDetail .CardDetailImg img {
+  object-fit: cover;
   width: 100%;
   height: 150px;
-  padding: 10px;
+  vertical-align: top;
 }
 .CartWrap .CartProBOX .CartProCardBox .CartProCardDetail .CardDetailCount {
   display: flex;
@@ -1220,6 +1211,8 @@ footer .footerTxt p {
   cursor: pointer;
 }
 .CartWrap .CartProBOX .CartProCardBox .CartProCardDetail .CardDetailDelet {
+  display: inline-block;
+  width: 36px;
   cursor: pointer;
   font-weight: bold;
 }
@@ -1268,28 +1261,24 @@ footer .footerTxt p {
   .CartWrap .CartSpeedBox .course {
     justify-content: space-around;
   }
-  .CartWrap .DoneBtnBox,
-  .CartWrap .CartBtmBox {
+  .CartWrap .DoneBtnBox, .CartWrap .CartBtmBox {
     padding-right: 0;
     padding-left: 0;
     width: 100%;
     display: block;
   }
-  .CartWrap .DoneBtnBox .btn_s,
-  .CartWrap .CartBtmBox .btn_s {
+  .CartWrap .DoneBtnBox .btn_s, .CartWrap .CartBtmBox .btn_s {
     width: 100%;
     line-height: 36px;
     border: 1px solid #333;
   }
-  .CartWrap .DoneBtnBox .btn_s:last-child,
-  .CartWrap .CartBtmBox .btn_s:last-child {
+  .CartWrap .DoneBtnBox .btn_s:last-child, .CartWrap .CartBtmBox .btn_s:last-child {
     margin: 1rem 0;
   }
-  .CartWrap .DoneBtnBox .btn_m,
-  .CartWrap .CartBtmBox .btn_m {
+  .CartWrap .DoneBtnBox .btn_m, .CartWrap .CartBtmBox .btn_m {
     background-color: #4bc887;
     margin: auto 0;
     width: 100%;
     color: #fff;
   }
-} /*# sourceMappingURL=main.css.map */
+}/*# sourceMappingURL=main.css.map */
