@@ -197,7 +197,7 @@
               (lightBox = !lightBox),
               (item.isShow = !item.isShow),
               showMrtCard(item)
-          "
+              selectedType = '景點';"
         >
           <div class="mrtStaMaruBox">
             <img
@@ -223,7 +223,7 @@
                   v-for="(itemplace, index) in item.place"
                 > -->
                 <div  class="swiper-slide" v-for="(itemCard, index) in filteredMrtCard"  :key="index">
-                <div class="mrtCardWrap" v-if="selectedType === '' || itemCard.fea_name === selectedType">
+                <div class="mrtCardWrap" v-show="selectedType === '' || itemCard.fea_name === selectedType">
                   <!-- <router-link
                 :to="{ path: itemplace?.router ? itemplace.router : '/' }"
                 > -->
@@ -250,6 +250,7 @@
             </div>
           </transition>
         </div>
+        <!-- ---------------------按鈕 -->
         <div class="mrtTagbar" @click="checkShow">
             <div class="outer-circle"></div>
             <div class="color-circle"></div>
@@ -267,6 +268,7 @@
               </div>
             </transition>
           </div>
+      <!-- --------------------- -->
       </div>
     </div>
   </div>
@@ -283,7 +285,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      selectedType: '',
+      selectedType: '景點',
       selectedFeature: "",
       selectMrtId: "R",
       mrtstaGroup: [],
