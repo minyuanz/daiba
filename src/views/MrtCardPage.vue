@@ -1,13 +1,7 @@
 <template>
   <div class="mrtContibuteInPage">
     <div class="title">
-      <h1>{{ mrtfeature.special_title }}</h1>
-      <div class="tag">
-        <span class="title-tag gray">{{ mrtCardPage.grayTag }}</span>
-        <span class="title-tag red">
-          {{ mrtCardPage.colorTag }}
-        </span>
-      </div>
+      <h1>{{ filtermrtFea.special_title }}</h1>
     </div>
     <div class="fixCenter">
       <div
@@ -17,11 +11,11 @@
         }"
       >
         <div class="image">
-          <img :src="mrtCardPage.mrtimg1" alt="" />
+          <img :src="$imgUrl(filtermrtFea.special_pic1)" alt="" />
         </div>
       </div>
       <p>
-        {{ mrtCardPage.p1 }}
+        {{ filtermrtFea.special_ctx1 }}
       </p>
     </div>
     <div class="fixCenter part2">
@@ -126,6 +120,7 @@ import backgroundMb3 from "@../../../public/img/ron/part3_mb.svg";
 import background4 from "@../../../public/img/ron/part4bgc.svg";
 import backgroundMb4 from "@../../../public/img/ron/part4_mb.svg";
 import ButtonM from "@/components/ButtonM.vue";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -139,8 +134,8 @@ export default {
       PC: true,
       btninner: "官方網站",
       mrtCardPage: "",
-      newstest: "",
-      mrtfeature: "",
+      mrtFeature: [],
+      filtermrtFea: [],
     };
   },
   components: {
@@ -156,6 +151,19 @@ export default {
     //   (item) => item.id === storeId
     // );
     // console.log(this.$store.state.mrtCardPage);
+
+    axios
+      .get(this.$apiUrl("BackFeatureM.php"))
+      .then((res) => {
+        this.mrtFeature = res.data;
+        let idToFind = this.$route.params.id;
+        this.filtermrtFea = this.mrtFeature.find(
+          (item) => item.special_id === idToFind
+        );
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
   },
 
   methods: {
@@ -168,28 +176,9 @@ export default {
         this.MB = false;
       }
     },
-    fetchData() {
-      // 獲得newsinside/id的id值
-      let idToFind = this.$route.params.id;
-      // 獲得資料庫的消息列表
-      fetch(this.$apiUrl("BackFeatureM.php"))
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          // 更新數據到newstest
-          this.newstest = data;
-          // 提出newstest資料中news_id等於idToFind的那筆放進newsqaq
-          this.mrtfeature = this.newstest.find(
-            (item) => item.special_id === idToFind
-          );
-          // this.foundObject = this.newstest.find(item => item.news_id === idToFind);
-        })
-        .catch((error) => {
-          console.error("數據傳輸失敗：", error);
-        });
-    },
   },
+
+  // this.fetchData();
 };
 </script>
 <style lang="scss">
