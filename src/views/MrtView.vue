@@ -33,7 +33,7 @@
       <div class="mrtMainLine">
         <div
           class="pic border-redline mrtRedBoy"
-          @click="filterOptions(color)"
+          @click="filterOptions('red'); scrollTop(); showTag('red');"
           @mouseenter="activate('red')"
           @mouseleave="deactivate('red')"
           :class="{ active: isActive.red }"
@@ -42,7 +42,7 @@
         </div>
         <div
           class="pic border-blueline mrtBlueBoy"
-          @click="filterOptions(color)"
+          @click="filterOptions('blue'); scrollTop(); showTag('blue');"
           @mouseenter="activate('blue')"
           @mouseleave="deactivate('blue')"
           :class="{ active: isActive.blue }"
@@ -51,7 +51,7 @@
         </div>
         <div
           class="pic border-greenline mrtGreenBoy"
-          @click="filterOptions(color)"
+          @click="filterOptions('green'); scrollTop(); showTag('green');"
           @mouseenter="activate('green')"
           @mouseleave="deactivate('green')"
           :class="{ active: isActive.green }"
@@ -60,7 +60,7 @@
         </div>
         <div
           class="pic border-orangeline mrtOrangeBoy"
-          @click="filterOptions(color)"
+          @click="filterOptions('orange'); scrollTop(); showTag('orange');"
           @mouseenter="activate('orange')"
           @mouseleave="deactivate('orange')"
           :class="{ active: isActive.orange }"
@@ -69,7 +69,7 @@
         </div>
         <div
           class="pic border-brownline mrtBrownBoy"
-          @click="filterOptions(color)"
+          @click="filterOptions('brown'); scrollTop(); showTag('brown');"
           @mouseenter="activate('brown')"
           @mouseleave="deactivate('brown')"
           :class="{ active: isActive.brown }"
@@ -78,7 +78,7 @@
         </div>
         <div
           class="pic border-yellowline mrtYellowBoy"
-          @click="filterOptions(color)"
+          @click="filterOptions('yellow'); scrollTop(); showTag('yellow');"
           @mouseenter="activate('yellow')"
           @mouseleave="deactivate('yellow')"
           :class="{ active: isActive.yellow }"
@@ -105,39 +105,39 @@
     </div>
 
     <div v-if="MB" class="mrtTag">
-      <div
+      <button
         class="title-tag"
         v-for="(color, index) in selectColor"
         :key="color"
-        :class="({ active: selectColor === color }, color)"
+        :class="BGColor(color), color"
         @click="
           filterOptions(color);
-          // showTag(color);
+          showTag(color);
           scrollTop();
         "
         @mouseenter="activate(color)"
         @mouseleave="deactivate(color)"
       >
         {{ upperCaseColorsMB[index] }}
-      </div>
+      </button>
     </div>
 
     <div v-if="PC" class="mrtTag">
-      <div
+      <button
         class="title-tag"
         v-for="(color, index) in selectColor"
         :key="color"
-        :class="({ active: selectColor === color }, color)"
-        @mouseenter="activate(color)"
+        :class="BGColor(color), color"
+        @mouseenter="activate(color), showTag(color)"
         @mouseleave="deactivate(color)"
         @click="
           filterOptions(color);
-          // showTag(color);
+          showTag(color);
           scrollTop();
         "
       >
         {{ upperCaseColorsPC[index] }}
-      </div>
+      </button>
     </div>
   </section>
 
@@ -524,24 +524,15 @@ export default {
         .scrollIntoView({ behavior: "smooth" });
     },
 
-    // showTag(color) {
-    //   this.selectedColor = color;
-    //   this.filteredMrt = this.mrt.filter((item) => item.color === color);
+    showTag(color) {
+      this.selectedColor = color;
+    },
 
-    //   if (window.innerWidth <= 768) {
-    //     this.showAll = true;
-    //   } else {
-    //     this.selectColor = [
-    //       "red",
-    //       "blue",
-    //       "green",
-    //       "orange",
-    //       "brown",
-    //       "yellow",
-    //     ];
-    //     this.showAll = true;
-    //   }
-    // },
+    BGColor(color) {
+      if (this.selectedColor === color) {
+        return `${color}Click`;
+      }
+    },
     //rwd判斷
     WindowWidth() {
       if (window.innerWidth <= 768) {
@@ -653,9 +644,9 @@ export default {
   animation: flash 300ms linear forwards;
 }
 
-.title-tag:hover ~ .pic.active {
-  animation: flash 300ms linear forwards;
-}
+// .title-tag:hover ~ .pic.active {
+//   animation: flash 300ms linear forwards;
+// }
 
 @keyframes flash {
   0% {

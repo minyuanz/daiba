@@ -272,9 +272,40 @@
       }
     }
 
+    .redClick {
+      color: #fff;
+      background-color: map-get($color, $key: danger);
+    }
+    .blueClick {
+      color: #fff;
+      background-color: map-get($color, $key: info);
+    }
+    .greenClick {
+      color: #fff;
+      background-color: map-get($color, $key: success);
+    }
+    .yellowClick {
+      color: #fff;
+      background-color: map-get($color, $key: warning);
+    }
+    .orangeClick {
+      color: #fff;
+      background-color: map-get($color, $key: tangerine);
+    }
+    .brownClick {
+      color: #fff;
+      background-color: map-get($color, $key: choco);
+    }
+
     .red {
       &::after {
         border-left: 5px solid map-get($color, $key: danger);
+      }
+
+      &:hover,
+      &:active {
+        background-color: map-get($color, $key: danger);
+        color: #fff;
       }
     }
 
@@ -282,11 +313,23 @@
       &::after {
         border-left: 5px solid map-get($color, $key: info);
       }
+
+      &:hover,
+      &:active {
+        background-color: map-get($color, $key: info);
+        color: #fff;
+      }
     }
 
     .green {
       &::after {
         border-left: 5px solid map-get($color, $key: success);
+      }
+
+      &:hover,
+      &:active {
+        background-color: map-get($color, $key: success);
+        color: #fff;
       }
     }
 
@@ -294,11 +337,23 @@
       &::after {
         border-left: 5px solid map-get($color, $key: tangerine);
       }
+
+      &:hover,
+      &:active {
+        background-color: map-get($color, $key: tangerine);
+        color: #fff;
+      }
     }
 
     .brown {
       &::after {
         border-left: 5px solid map-get($color, $key: choco);
+      }
+
+      &:hover,
+      &:active {
+        background-color: map-get($color, $key: choco);
+        color: #fff;
       }
     }
 
@@ -306,40 +361,12 @@
       &::after {
         border-left: 5px solid map-get($color, $key: warning);
       }
-    }
 
-    .red:hover {
-      background-color: map-get($color, $key: danger);
-      color: #fff;
-    }
-
-    .red:hover ~ .mrtPic .pic.border-red {
-      opacity: 0;
-    }
-
-    .blue:hover {
-      background-color: map-get($color, $key: info);
-      color: #fff;
-    }
-
-    .green:hover {
-      background-color: map-get($color, $key: success);
-      color: #fff;
-    }
-
-    .orange:hover {
-      background-color: map-get($color, $key: tangerine);
-      color: #fff;
-    }
-
-    .brown:hover {
-      background-color: map-get($color, $key: choco);
-      color: #fff;
-    }
-
-    .yellow:hover {
-      background-color: map-get($color, $key: warning);
-      color: #fff;
+      &:hover,
+      &:active {
+        background-color: map-get($color, $key: warning);
+        color: #fff;
+      }
     }
   }
 }
