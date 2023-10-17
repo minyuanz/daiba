@@ -63,7 +63,7 @@
         </p>
       </article>
       <div class="pic">
-        <img :src="`${imgURL}/src/assets/images/101.jpg`" alt="taipei101" />
+        <img :src="`${imgURL}101.jpg`" alt="taipei101" />
       </div>
     </div>
     <article class="mbArt">
