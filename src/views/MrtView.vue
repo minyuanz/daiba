@@ -212,29 +212,33 @@
           <transition appear name="fade" mode="out-in">
             <div class="swiperMRTCard">
               <div class="swiper-wrapper">
-                <div
+                <!-- <div
                   class="swiper-slide"
                   v-for="(itemplace, index) in item.place"
+                > -->
+                <div
+                  class="swiper-slide"
+                  v-for="(itemCard, index) in mrtcardGroup"
+                  :key="index"
                 >
                   <!-- <router-link
                 :to="{ path: itemplace?.router ? itemplace.router : '/' }"
                 > -->
-                  <router-link :to="`/MrtCardPage/${itemplace.id}`">
-                    <div class="mrtCardWrap">
-                      <!-- 卡片 -->
-                      <div class="card-h border-r">
-                        <div class="img">
-                          <img :src="itemplace.url" alt="" />
+                  <!-- <router-link :to="`/MrtCardPage/${itemplace.id}`"></router-link> -->
+                  <div class="mrtCardWrap">
+                    <!-- 卡片 -->
+                    <div class="card-h border-r">
+                      <div class="img">
+                        <img :src="`./img/${itemCard.special_pic1}`" alt="" />
+                      </div>
+                      <div class="text">
+                        <div class="title">
+                          <h3>{{ itemCard.special_title }}</h3>
                         </div>
-                        <div class="text">
-                          <div class="title">
-                            <h3>{{ itemplace.title }}</h3>
-                          </div>
-                          <div class="txt">{{ itemplace.txt }}</div>
-                        </div>
+                        <div class="txt">{{ itemCard.special_des }}</div>
                       </div>
                     </div>
-                  </router-link>
+                  </div>
                 </div>
               </div>
               <div class="swiper-button-prev swiper-btn"></div>
@@ -261,6 +265,7 @@ export default {
       selectMrtId: "R",
       mrtstaGroup: [],
       mrtData: [],
+      mrtcardGroup: [],
       lightBox: false,
       closePost: false,
       originalPlaceData: [],
@@ -299,7 +304,16 @@ export default {
       .catch((err) => {
         console.log("err", err);
       });
-
+    axios
+      .get("http://localhost/dai/public/phps/BackFeatureM.php")
+      .then((res) => {
+        console.log("got it", res);
+        this.mrtcardGroup = res.data;
+        // console.log(mrtstaGroup);
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
     gsap.fromTo(
       ".mrtRedBoy",
       {

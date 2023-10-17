@@ -666,10 +666,10 @@ export default {
     .price {
       margin: 10px 0;
 
-      label {
-        // font-size: 24px;
-        // font-weight: bold;
-      }
+      // label {
+      //   // font-size: 24px;
+      //   // font-weight: bold;
+      // }
     }
   }
 
@@ -690,10 +690,10 @@ export default {
       margin-bottom: 30px;
     }
 
-    label {
-      // font-size: 24px;
-      // font-weight: bold;
-    }
+    // label {
+    //   // font-size: 24px;
+    //   // font-weight: bold;
+    // }
 
     select {
       width: 200px;
