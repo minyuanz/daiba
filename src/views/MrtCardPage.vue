@@ -3,9 +3,9 @@
     <div class="title">
       <h1>{{ mrtCardPage.title }}</h1>
       <div class="tag">
-        <span class="title-tag gray">{{mrtCardPage.grayTag}}</span>
+        <span class="title-tag gray">{{ mrtCardPage.grayTag }}</span>
         <span class="title-tag red">
-          {{mrtCardPage.colorTag}}
+          {{ mrtCardPage.colorTag }}
         </span>
       </div>
     </div>
@@ -109,14 +109,13 @@
           <p>《 營業時間 》</p>
           <p>➢ {{ mrtCardPage.time1 }}</p>
           <p>➢ {{ mrtCardPage.time2 }}</p>
-        </div> 
+        </div>
       </div>
 
       <a href="https://www.travel.taipei/" class="officialWeb">
         <ButtonM :HTMLInner="btninner" />
-      </a>     
+      </a>
     </div>
-
   </div>
 </template>
 <script>
@@ -145,7 +144,18 @@ export default {
   components: {
     ButtonM,
   },
+
   mounted() {
+    axios
+      .get("http://localhost/dai/public/phps/BackFeatureM.php")
+      .then((res) => {
+        console.log("got it", res);
+        this.mrtcard = res.data;
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
+
     this.WindowWidth();
     window.addEventListener("resize", this.WindowWidth);
 
