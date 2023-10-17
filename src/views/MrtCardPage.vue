@@ -11,7 +11,7 @@
         }"
       >
         <div class="image">
-          <img :src="$imgUrl(filtermrtFea.special_pic1)" alt="" />
+          <img :src="$imgUrl(filtermrtFea.special_pic2)" alt="" />
         </div>
       </div>
       <p>
@@ -26,12 +26,12 @@
         }"
       >
         <div class="image">
-          <img :src="mrtCardPage.mrtimg2" alt="ron1" />
+          <img :src="$imgUrl(filtermrtFea.special_pic3)" alt="ron1" />
         </div>
       </div>
 
       <p>
-        {{ mrtCardPage.p2 }}
+        {{ filtermrtFea.special_ctx2 }}
       </p>
     </div>
     <!-- ------------------------------------------------------------ -->
@@ -43,18 +43,18 @@
     >
       <div class="content">
         <div class="image">
-          <img :src="mrtCardPage.mrtimg3" alt="ron1" />
+          <img :src="$imgUrl(filtermrtFea.special_pic4)" alt="ron1" />
         </div>
         <article>
           <p>
-            {{ mrtCardPage.p3 }}
+            {{ filtermrtFea.special_ctx3 }}
           </p>
         </article>
       </div>
     </div>
     <article class="mbart">
       <p>
-        {{ mrtCardPage.p3 }}
+        {{ filtermrtFea.special_ctx3 }}
       </p>
     </article>
     <!-- ------------------------------------------------------------ -->
@@ -66,18 +66,18 @@
     >
       <div class="content">
         <div class="image">
-          <img :src="mrtCardPage.mrtimg4" alt="ron1" />
+          <img :src="$imgUrl(filtermrtFea.special_pic5)" alt="ron1" />
         </div>
         <article>
           <p>
-            {{ mrtCardPage.p4 }}
+            {{ filtermrtFea.special_ctx4 }}
           </p>
         </article>
       </div>
     </div>
     <article class="mbart">
       <p>
-        {{ mrtCardPage.p4 }}
+        {{ filtermrtFea.special_ctx4 }}
       </p>
     </article>
     <div class="seperate">
@@ -96,13 +96,13 @@
       <div class="leftSide">
         <div class="detailTxt">
           <p>《 詳細資訊 》</p>
-          <p>地址: {{ mrtCardPage.address }}</p>
-          <p>電話: {{ mrtCardPage.tel }}</p>
+          <p>地址: {{ filtermrtFea.special_address }}</p>
+          <p>電話: {{ filtermrtFea.special_tel }}</p>
         </div>
         <div class="timelTxt">
           <p>《 營業時間 》</p>
-          <p>➢ {{ mrtCardPage.time1 }}</p>
-          <p>➢ {{ mrtCardPage.time2 }}</p>
+          <p>➢ {{ filtermrtFea.special_time }}</p>
+          <p>➢ {{ filtermrtFea.special_rest }}</p>
         </div>
       </div>
 

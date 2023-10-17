@@ -53,7 +53,11 @@ try {
             special_ctx2 = :special_ctx2,
             special_ctx3 = :special_ctx3,
             special_ctx4 = :special_ctx4,
-            special_ctx5 = :special_ctx5
+            special_ctx5 = :special_ctx5,
+            special_address = :special_address,
+            special_tel = :special_tel,
+            special_time = :special_time,
+            special_rest = :special_rest
             WHERE special_id = :special_id";
 
 
@@ -72,6 +76,10 @@ try {
     $stmt->bindValue(":special_ctx3", $_POST["special_ctx3"]);
     $stmt->bindValue(":special_ctx4", $_POST["special_ctx4"]);
     $stmt->bindValue(":special_ctx5", $_POST["special_ctx5"]);
+    $stmt->bindValue(":special_address", $_POST["special_address"]);
+    $stmt->bindValue(":special_tel", $_POST["special_tel"]);
+    $stmt->bindValue(":special_time", $_POST["special_time"]);
+    $stmt->bindValue(":special_rest", $_POST["special_rest"]);
     $stmt->bindValue(":special_id", $special_id);
 
     $stmt->execute();
