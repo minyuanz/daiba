@@ -334,11 +334,11 @@ export default {
       userName: "", //使用者名稱
       closeName: false, //關閉填寫名稱欄位
       gameLogo: true,
-      home: false, //遊戲首頁
+      home: true, //遊戲首頁
       startBtn: true, //開始按鈕
       mode: false, //選擇模式
       costume: false, //選擇服裝
-      Inner: true, //遊戲內頁
+      Inner: false, //遊戲內頁
       imgFill: false, //控制圖片css
       closeTxtName: true,
       closeBalloon: true,
@@ -1134,6 +1134,7 @@ export default {
     
     },
 
+    // 隨機產生陣列數
     random(){
       return Math.floor(Math.random() * this.specialAim.length) + 1;
     },

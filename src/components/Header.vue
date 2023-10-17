@@ -122,6 +122,7 @@ export default {
     },
     signOut() {
       localStorage.removeItem('user')
+      alert('您已登出')
       this.$store.dispatch('setInfo', {})
       if (this.$router.currentRoute.value.path === '/user') {
         alert('您已登出')
