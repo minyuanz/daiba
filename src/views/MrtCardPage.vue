@@ -1,7 +1,7 @@
 <template>
   <div class="mrtContibuteInPage">
     <div class="title">
-      <h1>{{ mrtCardPage.title }}</h1>
+      <h1>{{ mrtfeature.special_title }}</h1>
       <div class="tag">
         <span class="title-tag gray">{{ mrtCardPage.grayTag }}</span>
         <span class="title-tag red">
@@ -139,6 +139,8 @@ export default {
       PC: true,
       btninner: "官方網站",
       mrtCardPage: "",
+      newstest: "",
+      mrtfeature: "",
     };
   },
   components: {
@@ -146,25 +148,16 @@ export default {
   },
 
   mounted() {
-    axios
-      .get("http://localhost/dai/public/phps/BackFeatureM.php")
-      .then((res) => {
-        console.log("got it", res);
-        this.mrtcard = res.data;
-      })
-      .catch((err) => {
-        console.log("err", err);
-      });
-
     this.WindowWidth();
     window.addEventListener("resize", this.WindowWidth);
 
-    const storeId = parseInt(this.$route.params.id);
-    this.mrtCardPage = this.$store.state.mrtCardPage.find(
-      (item) => item.id === storeId
-    );
-    console.log(this.$store.state.mrtCardPage);
+    // const storeId = parseInt(this.$route.params.id);
+    // this.mrtCardPage = this.$store.state.mrtCardPage.find(
+    //   (item) => item.id === storeId
+    // );
+    // console.log(this.$store.state.mrtCardPage);
   },
+
   methods: {
     WindowWidth() {
       if (window.innerWidth <= 768) {
@@ -174,6 +167,27 @@ export default {
         this.PC = true;
         this.MB = false;
       }
+    },
+    fetchData() {
+      // 獲得newsinside/id的id值
+      let idToFind = this.$route.params.id;
+      // 獲得資料庫的消息列表
+      fetch(this.$apiUrl("BackFeatureM.php"))
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          // 更新數據到newstest
+          this.newstest = data;
+          // 提出newstest資料中news_id等於idToFind的那筆放進newsqaq
+          this.mrtfeature = this.newstest.find(
+            (item) => item.special_id === idToFind
+          );
+          // this.foundObject = this.newstest.find(item => item.news_id === idToFind);
+        })
+        .catch((error) => {
+          console.error("數據傳輸失敗：", error);
+        });
     },
   },
 };

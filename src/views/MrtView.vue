@@ -151,7 +151,7 @@
         class="title-tag"
         v-for="(color, index) in selectColor"
         :key="color"
-        :class="BGColor(color), color"
+        :class="(BGColor(color), color)"
         @mouseenter="activate(color)"
         @mouseleave="deactivate(color)"
         @click="
@@ -249,7 +249,11 @@
                   <!-- <router-link
                 :to="{ path: itemplace?.router ? itemplace.router : '/' }"
                 > -->
-                  <router-link to="/MrtCardPage/:id"
+                  <router-link
+                    :to="{
+                      name: 'MrtCardPage',
+                      params: { id: itemCard.special_id },
+                    }"
                     ><div class="mrtCardWrap">
                       <!-- 卡片 -->
                       <div class="card-h border-r">
@@ -271,6 +275,7 @@
               <div class="swiper-button-next swiper-btn"></div>
             </div>
           </transition>
+          <!-- to="/MrtCardPage/:id" -->
         </div>
       </div>
     </div>
