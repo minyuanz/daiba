@@ -225,22 +225,22 @@
                   <!-- <router-link
                 :to="{ path: itemplace?.router ? itemplace.router : '/' }"
                 > -->
-                  <router-link :to="`/MrtCardPage/${itemplace.id}`">
-                    <div class="mrtCardWrap">
+                  <router-link to="/MrtCardPage/:id"
+                    ><div class="mrtCardWrap">
                       <!-- 卡片 -->
                       <div class="card-h border-r">
                         <div class="img">
-                          <img :src="itemplace.url" alt="" />
+                          <img :src="`./img/${itemCard.special_pic1}`" alt="" />
                         </div>
                         <div class="text">
                           <div class="title">
-                            <h3>{{ itemplace.title }}</h3>
+                            <h3>{{ itemCard.special_title }}</h3>
                           </div>
-                          <div class="txt">{{ itemplace.txt }}</div>
+                          <div class="txt">{{ itemCard.special_des }}</div>
                         </div>
                       </div>
-                    </div>
-                  </router-link>
+                    </div></router-link
+                  >
                 </div>
               </div>
               <div class="swiper-button-prev swiper-btn"></div>
