@@ -124,6 +124,7 @@ export default {
       localStorage.removeItem('user')
       this.$store.dispatch('setInfo', {})
       if (this.$router.currentRoute.value.path === '/user') {
+        alert('您已登出')
         this.$router.push('/home');
       }
 

@@ -113,7 +113,8 @@
             <!-- 文章內容 -->
             <div class="CBPost" v-show="closePost">
                 <div class="box">
-                    <img :src=$imgUrl(CBPost.mem_img) class="head" />
+                    <img v-if="CBPost.mem_img" :src=$imgUrl(CBPost.mem_img) class="head" />
+                    <img v-else :src=$imgUrl(userImg) class="head" />
                     <span class="closePost" @click="(closePost = !closePost), (lightBox = !lightBox)">✖</span>
                     <div class="swiperPost">
                         <div class="swiper-wrapper">
@@ -135,7 +136,7 @@
                             <h3>{{ CBPost.art_title }}</h3>
                             <h4>{{ CBPost.art_subTitle }}</h4>
                         </div>
-                        <div class="DigLikeBox" @click="addToCollect">
+                        <div class="DigLikeBox" @click="addToCollect" v-if="this.closePost === true">
                             <i v-if="toCollect" class="fa-solid fa-heart" style="color: #ff0000;cursor: pointer;"></i>
                             <i v-else class="fa-regular fa-heart" style="cursor: pointer;"></i>
                         </div>
@@ -313,7 +314,6 @@ export default {
             artId: '', // get art_id
             memId: '', // get mem_id
             userALLArtCollect:[],
-            userArtCollect:'',
             pageSize: 6, // 每頁顯示數量
             currentPage: 1, // 當前頁數
         };
@@ -388,9 +388,7 @@ export default {
 
             this.CBPost = []
             this.CBPost = item
-            this.userArtCollect = this.userALLArtCollect[ parseInt(this.CBPost.art_id) - 1].art_id
-            console.log( parseInt(this.CBPost.art_id) - 1);
-            console.log(this.userArtCollect);
+           
             this.lightBox = true
             this.artId = this.CBList[index].art_id
             this.memId = this.CBList[index].mem_id
@@ -477,6 +475,7 @@ export default {
         },
 
 
+
     },
 
     mounted() {
@@ -497,26 +496,6 @@ export default {
             },
         });
 
-        // const swiperPost = new Swiper(".swiperPost", {
-        //     effect: "cube",
-        //     speed: 2000,
-        //     loop: true,
-        //     autoplay: {
-        //         delay: 30
-        //     },
-        //     cubeEffect: {
-        //         shadow: true,
-        //         slideShadows: true,
-        //         shadowOffset: 20,
-        //         shadowScale: 0.94,
-        //     },
-        //     navigation: {
-        //         nextEl: ".swiper-button-next",
-        //         prevEl: ".swiper-button-prev",
-        //     },
-        //     });
-
-         
 
         // 背景圖輪播
         setTimeout(() => {
@@ -541,38 +520,16 @@ export default {
             });
 
 
-
+        //抓取會員收藏資料的狀態
         axios.get(`${this.$apiUrl('getALLArticleCollect.php')}`)
         .then((res) => {
-            console.log(res.data);
             const matchingUser = res.data.filter(user => user.mem_id === this.$store.state.memInfo.mem_id); //資料中和目前登入的ID配對
-            this. userALLArtCollect = matchingUser
-            console.log(this. userALLArtCollect);
+            this.userALLArtCollect = matchingUser  //得到目前登入的帳號的收藏資料
         })
         .catch((error) => {
             console.error('資料失敗：', error);
         });
 
-
-            
-        //抓取會員收藏的狀態
-        // let memId = this.$store.state.memInfo.mem_id
-        // let formData = new FormData()
-        // formData.append("mem_id", memId);
-        // // this.$apiUrl('getArticleCollect.php')
-        // fetch(this.$apiUrl('getALLArticleCollect.php'), {
-        //   method: 'post',
-        //   body: formData
-        // })
-        //   .then(res => res.json())
-        //   .then((res) => {
-        //     this.userArtCollect = res
-        //   })
-        //   .catch((error) => {
-        //     console.error('數據傳輸失敗：', error);
-        //   });
-
-    
     },
     computed:{ 
         //算出所有的頁數
@@ -587,16 +544,22 @@ export default {
             return this.CBList.slice(startIndex, endIndex);
         },
 
+        // 根據會員的收藏來顯示愛心的狀態
         toCollect() {
-            console.log(this.userArtCollect);
-              console.log(this.CBPost.art_id);
-           if (this.userArtCollect === this.CBPost.art_id) {
-            //   console.log(this.userArtCollect);
-            //   console.log(this.CBPost.art_id);
-              return true;
+            if(this.closePost === true){ //如彈窗已被開啟再執行，不然會重複渲染bug
+                let index = this.userALLArtCollect.findIndex(item => item.art_id === this.CBPost.art_id); //搜尋當前CBPost的art_id是否有找到
+                console.log(index); 
+                if (index != -1) {  //有的話為true，顯示實心紅愛心
+                  return true;
+                }
             }
             
             
+        },
+
+        // 如會員沒照片則顯示空照片
+        userImg(){
+            return 'user.png'
         },
 }
 }
