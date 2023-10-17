@@ -223,7 +223,7 @@
                   v-for="(itemplace, index) in item.place"
                 > -->
                 <div class="swiper-slide" v-for="(itemCard, index) in filteredMrtCard" :key="index" :class="{ 'hidden': selectedType !== '' && itemCard.fea_name !== selectedType }">
-                  <div class="mrtCardWrap" v-if="selectedType === '' || itemCard.fea_name === selectedType">
+                  <div class="cardHeight" v-if="selectedType === '' || itemCard.fea_name === selectedType">
                   <!-- <router-link
                 :to="{ path: itemplace?.router ? itemplace.router : '/' }"
                 > -->
@@ -232,7 +232,8 @@
                       name: 'MrtCardPage',
                       params: { id: itemCard.special_id },
                     }"
-                    ><div class="mrtCardWrap">
+                    >
+                    <div class="mrtCardWrap">
                       <!-- 卡片 -->
                       <div class="card-h border-r">
                         <div class="img">
@@ -245,12 +246,13 @@
                           <div class="txt">{{ itemCard.special_des }}</div>
                         </div>
                       </div>
-                    </div></router-link
-                  >
+                    </div>
+                    </router-link>
                 </div>
                 </div>
               </div>
-              
+              <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
             </div>
           </transition>
           <!-- to="/MrtCardPage/:id" -->
@@ -273,6 +275,7 @@
               </div>
             </transition>
           </div>
+
       <!-- --------------------- -->
       </div>
     </div>

@@ -359,7 +359,9 @@
 
     .CBPost {
       max-width: 1200px;
-      max-height: 700px;
+      max-height: 600px;
+      width: 90%;
+      height: 80%;
       // background-color: #d9d9d9;
       padding: 30px;
       display: flex;
@@ -528,77 +530,93 @@
           margin: auto;
           overflow: hidden;
           width: 100%;
+          height: 100%;
 
-          .swiper-btn {
-            color: #838383;
+          .swiper-button-prev {
+            position: absolute;
+            margin-block: auto;
+            height: 100%;
+            top: 0;
+            bottom: 0;
+            width: 10%;
+            color: #32c8e1;
+  
+            &::after {
+              left: 0;
+              position: absolute;
+              font-size: 50px;
+            }
+          }
+  
+          .swiper-button-next {
+            position: absolute;
+            margin-block: auto;
+            height: 100%;
+            top: 0;
+            bottom: 0;
+            width: 10%;
+            color: #32c8e1;
+  
+            &::after {
+              right: 0;
+              font-size: 50px;
+              position: absolute;
+            }
           }
 
-          // 卡片樣式
-          .swiper-slide {
-            width: 300px;
-            height: 550px;
+          // .swiper-btn {
+          //   color: #838383;
+          // }
 
-            .mrtCardWrap {
+          .swiper-wrapper{
+
+            // 卡片樣式
+            .swiper-slide {
+              // width: 300px;
               height: 100%;
 
-              .card-h {
-                border: none;
-                box-shadow: rgba(126, 126, 126, 0.3) 0px 2px 4px,
-                  rgba(126, 126, 126, 0.3) 0px 7px 13px -3px,
-                  rgba(126, 126, 126, 0.3) 0px -3px 5px inset;
-                background-color: #ffffff;
-                width: 350px;
-                margin: 5% 0;
-                padding: 20px;
-
-                .img {
-                  height: 55%;
-                  overflow: hidden;
-
-                  img {
-                    height: 100%;
-                    border-radius: 0px;
-                  }
-                }
-                .text {
-                  margin: 1rem 0.5rem;
-                  .txt {
-                    margin-top: 10px;
-                    -webkit-line-clamp: 5;
+              .cardHeight{
+                height: 100%;
+  
+                .mrtCardWrap {
+                  height: 100%;
+    
+                  .card-h {
+                    border: none;
+                    // box-shadow: rgba(126, 126, 126, 0.3) 0px 2px 4px,
+                    //   rgba(126, 126, 126, 0.3) 0px 7px 13px -3px,
+                    //   rgba(126, 126, 126, 0.3) 0px -3px 5px inset;
+                    // background-color: #ffffff;
+                    // width: 350px;
+                    margin: 0%;
+                    padding: 1rem;
+                    // height: 100%;
+    
+                    .img {
+                      height: 55%;
+                      overflow: hidden;
+    
+                      img {
+                        height: 100%;
+                        border-radius: 0px;
+                      }
+                    }
+                    .text {
+                      margin: 1rem 0.5rem;
+                      .txt {
+                        margin-top: 10px;
+                        -webkit-line-clamp: 5;
+                      }
+                    }
                   }
                 }
               }
+
             }
           }
         }
 
-        .swiper-button-prev {
-          position: absolute;
-          margin-block: auto;
-          height: 100%;
-          top: 0;
-          bottom: 0;
-          width: 10%;
 
-          &::after {
-            left: 0;
-            position: absolute;
-          }
-        }
-
-        .swiper-button-next {
-          position: absolute;
-          margin-block: auto;
-          height: 100%;
-          top: 0;
-          bottom: 0;
-          width: 10%;
-
-          &::after {
-            right: 0;
-            position: absolute;
-          }
-        }
       }
     }
   }
@@ -702,8 +720,8 @@
   .mrtWrappo {
     .mrtWrap {
       .CBPost {
-        width: 90%;
-        height: 600px;
+        // width: 90%;
+        // height: 600px;
 
         .box {
           .closePost {
@@ -807,7 +825,7 @@
     .mrtWrap {
       .CBPost {
         width: 90%;
-        height: 500px;
+        height: 70%;
 
         .mrtTagbar {
           width: 100px;
@@ -826,20 +844,20 @@
           .swiperPost {
             margin: 1rem;
           }
-          .closePost {
-            top: -2%;
-            right: 4%;
-          }
+          // .closePost {
+          //   top: -2%;
+          //   right: 4%;
+          // }
           .inner {
             height: 105%;
           }
           .swiperMRTCard {
-            width: 80%;
+            // width: 80%;
             .swiper-slide {
               height: 420px;
               .mrtCardWrap {
                 .card-h {
-                  width: 300px;
+                  // width: 300px;
                   .text {
                     .txt {
                       -webkit-line-clamp: 4;
@@ -932,8 +950,8 @@
   .mrtWrappo {
     .mrtWrap {
       .CBPost {
-        width: 95%;
-        height: 80%;
+        // width: 95%;
+        // height: 80%;
         margin: auto;
 
         .mrtTagbar {
@@ -947,8 +965,8 @@
           height: 100%;
           padding: 0;
           .closePost {
-            top: 16%;
-            right: 0%;
+            top: -15%;
+            right: -12%;
           }
           // 卡片輪播
           .swiperMRTCard {
@@ -966,7 +984,7 @@
               .mrtCardWrap {
                 // 卡片樣式
                 .card-h {
-                  width: 100%;
+                  // width: 100%;
 
                   .text {
                     margin-top: 0px;
