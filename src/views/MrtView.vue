@@ -14,7 +14,7 @@
         <div class="checkBox" v-if="showCheckBox">
           <div class="box">
             <button class="place" @click="resetToPlace">景點</button>
-            <button class="food" @click="changeContent('food')">美食</button>
+            <button class="food" @click="changeContent('hotel')">美食</button>
             <button class="hotel" @click="changeContent('hotel')">住宿</button>
           </div>
           <div class="triangle"></div>
@@ -189,7 +189,8 @@
           @click="
             (closePost = !closePost),
               (lightBox = !lightBox),
-              (item.isShow = !item.isShow)
+              (item.isShow = !item.isShow),
+              showMrtCard(item)
           "
         >
           <div class="mrtStaMaruBox">
@@ -218,7 +219,7 @@
                 > -->
                 <div
                   class="swiper-slide"
-                  v-for="(itemCard, index) in mrtcardGroup"
+                  v-for="(itemCard, index) in filteredMrtCard"
                   :key="index"
                 >
                   <!-- <router-link
@@ -264,8 +265,10 @@ export default {
     return {
       selectMrtId: "R",
       mrtstaGroup: [],
+      filteredMrtCard: [],
+      filteredchangfood: [],
       mrtData: [],
-      mrtcardGroup: [],
+      mrtcard: [],
       lightBox: false,
       closePost: false,
       originalPlaceData: [],
@@ -308,8 +311,7 @@ export default {
       .get("http://localhost/dai/public/phps/BackFeatureM.php")
       .then((res) => {
         console.log("got it", res);
-        this.mrtcardGroup = res.data;
-        // console.log(mrtstaGroup);
+        this.mrtcard = res.data;
       })
       .catch((err) => {
         console.log("err", err);
@@ -477,6 +479,19 @@ export default {
       this.scrollTop();
     },
 
+    showMrtCard(item) {
+      console.log("Clicked item:", item.sta_name);
+      // 根据点击的站点 item 获取相应的 mrtcard 数据
+      this.filteredMrtCard = this.mrtcard.filter(
+        (card) => card.sta_name === item.sta_name
+      );
+      console.log("Filtered Mrt Card:", this.filteredMrtCard);
+      // 显示相关的卡片内容
+      this.closePost = true;
+      this.lightBox = true;
+      item.isShow = true;
+    },
+
     changeContent(type) {
       // 保存原始資料
       if (this.originalPlaceData.length === 0) {
@@ -595,6 +610,12 @@ export default {
         return [];
       }
     },
+    // filteredMrtcard() {
+    //   // 根据当前站点的 sta_name 过滤 mrtcardGroup
+    //   return this.mrtcard.filter(
+    //     (itemcard) => itemcard.sta_name === this.mrtstaGroup
+    //   );
+    // },
   },
   watch: {
     lightBox(nVal) {
