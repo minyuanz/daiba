@@ -29,27 +29,13 @@
       </div>
     </div>
     <div class="pagination">
-      <button
-        class="paginationmain"
-        @click="prevPage"
-        :disabled="currentPage === 1"
-      >
+      <button class="paginationmain" @click="prevPage" :disabled="currentPage === 1 || isLoading">
         ＜
       </button>
-      <button
-        class="paginationmain"
-        @click="goToPage(page)"
-        v-for="page in totalPages"
-        :key="page"
-        :class="{ 'current-page': page === currentPage }"
-      >
+      <button class="paginationmain" @click="goToPage(page)" v-for="page in totalPages" :key="page" :class="{ 'current-page': page === currentPage }">
         {{ page }}
       </button>
-      <button
-        class="paginationmain"
-        @click="nextPage"
-        :disabled="currentPage === totalPages"
-      >
+      <button class="paginationmain" @click="nextPage" :disabled="currentPage === totalPages || isLoading">
         ＞
       </button>
     </div>
@@ -67,6 +53,7 @@ export default {
       pageSize: 6, // 每頁顯示數量
       currentPage: 1, // 當前頁數
       selectedType: 'all',
+      isLoading: true,
       // testitem: ProTest,
     };
   },
@@ -78,6 +65,7 @@ export default {
             axios.get(this.$apiUrl('ProductM.php'))
             .then((response) => {
             this.allProducts = response.data; // 更新數據到 products
+            this.isLoading = false;
         })
             .catch((error) => {
             console.error('數據傳輸失敗：', error);
@@ -114,19 +102,29 @@ export default {
     },
   },
   computed: {
-    paginatedProducts() {
+  paginatedProducts() {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     const filteredProducts = this.allProducts.filter(item => {
       if (this.selectedType === 'all') {
-        return true; 
+        return true;
       } else {
         return item.prod_type === this.selectedType;
       }
     });
     return filteredProducts.slice(startIndex, endIndex);
   },
+  totalPages() {
+    const filteredProducts = this.allProducts.filter(item => {
+      if (this.selectedType === 'all') {
+        return true;
+      } else {
+        return item.prod_type === this.selectedType;
+      }
+    });
+    return Math.ceil(filteredProducts.length / this.pageSize);
   },
+},
 };
 </script>
 

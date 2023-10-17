@@ -437,7 +437,7 @@ export default {
                 formData.append("mem_id", userinfo.mem_id);
                 formData.append("art_no", this.artNo);
 
-                fetch('http://localhost/dai/public/phps/addToArticleCollect.php', {
+                fetch(this.$apiUrl('addToArticleCollect.php'), {
                     method: 'post',
                     body: formData
                 })

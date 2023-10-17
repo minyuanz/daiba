@@ -484,7 +484,7 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             //檢查http  來判別php新增與否
-            alert("商品已成功新增");
+            alert("商品已成功新增，請記得上架");
             this.pics = [
               { imageURL: null, fix: false },
               { imageURL: null, fix: false },
