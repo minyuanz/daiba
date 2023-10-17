@@ -222,8 +222,8 @@
                   class="swiper-slide"
                   v-for="(itemplace, index) in item.place"
                 > -->
-                <div  class="swiper-slide" v-for="(itemCard, index) in filteredMrtCard"  :key="index">
-                <div class="mrtCardWrap" v-show="selectedType === '' || itemCard.fea_name === selectedType">
+                <div class="swiper-slide" v-for="(itemCard, index) in filteredMrtCard" :key="index" :class="{ 'hidden': selectedType !== '' && itemCard.fea_name !== selectedType }">
+                  <div class="mrtCardWrap" v-if="selectedType === '' || itemCard.fea_name === selectedType">
                   <!-- <router-link
                 :to="{ path: itemplace?.router ? itemplace.router : '/' }"
                 > -->
@@ -708,5 +708,8 @@ export default {
   100% {
     filter: brightness(150%);
   }
+}
+.hidden {
+  display: none;
 }
 </style>
