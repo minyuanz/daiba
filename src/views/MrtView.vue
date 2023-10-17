@@ -33,7 +33,11 @@
       <div class="mrtMainLine">
         <div
           class="pic border-redline mrtRedBoy"
-          @click="filterOptions('red'); scrollTop(); showTag('red');"
+          @click="
+            filterOptions('red');
+            scrollTop();
+            showTag('red');
+          "
           @mouseenter="activate('red')"
           @mouseleave="deactivate('red')"
           :class="{ active: isActive.red }"
@@ -42,7 +46,11 @@
         </div>
         <div
           class="pic border-blueline mrtBlueBoy"
-          @click="filterOptions('blue'); scrollTop(); showTag('blue');"
+          @click="
+            filterOptions('blue');
+            scrollTop();
+            showTag('blue');
+          "
           @mouseenter="activate('blue')"
           @mouseleave="deactivate('blue')"
           :class="{ active: isActive.blue }"
@@ -51,7 +59,11 @@
         </div>
         <div
           class="pic border-greenline mrtGreenBoy"
-          @click="filterOptions('green'); scrollTop(); showTag('green');"
+          @click="
+            filterOptions('green');
+            scrollTop();
+            showTag('green');
+          "
           @mouseenter="activate('green')"
           @mouseleave="deactivate('green')"
           :class="{ active: isActive.green }"
@@ -60,7 +72,11 @@
         </div>
         <div
           class="pic border-orangeline mrtOrangeBoy"
-          @click="filterOptions('orange'); scrollTop(); showTag('orange');"
+          @click="
+            filterOptions('orange');
+            scrollTop();
+            showTag('orange');
+          "
           @mouseenter="activate('orange')"
           @mouseleave="deactivate('orange')"
           :class="{ active: isActive.orange }"
@@ -69,7 +85,11 @@
         </div>
         <div
           class="pic border-brownline mrtBrownBoy"
-          @click="filterOptions('brown'); scrollTop(); showTag('brown');"
+          @click="
+            filterOptions('brown');
+            scrollTop();
+            showTag('brown');
+          "
           @mouseenter="activate('brown')"
           @mouseleave="deactivate('brown')"
           :class="{ active: isActive.brown }"
@@ -78,7 +98,11 @@
         </div>
         <div
           class="pic border-yellowline mrtYellowBoy"
-          @click="filterOptions('yellow'); scrollTop(); showTag('yellow');"
+          @click="
+            filterOptions('yellow');
+            scrollTop();
+            showTag('yellow');
+          "
           @mouseenter="activate('yellow')"
           @mouseleave="deactivate('yellow')"
           :class="{ active: isActive.yellow }"
@@ -109,7 +133,7 @@
         class="title-tag"
         v-for="(color, index) in selectColor"
         :key="color"
-        :class="BGColor(color), color"
+        :class="(BGColor(color), color)"
         @click="
           filterOptions(color);
           showTag(color);
@@ -267,7 +291,6 @@ export default {
       selectMrtId: "R",
       mrtstaGroup: [],
       filteredMrtCard: [],
-      filteredchangfood: [],
       mrtData: [],
       mrtcard: [],
       lightBox: false,
