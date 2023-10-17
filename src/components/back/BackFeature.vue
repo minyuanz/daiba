@@ -218,7 +218,7 @@
           <div class="pic">
             <p>＋</p>
             <img
-              :src="`${this.$store.state.imgURL}` + editFeature.special_pic2"
+              :src="$imgUrl(editFeature.special_pic2)"
               v-if="editFeature.special_pic2 !== '' ? true : false"
             />
             <input
@@ -226,7 +226,7 @@
               name="image2"
               @change="handleFileChange($event, 1, 'edit')"
             />
-            <img :src="originalpics[1].imageURL" v-show="originalpics[1].fix" />
+            <img :src="originalpics[1].imageURL" v-show="originalpics[1].fix"  />
           </div>
           <textarea
             class="custom-input"
@@ -238,7 +238,7 @@
           <div class="pic">
             <p>＋</p>
             <img
-              :src="`${this.$store.state.imgURL}` + editFeature.special_pic3"
+            :src="$imgUrl(editFeature.special_pic3)"
               v-if="editFeature.special_pic3 !== '' ? true : false"
             />
             <input
@@ -258,7 +258,7 @@
           <div class="pic">
             <p>＋</p>
             <img
-              :src="`${this.$store.state.imgURL}` + editFeature.special_pic4"
+            :src="$imgUrl(editFeature.special_pic4)"
               v-if="editFeature.special_pic4 !== '' ? true : false"
             />
             <input
@@ -278,7 +278,7 @@
           <div class="pic">
             <p>＋</p>
             <img
-              :src="`${this.$store.state.imgURL}` + editFeature.special_pic5"
+            :src="$imgUrl(editFeature.special_pic5)"
               v-if="editFeature.special_pic5 !== '' ? true : false"
             />
             <input
@@ -362,7 +362,7 @@ export default {
   created() {
     this.fetchData();
     axios
-    .get("http://localhost/dai/public/phps/GetMrtStations.php") 
+    .get(this.$apiUrl('GetMrtStations.php')) 
     .then((response) => {
       this.mrtStations = response.data;
     })
@@ -373,7 +373,7 @@ export default {
   methods: {
     fetchData() {
       axios
-        .get("http://localhost/dai/public/phps/BackFeatureM.php")
+        .get(this.$apiUrl('BackFeatureM.php'))
         .then((response) => {
           this.features = response.data; // 更新數據到 features
         })
@@ -498,7 +498,7 @@ export default {
       formData.append("special_ctx5", this.formData.special_ctx5);
 
       axios
-        .post("http://localhost/dai/public/phps/CreatFeature.php", formData, {
+        .post(this.$apiUrl('CreatFeature.php'), formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -551,7 +551,7 @@ export default {
       formData.append("special_id", this.editFeature.special_id);
 
       axios
-        .post("http://localhost/dai/public/phps/UpdateFeature.php", formData, {
+        .post(this.$apiUrl('UpdateFeature.php'), formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
