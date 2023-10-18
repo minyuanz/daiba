@@ -8,7 +8,10 @@ try {
         if( !file_exists($dir) ){
             mkdir($dir);
         }
-                
+        
+        // $original = $_FILES['news_imageURL']['name']
+        // echo $original;
+        // exit;
         $from = $_FILES["news_imageURL"]["tmp_name"];
         
         //-----------------決定檔案名稱
@@ -20,7 +23,7 @@ try {
         $to = $dir . $filename;
         copy($from, $to);
     } else {
-        $fileName = "";
+        $filename = "";
     }
 
 
