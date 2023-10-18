@@ -127,8 +127,8 @@ export default {
       formData.append("art_id", art_id);
 
       confirm('確定取消收藏嗎?')
-
-      fetch('http://localhost/dai/public/phps/delArticleCollect.php', {
+// $apiUrl('delArticleCollect.php')
+      fetch(this.$apiUrl('delArticleCollect.php'), {
         method: 'post',
         body: formData
       })

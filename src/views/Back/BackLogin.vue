@@ -42,7 +42,8 @@ export default {
         const data = new FormData();
         data.append('adminId', adminId);
         data.append('adminPwd', adminPwd);
-        fetch('http://localhost/dai/public/phps/BackLogin.php', {
+        // $apiUrl('BackLogin.php')
+        fetch(this.apiUrl('BackLogin.php'), {
         method: 'POST',
         body: data,
       })
