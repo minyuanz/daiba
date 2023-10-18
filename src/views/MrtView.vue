@@ -115,7 +115,7 @@
         class="title-tag"
         v-for="(color, index) in selectColor"
         :key="color"
-        :class="(BGColor(color), color)"
+        :class="BGColor(color), color"
         @click="
           filterOptions(color);
           showTag(color);
@@ -133,7 +133,7 @@
         class="title-tag"
         v-for="(color, index) in selectColor"
         :key="color"
-        :class="(BGColor(color), color)"
+        :class="BGColor(color), color"
         @mouseenter="activate(color)"
         @mouseleave="deactivate(color)"
         @click="

@@ -132,9 +132,14 @@
                         <div class="swiper-button-next"></div>
                     </div>
                     <div class="inner">
-                        <div class="title">
+                        <div class="title" :class="titleColor(CBPost.sta_id1)">
                             <h3>{{ CBPost.art_title }}</h3>
                             <h4>{{ CBPost.art_subTitle }}</h4>
+                            <div class="lineColor" :class="lineColor(CBPost.sta_id1)"></div>
+                            <span class="title-tag" :class="artChooseTag(CBPost.sta_id1)">#{{
+                                    colorClassMap2[CBPost.sta_id1] }}</span>
+                            <span class="title-tag" :class="artChooseTag(CBPost.sta_id2)">
+                                {{CBPost.sta_id2 ? '#' +colorClassMap2[CBPost.sta_id2] : null }}</span>
                         </div>
                         <div class="DigLikeBox" @click="addToCollect" v-if="this.closePost === true">
                             <i v-if="toCollect" class="fa-solid fa-heart" style="color: #ff0000;cursor: pointer;"></i>
@@ -150,7 +155,7 @@
                             </div>
                         </div>
                         <div class="author">
-                            <div class="line"></div>
+                            <div class="line" :class="lineColor(CBPost.sta_id1)"></div>
                             <span>{{ CBPost.mem_name }}</span>
                         </div>
                     </div>
@@ -372,7 +377,7 @@ export default {
             speed: 2000,
             loop: true,
             autoplay: {
-                delay: 30
+                delay: 3000
             },
             cubeEffect: {
                 shadow: true,
@@ -473,6 +478,16 @@ export default {
         goToPage(page){
             this.currentPage = page;
         },
+
+        // 內文的border顏色
+        titleColor(id){
+            return `title${id}`
+        },
+
+         // 內文的底線顏色
+        lineColor(id){
+            return `line${id}`
+        }
 
 
 
