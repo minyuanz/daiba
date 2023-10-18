@@ -2,7 +2,7 @@
   <div class="artWrap">
     <h1>我的投稿</h1>
     <div class="artGrid">
-      <div class="artCard" v-for="card in articleCollect">
+      <div class="artCard" v-for="card in paginatedList">
         <div class="card-h">
           <div class="img">
             <img :src=$imgUrl(card.art_pic1) alt="" />
@@ -25,7 +25,18 @@
           </p>
         </div>
       </div>
-      <!-- <Page :total="cards.length" size="small" :page-size="pageSize" @on-change="updatePage" id="page" /> -->
+      <div class="pagination">
+        <button class="paginationmain" @click="prevPage" :disabled="currentPage === 1 || isLoading">
+          ＜
+        </button>
+        <button class="paginationmain" @click="goToPage(page)" v-for="page in totalPages" :key="page"
+          :class="{ 'current-page': page === currentPage }">
+          {{ page }}
+        </button>
+        <button class="paginationmain" @click="nextPage" :disabled="currentPage === totalPages || isLoading">
+          ＞
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -34,71 +45,108 @@
 export default {
   data() {
     return {
-      cards: [
-        {
-          image: require("@/../public/img/artCard.png"),
-          head: require("@/../public/img/artCard1.png"),
-          // image: '../img/artCard.png',
-          // head: '../img/artCard1.png',
-          tag: "住宿推薦",
-          title: "原來京站樓上長這樣？",
-          title2: "開箱五星級行政豪華客房一泊二食",
-          date: "2020-06-15",
-          ctx: "在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。",
-        },
-        {
-          image: require("@/../public/img/artCard.png"),
-          head: require("@/../public/img/artCard1.png"),
-          tag: "住宿推薦",
-          title: "原來京站樓上長這樣？",
-          title2: "開箱五星級行政豪華客房一泊二食",
-          date: "2020-06-15",
-          ctx: "在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。",
-        },
-        {
-          image: require("@/../public/img/artCard.png"),
-          head: require("@/../public/img/artCard1.png"),
-          tag: "住宿推薦",
-          title: "原來京站樓上長這樣？",
-          title2: "開箱五星級行政豪華客房一泊二食",
-          date: "2020-06-15",
-          ctx: "在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。",
-        },
-        {
-          image: require("@/../public/img/artCard.png"),
-          head: require("@/../public/img/artCard1.png"),
-          tag: "住宿推薦",
-          title: "原來京站樓上長這樣？",
-          title2: "開箱五星級行政豪華客房一泊二食",
-          date: "2020-06-15",
-          ctx: "在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。",
-        },
-        {
-          image: require("@/../public/img/artCard.png"),
-          head: require("@/../public/img/artCard1.png"),
-          tag: "住宿推薦",
-          title: "原來京站樓上長這樣？",
-          title2: "開箱五星級行政豪華客房一泊二食",
-          date: "2020-06-15",
-          ctx: "在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。",
-        },
-        {
-          image: require("@/../public/img/artCard.png"),
-          head: require("@/../public/img/artCard1.png"),
-          tag: "住宿推薦",
-          title: "原來京站樓上長這樣？",
-          title2: "開箱五星級行政豪華客房一泊二食",
-          date: "2020-06-15",
-          ctx: "在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。",
-        },
-      ],
-      cardsDisplay: [],
+      // cards: [
+      //   {
+      //     image: require("@/../public/img/artCard.png"),
+      //     head: require("@/../public/img/artCard1.png"),
+      //     // image: '../img/artCard.png',
+      //     // head: '../img/artCard1.png',
+      //     tag: "住宿推薦",
+      //     title: "原來京站樓上長這樣？",
+      //     title2: "開箱五星級行政豪華客房一泊二食",
+      //     date: "2020-06-15",
+      //     ctx: "在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。",
+      //   },
+      //   {
+      //     image: require("@/../public/img/artCard.png"),
+      //     head: require("@/../public/img/artCard1.png"),
+      //     tag: "住宿推薦",
+      //     title: "原來京站樓上長這樣？",
+      //     title2: "開箱五星級行政豪華客房一泊二食",
+      //     date: "2020-06-15",
+      //     ctx: "在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。",
+      //   },
+      //   {
+      //     image: require("@/../public/img/artCard.png"),
+      //     head: require("@/../public/img/artCard1.png"),
+      //     tag: "住宿推薦",
+      //     title: "原來京站樓上長這樣？",
+      //     title2: "開箱五星級行政豪華客房一泊二食",
+      //     date: "2020-06-15",
+      //     ctx: "在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。",
+      //   },
+      //   {
+      //     image: require("@/../public/img/artCard.png"),
+      //     head: require("@/../public/img/artCard1.png"),
+      //     tag: "住宿推薦",
+      //     title: "原來京站樓上長這樣？",
+      //     title2: "開箱五星級行政豪華客房一泊二食",
+      //     date: "2020-06-15",
+      //     ctx: "在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。",
+      //   },
+      //   {
+      //     image: require("@/../public/img/artCard.png"),
+      //     head: require("@/../public/img/artCard1.png"),
+      //     tag: "住宿推薦",
+      //     title: "原來京站樓上長這樣？",
+      //     title2: "開箱五星級行政豪華客房一泊二食",
+      //     date: "2020-06-15",
+      //     ctx: "在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。",
+      //   },
+      //   {
+      //     image: require("@/../public/img/artCard.png"),
+      //     head: require("@/../public/img/artCard1.png"),
+      //     tag: "住宿推薦",
+      //     title: "原來京站樓上長這樣？",
+      //     title2: "開箱五星級行政豪華客房一泊二食",
+      //     date: "2020-06-15",
+      //     ctx: "在日本旅行的時候最喜歡住在靠近JR車站或者地鐵站附近的飯店，而到台灣台北旅行，最方便的地點莫過於是住在台北車站或者西門附近的飯店，台北車站是五鐵共構的大車站......。",
+      //   },
+      // ],
+      // cardsDisplay: [],
       pageSize: 6,
       currentPage: 1,
-      articleCollect: []
+      articleCollect: [],
+      isLoading: true,
+
     };
   },
+  computed: {
+    //算出所有的頁數
+    totalPages() {
+      return Math.ceil(this.articleCollect.length / this.pageSize);
+    },
+    // 顯示頁面的資料
+    paginatedList() {
+      const startIndex = (this.currentPage - 1) * this.pageSize; //算出上一頁跑到陣列第幾個
+      const endIndex = startIndex + this.pageSize;
+      return this.articleCollect.slice(startIndex, endIndex);
+    },
+    // totalPages() {
+    //   const filteredProducts = this.allProducts.filter(item => {
+    //     if (this.selectedType === 'all') {
+    //       return true;
+    //     } else {
+    //       return item.prod_type === this.selectedType;
+    //     }
+    //   });
+    //   return Math.ceil(filteredProducts.length / this.pageSize);
+    // },
+  },
   methods: {
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage -= 1;
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage += 1;
+      }
+    },
+    goToPage(page) {
+      this.currentPage = page;
+    },
     updatePage(page) {
       // console.log(page);
       this.currentPage = page;
@@ -175,14 +223,34 @@ export default {
       }
     }
 
-    #page {
+    .pagination {
+      // width: 100%;
+      // display: flex;
+      // align-items: center;
+      // justify-content: center;
+      // margin: 5rem auto;
       grid-area: 3/1/4/4;
-      // display: block;
-      text-align: center;
+
+      .paginationmain {
+        margin: 0 .5rem;
+        cursor: pointer;
+        width: 45px;
+        height: 45px;
+        border: none;
+        background: none;
+        color: #555;
+        font-size: 18px;
+      }
+
+      .current-page {
+        border: 1px solid #999;
+        border-radius: 50%;
+      }
     }
   }
 }
 
+// grid-area: 3/1/4/4;
 @media screen and (max-width: 414px) {
   .artWrap {
     width: 100%;
