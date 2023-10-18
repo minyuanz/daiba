@@ -310,7 +310,7 @@ export default {
             formData.append('mem_id', memId);
             
 
-            axios.post('http://localhost/dai/public/phps/submit.php', formData, {
+            axios.post(`${this.$apiUrl('submit.php')}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

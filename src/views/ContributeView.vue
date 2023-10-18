@@ -98,7 +98,7 @@
                                 <span class="title-tag gray">#{{ itemList.fea_tag }}</span>
                                 <span class="title-tag" :class="artChooseTag(itemList.sta_id1)">#{{
                                     colorClassMap2[itemList.sta_id1] }}</span>
-                                <span class="title-tag" :class="artChooseTag(itemList.sta_id2)">
+                                <span class="title-tag" :class="artChooseTag(itemList.sta_id2)" v-if="itemList.sta_id1 !== itemList.sta_id2">
                                 {{itemList.sta_id2 ? '#' +colorClassMap2[itemList.sta_id2] : null }}</span>
                             </div>
                             <span class="s_text time">{{ itemList.art_date }}</span>
@@ -136,14 +136,16 @@
                             <h3>{{ CBPost.art_title }}</h3>
                             <h4>{{ CBPost.art_subTitle }}</h4>
                             <div class="lineColor" :class="lineColor(CBPost.sta_id1)"></div>
-                            <span class="title-tag" :class="artChooseTag(CBPost.sta_id1)">#{{
-                                    colorClassMap2[CBPost.sta_id1] }}</span>
-                            <span class="title-tag" :class="artChooseTag(CBPost.sta_id2)">
-                                {{CBPost.sta_id2 ? '#' +colorClassMap2[CBPost.sta_id2] : null }}</span>
                         </div>
                         <div class="DigLikeBox" @click="addToCollect" v-if="this.closePost === true">
                             <i v-if="toCollect" class="fa-solid fa-heart" style="color: #ff0000;cursor: pointer;"></i>
                             <i v-else class="fa-regular fa-heart" style="cursor: pointer;"></i>
+                        </div>
+                        <div class="tag">
+                            <span class="title-tag" :class="artChooseTag(CBPost.sta_id1)">#{{
+                                    colorClassMap2[CBPost.sta_id1] }}</span>
+                            <span class="title-tag" :class="artChooseTag(CBPost.sta_id2)" v-if="CBPost.sta_id1 !== CBPost.sta_id2">
+                                {{CBPost.sta_id2 ? '#' +colorClassMap2[CBPost.sta_id2] : null }}</span>
                         </div>
                         <div class="scrollbarArea">
                             <div class="info">

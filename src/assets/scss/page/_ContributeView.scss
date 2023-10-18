@@ -409,9 +409,6 @@
             border-bottom: 1px solid map-get($color, $key: warning);
           }
 
-          .title-tag {
-            margin-top: 20px;
-          }
         }
 
         .titleR {
@@ -453,6 +450,10 @@
           top: 9.5rem;
           z-index: 5;
           color: #000000;
+        }
+
+        .tag {
+          padding-inline: 3.5rem;
         }
 
         .scrollbarArea::-webkit-scrollbar {
