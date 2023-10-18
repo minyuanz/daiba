@@ -157,21 +157,27 @@
           v-model="formData.special_ctx5"
         ></textarea>
       </div> -->
-      <div>
-        <label for="">地址：</label>
-        <input type="text" v-model="formData.special_address" />
-      </div>
-      <div>
-        <label for="">電話：</label>
-        <input type="text" v-model="formData.special_tel" />
-      </div>
-      <div>
-        <label for="">營業時間：</label>
-        <input type="text" v-model="formData.special_time" />
-      </div>
-      <div>
-        <label for="">公休時間：</label>
-        <input type="text" v-model="formData.special_rest" />
+      <div class="txt">
+        <div class="addre-tel">
+          <div>
+            <label for="">聯絡地址：</label>
+            <input type="text" v-model="formData.special_address" />
+          </div>
+          <div>
+            <label for="">電話號碼：</label>
+            <input type="text" v-model="formData.special_tel" />
+          </div>
+        </div>
+        <div class="time">
+          <div>
+            <label for="">營業時間：</label>
+            <input type="text" v-model="formData.special_time" />
+          </div>
+          <div>
+            <label for="">公休時間：</label>
+            <input type="text" v-model="formData.special_rest" />
+          </div>
+        </div>
       </div>
       <div class="btn">
         <button @click="addToggle = !addToggle">取消新增</button>
@@ -311,22 +317,29 @@
           v-model="editFeature.special_ctx5"
         ></textarea>
       </div> -->
-      <div>
-        <label for="">地址：</label>
-        <input type="text" v-model="editFeature.special_address" />
+      <div class="txt">
+        <div class="addre-tel">
+          <div>
+            <label for="">聯絡地址：</label>
+            <input type="text" v-model="editFeature.special_address" />
+          </div>
+          <div>
+            <label for="">電話號碼：</label>
+            <input type="text" v-model="editFeature.special_tel" />
+          </div>
+        </div>
+        <div class="time">
+          <div>
+            <label for="">營業時間：</label>
+            <input type="text" v-model="editFeature.special_time" />
+          </div>
+          <div>
+            <label for="">公休時間：</label>
+            <input type="text" v-model="editFeature.special_rest" />
+          </div>
+        </div>
       </div>
-      <div>
-        <label for="">電話：</label>
-        <input type="text" v-model="editFeature.special_tel" />
-      </div>
-      <div>
-        <label for="">營業時間：</label>
-        <input type="text" v-model="editFeature.special_time" />
-      </div>
-      <div>
-        <label for="">公休時間：</label>
-        <input type="text" v-model="editFeature.special_rest" />
-      </div>
+
       <div class="btn">
         <button @click="cancelEdit">取消編輯</button>
         <button type="submit">確認編輯</button>
@@ -940,6 +953,43 @@ export default {
       margin-left: 20px;
       padding: 10px 20px;
     }
+  }
+  .txt {
+    display: flex;
+    margin: 20px 0;
+    justify-content: center;
+
+    .addre-tel,
+    .time {
+      margin: 0 20px;
+      div {
+        // border: 1px solid red;
+        margin: 15px 0;
+        align-items: center;
+        display: flex;
+        input {
+          width: 270px;
+        }
+        select {
+          // border: 1px solid red;
+          width: 220px;
+        }
+      }
+    }
+    // .time {
+    //   margin: 0 20px;
+    //   div {
+    //     // border: 1px solid red;
+
+    //     input {
+    //       width: 280px;
+    //     }
+    //     select {
+    //       // border: 1px solid red;
+    //       width: 220px;
+    //     }
+    //   }
+    // }
   }
 }
 </style>
