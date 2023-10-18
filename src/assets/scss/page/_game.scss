@@ -954,6 +954,12 @@ img {
     vertical-align: top;
 }
 
+// 分類標籤改為白色
+#feaName {
+    border: 2px solid #fff;
+    color: #fff;
+}
+
 @media screen and (max-height: 700px) {
     .gameHome {
 
