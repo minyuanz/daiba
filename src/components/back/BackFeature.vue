@@ -15,7 +15,6 @@
       <p>標題</p>
       <p>推薦分類</p>
       <p>編輯</p>
-      <p>刪除</p>
     </div>
     <div
       class="feaInfo"
@@ -31,9 +30,6 @@
           <i class="fa-solid fa-pen-to-square"></i>
           編輯
         </button>
-      </div>
-      <div class="del">
-        <i class="fa-solid fa-circle-xmark"></i>
       </div>
     </div>
     <div class="addSta">
