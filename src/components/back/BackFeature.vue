@@ -1,5 +1,15 @@
 <template>
   <div class="backFeature" v-if="addToggle" v-show="!editMode">
+    <div class="feaSearch">
+      <label for="">請選擇分類：</label>
+      <select v-model="selectFeatureAll">
+        <option value="ALL">全部</option>
+        <option v-for="(feature, index) in selectedFeatures" :key="index">
+          {{ feature }}
+        </option>
+      </select>
+      <button class="btnsearch" @click="filterOptions()">查詢</button>
+    </div>
     <!-- <div class="feaSearch">
       <label for="">請選擇捷運線：</label>
       <select name="" id="">
@@ -28,7 +38,11 @@
       <p>編輯</p>
       <p>刪除</p>
     </div>
-    <div class="feaInfo" v-for="(feature, index) in features" :key="index">
+    <div
+      class="feaInfo"
+      v-for="(feature, index) in filteredFeature"
+      :key="index"
+    >
       <!-- <p>{{ feature.special_id }}</p> -->
       <p>{{ feature.sta_name }}</p>
       <p>{{ feature.special_title }}</p>
@@ -353,6 +367,9 @@ export default {
   data() {
     return {
       addToggle: true,
+      selectFeatureAll: "ALL",
+      filteredFeature: [],
+      selectedFeatures: [],
       picURL: "",
       fix: false,
       show: false,
@@ -418,6 +435,12 @@ export default {
         .get(this.$apiUrl("BackFeatureM.php"))
         .then((response) => {
           this.features = response.data; // 更新數據到 features
+          this.filteredFeature = this.features;
+
+          const featuresValue = this.features.map(
+            (feature) => feature.fea_name
+          );
+          this.selectedFeatures = [...new Set(featuresValue)];
         })
         .catch((error) => {
           console.error("數據傳輸失敗：", error);
@@ -452,7 +475,20 @@ export default {
         { imageURL: null, fix: false },
       ];
     },
-
+    filterOptions() {
+      const selectedFeature = this.selectFeatureAll;
+      if (selectedFeature === "景點") {
+        this.filteredFeature = this.features.filter(
+          (features) => features.fea_name === selectedFeature
+        );
+      } else if (selectedFeature === "ALL") {
+        this.filteredFeature = this.features;
+      } else if (selectedFeature === "美食") {
+        this.filteredFeature = this.features.filter(
+          (features) => features.fea_name === selectedFeature
+        );
+      }
+    },
     handleFileChange(e, index, mode) {
       const files = e.target.files;
       for (let i = 0; i < files.length; i++) {
