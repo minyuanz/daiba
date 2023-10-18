@@ -126,7 +126,7 @@
       >
         {{ upperCaseColorsMB[index] }}
       </button>
-    </div>  
+    </div>
 
     <div v-if="PC" class="mrtTag">
       <button
@@ -196,8 +196,9 @@
             (closePost = !closePost),
               (lightBox = !lightBox),
               (item.isShow = !item.isShow),
-              showMrtCard(item)
-              selectedType = '景點';"
+              showMrtCard(item);
+            selectedType = '景點';
+          "
         >
           <div class="mrtStaMaruBox">
             <img
@@ -222,16 +223,29 @@
                   class="swiper-slide"
                   v-for="(itemplace, index) in item.place"
                 > -->
-                <div class="swiper-slide" v-for="(itemCard, index) in filteredMrtCard" :key="index" :class="{ 'hidden': selectedType !== '' && itemCard.fea_name !== selectedType }">
-                  <div class="cardHeight" v-if="selectedType === '' || itemCard.fea_name === selectedType">
-                  <!-- <router-link
+                <div
+                  class="swiper-slide"
+                  v-for="(itemCard, index) in filteredMrtCard"
+                  :key="index"
+                  :class="{
+                    hidden:
+                      selectedType !== '' && itemCard.fea_name !== selectedType,
+                  }"
+                >
+                  <div
+                    class="cardHeight"
+                    v-if="
+                      selectedType === '' || itemCard.fea_name === selectedType
+                    "
+                  >
+                    <!-- <router-link
                 :to="{ path: itemplace?.router ? itemplace.router : '/' }"
                 > -->
-                  <router-link
-                    :to="{
-                      name: 'MrtCardPage',
-                      params: { id: itemCard.special_id },
-                    }"
+                    <router-link
+                      :to="{
+                        name: 'MrtCardPage',
+                        params: { id: itemCard.special_id },
+                      }"
                     >
                     <div class="mrtCardWrap">
                       <!-- 卡片 -->
@@ -248,39 +262,39 @@
                       </div>
                     </div>
                     </router-link>
-                </div>
+                  </div>
                 </div>
               </div>
               <div class="swiper-button-next"></div>
-          <div class="swiper-button-prev"></div>
+              <div class="swiper-button-prev"></div>
             </div>
           </transition>
           <!-- to="/MrtCardPage/:id" -->
         </div>
         <!-- ---------------------按鈕 -->
         <div class="mrtTagbar" @click="checkShow">
-            <div class="outer-circle"></div>
-            <div class="color-circle"></div>
-            <div class="inner-circle">
-              <img src="../../public/img/mrtImg.png" alt="" />
-            </div>
-            <transition appear name="box" mode="out-in">
-              <div class="checkBox" style="" v-if="showCheckBox">
-                <div class="box">
-                  <button class="place" @click="selectType('景點')">景點</button>
-                  <button class="food" @click="selectType('美食')">美食</button>
-                  <button class="hotel" @click="selectType('住宿')">住宿</button>
-                </div>
-                <div class="triangle"></div>
-              </div>
-            </transition>
+          <div class="outer-circle"></div>
+          <div class="color-circle"></div>
+          <div class="inner-circle">
+            <img src="../../public/img/mrtImg.png" alt="" />
           </div>
+          <transition appear name="box" mode="out-in">
+            <div class="checkBox" style="" v-if="showCheckBox">
+              <div class="box">
+                <button class="place" @click="selectType('景點')">景點</button>
+                <button class="food" @click="selectType('美食')">美食</button>
+                <button class="hotel" @click="selectType('住宿')">住宿</button>
+              </div>
+              <div class="triangle"></div>
+            </div>
+          </transition>
+        </div>
 
-      <!-- --------------------- -->
+        <!-- --------------------- -->
       </div>
     </div>
   </div>
-  <div class="lightBox" v-show="lightBox"  @click="toggleBox(item)"></div>
+  <div class="lightBox" v-show="lightBox" @click="toggleBox(item)"></div>
 </template>
 
 <script>
@@ -293,7 +307,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      selectedType: '景點',
+      selectedType: "景點",
       selectedFeature: "",
       selectMrtId: "R",
       mrtstaGroup: [],
@@ -523,7 +537,7 @@ export default {
       item.isShow = true;
     },
     selectType(type) {
-    this.selectedType = type;
+      this.selectedType = type;
     },
     // changeContent(type) {
     //   // 保存原始資料
@@ -615,11 +629,11 @@ export default {
       this.lightBox = !this.lightBox;
     },
 
-    toggleBox(item){
+    toggleBox(item) {
       this.closePost = !this.closePost;
       // item.isShow = !item.isShow;
       this.lightBox = !this.lightBox;
-    }
+    },
   },
 
   computed: {
