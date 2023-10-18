@@ -81,7 +81,7 @@
           v-for="detail in selectedOrder.details"
           :key="detail.prod_id"
         >
-          <img :src=$imgUrl(detail.prod_img1) alt=""/>
+          <img :src="$imgUrl(detail.prod_img1)" alt="" />
           <p>{{ detail.prod_name }}</p>
           <p>NT {{ detail.buy_price }}</p>
           <p>{{ detail.orderdetail_count }}</p>
@@ -104,30 +104,29 @@ export default {
     };
   },
   mounted() {
-    axios
-      .get(this.$apiUrl('BackOrderM.php'))
-      .then((response) => {
-        this.orders = response.data;
-      });
+    axios.get(this.$apiUrl("BackOrderM.php")).then((response) => {
+      this.orders = response.data;
+    });
   },
   methods: {
     showOrderDetails(order) {
-      const apiUrl = this.$apiUrl(`BackOrderDetailM.php?orderId=${order.ord_id}`);
-      axios.get(apiUrl)
-        .then((response) => {
-          this.selectedOrder = {
-            ...order,
-            details: response.data,
-          };
-          this.showOrderDetailsPage = true;
-        });
+      const apiUrl = this.$apiUrl(
+        `BackOrderDetailM.php?orderId=${order.ord_id}`
+      );
+      axios.get(apiUrl).then((response) => {
+        this.selectedOrder = {
+          ...order,
+          details: response.data,
+        };
+        this.showOrderDetailsPage = true;
+      });
     },
     updateOrderStatus(order) {
       const newStatus = order.ord_status;
       const orderId = order.ord_id;
       axios
         .post(
-          this.$apiUrl('UpdateOrderStatus.php'),
+          this.$apiUrl("UpdateOrderStatus.php"),
           {
             orderId: orderId,
             newStatus: newStatus,
@@ -225,6 +224,7 @@ export default {
   }
 }
 .BackDetail {
+  max-height: 900px;
   margin-top: 3rem;
   border: 1px solid #aaa;
   background-color: #fff;
@@ -242,11 +242,14 @@ export default {
     width: 45%;
     height: 40px;
     margin: 10px 0;
+    display: flex;
+    align-items: center;
     p {
       font-weight: bold;
       background-color: #aaa;
       width: 100px;
       text-align: center;
+      margin-inline: 1rem;
     }
   }
   .BackDetailM {
@@ -271,7 +274,7 @@ export default {
       background-color: #fff;
       width: 100%;
       display: flex;
-      flex-wrap: wrap;
+      // flex-wrap: wrap;
       height: 100px;
       justify-content: center;
       align-items: center;
@@ -282,6 +285,7 @@ export default {
       img {
         width: 25%;
         height: 100px;
+        margin-inline: 1rem;
       }
     }
   }

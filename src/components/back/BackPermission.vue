@@ -95,7 +95,7 @@ export default {
       formData.append("admin_acc", admin_acc);
       formData.append("admin_pas", admin_pas);
 
-      fetch(this.$apiUrl('CreatPermissionAC.php'), {
+      fetch(this.$apiUrl("CreatPermissionAC.php"), {
         method: "post",
         body: formData,
       })
@@ -118,7 +118,7 @@ export default {
     },
     fetchData() {
       axios
-        .get(this.$apiUrl('PremissonM.php'))
+        .get(this.$apiUrl("PremissonM.php"))
         .then((response) => {
           this.admins = response.data; // 更新數據到 admins
         })
@@ -130,7 +130,7 @@ export default {
       // 更改狀態
       admin.admin_sich = admin.admin_sich === "1" ? "0" : "1";
       axios
-        .post(this.$apiUrl('ContralPermissionAC.php'), {
+        .post(this.$apiUrl("ContralPermissionAC.php"), {
           admin_id: admin.admin_id,
           admin_sich: admin.admin_sich,
         })
@@ -258,6 +258,7 @@ export default {
   border: 1px solid #aaa;
   background-color: #fff;
   // border-radius: 20px;
+  height: 900px;
   width: 900px;
   padding: 50px;
   margin-top: 3rem;
