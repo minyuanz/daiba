@@ -376,6 +376,7 @@ export default {
         .catch((error) => {
           console.error("更新商品请求失败：", error);
         });
+        location.reload();
     },
 
     handleFileChange(e, index, mode) {
