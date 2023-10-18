@@ -10,28 +10,7 @@
       </select>
       <button class="btnsearch" @click="filterOptions()">查詢</button>
     </div>
-    <!-- <div class="feaSearch">
-      <label for="">請選擇捷運線：</label>
-      <select name="" id="">
-        <option :value="line.name" v-for="line in lines">
-          {{ line.name }}
-        </option>
-      </select>
-      <label for="">請選擇捷運站：</label>
-      <select name="" id="">
-        <option :value="sta.name" v-for="sta in stations">
-          {{ sta.name }}
-        </option>
-      </select>
-      <label for="">請選擇分類：</label>
-      <select name="" id="">
-        <option :value="fea.name" v-for="fea in features">
-          {{ fea.name }}
-        </option>
-      </select>
-    </div> -->
     <div class="feaTitle">
-      <!-- <p>編號</p> -->
       <p>捷運站</p>
       <p>標題</p>
       <p>推薦分類</p>
@@ -43,7 +22,6 @@
       v-for="(feature, index) in filteredFeature"
       :key="index"
     >
-      <!-- <p>{{ feature.special_id }}</p> -->
       <p>{{ feature.sta_name }}</p>
       <p>{{ feature.special_title }}</p>
       <p>{{ feature.fea_name }}</p>
@@ -674,13 +652,20 @@ export default {
   background-color: #fff;
   width: 900px;
   padding: 50px;
+  height: 900px;
+  overflow-y: scroll;
 
   .feaSearch {
     // border: 1px solid red;
     margin: 10px 0;
     display: flex;
     align-items: center;
-
+    .btnsearch {
+      // border: 1px solid red;
+      margin: 0 10px;
+      padding: 0px 30px;
+      height: 30px;
+    }
     select {
       height: 30px;
       margin-right: 30px;
