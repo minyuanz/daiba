@@ -219,9 +219,12 @@
         <!-- 點數 -->
         <form @submit.prevent="addPoint" enctype="multipart/form-data">
         <div class="station">
+          <!-- 正面 -->
           <div class="FrontCard">
             <img src="../../public/img/logo.png" alt="logo" />
           </div>
+
+          <!-- 背面 -->
           <div class="backCard">
             <div class="point">
               <p v-if="notLogin">登入會員遊玩的話即可獲得點數！</p>
@@ -238,25 +241,33 @@
 
         <!-- 推薦的東西 -->
         <div class="info">
+          <!-- 正面 -->
           <div class="FrontCard">
             <img src="../../public/img/logo.png" alt="logo" />
           </div>
+          <!-- 背面 -->
           <div class="backCard">
-            <div class="card-h border-r">
-              <div class="img">
-                <img :src=$imgUrl(specialAim[randomIndex].special_pic1) />
-              </div>
-              <div class="tag">
-                <span class="title-tag gray">{{specialAim[randomIndex].fea_name}}</span>
-                <span class="title-tag gray">{{specialAim[randomIndex].sta_name}}</span>
-              </div>
-              <div class="text">
-                <div class="title">
-                  <h3 v-if="specialAim.length > 0">{{ specialAim[randomIndex].special_title }}</h3>
-                  <p>{{specialAim[randomIndex].special_des}}</p>
+            <!-- 連結帶出id -->
+            <router-link :to="{ name: 'MrtCardPage', params: { id: specialAim[randomIndex].special_id } }">
+              <div class="card-h border-r">
+                <!-- 圖片 -->
+                <div class="img" v-if="specialAim">
+                  <img :src=$imgUrl(specialAim[randomIndex].special_pic1) />
+                </div>
+                <!-- 標籤 -->
+                <div class="tag">
+                  <span class="title-tag gray" id="feaName">{{specialAim[randomIndex].fea_name}}</span>
+                  <span class="title-tag" :class="staColor(specialAim[randomIndex].sta_name)">{{specialAim[randomIndex].sta_name}}</span>
+                </div>
+                <!-- 內容 -->
+                <div class="text">
+                  <div class="title">
+                    <h3 v-if="specialAim.length > 0">{{ specialAim[randomIndex].special_title }}</h3>
+                    <p>{{specialAim[randomIndex].special_des}}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+           </router-link>
           </div>
         </div>
 
@@ -378,12 +389,13 @@ export default {
       itemIndex: 0, //Key
       zIndex: 1,  //階級
 
-      newCostumeItem: [
+      newCostumeItem: [//篩選服裝 預設為上衣
         { id: 1, img: require('@/assets/images/game/costume/black_sweater.png'), alt: '上衣' },
         { id: 2, img: require('@/assets/images/game/costume/blue_shirt.png'), alt: '上衣' },
         { id: 3, img: require('@/assets/images/game/costume/yellow_upper.png'), alt: '上衣' },
         { id: 4, img: require('@/assets/images/game/costume/white_tshirt.png'), alt: '上衣' },
-      ], //篩選服裝 預設為上衣
+      ], 
+
       tryItems: [], //選擇的服裝
       fireing: false,
       recycleing: true,
@@ -391,7 +403,7 @@ export default {
 
 
       // 需帶出的物件
-      aim: "景點", //目的
+      aim: "", //目的
       line: "", //捷運線
 
       // 選項
@@ -422,11 +434,17 @@ export default {
       notLogin:false,
 
       // 捷運推薦
-      specialALL:[],
-      specialAim:[],
-      randomIndex:null,
-      
-
+      specialALL:[], //所有的推薦資料
+      specialAim:[], //篩選的資料
+      randomIndex:null, //亂數
+      stations:{
+                red:['象山','台北101/世貿','信義安和','大安','大安森林公園','東門','中正紀念堂','台大醫院','台北車站','中山','雙連','民權西路','圓山','劍潭','士林','芝山','明德','石牌','唭哩岸','奇岩','北投','復興崗','忠義','關渡','竹圍','紅樹林','淡水'],
+                blue:['頂埔','永寧','土城','海山','亞東醫院','府中','板橋','新埔','江子翠','龍山寺','西門','台北車站','善導寺','忠孝新生','忠孝復興','忠孝敦化','國父紀念館','市政府','永春','後山埤','昆陽','南港','南港展覽館'],
+                green:['新店','新店區公所','七張','大坪林','景美','萬隆','公館','台電大樓','古亭','中正紀念堂','小南門','西門','北門','中山','松江南京','南京復興','台北小巨蛋','南京三民','松山'],
+                orange:['南勢角','景安','永安市場','頂溪','古亭','東門','忠孝新生','松江南京','行天宮','中山國小','民權西路','大橋頭','台北橋','菜寮','三重','先嗇宮','頭前庄','新莊','永春','輔大','丹鳳','迴龍','三重國小','三和國中','徐匯中學','三民高中','蘆洲'],
+                brown:['動物園','木柵','萬芳社區','萬芳醫院','辛亥','麟光','六張犁','科技大樓','大安','忠孝復興','南京復興','中山國中','松山機場','大直','劍南路','西湖','港墘','文德','內湖','大湖公園','葫洲','東湖','南港軟體園區','南港展覽館'],
+                yellow:['大坪林','十四張','秀朗橋','景平','景平','景安','中和','橋和','中原','板新','板橋','新埔民生','頭前庄','幸福','新北產業園區'],
+              },
       // 對話內容
       messages: [
         {
@@ -840,48 +858,42 @@ export default {
 
   },
   mounted(){
-            // 會員
-      axios.get(`${this.$apiUrl('getMember.php')}`)
-            .then((res) => {
-                //抓取資料res
-                const matchingUser = res.data.find(user => user.mem_id === this.$store.state.memInfo.mem_id); //資料中和目前登入的ID配對
-                this.userId = matchingUser.mem_id   //現在的會員的id
-                this.point = parseInt(matchingUser.mem_point) //現在會員的點數資料 + 轉成int
-                
-            })
-            .catch((error) => {
-                console.error('資料失敗：', error);
-            });
+    // 抓會員
+    axios.get(`${this.$apiUrl('getMember.php')}`)
+      .then((res) => {
+          //抓取資料res
+          const matchingUser = res.data.find(user => user.mem_id === this.$store.state.memInfo.mem_id); //資料中和目前登入的ID配對
+          this.userId = matchingUser.mem_id   //現在的會員的id
+          this.point = parseInt(matchingUser.mem_point) //現在會員的點數資料 + 轉成int
+          
+      })
+      .catch((error) => {
+        console.error('資料失敗：', error);
+      });
 
-            // 判斷會員顯示
-            if(this.$store.state.memInfo){
-              this.isLogin = true
-              this.notLogin = false
-            }else{
-              this.notLogin = true
-              this.isLogin = false
-            }
+      // 判斷獲得點數的是否會員顯示
+      if(this.$store.state.memInfo){
+        this.isLogin = true
+        this.notLogin = false
+      }else{
+        this.notLogin = true
+        this.isLogin = false
+      }
     
-            // 推薦
-            axios.get(`${this.$apiUrl('BackFeatureM.php')}`)
-            .then((res) => {
-                // console.log(res) //抓取資料
-                this.specialALL = res.data
-                console.log(this.specialALL);
-                console.log(this.specialALL[0].special_title);
-                this.specialAim = this.specialALL.filter(special => special.fea_name === this.aim)
-                console.log(this.specialAim);    
-            })
-            .catch((error) => {
-                console.error('資料失敗：', error);
-            });
+      // 抓推薦資料
+    axios.get(`${this.$apiUrl('BackFeatureM.php')}`)
+      .then((res) => {
+          this.specialALL = res.data
+          this.specialAim = this.specialALL.filter(special => special.fea_name === this.aim) //與選擇的路線篩選
 
-            
+      })
+      .catch((error) => {
+          console.error('資料失敗：', error);
+      });
+     
   },
 
-
   methods: {
-
     // 換下一個內容
     nextMessage() {
       if (this.idx === this.currentMessage.text.length) {
@@ -1037,6 +1049,7 @@ export default {
       }
       this.specialAim = this.specialALL.filter(special => special.fea_name === this.aim)
       console.log(this.aim);
+      console.log(this.specialAim);
       
     },
 
@@ -1136,7 +1149,16 @@ export default {
 
     // 隨機產生陣列數
     random(){
-      return Math.floor(Math.random() * this.specialAim.length) + 1;
+      return Math.floor(Math.random() * this.specialAim.length);
+    },
+
+    // 判斷站的顏色
+    staColor(staName){
+      let newStaName = staName.replace('站','')  //去掉站字
+      const line = Object.keys(this.stations).find(line => this.stations[line].includes(newStaName));
+       // 把this.stations的key已陣列呈現，再來用this.stations[line]配對已陣列的方式搜尋newStaName
+       // console.log(this.stations[line]);
+      return line
     },
 
     // 重新遊戲
@@ -1267,4 +1289,5 @@ export default {
   height: 100px;
   margin-right: 10px;
 }
+
 </style>
