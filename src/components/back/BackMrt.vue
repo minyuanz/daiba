@@ -341,8 +341,9 @@ export default {
     },
 
     fetchData() {
+      // $apiUrl('mrt.php')
       axios
-        .get("http://localhost/dai/public/phps/mrt.php")
+        .get(this.$apiUrl('mrt.php'))
         .then((response) => {
           this.mrts = response.data;
           // console.log(this.mrts);
@@ -368,7 +369,8 @@ export default {
       formData.append("mrt_id2", this.currentEditMrt.mrt_id2);
       formData.append("sta_describe", this.currentEditMrt.sta_describe);
 
-      fetch(`http://localhost/dai/public/phps/updateMrt.php`, {
+      // $apiUrl('updateMrt.php')
+      fetch(this.$apiUrl('updateMrt.php'), {
         method: "post",
         body: formData,
       })
@@ -397,7 +399,8 @@ export default {
       // formData.append("news_imageURL", this.newMrt.sta_pictor);
       formData.append("sta_describe", this.newMrt.sta_describe);
 
-      fetch(`http://localhost/dai/public/phps/CreatMrt.php`, {
+      // $apiUrl('CreatMrt.php')
+      fetch(this.$apiUrl('CreatMrt.php'), {
         method: "post",
         body: formData,
       })
