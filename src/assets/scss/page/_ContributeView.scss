@@ -351,18 +351,17 @@
           font-size: map-get($map, small);
         }
 
-        .title::after {
-          content: "";
-          position: absolute;
-          width: 90%;
-          border-bottom: 1px solid map-get($color, $key: success);
-          bottom: 0;
-          left: 5%;
-        }
+
+        // .title::after {
+        //   content: "";
+        //   position: absolute;
+        //   width: 90%;
+        //   border-bottom: 1px solid map-get($color, $key: danger);
+        //   bottom: 0;
+        //   left: 5%;
+        // }
 
         .title {
-          border-top: 30px solid map-get($color, $key: success);
-          border-left: 30px solid map-get($color, $key: success);
           padding-top: 1rem;
           padding-inline: 2rem;
           position: relative;
@@ -378,7 +377,73 @@
             font-size: map-get($fontsizes, h4);
             line-height: 65px;
           }
+
+          .lineColor {
+            position: absolute;
+            width: 90%;
+            bottom: 0;
+            left: 5%;
+          }
+
+          .lineR {
+            border-bottom: 1px solid map-get($color, $key: danger);
+          }
+
+          .lineBL {
+            border-bottom: 1px solid map-get($color, $key: info);
+          }
+
+          .lineO {
+            border-bottom: 1px solid map-get($color, $key: tangerine);
+          }
+
+          .lineG {
+            border-bottom: 1px solid map-get($color, $key: success);
+          }
+
+          .lineBR {
+            border-bottom: 1px solid map-get($color, $key: choco);
+          }
+
+          .lineY {
+            border-bottom: 1px solid map-get($color, $key: warning);
+          }
+
+          .title-tag {
+            margin-top: 20px;
+          }
         }
+
+        .titleR {
+          border-top: 30px solid map-get($color, $key: danger);
+          border-left: 30px solid map-get($color, $key: danger);
+        }
+
+        .titleBL {
+          border-top: 30px solid map-get($color, $key: info);
+          border-left: 30px solid map-get($color, $key: info);
+        }
+
+        .titleO {
+          border-top: 30px solid map-get($color, $key: tangerine);
+          border-left: 30px solid map-get($color, $key: tangerine);
+        }
+
+        .titleG {
+          border-top: 30px solid map-get($color, $key: success);
+          border-left: 30px solid map-get($color, $key: success);
+        }
+
+        .titleBR {
+          border-top: 30px solid map-get($color, $key: choco);
+          border-left: 30px solid map-get($color, $key: choco);
+        }
+
+        .titleY {
+          border-top: 30px solid map-get($color, $key: warning);
+          border-left: 30px solid map-get($color, $key: warning);
+        }
+
 
         .DigLikeBox {
           position: absolute;
@@ -413,9 +478,10 @@
             width: 100%;
             //   width: calc(100% + 40px);
             background-color: transparent;
-            display: inline-grid;
+            // display: inline-grid;
             position: relative;
             padding: 1rem 0.5rem 0;
+
 
             p {
               padding-left: 3.5rem;
@@ -464,6 +530,36 @@
             flex: 1;
             height: 12px;
             background-color: map-get($color, $key: success);
+          }
+
+          .lineR {
+            border-top: 30px solid map-get($color, $key: danger);
+            border-left: 30px solid map-get($color, $key: danger);
+          }
+
+          .lineBL {
+            border-top: 30px solid map-get($color, $key: info);
+            border-left: 30px solid map-get($color, $key: info);
+          }
+
+          .lineO {
+            border-top: 30px solid map-get($color, $key: tangerine);
+            border-left: 30px solid map-get($color, $key: tangerine);
+          }
+
+          .lineG {
+            border-top: 30px solid map-get($color, $key: success);
+            border-left: 30px solid map-get($color, $key: success);
+          }
+
+          .lineBR {
+            border-top: 30px solid map-get($color, $key: choco);
+            border-left: 30px solid map-get($color, $key: choco);
+          }
+
+          .lineY {
+            border-top: 30px solid map-get($color, $key: warning);
+            border-left: 30px solid map-get($color, $key: warning);
           }
 
           span {
