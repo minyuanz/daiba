@@ -207,7 +207,7 @@
             />
           </div>
           <div class="mrtStaPicBox">
-            <img class="mrtStaPic" :src="`./img/${item.sta_pictor}`" alt="" />
+            <img class="mrtStaPic" :src=$imgUrl(item.sta_pictor) alt="" /> 
           </div>
         </div>
       </div>
@@ -237,7 +237,7 @@
                       <!-- 卡片 -->
                       <div class="card-h border-r">
                         <div class="img">
-                          <img :src="`./img/${itemCard.special_pic1}`" alt="" />
+                          <img :src=$imgUrl(itemCard.special_pic1) alt="" />
                         </div>
                         <div class="text">
                           <div class="title">
@@ -326,7 +326,7 @@ export default {
 
   mounted() {
     axios
-      .get("http://localhost/dai/public/phps/mrt.php")
+      .get(this.$apiUrl('mrt.php'))
       .then((res) => {
         this.mrtData = res.data;
         this.mrtstaGroup = this.mrtData.filter(
@@ -339,7 +339,7 @@ export default {
         console.log("err", err);
       });
     axios
-      .get("http://localhost/dai/public/phps/BackFeatureM.php")
+      .get(this.$apiUrl('BackFeatureM.php'))
       .then((res) => {
         console.log("got it", res);
         this.mrtcard = res.data;
