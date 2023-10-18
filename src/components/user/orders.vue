@@ -9,7 +9,7 @@
                     <p>總金額</p>
                     <p>訂單狀態</p>
                 </div>
-                <div class="orderList" v-for="order in ordersDisplay" :key="order.ord_id" @click="loadOrderDetails(order.ord_id)">
+                <div class="orderList" v-for="order in orders" :key="order.ord_id" @click="loadOrderDetails(order.ord_id)">
                     <div class="order">
                         <p>{{ order.ord_id }}</p>
                         <p>NT {{ order.ord_price }}</p>
@@ -23,7 +23,7 @@
                             <p>數量</p>
                         </div>
                         <div class="infoCtx" v-for="detail in order.details" :key="detail.prod_id">
-                            <img :src="`${this.$store.state.imgURLp}` +  detail.prod_img1" alt="">
+                            <img :src=$imgUrl(detail.prod_img1) alt="">
                             <p>{{ detail.prod_name }}</p>
                             <p>NT {{ detail.buy_price }}</p>
                             <p>{{ detail.orderdetail_count }}</p>
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <Page :total="orders.length" size="small" :page-size="pageSize" @on-change="updatePage" id="page" />
+        <!-- <Page :total="orders.length" size="small" :page-size="pageSize" @on-change="updatePage" id="page" /> -->
     </div>
 </template>
 
@@ -49,7 +49,8 @@ export default {
     },
     methods: {
     fetchOrders(memberId) {
-    axios.get(`http://localhost/dai/public/phps/MemberOrderM.php?memberId=${memberId}`)
+    const apiUrl = this.$apiUrl(`MemberOrderM.php?memberId=${memberId}`);
+    axios.get(apiUrl)
       .then((response) => {
         this.orders = response.data; 
         this.updatePage(1); 
@@ -59,8 +60,8 @@ export default {
       });
   },
   loadOrderDetails(orderId) {
-  axios
-    .get(`http://localhost/dai/public/phps/MemberOrderDerailM.php?orderId=${orderId}`)
+    const apiUrl = this.$apiUrl(`MemberOrderDerailM.php?orderId=${orderId}`);
+    axios.get(apiUrl)
     .then((response) => {
       const orderIndex = this.orders.findIndex(order => order.ord_id === orderId);
       if (orderIndex !== -1) {

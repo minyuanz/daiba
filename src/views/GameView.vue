@@ -212,7 +212,7 @@
       </div>
 
       <!-- 結束畫面 -->
-      <div class="end" v-if="openEnd">
+      <div class="end" v-if="openEnd" >
         <p>冒險的一天結束了！</p>
         <p>根據你的冒險路線，你可以選擇...</p>
 
@@ -244,16 +244,16 @@
           <div class="backCard">
             <div class="card-h border-r">
               <div class="img">
-                <img src="https://picsum.photos/280/200/?random=10" />
+                <img :src=$imgUrl(specialAim[randomIndex].special_pic1) />
               </div>
               <div class="tag">
-                <span class="title-tag blue">#板南線</span>
-                <span class="title-tag red">#淡水信義線</span>
+                <span class="title-tag gray">{{specialAim[randomIndex].fea_name}}</span>
+                <span class="title-tag gray">{{specialAim[randomIndex].sta_name}}</span>
               </div>
               <div class="text">
                 <div class="title">
-                  <h3>原來京站樓上長這樣？</h3>
-                  <p>開箱五星級行政豪華客房一泊二食</p>
+                  <h3 v-if="specialAim.length > 0">{{ specialAim[randomIndex].special_title }}</h3>
+                  <p>{{specialAim[randomIndex].special_des}}</p>
                 </div>
               </div>
             </div>
@@ -391,7 +391,7 @@ export default {
 
 
       // 需帶出的物件
-      aim: "", //目的
+      aim: "景點", //目的
       line: "", //捷運線
 
       // 選項
@@ -420,6 +420,12 @@ export default {
       showPoint:false,
       isLogin:false,
       notLogin:false,
+
+      // 捷運推薦
+      specialALL:[],
+      specialAim:[],
+      randomIndex:null,
+      
 
       // 對話內容
       messages: [
@@ -830,6 +836,8 @@ export default {
     currentMessage() {
       return this.messages[this.currentMessageIndex];
     },
+
+
   },
   mounted(){
             // 會員
@@ -855,20 +863,20 @@ export default {
             }
     
             // 推薦
-            // axios.get(`${this.$apiUrl('.php')}`)
-            // .then((res) => {
-            //     console.log(res) //抓取資料
-            //     const matchingUser = res.data.find(user => user.mem_id === this.$store.state.memInfo.mem_id); //資料中和目前登入的ID配對
-            //     this.userId = matchingUser.mem_id   //現在的會員的id
-            //     this.point = parseInt(matchingUser.mem_point) //現在會員的點數資料 + 轉成int
-            //     console.log(matchingUser);
-            //     console.log(this.userId)
-            //     console.log(this.point)
-                
-            // })
-            // .catch((error) => {
-            //     console.error('資料失敗：', error);
-            // });
+            axios.get(`${this.$apiUrl('BackFeatureM.php')}`)
+            .then((res) => {
+                // console.log(res) //抓取資料
+                this.specialALL = res.data
+                console.log(this.specialALL);
+                console.log(this.specialALL[0].special_title);
+                this.specialAim = this.specialALL.filter(special => special.fea_name === this.aim)
+                console.log(this.specialAim);    
+            })
+            .catch((error) => {
+                console.error('資料失敗：', error);
+            });
+
+            
   },
 
 
@@ -1027,7 +1035,9 @@ export default {
         this.nextMessage();
         this.nextMessage();
       }
+      this.specialAim = this.specialALL.filter(special => special.fea_name === this.aim)
       console.log(this.aim);
+      
     },
 
     // 捷運路線
@@ -1071,6 +1081,7 @@ export default {
         this.chikinshop = false;
         this.nextMessage();
       }
+      
     },
 
     // 唱歌
@@ -1121,6 +1132,11 @@ export default {
       
         
     
+    },
+
+    // 隨機產生陣列數
+    random(){
+      return Math.floor(Math.random() * this.specialAim.length) + 1;
     },
 
     // 重新遊戲
@@ -1185,6 +1201,8 @@ export default {
         this.closeTxtName = false;
         this.closeBalloon = false;
         this.openEnd = true;
+        this.randomIndex = this.random()
+        console.log(this.randomIndex);
       }
     },
 

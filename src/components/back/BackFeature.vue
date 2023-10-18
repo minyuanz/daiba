@@ -78,7 +78,16 @@
         </div>
         <div class="selectTAg">
           <label for="">捷運站：</label>
-          <input type="text" v-model="formData.sta_name" />
+          <select name="sta_name" v-model="formData.sta_name">
+            <option value="">請選擇捷運站</option>
+            <option
+              v-for="station in mrtStations"
+              :value="station.sta_name"
+              :key="station.id"
+            >
+              {{ station.sta_name }}
+            </option>
+          </select>
           <label for="">推薦分類：</label>
           <select name="" id="" v-model="formData.fea_name">
             <option value="景點">景點</option>
@@ -153,12 +162,28 @@
           ></textarea>
         </div>
       </div>
-      <div class="backFeaCtx">
+      <!-- <div class="backFeaCtx">
         <label for="">詳細資訊</label>
         <textarea
           class="custom-input"
           v-model="formData.special_ctx5"
         ></textarea>
+      </div> -->
+      <div>
+        <label for="">地址：</label>
+        <input type="text" v-model="formData.special_address" />
+      </div>
+      <div>
+        <label for="">電話：</label>
+        <input type="text" v-model="formData.special_tel" />
+      </div>
+      <div>
+        <label for="">營業時間：</label>
+        <input type="text" v-model="formData.special_time" />
+      </div>
+      <div>
+        <label for="">公休時間：</label>
+        <input type="text" v-model="formData.special_rest" />
       </div>
       <div class="btn">
         <button @click="addToggle = !addToggle">取消新增</button>
@@ -215,7 +240,7 @@
           <div class="pic">
             <p>＋</p>
             <img
-              :src="`${this.$store.state.imgURL}` + editFeature.special_pic2"
+              :src="$imgUrl(editFeature.special_pic2)"
               v-if="editFeature.special_pic2 !== '' ? true : false"
             />
             <input
@@ -235,7 +260,7 @@
           <div class="pic">
             <p>＋</p>
             <img
-              :src="`${this.$store.state.imgURL}` + editFeature.special_pic3"
+              :src="$imgUrl(editFeature.special_pic3)"
               v-if="editFeature.special_pic3 !== '' ? true : false"
             />
             <input
@@ -255,7 +280,7 @@
           <div class="pic">
             <p>＋</p>
             <img
-              :src="`${this.$store.state.imgURL}` + editFeature.special_pic4"
+              :src="$imgUrl(editFeature.special_pic4)"
               v-if="editFeature.special_pic4 !== '' ? true : false"
             />
             <input
@@ -275,7 +300,7 @@
           <div class="pic">
             <p>＋</p>
             <img
-              :src="`${this.$store.state.imgURL}` + editFeature.special_pic5"
+              :src="$imgUrl(editFeature.special_pic5)"
               v-if="editFeature.special_pic5 !== '' ? true : false"
             />
             <input
@@ -291,12 +316,28 @@
           ></textarea>
         </div>
       </div>
-      <div class="backFeaCtx">
+      <!-- <div class="backFeaCtx">
         <label for="">詳細資訊</label>
         <textarea
           class="custom-input"
           v-model="editFeature.special_ctx5"
         ></textarea>
+      </div> -->
+      <div>
+        <label for="">地址：</label>
+        <input type="text" v-model="editFeature.special_address" />
+      </div>
+      <div>
+        <label for="">電話：</label>
+        <input type="text" v-model="editFeature.special_tel" />
+      </div>
+      <div>
+        <label for="">營業時間：</label>
+        <input type="text" v-model="editFeature.special_time" />
+      </div>
+      <div>
+        <label for="">公休時間：</label>
+        <input type="text" v-model="editFeature.special_rest" />
       </div>
       <div class="btn">
         <button @click="cancelEdit">取消編輯</button>
@@ -353,16 +394,28 @@ export default {
         special_ctx3: "",
         special_ctx4: "",
         special_ctx5: "",
+        special_address: "",
+        special_tel: "",
+        special_time: "",
+        special_rest: "",
       },
     };
   },
   created() {
     this.fetchData();
+    axios
+      .get(this.$apiUrl("GetMrtStations.php"))
+      .then((response) => {
+        this.mrtStations = response.data;
+      })
+      .catch((error) => {
+        console.error("獲取捷運站數據失敗：", error);
+      });
   },
   methods: {
     fetchData() {
       axios
-        .get("http://localhost/dai/public/phps/BackFeatureM.php")
+        .get(this.$apiUrl("BackFeatureM.php"))
         .then((response) => {
           this.features = response.data; // 更新數據到 features
         })
@@ -485,9 +538,13 @@ export default {
       formData.append("special_ctx3", this.formData.special_ctx3);
       formData.append("special_ctx4", this.formData.special_ctx4);
       formData.append("special_ctx5", this.formData.special_ctx5);
+      formData.append("special_address", this.formData.special_address);
+      formData.append("special_tel", this.formData.special_tel);
+      formData.append("special_time", this.formData.special_time);
+      formData.append("special_rest", this.formData.special_rest);
 
       axios
-        .post("http://localhost/dai/public/phps/CreatFeature.php", formData, {
+        .post(this.$apiUrl("CreatFeature.php"), formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -503,22 +560,7 @@ export default {
         .catch((error) => {
           console.error("新增請求失敗：", error);
         });
-
-      // fetch(`http://localhost/dai/public/phps/CreatFeature.php`, {
-      //   method: "post",
-      //   body: formData,
-      // })
-      //   .then((res) => res.json())
-      //   .then((res) => {
-      //     if (!res.error) {
-      //       alert(res.msg);
-      //       // this.addToggle = !this.addToggle;
-      //       this.addToggle = false;
-      //     }
-      //   })
-      //   .catch(function (error) {
-      //     console.log(error);
-      //   });
+      location.reload();
     },
     updateFeature() {
       // 建立數據資料夾好發給PHP做處理新增
@@ -538,9 +580,13 @@ export default {
       formData.append("special_ctx4", this.editFeature.special_ctx4);
       formData.append("special_ctx5", this.editFeature.special_ctx5);
       formData.append("special_id", this.editFeature.special_id);
+      formData.append("special_address", this.editFeature.special_address);
+      formData.append("special_tel", this.editFeature.special_tel);
+      formData.append("special_time", this.editFeature.special_time);
+      formData.append("special_rest", this.editFeature.special_rest);
 
       axios
-        .post("http://localhost/dai/public/phps/UpdateFeature.php", formData, {
+        .post(this.$apiUrl("UpdateFeature.php"), formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -556,6 +602,7 @@ export default {
             this.editFeature.special_pic3 = null;
             this.editFeature.special_pic4 = null;
             this.editFeature.special_pic5 = null;
+            location.reload();
           } else {
             alert("更新失敗");
           }

@@ -1,13 +1,7 @@
 <template>
   <div class="mrtContibuteInPage">
     <div class="title">
-      <h1>{{ mrtCardPage.title }}</h1>
-      <div class="tag">
-        <span class="title-tag gray">{{mrtCardPage.grayTag}}</span>
-        <span class="title-tag red">
-          {{mrtCardPage.colorTag}}
-        </span>
-      </div>
+      <h1>{{ filtermrtFea.special_title }}</h1>
     </div>
     <div class="fixCenter">
       <div
@@ -17,11 +11,11 @@
         }"
       >
         <div class="image">
-          <img :src="mrtCardPage.mrtimg1" alt="" />
+          <img :src="$imgUrl(filtermrtFea.special_pic2)" alt="" />
         </div>
       </div>
       <p>
-        {{ mrtCardPage.p1 }}
+        {{ filtermrtFea.special_ctx1 }}
       </p>
     </div>
     <div class="fixCenter part2">
@@ -32,12 +26,12 @@
         }"
       >
         <div class="image">
-          <img :src="mrtCardPage.mrtimg2" alt="ron1" />
+          <img :src="$imgUrl(filtermrtFea.special_pic3)" alt="ron1" />
         </div>
       </div>
 
       <p>
-        {{ mrtCardPage.p2 }}
+        {{ filtermrtFea.special_ctx2 }}
       </p>
     </div>
     <!-- ------------------------------------------------------------ -->
@@ -49,18 +43,18 @@
     >
       <div class="content">
         <div class="image">
-          <img :src="mrtCardPage.mrtimg3" alt="ron1" />
+          <img :src="$imgUrl(filtermrtFea.special_pic4)" alt="ron1" />
         </div>
         <article>
           <p>
-            {{ mrtCardPage.p3 }}
+            {{ filtermrtFea.special_ctx3 }}
           </p>
         </article>
       </div>
     </div>
     <article class="mbart">
       <p>
-        {{ mrtCardPage.p3 }}
+        {{ filtermrtFea.special_ctx3 }}
       </p>
     </article>
     <!-- ------------------------------------------------------------ -->
@@ -72,18 +66,18 @@
     >
       <div class="content">
         <div class="image">
-          <img :src="mrtCardPage.mrtimg4" alt="ron1" />
+          <img :src="$imgUrl(filtermrtFea.special_pic5)" alt="ron1" />
         </div>
         <article>
           <p>
-            {{ mrtCardPage.p4 }}
+            {{ filtermrtFea.special_ctx4 }}
           </p>
         </article>
       </div>
     </div>
     <article class="mbart">
       <p>
-        {{ mrtCardPage.p4 }}
+        {{ filtermrtFea.special_ctx4 }}
       </p>
     </article>
     <div class="seperate">
@@ -102,21 +96,20 @@
       <div class="leftSide">
         <div class="detailTxt">
           <p>《 詳細資訊 》</p>
-          <p>地址: {{ mrtCardPage.address }}</p>
-          <p>電話: {{ mrtCardPage.tel }}</p>
+          <p>地址: {{ filtermrtFea.special_address }}</p>
+          <p>電話: {{ filtermrtFea.special_tel }}</p>
         </div>
         <div class="timelTxt">
           <p>《 營業時間 》</p>
-          <p>➢ {{ mrtCardPage.time1 }}</p>
-          <p>➢ {{ mrtCardPage.time2 }}</p>
-        </div> 
+          <p>➢ {{ filtermrtFea.special_time }}</p>
+          <p>➢ {{ filtermrtFea.special_rest }}</p>
+        </div>
       </div>
 
       <a href="https://www.travel.taipei/" class="officialWeb">
         <ButtonM :HTMLInner="btninner" />
-      </a>     
+      </a>
     </div>
-
   </div>
 </template>
 <script>
@@ -127,6 +120,7 @@ import backgroundMb3 from "@../../../public/img/ron/part3_mb.svg";
 import background4 from "@../../../public/img/ron/part4bgc.svg";
 import backgroundMb4 from "@../../../public/img/ron/part4_mb.svg";
 import ButtonM from "@/components/ButtonM.vue";
+import axios from "axios";
 export default {
   data() {
     return {
@@ -140,21 +134,38 @@ export default {
       PC: true,
       btninner: "官方網站",
       mrtCardPage: "",
+      mrtFeature: [],
+      filtermrtFea: [],
     };
   },
   components: {
     ButtonM,
   },
+
   mounted() {
     this.WindowWidth();
     window.addEventListener("resize", this.WindowWidth);
 
-    const storeId = parseInt(this.$route.params.id);
-    this.mrtCardPage = this.$store.state.mrtCardPage.find(
-      (item) => item.id === storeId
-    );
-    console.log(this.$store.state.mrtCardPage);
+    // const storeId = parseInt(this.$route.params.id);
+    // this.mrtCardPage = this.$store.state.mrtCardPage.find(
+    //   (item) => item.id === storeId
+    // );
+    // console.log(this.$store.state.mrtCardPage);
+
+    axios
+      .get(this.$apiUrl("BackFeatureM.php"))
+      .then((res) => {
+        this.mrtFeature = res.data;
+        let idToFind = this.$route.params.id;
+        this.filtermrtFea = this.mrtFeature.find(
+          (item) => item.special_id === idToFind
+        );
+      })
+      .catch((err) => {
+        console.log("err", err);
+      });
   },
+
   methods: {
     WindowWidth() {
       if (window.innerWidth <= 768) {
@@ -166,6 +177,8 @@ export default {
       }
     },
   },
+
+  // this.fetchData();
 };
 </script>
 <style lang="scss">

@@ -1,35 +1,17 @@
 <template>
   <div class="storeWrap">
     <h1 class="storeTitle">精選購物</h1>
-    <!-- <div class="storeSearch">
-      <div class="storeSearchMrt">
-        <span>捷運線選擇</span>
-        <i class="fa-solid fa-play fa-rotate-90"></i>
-        <ul class="SearchMrtBox">
-          <li v-for="i in 5">選項1</li>
-        </ul>
-      </div>
-      <div class="storeSearchSta">
-        <span>捷運站選擇</span>
-        <i class="fa-solid fa-play fa-rotate-90"></i>
-        <ul class="SearchStaBox">
-          <li v-for="i in 5">選項1</li>
-        </ul>
-      </div>
-      <div class="storeSearchSP">
-        <span>特色選擇</span>
-        <i class="fa-solid fa-play fa-rotate-90"></i>
-        <ul class="SearchSPBox">
-          <li v-for="i in 5">選項1</li>
-        </ul>
-      </div>
-      <button class="storeSearchBt">搜尋</button>
-    </div> -->
+    <div class="storeFilter">
+      <button @click="filterProducts('all')">全部</button>
+      <button @click="filterProducts('Souvenir')">伴手禮</button>
+      <button @click="filterProducts('memento')">紀念品</button>
+    </div>
     <div class="storecardbox">
       <div v-for="item  in paginatedProducts "  :key="item.pord_id"  class="storeCard">
-        <router-link :to="'/storeDetail/' + item.prod_id" >
+        <div style="display:none ;">{{ item.prod_type }}</div>
+        <router-link :to="'/storeDetail/' + item.prod_id">
           <div class="imgbox">
-            <img  class="storeCardimg" :src="`${this.$store.state.imgURLp}` +  item.prod_img1"/>
+            <img  class="storeCardimg" :src="$imgUrl(item.prod_img1)"/>
             <!-- <div class="storeButton addToHeart">
               <i class="fa-regular fa-heart" style="cursor: pointer"></i>
             </div> -->
@@ -47,27 +29,13 @@
       </div>
     </div>
     <div class="pagination">
-      <button
-        class="paginationmain"
-        @click="prevPage"
-        :disabled="currentPage === 1"
-      >
+      <button class="paginationmain" @click="prevPage" :disabled="currentPage === 1 || isLoading">
         ＜
       </button>
-      <button
-        class="paginationmain"
-        @click="goToPage(page)"
-        v-for="page in totalPages"
-        :key="page"
-        :class="{ 'current-page': page === currentPage }"
-      >
+      <button class="paginationmain" @click="goToPage(page)" v-for="page in totalPages" :key="page" :class="{ 'current-page': page === currentPage }">
         {{ page }}
       </button>
-      <button
-        class="paginationmain"
-        @click="nextPage"
-        :disabled="currentPage === totalPages"
-      >
+      <button class="paginationmain" @click="nextPage" :disabled="currentPage === totalPages || isLoading">
         ＞
       </button>
     </div>
@@ -84,6 +52,8 @@ export default {
       allProducts: [], // 假設顯示所有商品數據
       pageSize: 6, // 每頁顯示數量
       currentPage: 1, // 當前頁數
+      selectedType: 'all',
+      isLoading: true,
       // testitem: ProTest,
     };
   },
@@ -92,13 +62,18 @@ export default {
     },
   methods: {
     fetchData() {
-            axios.get('http://localhost/dai/public/phps/ProductM.php')
+            axios.get(this.$apiUrl('ProductM.php'))
             .then((response) => {
             this.allProducts = response.data; // 更新數據到 products
+            this.isLoading = false;
         })
             .catch((error) => {
             console.error('數據傳輸失敗：', error);
         });
+        },
+        filterProducts(type) {
+          this.selectedType = type;
+          this.currentPage = 1; // 将当前页数重置为第一页
         },
     // goToStoreDetail(Detail) {
     //   this.$router.push({
@@ -127,15 +102,29 @@ export default {
     },
   },
   computed: {
-    paginatedProducts() {
-      const startIndex = (this.currentPage - 1) * this.pageSize;
-      const endIndex = startIndex + this.pageSize;
-      return this.allProducts.slice(startIndex, endIndex);
-    },
-    totalPages() {
-      return Math.ceil(this.allProducts.length / this.pageSize);
-    },
+  paginatedProducts() {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    const filteredProducts = this.allProducts.filter(item => {
+      if (this.selectedType === 'all') {
+        return true;
+      } else {
+        return item.prod_type === this.selectedType;
+      }
+    });
+    return filteredProducts.slice(startIndex, endIndex);
   },
+  totalPages() {
+    const filteredProducts = this.allProducts.filter(item => {
+      if (this.selectedType === 'all') {
+        return true;
+      } else {
+        return item.prod_type === this.selectedType;
+      }
+    });
+    return Math.ceil(filteredProducts.length / this.pageSize);
+  },
+},
 };
 </script>
 
@@ -150,104 +139,26 @@ export default {
     margin: 3rem 0;
     text-align: center;
   }
-  .storeSearch {
+  .storeFilter{
     width: 100%;
-    height: 10vh;
+    margin: auto;
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: map-get($map: $fontsizes, $key: h4);
-
-    .storeSearchMrt {
-      border: 3px solid black;
-      padding: 0 0.5rem;
-      margin-right: 50px;
-      span {
-        font-size: map-get($map: $fontsizes, $key: h4);
-        margin-right: 20px;
-      }
-      &:hover .SearchMrtBox {
-        display: block;
-      }
-      .SearchMrtBox {
-        display: none;
-        position: absolute;
-        background-color: white;
-        border: 1px solid #ccc;
-        width: 150px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        li {
-          padding: 12px 16px;
-          text-decoration: none;
-          cursor: pointer;
-          &:hover {
-            background-color: rgb(108, 108, 108);
-            color: #fffcfc;
-          }
+    justify-content: center;
+    button {
+        width: 100px;
+        height: 70px;
+        border: 2px solid #666;
+        background-color: transparent;
+        cursor: pointer;
+        border-radius: 10px;
+        margin: 30px;
+        transition: all 0.3s;
+        &:hover {
+          // border: 2px solid #333;
+          background-color: #ddd;
         }
       }
-    }
-    .storeSearchSta {
-      border: 3px solid black;
-      padding: 0 0.5rem;
-      margin-right: 50px;
-      span {
-        font-size: map-get($map: $fontsizes, $key: h4);
-        margin-right: 20px;
-      }
-      &:hover .SearchStaBox {
-        display: block;
-      }
-      .SearchStaBox {
-        display: none;
-        position: absolute;
-        background-color: white;
-        border: 1px solid #ccc;
-        width: 150px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        li {
-          padding: 12px 16px;
-          text-decoration: none;
-          cursor: pointer;
-          &:hover {
-            background-color: rgb(108, 108, 108);
-            color: #fffcfc;
-          }
-        }
-      }
-    }
-    .storeSearchSP {
-      border: 3px solid black;
-      padding: 0 0.5rem;
-      margin-right: 50px;
-      span {
-        font-size: map-get($map: $fontsizes, $key: h4);
-        margin-right: 20px;
-      }
-      &:hover .SearchSPBox {
-        display: block;
-      }
-      .SearchSPBox {
-        display: none;
-        position: absolute;
-        background-color: white;
-        border: 1px solid #ccc;
-        width: 150px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        li {
-          padding: 12px 16px;
-          text-decoration: none;
-          cursor: pointer;
-          &:hover {
-            background-color: rgb(108, 108, 108);
-            color: #fffcfc;
-          }
-        }
-      }
-    }
-    .storeSearchBt {
-      width: 100px;
-    }
   }
   .storecardbox {
     width: 100%;

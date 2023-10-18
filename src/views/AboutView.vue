@@ -63,7 +63,8 @@
         </p>
       </article>
       <div class="pic">
-        <img src="../../src/assets/images/101.jpg" alt="taipei101" />
+        <!-- ${this.$store.state.publicURLL}/img/101/jpg -->
+        <img :src="`${this.$store.state.imgURL}101.jpg`" alt="taipei101" />
       </div>
     </div>
     <article class="mbArt">

@@ -6,7 +6,7 @@ try {
 
     for ($i = 1; $i <= 4; $i++) { 
         if ($_FILES["prod_img{$i}"]["error"] === 0) { 
-            $dir = "../img/product/"; 
+            $dir = "../img/"; 
             if (!file_exists($dir)) {
                 mkdir($dir);  
             }

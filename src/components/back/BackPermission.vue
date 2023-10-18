@@ -95,7 +95,7 @@ export default {
       formData.append("admin_acc", admin_acc);
       formData.append("admin_pas", admin_pas);
 
-      fetch(`http://localhost/dai/public/phps/CreatPermissionAC.php`, {
+      fetch(this.$apiUrl('CreatPermissionAC.php'), {
         method: "post",
         body: formData,
       })
@@ -118,7 +118,7 @@ export default {
     },
     fetchData() {
       axios
-        .get("http://localhost/dai/public/phps/PremissonM.php")
+        .get(this.$apiUrl('PremissonM.php'))
         .then((response) => {
           this.admins = response.data; // 更新數據到 admins
         })
@@ -130,7 +130,7 @@ export default {
       // 更改狀態
       admin.admin_sich = admin.admin_sich === "1" ? "0" : "1";
       axios
-        .post("http://localhost/dai/public/phps/ContralPermissionAC.php", {
+        .post(this.$apiUrl('ContralPermissionAC.php'), {
           admin_id: admin.admin_id,
           admin_sich: admin.admin_sich,
         })

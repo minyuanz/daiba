@@ -15,4 +15,4 @@ try {
     echo json_encode($response);
 }
 $pdo = null;
-?>
+?>  

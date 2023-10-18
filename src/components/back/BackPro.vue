@@ -66,10 +66,10 @@
           <option value="Souvenir">伴手禮</option>
           <option value="memento">紀念品</option>
         </select>
-        <label for="">捷運站：</label>
+        <!-- <label for="">捷運站：</label>
         <select id="staId" v-model="newProduct.sta_id">
           <option value="BL">BL</option>
-        </select>
+        </select> -->
       </div>
       <div class="proPic">
         <p class="title">商品照</p>
@@ -172,10 +172,10 @@
           <option value="Souvenir">伴手禮</option>
           <option value="memento">紀念品</option>
         </select>
-        <label for="">捷運站：</label>
+        <!-- <label for="">捷運站：</label>
         <select id="staId" v-model="currentEditProduct.sta_id">
           <option value="BL">BL</option>
-        </select>
+        </select> -->
       </div>
       <div class="proPic">
         <p class="title">商品照</p>
@@ -185,9 +185,7 @@
             <div class="pic">
               <p>＋</p>
               <img
-                :src="
-                  `${this.$store.state.imgURLp}` + currentEditProduct.prod_img1
-                "
+                :src=$imgUrl(currentEditProduct.prod_img1)
                 v-if="currentEditProduct.prod_img1 !== '' ? true : false"
               />
               <input
@@ -205,9 +203,7 @@
             <div class="pic">
               <p>＋</p>
               <img
-                :src="
-                  `${this.$store.state.imgURLp}` + currentEditProduct.prod_img2
-                "
+                :src=$imgUrl(currentEditProduct.prod_img2)
                 v-if="currentEditProduct.prod_img2 !== '' ? true : false"
               />
               <input
@@ -225,9 +221,7 @@
             <div class="pic">
               <p>＋</p>
               <img
-                :src="
-                  `${this.$store.state.imgURLp}` + currentEditProduct.prod_img3
-                "
+                :src=$imgUrl(currentEditProduct.prod_img3)
                 v-if="currentEditProduct.prod_img3 !== '' ? true : false"
               />
               <input
@@ -245,9 +239,7 @@
             <div class="pic">
               <p>＋</p>
               <img
-                :src="
-                  `${this.$store.state.imgURLp}` + currentEditProduct.prod_img14
-                "
+                :src=$imgUrl(currentEditProduct.prod_img4)
                 v-if="currentEditProduct.prod_img4 !== '' ? true : false"
               />
               <input
@@ -363,7 +355,7 @@ export default {
       formData.append("prod_img4", this.currentEditProduct.prod_img4);
 
       axios
-        .post("http://localhost/dai/public/phps/UpdateProduct.php", formData, {
+        .post(this.$apiUrl('UpdateProduct.php'), formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -436,7 +428,7 @@ export default {
     },
     fetchData() {
       axios
-        .get("http://localhost/dai/public/phps/BackProductM.php")
+        .get(this.$apiUrl('BackProductM.php'))
         .then((response) => {
           this.products = response.data; // 更新數據到 products
         })
@@ -447,7 +439,7 @@ export default {
     toggleProductStatus(product) {
       product.prod_status = product.prod_status === "1" ? "0" : "1";
       axios
-        .post("http://localhost/dai/public/phps/ContralProductsich.php", {
+        .post(this.$apiUrl('ContralProductsich.php'), {
           prod_id: product.prod_id,
           prod_status: product.prod_status,
         })
@@ -484,7 +476,7 @@ export default {
       formData.append("prod_img4", this.newProduct.prod_img4);
 
       axios
-        .post("http://localhost/dai/public/phps/CreatProduct.php", formData, {
+        .post(this.$apiUrl('CreatProduct.php'), formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -492,7 +484,7 @@ export default {
         .then((response) => {
           if (response.status === 200) {
             //檢查http  來判別php新增與否
-            alert("商品已成功新增");
+            alert("商品已成功新增，請記得上架");
             this.pics = [
               { imageURL: null, fix: false },
               { imageURL: null, fix: false },
@@ -503,14 +495,14 @@ export default {
             this.newProduct = {
               prod_name: "",
               prod_price: "",
-              prod_type: "food",
-              sta_id: "BL",
+              prod_type: "",
               prod_des1: "",
               prod_des2: "",
               prod_img1: null,
               prod_img2: null,
               prod_img3: null,
               prod_img4: null,
+
             };
           } else {
             alert("商品新增失敗");
@@ -519,6 +511,7 @@ export default {
         .catch((error) => {
           console.error("新增商品請求失敗：", error);
         });
+        location.reload();
     },
   },
 };

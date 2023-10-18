@@ -5,7 +5,7 @@ header("Access-Control-Allow-Origin:*"); // 允许任何来源访问
 
 try {
     $mem_id=$_POST['mem_id'];
-    $art_id=$_POST['art_no'];
+    $art_id=$_POST['art_id'];
 
     // 連接資料庫
     require_once("connect_chd103g5_2.php");
@@ -20,12 +20,12 @@ try {
     // echo json_encode($result);
 
     if(empty($result)){
-        $sql = "insert into article_collect (mem_id, art_no) values (:mem_id, :art_no)";
+        $sql = "insert into article_collect (mem_id, art_id) values (:mem_id, :art_id)";
     
         $news = $pdo->prepare( $sql );
     
         $news->bindValue(":mem_id", $mem_id);
-        $news->bindValue(":art_no", $art_id);
+        $news->bindValue(":art_id", $art_id);
     
         $news->execute();
     
@@ -39,7 +39,6 @@ try {
     };
     // require_once("connect_chd103g5_2.php");
     //變數名稱 = $_post[formData的key值]
-    
     
 
  

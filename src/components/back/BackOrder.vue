@@ -81,10 +81,7 @@
           v-for="detail in selectedOrder.details"
           :key="detail.prod_id"
         >
-          <img
-            :src="`${this.$store.state.imgURLp}` + detail.prod_img1"
-            alt=""
-          />
+          <img :src=$imgUrl(detail.prod_img1) alt=""/>
           <p>{{ detail.prod_name }}</p>
           <p>NT {{ detail.buy_price }}</p>
           <p>{{ detail.orderdetail_count }}</p>
@@ -108,17 +105,15 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost/dai/public/phps/BackOrderM.php")
+      .get(this.$apiUrl('BackOrderM.php'))
       .then((response) => {
         this.orders = response.data;
       });
   },
   methods: {
     showOrderDetails(order) {
-      axios
-        .get(
-          `http://localhost/dai/public/phps/BackOrderDetailM.php?orderId=${order.ord_id}`
-        )
+      const apiUrl = this.$apiUrl(`BackOrderDetailM.php?orderId=${order.ord_id}`);
+      axios.get(apiUrl)
         .then((response) => {
           this.selectedOrder = {
             ...order,
@@ -132,7 +127,7 @@ export default {
       const orderId = order.ord_id;
       axios
         .post(
-          "http://localhost/dai/public/phps/UpdateOrderStatus.php",
+          this.$apiUrl('UpdateOrderStatus.php'),
           {
             orderId: orderId,
             newStatus: newStatus,

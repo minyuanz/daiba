@@ -12,8 +12,8 @@ try {
     LEFT JOIN member d ON e.mem_id = d.mem_id
     WHERE e.art_status = 1";
     // 
-    $news = $pdo->query( $sql );
-    $result=$news->fetchAll(PDO::FETCH_ASSOC);
+    $article = $pdo->query( $sql );
+    $result=$article->fetchAll(PDO::FETCH_ASSOC);
     
     echo json_encode($result);
 

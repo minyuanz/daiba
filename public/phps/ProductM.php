@@ -10,7 +10,7 @@ try {
 
     echo json_encode($result);
 } catch (PDOException $e) {
-    $response = array('error' => true, 'msg' => '获取产品数据失败: ' . $e->getMessage());
+    $response = array('error' => true, 'msg' => '獲取產品訊息失敗: ' . $e->getMessage());
     echo json_encode($response);
 }
 

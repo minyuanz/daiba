@@ -3,7 +3,6 @@
     <div class="NewsSearch">
       投稿編號查詢:
       <input type="text" v-model="search" />
-      <button class="NewsSearchBtn">查詢</button>
     </div>
     <div class="NewsTitle">
       <p>編號</p>
@@ -14,11 +13,11 @@
       <p>文章內容</p>
       <p>核准狀態</p>
     </div>
-    <div class="NewsInfro" v-for="item in items" :key="item.art_id">
+    <div class="NewsInfro" v-for="item in filter" :key="item.art_id">
       <p>{{ item.art_id }}</p>
       <p>{{ item.fea_tag }}</p>
       <p>{{ item.art_title }}</p>
-      <p>{{ item.mem_id }}</p>
+      <p>{{ item.mem_name }}</p>
       <p>{{ item.art_date }}</p>
       <div>
         <button @click="showItemDetail(item)">查閱</button>
@@ -38,13 +37,13 @@
           <div class="swiperPost">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
-                <img :src="`${this.$store.state.imgURL}` + selectedItem.art_pic1" />
+                <img :src=$imgUrl(selectedItem.art_pic1) />
               </div>
               <div class="swiper-slide">
-                <img :src="`${this.$store.state.imgURL}` + selectedItem.art_pic2" />
+                <img :src=$imgUrl(selectedItem.art_pic2) />
               </div>
               <div class="swiper-slide">
-                <img :src="`${this.$store.state.imgURL}` + selectedItem.art_pic3" />
+                <img :src=$imgUrl(selectedItem.art_pic3) />
               </div>
               <!-- <div class="swiper-slide">
                               <img :src="selectedItem.prod_img4" />
@@ -70,9 +69,9 @@
             </div>
             <div class="author">
               <div class="line"></div>
-              <span>TIM SMITH JR.</span>
+              <span>{{ selectedItem.mem_name }}</span>
             </div>
-            <img src="https://picsum.photos/200/200/?random=10" class="head" />
+            <img :src=$imgUrl(selectedItem.mem_img) class="head" />
           </div>
         </div>
       </div>
@@ -122,7 +121,7 @@ export default {
       },
     });
     axios
-      .get("http://localhost/dai/public/phps/BackContriM.php")
+      .get(this.$apiUrl('BackContriM.php'))
       .then((response) => {
         this.items = response.data;
       })
@@ -139,7 +138,7 @@ export default {
       // 更改狀態
       item.art_status = item.art_status === "1" ? "0" : "1";
       axios
-        .post("http://localhost/dai/public/phps/ContralBackContri.php", {
+        .post(this.$apiUrl('ContralBackContri.php'), {
           art_id: item.art_id,
           art_status: item.art_status,
         })

@@ -4,24 +4,6 @@
   </div>
 
   <section class="mrtLineCheck">
-    <div class="mrtTagbar" @click="checkShow">
-      <div class="outer-circle"></div>
-      <div class="color-circle"></div>
-      <div class="inner-circle">
-        <img src="../../public/img/mrtImg.png" alt="" />
-      </div>
-      <transition appear name="box" mode="out-in">
-        <div class="checkBox" v-if="showCheckBox">
-          <div class="box">
-            <button class="place" @click="resetToPlace">景點</button>
-            <button class="food" @click="changeContent('food')">美食</button>
-            <button class="hotel" @click="changeContent('hotel')">住宿</button>
-          </div>
-          <div class="triangle"></div>
-        </div>
-      </transition>
-    </div>
-
     <div class="mrtPic">
       <div class="pic mrtGrayStyle border-brownline">
         <img src="../../public/img/brown.jpeg" alt="brownline" />
@@ -33,7 +15,11 @@
       <div class="mrtMainLine">
         <div
           class="pic border-redline mrtRedBoy"
-          @click="filterOptions(color)"
+          @click="
+            filterOptions('red');
+            scrollTop();
+            showTag('red');
+          "
           @mouseenter="activate('red')"
           @mouseleave="deactivate('red')"
           :class="{ active: isActive.red }"
@@ -42,7 +28,11 @@
         </div>
         <div
           class="pic border-blueline mrtBlueBoy"
-          @click="filterOptions(color)"
+          @click="
+            filterOptions('blue');
+            scrollTop();
+            showTag('blue');
+          "
           @mouseenter="activate('blue')"
           @mouseleave="deactivate('blue')"
           :class="{ active: isActive.blue }"
@@ -51,7 +41,11 @@
         </div>
         <div
           class="pic border-greenline mrtGreenBoy"
-          @click="filterOptions(color)"
+          @click="
+            filterOptions('green');
+            scrollTop();
+            showTag('green');
+          "
           @mouseenter="activate('green')"
           @mouseleave="deactivate('green')"
           :class="{ active: isActive.green }"
@@ -60,7 +54,11 @@
         </div>
         <div
           class="pic border-orangeline mrtOrangeBoy"
-          @click="filterOptions(color)"
+          @click="
+            filterOptions('orange');
+            scrollTop();
+            showTag('orange');
+          "
           @mouseenter="activate('orange')"
           @mouseleave="deactivate('orange')"
           :class="{ active: isActive.orange }"
@@ -69,7 +67,11 @@
         </div>
         <div
           class="pic border-brownline mrtBrownBoy"
-          @click="filterOptions(color)"
+          @click="
+            filterOptions('brown');
+            scrollTop();
+            showTag('brown');
+          "
           @mouseenter="activate('brown')"
           @mouseleave="deactivate('brown')"
           :class="{ active: isActive.brown }"
@@ -78,7 +80,11 @@
         </div>
         <div
           class="pic border-yellowline mrtYellowBoy"
-          @click="filterOptions(color)"
+          @click="
+            filterOptions('yellow');
+            scrollTop();
+            showTag('yellow');
+          "
           @mouseenter="activate('yellow')"
           @mouseleave="deactivate('yellow')"
           :class="{ active: isActive.yellow }"
@@ -105,39 +111,39 @@
     </div>
 
     <div v-if="MB" class="mrtTag">
-      <div
+      <button
         class="title-tag"
         v-for="(color, index) in selectColor"
         :key="color"
-        :class="({ active: selectColor === color }, color)"
+        :class="(BGColor(color), color)"
         @click="
           filterOptions(color);
-          // showTag(color);
+          showTag(color);
           scrollTop();
         "
         @mouseenter="activate(color)"
         @mouseleave="deactivate(color)"
       >
         {{ upperCaseColorsMB[index] }}
-      </div>
-    </div>
+      </button>
+    </div>  
 
     <div v-if="PC" class="mrtTag">
-      <div
+      <button
         class="title-tag"
         v-for="(color, index) in selectColor"
         :key="color"
-        :class="({ active: selectColor === color }, color)"
+        :class="(BGColor(color), color)"
         @mouseenter="activate(color)"
         @mouseleave="deactivate(color)"
         @click="
           filterOptions(color);
-          // showTag(color);
+          showTag(color);
           scrollTop();
         "
       >
         {{ upperCaseColorsPC[index] }}
-      </div>
+      </button>
     </div>
   </section>
 
@@ -189,8 +195,9 @@
           @click="
             (closePost = !closePost),
               (lightBox = !lightBox),
-              (item.isShow = !item.isShow)
-          "
+              (item.isShow = !item.isShow),
+              showMrtCard(item)
+              selectedType = '景點';"
         >
           <div class="mrtStaMaruBox">
             <img
@@ -208,7 +215,6 @@
       <div class="CBPost" v-show="closePost && item.isShow">
         <div class="box" v-if="item.isShow">
           <span class="closePost" @click="toggleMtrStaBox(item)">✖</span>
-
           <transition appear name="fade" mode="out-in">
             <div class="swiperMRTCard">
               <div class="swiper-wrapper">
@@ -216,40 +222,65 @@
                   class="swiper-slide"
                   v-for="(itemplace, index) in item.place"
                 > -->
-                <div
-                  class="swiper-slide"
-                  v-for="(itemCard, index) in mrtcardGroup"
-                  :key="index"
-                >
+                <div class="swiper-slide" v-for="(itemCard, index) in filteredMrtCard" :key="index" :class="{ 'hidden': selectedType !== '' && itemCard.fea_name !== selectedType }">
+                  <div class="cardHeight" v-if="selectedType === '' || itemCard.fea_name === selectedType">
                   <!-- <router-link
                 :to="{ path: itemplace?.router ? itemplace.router : '/' }"
                 > -->
-                  <!-- <router-link :to="`/MrtCardPage/${itemplace.id}`"></router-link> -->
-                  <div class="mrtCardWrap">
-                    <!-- 卡片 -->
-                    <div class="card-h border-r">
-                      <div class="img">
-                        <img :src="`./img/${itemCard.special_pic1}`" alt="" />
-                      </div>
-                      <div class="text">
-                        <div class="title">
-                          <h3>{{ itemCard.special_title }}</h3>
+                  <router-link
+                    :to="{
+                      name: 'MrtCardPage',
+                      params: { id: itemCard.special_id },
+                    }"
+                    >
+                    <div class="mrtCardWrap">
+                      <!-- 卡片 -->
+                      <div class="card-h border-r">
+                        <div class="img">
+                          <img :src="`./img/${itemCard.special_pic1}`" alt="" />
                         </div>
-                        <div class="txt">{{ itemCard.special_des }}</div>
+                        <div class="text">
+                          <div class="title">
+                            <h3>{{ itemCard.special_title }}</h3>
+                          </div>
+                          <div class="txt">{{ itemCard.special_des }}</div>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                    </router-link>
+                </div>
                 </div>
               </div>
-              <div class="swiper-button-prev swiper-btn"></div>
-              <div class="swiper-button-next swiper-btn"></div>
+              <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
             </div>
           </transition>
+          <!-- to="/MrtCardPage/:id" -->
         </div>
+        <!-- ---------------------按鈕 -->
+        <div class="mrtTagbar" @click="checkShow">
+            <div class="outer-circle"></div>
+            <div class="color-circle"></div>
+            <div class="inner-circle">
+              <img src="../../public/img/mrtImg.png" alt="" />
+            </div>
+            <transition appear name="box" mode="out-in">
+              <div class="checkBox" style="" v-if="showCheckBox">
+                <div class="box">
+                  <button class="place" @click="selectType('景點')">景點</button>
+                  <button class="food" @click="selectType('美食')">美食</button>
+                  <button class="hotel" @click="selectType('住宿')">住宿</button>
+                </div>
+                <div class="triangle"></div>
+              </div>
+            </transition>
+          </div>
+
+      <!-- --------------------- -->
       </div>
     </div>
   </div>
-  <div class="lightBox" v-show="lightBox"></div>
+  <div class="lightBox" v-show="lightBox"  @click="toggleBox(item)"></div>
 </template>
 
 <script>
@@ -262,10 +293,13 @@ import axios from "axios";
 export default {
   data() {
     return {
+      selectedType: '景點',
+      selectedFeature: "",
       selectMrtId: "R",
       mrtstaGroup: [],
+      filteredMrtCard: [],
       mrtData: [],
-      mrtcardGroup: [],
+      mrtcard: [],
       lightBox: false,
       closePost: false,
       originalPlaceData: [],
@@ -308,8 +342,7 @@ export default {
       .get("http://localhost/dai/public/phps/BackFeatureM.php")
       .then((res) => {
         console.log("got it", res);
-        this.mrtcardGroup = res.data;
-        // console.log(mrtstaGroup);
+        this.mrtcard = res.data;
       })
       .catch((err) => {
         console.log("err", err);
@@ -477,27 +510,43 @@ export default {
       this.scrollTop();
     },
 
-    changeContent(type) {
-      // 保存原始資料
-      if (this.originalPlaceData.length === 0) {
-        this.originalPlaceData = this.filteredMrt.map((item) => ({ ...item }));
-      }
-
-      this.filteredMrt.forEach((item) => {
-        item.isShow = false;
-        item.place = item[type];
-      });
+    showMrtCard(item) {
+      console.log("Clicked item:", item.sta_name);
+      // 根据点击的站点 item 获取相应的 mrtcard 数据
+      this.filteredMrtCard = this.mrtcard.filter(
+        (card) => card.sta_name === item.sta_name
+      );
+      console.log("Filtered Mrt Card:", this.filteredMrtCard);
+      // 显示相关的卡片内容
+      this.closePost = true;
+      this.lightBox = true;
+      item.isShow = true;
     },
-
-    resetToPlace() {
-      if (this.originalPlaceData.length > 0) {
-        this.filteredMrt.forEach((item, index) => {
-          item.isShow = false;
-          item.place = this.originalPlaceData[index].place;
-        });
-        this.originalPlaceData = []; // 清空暫存的資料
-      }
+    selectType(type) {
+    this.selectedType = type;
     },
+    // changeContent(type) {
+    //   // 保存原始資料
+    //   this.selectedFeature = type;
+    //   if (this.originalPlaceData.length === 0) {
+    //     this.originalPlaceData = this.filteredMrt.map((item) => ({ ...item }));
+    //   }
+
+    //   this.filteredMrt.forEach((item) => {
+    //     item.isShow = false;
+    //     item.place = item[type];
+    //   });
+    // },
+
+    // resetToPlace() {
+    //   if (this.originalPlaceData.length > 0) {
+    //     this.filteredMrt.forEach((item, index) => {
+    //       item.isShow = false;
+    //       item.place = this.originalPlaceData[index].place;
+    //     });
+    //     this.originalPlaceData = []; // 清空暫存的資料
+    //   }
+    // },
 
     someMethod() {
       if (Array.isArray(this.selectColor)) {
@@ -524,24 +573,15 @@ export default {
         .scrollIntoView({ behavior: "smooth" });
     },
 
-    // showTag(color) {
-    //   this.selectedColor = color;
-    //   this.filteredMrt = this.mrt.filter((item) => item.color === color);
+    showTag(color) {
+      this.selectedColor = color;
+    },
 
-    //   if (window.innerWidth <= 768) {
-    //     this.showAll = true;
-    //   } else {
-    //     this.selectColor = [
-    //       "red",
-    //       "blue",
-    //       "green",
-    //       "orange",
-    //       "brown",
-    //       "yellow",
-    //     ];
-    //     this.showAll = true;
-    //   }
-    // },
+    BGColor(color) {
+      if (this.selectedColor === color) {
+        return `${color}Click`;
+      }
+    },
     //rwd判斷
     WindowWidth() {
       if (window.innerWidth <= 768) {
@@ -574,6 +614,12 @@ export default {
       item.isShow = !item.isShow;
       this.lightBox = !this.lightBox;
     },
+
+    toggleBox(item){
+      this.closePost = !this.closePost;
+      // item.isShow = !item.isShow;
+      this.lightBox = !this.lightBox;
+    }
   },
 
   computed: {
@@ -595,6 +641,12 @@ export default {
         return [];
       }
     },
+    // filteredMrtcard() {
+    //   // 根据当前站点的 sta_name 过滤 mrtcardGroup
+    //   return this.mrtcard.filter(
+    //     (itemcard) => itemcard.sta_name === this.mrtstaGroup
+    //   );
+    // },
   },
   watch: {
     lightBox(nVal) {
@@ -653,9 +705,9 @@ export default {
   animation: flash 300ms linear forwards;
 }
 
-.title-tag:hover ~ .pic.active {
-  animation: flash 300ms linear forwards;
-}
+// .title-tag:hover ~ .pic.active {
+//   animation: flash 300ms linear forwards;
+// }
 
 @keyframes flash {
   0% {
@@ -665,5 +717,8 @@ export default {
   100% {
     filter: brightness(150%);
   }
+}
+.hidden {
+  display: none;
 }
 </style>
