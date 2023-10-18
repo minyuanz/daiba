@@ -115,7 +115,7 @@
         class="title-tag"
         v-for="(color, index) in selectColor"
         :key="color"
-        :class="BGColor(color), color"
+        :class="[BGColor(color), color]"
         @click="
           filterOptions(color);
           showTag(color);
@@ -133,7 +133,7 @@
         class="title-tag"
         v-for="(color, index) in selectColor"
         :key="color"
-        :class="BGColor(color), color"
+        :class="[BGColor(color), color]"
         @mouseenter="activate(color)"
         @mouseleave="deactivate(color)"
         @click="
@@ -208,7 +208,7 @@
             />
           </div>
           <div class="mrtStaPicBox">
-            <img class="mrtStaPic" :src=$imgUrl(item.sta_pictor) alt="" /> 
+            <img class="mrtStaPic" :src="$imgUrl(item.sta_pictor)" alt="" />
           </div>
         </div>
       </div>
@@ -247,20 +247,20 @@
                         params: { id: itemCard.special_id },
                       }"
                     >
-                    <div class="mrtCardWrap">
-                      <!-- 卡片 -->
-                      <div class="card-h border-r">
-                        <div class="img">
-                          <img :src=$imgUrl(itemCard.special_pic1) alt="" />
-                        </div>
-                        <div class="text">
-                          <div class="title">
-                            <h3>{{ itemCard.special_title }}</h3>
+                      <div class="mrtCardWrap">
+                        <!-- 卡片 -->
+                        <div class="card-h border-r">
+                          <div class="img">
+                            <img :src="$imgUrl(itemCard.special_pic1)" alt="" />
                           </div>
-                          <div class="txt">{{ itemCard.special_des }}</div>
+                          <div class="text">
+                            <div class="title">
+                              <h3>{{ itemCard.special_title }}</h3>
+                            </div>
+                            <div class="txt">{{ itemCard.special_des }}</div>
+                          </div>
                         </div>
                       </div>
-                    </div>
                     </router-link>
                   </div>
                 </div>
@@ -340,7 +340,7 @@ export default {
 
   mounted() {
     axios
-      .get(this.$apiUrl('mrt.php'))
+      .get(this.$apiUrl("mrt.php"))
       .then((res) => {
         this.mrtData = res.data;
         this.mrtstaGroup = this.mrtData.filter(
@@ -353,7 +353,7 @@ export default {
         console.log("err", err);
       });
     axios
-      .get(this.$apiUrl('BackFeatureM.php'))
+      .get(this.$apiUrl("BackFeatureM.php"))
       .then((res) => {
         console.log("got it", res);
         this.mrtcard = res.data;
