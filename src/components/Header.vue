@@ -134,7 +134,7 @@ export default {
     const userStorage = localStorage.getItem('user')
     if (userStorage) {
       this.$store.dispatch('setInfo', JSON.parse(userStorage))
-      // console.log(JSON.parse(userStorage))
+      console.log(JSON.parse(userStorage))
     }
     fetch(
       "https://api.weatherapi.com/v1/current.json?q=Taipei&lang=zh_tw&key=831993a5339d4b7cadc74621231609"
@@ -146,12 +146,12 @@ export default {
           this.weather.condition.icon = require("@/assets/images/test.gif");
         } else if (this.weather.condition.text === "晴天") {
           this.weather.condition.icon = require("@/assets/images/sun.gif");
-        }
+        } 
         if (this.weather.temp_c >= 30) {
           this.hot = true;
         }
       });
-
+   
 
     // gsap.fromTo(
     //   ".showHomeNav ul li:nth-child(1)",
