@@ -43,7 +43,8 @@ export default {
         data.append('adminId', adminId);
         data.append('adminPwd', adminPwd);
         // $apiUrl('BackLogin.php')
-        fetch(this.apiUrl('BackLogin.php'), {
+        // this.$apiUrl('getNews.php')
+        fetch(this.$apiUrl('BackLogin.php'), {
         method: 'POST',
         body: data,
       })
