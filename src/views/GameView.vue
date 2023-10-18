@@ -263,9 +263,9 @@
                 <div class="text">
                   <div class="title">
                     <h3 v-if="specialAim.length > 0">{{ specialAim[randomIndex].special_title }}</h3>
-                    <p>{{specialAim[randomIndex].special_des}}</p>
                   </div>
                 </div>
+                <img src="~@/assets/images/game/cursor.png" id="cursor"  alt="cursor"/>
               </div>
            </router-link>
           </div>
