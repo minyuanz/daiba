@@ -64,7 +64,10 @@
       </article>
       <div class="pic">
         <!-- ${this.$store.state.publicURLL}/img/101/jpg -->
-        <img :src="`${this.$store.state.imgURL}101.jpg`" alt="taipei101" />
+        <!-- $imgUrl('101.jpg') -->
+        <!-- $imgUrl('aa/bbb.jpg') -->
+        <!-- ../../public/img/101.jpg -->
+        <img src='../../public/img/101.jpg' alt="taipei101" />
       </div>
     </div>
     <article class="mbArt">
