@@ -94,7 +94,7 @@
         <!-- <span class="count">0/100字</span> -->
       </div>
       <div class="btn">
-        <button @click="addToggle = !addToggle">取消新增</button>
+        <button @click="cancelAdd">取消新增</button>
         <button @click="addNewMrt">確認新增</button>
       </div>
     </form>
@@ -254,6 +254,17 @@ export default {
       this.addToggle = false;
     },
 
+    cancelAdd(){
+      this.addToggle = !this.addToggle;
+      this.newMrt.sta_describe = '';
+      this.newMrt.mrt_code1 = '';
+      this.newMrt.mrt_code2 = '';
+      this.newMrt.sta_name = '';
+      this.newMrt.mrt_id1 = '';
+      this.newMrt.mrt_id2 = '';
+      this.newMrt.sta_pictor = '';
+    },
+
     cancelEdit() {
       this.editMode = false; //取消編輯並清空圖片
       this.show = false;
@@ -366,7 +377,8 @@ export default {
           if (!res.error) {
             alert(res.msg);
             this.editMode = false; // 退出编辑模式
-            this.currentEditProduct.sta_pictor = null;
+            // this.currentEditProduct.sta_pictor = null;
+            location.reload();
           }
         })
         .catch(function (error) {
@@ -407,6 +419,7 @@ export default {
           if (!res.error) {
             alert(res.msg);
             this.addToggle = false;
+            location.reload();
           }
         })
         .catch(function (error) {
@@ -521,6 +534,7 @@ export default {
   width: 900px;
   padding: 50px;
   margin-top: 3rem;
+  height: 900px;
 
   .addInfo {
     // border: 1px solid red;

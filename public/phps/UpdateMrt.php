@@ -21,7 +21,8 @@ try {
 
         $to = $dir . $filename;
         copy($from, $to);
-    } else {
+    } 
+    else {
         $fileName = "";
     }
 
