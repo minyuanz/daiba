@@ -5,7 +5,7 @@ header("Content-Type: application/json");
 require_once("connect_chd103g5_2.php"); 
 
 try {
-    $sql = "SELECT * FROM  special";
+    $sql = "SELECT * FROM  special where special_status = 1";
     $stmt = $pdo->query($sql);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

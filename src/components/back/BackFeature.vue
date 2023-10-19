@@ -15,6 +15,7 @@
       <p>標題</p>
       <p>推薦分類</p>
       <p>編輯</p>
+      <p>上架/下架</p>
     </div>
     <div
       class="feaInfo"
@@ -30,6 +31,22 @@
           <i class="fa-solid fa-pen-to-square"></i>
           編輯
         </button>
+      </div>
+      <div class="upcheck">
+        <label class="ios-switch">
+          <input
+            type="checkbox"
+            :checked="feature.special_status === '1'"
+            @change="toggleFeatureStatus(feature)"
+          />
+          <span
+            class="slider"
+            :style="{
+              backgroundColor:
+                feature.special_status === '1' ? '#4CAF50' : '#565656',
+            }"
+          ></span>
+        </label>
       </div>
     </div>
     <div class="addSta">
@@ -358,6 +375,7 @@ export default {
       filteredFeature: [],
       selectedFeatures: [],
       picURL: "",
+      isSwitchOn: false,
       fix: false,
       show: false,
       editMode: false, // 編輯模式的開啟與否
@@ -474,7 +492,37 @@ export default {
         this.filteredFeature = this.features.filter(
           (features) => features.fea_name === selectedFeature
         );
+      } else if (selectedFeature === "住宿") {
+        this.filteredFeature = this.features.filter(
+          (features) => features.fea_name === selectedFeature
+        );
       }
+    },
+    toggleFeatureStatus(feature) {
+      feature.special_status = feature.special_status === "1" ? "0" : "1";
+      axios
+        .post(this.$apiUrl("ContralFeature.php"), {
+          special_id: feature.special_id,
+          special_status: feature.special_status,
+        })
+        .then((response) => {
+          // 檢查
+          if (response.data.success) {
+            // console.log('商品狀態已更新');
+            alert("商品狀態更新成功");
+          } else {
+            // console.error('商品狀態更新失敗');
+            alert("商品狀態更新失敗");
+            // 如果失敗回歸原本狀態
+            feature.special_status = feature.special_status === "1" ? "0" : "1";
+          }
+        })
+        .catch((error) => {
+          console.error("更新失敗：", error);
+          alert("更新失敗");
+          // 如果失敗回歸原本狀態
+          feature.special_status = feature.special_status === "1" ? "0" : "1";
+        });
     },
     handleFileChange(e, index, mode) {
       const files = e.target.files;
@@ -504,24 +552,6 @@ export default {
         this.originalpics[index].fix = true; // 使用 originalpics 數據
       }
     },
-    // handleFileChange(e, index) {
-    //   const files = e.target.files; // 獲取所有所選文件
-
-    //   for (let i = 0; i < files.length; i++) {
-    //     const file = files[i];
-    //     const reader = new FileReader();
-    //     reader.onload = () => {
-    //       // 當讀取完成時觸發
-    //       this.pics[index].picURL = reader.result; // 將 Data URL 賦值給圖片的 src
-    //     };
-
-    //     if (file) {
-    //       reader.readAsDataURL(file); // 讀取文件內容，以 Data URL 形式
-    //       this.pics[index].imageURL = file; // 讀取文件內容，以 Data URL 形式
-    //     }
-    //   }
-    //   this.pics[index].fix = true;
-    // },
     FileChange(e) {
       console.log(e.target.files[0].name);
       const file = e.target.files[0]; // 獲取所有所選文件
@@ -725,6 +755,50 @@ export default {
           background-color: #ddd;
         }
       }
+    }
+    .ios-switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 30px;
+      background-color: #ccc;
+      border-radius: 15px;
+    }
+
+    .ios-switch input {
+      display: none;
+    }
+
+    .ios-switch .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #565656;
+      border-radius: 15px;
+      transition: 0.4s;
+    }
+
+    .ios-switch input:checked + .slider {
+      background-color: #4caf50;
+    }
+
+    .ios-switch .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.4s;
+    }
+
+    .ios-switch input:checked + .slider:before {
+      transform: translateX(30px);
     }
   }
 
