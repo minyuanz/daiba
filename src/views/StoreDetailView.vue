@@ -381,6 +381,7 @@ export default {
         .top {
           height: 355px;
           display: block;
+          margin-bottom:100px;
 
           .Digtitle {
             margin: 2rem auto;
@@ -441,6 +442,13 @@ export default {
       }
 
       .OtherDetailCardbox {
+        overflow-x: scroll;
+        scroll-behavior: smooth;
+        /* 增加滑動效果 */
+        -webkit-overflow-scrolling: touch;
+        /* ios滑動效果 */
+        scroll-snap-type: x mandatory;
+        width: 100%;
         display: flex;
         width: 80%;
         margin: 2rem auto;
