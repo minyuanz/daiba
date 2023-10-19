@@ -17,11 +17,7 @@
       <p>編輯</p>
       <p>上架/下架</p>
     </div>
-    <div
-      class="feaInfo"
-      v-for="(feature, index) in filteredFeature"
-      :key="index"
-    >
+    <div class="feaInfo" v-for="(feature, index) in filteredFeature" :key="index">
       <p>{{ feature.sta_name }}</p>
       <p>{{ feature.special_title }}</p>
       <p>{{ feature.fea_name }}</p>
@@ -34,18 +30,11 @@
       </div>
       <div class="upcheck">
         <label class="ios-switch">
-          <input
-            type="checkbox"
-            :checked="feature.special_status === '1'"
-            @change="toggleFeatureStatus(feature)"
-          />
-          <span
-            class="slider"
-            :style="{
-              backgroundColor:
-                feature.special_status === '1' ? '#4CAF50' : '#565656',
-            }"
-          ></span>
+          <input type="checkbox" :checked="feature.special_status === '1'" @change="toggleFeatureStatus(feature)" />
+          <span class="slider" :style="{
+            backgroundColor:
+              feature.special_status === '1' ? '#4CAF50' : '#565656',
+          }"></span>
         </label>
       </div>
     </div>
@@ -66,30 +55,19 @@
           <label for="">版頭圖片</label>
           <div class="pic">
             <p>＋</p>
-            <input
-              type="file"
-              name="image1"
-              @change="handleFileChange($event, 0, 'add')"
-            />
+            <input type="file" name="image1" @change="handleFileChange($event, 0, 'add')" />
             <img :src="pics[0].imageURL" v-show="pics[0].fix" />
           </div>
         </div>
         <div class="backFeaCtx">
           <label for="">文章簡介</label>
-          <textarea
-            class="custom-input"
-            v-model="formData.special_des"
-          ></textarea>
+          <textarea class="custom-input" v-model="formData.special_des"></textarea>
         </div>
         <div class="selectTAg">
           <label for="">捷運站：</label>
           <select name="sta_name" v-model="formData.sta_name">
             <option value="">請選擇捷運站</option>
-            <option
-              v-for="station in mrtStations"
-              :value="station.sta_name"
-              :key="station.id"
-            >
+            <option v-for="station in mrtStations" :value="station.sta_name" :key="station.id">
               {{ station.sta_name }}
             </option>
           </select>
@@ -106,65 +84,37 @@
           <label for="">圖片一</label>
           <div class="pic">
             <p>＋</p>
-            <input
-              type="file"
-              name="image2"
-              @change="handleFileChange($event, 1, 'add')"
-            />
+            <input type="file" name="image2" @change="handleFileChange($event, 1, 'add')" />
             <img :src="pics[1].imageURL" v-show="pics[1].fix" />
           </div>
-          <textarea
-            class="custom-input"
-            v-model="formData.special_ctx1"
-          ></textarea>
+          <textarea class="custom-input" v-model="formData.special_ctx1"></textarea>
         </div>
         <div class="uploadPic">
           <label for="">圖片二 </label>
           <div class="pic">
             <p>＋</p>
-            <input
-              type="file"
-              name="image3"
-              @change="handleFileChange($event, 2, 'add')"
-            />
+            <input type="file" name="image3" @change="handleFileChange($event, 2, 'add')" />
             <img :src="pics[2].imageURL" v-show="pics[2].fix" />
           </div>
-          <textarea
-            class="custom-input"
-            v-model="formData.special_ctx2"
-          ></textarea>
+          <textarea class="custom-input" v-model="formData.special_ctx2"></textarea>
         </div>
         <div class="uploadPic">
           <label for="">圖片三 </label>
           <div class="pic">
             <p>＋</p>
-            <input
-              type="file"
-              name="image4"
-              @change="handleFileChange($event, 3, 'add')"
-            />
+            <input type="file" name="image4" @change="handleFileChange($event, 3, 'add')" />
             <img :src="pics[3].imageURL" v-show="pics[3].fix" />
           </div>
-          <textarea
-            class="custom-input"
-            v-model="formData.special_ctx3"
-          ></textarea>
+          <textarea class="custom-input" v-model="formData.special_ctx3"></textarea>
         </div>
         <div class="uploadPic">
           <label for="">圖片四 </label>
           <div class="pic">
             <p>＋</p>
-            <input
-              type="file"
-              name="image5"
-              @change="handleFileChange($event, 4, 'add')"
-            />
+            <input type="file" name="image5" @change="handleFileChange($event, 4, 'add')" />
             <img :src="pics[4].imageURL" v-show="pics[4].fix" />
           </div>
-          <textarea
-            class="custom-input"
-            v-model="formData.special_ctx4"
-          ></textarea>
+          <textarea class="custom-input" v-model="formData.special_ctx4"></textarea>
         </div>
       </div>
       <!-- <div class="backFeaCtx">
@@ -215,24 +165,15 @@
           <label for="">版頭圖片</label>
           <div class="pic">
             <p>＋</p>
-            <img
-              :src="`${this.$store.state.imgURL}` + editFeature.special_pic1"
-              v-if="editFeature.special_pic1 !== '' ? true : false"
-            />
-            <input
-              type="file"
-              name="image1"
-              @change="handleFileChange($event, 0, 'edit')"
-            />
+            <img :src="`${this.$store.state.imgURL}` + editFeature.special_pic1"
+              v-if="editFeature.special_pic1 !== '' ? true : false" />
+            <input type="file" name="image1" @change="handleFileChange($event, 0, 'edit')" />
             <img :src="originalpics[0].imageURL" v-show="originalpics[0].fix" />
           </div>
         </div>
         <div class="backFeaCtx">
           <label for="">文章簡介</label>
-          <textarea
-            class="custom-input"
-            v-model="editFeature.special_des"
-          ></textarea>
+          <textarea class="custom-input" v-model="editFeature.special_des"></textarea>
         </div>
         <div class="selectTAg">
           <label for="">捷運站：</label>
@@ -250,81 +191,41 @@
           <label for="">圖片一</label>
           <div class="pic">
             <p>＋</p>
-            <img
-              :src="$imgUrl(editFeature.special_pic2)"
-              v-if="editFeature.special_pic2 !== '' ? true : false"
-            />
-            <input
-              type="file"
-              name="image2"
-              @change="handleFileChange($event, 1, 'edit')"
-            />
+            <img :src="$imgUrl(editFeature.special_pic2)" v-if="editFeature.special_pic2 !== '' ? true : false" />
+            <input type="file" name="image2" @change="handleFileChange($event, 1, 'edit')" />
             <img :src="originalpics[1].imageURL" v-show="originalpics[1].fix" />
           </div>
-          <textarea
-            class="custom-input"
-            v-model="editFeature.special_ctx1"
-          ></textarea>
+          <textarea class="custom-input" v-model="editFeature.special_ctx1"></textarea>
         </div>
         <div class="uploadPic">
           <label for="">圖片二 </label>
           <div class="pic">
             <p>＋</p>
-            <img
-              :src="$imgUrl(editFeature.special_pic3)"
-              v-if="editFeature.special_pic3 !== '' ? true : false"
-            />
-            <input
-              type="file"
-              name="image3"
-              @change="handleFileChange($event, 2, 'edit')"
-            />
+            <img :src="$imgUrl(editFeature.special_pic3)" v-if="editFeature.special_pic3 !== '' ? true : false" />
+            <input type="file" name="image3" @change="handleFileChange($event, 2, 'edit')" />
             <img :src="originalpics[2].imageURL" v-show="originalpics[2].fix" />
           </div>
-          <textarea
-            class="custom-input"
-            v-model="editFeature.special_ctx2"
-          ></textarea>
+          <textarea class="custom-input" v-model="editFeature.special_ctx2"></textarea>
         </div>
         <div class="uploadPic">
           <label for="">圖片三 </label>
           <div class="pic">
             <p>＋</p>
-            <img
-              :src="$imgUrl(editFeature.special_pic4)"
-              v-if="editFeature.special_pic4 !== '' ? true : false"
-            />
-            <input
-              type="file"
-              name="image4"
-              @change="handleFileChange($event, 3, 'edit')"
-            />
+            <img :src="$imgUrl(editFeature.special_pic4)" v-if="editFeature.special_pic4 !== '' ? true : false" />
+            <input type="file" name="image4" @change="handleFileChange($event, 3, 'edit')" />
             <img :src="originalpics[3].imageURL" v-show="originalpics[3].fix" />
           </div>
-          <textarea
-            class="custom-input"
-            v-model="editFeature.special_ctx3"
-          ></textarea>
+          <textarea class="custom-input" v-model="editFeature.special_ctx3"></textarea>
         </div>
         <div class="uploadPic">
           <label for="">圖片四 </label>
           <div class="pic">
             <p>＋</p>
-            <img
-              :src="$imgUrl(editFeature.special_pic5)"
-              v-if="editFeature.special_pic5 !== '' ? true : false"
-            />
-            <input
-              type="file"
-              name="image5"
-              @change="handleFileChange($event, 4, 'edit')"
-            />
+            <img :src="$imgUrl(editFeature.special_pic5)" v-if="editFeature.special_pic5 !== '' ? true : false" />
+            <input type="file" name="image5" @change="handleFileChange($event, 4, 'edit')" />
             <img :src="originalpics[4].imageURL" v-show="originalpics[4].fix" />
           </div>
-          <textarea
-            class="custom-input"
-            v-model="editFeature.special_ctx4"
-          ></textarea>
+          <textarea class="custom-input" v-model="editFeature.special_ctx4"></textarea>
         </div>
       </div>
       <!-- <div class="backFeaCtx">
@@ -612,8 +513,11 @@ export default {
         })
         .catch((error) => {
           console.error("新增請求失敗：", error);
+        })
+        .finally(() => {
+          location.reload();
         });
-      location.reload();
+      // location.reload();
     },
     updateFeature() {
       // 建立數據資料夾好發給PHP做處理新增
@@ -655,13 +559,16 @@ export default {
             this.editFeature.special_pic3 = null;
             this.editFeature.special_pic4 = null;
             this.editFeature.special_pic5 = null;
-            location.reload();
+            // location.reload();
           } else {
             alert("更新失敗");
           }
         })
         .catch((error) => {
           console.error("更新請求失敗：", error);
+        })
+        .finally(() => {
+          location.reload();
         });
     },
   },
@@ -699,12 +606,14 @@ export default {
     margin: 10px 0;
     display: flex;
     align-items: center;
+
     .btnsearch {
       // border: 1px solid red;
       margin: 0 10px;
       padding: 0px 30px;
       height: 30px;
     }
+
     select {
       height: 30px;
       margin-right: 30px;
@@ -741,6 +650,7 @@ export default {
       width: 100%;
       text-align: center;
     }
+
     .edit {
       button {
         border: 2px solid #666;
@@ -756,6 +666,7 @@ export default {
         }
       }
     }
+
     .ios-switch {
       position: relative;
       display: inline-block;
@@ -781,7 +692,7 @@ export default {
       transition: 0.4s;
     }
 
-    .ios-switch input:checked + .slider {
+    .ios-switch input:checked+.slider {
       background-color: #4caf50;
     }
 
@@ -797,7 +708,7 @@ export default {
       transition: 0.4s;
     }
 
-    .ios-switch input:checked + .slider:before {
+    .ios-switch input:checked+.slider:before {
       transform: translateX(30px);
     }
   }
@@ -824,6 +735,7 @@ export default {
   margin-top: 3rem;
 
   .feaHead {
+
     // border: 1px solid red;
     .mainTitle {
       text-align: center;
@@ -1028,6 +940,7 @@ export default {
       padding: 10px 20px;
     }
   }
+
   .txt {
     display: flex;
     margin: 20px 0;
@@ -1036,20 +949,24 @@ export default {
     .addre-tel,
     .time {
       margin: 0 20px;
+
       div {
         // border: 1px solid red;
         margin: 15px 0;
         align-items: center;
         display: flex;
+
         input {
           width: 270px;
         }
+
         select {
           // border: 1px solid red;
           width: 220px;
         }
       }
     }
+
     // .time {
     //   margin: 0 20px;
     //   div {

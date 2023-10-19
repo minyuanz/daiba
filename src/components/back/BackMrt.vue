@@ -316,7 +316,7 @@ export default {
 
       if (file) {
         reader.readAsDataURL(file); // 讀取文件內容，以 Data URL 形式
-        this.newMrt.imageURL = file;
+        this.newMrt.sta_pictor = file;
       }
       this.newMrt.fix = true;
     },
