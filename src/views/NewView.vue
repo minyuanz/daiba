@@ -211,12 +211,12 @@ export default {
       // Optional parameters
       direction: "horizontal",
       speed: 1500,
-      // loop: true,
+      loop: true,
       slidesPerView: 1,
       spaceBetween: 0,
-      // autoplay: {
-      //   delay: 3000
-      // },
+      autoplay: {
+        delay: 3000
+      },
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
