@@ -99,6 +99,7 @@ export default {
     },
     goToPage(page) {
       this.currentPage = page;
+      window.scrollTo(0, 0);
     },
   },
   computed: {
