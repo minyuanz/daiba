@@ -353,7 +353,7 @@ export default {
         console.log("err", err);
       });
     axios
-      .get(this.$apiUrl("BackFeatureM.php"))
+      .get(this.$apiUrl("FeatureM.php"))
       .then((res) => {
         console.log("got it", res);
         this.mrtcard = res.data;
