@@ -622,7 +622,8 @@ export default {
         heartStyle(){
             let Index = this.$store.state.memArtCollect.findIndex(item => item.art_id === this.CBPost.art_id); //搜尋當前CBPost的art_id是否有找到
             console.log(Index); 
-            return (Index === -1 || !this.heart) ? 'far fa-heart': 'fas fa-heart'
+            console.log(this.$store.state.memArtCollect); 
+            return (Index === -1) ? 'far fa-heart': 'fas fa-heart'
         },
 
         // 如會員沒照片則顯示空照片
