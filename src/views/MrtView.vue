@@ -430,6 +430,9 @@ export default {
     setTimeout(() => {
       this.initSwiper();
     }, 100);
+
+    this.swiper()
+
     this.WindowWidth();
     window.addEventListener("resize", this.WindowWidth);
   },
@@ -503,7 +506,13 @@ export default {
 
     selectType(type) {
       this.selectedType = type;
+      this.$nextTick(() => {
+        this.swiper();
+      });
+     
+    },
 
+    swiper(){
       const swiperMRTCard = new Swiper(".swiperMRTCard", {
       direction: "horizontal",
       speed: 500,
@@ -539,6 +548,7 @@ export default {
         },
       },
     });
+console.log(swiperMRTCard);
     },
     // changeContent(type) {
     //   // 保存原始資料
