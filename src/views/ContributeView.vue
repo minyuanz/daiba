@@ -441,7 +441,8 @@ export default {
             if (!user) {
                 alert('請先登入')
                 this.$router.push('/login')
-            } else if (userinfo.mem_id == this.memId) {
+                // (userinfo.mem_id == this.memId)
+            } else if (this.CBPost.mem_id == this.memId) {
                 alert('請收藏其他投稿，自己的不可收藏')
             } else {
                 const formData = new FormData();
