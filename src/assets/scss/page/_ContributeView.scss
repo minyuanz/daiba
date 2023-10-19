@@ -492,8 +492,8 @@
               display: block;
               text-align: end;
               color: #999;
-              padding-bottom: 1.5rem;
-              margin-top: 1rem;
+              padding-bottom: .5rem;
+              margin-top: .2rem;
               margin-left: auto;
             }
           }
@@ -504,7 +504,7 @@
             width: calc(90% - 0px);
             position: absolute;
             bottom: 0;
-            left: calc(5% + 30px);
+            left: calc(5% + 10px);
           }
 
           .txt {
@@ -534,33 +534,39 @@
           }
 
           .lineR {
-            border-top: 30px solid map-get($color, $key: danger);
+            border-top: 18px solid map-get($color, $key: danger);
             border-left: 30px solid map-get($color, $key: danger);
+            margin-bottom: 0.2rem;
           }
 
           .lineBL {
-            border-top: 30px solid map-get($color, $key: info);
+            border-top: 18px solid map-get($color, $key: info);
             border-left: 30px solid map-get($color, $key: info);
+            margin-bottom: 0.2rem;
           }
 
           .lineO {
-            border-top: 30px solid map-get($color, $key: tangerine);
+            border-top: 18px solid map-get($color, $key: tangerine);
             border-left: 30px solid map-get($color, $key: tangerine);
+            margin-bottom: 0.2rem;
           }
 
           .lineG {
-            border-top: 30px solid map-get($color, $key: success);
+            border-top: 18px solid map-get($color, $key: success);
             border-left: 30px solid map-get($color, $key: success);
+            margin-bottom: 0.2rem;
           }
 
           .lineBR {
-            border-top: 30px solid map-get($color, $key: choco);
+            border-top: 18px solid map-get($color, $key: choco);
             border-left: 30px solid map-get($color, $key: choco);
+            margin-bottom: 0.2rem;
           }
 
           .lineY {
-            border-top: 30px solid map-get($color, $key: warning);
+            border-top: 18px solid map-get($color, $key: warning);
             border-left: 30px solid map-get($color, $key: warning);
+            margin-bottom: 0.2rem;
           }
 
           span {
@@ -734,6 +740,8 @@
 
       .box {
         .closePost {
+          right: -5%;
+          top: -2%;
           scale: 0.8;
         }
 
@@ -841,6 +849,14 @@
 
           .inner {
             height: 105%;
+            width: 60%;
+
+            .DigLikeBox{
+              top: 8.2rem;
+            }
+            .tag{
+              padding-inline: 3rem;
+            }
 
             .title {
               border-top: 18px solid map-get($color, $key: success);
@@ -848,6 +864,10 @@
               padding-top: 1rem;
               padding-inline: 1rem;
               height: 30%;
+
+              .lineColor{
+                width: 85%;
+              }
 
               h3 {
                 line-height: 36px;
@@ -859,26 +879,32 @@
             }
 
             .title::after {
-              width: 93%;
-              bottom: -15px;
-              left: 3%;
+              display: none;
             }
 
             .scrollbarArea {
               margin-right: -15px;
-              margin-top: 15px;
+              margin-top: 0px;
 
               .info {
-                padding: 0.2rem 0 0 2.5rem;
+                padding: 0 0 0 2.5rem;
+                p{
+                  padding: 0 0 0 1rem;
+                }
 
                 span {
                   text-align: start;
+                  padding-left: 1rem;
                 }
               }
 
               .txt {
                 padding-left: 2.5rem;
                 margin-top: -1.5rem;
+                p{
+                  text-indent: 0;
+                  width: 70%;
+                }
               }
             }
 
