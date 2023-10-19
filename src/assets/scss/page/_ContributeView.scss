@@ -685,7 +685,7 @@
         position: relative;
         padding: 1rem;
         box-shadow: 1px 3px 6px #0006;
-        height: 479px;
+        height: 100%;
 
         .title p {
           line-height: 2rem;
@@ -763,6 +763,10 @@
             font-size: map-get($map, small);
           }
 
+          .DigLikeBox {
+            right: 0.9rem;
+            top: 7rem;
+          }
 
 
           .title {
@@ -775,7 +779,7 @@
 
             h3 {
               font-size: map-get($fontsizes, h2);
-              line-height: 70px;
+              line-height: 40px;
               height: 50%;
             }
 
@@ -825,7 +829,7 @@
 
     .CBList {
       width: 85%;
-      gap: 0;
+      gap: 1.5rem;
 
       .img {
         .head {
@@ -852,6 +856,8 @@
           width: 100%;
 
           .head {
+            width: 100px;
+            height: 100px;
             bottom: -17%;
             right: -10%;
           }
@@ -871,12 +877,13 @@
 
 
               h3 {
-                line-height: 36px;
-                font-size: 28px;
+                line-height: 30px;
+                font-size: 22px;
               }
 
               h4 {
                 line-height: 21px;
+                font-size: 18px;
               }
             }
 
@@ -928,6 +935,7 @@
 
                 p {
                   padding-left: 0rem;
+                  font-size: 16px;
                 }
 
                 span {
@@ -939,6 +947,10 @@
                 padding-left: 2.5rem;
                 margin-top: -1.5rem;
                 width: 100%;
+
+                p {
+                  font-size: 16px;
+                }
               }
             }
 

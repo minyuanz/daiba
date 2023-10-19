@@ -81,7 +81,7 @@
 
 
         <!-- 文章清單 -->
-        <div class="CBList">
+        <div class="CBList" id="CBList">
             <div v-for="  (itemList, index)    in   paginatedList  " :key="itemList.art_id"
                 @click="(closePost = !closePost), (lightBox = !lightBox), openInner(itemList, index)">
                 <div :class="{ 'card-w': PC, 's-card-h': !PC }">
@@ -138,8 +138,9 @@
                             <div class="lineColor" :class="lineColor(CBPost.sta_id1)"></div>
                         </div>
                         <div class="DigLikeBox" @click="addToCollect" v-if="this.closePost === true">
-                            <i v-if="toCollect" class="fa-solid fa-heart" style="color: #ff0000;cursor: pointer;"></i>
-                            <i v-else class="fa-regular fa-heart" style="cursor: pointer;"></i>
+                            <i class="heart-border" id="heart" :class="heartStyle" style="color:#ff0000;cursor: pointer"></i>
+                            <!-- <i v-if="toCollect" class="fa-solid fa-heart" style="color: #ff0000;cursor: pointer;"></i>
+                            <i v-else class="fa-regular fa-heart" style="cursor: pointer;"></i> -->
                         </div>
                         <div class="tag">
                             <span class="title-tag" :class="artChooseTag(CBPost.sta_id1)">#{{
@@ -177,7 +178,7 @@
     </section>
 
     <!-- 燈箱 -->
-    <div class="lightBox" v-show="lightBox"></div>
+    <div class="lightBox" v-show="lightBox" @click="closePost = !closePost,lightBox = !lightBox"></div>
 
     <!-- 背景輪播 -->
     <div class="mrtBanner">
@@ -319,10 +320,11 @@ export default {
             lightBox: false,
             swiper: false,
             artId: '', // get art_id
-            memId: '', // get mem_id
+            memId: this.$store.state.memInfo.mem_id, // get mem_id
             userALLArtCollect:[],
             pageSize: 6, // 每頁顯示數量
             currentPage: 1, // 當前頁數
+            heart:false,
         };
     },
     components: {
@@ -373,7 +375,8 @@ export default {
 
         //打開文章內容
         openInner(item, index) {
-            // 輪播w
+            // 輪播
+
             const swiperPost = new Swiper(".swiperPost", {
             effect: "cube",
             speed: 2000,
@@ -397,8 +400,10 @@ export default {
             this.CBPost = item
            
             this.lightBox = true
-            this.artId = this.CBList[index].art_id
-            this.memId = this.CBList[index].mem_id
+            this.addCollect = false
+        
+            this.artId = this.CBPost.art_id
+            // this.memId = this.CBList[index].mem_id
         },
 
         // 我要投稿驗證
@@ -432,38 +437,84 @@ export default {
 
         // 加入收藏
         addToCollect() {
-            // console.log(111);
+            
             let user = localStorage.getItem('user')
             let userinfo = JSON.parse(user)
-            // console.log(userinfo);
-            // console.log(this.artId);
+           
+            let Index = this.$store.state.memArtCollect.findIndex(item => item.art_id === this.CBPost.art_id)
 
-            if (!user) {
+            // 如果沒有資料則新增
+            if(Index === -1){
+                if (!user) {
                 alert('請先登入')
                 this.$router.push('/login')
                 // (userinfo.mem_id == this.memId)
-            } else if (this.CBPost.mem_id == this.memId) {
-                alert('請收藏其他投稿，自己的不可收藏')
-            } else {
-                const formData = new FormData();
-                formData.append("mem_id", userinfo.mem_id);
-                formData.append("art_id", this.artId);
+                } else if (this.CBPost.mem_id == this.memId) {
+                    alert('請收藏其他投稿，自己的不可收藏')
+                } else {
+                    const formData = new FormData();
+                    formData.append("mem_id", userinfo.mem_id);
+                    formData.append("art_id", this.artId);
 
-                fetch(this.$apiUrl('addToArticleCollect.php'), {
-                    method: 'post',
-                    body: formData
-                })
-                    .then(res => res.json())
-                    .then((res) => {
-                        if (!res.error) {
-                            alert(res.msg);
-                        }
+                    fetch(this.$apiUrl('addToArticleCollect.php'), {
+                        method: 'post',
+                        body: formData
                     })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                        .then(res => res.json())
+                        .then((res) => {
+                            if (!res.error) {
+                                alert(res.msg);
+                                if(res.msg === '成功加入收藏'){
+                                    let newADD = {mem_id:userinfo.mem_id,art_id:this.artId}  //抓出目前會員ID和投稿ID
+                                    this.$store.commit('getMemArtCollect', newADD);  //將資料帶入暫存區
+                                    let heart = document.getElementById('heart'); //控制愛心CSS
+                                    heart.classList.add('fas', 'fa-heart');
+                                    this.heart = true
+                                }
+
+                            } 
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    }
             }
-        },
+            // 沒有則刪除
+            else{
+                    const formData = new FormData();
+                          formData.append("mem_id", userinfo.mem_id);
+                          formData.append("art_id", this.artId);
+
+                          confirm('確定取消收藏嗎?')
+                    // $apiUrl('delArticleCollect.php')
+                          fetch(this.$apiUrl('delArticleCollect.php'), {
+                            method: 'post',
+                            body: formData
+                          })
+                            .then(res => res.json())
+                            .then((res) => {
+                              if (!res.error) {
+                                alert(res.msg);
+                                if(res.msg === '刪除成功'){
+                                    let dis = {mem_id:userinfo.mem_id,art_id:this.artId} //抓出會員ID和投稿id
+                                    this.$store.commit('disMemArtCollect', dis);  //執行刪除暫存區資料
+                                    let heart = document.getElementById('heart'); //控制愛心Css
+                                    heart.classList.remove('fas');
+                                    heart.classList.remove('fa-heart');
+                                    heart.classList.add('far', 'fa-heart');
+                                }
+                                
+                              }
+                            })
+                            .catch(function (error) {
+                              console.log(error);
+                            });
+                        
+
+            }
+},
+            
+        
 
         // 上一頁
         prevPage(){
@@ -480,6 +531,7 @@ export default {
         // 前往該頁數
         goToPage(page){
             this.currentPage = page;
+            document.querySelector("#CBList").scrollIntoView({ behavior: "smooth" }); //自動跳最上面
         },
 
         // 內文的border顏色
@@ -490,7 +542,8 @@ export default {
          // 內文的底線顏色
         lineColor(id){
             return `line${id}`
-        }
+        },
+        
 
 
 
@@ -542,13 +595,16 @@ export default {
         axios.get(`${this.$apiUrl('getALLArticleCollect.php')}`)
         .then((res) => {
             const matchingUser = res.data.filter(user => user.mem_id === this.$store.state.memInfo.mem_id); //資料中和目前登入的ID配對
-            this.userALLArtCollect = matchingUser  //得到目前登入的帳號的收藏資料
+            this.userALLArtCollect = matchingUser  //得到目前登入的帳號的收藏資料　
+            let memArtCollect = JSON.stringify(matchingUser)  //放進localStorage
+            localStorage.setItem("memArtCollect",  memArtCollect);
+            
         })
         .catch((error) => {
             console.error('資料失敗：', error);
         });
-
     },
+
     computed:{ 
         //算出所有的頁數
         totalPages() {
@@ -562,17 +618,11 @@ export default {
             return this.CBList.slice(startIndex, endIndex);
         },
 
-        // 根據會員的收藏來顯示愛心的狀態
-        toCollect() {
-            if(this.closePost === true){ //如彈窗已被開啟再執行，不然會重複渲染bug
-                let index = this.userALLArtCollect.findIndex(item => item.art_id === this.CBPost.art_id); //搜尋當前CBPost的art_id是否有找到
-                console.log(index); 
-                if (index != -1) {  //有的話為true，顯示實心紅愛心
-                  return true;
-                }
-            }
-            
-            
+        // 愛心顯示狀態
+        heartStyle(){
+            let Index = this.$store.state.memArtCollect.findIndex(item => item.art_id === this.CBPost.art_id); //搜尋當前CBPost的art_id是否有找到
+            console.log(Index); 
+            return (Index === -1 || !this.heart) ? 'far fa-heart': 'fas fa-heart'
         },
 
         // 如會員沒照片則顯示空照片

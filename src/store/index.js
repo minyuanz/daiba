@@ -1,3 +1,4 @@
+import { get } from "jquery";
 import { createStore } from "vuex";
 
 const baseURL =
@@ -28,6 +29,8 @@ export default createStore({
     imgURLp,//商品圖片路徑
     memId: "", // 存會員的memId
     memInfo: "",
+    memArtCollect: JSON.parse(localStorage.getItem('memArtCollect')) || [],
+    userArtCollect: [],
     loggedInUser: null, // 後台登入狀態
     mrtCardPage: [
       {
@@ -128,6 +131,19 @@ export default createStore({
       //後台loco的數據暫存
       state.loggedInUser = user;
     },
+    getMemArtCollect(state, artCollect) {
+      // 
+      state.userArtCollect.push(artCollect);
+      state.memArtCollect.push(artCollect);
+      localStorage.setItem('memArtCollect', JSON.stringify(state.memArtCollect));
+    },
+    disMemArtCollect(state, artCollect) {
+      const index = state.memArtCollect.indexOf(artCollect);
+      state.userArtCollect.splice(index, 1);
+      state.memArtCollect.splice(index, 1);
+      localStorage.setItem('memArtCollect', JSON.stringify(state.memArtCollect));
+    }
+
   },
   actions: {
     addToCart({ commit, state }, product) {
@@ -164,6 +180,12 @@ export default createStore({
       // 拿到會員的memInfo
       commit('getInfo', user);
     },
+
+    setArtCollect({ commit }) {
+
+    },
+
+
     // clearCart({ commit }) {
     //   // 清空購物車
     //   commit('clearCart');
