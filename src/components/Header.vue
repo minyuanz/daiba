@@ -136,7 +136,7 @@ export default {
     const userStorage = localStorage.getItem('user')
     if (userStorage) {
       this.$store.dispatch('setInfo', JSON.parse(userStorage))
-      console.log(JSON.parse(userStorage))
+      // console.log(JSON.parse(userStorage))
     }
     fetch(
       "https://api.weatherapi.com/v1/current.json?q=Taipei&lang=zh_tw&key=6270d6c5f0ba491196f45945231810"
