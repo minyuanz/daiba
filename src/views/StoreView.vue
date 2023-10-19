@@ -7,16 +7,20 @@
       <button @click="filterProducts('memento')">紀念品</button>
     </div>
     <div class="storecardbox">
-      <div v-for="item  in paginatedProducts "  :key="item.pord_id"  class="storeCard">
-        <div style="display:none ;">{{ item.prod_type }}</div>
+      <div
+        v-for="item in paginatedProducts"
+        :key="item.pord_id"
+        class="storeCard"
+      >
+        <div style="display: none">{{ item.prod_type }}</div>
         <router-link :to="'/storeDetail/' + item.prod_id">
           <div class="imgbox">
-            <img  class="storeCardimg" :src="$imgUrl(item.prod_img1)"/>
+            <img class="storeCardimg" :src="$imgUrl(item.prod_img1)" />
             <!-- <div class="storeButton addToHeart">
               <i class="fa-regular fa-heart" style="cursor: pointer"></i>
             </div> -->
           </div>
-      </router-link>
+        </router-link>
         <div class="storeBottom">
           <div class="storeCardText">
             <h2 class="CardDes">{{ item.prod_name }}</h2>
@@ -29,13 +33,27 @@
       </div>
     </div>
     <div class="pagination">
-      <button class="paginationmain" @click="prevPage" :disabled="currentPage === 1 || isLoading">
+      <button
+        class="paginationmain"
+        @click="prevPage"
+        :disabled="currentPage === 1 || isLoading"
+      >
         ＜
       </button>
-      <button class="paginationmain" @click="goToPage(page)" v-for="page in totalPages" :key="page" :class="{ 'current-page': page === currentPage }">
+      <button
+        class="paginationmain"
+        @click="goToPage(page)"
+        v-for="page in totalPages"
+        :key="page"
+        :class="{ 'current-page': page === currentPage }"
+      >
         {{ page }}
       </button>
-      <button class="paginationmain" @click="nextPage" :disabled="currentPage === totalPages || isLoading">
+      <button
+        class="paginationmain"
+        @click="nextPage"
+        :disabled="currentPage === totalPages || isLoading"
+      >
         ＞
       </button>
     </div>
@@ -44,7 +62,7 @@
 
 <script>
 // import ProTest from "@/testdata/ProTest.json";
-import axios from 'axios';
+import axios from "axios";
 export default {
   components: {},
   data() {
@@ -52,29 +70,30 @@ export default {
       allProducts: [], // 假設顯示所有商品數據
       pageSize: 6, // 每頁顯示數量
       currentPage: 1, // 當前頁數
-      selectedType: 'all',
+      selectedType: "all",
       isLoading: true,
       // testitem: ProTest,
     };
   },
   created() {
-        this.fetchData(); 
-    },
+    this.fetchData();
+  },
   methods: {
     fetchData() {
-            axios.get(this.$apiUrl('ProductM.php'))
-            .then((response) => {
-            this.allProducts = response.data; // 更新數據到 products
-            this.isLoading = false;
+      axios
+        .get(this.$apiUrl("ProductM.php"))
+        .then((response) => {
+          this.allProducts = response.data; // 更新數據到 products
+          this.isLoading = false;
         })
-            .catch((error) => {
-            console.error('數據傳輸失敗：', error);
+        .catch((error) => {
+          console.error("數據傳輸失敗：", error);
         });
-        },
-        filterProducts(type) {
-          this.selectedType = type;
-          this.currentPage = 1; // 将当前页数重置为第一页
-        },
+    },
+    filterProducts(type) {
+      this.selectedType = type;
+      this.currentPage = 1; // 将当前页数重置为第一页
+    },
     // goToStoreDetail(Detail) {
     //   this.$router.push({
     //     name: 'storeDetail',
@@ -84,7 +103,7 @@ export default {
     //   });
     // },
     addToCart(product) {
-      this.$store.dispatch('addToCart', { ...product, count: this.count });
+      this.$store.dispatch("addToCart", { ...product, count: this.count });
       alert("已加入購物車");
     },
     prevPage() {
@@ -99,33 +118,34 @@ export default {
     },
     goToPage(page) {
       this.currentPage = page;
-      window.scrollTo(0, 0);
+      // window.scrollTo(0, 0);
+      document.querySelector("#app").scrollIntoView({ behavior: "smooth" });
     },
   },
   computed: {
-  paginatedProducts() {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    const filteredProducts = this.allProducts.filter(item => {
-      if (this.selectedType === 'all') {
-        return true;
-      } else {
-        return item.prod_type === this.selectedType;
-      }
-    });
-    return filteredProducts.slice(startIndex, endIndex);
+    paginatedProducts() {
+      const startIndex = (this.currentPage - 1) * this.pageSize;
+      const endIndex = startIndex + this.pageSize;
+      const filteredProducts = this.allProducts.filter((item) => {
+        if (this.selectedType === "all") {
+          return true;
+        } else {
+          return item.prod_type === this.selectedType;
+        }
+      });
+      return filteredProducts.slice(startIndex, endIndex);
+    },
+    totalPages() {
+      const filteredProducts = this.allProducts.filter((item) => {
+        if (this.selectedType === "all") {
+          return true;
+        } else {
+          return item.prod_type === this.selectedType;
+        }
+      });
+      return Math.ceil(filteredProducts.length / this.pageSize);
+    },
   },
-  totalPages() {
-    const filteredProducts = this.allProducts.filter(item => {
-      if (this.selectedType === 'all') {
-        return true;
-      } else {
-        return item.prod_type === this.selectedType;
-      }
-    });
-    return Math.ceil(filteredProducts.length / this.pageSize);
-  },
-},
 };
 </script>
 
@@ -140,26 +160,26 @@ export default {
     margin: 3rem 0;
     text-align: center;
   }
-  .storeFilter{
+  .storeFilter {
     width: 100%;
     margin: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     button {
-        width: 100px;
-        height: 70px;
-        border: 2px solid #666;
-        background-color: transparent;
-        cursor: pointer;
-        border-radius: 10px;
-        margin: 30px;
-        transition: all 0.3s;
-        &:hover {
-          // border: 2px solid #333;
-          background-color: #ddd;
-        }
+      width: 100px;
+      height: 70px;
+      border: 2px solid #666;
+      background-color: transparent;
+      cursor: pointer;
+      border-radius: 10px;
+      margin: 30px;
+      transition: all 0.3s;
+      &:hover {
+        // border: 2px solid #333;
+        background-color: #ddd;
       }
+    }
   }
   .storecardbox {
     width: 100%;
@@ -173,23 +193,23 @@ export default {
       overflow: hidden;
       padding: 2rem;
       margin-block: 2rem;
-      .imgbox{
+      .imgbox {
         width: 100%;
         // height: 300px;
         position: relative;
-      .storeCardimg {
-        width: 100%;
-        cursor: pointer;
-        object-fit: cover;
-      }
-      .storeButton {
+        .storeCardimg {
+          width: 100%;
+          cursor: pointer;
+          object-fit: cover;
+        }
+        .storeButton {
           position: absolute;
           right: 10px;
           bottom: 10px;
           font-size: 30px;
           z-index: 2;
-          .fa-heart{
-            color:#ddd;
+          .fa-heart {
+            color: #ddd;
             // background-color: #fff;
           }
         }
@@ -207,9 +227,8 @@ export default {
 
           .CardDes {
             font-size: 30px;
-            margin: 10px 0 ;
+            margin: 10px 0;
             // color: #444;
-
           }
           .CardPri {
             color: #5b5b5b;
@@ -235,14 +254,14 @@ export default {
     justify-content: center;
     margin: 5rem auto;
     .paginationmain {
-      margin: 0 .5rem;
+      margin: 0 0.5rem;
       cursor: pointer;
       width: 45px;
       height: 45px;
       border: none;
       background: none;
       color: #555;
-      font-size:18px;
+      font-size: 18px;
     }
     .current-page {
       border: 1px solid #999;
@@ -264,7 +283,6 @@ export default {
       font-weight: bold;
       text-align: center;
       padding: 0;
-      
     }
     .storeSearch {
       width: 100%;
@@ -376,19 +394,19 @@ export default {
         flex-direction: column;
         width: calc(50% - 8px);
         padding: 0.8rem;
-        .imgbox{
-       .storeCardimg {
-        width: 100%;
-        object-fit: cover;
-        cursor: pointer;
-      }
-      .storeButton{
-          right: 5px;
-          bottom: 5px;
+        .imgbox {
+          .storeCardimg {
+            width: 100%;
+            object-fit: cover;
+            cursor: pointer;
+          }
+          .storeButton {
+            right: 5px;
+            bottom: 5px;
+          }
         }
-      }
         .storeBottom {
-          margin-top: .2rem;
+          margin-top: 0.2rem;
           display: flex;
           flex: 1;
           flex-direction: column;
