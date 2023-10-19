@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->rowCount() > 0) {
             $response = array("success" => true);
         } else {
-            $response = array("success" => false, "msg" => "商品狀態更新失敗");
+            $response = array("success" => false, "msg" => "卡片狀態更新失敗");
         }
     } else {
         $response = array("success" => false, "msg" => "參數 prod_id 和 prod_status 遺失");
