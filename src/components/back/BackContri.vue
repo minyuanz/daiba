@@ -33,48 +33,54 @@
     </div>
     <div class="backContri">
       <div class="CBPost" v-show="closePost">
-        <div class="box">
-          <div class="swiperPost">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <img :src=$imgUrl(selectedItem.art_pic1) />
-              </div>
-              <div class="swiper-slide">
-                <img :src=$imgUrl(selectedItem.art_pic2) />
-              </div>
-              <div class="swiper-slide">
-                <img :src=$imgUrl(selectedItem.art_pic3) />
-              </div>
-              <!-- <div class="swiper-slide">
-                              <img :src="selectedItem.prod_img4" />
-                          </div> -->
+                <div class="box">
+                    <img v-if="selectedItem.mem_img" :src=$imgUrl(selectedItem.mem_img) class="head" />
+                    <img v-else :src=$imgUrl(userImg) class="head" />
+                    <span class="closePost" @click="(closePost = !closePost), (lightBox = !lightBox)">✖</span>
+                    <div class="swiperPost">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" v-if="selectedItem.art_pic1">
+                                <img :src=$imgUrl(selectedItem.art_pic1) alt="圖片1">
+                            </div>
+                            <div class="swiper-slide" v-if="selectedItem.art_pic2">
+                                <img :src=$imgUrl(selectedItem.art_pic2) alt="圖片2">
+                            </div>
+                            <div class="swiper-slide" v-if="selectedItem.art_pic3">
+                                <img :src=$imgUrl(selectedItem.art_pic3) alt="圖片3">
+                            </div>
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                    <div class="inner">
+                        <div class="title" :class="titleColor(selectedItem.sta_id1)">
+                            <h3>{{ selectedItem.art_title }}</h3>
+                            <h4>{{ selectedItem.art_subTitle }}</h4>
+                            <div class="lineColor" :class="lineColor(selectedItem.sta_id1)"></div>
+                        </div>
+                        <div class="tag">
+                            <span class="title-tag" :class="artChooseTag(selectedItem.sta_id1)">#{{
+                                    colorClassMap2[selectedItem.sta_id1] }}</span>
+                            <span class="title-tag" :class="artChooseTag(selectedItem.sta_id2)" v-if="selectedItem.sta_id1 !== selectedItem.sta_id2">
+                                {{selectedItem.sta_id2 ? '#' +colorClassMap2[selectedItem.sta_id2] : null }}</span>
+                        </div>
+                        <div class="scrollbarArea">
+                            <div class="info">
+                                <p>地址：{{ selectedItem.art_address }}</p>
+                                <span class="PostingDate">發布日期：{{ selectedItem.art_date }}</span>
+                            </div>
+                            <div class="txt">
+                                <p>{{ selectedItem.art_content }}</p>
+                            </div>
+                        </div>
+                        <div class="author">
+                            <div class="line" :class="lineColor(selectedItem.sta_id1)"></div>
+                            <span>{{ selectedItem.mem_name }}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-          </div>
-          <div class="inner">
-            <div class="title">
-              <h3>{{ selectedItem.art_title }}</h3>
-              <span class="closePost" @click="(closePost = !closePost), (lightBox = !lightBox)">✖</span>
-              <h4>{{ selectedItem.art_subTitle }}</h4>
-            </div>
-            <div class="info">
-              <p>地址：{{ selectedItem.art_address }}</p>
-              <span class="PostingDate">發布日期：{{ selectedItem.art_date }}</span>
-            </div>
-            <div class="txt">
-              <p>
-                {{ selectedItem.art_content }}
-              </p>
-            </div>
-            <div class="author">
-              <div class="line"></div>
-              <span>{{ selectedItem.mem_name }}</span>
-            </div>
-            <img :src=$imgUrl(selectedItem.mem_img) class="head" />
-          </div>
-        </div>
-      </div>
+
     </div>
   </div>
 </template>
@@ -89,7 +95,15 @@ export default {
       selectedItem: {}, //用於保存資料
       closePost: false,
       items: [],
-      search: ''
+      search: '',
+      colorClassMap2: {
+                BL: "板南線",
+                R: "淡水信義線",
+                G: "松山新店線",
+                O: "中和新蘆線",
+                BR: "文湖線",
+                Y: "環狀線",
+            }
       // item:BackProTest,
       // items: BackProTest.map((item) => ({...item,isChecked: false,})),
     };
@@ -104,7 +118,13 @@ export default {
         })
       }
 
-    }
+    },
+
+ // 如會員沒照片則顯示空照片
+ userImg(){
+            return 'user.png'
+        },
+
   },
   mounted() {
     const swiperPost = new Swiper(".swiperPost", {
@@ -130,6 +150,36 @@ export default {
       });
   },
   methods: {
+        // 內文的border顏色
+        titleColor(id){
+            return `title${id}`
+        },
+
+         // 內文的底線顏色
+        lineColor(id){
+            return `line${id}`
+        },
+
+         // 捷運站顏色
+         artChooseTag(id) {
+            if (id === 'BL') {
+                return 'blue'
+            } else if (id === "R") {
+                return 'red'
+            } else if (id === 'G') {
+                return 'green'
+            } else if (id === 'O') {
+                return 'orange'
+            } else if (id === 'BR') {
+                return 'brown'
+            } else if (id === 'Y') {
+                return 'yellow'
+            }
+
+        },
+
+
+
     showItemDetail(item) {
       this.selectedItem = { ...item }; //拷貝目標訊息
       this.closePost = true; //顯示點擊項目資料
@@ -275,18 +325,15 @@ export default {
 
 .backContri {
   .CBPost {
-    width: 1200px;
-    height: 80%;
+    max-width: 1200px;
+    max-height: 700px;
     background-color: #d9d9d9;
     padding: 30px;
     display: flex;
     justify-self: center;
     align-items: center;
     position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    inset: 0;
     margin: auto;
     z-index: 10;
 
@@ -294,118 +341,287 @@ export default {
       width: 100%;
       height: 100%;
       display: flex;
-      justify-content: center;
+      justify-content: space-around;
       align-items: center;
       background-color: #fff;
       padding: 20px;
+      position: relative;
+
+      .closePost {
+        background-color: black;
+        font-size: 50px;
+        font-weight: 1000;
+        color: #fff;
+        border-radius: 50px;
+        width: 60px;
+        height: 60px;
+        display: inline-block;
+        position: absolute;
+        text-align: center;
+        line-height: 50px;
+        right: 0%;
+        top: 0%;
+        cursor: pointer;
+        z-index: 2;
+      }
+
+      .closePost:hover {
+        background-color: map-get($color, $key: danger);
+      }
+
+      .head {
+        position: absolute;
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        bottom: -7%;
+        right: -5%;
+        border: 6px solid #333;
+        object-fit: cover;
+      }
 
       .swiperPost {
-        width: 480px;
-        // height: 680px;
-        margin-right: 50px;
+        width: 40%;
+        height: 100%;
+        margin: 0 2rem 0 0;
+
+        .swiper-button-prev::after,
+        .swiper-button-next::after {
+          scale: 0.8;
+          color: #fff;
+        }
 
         .swiper-slide {
+          width: 100%;
+          height: 100%;
+
           img {
             width: 100%;
             height: 100%;
+            object-fit: cover;
           }
         }
       }
 
       .inner {
-        // height: 680px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
 
         p {
-          font-size: 18px;
+          font-size: map-get($map, small);
         }
 
+
+        // .title::after {
+        //   content: "";
+        //   position: absolute;
+        //   width: 90%;
+        //   border-bottom: 1px solid map-get($color, $key: danger);
+        //   bottom: 0;
+        //   left: 5%;
+        // }
+
         .title {
-          border-top: 30px solid map-get($color, $key: success);
-          border-left: 30px solid map-get($color, $key: success);
-          padding-top: 20px;
-          padding-inline: 20px;
+          padding-top: 1rem;
+          padding-inline: 2rem;
           position: relative;
+          height: 30%;
 
           h3 {
             font-size: map-get($fontsizes, h2);
             line-height: 70px;
+            height: 50%;
           }
 
           h4 {
             font-size: map-get($fontsizes, h4);
+            line-height: 65px;
           }
 
-          .closePost {
-            background-color: black;
-            font-size: 50px;
-            font-weight: 1000;
-            color: #fff;
-            border-radius: 50px;
-            width: 60px;
-            height: 60px;
-            display: inline-block;
+          .lineColor {
             position: absolute;
-            text-align: center;
-            line-height: 50px;
-            right: -5%;
-            top: -35%;
-            cursor: pointer;
+            width: 90%;
+            bottom: 0;
+            left: 5%;
           }
+
+          .lineR {
+            border-bottom: 1px solid map-get($color, $key: danger);
+          }
+
+          .lineBL {
+            border-bottom: 1px solid map-get($color, $key: info);
+          }
+
+          .lineO {
+            border-bottom: 1px solid map-get($color, $key: tangerine);
+          }
+
+          .lineG {
+            border-bottom: 1px solid map-get($color, $key: success);
+          }
+
+          .lineBR {
+            border-bottom: 1px solid map-get($color, $key: choco);
+          }
+
+          .lineY {
+            border-bottom: 1px solid map-get($color, $key: warning);
+          }
+
         }
 
-        .info {
-          background-color: #fff;
-          padding-left: 50px;
-          padding-right: 20px;
-          padding-top: 30px;
-          padding-bottom: 10px;
-          width: 100%;
-          height: 200px;
-          display: inline-grid;
-          position: relative;
-
-          .PostingDate {
-            display: block;
-            margin-top: auto;
-            text-align: end;
-            color: #999;
-            padding-block: 10px;
-          }
+        .titleR {
+          border-top: 30px solid map-get($color, $key: danger);
+          border-left: 30px solid map-get($color, $key: danger);
         }
 
-        .info::before {
-          content: "";
-          background-image: url("~@/assets/images/Line.svg");
-          width: 520px;
-          height: 2px;
+        .titleBL {
+          border-top: 30px solid map-get($color, $key: info);
+          border-left: 30px solid map-get($color, $key: info);
+        }
+
+        .titleO {
+          border-top: 30px solid map-get($color, $key: tangerine);
+          border-left: 30px solid map-get($color, $key: tangerine);
+        }
+
+        .titleG {
+          border-top: 30px solid map-get($color, $key: success);
+          border-left: 30px solid map-get($color, $key: success);
+        }
+
+        .titleBR {
+          border-top: 30px solid map-get($color, $key: choco);
+          border-left: 30px solid map-get($color, $key: choco);
+        }
+
+        .titleY {
+          border-top: 30px solid map-get($color, $key: warning);
+          border-left: 30px solid map-get($color, $key: warning);
+        }
+
+
+        .DigLikeBox {
           position: absolute;
-          bottom: 0;
-          left: 9%;
+          font-size: 36px;
+          // bottom: 1rem;
+          right: 0.9rem;
+          top: 9.5rem;
+          z-index: 5;
+          color: #000000;
         }
 
-        .txt {
-          padding-left: 50px;
-          padding-right: 20px;
-          height: 280px;
+        .tag {
+          padding-inline: 3.5rem;
+        }
 
-          p {
-            text-indent: 2em;
-            padding-top: 20px;
+        .scrollbarArea::-webkit-scrollbar {
+          width: 8px;
+        }
+
+        .scrollbarArea::-webkit-scrollbar-track {
+          box-shadow: transparent;
+        }
+
+        .scrollbarArea::-webkit-scrollbar-thumb {
+          border-radius: 10px;
+          background-color: #ccc;
+          cursor: pointer;
+        }
+
+        .scrollbarArea {
+          overflow-x: hidden;
+          overflow-y: scroll;
+          margin-right: 20px;
+
+          .info {
+            width: 100%;
+            //   width: calc(100% + 40px);
+            background-color: transparent;
+            // display: inline-grid;
+            position: relative;
+            padding: 1rem 0.5rem 0;
+
+
+            p {
+              padding-left: 3.5rem;
+            }
+
+            .PostingDate {
+              display: block;
+              text-align: end;
+              color: #999;
+              padding-bottom: 1.5rem;
+              margin-top: 1rem;
+              margin-left: auto;
+            }
+          }
+
+          .info::before {
+            content: "";
+            border-bottom: #aaa 3px dashed;
+            width: calc(90% - 0px);
+            position: absolute;
+            bottom: 0;
+            left: calc(5% + 30px);
+          }
+
+          .txt {
+            width: 520px;
+            padding-left: 50px;
+            padding-right: 20px;
+
+            p {
+              text-indent: 2em;
+              padding-top: 20px;
+            }
           }
         }
 
         .author {
           display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding-left: 50px;
-          padding-right: 50px;
+          justify-content: flex-end;
+          align-items: end;
+          gap: 1rem;
+          padding: 0 60px 0 50px;
           height: 50px;
 
           .line {
-            width: 300px;
+            flex: 1;
             height: 12px;
-            background-color: map-get($color, $key: success);
+          }
+
+          .lineR {
+            border-top: 30px solid map-get($color, $key: danger);
+            border-left: 30px solid map-get($color, $key: danger);
+          }
+
+          .lineBL {
+            border-top: 30px solid map-get($color, $key: info);
+            border-left: 30px solid map-get($color, $key: info);
+          }
+
+          .lineO {
+            border-top: 30px solid map-get($color, $key: tangerine);
+            border-left: 30px solid map-get($color, $key: tangerine);
+          }
+
+          .lineG {
+            border-top: 30px solid map-get($color, $key: success);
+            border-left: 30px solid map-get($color, $key: success);
+          }
+
+          .lineBR {
+            border-top: 30px solid map-get($color, $key: choco);
+            border-left: 30px solid map-get($color, $key: choco);
+          }
+
+          .lineY {
+            border-top: 30px solid map-get($color, $key: warning);
+            border-left: 30px solid map-get($color, $key: warning);
           }
 
           span {
@@ -413,18 +629,70 @@ export default {
             font-weight: 900;
           }
         }
-
-        .head {
-          position: absolute;
-          border-radius: 50%;
-          width: 120px;
-          height: 120px;
-          bottom: -2%;
-          right: -2%;
-          border: 6px solid #333;
-        }
       }
     }
   }
+
+
 }
+
+
+@media screen and (max-width: 1280px){
+  .backContri {
+
+    .CBPost {
+      width: 90%;
+      height: 580px;
+
+      .box {
+        .closePost {
+          scale: 0.8;
+        }
+
+        .scrollbarArea {
+          margin-right: -10px;
+        }
+
+        .head {
+          width: 100px;
+          height: 100px;
+          bottom: -6%;
+          right: -4%;
+          border: 7px solid #333;
+        }
+
+        .inner {
+          p {
+            font-size: map-get($map, small);
+          }
+
+
+
+          .title {
+
+            padding-top: 1rem;
+            padding-inline: 2rem;
+            position: relative;
+            height: 30%;
+            z-index: 1;
+
+            h3 {
+              font-size: map-get($fontsizes, h2);
+              line-height: 70px;
+              height: 50%;
+            }
+
+            h4 {
+              font-size: map-get($fontsizes, h4);
+              margin-top: 0.5rem;
+              line-height: normal;
+            }
+          }
+        }
+      }
+    }
+    }
+}
+
+
 </style>
