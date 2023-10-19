@@ -509,10 +509,10 @@ export default {
           // 檢查
           if (response.data.success) {
             // console.log('卡片狀態已更新');
-            alert("商品狀態更新成功");
+            alert("卡片狀態更新成功");
           } else {
             // console.error('卡片狀態更新失敗');
-            alert("商品狀態更新失敗");
+            alert("卡片狀態更新失敗");
             // 如果失敗回歸原本狀態
             feature.special_status = feature.special_status === "1" ? "0" : "1";
           }
