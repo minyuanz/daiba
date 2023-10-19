@@ -14,7 +14,7 @@
         <div class="box">
           <button class="place">景點</button>
           <button class="food">美食</button>
-          <button class="hotel">住宿</button>
+          <button class="hotel">QAQ</button>
         </div>
         <div class="triangle"></div>
       </div>

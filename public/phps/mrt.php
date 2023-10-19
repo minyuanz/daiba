@@ -3,7 +3,8 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
 require_once("connect_chd103g5_2.php"); 
-
+// phpinfo();
+// exit();
 
 try {
     // sql指令
