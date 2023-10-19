@@ -8,7 +8,7 @@ try {
     // 連接資料庫
     require_once("connect_chd103g5_2.php");
     // sql指令
-	$sql = "select * from news";
+	$sql = "SELECT * FROM `news` ORDER BY `news`.`news_date` DESC";
     // 
     $news = $pdo->query( $sql );
     $result=$news->fetchAll(PDO::FETCH_ASSOC);

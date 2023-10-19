@@ -79,10 +79,7 @@
         <div class="pic">
           <p>＋</p>
           <!-- $imgUrl(currentEditnews.news_pic1) -->
-          <img
-            :src="$imgUrl(currentEditnews.news_pic1)"
-            v-if="currentEditnews.news_pic1 !== '' ? true : false"
-          />
+          <img :src="$imgUrl(currentEditnews.news_pic1)" v-if="currentEditnews.news_pic1 !== '' ? true : false" />
           <input type="file" @change="FileUpdate" name="image" />
           <img :src="picURL" alt="" v-show="show" />
         </div>
@@ -97,14 +94,12 @@
     </div>
     <div class="Ctx">
       <label for="">內文</label>
-      <textarea
-        class="custom-input"
-        v-model="currentEditnews.news_des1"
-      ></textarea>
+      <textarea class="custom-input" v-model="currentEditnews.news_des1"></textarea>
       <!-- <input type="text"> -->
     </div>
     <div class="btn">
       <button @click="cancelEdit">取消編輯</button>
+      <button type="button" @click="delNews">刪除消息</button>
       <button type="button" @click="updateNews">確認編輯</button>
     </div>
   </form>
@@ -146,6 +141,7 @@ export default {
     }
   },
   methods: {
+
     cancelEdit() {
       this.editMode = false; //取消編輯並清空圖片
       this.show = false;
@@ -243,6 +239,31 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
+    },
+
+    delNews() {
+      if (confirm('確定要刪除嗎?')) {
+        const formData = new FormData();
+        formData.append("news_id", this.currentEditnews.news_id);
+
+        fetch(this.$apiUrl("delNews.php"), {
+          method: "post",
+          body: formData,
+        })
+          .then(res => res.json())
+          .then((res) => {
+            if (!res.error) {
+              alert(res.msg)
+              this.editMode = false
+            }
+          }
+          )
+          .catch(function (error) {
+            console.log(error);
+          })
+
+      }
+
     },
     fetchData() {
       // this.$apiUrl('getNews.php')
@@ -355,7 +376,7 @@ export default {
       transition: 0.4s;
     }
 
-    .ios-switch input:checked + .slider {
+    .ios-switch input:checked+.slider {
       background-color: #4caf50;
     }
 
@@ -371,7 +392,7 @@ export default {
       transition: 0.4s;
     }
 
-    .ios-switch input:checked + .slider:before {
+    .ios-switch input:checked+.slider:before {
       transform: translateX(30px);
     }
   }
