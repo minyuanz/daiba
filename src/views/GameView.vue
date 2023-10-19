@@ -117,7 +117,7 @@
 
       <!-- 背景 -->
       <transition>
-        <img :src="currentMessage.image" alt="Character Image" class="character-image" :class="{ imgFill }" />
+        <img :src="currentMessage.image" @click="nextMessage" alt="Character Image" class="character-image" :class="{ imgFill }" />
       </transition>
 
       <!-- 對話框角色 -->

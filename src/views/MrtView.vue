@@ -234,9 +234,7 @@
                 >
                   <div
                     class="cardHeight"
-                    v-if="
-                      selectedType === '' || itemCard.fea_name === selectedType
-                    "
+                    
                   >
                     <!-- <router-link
                 :to="{ path: itemplace?.router ? itemplace.router : '/' }"
@@ -352,6 +350,7 @@ export default {
       .catch((err) => {
         console.log("err", err);
       });
+
     axios
       .get(this.$apiUrl("BackFeatureM.php"))
       .then((res) => {
@@ -428,41 +427,6 @@ export default {
       }
     );
 
-    const swiperMRTCard = new Swiper(".swiperMRTCard", {
-      direction: "horizontal",
-      speed: 500,
-      loop: true,
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      breakpoints: {
-        375: {
-          slidesPerView: 1,
-          slidesPerGroup: 1,
-          spaceBetween: 30,
-        },
-        415: {
-          slidesPerView: 1,
-          slidesPerGroup: 1,
-          spaceBetween: 30,
-        },
-        577: {
-          slidesPerView: 2,
-          slidesPerGroup: 2,
-          spaceBetween: 30,
-        },
-        769: {
-          slidesPerView: 3,
-          spaceBetween: 30,
-        },
-        1281: {
-          slidesPerView: 4,
-          slidesPerGroup: 4,
-          spaceBetween: 50,
-        },
-      },
-    });
     setTimeout(() => {
       this.initSwiper();
     }, 100);
@@ -536,8 +500,45 @@ export default {
       this.lightBox = true;
       item.isShow = true;
     },
+
     selectType(type) {
       this.selectedType = type;
+
+      const swiperMRTCard = new Swiper(".swiperMRTCard", {
+      direction: "horizontal",
+      speed: 500,
+      loop: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        375: {
+          slidesPerView: 1,
+          slidesPerGroup: 1,
+          spaceBetween: 30,
+        },
+        415: {
+          slidesPerView: 1,
+          slidesPerGroup: 1,
+          spaceBetween: 30,
+        },
+        577: {
+          slidesPerView: 2,
+          slidesPerGroup: 2,
+          spaceBetween: 30,
+        },
+        769: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+        1281: {
+          slidesPerView: 4,
+          slidesPerGroup: 4,
+          spaceBetween: 50,
+        },
+      },
+    });
     },
     // changeContent(type) {
     //   // 保存原始資料

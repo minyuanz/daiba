@@ -252,6 +252,12 @@
             -webkit-line-clamp: 1;
             font-size: 15px;
           }
+
+          .tag {
+            display: flex;
+            flex-wrap: wrap;
+
+          }
         }
 
         .txt {
@@ -260,6 +266,10 @@
         }
       }
     }
+  }
+
+  .s-card-h .text .title .tag .title-tag {
+    margin-top: 0.5rem;
   }
 
   .CBPost {
@@ -492,8 +502,8 @@
               display: block;
               text-align: end;
               color: #999;
-              padding-bottom: .5rem;
-              margin-top: .2rem;
+              padding-bottom: 1.5rem;
+              margin-top: 1rem;
               margin-left: auto;
             }
           }
@@ -504,7 +514,7 @@
             width: calc(90% - 0px);
             position: absolute;
             bottom: 0;
-            left: calc(5% + 10px);
+            left: calc(5% + 30px);
           }
 
           .txt {
@@ -530,43 +540,36 @@
           .line {
             flex: 1;
             height: 12px;
-            background-color: map-get($color, $key: success);
           }
 
           .lineR {
-            border-top: 18px solid map-get($color, $key: danger);
+            border-top: 30px solid map-get($color, $key: danger);
             border-left: 30px solid map-get($color, $key: danger);
-            margin-bottom: 0.2rem;
           }
 
           .lineBL {
-            border-top: 18px solid map-get($color, $key: info);
+            border-top: 30px solid map-get($color, $key: info);
             border-left: 30px solid map-get($color, $key: info);
-            margin-bottom: 0.2rem;
           }
 
           .lineO {
-            border-top: 18px solid map-get($color, $key: tangerine);
+            border-top: 30px solid map-get($color, $key: tangerine);
             border-left: 30px solid map-get($color, $key: tangerine);
-            margin-bottom: 0.2rem;
           }
 
           .lineG {
-            border-top: 18px solid map-get($color, $key: success);
+            border-top: 30px solid map-get($color, $key: success);
             border-left: 30px solid map-get($color, $key: success);
-            margin-bottom: 0.2rem;
           }
 
           .lineBR {
-            border-top: 18px solid map-get($color, $key: choco);
+            border-top: 30px solid map-get($color, $key: choco);
             border-left: 30px solid map-get($color, $key: choco);
-            margin-bottom: 0.2rem;
           }
 
           .lineY {
-            border-top: 18px solid map-get($color, $key: warning);
+            border-top: 30px solid map-get($color, $key: warning);
             border-left: 30px solid map-get($color, $key: warning);
-            margin-bottom: 0.2rem;
           }
 
           span {
@@ -740,8 +743,6 @@
 
       .box {
         .closePost {
-          right: -5%;
-          top: -2%;
           scale: 0.8;
         }
 
@@ -762,18 +763,10 @@
             font-size: map-get($map, small);
           }
 
-          .title::after {
-            content: "";
-            position: absolute;
-            width: 90%;
-            border-bottom: 1px solid map-get($color, $key: success);
-            bottom: -2px;
-            left: 5%;
-          }
+
 
           .title {
-            border-top: 30px solid map-get($color, $key: success);
-            border-left: 30px solid map-get($color, $key: success);
+
             padding-top: 1rem;
             padding-inline: 2rem;
             position: relative;
@@ -805,6 +798,21 @@
 @media screen and (max-width: 768px) {
   .CBWrapper {
     width: 100%;
+
+    .toCB {
+      margin-block: 10%;
+    }
+  }
+
+  .CBTitle::after {
+    content: "";
+    background-image: none !important;
+
+  }
+
+  .CBTitle::before {
+    content: "";
+    background-image: none !important;
   }
 
   .CBArea {
@@ -835,6 +843,10 @@
         width: 90%;
         height: 500px;
 
+        h3 {
+          font-size: 28px;
+        }
+
         .box {
           width: 100%;
 
@@ -849,25 +861,13 @@
 
           .inner {
             height: 105%;
-            width: 60%;
-
-            .DigLikeBox{
-              top: 8.2rem;
-            }
-            .tag{
-              padding-inline: 3rem;
-            }
+            width: 100%;
 
             .title {
-              border-top: 18px solid map-get($color, $key: success);
-              border-left: 18px solid map-get($color, $key: success);
-              padding-top: 1rem;
+              padding-block: 1rem;
               padding-inline: 1rem;
               height: 30%;
 
-              .lineColor{
-                width: 85%;
-              }
 
               h3 {
                 line-height: 36px;
@@ -878,39 +878,103 @@
               }
             }
 
-            .title::after {
-              display: none;
+            .titleR {
+              border-top: 10px solid map-get($color, $key: danger);
+              border-left: 10px solid map-get($color, $key: danger);
             }
+
+            .titleBL {
+              border-top: 10px solid map-get($color, $key: info);
+              border-left: 10px solid map-get($color, $key: info);
+            }
+
+            .titleO {
+              border-top: 10px solid map-get($color, $key: tangerine);
+              border-left: 10px solid map-get($color, $key: tangerine);
+            }
+
+            .titleG {
+              border-top: 10px solid map-get($color, $key: success);
+              border-left: 10px solid map-get($color, $key: success);
+            }
+
+            .titleBR {
+              border-top: 10px solid map-get($color, $key: choco);
+              border-left: 10px solid map-get($color, $key: choco);
+            }
+
+            .titleY {
+              border-top: 10px solid map-get($color, $key: warning);
+              border-left: 10px solid map-get($color, $key: warning);
+            }
+
+
+
+
+
+            .tag {
+              padding-inline: 1rem;
+            }
+
 
             .scrollbarArea {
               margin-right: -15px;
-              margin-top: 0px;
+              margin-top: 15px;
 
               .info {
-                padding: 0 0 0 2.5rem;
-                p{
-                  padding: 0 0 0 1rem;
+                padding: 0.2rem 0 0 2.5rem;
+
+                p {
+                  padding-left: 0rem;
                 }
 
                 span {
                   text-align: start;
-                  padding-left: 1rem;
                 }
               }
 
               .txt {
                 padding-left: 2.5rem;
                 margin-top: -1.5rem;
-                p{
-                  text-indent: 0;
-                  width: 70%;
-                }
+                width: 100%;
               }
             }
 
             .author {
               padding-left: 0;
+
+              .lineR {
+                border-top: 10px solid map-get($color, $key: danger);
+                border-left: 10px solid map-get($color, $key: danger);
+              }
+
+              .lineBL {
+                border-top: 10px solid map-get($color, $key: info);
+                border-left: 10px solid map-get($color, $key: info);
+              }
+
+              .lineO {
+                border-top: 10px solid map-get($color, $key: tangerine);
+                border-left: 10px solid map-get($color, $key: tangerine);
+              }
+
+              .lineG {
+                border-top: 10px solid map-get($color, $key: success);
+                border-left: 10px solid map-get($color, $key: success);
+              }
+
+              .lineBR {
+                border-top: 10px solid map-get($color, $key: choco);
+                border-left: 10px solid map-get($color, $key: choco);
+              }
+
+              .lineY {
+                border-top: 10px solid map-get($color, $key: warning);
+                border-left: 10px solid map-get($color, $key: warning);
+              }
             }
+
+
           }
         }
       }
@@ -994,14 +1058,10 @@
 
             .title {
               border-top: 0;
-              border-left: 10px solid map-get($color, $key: success);
+
               padding-inline: 10px;
             }
 
-            .title::after {
-              width: 95%;
-              left: 5px;
-            }
 
             .scrollbarArea {
               margin-right: -10px;
@@ -1017,7 +1077,7 @@
               }
 
               .txt {
-                padding: 0 0.5rem 0 1rem;
+                padding: 1rem 0.5rem 0 1rem;
               }
             }
 
