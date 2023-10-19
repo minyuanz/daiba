@@ -262,7 +262,11 @@ export default {
         .card-h {
           height: 550px;
           margin: 10px 0;
+          width: 320px;
         }
+      }
+      .pagination{
+        text-align: center;
       }
     }
   }

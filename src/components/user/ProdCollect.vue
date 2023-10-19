@@ -192,6 +192,11 @@ export default {
 
       .prodCard {
         margin: 10px 0;
+        .pic{
+          img{
+            width: 100%;
+          }
+        }
       }
     }
   }

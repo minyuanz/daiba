@@ -31,7 +31,7 @@
                         <i class="fa-solid fa-eye-slash"></i>
                     </div>
                 </div>
-                <router-link to="/ForgetPwd">忘記密碼 ?</router-link>
+                <!-- <router-link to="/ForgetPwd">忘記密碼 ?</router-link> -->
                 <button class="btn_l btnlogin" type="button" @click="login">
                     登入
                 </button>
