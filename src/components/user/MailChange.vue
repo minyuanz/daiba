@@ -55,13 +55,13 @@ export default {
                         if (!res.error) {
                             alert(res.msg);
                             this.menu()
+                            location.reload();
                         }
                     })
                     .catch(function (error) {
                         console.log(error);
                     });
             }
-            location.reload();
         }
     }
 }

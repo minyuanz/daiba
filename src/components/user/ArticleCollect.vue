@@ -2,7 +2,7 @@
   <div class="collect">
     <h1>投稿收藏</h1>
     <div class="collectGrid">
-      <div class="collectCard" v-for="(card, index) in articleCollect" :key="index">
+      <div class="collectCard" v-for="(card, index) in paginatedList" :key="index">
         <div class="s-card-h">
           <div class="img">
             <!-- $imgUrl(card.art_pic1) -->
@@ -27,7 +27,18 @@
           </div>
         </div>
       </div>
-      <!-- <Page :total="cards.length" size="small" :page-size="pageSize" @on-change="updatePage" id="page" /> -->
+      <div class="pagination">
+        <button class="paginationmain" @click="prevPage" :disabled="currentPage === 1 || isLoading">
+          ＜
+        </button>
+        <button class="paginationmain" @click="goToPage(page)" v-for="page in totalPages" :key="page"
+          :class="{ 'current-page': page === currentPage }">
+          {{ page }}
+        </button>
+        <button class="paginationmain" @click="nextPage" :disabled="currentPage === totalPages || isLoading">
+          ＞
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -99,12 +110,50 @@ export default {
         },
       ],
       cardsDisplay: [],
-      pageSize: 2,
+      articleCollect: [],
+      // 
+      pageSize: 6,
       currentPage: 1,
-      articleCollect: []
+      // articleCollect: [],
+      isLoading: true,
     };
   },
+  computed: {
+    //算出所有的頁數
+    totalPages() {
+      return Math.ceil(this.articleCollect.length / this.pageSize);
+    },
+    // 顯示頁面的資料
+    paginatedList() {
+      const startIndex = (this.currentPage - 1) * this.pageSize; //算出上一頁跑到陣列第幾個
+      const endIndex = startIndex + this.pageSize;
+      return this.articleCollect.slice(startIndex, endIndex);
+    },
+    // totalPages() {
+    //   const filteredProducts = this.allProducts.filter(item => {
+    //     if (this.selectedType === 'all') {
+    //       return true;
+    //     } else {
+    //       return item.prod_type === this.selectedType;
+    //     }
+    //   });
+    //   return Math.ceil(filteredProducts.length / this.pageSize);
+    // },
+  },
   methods: {
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage -= 1;
+      }
+    },
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage += 1;
+      }
+    },
+    goToPage(page) {
+      this.currentPage = page;
+    },
     updatePage(page) {
       // console.log(page);
       this.currentPage = page;
@@ -114,7 +163,7 @@ export default {
       this.cardsDisplay = this.cards.slice(startIdx, endIdx);
     },
     delCollect(index) {
-      // console.log(index);
+      console.log(index);
 
       let memId = this.$store.state.memInfo.mem_id
       let art_id = this.articleCollect[index].art_id
@@ -127,7 +176,7 @@ export default {
       formData.append("art_id", art_id);
 
       confirm('確定取消收藏嗎?')
-// $apiUrl('delArticleCollect.php')
+      // $apiUrl('delArticleCollect.php')
       fetch(this.$apiUrl('delArticleCollect.php'), {
         method: 'post',
         body: formData
@@ -136,12 +185,12 @@ export default {
         .then((res) => {
           if (!res.error) {
             alert(res.msg);
+            location.reload();
           }
         })
         .catch(function (error) {
           console.log(error);
         });
-        location.reload();
     },
     getArticleCollect() {
       let memId = this.$store.state.memInfo.mem_id
@@ -223,6 +272,31 @@ export default {
         &:hover {
           background-color: map-get($color, $key: danger);
         }
+      }
+    }
+
+    .pagination {
+      // width: 100%;
+      // display: flex;
+      // align-items: center;
+      // justify-content: center;
+      // margin: 5rem auto;
+      grid-area: 3/1/4/4;
+
+      .paginationmain {
+        margin: 0 .5rem;
+        cursor: pointer;
+        width: 45px;
+        height: 45px;
+        border: none;
+        background: none;
+        color: #555;
+        font-size: 18px;
+      }
+
+      .current-page {
+        border: 1px solid #999;
+        border-radius: 50%;
       }
     }
   }
