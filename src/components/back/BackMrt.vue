@@ -75,7 +75,11 @@
           </div>
           <div>
             <label for="">捷運站編號：</label>
-            <input type="text" placeholder="若無轉乘線則免填" v-model="newMrt.mrt_code2" />
+            <input
+              type="text"
+              placeholder="若無轉乘線則免填"
+              v-model="newMrt.mrt_code2"
+            />
           </div>
           <div>
             <label for="">捷運站名稱：</label>
@@ -103,10 +107,18 @@
         <div class="pic">
           <!-- <img src="https://picsum.photos/200/200/?random=10" /> -->
           <!-- <button>上傳圖片</button> -->
-          <img :src="`${this.$store.state.imgURL}` + currentEditMrt.sta_pictor"
-            v-if="currentEditMrt.sta_pictor !== '' ? true : false" style="width: 200px; height: 200px" />
+          <img
+            :src="`${this.$store.state.imgURL}` + currentEditMrt.sta_pictor"
+            v-if="currentEditMrt.sta_pictor !== '' ? true : false"
+            style="width: 200px; height: 200px"
+          />
           <input type="file" @change="FileUpdate" name="image" />
-          <img :src="picURL" alt="" v-show="show" style="width: 200px; height: 200px; position: absolute" />
+          <img
+            :src="picURL"
+            alt=""
+            v-show="show"
+            style="width: 200px; height: 200px; position: absolute"
+          />
         </div>
         <div class="txt">
           <div>
@@ -136,7 +148,11 @@
           </div>
           <div>
             <label for="">捷運站編號：</label>
-            <input type="text" placeholder="若無轉乘線則免填" v-model="currentEditMrt.mrt_code2" />
+            <input
+              type="text"
+              placeholder="若無轉乘線則免填"
+              v-model="currentEditMrt.mrt_code2"
+            />
           </div>
           <div>
             <label for="">捷運站名稱：</label>
@@ -146,7 +162,10 @@
       </div>
       <div class="addCtx">
         <span>捷運站描述</span>
-        <textarea class="custom-input" v-model="currentEditMrt.sta_describe"></textarea>
+        <textarea
+          class="custom-input"
+          v-model="currentEditMrt.sta_describe"
+        ></textarea>
       </div>
       <div class="btn">
         <button @click="cancelEdit">取消編輯</button>
@@ -237,13 +256,13 @@ export default {
 
     cancelAdd() {
       this.addToggle = !this.addToggle;
-      this.newMrt.sta_describe = '';
-      this.newMrt.mrt_code1 = '';
-      this.newMrt.mrt_code2 = '';
-      this.newMrt.sta_name = '';
-      this.newMrt.mrt_id1 = '';
-      this.newMrt.mrt_id2 = '';
-      this.newMrt.sta_pictor = '';
+      this.newMrt.sta_describe = "";
+      this.newMrt.mrt_code1 = "";
+      this.newMrt.mrt_code2 = "";
+      this.newMrt.sta_name = "";
+      this.newMrt.mrt_id1 = "";
+      this.newMrt.mrt_id2 = "";
+      this.newMrt.sta_pictor = "";
     },
 
     cancelEdit() {
@@ -324,7 +343,7 @@ export default {
     fetchData() {
       // $apiUrl('mrt.php')
       axios
-        .get(this.$apiUrl('mrt.php'))
+        .get(this.$apiUrl("mrt.php"))
         .then((response) => {
           this.mrts = response.data;
           // console.log(this.mrts);
@@ -357,7 +376,7 @@ export default {
       //   })
 
       // $apiUrl('updateMrt.php')
-      await fetch(this.$apiUrl('updateMrt.php'), {
+      await fetch(this.$apiUrl("UpdateMrt.php"), {
         method: "post",
         body: formData,
       })
@@ -371,7 +390,7 @@ export default {
         })
         .catch(function (error) {
           console.log(error);
-        })
+        });
       location.reload();
     },
     async addNewMrt() {
@@ -406,7 +425,7 @@ export default {
       // });
 
       // $apiUrl('CreatMrt.php')
-      await fetch(this.$apiUrl('CreatMrt.php'), {
+      await fetch(this.$apiUrl("CreatMrt.php"), {
         method: "post",
         body: formData,
       })
@@ -419,7 +438,7 @@ export default {
         })
         .catch(function (error) {
           console.log(error);
-        })
+        });
       // .finally(() => {
       //   location.reload();
       // });

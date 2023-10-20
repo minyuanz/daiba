@@ -62,7 +62,8 @@
       margin-bottom: 1.5rem;
     }
 
-    li:hover {
+    li:hover,
+    li:active {
       background-color: #7d7d7d;
 
       a {

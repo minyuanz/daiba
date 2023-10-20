@@ -26,8 +26,12 @@
             <h2 class="CardDes">{{ item.prod_name }}</h2>
             <h3 class="CardPri">NT${{ item.prod_price }}</h3>
           </div>
-          <div class="storeButton">
-            <button class="btn_s" @click="addToCart(item)">加入購物車</button>
+          <div class="storeButton" @click="addToCart(item)">
+            <!-- <button class="btn_s" @click="addToCart(item)">加入購物車</button> -->
+            <i
+              class="fa-solid fa-cart-shopping fa-2xl"
+              style="color: #000333"
+            ></i>
           </div>
         </div>
       </div>
@@ -235,14 +239,16 @@ export default {
           }
         }
         .storeButton {
+          cursor: pointer;
           position: absolute;
           bottom: 0;
           right: 0;
+          margin-top: 1rem;
           width: 180;
-          font-size: 30px;
-          button {
-            width: 160px;
-          }
+          // font-size: 30px;
+          // button {
+          //   width: 160px;
+          // }
         }
       }
     }
