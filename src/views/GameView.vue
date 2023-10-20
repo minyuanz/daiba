@@ -1142,7 +1142,7 @@ export default {
                     console.error('上傳點數失敗：', error);
                 });
         
-      
+      this.isLogin = false;
         
     
     },
