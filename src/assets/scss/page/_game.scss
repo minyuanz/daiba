@@ -459,8 +459,8 @@
         background: #fff;
         filter: blur(15px);
         z-index: 20;
-        animation-fill-mode: forwards;
-        animation: eye 2.5s 0.2s;
+        // animation-fill-mode: forwards;
+        animation: eye 2.5s 0.2s forwards;
     }
 
 
