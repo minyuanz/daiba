@@ -38,7 +38,7 @@
     </div>
   </div>
   <div class="backMrtAdd" v-else>
-    <form @submit="addnewMrt" enctype="multipart/form-data">
+    <form  enctype="multipart/form-data">
       <p>你正在新增車站：</p>
       <div class="addInfo">
         <div class="pic">
@@ -89,19 +89,19 @@
       </div>
       <div class="addCtx">
         <span>捷運站描述</span>
-        <textarea class="custom-input" v-model="newMrt.sta_describe"></textarea>
+        <textarea class="custom-input" v-model="newMrt.sta_describe" @change=" console.log(this.newMrt);"></textarea>
         <!-- <input type="text" class="custom-input"> -->
         <!-- <span class="count">0/100字</span> -->
       </div>
       <div class="btn">
-        <button @click="cancelAdd">取消新增</button>
-        <button @click="addNewMrt">確認新增</button>
+        <button @click="cancelAdd" type="button">取消新增</button>
+        <button @click="addNewMrt" type="button">確認新增</button>
       </div>
     </form>
   </div>
 
   <div class="backMrtAdd" v-if="editMode">
-    <form @submit="addnewMrt" enctype="multipart/form-data">
+    <form enctype="multipart/form-data">
       <p>你正在新增車站：</p>
       <div class="addInfo">
         <div class="pic">
@@ -168,8 +168,8 @@
         ></textarea>
       </div>
       <div class="btn">
-        <button @click="cancelEdit">取消編輯</button>
-        <button @click="updateMrt">確認編輯</button>
+        <button @click="cancelEdit" type="button">取消編輯</button>
+        <button @click="updateMrt" type="button">確認編輯</button>
       </div>
     </form>
   </div>
@@ -382,6 +382,7 @@ export default {
       })
         .then((res) => res.json())
         .then((res) => {
+          console.log(res.error);
           if (!res.error) {
             alert(res.msg);
             this.editMode = false; // 退出编辑模式
@@ -391,7 +392,7 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
-      location.reload();
+      // location.reload();
     },
     async addNewMrt() {
       const formData = new FormData();
@@ -431,9 +432,11 @@ export default {
       })
         .then((res) => res.json())
         .then((res) => {
+          console.log(res.error);
           if (!res.error) {
             alert(res.msg);
             this.addToggle = false;
+            location.reload();
           }
         })
         .catch(function (error) {
@@ -442,7 +445,7 @@ export default {
       // .finally(() => {
       //   location.reload();
       // });
-      location.reload();
+     
     },
   },
 };

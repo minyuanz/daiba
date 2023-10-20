@@ -1,10 +1,13 @@
 <?php
-header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Origin:*");
+//print_r($_POST);
+header("Access-Control-Allow-Origin: http://localhost:8080");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 try {
     $fileNames = array();
-    var_dump($_FILES); 
-    var_dump($_POST); 
+
+    // var_dump($_FILES); 
+    // var_dump($_POST); 
         if ($_FILES["news_imageURL"]["error"] === 0) { 
             $dir = "../img/"; 
             if (!file_exists($dir)) {

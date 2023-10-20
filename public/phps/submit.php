@@ -1,5 +1,4 @@
 <?php
-print_r($_POST);
 header("Access-Control-Allow-Origin:*");
 
 
@@ -13,8 +12,8 @@ try {
     };
 
 
-    var_dump($_FILES); 
-    var_dump($_POST); 
+    // var_dump($_FILES); 
+    // var_dump($_POST); 
     
     for ($i = 1; $i <= 3; $i++) { 
         if ($_FILES["art_pic{$i}"]["error"] === 0) { 
