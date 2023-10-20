@@ -1171,15 +1171,25 @@ img {
         .name {
             top: 61.6%;
             left: 5%;
+            animation: none;
+            opacity: 1;
 
             p {
                 font-size: 20px;
             }
         }
 
+        .starLightBox,
+        .starGameScene {
+            display: none;
+        }
+
         .speechBalloon {
             width: 90%;
             padding: 1.5rem;
+            animation: none;
+            opacity: 1;
+
 
             p {
                 font-size: 18px;
