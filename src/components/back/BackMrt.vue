@@ -370,10 +370,16 @@ export default {
       formData.append("sta_describe", this.currentEditMrt.sta_describe);
 
       // $apiUrl('updateMrt.php')
-      fetch(this.$apiUrl('updateMrt.php'), {
-        method: "post",
-        body: formData,
-      })
+      // fetch(this.$apiUrl('updateMrt.php'), {
+      //   method: "post",
+      //   body: formData,
+      // })
+      axios
+        .post(this.$apiUrl('updateMrt.php'), formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
         .then((res) => res.json())
         .then((res) => {
           if (!res.error) {
@@ -403,10 +409,16 @@ export default {
       formData.append("sta_describe", this.newMrt.sta_describe);
 
       // $apiUrl('CreatMrt.php')
-      fetch(this.$apiUrl('CreatMrt.php'), {
-        method: "post",
-        body: formData,
-      })
+      // fetch(this.$apiUrl('CreatMrt.php'), {
+      //   method: "post",
+      //   body: formData,
+      // })
+      axios
+        .post(this.$apiUrl('CreatMrt.php'), formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
         // .then((res) => res.json())
         // .then((res) => {
         //   if (!res.error) {
