@@ -75,11 +75,7 @@
           </div>
           <div>
             <label for="">捷運站編號：</label>
-            <input
-              type="text"
-              placeholder="若無轉乘線則免填"
-              v-model="newMrt.mrt_code2"
-            />
+            <input type="text" placeholder="若無轉乘線則免填" v-model="newMrt.mrt_code2" />
           </div>
           <div>
             <label for="">捷運站名稱：</label>
@@ -107,18 +103,10 @@
         <div class="pic">
           <!-- <img src="https://picsum.photos/200/200/?random=10" /> -->
           <!-- <button>上傳圖片</button> -->
-          <img
-            :src="`${this.$store.state.imgURL}` + currentEditMrt.sta_pictor"
-            v-if="currentEditMrt.sta_pictor !== '' ? true : false"
-            style="width: 200px; height: 200px"
-          />
+          <img :src="`${this.$store.state.imgURL}` + currentEditMrt.sta_pictor"
+            v-if="currentEditMrt.sta_pictor !== '' ? true : false" style="width: 200px; height: 200px" />
           <input type="file" @change="FileUpdate" name="image" />
-          <img
-            :src="picURL"
-            alt=""
-            v-show="show"
-            style="width: 200px; height: 200px; position: absolute"
-          />
+          <img :src="picURL" alt="" v-show="show" style="width: 200px; height: 200px; position: absolute" />
         </div>
         <div class="txt">
           <div>
@@ -148,11 +136,7 @@
           </div>
           <div>
             <label for="">捷運站編號：</label>
-            <input
-              type="text"
-              placeholder="若無轉乘線則免填"
-              v-model="currentEditMrt.mrt_code2"
-            />
+            <input type="text" placeholder="若無轉乘線則免填" v-model="currentEditMrt.mrt_code2" />
           </div>
           <div>
             <label for="">捷運站名稱：</label>
@@ -162,10 +146,7 @@
       </div>
       <div class="addCtx">
         <span>捷運站描述</span>
-        <textarea
-          class="custom-input"
-          v-model="currentEditMrt.sta_describe"
-        ></textarea>
+        <textarea class="custom-input" v-model="currentEditMrt.sta_describe"></textarea>
       </div>
       <div class="btn">
         <button @click="cancelEdit">取消編輯</button>
@@ -254,7 +235,7 @@ export default {
       this.addToggle = false;
     },
 
-    cancelAdd(){
+    cancelAdd() {
       this.addToggle = !this.addToggle;
       this.newMrt.sta_describe = '';
       this.newMrt.mrt_code1 = '';
@@ -356,7 +337,7 @@ export default {
           console.error("數據傳輸失敗：", error);
         });
     },
-    updateMrt() {
+    async updateMrt() {
       const formData = new FormData();
       formData.append("news_imageURL", this.currentEditMrt.sta_pictor);
       formData.append("sta_id", this.currentEditMrt.sta_id);
@@ -368,35 +349,32 @@ export default {
       // formData.append("sta_pictor", this.currentEditMrt.imageURL);
       formData.append("mrt_id2", this.currentEditMrt.mrt_id2);
       formData.append("sta_describe", this.currentEditMrt.sta_describe);
+      // axios
+      //   .post(this.$apiUrl('updateMrt.php'), formData, {
+      //     headers: {
+      //       "Content-Type": "multipart/form-data",
+      //     },
+      //   })
 
       // $apiUrl('updateMrt.php')
-      // fetch(this.$apiUrl('updateMrt.php'), {
-      //   method: "post",
-      //   body: formData,
-      // })
-      axios
-        .post(this.$apiUrl('updateMrt.php'), formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
+      await fetch(this.$apiUrl('updateMrt.php'), {
+        method: "post",
+        body: formData,
+      })
         .then((res) => res.json())
         .then((res) => {
           if (!res.error) {
             alert(res.msg);
             this.editMode = false; // 退出编辑模式
             // this.currentEditProduct.sta_pictor = null;
-            // location.reload();
           }
         })
         .catch(function (error) {
           console.log(error);
         })
-        .finally(() => {
-          location.reload();
-        });
+      location.reload();
     },
-    addNewMrt() {
+    async addNewMrt() {
       const formData = new FormData();
       // formData.append("sta_id ", this.newMrt.sta_id);
       formData.append("mrt_code1", this.newMrt.mrt_code1);
@@ -407,45 +385,45 @@ export default {
       formData.append("news_imageURL", this.newMrt.sta_pictor);
       // formData.append("news_imageURL", this.newMrt.sta_pictor);
       formData.append("sta_describe", this.newMrt.sta_describe);
+      // axios
+      //   .post(this.$apiUrl('CreatMrt.php'), formData, {
+      //     headers: {
+      //       "Content-Type": "multipart/form-data",
+      //     },
+      //   })
+      // .then((res) => res.json())
+      // .then((res) => {
+      //   if (!res.error) {
+      //     console.log("成功响应:", res);
+      //     alert(res.msg); // 弹出成功提醒
+      //     this.addToggle = false; // 关闭新增站的页面
+      //   } else {
+      //     console.log("失败响应:", res);
+      //   }
+      // })
+      // .catch(function (error) {
+      //   console.log("请求失败:", error);
+      // });
 
       // $apiUrl('CreatMrt.php')
-      // fetch(this.$apiUrl('CreatMrt.php'), {
-      //   method: "post",
-      //   body: formData,
-      // })
-      axios
-        .post(this.$apiUrl('CreatMrt.php'), formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        // .then((res) => res.json())
-        // .then((res) => {
-        //   if (!res.error) {
-        //     console.log("成功响应:", res);
-        //     alert(res.msg); // 弹出成功提醒
-        //     this.addToggle = false; // 关闭新增站的页面
-        //   } else {
-        //     console.log("失败响应:", res);
-        //   }
-        // })
-        // .catch(function (error) {
-        //   console.log("请求失败:", error);
-        // });
+      await fetch(this.$apiUrl('CreatMrt.php'), {
+        method: "post",
+        body: formData,
+      })
         .then((res) => res.json())
         .then((res) => {
           if (!res.error) {
             alert(res.msg);
             this.addToggle = false;
-            // location.reload();
           }
         })
         .catch(function (error) {
           console.log(error);
         })
-        .finally(() => {
-          location.reload();
-        });
+      // .finally(() => {
+      //   location.reload();
+      // });
+      location.reload();
     },
   },
 };
@@ -593,9 +571,11 @@ export default {
         margin: 20px 0;
         display: flex;
         align-items: center;
+
         input {
           width: 220px;
         }
+
         select {
           // border: 1px solid red;
           width: 220px;
@@ -603,15 +583,18 @@ export default {
       }
     }
   }
+
   .addCtx {
     // border: 1px solid #333;
     margin-top: 30px;
+
     span {
       display: block;
       text-align: center;
       background-color: #ddd;
       border: 1px solid #333;
     }
+
     .custom-input {
       border: 1px solid #333;
       border-top: 1px solid transparent;
@@ -620,6 +603,7 @@ export default {
       padding: 10px;
       // line-height: 200px;
     }
+
     .count {
       border: 1px solid transparent;
       background-color: #fff;
@@ -627,10 +611,12 @@ export default {
       color: #ddd;
     }
   }
+
   .btn {
     // border: 1px solid red;
     margin-top: 30px;
     text-align: right;
+
     button {
       margin-left: 20px;
       padding: 10px 20px;
