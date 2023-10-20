@@ -380,7 +380,7 @@ export default {
             alert(res.msg);
             this.editMode = false; // 退出编辑模式
             // this.currentEditProduct.sta_pictor = null;
-            location.reload();
+            // location.reload();
           }
         })
         .catch(function (error) {
@@ -422,7 +422,7 @@ export default {
           if (!res.error) {
             alert(res.msg);
             this.addToggle = false;
-            location.reload();
+            // location.reload();
           }
         })
         .catch(function (error) {
