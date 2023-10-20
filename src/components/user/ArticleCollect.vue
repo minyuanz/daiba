@@ -170,27 +170,27 @@ export default {
 
       console.log(memId);
       console.log(art_id);
+      if (confirm('確定取消收藏嗎?')) {
+        const formData = new FormData();
+        formData.append("mem_id", memId);
+        formData.append("art_id", art_id);
 
-      const formData = new FormData();
-      formData.append("mem_id", memId);
-      formData.append("art_id", art_id);
-
-      confirm('確定取消收藏嗎?')
-      // $apiUrl('delArticleCollect.php')
-      fetch(this.$apiUrl('delArticleCollect.php'), {
-        method: 'post',
-        body: formData
-      })
-        .then(res => res.json())
-        .then((res) => {
-          if (!res.error) {
-            alert(res.msg);
-            location.reload();
-          }
+        // $apiUrl('delArticleCollect.php')
+        fetch(this.$apiUrl('delArticleCollect.php'), {
+          method: 'post',
+          body: formData
         })
-        .catch(function (error) {
-          console.log(error);
-        });
+          .then(res => res.json())
+          .then((res) => {
+            if (!res.error) {
+              alert(res.msg);
+              location.reload();
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     },
     getArticleCollect() {
       let memId = this.$store.state.memInfo.mem_id
