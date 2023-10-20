@@ -98,8 +98,9 @@
                                 <span class="title-tag gray">#{{ itemList.fea_tag }}</span>
                                 <span class="title-tag" :class="artChooseTag(itemList.sta_id1)">#{{
                                     colorClassMap2[itemList.sta_id1] }}</span>
-                                <span class="title-tag" :class="artChooseTag(itemList.sta_id2)" v-if="itemList.sta_id1 !== itemList.sta_id2">
-                                {{itemList.sta_id2 ? '#' +colorClassMap2[itemList.sta_id2] : null }}</span>
+                                <span class="title-tag" :class="artChooseTag(itemList.sta_id2)"
+                                    v-if="itemList.sta_id1 !== itemList.sta_id2">
+                                    {{ itemList.sta_id2 ? '#' + colorClassMap2[itemList.sta_id2] : null }}</span>
                             </div>
                             <span class="s_text time">{{ itemList.art_date }}</span>
                         </div>
@@ -138,15 +139,17 @@
                             <div class="lineColor" :class="lineColor(CBPost.sta_id1)"></div>
                         </div>
                         <div class="DigLikeBox" @click="addToCollect" v-if="this.closePost === true">
-                            <i class="heart-border" id="heart" :class="heartStyle" style="color:#ff0000;cursor: pointer"></i>
+                            <i class="heart-border" id="heart" :class="heartStyle"
+                                style="color:#ff0000;cursor: pointer"></i>
                             <!-- <i v-if="toCollect" class="fa-solid fa-heart" style="color: #ff0000;cursor: pointer;"></i>
                             <i v-else class="fa-regular fa-heart" style="cursor: pointer;"></i> -->
                         </div>
                         <div class="tag">
                             <span class="title-tag" :class="artChooseTag(CBPost.sta_id1)">#{{
-                                    colorClassMap2[CBPost.sta_id1] }}</span>
-                            <span class="title-tag" :class="artChooseTag(CBPost.sta_id2)" v-if="CBPost.sta_id1 !== CBPost.sta_id2">
-                                {{CBPost.sta_id2 ? '#' +colorClassMap2[CBPost.sta_id2] : null }}</span>
+                                colorClassMap2[CBPost.sta_id1] }}</span>
+                            <span class="title-tag" :class="artChooseTag(CBPost.sta_id2)"
+                                v-if="CBPost.sta_id1 !== CBPost.sta_id2">
+                                {{ CBPost.sta_id2 ? '#' + colorClassMap2[CBPost.sta_id2] : null }}</span>
                         </div>
                         <div class="scrollbarArea">
                             <div class="info">
@@ -166,19 +169,19 @@
             </div>
         </div>
         <div class="pagination">
-      <button class="paginationmain" @click="prevPage" :disabled="currentPage === 1" >＜</button>
+            <button class="paginationmain" @click="prevPage" :disabled="currentPage === 1">＜</button>
 
-      <button class="paginationmain" @click="goToPage(page)" v-for="page in totalPages" :key="page"
-        :class="{ 'current-page': page === currentPage }">
-        {{ page }}
-      </button>
+            <button class="paginationmain" @click="goToPage(page)" v-for="page in totalPages" :key="page"
+                :class="{ 'current-page': page === currentPage }">
+                {{ page }}
+            </button>
 
-      <button class="paginationmain" @click="nextPage" :disabled="currentPage === totalPages">＞</button>
-    </div>
+            <button class="paginationmain" @click="nextPage" :disabled="currentPage === totalPages">＞</button>
+        </div>
     </section>
 
     <!-- 燈箱 -->
-    <div class="lightBox" v-show="lightBox" @click="closePost = !closePost,lightBox = !lightBox"></div>
+    <div class="lightBox" v-show="lightBox" @click="closePost = !closePost, lightBox = !lightBox"></div>
 
     <!-- 背景輪播 -->
     <div class="mrtBanner">
@@ -321,10 +324,10 @@ export default {
             swiper: false,
             artId: '', // get art_id
             memId: this.$store.state.memInfo.mem_id, // get mem_id
-            userALLArtCollect:[],
+            userALLArtCollect: [],
             pageSize: 6, // 每頁顯示數量
             currentPage: 1, // 當前頁數
-            heart:false,
+            heart: false,
         };
     },
     components: {
@@ -378,30 +381,30 @@ export default {
             // 輪播
 
             const swiperPost = new Swiper(".swiperPost", {
-            effect: "cube",
-            speed: 2000,
-            loop: true,
-            autoplay: {
-                delay: 3000
-            },
-            cubeEffect: {
-                shadow: true,
-                slideShadows: true,
-                shadowOffset: 20,
-                shadowScale: 0.94,
-            },
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
+                effect: "cube",
+                speed: 2000,
+                loop: true,
+                autoplay: {
+                    delay: 3000
+                },
+                cubeEffect: {
+                    shadow: true,
+                    slideShadows: true,
+                    shadowOffset: 20,
+                    shadowScale: 0.94,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
             });
 
             this.CBPost = []
             this.CBPost = item
-           
+
             this.lightBox = true
             this.addCollect = false
-        
+
             this.artId = this.CBPost.art_id
             // this.memId = this.CBList[index].mem_id
         },
@@ -437,24 +440,24 @@ export default {
 
         // 加入收藏
         addToCollect() {
-            
+
             let user = localStorage.getItem('user')
             let userinfo = JSON.parse(user)
-           
+
             let Index = this.$store.state.memArtCollect.findIndex(item => item.art_id === this.CBPost.art_id)
 
             // 如果沒有資料則新增
-            if(Index === -1){
+            if (Index === -1) {
                 if (!user) {
-                alert('請先登入')
-                this.$router.push('/login')
-                // (userinfo.mem_id == this.memId)
-            } else if (this.CBPost.mem_id === this.$store.state.memInfo.mem_id) {
-                alert('請收藏其他投稿，自己的不可收藏')
-            } else {
-                const formData = new FormData();
-                formData.append("mem_id", userinfo.mem_id);
-                formData.append("art_id", this.CBPost.art_id);
+                    alert('請先登入')
+                    this.$router.push('/login')
+                    // (userinfo.mem_id == this.memId)
+                } else if (this.CBPost.mem_id === this.$store.state.memInfo.mem_id) {
+                    alert('請收藏其他投稿，自己的不可收藏')
+                } else {
+                    const formData = new FormData();
+                    formData.append("mem_id", userinfo.mem_id);
+                    formData.append("art_id", this.CBPost.art_id);
 
                     fetch(this.$apiUrl('addToArticleCollect.php'), {
                         method: 'post',
@@ -464,86 +467,91 @@ export default {
                         .then((res) => {
                             if (!res.error) {
                                 alert(res.msg);
-                                if(res.msg === '成功加入收藏'){
-                                    let newADD = {mem_id:userinfo.mem_id,art_id:this.artId}  //抓出目前會員ID和投稿ID
+                                if (res.msg === '成功加入收藏') {
+                                    let newADD = { mem_id: userinfo.mem_id, art_id: this.artId }  //抓出目前會員ID和投稿ID
                                     this.$store.commit('getMemArtCollect', newADD);  //將資料帶入暫存區
                                     let heart = document.getElementById('heart'); //控制愛心CSS
                                     heart.classList.add('fas', 'fa-heart');
                                     this.heart = true
                                 }
 
-                            } 
+                            }
                         })
                         .catch(function (error) {
                             console.log(error);
                         });
-                    }
+                }
             }
             // 沒有則刪除
-            else{
+            else {
+                if (confirm('確定取消收藏嗎?')) {
                     const formData = new FormData();
-                          formData.append("mem_id", userinfo.mem_id);
-                          formData.append("art_id", this.artId);
+                    formData.append("mem_id", userinfo.mem_id);
+                    formData.append("art_id", this.CBPost.art_id);
 
-                          confirm('確定取消收藏嗎?')
                     // $apiUrl('delArticleCollect.php')
-                          fetch(this.$apiUrl('delArticleCollect.php'), {
-                            method: 'post',
-                            body: formData
-                          })
-                            .then(res => res.json())
-                            .then((res) => {
-                              if (!res.error) {
+                    fetch(this.$apiUrl('delArticleCollect.php'), {
+                        method: 'post',
+                        body: formData
+                    })
+                        .then(res => res.json())
+                        .then((res) => {
+                            if (!res.error) {
                                 alert(res.msg);
-                                if(res.msg === '刪除成功'){
-                                    let dis = {mem_id:userinfo.mem_id,art_id:this.artId} //抓出會員ID和投稿id
+                                if (res.msg === '刪除成功') {
+                                    let dis = { mem_id: userinfo.mem_id, art_id: this.artId } //抓出會員ID和投稿id
                                     this.$store.commit('disMemArtCollect', dis);  //執行刪除暫存區資料
                                     let heart = document.getElementById('heart'); //控制愛心Css
                                     heart.classList.remove('fas');
                                     heart.classList.remove('fa-heart');
                                     heart.classList.add('far', 'fa-heart');
                                 }
-                                
-                              }
-                            })
-                            .catch(function (error) {
-                              console.log(error);
-                            });
-                        
+
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+
+                }
+
+
 
             }
-},
-            
-        
+        },
+
+
 
         // 上一頁
-        prevPage(){
-            if(this.currentPage > 1){
-                this.currentPage -= 1} 
+        prevPage() {
+            if (this.currentPage > 1) {
+                this.currentPage -= 1
+            }
         },
 
         // 下一頁
-        nextPage(){
-            if(this.currentPage < this.totalPages){
-                this.currentPage += 1} 
+        nextPage() {
+            if (this.currentPage < this.totalPages) {
+                this.currentPage += 1
+            }
         },
-        
+
         // 前往該頁數
-        goToPage(page){
+        goToPage(page) {
             this.currentPage = page;
             document.querySelector("#CBList").scrollIntoView({ behavior: "smooth" }); //自動跳最上面
         },
 
         // 內文的border顏色
-        titleColor(id){
+        titleColor(id) {
             return `title${id}`
         },
 
-         // 內文的底線顏色
-        lineColor(id){
+        // 內文的底線顏色
+        lineColor(id) {
             return `line${id}`
         },
-        
+
 
 
 
@@ -576,7 +584,7 @@ export default {
 
         window.addEventListener("resize", this.windowWidth);
 
-        
+
     },
     created() {
         // 從後端資料庫抓取投稿已審核的資料
@@ -593,44 +601,44 @@ export default {
 
         //抓取會員收藏資料的狀態
         axios.get(`${this.$apiUrl('getALLArticleCollect.php')}`)
-        .then((res) => {
-            const matchingUser = res.data.filter(user => user.mem_id === this.$store.state.memInfo.mem_id); //資料中和目前登入的ID配對
-            this.userALLArtCollect = matchingUser  //得到目前登入的帳號的收藏資料　
-            let memArtCollect = JSON.stringify(matchingUser)  //放進localStorage
-            localStorage.setItem("memArtCollect",  memArtCollect);
-            
-        })
-        .catch((error) => {
-            console.error('資料失敗：', error);
-        });
+            .then((res) => {
+                const matchingUser = res.data.filter(user => user.mem_id === this.$store.state.memInfo.mem_id); //資料中和目前登入的ID配對
+                this.userALLArtCollect = matchingUser  //得到目前登入的帳號的收藏資料　
+                let memArtCollect = JSON.stringify(matchingUser)  //放進localStorage
+                localStorage.setItem("memArtCollect", memArtCollect);
+
+            })
+            .catch((error) => {
+                console.error('資料失敗：', error);
+            });
     },
 
-    computed:{ 
+    computed: {
         //算出所有的頁數
         totalPages() {
             return Math.ceil(this.CBList.length / this.pageSize);
         },
 
-    // 顯示頁面的資料
+        // 顯示頁面的資料
         paginatedList() {
             const startIndex = (this.currentPage - 1) * this.pageSize; //算出上一頁跑到陣列第幾個
-            const endIndex = startIndex + this.pageSize;  
+            const endIndex = startIndex + this.pageSize;
             return this.CBList.slice(startIndex, endIndex);
         },
 
         // 愛心顯示狀態
-        heartStyle(){
+        heartStyle() {
             let Index = this.$store.state.memArtCollect.findIndex(item => item.art_id === this.CBPost.art_id); //搜尋當前CBPost的art_id是否有找到
-            console.log(Index); 
-            console.log(this.$store.state.memArtCollect); 
-            return (Index === -1) ? 'far fa-heart': 'fas fa-heart'
+            console.log(Index);
+            console.log(this.$store.state.memArtCollect);
+            return (Index === -1) ? 'far fa-heart' : 'fas fa-heart'
         },
 
         // 如會員沒照片則顯示空照片
-        userImg(){
+        userImg() {
             return 'user.png'
         },
-}
+    }
 }
 </script>
 

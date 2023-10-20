@@ -82,27 +82,30 @@ export default {
       let memId = this.$store.state.memInfo.mem_id
       let prod_id = this.prodCollect[index].prod_id
 
-      const formData = new FormData();
-      formData.append("mem_id", memId);
-      formData.append("prod_id", prod_id);
-      // this.$apiUrl('delCollect.php')
 
-      confirm('確定取消收藏嗎?')
+      if (confirm('確定取消收藏嗎?')) {
 
-      fetch(this.$apiUrl('delCollect.php'), {
-        method: 'post',
-        body: formData
-      })
-        .then(res => res.json())
-        .then((res) => {
-          if (!res.error) {
-            alert(res.msg);
-            location.reload();
-          }
+        const formData = new FormData();
+        formData.append("mem_id", memId);
+        formData.append("prod_id", prod_id);
+        // this.$apiUrl('delCollect.php')
+
+
+        fetch(this.$apiUrl('delCollect.php'), {
+          method: 'post',
+          body: formData
         })
-        .catch(function (error) {
-          console.log(error);
-        });
+          .then(res => res.json())
+          .then((res) => {
+            if (!res.error) {
+              alert(res.msg);
+              location.reload();
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     },
     getCollect() {
       let memId = this.$store.state.memInfo.mem_id
@@ -192,8 +195,9 @@ export default {
 
       .prodCard {
         margin: 10px 0;
-        .pic{
-          img{
+
+        .pic {
+          img {
             width: 100%;
           }
         }
