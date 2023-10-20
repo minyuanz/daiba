@@ -97,12 +97,12 @@ export default {
         .then((res) => {
           if (!res.error) {
             alert(res.msg);
+            location.reload();
           }
         })
         .catch(function (error) {
           console.log(error);
         });
-      location.reload();
     },
     getCollect() {
       let memId = this.$store.state.memInfo.mem_id

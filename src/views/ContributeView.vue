@@ -449,12 +449,12 @@ export default {
                 alert('請先登入')
                 this.$router.push('/login')
                 // (userinfo.mem_id == this.memId)
-                } else if (this.CBPost.mem_id == this.memId) {
-                    alert('請收藏其他投稿，自己的不可收藏')
-                } else {
-                    const formData = new FormData();
-                    formData.append("mem_id", userinfo.mem_id);
-                    formData.append("art_id", this.artId);
+            } else if (this.CBPost.mem_id === this.$store.state.memInfo.mem_id) {
+                alert('請收藏其他投稿，自己的不可收藏')
+            } else {
+                const formData = new FormData();
+                formData.append("mem_id", userinfo.mem_id);
+                formData.append("art_id", this.CBPost.art_id);
 
                     fetch(this.$apiUrl('addToArticleCollect.php'), {
                         method: 'post',
