@@ -3,8 +3,8 @@ header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin:*");
 try {
     $fileNames = array();
-    var_dump($_FILES); 
-    var_dump($_POST); 
+    // var_dump($_FILES); 
+    // var_dump($_POST); 
         if ($_FILES["news_imageURL"]["error"] === 0) { 
             $dir = "../img/"; 
             if (!file_exists($dir)) {

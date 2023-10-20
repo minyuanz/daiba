@@ -391,7 +391,7 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
-      location.reload();
+      // location.reload();
     },
     async addNewMrt() {
       const formData = new FormData();
@@ -442,7 +442,7 @@ export default {
       // .finally(() => {
       //   location.reload();
       // });
-      location.reload();
+      // location.reload();
     },
   },
 };
