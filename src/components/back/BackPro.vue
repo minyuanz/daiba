@@ -376,7 +376,9 @@ export default {
         .catch((error) => {
           console.error("更新商品请求失败：", error);
         });
-        location.reload();
+        .finally(() => {
+          location.reload();
+        });
     },
 
     handleFileChange(e, index, mode) {
@@ -512,7 +514,9 @@ export default {
         .catch((error) => {
           console.error("新增商品請求失敗：", error);
         });
-        location.reload();
+        .finally(() => {
+          location.reload();
+        });
     },
   },
 };
