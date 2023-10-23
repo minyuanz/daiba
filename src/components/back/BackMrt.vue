@@ -38,7 +38,7 @@
     </div>
   </div>
   <div class="backMrtAdd" v-else>
-    <form  enctype="multipart/form-data">
+    <form enctype="multipart/form-data">
       <p>你正在新增車站：</p>
       <div class="addInfo">
         <div class="pic">
@@ -89,7 +89,11 @@
       </div>
       <div class="addCtx">
         <span>捷運站描述</span>
-        <textarea class="custom-input" v-model="newMrt.sta_describe" @change=" console.log(this.newMrt);"></textarea>
+        <textarea
+          class="custom-input"
+          v-model="newMrt.sta_describe"
+          @change="console.log(this.newMrt)"
+        ></textarea>
         <!-- <input type="text" class="custom-input"> -->
         <!-- <span class="count">0/100字</span> -->
       </div>
@@ -386,13 +390,13 @@ export default {
           if (!res.error) {
             alert(res.msg);
             this.editMode = false; // 退出编辑模式
+            location.reload();
             // this.currentEditProduct.sta_pictor = null;
           }
         })
         .catch(function (error) {
           console.log(error);
         });
-      // location.reload();
     },
     async addNewMrt() {
       const formData = new FormData();
@@ -445,7 +449,6 @@ export default {
       // .finally(() => {
       //   location.reload();
       // });
-     
     },
   },
 };
