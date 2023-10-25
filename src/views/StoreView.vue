@@ -109,6 +109,7 @@ export default {
     addToCart(product) {
       this.$store.dispatch("addToCart", { ...product, count: this.count });
       alert("已加入購物車");
+      this.count = 1;
     },
     prevPage() {
       if (this.currentPage > 1) {
